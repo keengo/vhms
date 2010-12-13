@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.5, created on 2010-12-13 07:29:20
+<?php /* Smarty version Smarty-3.0.5, created on 2010-12-13 09:45:34
          compiled from "D:\project\janbao\kpanel\admin/views/default\vhostproduct/showTemplete.html" */ ?>
-<?php /*%%SmartyHeaderCode:325984d05cb50668f13-40444512%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:317264d05eb3edf49c2-51028837%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '7010cc82fdacc08cdf60a2685224184fb0a6535d' => 
     array (
       0 => 'D:\\project\\janbao\\kpanel\\admin/views/default\\vhostproduct/showTemplete.html',
-      1 => 1292225251,
+      1 => 1292233530,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '325984d05cb50668f13-40444512',
+  'nocache_hash' => '317264d05eb3edf49c2-51028837',
   'function' => 
   array (
   ),
@@ -47,17 +47,16 @@ if ($_smarty_tpl->_count($_from) > 0){
 </td>
 		<td class="right"><?php echo $_smarty_tpl->tpl_vars['row']->value['weight'];?>
 </td>
-		<td class="right"><?php echo $_smarty_tpl->tpl_vars['row']->value['state'];?>
-</td>
+		<td class="right"><?php if ($_smarty_tpl->tpl_vars['row']->value['state']==1){?>有效<?php }else{ ?>无效<?php }?></td>
 		<td class="right">[<a href="javascript:if(confirm('确定删除<?php echo $_smarty_tpl->tpl_vars['row']->value['name'];?>
-?')){location='?c=vhostproduct&a=del&id=<?php echo $_smarty_tpl->tpl_vars['row']->value['id'];?>
+?')){location='?c=vhostproduct&a=delTemplete&node=<?php echo $_smarty_tpl->tpl_vars['row']->value['node'];?>
+&templete=<?php echo $_smarty_tpl->tpl_vars['row']->value['templete'];?>
 ';}" title="删除">
-        <img src='<?php echo $_smarty_tpl->getVariable('STATIC')->value;?>
-images/b_drop.gif' alt='删除' border="0" align="absmiddle"></a>]
-        [<a href="?c=vhostproduct&a=addProductForm&id=<?php echo $_smarty_tpl->tpl_vars['row']->value['id'];?>
-" title="更改信息">
-        <img src='<?php echo $_smarty_tpl->getVariable('STATIC')->value;?>
-images/b_edit.gif' alt='更改' border="0" align="absmiddle"></a>]        </td>
+        删除</a>]
+        [<a href="?c=vhostproduct&a=editTempleteForm&node=<?php echo $_smarty_tpl->tpl_vars['row']->value['node'];?>
+&templete=<?php echo $_smarty_tpl->tpl_vars['row']->value['templete'];?>
+">
+       更改权重</a>]</td>
       </tr>
 	  <?php }} ?>
     </table>

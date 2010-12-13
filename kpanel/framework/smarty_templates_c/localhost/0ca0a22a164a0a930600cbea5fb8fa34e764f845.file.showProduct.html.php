@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.5, created on 2010-12-13 04:00:16
+<?php /* Smarty version Smarty-3.0.5, created on 2010-12-13 10:48:37
          compiled from "D:\project\janbao\kpanel\admin/views/default\vhostproduct/showProduct.html" */ ?>
-<?php /*%%SmartyHeaderCode:319294d059a509e2bc2-64501679%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:263144d05fa05036720-26100213%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '0ca0a22a164a0a930600cbea5fb8fa34e764f845' => 
     array (
       0 => 'D:\\project\\janbao\\kpanel\\admin/views/default\\vhostproduct/showProduct.html',
-      1 => 1292212428,
+      1 => 1292236997,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '319294d059a509e2bc2-64501679',
+  'nocache_hash' => '263144d05fa05036720-26100213',
   'function' => 
   array (
   ),
@@ -28,8 +28,8 @@ $_smarty_tpl->decodeProperties(array (
       <tr id="ttitle">
 	   <td class='color01 right' bgcolor='#efefef'>ID</td>
         <td class='color01 right' bgcolor='#efefef'>产品名称</td>
-		<td class='color01 right' bgcolor='#efefef'>空间配额</td>
-		<td class='color01 right' bgcolor='#efefef'>数据库配额</td>
+		<td class='color01 right' bgcolor='#efefef'>空间配额(M)</td>
+		<td class='color01 right' bgcolor='#efefef'>数据库配额(M)</td>
 		<td class='color01 right' bgcolor='#efefef'>模板</td>
         <td class='color01 right' bgcolor='#efefef'>操作</td>
       </tr>
@@ -54,7 +54,7 @@ if ($_smarty_tpl->_count($_from) > 0){
 ';}" title="删除">
         <img src='<?php echo $_smarty_tpl->getVariable('STATIC')->value;?>
 images/b_drop.gif' alt='删除' border="0" align="absmiddle"></a>]
-        [<a href="?c=vhostproduct&a=addProductForm&id=<?php echo $_smarty_tpl->tpl_vars['row']->value['id'];?>
+        [<a href="?c=vhostproduct&a=editProductForm&id=<?php echo $_smarty_tpl->tpl_vars['row']->value['id'];?>
 " title="更改信息">
         <img src='<?php echo $_smarty_tpl->getVariable('STATIC')->value;?>
 images/b_edit.gif' alt='更改' border="0" align="absmiddle"></a>]

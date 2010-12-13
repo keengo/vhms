@@ -243,12 +243,12 @@ function db_query($sql, $ret_type = 'result',$index_field = NULL)
 		} else {
 			return false;
 		}
-	} elseif ($dbenv['sql_cmd'] === "DELETE") {
+	} elseif ($dbenv['sql_cmd'] === "DELETE" || $dbenv['sql_cmd'] === "UPDATE"  ) {
 		if($result) {
 			if(mysql_affected_rows() >= 1){
 				return true;
 			} else {
-				return array();
+				return false;
 			}
 		} else {
 			return false;

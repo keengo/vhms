@@ -22,5 +22,16 @@ class VhostproductDAO extends DAO {
 	{
 		return $this->delData("id=".intval($id));
 	}
+	public function getProduct($id)
+	{
+		$where = $this->getFieldValue2('id',$id);
+		return $this->getData($where,'row');
+	}
+	public function update($arr)
+	{
+		$fields = $this->getFields(array('name','web_quota','db_quota','templete'), $arr);
+		$sql = "UPDATE ".$this->_TABLE." SET ".$fields." WHERE ".$this->getFieldValue2('id',$arr['id']);
+		return $this->executex($sql);
+	}
 }
 ?>

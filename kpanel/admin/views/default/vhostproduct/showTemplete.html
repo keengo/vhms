@@ -19,11 +19,11 @@
         <td class="right">!{$row.node}</td>
 		<td class="right">!{$row.templete}</td>
 		<td class="right">!{$row.weight}</td>
-		<td class="right">!{$row.state}</td>
-		<td class="right">[<a href="javascript:if(confirm('确定删除!{$row.name}?')){location='?c=vhostproduct&a=del&id=!{$row.id}';}" title="删除">
-        <img src='!{$STATIC}images/b_drop.gif' alt='删除' border="0" align="absmiddle"></a>]
-        [<a href="?c=vhostproduct&a=addProductForm&id=!{$row.id}" title="更改信息">
-        <img src='!{$STATIC}images/b_edit.gif' alt='更改' border="0" align="absmiddle"></a>]        </td>
+		<td class="right">!{if $row.state==1}有效!{else}无效!{/if}</td>
+		<td class="right">[<a href="javascript:if(confirm('确定删除!{$row.name}?')){location='?c=vhostproduct&a=delTemplete&node=!{$row.node}&templete=!{$row.templete}';}" title="删除">
+        删除</a>]
+        [<a href="?c=vhostproduct&a=editTempleteForm&node=!{$row.node}&templete=!{$row.templete}">
+       更改权重</a>]</td>
       </tr>
 	  !{/foreach}
     </table>

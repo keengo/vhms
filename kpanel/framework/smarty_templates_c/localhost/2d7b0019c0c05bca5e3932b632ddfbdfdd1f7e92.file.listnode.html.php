@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.5, created on 2010-12-13 07:43:49
+<?php /* Smarty version Smarty-3.0.5, created on 2010-12-13 08:18:29
          compiled from "D:\project\janbao\kpanel\admin/views/default\listnode.html" */ ?>
-<?php /*%%SmartyHeaderCode:83384d05ceb56b9363-06817953%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:207334d05d6d553c657-80592441%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '2d7b0019c0c05bca5e3932b632ddfbdfdd1f7e92' => 
     array (
       0 => 'D:\\project\\janbao\\kpanel\\admin/views/default\\listnode.html',
-      1 => 1292226226,
+      1 => 1292227179,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '83384d05ceb56b9363-06817953',
+  'nocache_hash' => '207334d05d6d553c657-80592441',
   'function' => 
   array (
   ),
@@ -27,13 +27,13 @@ $_smarty_tpl->decodeProperties(array (
 <div class="topimg pal1">共计 <?php echo $_smarty_tpl->getVariable('sum')->value;?>
  条记录</div>
   <div id="main" class="wid">
-    <table cellpadding=0 cellspacing=1 id="table">
+    <table width="657" cellpadding=0 cellspacing=1 id="table">
       <tr id="ttitle">
-        <td class='color01 right' bgcolor='#efefef'>名称</td>
-		<td class='color01 right' bgcolor='#efefef'>主机</td>
-		<td class='color01 right' bgcolor='#efefef'>端口</td>
-		<td class='color01 right' bgcolor='#efefef'>用户名</td>
-        <td class='color01 right' bgcolor='#efefef'>操作</td>
+        <td width="88" bgcolor='#efefef' class='color01 right'>名称</td>
+		<td width="81" bgcolor='#efefef' class='color01 right'>主机</td>
+		<td width="81" bgcolor='#efefef' class='color01 right'>端口</td>
+		<td width="81" bgcolor='#efefef' class='color01 right'>用户名</td>
+        <td width="339" bgcolor='#efefef' class='color01 right'>操作</td>
       </tr>
 	  <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable;
  $_from = $_smarty_tpl->getVariable('list')->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -57,8 +57,8 @@ if ($_smarty_tpl->_count($_from) > 0){
 " title="更改信息">更改信息
         </a>]
 		[<a href='?c=vhostproduct&a=refreshTemplete&name=<?php echo $_smarty_tpl->tpl_vars['row']->value['name'];?>
-'>刷新模板</a>]
-        </td>
+'>刷新模板</a>][<a href="?c=vhostproduct&a=exportConfig&name=<?php echo $_smarty_tpl->tpl_vars['row']->value['name'];?>
+">导出配置文件</a>] </td>
       </tr>
 	  <?php }} ?>
     </table>

@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.5, created on 2010-12-13 01:49:58
+<?php /* Smarty version Smarty-3.0.5, created on 2010-12-13 11:03:54
          compiled from "D:\project\janbao\kpanel\admin/views/default\user/userlist.html" */ ?>
-<?php /*%%SmartyHeaderCode:77904d057bc61ffca7-67247163%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:143634d05fd9a5a2051-14663205%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'ad0f75cc2b54567169ad33db93616b97cc49d0bf' => 
     array (
       0 => 'D:\\project\\janbao\\kpanel\\admin/views/default\\user/userlist.html',
-      1 => 1291967682,
+      1 => 1292238228,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '77904d057bc61ffca7-67247163',
+  'nocache_hash' => '143634d05fd9a5a2051-14663205',
   'function' => 
   array (
   ),
@@ -28,10 +28,8 @@ $_smarty_tpl->decodeProperties(array (
     <table cellpadding=0 cellspacing=1 id="table">
       <tr id="ttitle">
         <td class='color01 right' bgcolor='#efefef'>用户名</td>
-		<td class='color01 right' bgcolor='#efefef'>虚拟主机管理</td>
-		<td class='color01 right' bgcolor='#efefef'>FTP管理</td>
-		<td class='color01 right' bgcolor='#efefef'>数据库管理</td>
-      </tr>
+		<td class='color01 right' bgcolor='#efefef'>操作</td>
+	  </tr>
 	  <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable;
  $_from = $_smarty_tpl->getVariable('list')->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 if ($_smarty_tpl->_count($_from) > 0){
@@ -40,24 +38,12 @@ if ($_smarty_tpl->_count($_from) > 0){
       <tr>
         <td class="right"><a href="/?c=user&a=info&username=<?php echo $_smarty_tpl->tpl_vars['row']->value['username'];?>
 "><?php echo $_smarty_tpl->tpl_vars['row']->value['username'];?>
-</a>
-		[<a href="javascript:if(confirm('确定删除<?php echo $_smarty_tpl->tpl_vars['row']->value['username'];?>
+</a></td>
+		<td class="right">[<a href="javascript:if(confirm('确定删除<?php echo $_smarty_tpl->tpl_vars['row']->value['username'];?>
 ?')){location='?c=user&a=delete&username=<?php echo $_smarty_tpl->tpl_vars['row']->value['username'];?>
-';}" title="删除用户"><img src='images/b_drop.gif' alt='删除用户' border="0" align="absmiddle"></a>][<a href="?c=user&a=edit&username=<?php echo $_smarty_tpl->tpl_vars['row']->value['username'];?>
-" title="更改信息"><img src='images/b_edit.gif' alt='更改信息' border="0" align="absmiddle"></a>]
-		</td>
-		<td class="right">[<a href="/?c=host&a=addvh&username=<?php echo $_smarty_tpl->tpl_vars['row']->value['username'];?>
-">增加主机</a>][<a href="/?c=host&a=listvh&username=<?php echo $_smarty_tpl->tpl_vars['row']->value['username'];?>
-">主机列表</a>]</td>
-		<td class="right">[<a href="/?c=ftp&a=addftp&username=<?php echo $_smarty_tpl->tpl_vars['row']->value['username'];?>
-">增加ftp</a>][<a href="/?c=ftp&a=listftp&username=<?php echo $_smarty_tpl->tpl_vars['row']->value['username'];?>
-">ftp列表</a>]</td>
-
-		<td class="right">[<a href="/?c=db&a=adddb&username=<?php echo $_smarty_tpl->tpl_vars['row']->value['username'];?>
-">增加db</a>][<a href="/?c=db&a=listdb&username=<?php echo $_smarty_tpl->tpl_vars['row']->value['username'];?>
-">db列表</a>]</td>
-
-      </tr>
+';}" title="删除用户">删除</a>][<a href="?c=user&a=edit&username=<?php echo $_smarty_tpl->tpl_vars['row']->value['username'];?>
+" title="更改信息">更改</a>][进入管理]</td>
+	  </tr>
 	  <?php }} ?>
     </table>
     <div align="left">

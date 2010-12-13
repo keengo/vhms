@@ -52,18 +52,14 @@ class DAO
 		$sql.=" LIMIT 1";
 		return $this->executex($sql);
 	}
-	public function getData()
+	public function getData($where='',$type='rows')
 	{
 		$tbl = $this->_TABLE;
 		$sql = "SELECT ".$this->AllQueryFields()." FROM {$tbl}";
-		$value = $this->executex($sql, "rows");
-		if($value === false) {
-			return false;
+		if($where!=''){
+			$sql.=' WHERE '.$where;
 		}
-		if(!$value && is_array($value)) {
-			return null;
-		}
-		return $value;
+		return $this->executex($sql, $type);
 	}
 	public function insertData(&$arr)
 	{
@@ -136,6 +132,17 @@ class DAO
 		$fieldstr = trim($fieldstr,",");
 		return $fieldstr;
 	}
+	protected function getFields($fields,$array)
+	{
+		$fields_str = "";
+		for($i=0;$i<count($fields);$i++){
+			if($fields_str!=""){
+				$fields_str.=",";
+			}
+			$fields_str.=$this->getFieldValue2($fields[$i],$array[$fields[$i]]);
+		}
+		return $fields_str;
+	}
 	/**
 	  * 更新数据库字段组装
 	  * @param Array updateAry	更新数组
@@ -164,6 +171,10 @@ class DAO
 			}
 		}
 		return $string;
+	}
+	protected function getFieldValue2($name,$value)
+	{
+		return $this->MAP_ARR[$name]."=".$this->getFieldValue($name,$value);
 	}
 	protected function getFieldValue($name,$value)
 	{

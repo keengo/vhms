@@ -69,7 +69,6 @@ class NodesDAO extends DAO {
 		$sql = "UPDATE {$tbl} SET ".$update_str." WHERE `name` = '{$name}' limit 1";
 		return $this->execute($host, $dbname, $sql);
 	}
-
 	/**
 	 * ɾ���û���Ϣ
 	 */

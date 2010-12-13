@@ -19,6 +19,8 @@ class WhmAPI extends API{
 	}
 	protected function refreshHostTemplete($node)
 	{
+		
+		daocall('vhosttemplete','updateNodeState',array($node['name']));
 		$whm = new WhmClient();
 		$whm->setAuth($node['user'],$node['passwd']);
 		$whm->setWhmUrl("http://".$node['host'].":".$node['port']."/core.whm");
@@ -28,13 +30,16 @@ class WhmAPI extends API{
 			die('failed');
 			return false;
 		}
+		$templete = array();
 		for($i=0;;$i++){
-			$callName = $result->get("tvh",$i);
+			$value = $result->get("name",$i);
 			if(!$value){
 				break;
 			}
-			echo "tvh=".$tvh."\n";
+			$templete[] = $value;
+			//echo "tvh=".$value."\n";
 		}
-		die('');
+		daocall('vhosttemplete','updateNodeTemplete',array($node['name'],$templete));
+		//die('success');
 	}
 }
