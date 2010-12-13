@@ -1,0 +1,33 @@
+!{include file='common/head.html'}
+<body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
+<div id="container">
+<div class="topimg">当前位置：主机管理 -> 用户列表</div>
+<div class="topimg pal1">共计 !{$sum} 条记录</div>
+  <div id="main" class="wid">
+    <table cellpadding=0 cellspacing=1 id="table">
+      <tr id="ttitle">
+        <td class='color01 right' bgcolor='#efefef'>用户名</td>
+		<td class='color01 right' bgcolor='#efefef'>虚拟主机管理</td>
+		<td class='color01 right' bgcolor='#efefef'>FTP管理</td>
+		<td class='color01 right' bgcolor='#efefef'>数据库管理</td>
+      </tr>
+	  !{foreach from=$list item=row}
+      <tr>
+        <td class="right"><a href="/?c=user&a=info&username=!{$row.username}">!{$row.username}</a>
+		[<a href="javascript:if(confirm('确定删除!{$row.username}?')){location='?c=user&a=delete&username=!{$row.username}';}" title="删除用户"><img src='images/b_drop.gif' alt='删除用户' border="0" align="absmiddle"></a>][<a href="?c=user&a=edit&username=!{$row.username}" title="更改信息"><img src='images/b_edit.gif' alt='更改信息' border="0" align="absmiddle"></a>]
+		</td>
+		<td class="right">[<a href="/?c=host&a=addvh&username=!{$row.username}">增加主机</a>][<a href="/?c=host&a=listvh&username=!{$row.username}">主机列表</a>]</td>
+		<td class="right">[<a href="/?c=ftp&a=addftp&username=!{$row.username}">增加ftp</a>][<a href="/?c=ftp&a=listftp&username=!{$row.username}">ftp列表</a>]</td>
+
+		<td class="right">[<a href="/?c=db&a=adddb&username=!{$row.username}">增加db</a>][<a href="/?c=db&a=listdb&username=!{$row.username}">db列表</a>]</td>
+
+      </tr>
+	  !{/foreach}
+    </table>
+    <div align="left">
+	</div>
+  </div>
+</div>
+</body>
+</html>
+!{include file='common/foot.html'}

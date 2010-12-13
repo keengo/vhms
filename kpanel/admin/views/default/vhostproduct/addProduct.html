@@ -1,0 +1,39 @@
+﻿!{include file='common/head.html'}
+<body leftmargin="0" topmargin="0" bgcolor="#ffffff" text="#000000">
+<div id="container">
+<div class="topimg">增加虚拟主机产品</div>
+  <div id="main" class="wid">
+  <form name='nodeform' action="?c=vhostproduct&a=!{$action}&id=!{$vhostproduct.id}" method="post">
+    <table>
+		<tbody>
+		<tr>
+        <td width="103" bgcolor='#efefef' class='color01 right'>产品名称</td>
+        <td width="340"><input type='text' name='name' id='name' value="!{$vhostproduct.name}" onBlur="checkName();"><font color=red>*必填</font></td>
+      </tr>
+			
+			<tr>
+			 <td class="color01 right" bgcolor="#efefef">空间大小</td>
+			 <td><input name="web_quota" value="!{$vhostproduct.web_quota}" type="text">
+			   <font color=red>*必填</font></td>
+			</tr>
+			<tr>
+                <td class="color01 right" bgcolor="#efefef">数据库大小</td>
+				<td><input name="db_quota" type="text" id="db_quota" value="!{$vhostproduct.db_quota}">
+				   <font color=red>*必填</font></td>
+		  </tr>		  	  	 	  		  			  
+		  	 <tr>
+			 <td class="color01 right" bgcolor="#efefef">模板</td>
+			 <td><input name="templete" type="text" id="templete"></td>
+			</tr>
+		  	  	 	   <tr>
+        <td class="color01 right" bgcolor="#efefef"></td>
+        <td>
+	 <button type="submit">增加</button>  </td>
+      </tr>
+    </tbody></table>
+  </form>
+
+  </div>
+</div>
+</body>
+!{include file='common/foot.html'}

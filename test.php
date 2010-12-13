@@ -1,3 +1,3 @@
 <?php
-echo phpinfo();
+include("./smarty/Smarty.class.php");
 ?>

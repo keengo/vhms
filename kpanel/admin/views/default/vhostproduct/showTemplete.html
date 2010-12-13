@@ -1,0 +1,35 @@
+﻿!{include file='common/head.html'}
+<body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
+<div id="container">
+<div class="topimg pal1">
+  [<a href="javascript:if(confirm('确定要刷新所有模板吗？这可能要耗点时间。')){window.location='?c=vhostproduct&a=refreshAllTemplete';}">刷新所有主机模板</a>]
+  <p>共计 !{$sum} 条记录</p>
+</div>
+  <div id="main" class="wid">
+    <table cellpadding=0 cellspacing=1 id="table">
+      <tr id="ttitle">
+	   <td class='color01 right' bgcolor='#efefef'>主机</td>
+        <td class='color01 right' bgcolor='#efefef'>模板</td>
+		<td class='color01 right' bgcolor='#efefef'>权重</td>
+		<td class='color01 right' bgcolor='#efefef'>状态</td>
+		<td class='color01 right' bgcolor='#efefef'>操作</td>
+      </tr>
+	  !{foreach from=$list item=row}
+      <tr>
+        <td class="right">!{$row.node}</td>
+		<td class="right">!{$row.templete}</td>
+		<td class="right">!{$row.weight}</td>
+		<td class="right">!{$row.state}</td>
+		<td class="right">[<a href="javascript:if(confirm('确定删除!{$row.name}?')){location='?c=vhostproduct&a=del&id=!{$row.id}';}" title="删除">
+        <img src='!{$STATIC}images/b_drop.gif' alt='删除' border="0" align="absmiddle"></a>]
+        [<a href="?c=vhostproduct&a=addProductForm&id=!{$row.id}" title="更改信息">
+        <img src='!{$STATIC}images/b_edit.gif' alt='更改' border="0" align="absmiddle"></a>]        </td>
+      </tr>
+	  !{/foreach}
+    </table>
+    <div align="left">
+	</div>
+  </div>
+</div>
+</body>
+!{include file='common/foot.html'}

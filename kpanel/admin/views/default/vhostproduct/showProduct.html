@@ -1,0 +1,35 @@
+﻿!{include file='common/head.html'}
+<body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
+<div id="container">
+<div class="topimg pal1">共计 !{$sum} 条记录</div>
+  <div id="main" class="wid">
+    <table cellpadding=0 cellspacing=1 id="table">
+      <tr id="ttitle">
+	   <td class='color01 right' bgcolor='#efefef'>ID</td>
+        <td class='color01 right' bgcolor='#efefef'>产品名称</td>
+		<td class='color01 right' bgcolor='#efefef'>空间配额</td>
+		<td class='color01 right' bgcolor='#efefef'>数据库配额</td>
+		<td class='color01 right' bgcolor='#efefef'>模板</td>
+        <td class='color01 right' bgcolor='#efefef'>操作</td>
+      </tr>
+	  !{foreach from=$list item=row}
+      <tr>
+        <td class="right">!{$row.id}</td>
+		<td class="right">!{$row.name}</td>
+		<td class="right">!{$row.web_quota}</td>
+		<td class="right">!{$row.db_quota}</td>
+		<td class="right">!{$row.templete}</td>
+        <td class="right">[<a href="javascript:if(confirm('确定删除!{$row.name}?')){location='?c=vhostproduct&a=del&id=!{$row.id}';}" title="删除">
+        <img src='!{$STATIC}images/b_drop.gif' alt='删除' border="0" align="absmiddle"></a>]
+        [<a href="?c=vhostproduct&a=addProductForm&id=!{$row.id}" title="更改信息">
+        <img src='!{$STATIC}images/b_edit.gif' alt='更改' border="0" align="absmiddle"></a>]
+        </td>
+      </tr>
+	  !{/foreach}
+    </table>
+    <div align="left">
+	</div>
+  </div>
+</div>
+</body>
+!{include file='common/foot.html'}

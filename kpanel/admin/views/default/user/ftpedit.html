@@ -1,0 +1,45 @@
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+<title>主机列表</title>
+<link rel='stylesheet' type='text/css' href='css/style.css'>
+<script language="javascript" src="scripts/jquery.js"></script>
+<script language="javascript" src="scripts/common.js"></script>
+</head>
+<body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
+<div id="container">
+<div class="topimg">当前位置：管理 -> ftp信息 -> <%$info.ftpname%></div>
+  <div id="main" class="wid">
+  <form action="/?c=ftp&a=update&ftpname=<%$info.ftpname%>" method="post">
+    <table>
+
+		<tr>
+        <td class='color01 right' bgcolor='#efefef'>ftp用户名</td>
+        <td><%$info.ftpname%></td>
+      </tr>
+
+	  <tr>
+        <td class='color01 right' bgcolor='#efefef'>密码</td>
+        <td><input type='password' name='ftppasswd' id='ftppasswd' value=""/>&nbsp;&nbsp;<span id='check'></span></td>
+      </tr>
+	  <tr>
+        <td class='color01 right' bgcolor='#efefef'>确认密码</td>
+        <td><input type='password' name='ftppasswd2' id='ftppasswd2' value="" onblur="checkFtpPasswd();"/>&nbsp;&nbsp;<span id='check'></span></td>
+      </tr>
+
+	   <tr>
+        <td class='color01 right' bgcolor='#efefef'>子目录</td>
+        <td><input type='text' name='homedir' id='homedir' value=""/></td>
+      </tr>
+
+	   <tr>
+        <td class='color01 right' bgcolor='#efefef'></td>
+        <td >
+			<input type="submit" value="确认提交"</td>
+      </tr>
+    </table>
+  </form>
+  </div>
+</div>
+</body>
+</html>
