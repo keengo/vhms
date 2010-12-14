@@ -1,0 +1,38 @@
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+<title>主机列表</title>
+<link rel='stylesheet' type='text/css' href='css/style.css'>
+</head>
+<body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
+<div id="container">
+<div class="topimg">当前位置：主机管理 -> 主机信息 -> <%$info.name%></div>
+  <div id="main" class="wid">
+  <form action="/?c=host&a=savevh&name=<%$info.name%>" method="post">
+    <table>
+	<%foreach from=$info item=value key=key%>
+	  <%if $key!='name'%>
+		  <%if $key=='host'%>
+			  <tr>
+				<td class='color01 right' bgcolor='#efefef'><%$key%></td>
+				<td ><textarea name='<%$key%>'rows="4" cols="30"><%$value%></textarea></td>
+			  </tr>
+		  <%else%>
+			<tr>
+			 <td class='color01 right' bgcolor='#efefef'><%$key%></td>
+			 <td ><input name='<%$key%>' type="text" value="<%$value%>" size='60'/></td>
+			</tr>
+		  <%/if%>
+	  <%/if%>
+	 <%/foreach%>
+	   <tr>
+        <td class='color01 right' bgcolor='#efefef'></td>
+        <td >
+			<input type="submit" value="确认提交"</td>
+      </tr>
+    </table>
+  </form>
+  </div>
+</div>
+</body>
+</html>

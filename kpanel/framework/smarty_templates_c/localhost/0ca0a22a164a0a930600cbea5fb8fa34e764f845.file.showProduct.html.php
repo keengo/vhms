@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.5, created on 2010-12-13 10:48:37
+<?php /* Smarty version Smarty-3.0.5, created on 2010-12-14 04:48:07
          compiled from "D:\project\janbao\kpanel\admin/views/default\vhostproduct/showProduct.html" */ ?>
-<?php /*%%SmartyHeaderCode:263144d05fa05036720-26100213%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:225344d06f707302b72-98136700%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '0ca0a22a164a0a930600cbea5fb8fa34e764f845' => 
     array (
       0 => 'D:\\project\\janbao\\kpanel\\admin/views/default\\vhostproduct/showProduct.html',
-      1 => 1292236997,
+      1 => 1292302084,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '263144d05fa05036720-26100213',
+  'nocache_hash' => '225344d06f707302b72-98136700',
   'function' => 
   array (
   ),
@@ -30,7 +30,9 @@ $_smarty_tpl->decodeProperties(array (
         <td class='color01 right' bgcolor='#efefef'>产品名称</td>
 		<td class='color01 right' bgcolor='#efefef'>空间配额(M)</td>
 		<td class='color01 right' bgcolor='#efefef'>数据库配额(M)</td>
+		<td class='color01 right' bgcolor='#efefef'>价格(分/年)</td>
 		<td class='color01 right' bgcolor='#efefef'>模板</td>
+		<td class='color01 right' bgcolor='#efefef'>状态</td>
         <td class='color01 right' bgcolor='#efefef'>操作</td>
       </tr>
 	  <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable;
@@ -47,8 +49,11 @@ if ($_smarty_tpl->_count($_from) > 0){
 </td>
 		<td class="right"><?php echo $_smarty_tpl->tpl_vars['row']->value['db_quota'];?>
 </td>
+		<td class="right"><?php echo $_smarty_tpl->tpl_vars['row']->value['price'];?>
+</td>
 		<td class="right"><?php echo $_smarty_tpl->tpl_vars['row']->value['templete'];?>
 </td>
+		<td class="right"><?php if ($_smarty_tpl->tpl_vars['row']->value['state']==0){?>暂停销售<?php }elseif($_smarty_tpl->tpl_vars['row']->value['state']==1){?>购买<?php }else{ ?>试用<?php }?></td>
         <td class="right">[<a href="javascript:if(confirm('确定删除<?php echo $_smarty_tpl->tpl_vars['row']->value['name'];?>
 ?')){location='?c=vhostproduct&a=del&id=<?php echo $_smarty_tpl->tpl_vars['row']->value['id'];?>
 ';}" title="删除">

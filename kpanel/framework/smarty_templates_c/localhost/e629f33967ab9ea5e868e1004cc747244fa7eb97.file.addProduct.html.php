@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.5, created on 2010-12-13 10:49:58
+<?php /* Smarty version Smarty-3.0.5, created on 2010-12-14 04:48:08
          compiled from "D:\project\janbao\kpanel\admin/views/default\vhostproduct/addProduct.html" */ ?>
-<?php /*%%SmartyHeaderCode:258794d05fa56ed9e55-64530600%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:197004d06f708a83563-20422467%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'e629f33967ab9ea5e868e1004cc747244fa7eb97' => 
     array (
       0 => 'D:\\project\\janbao\\kpanel\\admin/views/default\\vhostproduct/addProduct.html',
-      1 => 1292237386,
+      1 => 1292302081,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '258794d05fa56ed9e55-64530600',
+  'nocache_hash' => '197004d06f708a83563-20422467',
   'function' => 
   array (
   ),
@@ -31,20 +31,23 @@ $_smarty_tpl->decodeProperties(array (
 		<tr>
         <td width="131" bgcolor='#efefef' class='color01 right'>产品名称</td>
         <td width="312"><input type='text' name='name' id='name' value="<?php echo $_smarty_tpl->getVariable('vhostproduct')->value['name'];?>
-" onBlur="checkName();"><font color=red>*必填</font></td>
+" onBlur="checkName();"></td>
       </tr>
 			
 			<tr>
 			 <td class="color01 right" bgcolor="#efefef">空间大小(M)</td>
 			 <td><input name="web_quota" value="<?php echo $_smarty_tpl->getVariable('vhostproduct')->value['web_quota'];?>
-" type="text">
-			   <font color=red>*必填</font></td>
+" type="text"></td>
 			</tr>
 			<tr>
-                <td class="color01 right" bgcolor="#efefef">数据库大小(M)</td>
-				<td><input name="db_quota" type="text" id="db_quota" value="<?php echo $_smarty_tpl->getVariable('vhostproduct')->value['db_quota'];?>
-">
-				   <font color=red>*必填</font></td>
+              <td class="color01 right" bgcolor="#efefef">数据库大小(M)</td>
+			  <td><input name="db_quota" type="text" id="db_quota" value="<?php echo $_smarty_tpl->getVariable('vhostproduct')->value['db_quota'];?>
+"></td>
+		  </tr>
+			<tr>
+                <td class="color01 right" bgcolor="#efefef">价格(分/年)</td>
+			  <td><input name="price" type="text" id="price" value="<?php echo $_smarty_tpl->getVariable('vhostproduct')->value['price'];?>
+"></td>
 		  </tr>		  	  	 	  		  			  
 		  	 <tr>
 			 <td class="color01 right" bgcolor="#efefef">模板</td>
@@ -60,6 +63,15 @@ if ($_smarty_tpl->_count($_from) > 0){
 			 <?php }} ?>
 			 </select></td>
 			</tr>
+		  	 <tr>
+               <td class="color01 right" bgcolor="#efefef">状态</td>
+		  	   <td><input type="radio" name="state" value="0" <?php if ($_smarty_tpl->getVariable('vhostproduct')->value['state']==0){?> checked <?php }?>>
+		  	     暂停销售
+		  	       <input type="radio" name="state" value="1" <?php if ($_smarty_tpl->getVariable('vhostproduct')->value['state']==1){?> checked <?php }?>>
+		  	       购买
+		  	       <input type="radio" name="state" value="2" <?php if ($_smarty_tpl->getVariable('vhostproduct')->value['state']==2){?> checked <?php }?>>
+试用</td>
+  	      </tr>
 		  	  	 	   <tr>
         <td class="color01 right" bgcolor="#efefef"></td>
         <td>

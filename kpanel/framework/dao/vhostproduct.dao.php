@@ -9,12 +9,16 @@ class VhostproductDAO extends DAO {
 			"name" => 'name',
 			"web_quota"=> 'web_quota',
 			"db_quota"=>'db_quota',
-			"templete"=>'templete'
+			"templete"=>'templete',
+			'price'=>'price',
+			'state'=>'state'
 		);
 		$this->MAP_TYPE = array(
 			'id'=>FIELD_TYPE_INT|FIELD_TYPE_AUTO,
 			'web_quota'=>FIELD_TYPE_INT,
-			'db_quota'=>FIELD_TYPE_INT
+			'db_quota'=>FIELD_TYPE_INT,
+			'price'=>FIELD_TYPE_INT,
+			'state'=>FIELD_TYPE_INT
 		);
 		$this->_TABLE = DBPRE .'vhost_product';
 	}
@@ -29,7 +33,7 @@ class VhostproductDAO extends DAO {
 	}
 	public function update($arr)
 	{
-		$fields = $this->getFields(array('name','web_quota','db_quota','templete'), $arr);
+		$fields = $this->getFields(array('name','web_quota','db_quota','templete','price','state'), $arr);
 		$sql = "UPDATE ".$this->_TABLE." SET ".$fields." WHERE ".$this->getFieldValue2('id',$arr['id']);
 		return $this->executex($sql);
 	}

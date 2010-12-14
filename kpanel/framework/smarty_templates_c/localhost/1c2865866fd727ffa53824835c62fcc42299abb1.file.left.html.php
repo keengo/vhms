@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.5, created on 2010-12-13 03:47:59
+<?php /* Smarty version Smarty-3.0.5, created on 2010-12-14 04:04:57
          compiled from "D:\project\janbao\kpanel\admin/views/default\left.html" */ ?>
-<?php /*%%SmartyHeaderCode:173504d05976fd483a7-40192304%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:14274d06ece9b75311-88395737%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '1c2865866fd727ffa53824835c62fcc42299abb1' => 
     array (
       0 => 'D:\\project\\janbao\\kpanel\\admin/views/default\\left.html',
-      1 => 1292211548,
+      1 => 1292299494,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '173504d05976fd483a7-40192304',
+  'nocache_hash' => '14274d06ece9b75311-88395737',
   'function' => 
   array (
   ),
@@ -21,7 +21,7 @@ $_smarty_tpl->decodeProperties(array (
  echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
 <body style="overflow-x:hidden; overflow-y:auto;">
 <link rel="stylesheet" rev="stylesheet" href="<?php echo $_smarty_tpl->getVariable('STATIC')->value;?>
-css/left.css" type="text/css" media="all" />
+style/left.css" type="text/css" media="all" />
 
 <table cellpadding="0" cellspacing="0" class="lefttd">
 <tr><td>
@@ -62,6 +62,7 @@ function SwitchMenu(obj,sty)
 	<ul class="submenu" id="sub3" >
 		<li><a href="?c=adminuser&a=listUser" target='main'>管理员列表</a></li>	
 		<li><a href="?c=adminuser&a=add" target='main'>增加管理员</a></li>
+		<li><a href="logout.php" target='_top'>退出登录</a></li>
 	</ul>
 	<h1 id="m5" onClick="SwitchMenu('sub5','m5')" class="menu"><ol id="p5">用户管理</ol></h1>
 	<ul class="submenu" id="sub5" >

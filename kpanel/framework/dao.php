@@ -6,6 +6,7 @@
  */
 define('FIELD_TYPE_STRING',0);
 define('FIELD_TYPE_INT',1);
+define('FIELD_TYPE_MD5',2);
 define('FIELD_TYPE_AUTO',1<<28);
 class DAO
 {
@@ -184,6 +185,8 @@ class DAO
 		switch($this->MAP_TYPE[$name] & 0xFF){
 			case FIELD_TYPE_INT:
 				return intval($value);
+			case FIELD_TYPE_MD5:
+				return "'".md5($value)."'";
 		}
 		return '\''.$value.'\'';	
 	}

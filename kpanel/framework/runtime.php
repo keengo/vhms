@@ -151,7 +151,7 @@ function load_api($file)
  */
 function load_dao($file)
 {
-	__load_core('mod:' . $file . '.dao', 'dao');
+	__load_core('pub:' . $file . '.dao', 'dao');
 }
 
 /**

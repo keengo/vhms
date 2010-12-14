@@ -11,12 +11,15 @@ class UserDAO extends DAO{
 		$this->MAP_ARR 	= array(		//用户信息信息字段对照表
 			"username" => 'username',
 			"passwd" => 'passwd',
-			"homedir" => 'homedir',
+			"email" => 'email',
 			"regtime" => 'regtime',
-			"exptime" => 'exptime',
-			"spacetype" => 'spacetype',
-			"uid"=>'uid',
-			"gid"=>'gid',
+			"name" => 'name',
+			"money" => 'money',
+			"id"=>'id'
+		);
+		$this->MAP_TYPE = array(
+			'money'=>FIELD_TYPE_INT,
+			'passwd'=>FIELD_TYPE_MD5
 		);
 		$this->_TABLE = DBPRE . 'users';
 	}
@@ -66,7 +69,12 @@ class UserDAO extends DAO{
 		$sql = "UPDATE {$tbl} SET ".$update_str." WHERE `username` = '{$username}' limit 1";
 		return $this->execute($host, $dbname, $sql);
 	}
-
+	public function updateMoney($username,$money)
+	{
+		$sql = "UPDATE ".$this->_TABLE." SET ".$this->MAP_ARR['money']."=".$this->MAP_ARR['money']."+".intval($money)." WHERE username='".$username."'";
+		//die($sql);
+		return $this->executex($sql);
+	}
 	/**
 	 * 删除用户信息
 	 */
@@ -87,19 +95,17 @@ class UserDAO extends DAO{
 	/**
 	 * 删除用户信息
 	 */
-	public function listUser()
+	public function listUser($username)
 	{
 		$tbl = $this->_TABLE;
 		if(!$tbl) {
 			return false;
 		}
 		$sql = "SELECT * FROM {$tbl}";
-		$ret = $this->execute($host, $dbname, $sql,'rows');
-		if($ret) {
-			return $ret;
-		}else {
-			return false;
+		if($username!=""){
+			$sql.=" WHERE ".$this->getFieldValue2('username', $username);
 		}
+		return $this->executex($sql,'rows');
 	}
 
 }

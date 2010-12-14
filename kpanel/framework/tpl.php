@@ -14,6 +14,9 @@ class TPL
 			self::$instance->use_sub_dirs = false;
 			self::$instance->template_dir = APPLICATON_ROOT . '/views/default';
 			self::$instance->assign("STATIC",dirname($_SERVER['SCRIPT_NAME']).'/views/default/');
+			self::$instance->assign('_c',$_REQUEST['c']);
+			self::$instance->assign('_a',$_REQUEST['a']);
+			
 			$tmp_dir = explode(".",$_SERVER['SERVER_NAME']);
 			self::$instance->caching = false;
 			if(!file_exists( SYS_ROOT . '/smarty_templates_c')){
