@@ -9,12 +9,12 @@
 	<div id="warning"></div>
 	<div id="login_top"></div>
 	<div id="login_main">
-		<form action="login.php" method=post name="form1" onSubmit='return ValidateForm()'>
+		<form action="index.php?c=session&a=login" method=post name="form1" onSubmit='return ValidateForm()'>
 		<div class="input_title">用户名</div>
 		<div class="input_box" style="margin-bottom:10px;"><input type="text" name="username" /></div>
 		<div class="input_title">密码</div>
 		<div class="input_box">		
-		<input type="password" name="password" /></div>
+		<input type="password" name="passwd" /></div>
 		<div class="login_button">
 		<input type="submit" value="登 录" />
 		</div>

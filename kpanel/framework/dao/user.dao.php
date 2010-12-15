@@ -32,15 +32,9 @@ class UserDAO extends DAO{
 		if(!$tbl) {
 			return false;
 		}
-		$sql = "SELECT * FROM {$tbl} WHERE `username`='{$username}'";
-		$value = $this->execute($host, $dbname, $sql, "row");
-		if($value === false) {
-			return false;
-		}
-		if(!$value && is_array($value)) {
-			return null;
-		}
-		return $value;
+		$sql = "SELECT * FROM {$tbl} WHERE ".$this->getFieldValue2('username',$username);
+	//	echo $sql;
+		return $this->executex($sql, "row");		
 	}
 	/**
 	 * 插入用户信息信息

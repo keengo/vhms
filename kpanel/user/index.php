@@ -8,9 +8,5 @@ define('SYS_ROOT', dirname(dirname(__FILE__)).'/framework');
 define('DEFAULT_CONTROL', 'index');
 include(SYS_ROOT . '/runtime.php');
 include("../config.php");
-if($_SESSION['username']==""){
-	$_REQUEST["c"] = "session";
-	$_REQUEST["a"] = "login";
-}
 startFramework();
 ?>

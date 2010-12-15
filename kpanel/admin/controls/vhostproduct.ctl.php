@@ -1,4 +1,5 @@
 <?php
+needRole('admin');
 class VhostproductControl extends Control {
 	
 	public function __construct()

@@ -81,18 +81,5 @@ class UserControl extends Control {
 		}
 		
 	}
-	public function getHomedir($username){
-		$homedir = "/home/ftp/".$username[0]."/".$username[1]."/".$username[2]."/".$username;
-		return $homedir;
-	}
-	public function listUser(){
-		$list = daocall('user','listUser',array($_REQUEST['username']));
-		//if($list){
-		$this->_tpl->assign('sum',count($list));
-		$this->_tpl->assign('list',$list);
-		$this->_tpl->display('user/userlist.html');
-		//}
-
-	}
 }
 ?>

@@ -1,11 +1,27 @@
-<html>
-<head>
-<meta http-equiv='Content-Language' content='zh-cn'>
-<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
-<title>信息显示</title>
-<link rel='stylesheet' type='text/css' href='css/style.css'>
-</head>
+!{include file='common/head.html'}
 <body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
+<table width="329" border="1" align="center">
+  <tr>
+    <td width="99">用户名</td>
+    <td width="214">!{$user.username}</td>
+  </tr>
+  <tr>
+    <td>姓名</td>
+    <td>!{$user.name}</td>
+  </tr>
+  <tr>
+    <td>身份证</td>
+    <td>!{$user.id}</td>
+  </tr>
+  <tr>
+    <td>电子邮件</td>
+    <td>!{$user.email}</td>
+  </tr>
+  <tr>
+    <td>账户余额(元)</td>
+    <td>!{$user.money/100}</td>
+  </tr>
+</table>
 <div id="container">
 <div class="topimg">
 </div>

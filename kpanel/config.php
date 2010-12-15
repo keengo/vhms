@@ -1,6 +1,3 @@
 <?php
-$db_host="192.168.1.23:3306";
-$db_user="root";
-$db_passwd="test";
-$db_db="kangle";
+$db_cfg['default']=array('driver'=>'mysql','host'=>'192.168.1.23','port'=>'3306','user'=>'root','passwd'=>'test','dbname'=>'kangle');
 ?>

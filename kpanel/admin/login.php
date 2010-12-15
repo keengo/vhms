@@ -1,5 +1,6 @@
 <?php
 session_start();
+die(print_r($_REQUEST));
 include("../config.php");
 $dblink = mysql_connect($db_host,$db_user,$db_passwd);
 mysql_select_db($db_db,$dblink);

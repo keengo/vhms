@@ -1,40 +1,26 @@
-<?php /* Smarty version Smarty-3.0.5, created on 2010-12-14 05:31:14
+<?php /* Smarty version Smarty-3.0.5, created on 2010-12-15 03:41:18
          compiled from "D:\project\janbao\kpanel\user/views/default\top.html" */ ?>
-<?php /*%%SmartyHeaderCode:180014d0701229aa814-45340405%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:205934d0838de537444-74557226%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'a6228117d97a5a4e900ef5ca06da50aa1e59f70f' => 
     array (
       0 => 'D:\\project\\janbao\\kpanel\\user/views/default\\top.html',
-      1 => 1291874826,
+      1 => 1292384476,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '180014d0701229aa814-45340405',
+  'nocache_hash' => '205934d0838de537444-74557226',
   'function' => 
   array (
   ),
   'has_nocache_code' => false,
 )); /*/%%SmartyHeaderCode%%*/?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!-- html标识扩展，定义名字空间 -->
-<html xmlns="http://www.w3.org/1999/xhtml" lang="utf-8">
-<head>
-<title>登陆页面</title>
-<!-- 定义语言编码 -->
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="Content-Language" content="utf-8" />
-<!-- 定义链接样式表 -->
-<link rel="stylesheet" rev="stylesheet" href="css/style.css" type="text/css" media="all" />
-<link rel="stylesheet" rev="stylesheet" href="css/header.css" type="text/css" media="all" />
-<base target="content" />
-</head>
+<?php $_template = new Smarty_Internal_Template("common/head.html", $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
 <body>
-<table id="t" cellpadding="0" cellspacing="0">
-  <tr>
-    <td>
-	<table cellspacing="0" cellpadding="0" width="100%">
+<table width="90%" align="center" cellpadding="0" cellspacing="0">
       <tr>
         <td id="t1"><img src="images/top-left.gif" alt="top-left" width="18" height="60" /><img src="images/logo.gif" alt="logo" width="164" height="60" /></td>
         <td id="t2">
@@ -67,22 +53,13 @@ function getFullYear(d)
   document.write("</table>");
 //-->
 </SCRIPT>
+
 </td>
-        </tr>
-    </table>	</td>
+<td align="right"><script language="javascript" src="?c=product&a=productList&target=parent.main">
+</script>
+</td>
   </tr>
 </table>
 
 </body>
 </html>
-<!--
-          <map name="Map" id="Map">
-            <area shape="rect" coords="45,2,120,60" href="domainmanage.htm" target='main' />
-            <area shape="rect" coords="141,2,216,60" href="hostlist.htm" target='main'/>
-            <area shape="rect" coords="236,2,291,60" href="funddetail.htm" target='main'/>
-            <area shape="rect" coords="310,2,361,60" href="cgi-bin/userself/pricelist.cgi" target='main'/>
-	    <area shape="rect" coords="384,2,434,59" href="renewlist.htm" target='main'/>
-	    <area shape="rect" coords="526,2,577,60" href="cgi-bin/logout.cgi" target='_top'/>
-		<area shape="rect" coords="458,0,510,59" href="cgi-bin/miscservice/techsupport.cgi" target='main' />
-</map>
--->

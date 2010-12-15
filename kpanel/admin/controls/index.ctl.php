@@ -1,4 +1,5 @@
 <?php
+needRole('admin');
 class IndexControl extends Control
 {
 	public function __construct()

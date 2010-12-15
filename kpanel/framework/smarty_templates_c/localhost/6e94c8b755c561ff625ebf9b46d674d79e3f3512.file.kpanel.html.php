@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.5, created on 2010-12-14 05:31:14
+<?php /* Smarty version Smarty-3.0.5, created on 2010-12-15 03:34:12
          compiled from "D:\project\janbao\kpanel\user/views/default\kpanel.html" */ ?>
-<?php /*%%SmartyHeaderCode:227474d0701227e6576-58084446%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:169034d0837346a69e1-51376017%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '6e94c8b755c561ff625ebf9b46d674d79e3f3512' => 
     array (
       0 => 'D:\\project\\janbao\\kpanel\\user/views/default\\kpanel.html',
-      1 => 1291881390,
+      1 => 1292384050,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '227474d0701227e6576-58084446',
+  'nocache_hash' => '169034d0837346a69e1-51376017',
   'function' => 
   array (
   ),
@@ -23,12 +23,10 @@ $_smarty_tpl->decodeProperties(array (
 <title>kangle web 主机管理系统</title>
 <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
-<frameset name="right" rows="64,9,*" cols="*" frameborder="no" border="0" framespacing="0">
+<frameset name="right" rows="64,*" cols="*" frameborder="no" border="0" framespacing="0">
 	<frame src="?c=index&a=top" name="top" noresize="noresize" scrolling="no">
-	<frame src="?c=index&a=controltop" name="controltop" noresize="noresize" scrolling="no">
-	<frameset cols="200,9,*" frameborder="no" border="0" framespacing="0" name="main1">
+	<frameset cols="200,*" frameborder="no" border="0" framespacing="0" name="main1">
 		<frame src="?c=index&a=left" name="left" noresize="noresize">
-		<frame src="?c=index&a=controlleft" name="control" scrolling="no"> 
 		<frame src="?c=index&a=main" name="main" scrolling="yes">
 	</frameset>
 </frameset>

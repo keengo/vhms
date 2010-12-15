@@ -1,4 +1,5 @@
 <?php
+needRole('admin');
 class NodesControl extends Control {
 	
 	public function __construct()

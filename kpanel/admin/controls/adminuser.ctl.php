@@ -1,4 +1,5 @@
 <?php
+needRole('admin');
 class AdminUserControl extends Control {
 	
 	public function __construct()

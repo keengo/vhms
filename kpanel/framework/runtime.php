@@ -221,7 +221,6 @@ function apicall($module,$method,$args) {
 	$className	= exportClass($module,"API");
 	return BaseCall("api",$className,$method,$args);
 }
-
 /**
  * DAO调用
  */
@@ -231,8 +230,12 @@ function daocall($module,$method,$args,$is_stat = true) {
 	$className	= exportClass($module,"DAO");
 	return BaseCall("dao",$className,$method,$args,false,$is_stat);
 }
-
-
+function newdao($module)
+{
+	load_dao($module);
+	$className	= exportClass($module,"DAO");
+	return 	Container::getInstance()->newObj($module,$className,true);
+}
 function exportClass($module,$lay) {
 	$module_clips 	= explode("_",$module);
 	$className  	= "";
@@ -280,7 +283,38 @@ function BaseCall($module,$className,$method,$args,$mul_mod = false,$is_stat = t
 		return false;
 	}
 }
-
+function unregisterUser()
+{
+	global $_SESSION;
+	$_SESSION['janbao_user'] = '';
+}
+function registerUser($user)
+{
+	global $_SESSION;
+	$_SESSION['janbao_user'] = $user;
+}
+function getUser()
+{
+	global $_SESSION;
+	return $_SESSION['janbao_user'];
+}
+function unregisterRole($role)
+{
+	global $_SESSION;
+	$_SESSION['janbao_role'][$role]=0;
+}
+function registerRole($role)
+{
+	global $_SESSION;
+	$_SESSION['janbao_role'][$role]=1;
+}
+function needRole($role)
+{
+	global $_SESSION;
+	if(intval($_SESSION['janbao_role'][$role])!=1){
+		die('<html><body><script language="javascript">window.top.location.href="index.php?c=session&a=loginForm";</script></body></html>');
+	}
+}
 /**
  * 获得微妙数
  */
@@ -289,7 +323,6 @@ function microtime_float()
     list($usec, $sec) = explode(" ", microtime());
     return (float)$usec + (float)$sec;
 }
-
 /*
 * 框架文件加载
 */

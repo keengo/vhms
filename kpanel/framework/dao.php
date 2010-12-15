@@ -13,21 +13,30 @@ class DAO
 	protected $MAP_ARR = null;
 	protected $MAP_TYPE = null;
 	protected $_TABLE = null;
+	public $db = null;
 	function __construct()
 	{
 		load_lib("pub:db");
 	}
-
 	function __destruct()
 	{
 		
 	}
+	protected function connect()
+	{
+		global $default_db;
+		if($this->db==null){
+			if($default_db==null){
+				$default_db = db_connect('default');
+			}
+			$this->db = $default_db;
+		}
+		return $this->db!=null;
+	}
  	protected function executex($sql,$type="result") {
  		global $db_db;
-	 	db_connect();
-		db_use($db_db);
-		$row = db_query($sql,$type);
-		db_close("");
+ 		$this->connect();
+	 	$row = db_query($this->db,$sql,$type);
 		return $row;
 	}
 	/**
@@ -38,10 +47,8 @@ class DAO
 	 * @param String type		执行类型。row:单条查询；rows:多条查询；result:执行动作
 	 */
  	protected function execute($host='vip',$dbname='kpanel',$sql,$type="result") {
-	 	db_connect($host);
-		db_use($dbname);
-		$row = db_query($sql,$type);
-		db_close("");
+	 	$this->connect();
+		$row = db_query($this->db,$sql,$type);
 		return $row;
 	}
 	public function delData($where)
@@ -57,6 +64,15 @@ class DAO
 	{
 		$tbl = $this->_TABLE;
 		$sql = "SELECT ".$this->AllQueryFields()." FROM {$tbl}";
+		if($where!=''){
+			$sql.=' WHERE '.$where;
+		}
+		return $this->executex($sql, $type);
+	}
+	public function getData2($fields,$where='',$type='rows')
+	{
+		$tbl = $this->_TABLE;
+		$sql = "SELECT ".$this->queryFields($fields)." FROM {$tbl}";
 		if($where!=''){
 			$sql.=' WHERE '.$where;
 		}
@@ -120,17 +136,16 @@ class DAO
 			}
 			$fieldstr .= $this->MAP_ARR[$field]." AS ".$field;
 		}
-		//$fieldstr = trim($fieldstr,",");
 		return $fieldstr;
 	}
-	protected function queryFields(&$fields,&$mapArr) {
+	protected function queryFields(&$fields) {
 		$fieldstr = "";
 		foreach($fields as $field) {
-			if(!array_key_exists($field,$mapArr))
-				continue;
-			$fieldstr .= $mapArr[$field][0]." AS ".$field.",";
+			if($fieldstr!=""){
+				$fieldstr.=',';
+			}
+			$fieldstr .= $this->MAP_ARR[$field]." AS ".$field;
 		}
-		$fieldstr = trim($fieldstr,",");
 		return $fieldstr;
 	}
 	protected function getFields($fields,$array)

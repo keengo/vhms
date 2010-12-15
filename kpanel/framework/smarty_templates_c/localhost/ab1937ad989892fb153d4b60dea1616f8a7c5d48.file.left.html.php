@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.5, created on 2010-12-14 06:19:29
+<?php /* Smarty version Smarty-3.0.5, created on 2010-12-15 08:02:20
          compiled from "D:\project\janbao\kpanel\user/views/default\left.html" */ ?>
-<?php /*%%SmartyHeaderCode:316634d070c71b96a83-94722769%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:41604d08760cbe40e2-61001089%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'ab1937ad989892fb153d4b60dea1616f8a7c5d48' => 
     array (
       0 => 'D:\\project\\janbao\\kpanel\\user/views/default\\left.html',
-      1 => 1292307559,
+      1 => 1292400138,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '316634d070c71b96a83-94722769',
+  'nocache_hash' => '41604d08760cbe40e2-61001089',
   'function' => 
   array (
   ),
@@ -63,10 +63,9 @@ function SwitchMenu(obj,sty)
 	  帐户管理
 	</h1>
 	<ul class="submenu" id="sub5" >
-		<li><a href="?c=user&a=listUser" target='main'>帐户信息</a></li>
+		<li><a href="?c=index&a=main" target='main'>帐户信息</a></li>
 		<li><a href="?c=user&a=add" target='main'>产品价格</a></li>	
-	    <li>购物车</li>
-	    <li>退出</li>
+	    <li><a href="?c=session&a=logout" target='_top'>退出</a></li>
 	</ul>
 	<h1 id="m4" onClick="SwitchMenu('sub4','m4')" class="menu">财务管理</h1>
 	<ul class="submenu" id="sub4" >

@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.5, created on 2010-12-14 04:11:15
+<?php /* Smarty version Smarty-3.0.5, created on 2010-12-15 08:13:07
          compiled from "D:\project\janbao\kpanel\user/views/default\login.html" */ ?>
-<?php /*%%SmartyHeaderCode:208514d06ee631ede77-39079314%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:75204d0878939549b2-57044988%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '36930e70d9df4b1a73fc91166ed7026b18605b71' => 
     array (
       0 => 'D:\\project\\janbao\\kpanel\\user/views/default\\login.html',
-      1 => 1291967338,
+      1 => 1292400778,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '208514d06ee631ede77-39079314',
+  'nocache_hash' => '75204d0878939549b2-57044988',
   'function' => 
   array (
   ),
@@ -30,12 +30,12 @@ style/login.css" type="text/css" media="all" />
 	<div id="warning"></div>
 	<div id="login_top"></div>
 	<div id="login_main">
-		<form action="login.php" method=post name="form1" onSubmit='return ValidateForm()'>
+		<form action="index.php?c=session&a=login" method=post name="form1" onSubmit='return ValidateForm()'>
 		<div class="input_title">用户名</div>
 		<div class="input_box" style="margin-bottom:10px;"><input type="text" name="username" /></div>
 		<div class="input_title">密码</div>
 		<div class="input_box">		
-		<input type="password" name="password" /></div>
+		<input type="password" name="passwd" /></div>
 		<div class="login_button">
 		<input type="submit" value="登 录" />
 		</div>
