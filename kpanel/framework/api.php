@@ -15,7 +15,7 @@ class API
 	public $_kangleUrl;
 	function __construct()
 	{
-		$this->_kangleUrl = "http://kpanel.jx116.net:83";
+		//$this->_kangleUrl = "http://kpanel.jx116.net:83";
 	}
 
 	function __destruct()

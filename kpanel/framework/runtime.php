@@ -84,7 +84,7 @@ function __load_core($file, $dir = "", $return = false)
 		}
 		else
 		{
-			require_once($file);
+			include_once($file);
 			return true;
 		}
 	}
@@ -111,7 +111,7 @@ function __get_last_load()
  */
 function load_lib($file)
 {
-	__load_core($file . '.lib', 'libraries');
+	__load_core($file . '.lib', 'lib');
 }
 /**
  * 配置加载函数
@@ -129,7 +129,7 @@ function load_conf($file)
  */
 function load_ctl($file)
 {
-	__load_core($file . '.ctl', 'controls');
+	__load_core($file . '.ctl', 'control');
 }
 
 
@@ -141,7 +141,7 @@ function load_ctl($file)
  */
 function load_api($file)
 {
-	__load_core('mod:' . $file . '.api', 'apis');
+	__load_core('pub:' . $file . '.api', 'api');
 }
 
 /**
@@ -161,7 +161,7 @@ function load_dao($file)
  */
 function load_mod($file)
 {
-	__load_core($file . '.mod', 'models');
+	__load_core($file . '.mod', 'model');
 
 	$pos = strrpos($file, '/');
 	if(false === $pos)
@@ -220,6 +220,12 @@ function apicall($module,$method,$args) {
 	load_api($module);
 	$className	= exportClass($module,"API");
 	return BaseCall("api",$className,$method,$args);
+}
+function newapi($module)
+{
+	load_api($module);
+	$className	= exportClass($module,"API");
+	return 	Container::getInstance()->newObj($module,$className,true);
 }
 /**
  * DAO调用
@@ -293,7 +299,7 @@ function registerUser($user)
 	global $_SESSION;
 	$_SESSION['janbao_user'] = $user;
 }
-function getUser()
+function getLoginUser()
 {
 	global $_SESSION;
 	return $_SESSION['janbao_user'];
@@ -308,12 +314,22 @@ function registerRole($role)
 	global $_SESSION;
 	$_SESSION['janbao_role'][$role]=1;
 }
-function needRole($role)
+function isRole($role)
 {
 	global $_SESSION;
-	if(intval($_SESSION['janbao_role'][$role])!=1){
+	return intval($_SESSION['janbao_role'][$role])==1;
+}
+function needRole($role)
+{
+
+	if(!isRole($role)){
 		die('<html><body><script language="javascript">window.top.location.href="index.php?c=session&a=loginForm";</script></body></html>');
 	}
+}
+function getRoles()
+{
+	global $_SESSION;
+	return $_SESSION['janbao_role'];
 }
 /**
  * 获得微妙数

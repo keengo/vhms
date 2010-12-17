@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.5, created on 2010-12-17 05:03:47
-         compiled from "D:\project\janbao\kpanel\admin/views/default\left.html" */ ?>
-<?php /*%%SmartyHeaderCode:285344d0aef33653a12-00935523%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.0.5, created on 2010-12-17 07:08:32
+         compiled from "D:\project\janbao\kpanel\user/view/default\left.html" */ ?>
+<?php /*%%SmartyHeaderCode:229664d0b0c70c8f1e4-12085269%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '1c2865866fd727ffa53824835c62fcc42299abb1' => 
+    '9d834704ae91d12143ebef83d2c3226876b4c439' => 
     array (
-      0 => 'D:\\project\\janbao\\kpanel\\admin/views/default\\left.html',
-      1 => 1292558092,
+      0 => 'D:\\project\\janbao\\kpanel\\user/view/default\\left.html',
+      1 => 1292400138,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '285344d0aef33653a12-00935523',
+  'nocache_hash' => '229664d0b0c70c8f1e4-12085269',
   'function' => 
   array (
   ),
@@ -24,12 +24,13 @@ $_smarty_tpl->decodeProperties(array (
 style/left.css" type="text/css" media="all" />
 
 <table cellpadding="0" cellspacing="0" class="lefttd">
-<tr><td>
+<tr><td width="154">
 <script type="text/javascript">
 
 function SwitchMenu(obj,sty)
 {
-/*	if(document.getElementById)
+/*
+	if(document.getElementById)
 	{
 	var el = document.getElementById(obj);
 	var ml = document.getElementById(sty);
@@ -57,28 +58,29 @@ function SwitchMenu(obj,sty)
 }
 </script>
 <div id="masterdiv">
-<h1 id="m3" onClick="SwitchMenu('sub3','m3')" class="menu"><ol id="p3">管理员管理</ol></h1>
-	<ul class="submenu" id="sub3" >
-		<li><a href="?c=adminuser&a=listUser" target='main'>管理员列表</a></li>	
-		<li><a href="?c=adminuser&a=add" target='main'>增加管理员</a></li>
-		<li><a href="?c=session&a=logout" target='_top'>退出登录</a></li>
-	</ul>
-	<h1 id="m5" onClick="SwitchMenu('sub5','m5')" class="menu"><ol id="p5">用户管理</ol></h1>
+
+	<h1 id="m5" onClick="SwitchMenu('sub5','m5')" class="menu">
+	  帐户管理
+	</h1>
 	<ul class="submenu" id="sub5" >
-		<li><a href="?c=user&a=listUser" target='main'>用户列表</a></li>
-		<li><a href="?c=user&a=add" target='main'>增加用户</a></li>	
+		<li><a href="?c=index&a=main" target='main'>帐户信息</a></li>
+		<li><a href="?c=user&a=add" target='main'>产品价格</a></li>	
+	    <li><a href="?c=session&a=logout" target='_top'>退出</a></li>
 	</ul>
-	<h1 id="m4" onClick="SwitchMenu('sub4','m4')" class="menu"><ol id="p4">主机管理</ol></h1>
+	<h1 id="m4" onClick="SwitchMenu('sub4','m4')" class="menu">财务管理</h1>
 	<ul class="submenu" id="sub4" >
-		<li><a href="?c=nodes&a=listNode" target='main'>主机列表</a></li>	
-		<li><a href="?c=nodes&a=addNode" target='main'>增加主机</a></li>
-	</ul>
-	<h1 id="m6" onClick="SwitchMenu('sub6','m6')" class="menu"><ol id="p6">虚拟主机产品管理</ol></h1>
+		<li><a href="http://www.512j.com/member/member.php?flag=add_fee">充值金额</a></li>	
+		<li><a href="?c=nodes&a=addNode" target='main'>消费记录</a></li>
+		<li><a href="?c=nodes&a=addNode" target='main'>充值记录</a></li>
+	    </ul>
+	<h1 id="m6" onClick="SwitchMenu('sub6','m6')" class="menu">
+	
+	    我的产品
+	 
+	</h1>
 	<ul class="submenu" id="sub6" >
-		<li><a href="?c=vhostproduct&a=showTemplete" target='main'>模板列表</a></li>
-		<li><a href="?c=vhostproduct&a=showProduct" target='main'>产品列表</a></li>	
-		<li><a href="?c=vhostproduct&a=addProductForm" target='main'>增加产品</a></li>
-	</ul>
+	    <li><a href="?c=vhostproduct&a=showTemplete" target='main'>我的虚拟主机</a></li>
+		</ul>
 </div>
 </td></tr>
 </table>

@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.5, created on 2010-12-17 05:03:47
-         compiled from "D:\project\janbao\kpanel\admin/views/default\left.html" */ ?>
-<?php /*%%SmartyHeaderCode:285344d0aef33653a12-00935523%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.0.5, created on 2010-12-17 07:08:25
+         compiled from "D:\project\janbao\kpanel\admin/view/default\left.html" */ ?>
+<?php /*%%SmartyHeaderCode:63784d0b0c69880898-13048699%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '1c2865866fd727ffa53824835c62fcc42299abb1' => 
+    '5b7d6a62abd52e48bab5fe28e652a862fe5134ac' => 
     array (
-      0 => 'D:\\project\\janbao\\kpanel\\admin/views/default\\left.html',
+      0 => 'D:\\project\\janbao\\kpanel\\admin/view/default\\left.html',
       1 => 1292558092,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '285344d0aef33653a12-00935523',
+  'nocache_hash' => '63784d0b0c69880898-13048699',
   'function' => 
   array (
   ),

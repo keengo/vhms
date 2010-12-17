@@ -4,18 +4,35 @@
  */
 class VhostDAO extends DAO{
 	
-	private $_TABLE	= 'hosts';
-
 	public function __construct()
 	{	//加载基本db文件
 		parent::__construct();
 		$this->MAP_ARR 	= array(		//用户信息信息字段对照表
 			"name" => 'name',
-			"username" => 'username',
-			"ftpuser"=>'ftpuser',
-			"ftppwd"=>'ftppwd',
+			'passwd'=>'passwd',
+			'doc_root'=>'doc_root',
+			'uid'=>'uid',
+			'group'=>'group',
+		 	'templete'=>'templete',
+			'create_time'=>'create_time',
+			'expire_time'=>'expire_time',
+			'state'=>'state',
+			'host'=>'shell',
+			'product_id'=>'product_id',
+			'username'=>'username'
 		);
-		$this->_TABLE = DBPRE . $this->_TABLE;
+		$this->MAP_TYPE = array(
+			'passwd'=>FIELD_TYPE_MD5,
+			'uid'=>FIELD_TYPE_INT,
+			'state'=>FIELD_TYPE_INT,
+			'product_id'=>FIELD_TYPE_INT		
+		);
+		$this->_TABLE = DBPRE . 'vhost';
+	}
+	public function check($user)
+	{
+		$sql = "SELECT 1 FROM ".$this->_TABLE." WHERE ".$this->getFieldValue2('name', $user);
+		return $this->executex($sql,'row');
 	}
 	/**
 	 * 查询用户信息信息
@@ -39,15 +56,21 @@ class VhostDAO extends DAO{
 	/**
 	 * 插入用户信息信息
 	 */
-	public function insertVhost($arr)
+	public function insertVhost($username,$name,$passwd,$doc_root,$group,$templete,$state,$host,$product_id,$month)
 	{
-		$tbl = $this->_TABLE;
-		if(!$tbl) {
-			return false;
-		}
-		$sql = $this->insertSql($tbl,$arr,$this->MAP_ARR);
-		$ret = $this->execute($host, $dbname, $sql);
-		return $ret;
+		$arr=array();
+		$arr['username']=$username;
+		$arr['name'] = $name;
+		$arr['passwd'] = $passwd;
+		$arr['doc_root'] = $doc_root;
+		$arr['group'] = $group;
+		$arr['templete'] = $templete;
+		$arr['state'] = $state;
+		$arr['host'] = $host;
+		$arr['product_id'] = $product_id;
+		$arr['create_time'] = 'NOW()';
+		$arr['expire_time'] = 'ADDDATE(NOW(),INTERVAL '.$month.' MONTH)';
+		return $this->insertData();		
 	}
 
 	/**

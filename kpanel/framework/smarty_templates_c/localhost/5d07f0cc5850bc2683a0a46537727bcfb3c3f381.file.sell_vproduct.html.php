@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.5, created on 2010-12-17 03:43:33
-         compiled from "D:\project\janbao\kpanel\user/views/default\sell_vproduct.html" */ ?>
-<?php /*%%SmartyHeaderCode:119314d0adc658082f2-51490980%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.0.5, created on 2010-12-17 07:14:48
+         compiled from "D:\project\janbao\kpanel\user/view/default\sell_vproduct.html" */ ?>
+<?php /*%%SmartyHeaderCode:162694d0b0de83fd795-27648959%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '00a2457938e916592b28893fdcf3db4957475025' => 
+    '5d07f0cc5850bc2683a0a46537727bcfb3c3f381' => 
     array (
-      0 => 'D:\\project\\janbao\\kpanel\\user/views/default\\sell_vproduct.html',
+      0 => 'D:\\project\\janbao\\kpanel\\user/view/default\\sell_vproduct.html',
       1 => 1292554063,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '119314d0adc658082f2-51490980',
+  'nocache_hash' => '162694d0b0de83fd795-27648959',
   'function' => 
   array (
   ),

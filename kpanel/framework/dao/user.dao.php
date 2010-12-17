@@ -63,10 +63,16 @@ class UserDAO extends DAO{
 		$sql = "UPDATE {$tbl} SET ".$update_str." WHERE `username` = '{$username}' limit 1";
 		return $this->execute($host, $dbname, $sql);
 	}
-	public function updateMoney($username,$money)
+	public function addMoney($username,$money)
 	{
-		$sql = "UPDATE ".$this->_TABLE." SET ".$this->MAP_ARR['money']."=".$this->MAP_ARR['money']."+".intval($money)." WHERE username='".$username."'";
-		//die($sql);
+		$where = $this->getFieldValue2('username', $username);
+		$sql = "UPDATE ".$this->_TABLE." SET ".$this->MAP_ARR['money']."=".$this->MAP_ARR['money']."+".intval($money)." WHERE ".$where;
+		return $this->executex($sql);
+	}
+	public function decMoney($username,$money)
+	{
+		$where = $this->getFieldValue2('username', $username).' AND '.$this->MAP_ARR['money'].'>='.$money;
+		$sql = "UPDATE ".$this->_TABLE." SET ".$this->MAP_ARR['money']."=".$this->MAP_ARR['money']."-".intval($money)." WHERE ".$where;
 		return $this->executex($sql);
 	}
 	/**
