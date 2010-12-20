@@ -1,0 +1,42 @@
+!{include file='common/head.html'}
+<body>
+<link rel="stylesheet" rev="stylesheet" href="!{$STATIC}style/login.css" type="text/css" media="all" />
+<div id="header"></div>
+
+<div id="login">
+	<div id="logo">管理员控制面板</div>
+
+	<div id="warning"></div>
+	<div id="login_top"></div>
+	<div id="login_main">
+		<form action="index.php?c=session&a=login" method=post name="form1" onSubmit='return ValidateForm()'>
+		<div class="input_title">用户名</div>
+		<div class="input_box" style="margin-bottom:10px;"><input type="text" name="username" /></div>
+		<div class="input_title">密码</div>
+		<div class="input_box">		
+		<input type="password" name="passwd" /></div>
+		<div class="login_button">
+		<input type="submit" value="登 录" />
+		</div>
+		</form>
+	</div>
+	<div id="login_bottom"></div>
+</div>
+</body>
+
+  <SCRIPT>
+function ValidateForm() 
+{
+	if ( document.form1.LoginName.value=="" || document.form1.LoginPass.value=="" || document.form1.CheckCode.value=="") 
+		{
+		alert("please enter ur name and passwd and checkcode!");
+		return false;
+	}
+	else { 
+		return true;
+	}
+}
+</SCRIPT>
+
+</html>
+											

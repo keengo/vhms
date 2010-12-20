@@ -7,6 +7,7 @@ define('APPLICATON_ROOT', dirname(__FILE__));
 define('SYS_ROOT', dirname(dirname(__FILE__)).'/framework');
 //定义默认控制器
 define('DEFAULT_CONTROL', 'index');
+//die(print_r($_REQUEST));
 include(SYS_ROOT . '/runtime.php');
 include("../config.php");
 startFramework();

@@ -1,0 +1,111 @@
+<?php
+/**
+ * 控制器调度
+ * 
+ * 根据url参数调度对于的Control，并执行相应的Action
+ *
+ * @package core
+ */
+
+
+function __dispatch_init()
+{
+	global $__core_env;
+
+	if(isset($_REQUEST['c']) && $_REQUEST ['c'] != '')
+	{
+		$__core_env['control'] = $_REQUEST['c'];
+		if(!preg_match('/^[a-z0-9_-]+$/i', $__core_env['control']))
+		{
+			__dispatch_exit('无效的控制器: ' . $__core_env['control']);
+		}
+		$__core_env['control'] = str_replace(array('-'), array('/'), $__core_env['control']);
+	}else{
+		if(defined('DEFAULT_CONTROL'))
+			$__core_env['control'] = DEFAULT_CONTROL;
+		else
+			__dispatch_exit('未指定默认控制器');
+	}
+	if(isset($_REQUEST['a']) && $_REQUEST['a'] != '')
+	{
+		$__core_env['action'] = $_REQUEST['a'];
+
+		if(!preg_match('/^[a-z0-9_]+$/i', $__core_env['action']))
+		{
+			__dispatch_exit('无效的事件 ' . $__core_env['action']);
+		}
+
+		if(substr($__core_env['action'], 0, 1) == '_')
+		{
+			__dispatch_exit('无效的事件 ' . $__core_env['action']);
+		}
+	}
+	else
+	{
+		$__core_env['action'] = 'index';		//默认调用index事件
+	}
+}
+
+function __dispatch_start()
+{
+	//系统层人员debug
+	global $__core_env;
+	$pos = strrpos($__core_env['control'], '/');
+	if(false === $pos)
+		$control_name = $__core_env['control'];
+	else
+		$control_name =	substr($__core_env['control'], $pos + 1, 100);
+
+	load_ctl($__core_env['control']);
+	$control_name[0] = strtoupper($control_name[0]);
+
+	$class = $control_name . 'Control';
+	//正常流程
+	if(!class_exists($class))
+	{
+		__dispatch_exit($class . '  控制器无效');
+	}
+
+	if(substr($__core_env['action'], 0, 1) == '_')
+	{
+		__dispatch_exit($class . ' 控制器的 ' . $__core_env['action'] . ' 该事件被禁止访问');
+	}
+
+	$inst = new $class;
+
+	if($inst && method_exists($inst, $__core_env['action']))
+	{
+		//接口开始执行时间
+		$t_start = microtime_float();
+		$inst->$__core_env['action']();
+		if(!defined("__OUTVIEW__"))
+		{
+			//接口结束执行时间
+			$t_end  = microtime_float();
+			$t_cost = round($t_end-$t_start,5);
+			$stat = array(	"l" => "CONTORL",
+							"c" => $control_name,
+							"a" => $__core_env['action'],
+							"t" => $t_cost);
+			if(!empty($__core_env['out'])){
+				echo json_encode($__core_env['out']);
+			}
+		}
+	}else{
+		__dispatch_exit($class . ' 控制器的 ' . $__core_env['action'] . ' 事件不存在');
+	}
+}
+
+function __dispatch_exit($msg)
+{
+	trigger_error($msg, E_USER_ERROR);
+	exit;
+}
+function dispatch($control,$action)
+{
+	global $__core_env;
+	$__core_env['control'] = $control;
+	$__core_env['action'] = $action;
+	__dispatch_start();
+}
+?>

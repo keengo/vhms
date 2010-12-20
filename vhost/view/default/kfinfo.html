@@ -1,0 +1,34 @@
+!{include file='common/head.html'}
+<body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
+<table width="329" border="1" align="center">
+  <tr>
+    <td width="99">FTP用户名</td>
+    <td width="214">!{$user.name}</td>
+  </tr>
+  <tr>
+    <td>FTP主机</td>
+    <td>!{$user.node}</td>
+  </tr>
+  <tr>
+    <td>产品名称</td>
+    <td>!{$user.product_id}</td>
+  </tr>
+  <tr>
+    <td>创建时间</td>
+    <td>!{$user.create_time}</td>
+  </tr>
+  <tr>
+    <td>到期时间</td>
+    <td>!{$user.expire_time}</td>
+  </tr>
+  <tr>
+    <td>状态</td>
+    <td>!{$user.state}</td>
+  </tr>
+</table>
+<div id="container">
+<div class="topimg">
+</div>
+</div>
+</body>
+</html>
