@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.0.5, created on 2010-12-20 17:54:50
+<?php /* Smarty version Smarty-3.0.5, created on 2010-12-21 16:04:03
          compiled from "D:\project\janbao\admin/view/default\adminuser/userlist.html" */ ?>
-<?php /*%%SmartyHeaderCode:33314d0f27eae86639-58880348%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:48364d105f73ca57a8-86539126%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,40 +11,31 @@ $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '33314d0f27eae86639-58880348',
+  'nocache_hash' => '48364d105f73ca57a8-86539126',
   'function' => 
   array (
   ),
   'has_nocache_code' => false,
 )); /*/%%SmartyHeaderCode%%*/?>
-<?php $_template = new Smarty_Internal_Template('common/head.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
- echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+!{include file='common/head.html'}
 <body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
 <div id="container">
 <div class="topimg">当前位置：主机管理 -> 用户列表</div>
-<div class="topimg pal1">共计 <?php echo $_smarty_tpl->getVariable('sum')->value;?>
- 条记录</div>
+<div class="topimg pal1">共计 !{$sum} 条记录</div>
   <div id="main" class="wid">
     <table cellpadding=0 cellspacing=1 id="table">
       <tr id="ttitle">
         <td class='color01 right' bgcolor='#efefef'>用户名</td>
         <td class='color01 right' bgcolor='#efefef'>操作</td>
       </tr>
-	  <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable;
- $_from = $_smarty_tpl->getVariable('list')->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-if ($_smarty_tpl->_count($_from) > 0){
-    foreach ($_from as $_smarty_tpl->tpl_vars['row']->key => $_smarty_tpl->tpl_vars['row']->value){
-?>
+	  !{foreach from=$list item=row}
       <tr>
-        <td class="right"><?php echo $_smarty_tpl->tpl_vars['row']->value['username'];?>
-</td>
+        <td class="right">!{$row.username}</td>
         <td>
-		[<a href="javascript:if(confirm('确定删除<?php echo $_smarty_tpl->tpl_vars['row']->value['username'];?>
-?')){location='?c=adminuser&a=del&username=<?php echo $_smarty_tpl->tpl_vars['row']->value['username'];?>
-';}" title="删除用户"><img src='images/b_drop.gif' alt='删除用户' border="0" align="absmiddle"></a>]
+		[<a href="javascript:if(confirm('确定删除!{$row.username}?')){location='?c=adminuser&a=del&username=!{$row.username}';}" title="删除用户"><img src='images/b_drop.gif' alt='删除用户' border="0" align="absmiddle"></a>]
 		</td>
       </tr>
-	  <?php }} ?>
+	  !{/foreach}
     </table>
     <div align="left">
 	</div>

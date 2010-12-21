@@ -45,7 +45,10 @@ function __dispatch_init()
 		$__core_env['action'] = 'index';		//默认调用index事件
 	}
 }
-
+function check_dispatch($control,$action)
+{
+	
+}
 function __dispatch_start()
 {
 	//系统层人员debug
@@ -77,7 +80,7 @@ function __dispatch_start()
 	{
 		//接口开始执行时间
 		$t_start = microtime_float();
-		$inst->$__core_env['action']();
+		$result = $inst->$__core_env['action']();
 		if(!defined("__OUTVIEW__"))
 		{
 			//接口结束执行时间
@@ -94,6 +97,7 @@ function __dispatch_start()
 	}else{
 		__dispatch_exit($class . ' 控制器的 ' . $__core_env['action'] . ' 事件不存在');
 	}
+	return $result;
 }
 
 function __dispatch_exit($msg)
@@ -104,8 +108,35 @@ function __dispatch_exit($msg)
 function dispatch($control,$action)
 {
 	global $__core_env;
-	$__core_env['control'] = $control;
-	$__core_env['action'] = $action;
-	__dispatch_start();
+	if($__core_env[$control.':'.$action]==1){
+		__dispatch_exit("control=".$control." action=".$action." 被重复执行");
+		return "";
+	}
+	$__core_env[$control.':'.$action]=1;
+	$pos = strrpos($control, '/');
+	if(false === $pos){
+		$control_name = $control;
+	}else{
+		$control_name =	substr($control, $pos + 1, 100);
+	}
+	load_ctl($control);
+	$control_name[0] = strtoupper($control_name[0]);
+	$class = $control_name . 'Control';
+	if(!class_exists($class))
+	{
+		__dispatch_exit($class . '  控制器无效');
+	}
+	if(substr($action, 0, 1) == '_')
+	{
+		__dispatch_exit($class . ' 控制器的 ' . $action . ' 该事件被禁止访问');
+	}
+	$inst = new $class;
+	if($inst && method_exists($inst, $action))
+	{
+		$result = $inst->$action();
+	}else{
+		__dispatch_exit($class . ' 控制器的 ' . $action . ' 事件不存在');
+	}
+	return $result;
 }
 ?>

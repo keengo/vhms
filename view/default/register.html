@@ -1,0 +1,66 @@
+!{include file='common/head.html'}
+<style type="text/css">
+<!--
+.STYLE1 {color: #FF0000}
+-->
+</style>
+<body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
+<div id="container">
+<div class="topimg">当前位置：主机管理 -&gt; 增加用户</div>
+  <div id="main" class="wid">
+  <form  action="?c=user&a=insert" method='post'>
+    <table cellpadding=0 cellspacing=1>
+      <tr>
+        <td width="71" bgcolor='#efefef' class='color01 right'>用户名</td>
+        <td width="173"><input name='username' type='text' id='username' onBlur="checkUsername();" value="" size="10"/>
+          <span class="STYLE1">*</span>
+            <button type="submit">检查 </button>
+          <span id='check'></span></td>
+      </tr>
+
+	  <tr>
+        <td class='color01 right' bgcolor='#efefef'>密码</td>
+        <td><input name='passwd' type='password' id='passwd' value="" size="12"/>&nbsp;&nbsp;<span id='check'><span class="STYLE1">*</span></span></td>
+      </tr>
+	  <tr>
+        <td class='color01 right' bgcolor='#efefef'>确认密码</td>
+	    <td><input name='passwd2' type='password' id='passwd2' onBlur="checkPasswd();" value="" size="12"/>
+	      &nbsp;&nbsp;<span id='check'><span class="STYLE1">*</span></span></td>
+	    </tr>
+	  <tr>
+        <td class='color01 right' bgcolor='#efefef'>电子邮件</td>
+	    <td><input name='email' type='password' id='email' onBlur="checkPasswd();" value="" size="16"/>
+	      <span class="STYLE1">*</span>&nbsp;&nbsp;<span id='check'></span></td>
+	    </tr>
+	  <tr>
+        <td class='color01 right' bgcolor='#efefef'>真实姓名</td>
+	    <td><input name='name' type='password' id='name' onBlur="checkPasswd();" value="" size="12"/>
+	      &nbsp;&nbsp;<span id='check'></span></td>
+	    </tr>
+	  <tr>
+        <td class='color01 right' bgcolor='#efefef'>身份证</td>
+	    <td><input type='text' name='id' id='id' value="" onBlur="checkPasswd();"/>
+	      &nbsp;&nbsp;<span id='check'></span></td>
+	    </tr>
+	  <tr>
+        <td class='color01 right' bgcolor='#efefef'>&nbsp;</td>
+	    <td>&nbsp;&nbsp;
+	      <input type="checkbox" name="checkbox" value="checkbox">
+	      我已阅读并同意<a href="?c=">注册协议</a></td>
+	    </tr>
+
+	   <tr>
+        <td class='color01 right' bgcolor='#efefef'></td>
+        <td><button type="submit">注册</button></td>
+      </tr>
+    </table>
+	<div>
+	<!--S 协议-->
+	请阅读服务协议
+	<!--E 协议-->
+	</div>
+	</form>
+  </div>
+</div>
+</body>
+!{include file='common/foot.html'}

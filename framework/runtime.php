@@ -84,7 +84,9 @@ function __load_core($file, $dir = "", $return = false)
 		}
 		else
 		{
+			//echo 'file='.$file;
 			include_once($file);
+			//print_r($lang);
 			return true;
 		}
 	}
@@ -143,7 +145,10 @@ function load_api($file)
 {
 	__load_core('pub:' . $file . '.api', 'api');
 }
-
+function load_lng($file)
+{
+	__load_core('pub:'.$file.'.lng','lng');
+}
 /**
  * dao加载函数
  *
@@ -337,6 +342,10 @@ function microtime_float()
 * 框架文件加载
 */
 $__core_env['DEBUG']=false;
+load_lng('zh');
+//include_once(SYS_ROOT.'/lng/zh.lng.php');
+//print_r($lang);
+//die('');
 __load_core('core:control');
 __load_core('core:model');
 __load_core('core:dao');
@@ -344,6 +353,7 @@ __load_core('core:api');
 __load_core('core:tpl');
 __load_core('core:container');
 __load_core('core:dispatch');
+
 //load_conf('pub:global');
 //load_conf('pub:database');
 /*
@@ -354,7 +364,7 @@ function startFramework()
 	if(!defined('CORE_DAEMON'))	//当框架非用于后台Daemon脚本编写
 	{		
 		__dispatch_init();
-		__dispatch_start();
+		echo __dispatch_start();
 	}
 }
 //ob_end_flush();

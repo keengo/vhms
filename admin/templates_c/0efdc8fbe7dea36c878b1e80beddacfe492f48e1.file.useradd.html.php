@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.0.5, created on 2010-12-20 17:55:01
+<?php /* Smarty version Smarty-3.0.5, created on 2010-12-21 16:43:47
          compiled from "D:\project\janbao\admin/view/default\user/useradd.html" */ ?>
-<?php /*%%SmartyHeaderCode:9204d0f27f51142a4-72024815%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:237614d1068c34442c9-71693817%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,14 +11,13 @@ $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '9204d0f27f51142a4-72024815',
+  'nocache_hash' => '237614d1068c34442c9-71693817',
   'function' => 
   array (
   ),
   'has_nocache_code' => false,
 )); /*/%%SmartyHeaderCode%%*/?>
-<?php $_template = new Smarty_Internal_Template('common/head.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
- echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+!{include file='common/head.html'}
 <body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
 <div id="container">
 <div class="topimg">当前位置：主机管理 -&gt; 增加用户</div>
@@ -53,5 +52,4 @@ $_smarty_tpl->decodeProperties(array (
   </div>
 </div>
 </body>
-<?php $_template = new Smarty_Internal_Template('common/foot.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
- echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
+!{include file='common/foot.html'}

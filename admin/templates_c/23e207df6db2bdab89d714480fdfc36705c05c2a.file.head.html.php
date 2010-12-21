@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.5, created on 2010-12-20 17:54:23
+<?php /* Smarty version Smarty-3.0.5, created on 2010-12-21 16:13:09
          compiled from "D:\project\janbao\admin/view/default\common/head.html" */ ?>
-<?php /*%%SmartyHeaderCode:219624d0f27cfd57df3-63069127%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:275994d1061951563e2-78884497%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '23e207df6db2bdab89d714480fdfc36705c05c2a' => 
     array (
       0 => 'D:\\project\\janbao\\admin/view/default\\common/head.html',
-      1 => 1291967632,
+      1 => 1292918767,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '219624d0f27cfd57df3-63069127',
+  'nocache_hash' => '275994d1061951563e2-78884497',
   'function' => 
   array (
   ),
@@ -27,5 +27,4 @@ $_smarty_tpl->decodeProperties(array (
 style/public.css" type="text/css"/>
 <link rel="stylesheet" rev="stylesheet" href="<?php echo $_smarty_tpl->getVariable('STATIC')->value;?>
 style/style.css" type="text/css"/>
-
 </head>

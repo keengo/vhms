@@ -92,7 +92,11 @@ class UserControl extends Control {
 		return $homedir;
 	}
 	public function listUser(){
-		$list = daocall('user','listUser',array($_REQUEST['username']));
+		$username = $_REQUEST['username'];
+		if($username!=""){
+			$this->_tpl->assign('username',$username);
+			$list = daocall('user','listUser',array($username));
+		}
 		//if($list){
 		$this->_tpl->assign('sum',count($list));
 		$this->_tpl->assign('list',$list);

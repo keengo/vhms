@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.0.5, created on 2010-12-20 17:54:22
+<?php /* Smarty version Smarty-3.0.5, created on 2010-12-21 16:04:06
          compiled from "D:\project\janbao\admin/view/default\kpanel.html" */ ?>
-<?php /*%%SmartyHeaderCode:156094d0f27ce5d8d18-97372479%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:310564d105f7654c320-06114967%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '156094d0f27ce5d8d18-97372479',
+  'nocache_hash' => '310564d105f7654c320-06114967',
   'function' => 
   array (
   ),

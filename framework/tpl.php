@@ -9,17 +9,17 @@ class TPL
     public static function singleton() 
     {
 		require_once( SYS_ROOT . "/smarty/Smarty.class.php");
-        if (!isset(self::$instance)) {
+		if (!isset(self::$instance)) {
+			//global $lang;
+			//die('lang='.$lang);
             self::$instance = new Smarty();
 			self::$instance->use_sub_dirs = false;
 			self::$instance->template_dir = APPLICATON_ROOT . '/view/default';
-			self::$instance->assign("STATIC",dirname($_SERVER['SCRIPT_NAME']).'/view/default/');
-			self::$instance->assign('_c',$_REQUEST['c']);
-			self::$instance->assign('_a',$_REQUEST['a']);
-			
-			
+			self::$instance->assign("STATIC",dirname($_SERVER['SCRIPT_NAME']).'/view/default/');			
+			self::$instance->assign('lang',get_lang());
+			print_r($lang);			
 			self::$instance->caching = false;
-			self::$instance->compile_check = false;
+			//self::$instance->compile_check = false;
 			/*
 			$tmp_dir = explode(".",$_SERVER['SERVER_NAME']);
 			if(!file_exists( SYS_ROOT . '/smarty_templates_c')){
@@ -39,8 +39,8 @@ class TPL
 			self::$instance->cache_dir = SYS_ROOT . '/smarty_cache/'.$tmp_dir[0];
 			self::$instance->plugins_dir = array("plugins", SYS_ROOT . "/smarty/helpers");
 			*/
-			self::$instance->left_delimiter = '!{';
-			self::$instance->right_delimiter = '}';
+			self::$instance->left_delimiter = '{{';
+			self::$instance->right_delimiter = '}}';
         }
         return self::$instance;
 	}

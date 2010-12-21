@@ -114,20 +114,30 @@ class VhostDAO extends DAO{
 			return false;
 		}
 	}
-	public function listVhost($username)
+	public function listVhostByUid($uid,$result='rows')
+	{
+		$where = $this->getFieldValue2('uid', $uid);
+		return $this->getData($where,$result);
+	}
+	public function listVhostByName($name,$result='rows')
+	{
+		$where = $this->getFieldValue2('name', $name);
+		return $this->getData($where,$result);
+	}
+	public function listVhost($username,$result='rows')
 	{
 		$where = "";
 		if($username){
 			$where = $this->getFieldValue2('username', $username);
 		}
-		return $this->getData2(array('name','uid','create_time','expire_time','state','node','product_id'),$where);
+		return $this->getData2(array('name','uid','create_time','expire_time','state','node','product_id'),$where,$result);
 	}
-	public function listMyVhost($username)
+	public function listMyVhost($username,$result='rows')
 	{
 		if($username=="" || $username==null){
 			return false;
 		}
-		return $this->listVhost($username);
+		return $this->listVhost($username,$result);
 	}
 }
 ?>

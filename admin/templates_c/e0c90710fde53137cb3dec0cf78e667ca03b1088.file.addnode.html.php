@@ -1,23 +1,23 @@
-<?php /* Smarty version Smarty-3.0.5, created on 2010-12-20 17:55:05
+<?php /* Smarty version Smarty-3.0.5, created on 2010-12-21 16:43:42
          compiled from "D:\project\janbao\admin/view/default\addnode.html" */ ?>
-<?php /*%%SmartyHeaderCode:172504d0f27f9b3c6f4-44937591%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:26664d1068be98ed59-88952453%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'e0c90710fde53137cb3dec0cf78e667ca03b1088' => 
     array (
       0 => 'D:\\project\\janbao\\admin/view/default\\addnode.html',
-      1 => 1291990420,
+      1 => 1292921020,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '172504d0f27f9b3c6f4-44937591',
+  'nocache_hash' => '26664d1068be98ed59-88952453',
   'function' => 
   array (
   ),
   'has_nocache_code' => false,
 )); /*/%%SmartyHeaderCode%%*/?>
-﻿<?php $_template = new Smarty_Internal_Template('common/head.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+<?php $_template = new Smarty_Internal_Template('common/head.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
  echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
 <body leftmargin="0" topmargin="0" bgcolor="#ffffff" text="#000000">
 <div id="container">

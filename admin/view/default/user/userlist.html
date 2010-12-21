@@ -4,10 +4,11 @@
 <div class="topimg">
   <form name="form1" method="post" action="?c=!{$_c}&a=!{$_a}">
     用户名:
-    <input name="username" type="text" id="username">
+    <input name="username" type="text" id="username" value="!{$username}">
     <input type="submit" name="Submit" value="搜索">
   </form>
   </div>
+  !{if $sum>0}
 <div class="topimg pal1">共计 !{$sum} 条记录</div>
   <div id="main" class="wid"> 
     <table cellpadding=0 cellspacing=1 id="table">
@@ -35,6 +36,7 @@
     </table>
    </div>
 </div>
+!{/if}
 </body>
 </html>
 !{include file='common/foot.html'}

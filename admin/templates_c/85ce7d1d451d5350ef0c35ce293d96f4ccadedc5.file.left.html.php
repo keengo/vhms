@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.5, created on 2010-12-20 17:54:23
+<?php /* Smarty version Smarty-3.0.5, created on 2010-12-21 16:33:36
          compiled from "D:\project\janbao\admin/view/default\left.html" */ ?>
-<?php /*%%SmartyHeaderCode:279574d0f27cfac1e29-36723372%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:186464d106660d1b2b7-11990143%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '85ce7d1d451d5350ef0c35ce293d96f4ccadedc5' => 
     array (
       0 => 'D:\\project\\janbao\\admin/view/default\\left.html',
-      1 => 1292827713,
+      1 => 1292920412,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '279574d0f27cfac1e29-36723372',
+  'nocache_hash' => '186464d106660d1b2b7-11990143',
   'function' => 
   array (
   ),
@@ -57,10 +57,13 @@ function SwitchMenu(obj,sty)
 }
 </script>
 <div id="masterdiv">
-<h1 id="m2" onClick="SwitchMenu('sub2','m2')" class="menu"><ol id="p2">账号管理</ol></h1>
+<h1 id="m2" onClick="SwitchMenu('sub2','m2')" class="menu"><ol id="p2"><?php echo $_smarty_tpl->getVariable('lang')->value['account_manage'];?>
+</ol></h1>
 	<ul class="submenu" id="sub2" >
-		<li><a href="?c=index&a=main" target='main'>我的信息</a></li>	
-		<li><a href="?c=session&a=changePasswordForm" target='main'>修改密码</a></li>	
+		<li><a href="?c=index&a=main" target='main'><?php echo $_smarty_tpl->getVariable('lang')->value['myinfo'];?>
+</a></li>	
+		<li><a href="?c=session&a=changePasswordForm" target='main'><?php echo $_smarty_tpl->getVariable('lang')->value['change_passwd'];?>
+</a></li>	
 		<li><a href="?c=session&a=logout" target='_top'>退出登录</a></li>
 	</ul>
 <h1 id="m3" onClick="SwitchMenu('sub3','m3')" class="menu"><ol id="p3">管理员管理</ol></h1>
@@ -84,6 +87,7 @@ function SwitchMenu(obj,sty)
 	</ol>
 	</h1>
 	<ul class="submenu" id="sub6" >
+		<li><a href="?c=vhostproduct&a=showVhost" target='main'>虚拟主机列表</a></li>	
 		<li><a href="?c=vhostproduct&a=showProduct" target='main'>产品列表</a></li>	
 		<li><a href="?c=vhostproduct&a=addProductForm" target='main'>增加产品</a></li>
 	</ul>

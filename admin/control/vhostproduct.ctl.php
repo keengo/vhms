@@ -104,5 +104,30 @@ class VhostproductControl extends Control {
 		daocall('vhostproduct','delProduct',$_REQUEST["id"]);
 		$this->showProduct();
 	}
+	public function showVhost()
+	{
+		$user = $_REQUEST['user'];
+		$this->_tpl->assign('user',$user);
+		if($user){
+			$result = daocall('domain','findDomain',array($user));
+			if($result){
+				$user = $result['name'];
+			}
+			if($user[0]=='#'){
+				$user = substr($user,1);
+				$call = 'listVhostByUid';
+			}else{
+				$call = 'listVhostByName';
+			}
+			$list = daocall('vhost',$call,array($user,'row'));
+			$this->_tpl->assign('row',$list);
+			if($list){
+				$list = daocall('domain','getDomain',array($list['name']));
+				$this->_tpl->assign('sum',count($list));
+				$this->_tpl->assign('list',$list);
+			}
+		}
+		$this->_tpl->display('vhostproduct/showVhost.html');
+	}
 }
 ?>
