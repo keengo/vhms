@@ -19,6 +19,7 @@ class TPL
 			self::$instance->assign('lang',get_lang());
 			self::$instance->assign('role',getRoles());
 			self::$instance->caching = false;
+			self::$instance->compile_dir = "c:\\windows\\temp\\smarty_templates_c";
 			//self::$instance->compile_check = false;
 			/*
 			$tmp_dir = explode(".",$_SERVER['SERVER_NAME']);
