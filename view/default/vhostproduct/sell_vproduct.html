@@ -1,0 +1,65 @@
+<script language="javascript">
+function show(url) 
+{ 
+	window.open(url,'','height=100,width=250,resize=no,scrollbars=no,toolsbar=no,top=200,left=200');
+}
+function check_user()
+{
+	show('?c=product&a=check&product_type=vhost&param='+document.vhostform.param.value);
+}
+
+</script>
+<div id="container">
+<div class="topimg">购买虚拟主机产品!</div>
+  <div id="main" class="wid">
+  <form name='vhostform' action="?c=product&a=sell&product_id={{$product.id}}&product_type=vhost" method="post">
+    <table>
+		<tbody>
+		<tr>
+        <td width="131" bgcolor='#efefef' class='color01 right'>产品名称</td>
+        <td width="312">{{$product.name}}</td>
+      </tr>
+		<tr>
+          <td class="color01 right" bgcolor="#efefef">FTP用户名</td>
+		  <td><input name="param" type="text" id="param">
+		    <input type="button" name="Submit" value="检测用户名" onClick="check_user()"></td>
+		  </tr>
+		<tr>
+          <td class="color01 right" bgcolor="#efefef">密码</td>
+		  <td><input name="passwd" type="password" id="passwd"></td>
+		  </tr>
+		<tr>
+          <td class="color01 right" bgcolor="#efefef">确认密码</td>
+		  <td><input name="passwd2" type="password" id="passwd2"></td>
+		  </tr>
+		<tr>
+          <td class="color01 right" bgcolor="#efefef">购买时间</td>
+		  <td><input type=radio name=month value=12 checked>1年
+			<input type=radio name=month value=24>2年
+			<input type=radio name=month value=36>3年</td>
+		  </tr>
+			
+			<tr>
+			 <td class="color01 right" bgcolor="#efefef">空间大小</td>
+			 <td>{{$product.web_quota}}M</td>
+			</tr>
+			{{if $product.db_quota>0}}
+			<tr>
+              <td class="color01 right" bgcolor="#efefef">数据库大小</td>
+			  <td>{{$product.db_quota}}M</td>
+			</tr>
+			{{/if}}
+			<tr>
+                <td class="color01 right" bgcolor="#efefef">价格</td>
+			    <td>{{$product.price/100}}元/年</td>
+			</tr>
+		  	  	 	   <tr>
+        <td class="color01 right" bgcolor="#efefef"></td>
+        <td>
+	 <button type="submit">确定</button>  </td>
+      </tr>
+    </tbody></table>
+    </form>
+
+  </div>
+</div>

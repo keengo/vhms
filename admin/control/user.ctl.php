@@ -107,7 +107,7 @@ class UserControl extends Control {
 	public function impLogin()
 	{
 		registerRole('user',$_REQUEST['username']);
-		header("Location: /user/");
+		header("Location: ");
 	}
 }
 ?>

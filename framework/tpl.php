@@ -17,7 +17,7 @@ class TPL
 			self::$instance->template_dir = APPLICATON_ROOT . '/view/default';
 			self::$instance->assign("STATIC",dirname($_SERVER['SCRIPT_NAME']).'/view/default/');			
 			self::$instance->assign('lang',get_lang());
-			print_r($lang);			
+			self::$instance->assign('role',getRoles());
 			self::$instance->caching = false;
 			//self::$instance->compile_check = false;
 			/*

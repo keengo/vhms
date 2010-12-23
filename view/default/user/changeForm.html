@@ -1,0 +1,24 @@
+<form action="?c=user&a=change" method="post">
+<table width="329" border="1">
+  <tr>
+    <td width="99">用户名</td>
+    <td width="214">{{$user.username}}</td>
+  </tr>
+  <tr>
+    <td>姓名</td>
+    <td><input name='name' id="name" value='{{$user.name}}' /></td>
+  </tr>
+  <tr>
+    <td>身份证</td>
+    <td><input name='id' id="id" value='{{$user.id}}' /></td>
+  </tr>
+  <tr>
+    <td>电子邮件</td>
+    <td><input name='email' id="email" value='{{$user.email}}' /></td>
+  </tr>
+    <tr>
+    <td>&nbsp;</td>
+    <td><input type='submit' value='修改' /></td>
+  </tr>
+ </table>
+</form>

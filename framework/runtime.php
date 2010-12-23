@@ -323,6 +323,16 @@ function isRole($role)
 	}	
 	return true;
 }
+function setTitle($title)
+{
+	global $__core_env;
+	$__core_env['title'] = $title;
+}
+function getTitle()
+{
+	global $__core_env;
+	return $__core_env['title'];
+}
 function needRole($role)
 {
 	if(!isRole($role)){

@@ -19,7 +19,8 @@ class UserDAO extends DAO{
 		);
 		$this->MAP_TYPE = array(
 			'money'=>FIELD_TYPE_INT,
-			'passwd'=>FIELD_TYPE_MD5
+			'passwd'=>FIELD_TYPE_MD5,
+			'regtime'=>FIELD_TYPE_DATETIME
 		);
 		$this->_TABLE = DBPRE . 'users';
 	}
@@ -36,36 +37,39 @@ class UserDAO extends DAO{
 	//	echo $sql;
 		return $this->executex($sql, "row");		
 	}
+	public function checkUser($username)
+	{
+		$sql = "SELECT 1 FROM ".$this->_TABLE." WHERE ".$this->getFieldValue2('username',$username);
+		return $this->executex($sql,'row');
+	}
 	/**
 	 * 插入用户信息信息
 	 */
-	public function insertUser($arr)
+	public function newUser($username,$passwd,$email,$name,$id)
 	{
-		$tbl = $this->_TABLE;
-		if(!$tbl) {
-			return false;
-		}
-		$sql = $this->insertSql($tbl,$arr,$this->MAP_ARR);
-		$ret = $this->execute($host, $dbname, $sql);
-		return $ret;
+		$arr['username'] = $username;
+		$arr['passwd'] = $passwd;
+		$arr['email']= $email;
+		$arr['name'] = $name;
+		$arr['id'] = $id;
+		$arr['regtime'] = 'NOW()';
+		return $this->insertData($arr);
 	}
 	public function updatePassword($username,$passwd)
 	{
-		$sql = "UPDATE ".$this->_TABLE." SET ".$this->getFieldValue2('passwd',$passwd)." WHERE ".$this->getFieldValue2('username', $username);
-		return $this->executex($sql);
+		//$sql = "UPDATE ".$this->_TABLE." SET ".$this->getFieldValue2('passwd',$passwd)." WHERE ".$this->getFieldValue2('username', $username);
+		$arr['passwd'] = $passwd;
+		return $this->update($arr,$this->getFieldValue2('username', $username));
 	}
 	/**
 	 * 更新用户信息
 	 */
-	public function updateUser($username, $arr)
+	public function updateUser($username,$name,$email,$id)
 	{
-		$tbl = $this->_TABLE;
-		if(!$tbl) {
-			return false;
-		}
-		$update_str = $this->updateFields($arr,$this->MAP_ARR);
-		$sql = "UPDATE {$tbl} SET ".$update_str." WHERE `username` = '{$username}' limit 1";
-		return $this->execute($host, $dbname, $sql);
+		$arr['email']= $email;
+		$arr['name'] = $name;
+		$arr['id'] = $id;
+		return $this->update($arr,$this->getFieldValue2('username', $username));
 	}
 	public function addMoney($username,$money)
 	{

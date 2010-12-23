@@ -61,6 +61,15 @@ class DAO
 		$sql.=" LIMIT 1";
 		return $this->executex($sql);
 	}
+	public function select($fields,$where='',$type='rows')
+	{
+		$tbl = $this->_TABLE;
+		$sql = "SELECT ".$this->queryFields($fields)." FROM {$tbl}";
+		if($where!=''){
+			$sql.=' WHERE '.$where;
+		}
+		return $this->executex($sql, $type);
+	}
 	public function getData($where='',$type='rows')
 	{
 		$tbl = $this->_TABLE;
@@ -78,6 +87,22 @@ class DAO
 			$sql.=' WHERE '.$where;
 		}
 		return $this->executex($sql, $type);
+	}
+	public function update($arr,$where)
+	{
+		$fields_str = "";
+		foreach($arr as $field => $value) {
+			if($fields_str!=""){
+				$fields_str.=',';
+			}
+	 		$fields_str .= $this->getFieldValue2($field,$value);
+	 	}
+		$sql = "UPDATE ".$this->_TABLE." SET ".$fields_str;
+		if($where!=""){
+			$sql.=" WHERE ".$where;
+		}
+		//die($sql);
+		return $this->executex($sql);
 	}
 	public function insertData($arr)
 	{

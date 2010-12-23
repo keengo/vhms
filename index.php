@@ -6,9 +6,21 @@ header("Cache-Control: no-cache, must-revalidate");
 define('APPLICATON_ROOT', dirname(__FILE__));
 define('SYS_ROOT', dirname(__FILE__).'/framework');
 //定义默认控制器
-define('DEFAULT_CONTROL', 'index');
-//die(print_r($_REQUEST));
+define('DEFAULT_CONTROL', 'public');
 include(SYS_ROOT . '/runtime.php');
 include("./config.php");
-startFramework();
+$c=$_REQUEST['c'];
+$a=$_REQUEST['a'];
+if($c==""){
+	$_REQUEST['c']=$c='public';
+	$_REQUEST['a']=$a='index';
+}
+$main = dispatch($c,$a);
+//echo $main;
+//startFramework();
+$tpl = TPL::singleton();
+$tpl->assign('main',$main);
+$tpl->assign('width','960');
+$tpl->assign('title',getTitle());
+$tpl->display('_framework.html');
 ?>

@@ -1,24 +1,24 @@
-<?php /* Smarty version Smarty-3.0.5, created on 2010-12-21 16:39:52
+<?php /* Smarty version Smarty-3.0.5, created on 2010-12-23 14:37:15
          compiled from "D:\project\janbao\admin/view/default\vhostproduct/addProduct.html" */ ?>
-<?php /*%%SmartyHeaderCode:324424d1067d84d6eb9-87746243%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:208054d12ee1b343504-80952418%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '2b9a061e904c9ae4921809fa656c50cfdfda4834' => 
     array (
       0 => 'D:\\project\\janbao\\admin/view/default\\vhostproduct/addProduct.html',
-      1 => 1292920789,
+      1 => 1292920802,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '324424d1067d84d6eb9-87746243',
+  'nocache_hash' => '208054d12ee1b343504-80952418',
   'function' => 
   array (
   ),
   'has_nocache_code' => false,
 )); /*/%%SmartyHeaderCode%%*/?>
 <?php $_template = new Smarty_Internal_Template('common/head.html', $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
- echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>}}
+ echo $_template->getRenderedTemplate();?><?php $_template->updateParentVariables(0);?><?php unset($_template);?>
 <body leftmargin="0" topmargin="0" bgcolor="#ffffff" text="#000000">
 <div id="container">
 <div class="topimg"><?php if ($_smarty_tpl->getVariable('action')->value=='addProduct'){?>增加虚拟主机产品<?php }else{ ?>修改虚拟主机产品<?php }?></div>

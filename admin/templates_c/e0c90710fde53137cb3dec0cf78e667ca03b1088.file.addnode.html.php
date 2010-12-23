@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.5, created on 2010-12-21 16:43:42
+<?php /* Smarty version Smarty-3.0.5, created on 2010-12-23 14:37:19
          compiled from "D:\project\janbao\admin/view/default\addnode.html" */ ?>
-<?php /*%%SmartyHeaderCode:26664d1068be98ed59-88952453%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:236544d12ee1f79e086-34673279%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'e0c90710fde53137cb3dec0cf78e667ca03b1088' => 
     array (
       0 => 'D:\\project\\janbao\\admin/view/default\\addnode.html',
-      1 => 1292921020,
+      1 => 1292921191,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '26664d1068be98ed59-88952453',
+  'nocache_hash' => '236544d12ee1f79e086-34673279',
   'function' => 
   array (
   ),
@@ -71,7 +71,6 @@ $_smarty_tpl->decodeProperties(array (
       </tr>
     </tbody></table>
   </form>
-
   </div>
 </div>
 </body>

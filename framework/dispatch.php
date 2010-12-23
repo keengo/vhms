@@ -1,7 +1,7 @@
 <?php
 /**
  * 控制器调度
- * 
+ *
  * 根据url参数调度对于的Control，并执行相应的Action
  *
  * @package core
@@ -22,9 +22,9 @@ function __dispatch_init()
 		$__core_env['control'] = str_replace(array('-'), array('/'), $__core_env['control']);
 	}else{
 		if(defined('DEFAULT_CONTROL'))
-			$__core_env['control'] = DEFAULT_CONTROL;
+		$__core_env['control'] = DEFAULT_CONTROL;
 		else
-			__dispatch_exit('未指定默认控制器');
+		__dispatch_exit('未指定默认控制器');
 	}
 	if(isset($_REQUEST['a']) && $_REQUEST['a'] != '')
 	{
@@ -47,7 +47,7 @@ function __dispatch_init()
 }
 function check_dispatch($control,$action)
 {
-	
+
 }
 function __dispatch_start()
 {
@@ -55,9 +55,9 @@ function __dispatch_start()
 	global $__core_env;
 	$pos = strrpos($__core_env['control'], '/');
 	if(false === $pos)
-		$control_name = $__core_env['control'];
+	$control_name = $__core_env['control'];
 	else
-		$control_name =	substr($__core_env['control'], $pos + 1, 100);
+	$control_name =	substr($__core_env['control'], $pos + 1, 100);
 
 	load_ctl($__core_env['control']);
 	$control_name[0] = strtoupper($control_name[0]);
