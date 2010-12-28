@@ -10,9 +10,12 @@ class SessionControl extends Control {
 		parent::__destruct();
 	}
 	public function loginForm(){
-		//return $this->_tpl->fetch('login.html');
-		header("Location: ?c=public&a=index");
-		die();
+		if($GLOBALS['frame']==1){
+			return $this->_tpl->fetch('session/login.html');
+		}else{
+			header("Location: ?c=public&a=index");
+			die();
+		}
 	}
 	public function login()
 	{
@@ -23,7 +26,11 @@ class SessionControl extends Control {
 			return "登录错误";
 		}
 		registerRole('user',$user['username']);
-		header("Location: index.php?c=user&a=index");
+		if($GLOBALS['frame']==1){
+			header("Location: ?c=frame&a=index");
+		}else{
+			header("Location: ?c=user&a=index");
+		}
 		die();
 	}
 	public function logout()

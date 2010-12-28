@@ -336,7 +336,7 @@ function getTitle()
 function needRole($role)
 {
 	if(!isRole($role)){
-		die('<html><body><script language="javascript">window.top.location.href="index.php?c=session&a=loginForm";</script></body></html>');
+		die('<html><body><script language="javascript">window.top.location.href="?c=session&a=loginForm";</script></body></html>');
 	}
 }
 

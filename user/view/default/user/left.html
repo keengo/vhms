@@ -13,10 +13,10 @@ function SwitchMenu(obj,sty)
 	  帐户管理
 	</h1>
 	<ul class="submenu" id="sub5" >
-		<li><a href="?c=user&a=index" >帐户信息</a></li>
-		<li><a href="?c=user&a=changeForm" >修改资料</a></li>
-		<li><a href="?c=session&a=changePasswordForm" >修改密码</a></li>
-	    <li><a href="?c=session&a=logout" >退出</a></li>
+		<li><a href="?c=user&a=index" target="{{$target}}">帐户信息</a></li>
+		<li><a href="?c=user&a=changeForm" target="{{$target}}">修改资料</a></li>
+		<li><a href="?c=session&a=changePasswordForm" target="{{$target}}">修改密码</a></li>
+	    <li><a href="?c=session&a=logout" target="_top">退出</a></li>
 	</ul>
 	<!-- 
 	<h1 id="m4" onClick="SwitchMenu('sub4','m4')" class="menu">财务管理</h1>
@@ -30,7 +30,7 @@ function SwitchMenu(obj,sty)
 	    我的产品	 
 	</h1>
 	<ul class="submenu" id="sub6" >
-	    <li><a href="?c=vhostproduct&a=show">我的虚拟主机</a></li>
+	    <li><a href="?c=vhostproduct&a=show" target="{{$target}}">我的虚拟主机</a></li>
 		</ul>
 </div>
 </td></tr>
