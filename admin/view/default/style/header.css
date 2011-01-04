@@ -1,8 +1,8 @@
 #t{
-height:60px;
+height:72px;
 width:100%;
-background:url(/images/top-bg.gif);
-border-bottom:4px solid #005B99;
+background:url(/images/top-bg.gif) #1A8EF1;
+border-bottom:4px solid #1A8EF1;
 }
 #t1 {
 width:762px;

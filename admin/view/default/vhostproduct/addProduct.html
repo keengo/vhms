@@ -2,12 +2,12 @@
 <body leftmargin="0" topmargin="0" bgcolor="#ffffff" text="#000000">
 <div id="container">
 <div class="topimg">{{if $action=='addProduct'}}增加虚拟主机产品{{else}}修改虚拟主机产品{{/if}}</div>
-  <div id="main" class="wid">
+  <div id="main" class="wid" align="center">
   <form name='nodeform' action="?c=vhostproduct&a={{$action}}&id={{$vhostproduct.id}}" method="post">
-    <table>
+    <table height="220">
 		<tbody>
 		<tr>
-        <td width="131" bgcolor='#efefef' class='color01 right'>产品名称</td>
+        <td width="125" bgcolor='#efefef' class='color01 right'>产品名称</td>
         <td width="312"><input type='text' name='name' id='name' value="{{$vhostproduct.name}}" onBlur="checkName();"></td>
       </tr>
 			
