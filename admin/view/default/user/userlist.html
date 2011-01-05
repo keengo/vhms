@@ -1,15 +1,15 @@
-!{include file='common/head.html'}
+{{include file='common/head.html'}}
 <body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
 <div id="container">
 <div class="topimg">
-  <form name="form1" method="post" action="?c=!{$_c}&a=!{$_a}">
+  <form name="form1" method="post" action="?c={{$_c}}&a={{$_a}}">
     用户名:
-    <input name="username" type="text" id="username" value="!{$username}">
+    <input name="username" type="text" id="username" value="{{$username}}">
     <input type="submit" name="Submit" value="搜索">
   </form>
   </div>
-  !{if $sum>0}
-<div class="topimg pal1">共计 !{$sum} 条记录</div>
+  {{if $sum>0}}
+<div class="topimg pal1">共计 {{$sum}} 条记录</div>
   <div id="main" class="wid"> 
     <table cellpadding=0 cellspacing=1 id="table">
       <tr id="ttitle">	
@@ -22,21 +22,21 @@
 		<td class='color01 right' bgcolor='#efefef'>余额(分)</td>
 	
 	  </tr>
-	  !{foreach from=$list item=row}
+	  {{foreach from=$list item=row}}
       <tr>
-	  <td class="right">[<a href="?c=user&a=editForm&username=!{$row.username}" title="更改信息">更改</a>][<a href="?c=user&a=impLogin&username=!{$row.username}" target="_blank">模拟登录</a>]</td>
-	  <td ><a href="?c=user&a=editForm&username=!{$row.username}">!{$row.username}</a></td>
-        <td>!{$row.name}</td>
-		 <td>!{$row.id}</td>
-		  <td>!{$row.email}</td>
-		   <td>!{$row.regtime}</td>
-		 <td><a href="?c=user&a=editMoneyForm&username=!{$row.username}">!{$row.money}</a></td>
+	  <td class="right">[<a href="?c=user&a=editForm&username={{$row.username}}" title="更改信息">更改</a>][<a href="?c=user&a=impLogin&username={{$row.username}}" target="_blank">模拟登录</a>]</td>
+	  <td ><a href="?c=user&a=editForm&username={{$row.username}}">{{$row.username}}</a></td>
+        <td>{{$row.name}}</td>
+		 <td>{{$row.id}}</td>
+		  <td>{{$row.email}}</td>
+		   <td>{{$row.regtime}}</td>
+		 <td><a href="?c=user&a=editMoneyForm&username={{$row.username}}">{{$row.money}}</a></td>
 		  </tr>
-	  !{/foreach}
+	  {{/foreach}}
     </table>
    </div>
 </div>
-!{/if}
+{{/if}}
 </body>
 </html>
-!{include file='common/foot.html'}
+{{include file='common/foot.html'}}
