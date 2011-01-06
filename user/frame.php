@@ -9,6 +9,7 @@ include(SYS_ROOT . '/runtime.php');
 include("../config.php");
 $c=$_REQUEST['c'];
 $a=$_REQUEST['a'];
+$e=$_REQUEST['e'];
 if($c==""){
 	$_REQUEST['c']=$c='frame';
 	$_REQUEST['a']=$a='index';
@@ -16,6 +17,18 @@ if($c==""){
 $tpl = TPL::singleton();
 $tpl->assign('frame',1);
 $GLOBALS['frame'] = 1;
+if($c=='frame' && $a=='index'){
+	$fc = $_REQUEST['fc'];
+	$fa = $_REQUEST['fa'];
+	if($fc==""){
+		$fc = 'frame';
+	}
+	if($fa==""){
+		$fa = 'main';
+	}
+	$tpl->assign("fc",$fc);
+	$tpl->assign("fa",$fa);
+}
 $main = dispatch($c,$a);
 //echo $main;
 //startFramework();
