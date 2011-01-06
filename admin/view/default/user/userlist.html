@@ -2,7 +2,7 @@
 <body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
 <div id="container">
 <div class="topimg">
-  <form name="form1" method="post" action="?c={{$_c}}&a={{$_a}}">
+  <form name="form1" method="post" action="?c={{$smarty.request.c}}&a={{$smarty.request.a}}">
     用户名:
     <input name="username" type="text" id="username" value="{{$username}}">
     <input type="submit" name="Submit" value="搜索">
