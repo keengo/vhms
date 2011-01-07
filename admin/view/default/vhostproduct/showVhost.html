@@ -8,8 +8,8 @@
 <div id="container">
 
   {{if $row}}
-  
-    <table width="224" border="1">
+   <div id="main" class="wid"> 
+      <table width="224" border="1">
     <tr>
       <td>用户名</td>
       <td>{{$row.name}}</td>
@@ -52,7 +52,7 @@
       <td>{{$row.state}}</td>
     </tr>
   </table>
-  {{if $list}}
+    {{if $list}}
   <table >
   <tr id="ttitle"><td class='color01 right' bgcolor='#efefef'>域名</td><td class='color01 right' bgcolor='#efefef'>目录</td></tr>
   {{foreach from=$list item=row}}
@@ -60,7 +60,7 @@
   {{/foreach}}
   {{/if}}
   </table>
-  {{/if}}  
+   {{/if}}
 </div>
 </body>
 {{include file='common/foot.html'}}
