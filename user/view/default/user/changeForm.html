@@ -1,24 +1,35 @@
 <form action="?c=user&a=change" method="post">
-<table width="329" border="1">
+<br /><div class="topimg">当前位置：修改资料</div>
+<table width="70%" border=0 align="center" cellPadding=3 cellSpacing=0>
+<tr>
+  <td width="15" height="40"></td>
+</tr>
   <tr>
-    <td width="99">用户名</td>
-    <td width="214">{{$user.username}}</td>
+    <td height="25" background="{{$STATIC}}/images/th_bg.gif"><FONT color=#ffffff><STRONG>&nbsp;修改资料</STRONG></FONT></td>
+  </tr>
+<tr>
+  <td><table width="100%" height="150" border="0" cellpadding="0" cellspacing="1" id="table">
+  <tr>
+    <td width="99">&nbsp;用户名</td>
+    <td width="214">&nbsp;{{$user.username}}</td>
   </tr>
   <tr>
-    <td>姓名</td>
-    <td><input name='name' id="name" value='{{$user.name}}' /></td>
+    <td>&nbsp;姓名</td>
+    <td>&nbsp;<input name='name' id="name" value='{{$user.name}}' /></td>
   </tr>
   <tr>
-    <td>身份证</td>
-    <td><input name='id' id="id" value='{{$user.id}}' /></td>
+    <td>&nbsp;身份证</td>
+    <td>&nbsp;<input name='id' id="id" value='{{$user.id}}' /></td>
   </tr>
   <tr>
-    <td>电子邮件</td>
-    <td><input name='email' id="email" value='{{$user.email}}' /></td>
+    <td>&nbsp;电子邮件</td>
+    <td>&nbsp;<input name='email' id="email" value='{{$user.email}}' /></td>
   </tr>
     <tr>
     <td>&nbsp;</td>
-    <td><input type='submit' value='修改' /></td>
+    <td>&nbsp;<input type='submit' value='修改' /></td>
   </tr>
+ </table></td>
+</tr>
  </table>
-</form>
+ </form>
