@@ -1,14 +1,14 @@
-﻿!{include file='common/head.html'}
+﻿{{include file='common/head.html'}}
 <body leftmargin="0" topmargin="0" bgcolor="#ffffff" text="#000000">
 <div id="container">
-<div class="topimg">!{if $action=='add'}增加域名绑定!{else}修改域名绑定!{/if}</div>
+<div class="topimg">{{if $action=='add'}}增加域名绑定{{else}}修改域名绑定{{/if}}</div>
   <div id="main" class="wid">
-  <form name='nodeform' action="?c=domain&a=!{$action}" method="post">
+  <form name='nodeform' action="?c=domain&a={{$action}}" method="post">
     <table>
 		<tbody>
 		<tr>
         <td width="131" bgcolor='#efefef' class='color01 right'>域名</td>
-        <td width="312"><input type='text' name='domain' id='domain' value="!{$domain.domain}" onBlur="checkName();"></td>
+        <td width="312"><input type='text' name='domain' id='domain' value="{{$domain.domain}}" onBlur="checkName();"></td>
       </tr>
 		  	  	 	   <tr>
         <td class="color01 right" bgcolor="#efefef"></td>
@@ -21,4 +21,4 @@
   </div>
 </div>
 </body>
-!{include file='common/foot.html'}
+{{include file='common/foot.html'}}
