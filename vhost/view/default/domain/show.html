@@ -1,8 +1,9 @@
-﻿!{include file='common/head.html'}
+﻿{{include file='common/head.html'}}
 <body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
 <div id="container">
+<div class="topimg">当前位置：绑定域名列表</div>
 <div class="topimg"></div>
-<div class="topimg pal1">共计 !{$sum} 条记录</div>
+<div class="topimg pal1">共计 {{$sum}} 条记录</div>
   <div id="main" class="wid">
     <table width="436" cellpadding=0 cellspacing=1 id="table">
       <tr id="ttitle">
@@ -10,17 +11,17 @@
         <td width="123" bgcolor='#efefef' class='color01 right'>域名</td>
         <td width="232" bgcolor='#efefef' class='color01 right'>目录</td>
 	  </tr>
-	  !{foreach from=$list item=row}
+	  {{foreach from=$list item=row}}
       <tr>
-        <td class="right">[<a href="javascript:if(confirm('确定删除!{$row.name}?')){location='?c=domain&a=del&domain=!{$row.domain}';}" title="删除域名"> 删除</a>]</td>
-        <td class="right">!{$row.domain}</td>
-        <td class="right">!{$row.dir}</td>
+        <td class="right">[<a href="javascript:if(confirm('确定删除{{$row.name}}?')){location='?c=domain&a=del&domain={{$row.domain}}';}" title="删除域名"> 删除</a>]</td>
+        <td class="right">{{$row.domain}}</td>
+        <td class="right">{{$row.dir}}</td>
 	  </tr>
-	  !{/foreach}
+	  {{/foreach}}
     </table>
     <div align="left">
 	</div>
   </div>
 </div>
 </body>
-!{include file='common/foot.html'}
+{{include file='common/foot.html'}}

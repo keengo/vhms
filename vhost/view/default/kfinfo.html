@@ -1,34 +1,44 @@
-!{include file='common/head.html'}
-<body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
-<table width="329" border="1" align="center">
+{{include file='common/head.html'}}
+<body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0' >
+<br /><div class="topimg STYLE1">当前位置：帐户信息</div>
+<div id="main" class="wid">
+<table width="70%" border=0 align="center" cellPadding=3 cellSpacing=0 >
+<tr>
+  <td width="15" height="40"></td>
+</tr>
   <tr>
-    <td width="99">FTP用户名</td>
-    <td width="214">!{$user.name}</td>
+    <td height="25" background="{{$STATIC}}/images/th_bg.gif"><FONT color=#ffffff><STRONG>&nbsp;帐号信息</STRONG></FONT></td>
+  </tr>
+<tr>
+  <td><table width="100%" height="150" cellpadding="0" cellspacing="1" class=style1 id=table>
+  <tr>
+    <td width="99">&nbsp;FTP用户名</td>
+    <td width="214">&nbsp;{{$user.name}}</td>
   </tr>
   <tr>
-    <td>FTP主机</td>
-    <td>!{$user.node}</td>
+    <td>&nbsp;FTP主</td>
+    <td>&nbsp;{{$user.node}}</td>
   </tr>
   <tr>
-    <td>产品名称</td>
-    <td>!{$user.product_id}</td>
+    <td>&nbsp;产品名称</td>
+    <td>&nbsp;{{$user.product_id}}</td>
   </tr>
   <tr>
-    <td>创建时间</td>
-    <td>!{$user.create_time}</td>
+    <td>&nbsp;创建时间</td>
+    <td>&nbsp;{{$user.create_time}}</td>
   </tr>
   <tr>
-    <td>到期时间</td>
-    <td>!{$user.expire_time}</td>
+    <td>&nbsp;到期时间</td>
+    <td>&nbsp;{{$user.expire_time}}</td>
   </tr>
   <tr>
-    <td>状态</td>
-    <td>!{$user.state}</td>
+    <td>&nbsp;状态</td>
+    <td>&nbsp;{{$user.state}}</td>
   </tr>
+</table></td>
+</tr>
 </table>
-<div id="container">
-<div class="topimg">
 </div>
-</div>
+
 </body>
 </html>

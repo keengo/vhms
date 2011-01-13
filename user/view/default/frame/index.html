@@ -4,10 +4,12 @@
 <title>会员中心</title>
 <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
-<frameset name="right" rows="64,*" cols="*" frameborder="no" border="0" framespacing="0">
+<frameset name="right" rows="64,9,*" cols="*" frameborder="no" border="0" framespacing="0">
 	<frame src="?c=frame&a=top" name="top" noresize="noresize" scrolling="no">
-	<frameset cols="200,*" frameborder="no" border="0" framespacing="0" name="main1">
+	<frame src="?c=index&a=controltop" name="controltop" noresize="noresize" scrolling="no">
+	<frameset cols="200,9,*" frameborder="no" border="0" framespacing="0" name="main1">
 		<frame src="?c=user&a=left" name="left" noresize="noresize">
+		<frame src="?c=index&a=controlleft" name="control" scrolling="no"> 
 		<frame src="?c={{$fc}}&a={{$fa}}" name="main" scrolling="yes">
 	</frameset>
 </frameset>

@@ -94,13 +94,13 @@ function shift_status()
 			rightFrame.rows = "64,9,*";
 		else
 			rightFrame.rows = "64,9,*";
-		document.getElementById('menuSwitch1').src='images/ej1_31.gif';
+		document.getElementById('menuSwitch1').src='{{$STATIC}}images/ej1_31.gif';
 		document.getElementById('menuSwitch1').title='隐藏';
 	}
 	else
 	{
 		rightFrame.rows = "0,9,*";
-		document.getElementById('menuSwitch1').src='images/ej1_31a.gif';
+		document.getElementById('menuSwitch1').src='{{$STATIC}}images/ej1_31a.gif';
 		document.getElementById('menuSwitch1').title='显示';
 	}
 
@@ -113,7 +113,7 @@ function shift_status()
 <span class="cacher" id="cacheData" name="cacheData"></span>
 <table width="100%" height="9" border=0 cellpadding="0" cellspacing="0">
 	<tr>
-	 <td align="center" bgcolor="#DCDCDC" id=menuSwitch style="cursor:hand"><img src="images/ej1_31.gif" name="menuSwitch1" height="9" id=menuSwitch1></td>
+	 <td align="center" bgcolor="#DCDCDC" id=menuSwitch style="cursor:hand"><img src="{{$STATIC}}images/ej1_31.gif" name="menuSwitch1" height="9" id=menuSwitch1></td>
 	</tr>
 </table>
 </BODY>

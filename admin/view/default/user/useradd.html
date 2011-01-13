@@ -4,26 +4,49 @@
 <div class="topimg">当前位置：主机管理 -&gt; 增加用户</div>
   <div id="main" class="wid" align="center">
   <form  action="?c=user&a=insert" method='post'>
-    <table height="120" align="center" cellpadding=0 cellspacing=1>
+    <table width="500" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
       <tr>
-        <td bgcolor='#efefef' class='color01 right'>用户名</td>
+        <td width="12" height="49"><img src="{{$STATIC}}/images/left_2.jpg" width="12" height="49"></td>
+        <td background="/admin/view/default/images/bg3.jpg" align="left">
+		  <table width="122" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="122" height="10"></td>
+            </tr>
+            <tr>
+              <td><img src="{{$STATIC}}/images/bg14.png" width="121" height="29"></td>
+            </tr>
+            <tr>
+              <td></td>
+            </tr>
+          </table>		</td>
+        <td width="12" height="49"><img src="{{$STATIC}}/images/righ_2.jpg" width="12" height="49"></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td height="218" align="center" valign="top" background="{{$STATIC}}/images/bg_10.jpg"><table width="350" height="135" border="0" cellpadding="0" cellspacing="0">
+	<tr><td>&nbsp;</td></tr>
+      <tr>
+        <td class='color01 right'>用户名</td>
         <td><input type='text' name='username' id='username' value="" onBlur="checkUsername();"/>&nbsp;&nbsp;<span id='check'></span></td>
       </tr>
-
-	  <tr>
-        <td class='color01 right' bgcolor='#efefef'>密码</td>
-        <td><input type='password' name='passwd' id='passwd' value=""/>&nbsp;&nbsp;<span id='check'></span></td>
+      <tr>
+        <td class='color01 right'>密码</td>
+        <td><input type='password' name='passwd' id='passwd' value=""/>          &nbsp;&nbsp;<span id='check'></span></td>
       </tr>
-	  <tr>
-        <td class='color01 right' bgcolor='#efefef'>确认密码</td>
+      <tr>
+        <td class='color01 right'>确认密码</td>
         <td><input type='password' name='passwd2' id='passwd2' value="" onBlur="checkPasswd();"/>&nbsp;&nbsp;<span id='check'></span></td>
       </tr>
-
-	   <tr>
-        <td class='color01 right' bgcolor='#efefef'></td>
+      <tr>
+        <td>&nbsp;</td>
         <td><button type="submit">同意以下服务条款，提交注册信息</button></td>
       </tr>
-    </table>
+    </table></td>
+  </tr>
+</table>
 	<div>
 	<!--S 协议-->
 	请阅读服务协议
