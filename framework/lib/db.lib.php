@@ -13,11 +13,15 @@ function db_connect($host)
 	}
 	$dsn.=';dbname='.$db_cfg[$host]['dbname'];
 	//die("host=".$host." dsn=".$dsn);
-	$dlink = new PDO($dsn,$db_cfg[$host]['user'],$db_cfg[$host]['passwd'],array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-	if(!$dlink){
-		return null;
+	try{
+		$dlink = @new PDO($dsn,$db_cfg[$host]['user'],$db_cfg[$host]['passwd'],array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+		if(!$dlink){
+			return null;
+		}
+		return $dlink;
+	}catch(Exception $e){
+		die("无法连接数据库");
 	}
-	return $dlink;
 }
 
 /**
