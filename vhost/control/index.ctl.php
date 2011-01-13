@@ -22,6 +22,14 @@ class IndexControl extends Control
 	{
 		$this->_tpl->display('left.html');
 	}
+		public function controltop()
+	{
+		$this->_tpl->display('controltop.html');
+	}
+		public function controlleft()
+	{
+		$this->_tpl->display('controlleft.html');
+	}
 	public function main()
 	{
 		$user = daocall('vhost','getVhost',array(getRole('vhost')));
