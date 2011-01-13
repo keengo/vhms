@@ -4,26 +4,36 @@ define("DB_CONNECT", 1);
 define("DB_ERROR", 2);
 define("DBPRE","");
 
+
+function db_connectx($driver,$host,$port,$dbname,$user,$passwd)
+{
+	$dsn = $driver.":host=".$host;
+	if($port!=""){
+		$dsn.=';port='.$port;
+	}
+	$dsn.=';dbname='.$dbname;
+	//die("host=".$host." dsn=".$dsn);
+	try{
+		return @new PDO($dsn,$user,$passwd,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+	}catch(Exception $e){
+		return false;
+	}
+}
 function db_connect($host)
 {
 	global $db_cfg;
-	$dsn = $db_cfg[$host]['driver'].":host=".$db_cfg[$host]['host'];
-	if($db_cfg[$host]['port']!=""){
-		$dsn.=';port='.$db_cfg[$host]['port'];
-	}
-	$dsn.=';dbname='.$db_cfg[$host]['dbname'];
-	//die("host=".$host." dsn=".$dsn);
-	try{
-		$dlink = @new PDO($dsn,$db_cfg[$host]['user'],$db_cfg[$host]['passwd'],array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-		if(!$dlink){
-			return null;
-		}
-		return $dlink;
-	}catch(Exception $e){
+	$dlink = db_connectx(
+	$db_cfg[$host]['driver'],
+	$db_cfg[$host]['host'],
+	$db_cfg[$host]['port'],
+	$db_cfg[$host]['dbname'],
+	$db_cfg[$host]['user'],
+	$db_cfg[$host]['passwd']);
+	if(!$dlink){
 		die("无法连接数据库");
 	}
+	return $dlink;
 }
-
 /**
  * 数据库查询方法
  * sql		sql语句
@@ -44,7 +54,7 @@ function db_query(PDO $db,$sql, $ret_type = 'result')
 	}	
 	if(!$result && $db->errorCode()>0)
 	{
-		trigger_error('在MYSQL服务器端执行SQL语句失败.<br />SQL: ' . $sql . '<br />原因: '. $db->errorCode() . '<br />');
+		//trigger_error('在MYSQL服务器端执行SQL语句失败.<br />SQL: ' . $sql . '<br />原因: '. $db->errorCode() . '<br />');
 		return false;
 	}
 	switch($ret_type)

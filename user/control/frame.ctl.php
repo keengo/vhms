@@ -29,11 +29,11 @@ class FrameControl extends Control
 	}
 	public function controltop()
 	{
-		$this->_tpl->display('frmae/controltop.html');
+		return $this->_tpl->fetch('frmae/controltop.html');
 	}
 	public function controlleft()
 	{
-		$this->_tpl->display('frame/controlleft.html');
+		return $this->_tpl->fetch('frame/controlleft.html');
 	}
 }
 ?>
