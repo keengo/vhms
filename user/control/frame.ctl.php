@@ -27,5 +27,13 @@ class FrameControl extends Control
 	{
 		return $this->_tpl->fetch('frame/main.html');
 	}
+	public function controltop()
+	{
+		$this->_tpl->display('frmae/controltop.html');
+	}
+	public function controlleft()
+	{
+		$this->_tpl->display('frame/controlleft.html');
+	}
 }
 ?>
