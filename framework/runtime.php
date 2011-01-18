@@ -235,7 +235,7 @@ function newapi($module)
 /**
  * DAO调用
  */
-function daocall($module,$method,$args,$is_stat = true) {
+function daocall($module,$method,$args=null,$is_stat = true) {
 	//加载DAO层文件
 	load_dao($module);
 	$className	= exportClass($module,"DAO");

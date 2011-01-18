@@ -1,0 +1,46 @@
+<script language="javascript">
+function check_db()
+{
+	var url = '?c=install&a=checkdb&db_host=' + form1.db_host + '&db_name=' + form1.db_name + '&db_user=' + form1.db_user + '&db_passwd=' ;
+	window.open(url,'','height=100,width=250,resize=no,scrollbars=no,toolsbar=no,top=200,left=200');
+}
+</script>
+欢迎安装kangle虚拟主机管理系统!<br>
+<font color='red'>
+{{$msg}}
+</font>
+<form id="form1" name="form1" method="post" action="?c=install&a=step2">
+  <table width="425" border="1" align="center">
+    <tr>
+      <td width="139">数据库地址</td>
+      <td width="270"><input name="db_host" type="text" id="db_host" value="{{$request.db_host}}" /></td>
+    </tr>
+    <tr>
+      <td>数据库名</td>
+      <td><input name="db_name" type="text" id="db_name" value="{{$request.db_name}}" /></td>
+    </tr>
+    <tr>
+      <td>数据用户名</td>
+      <td><input name="db_user" type="text" id="db_user" value="{{$request.db_user}}" /></td>
+    </tr>
+    <tr>
+      <td>数据库密码</td>
+      <td><input name="db_passwd" type="password" id="db_passwd" autocomplete='off'/></td>
+    </tr>
+    <tr>
+      <td>域名</td>
+      <td><input name="domain" type="text" id="domain" value="{{$request.domain}}"/></td>
+    </tr>
+    <tr>
+      <td>初始管理员</td>
+      <td><input name="admin_user" type="text" id="admin_user" value="{{$request.admin_user}}"/></td>
+    </tr>
+    <tr>
+      <td>初始管理员密码</td>
+      <td><input name="admin_passwd" type="password" id="admin_passwd" autocomplete='off'/></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><input type="submit" name="Submit" value="下一步" /></td>
+    </tr>
+  </table>
+</form>

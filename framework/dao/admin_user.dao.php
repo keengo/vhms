@@ -44,7 +44,12 @@ class AdminUserDAO extends DAO{
 		$ret = $this->execute($host, $dbname, $sql);
 		return $ret;
 	}
-
+	public function newUser($username,$passwd)
+	{
+		$arr['username'] = $username;
+		$arr['passwd'] = $passwd;
+		return $this->insertData($arr);
+	}
 	/**
 	 * 更新用户信息
 	 */

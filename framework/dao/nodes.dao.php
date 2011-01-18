@@ -16,6 +16,8 @@ class NodesDAO extends DAO {
 			"port"=> 'port',
 			"user"=>'user',
 			"passwd"=>'passwd',
+			"db_user"=>'db_user',
+			'db_passwd'=>'db_passwd',
 			"state"=>'state'
 		);
 		$this->MAP_TYPE = array(
@@ -95,18 +97,8 @@ class NodesDAO extends DAO {
 	 */
 	public function listNodes()
 	{
-		$tbl = $this->_TABLE;
-		if(!$tbl) {
-			return false;
-		}
-		$sql = "SELECT * FROM {$tbl}";
-		$ret = $this->execute($host, $dbname, $sql,'rows');
-		if($ret) {
-			return $ret;
-		}else {
-			return null;
-		}
+		$sql = "SELECT ".$this->AllQueryFields()." FROM ".$this->_TABLE;
+		return $this->executex($sql,'rows');
 	}
-
 }
 ?>

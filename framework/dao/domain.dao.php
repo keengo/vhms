@@ -28,5 +28,10 @@ class DomainDAO extends DAO
 		$where.= $this->getFieldValue2('domain', $domain);
 		return $this->delData($where);
 	}
+	public function getLoadHostSql()
+	{
+		$sql = "SELECT ".$this->MAP_ARR['domain'].",".$this->MAP_ARR['dir']." FROM ".$this->_TABLE." WHERE ".$this->MAP_ARR['name']."='%s'";
+		return $sql;
+	}
 }
 ?>
