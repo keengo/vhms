@@ -18,11 +18,11 @@ class NodesControl extends Control {
 		$this->_tpl->assign('sum',$sum);
 		$this->_tpl->assign('username',$username);
 		$this->_tpl->assign('list',$list);
-		$this->_tpl->display('listnode.html');
+		$this->_tpl->display('nodes/listnode.html');
 	}
 	public function addNode(){
 		$this->_tpl->assign('action','insert');
-		$this->_tpl->display('addnode.html');
+		$this->_tpl->display('nodes/addnode.html');
 	}
 	public function editForm(){
 		$node = daocall('nodes','getNode',array($_REQUEST['name']));
@@ -31,7 +31,7 @@ class NodesControl extends Control {
 		}
 		$this->_tpl->assign('action','edit');
 		$this->_tpl->assign('node',$node);
-		$this->_tpl->display('addnode.html');
+		$this->_tpl->display('nodes/addnode.html');
 	}
 	public function edit(){
 		daocall('nodes','updateNode', array($_REQUEST["name"],$_REQUEST));
@@ -55,6 +55,10 @@ class NodesControl extends Control {
 		if($ret !== false ){
 			header("Location: ?c=nodes&a=listNode");
 		}
+	}
+	public function init()
+	{
+		
 	}
 }
 ?>

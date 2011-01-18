@@ -5,5 +5,5 @@ $db_cfg['default']=array(
 'port'=>'3306',
 'user'=>'root',
 'passwd'=>'test',
-'dbname'=>'kangle2');
+'dbname'=>'kangle');
 ?>

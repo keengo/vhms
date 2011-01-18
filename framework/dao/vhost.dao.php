@@ -3,6 +3,7 @@
  * 用户信息信息DAO层基本函数生成
  */
 class VhostDAO extends DAO{
+	private $vh_col_map = array('name','doc_root','user','group','templete');
 	
 	public function __construct()
 	{	//加载基本db文件
@@ -138,6 +139,32 @@ class VhostDAO extends DAO{
 			return false;
 		}
 		return $this->listVhost($username,$result);
+	}
+	public function getFlushSql()
+	{
+		return "WHERE ".$this->MAP_ARR['name']."='%s'";
+	}
+	public function getLoadSql()
+	{
+		$sql = "SELECT ";
+		for($i=0;$i<count($this->vh_col_map);$i++){
+			if($i>0){
+				$col_map.=',';
+			}
+			$sql.=$this->MAP_ARR[$this->vh_col_map[$i]];
+		}
+		$sql .= " FROM ".$this->_TABLE;
+		return $sql;
+	}
+	public function getColMap()
+	{
+		for($i=0;$i<count($this->vh_col_map);$i++){
+			if($i>0){
+				$col_map.=',';
+			}
+			$col_map.=$this->vh_col_map[$i];
+		}
+		return $col_map;
 	}
 }
 ?>
