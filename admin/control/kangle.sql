@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- 主机: localhost
--- 生成日期: 2010 年 12 月 20 日 01:33
+-- 生成日期: 2010 年 12 月 20 日 21:19
 -- 服务器版本: 5.0.77
 -- PHP 版本: 5.1.6
 -- 
@@ -19,9 +19,9 @@
 CREATE TABLE `admin_users` (
   `username` varchar(32) NOT NULL,
   `passwd` varchar(255) NOT NULL,
-  `last_login` varchar(255) NOT NULL,
-  `last_ip` varchar(255) NOT NULL,
-  `rights` int(11) NOT NULL,
+  `last_login` varchar(255) default NULL,
+  `last_ip` varchar(255) default NULL,
+  `rights` int(11) NOT NULL default '0',
   PRIMARY KEY  (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='管理员列表';
 
@@ -34,7 +34,7 @@ CREATE TABLE `admin_users` (
 CREATE TABLE `domain` (
   `name` varchar(255) NOT NULL,
   `domain` varchar(255) NOT NULL,
-  `dir` varchar(255) NOT NULL,
+  `dir` varchar(255) NOT NULL default '/',
   UNIQUE KEY `domain` (`domain`),
   KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -51,7 +51,9 @@ CREATE TABLE `nodes` (
   `port` int(11) NOT NULL,
   `user` varchar(32) NOT NULL,
   `passwd` varchar(32) NOT NULL,
-  `state` tinyint(4) NOT NULL,
+  `db_user` varchar(255) default NULL,
+  `db_passwd` varchar(255) default NULL,
+  `state` tinyint(4) NOT NULL default '0',
   PRIMARY KEY  (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='服务器';
 
@@ -85,10 +87,10 @@ CREATE TABLE `shopping_cart` (
 CREATE TABLE `users` (
   `username` varchar(32) NOT NULL,
   `passwd` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `email` varchar(255) default NULL,
+  `name` varchar(255) default NULL,
   `money` int(11) NOT NULL default '0',
-  `id` varchar(255) NOT NULL,
+  `id` varchar(255) default NULL,
   `regtime` datetime NOT NULL,
   PRIMARY KEY  (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户列表';
@@ -126,11 +128,11 @@ CREATE TABLE `vhost` (
 CREATE TABLE `vhost_product` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(32) NOT NULL,
-  `desc` text NOT NULL,
+  `describe` text,
   `templete` varchar(32) NOT NULL,
   `web_quota` bigint(11) NOT NULL,
   `db_type` tinyint(4) NOT NULL default '1',
-  `db_quota` bigint(20) NOT NULL,
+  `db_quota` bigint(20) NOT NULL default '0',
   `price` int(11) NOT NULL,
   `state` tinyint(4) NOT NULL default '0',
   `node` varchar(32) NOT NULL,
