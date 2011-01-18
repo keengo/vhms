@@ -1,5 +1,5 @@
 <?php
-class NodeAPI extends API
+class NodesAPI extends API
 {
 	private $MAP_ARR;
 	/**
@@ -51,7 +51,7 @@ class NodeAPI extends API
 		fwrite($fp,"<?php\r\n");
 		$nodes = daocall('nodes','listNodes');
 		for($i=0;$i<count($nodes);$i++){
-			write_node_config($fp,$nodes[$i]);
+			$this->write_node_config($fp,$nodes[$i]);
 		}
 		fwrite($fp,"?>");
 		fclose($fp);
@@ -61,20 +61,18 @@ class NodeAPI extends API
 	{
 		$str = "\$node_cfg['".$node['name']."']=array(";
 		$item = "";
-		for(;;){
-			$key = key($node);
-			$value = value($node);
+		for($i=0;$i<count($node);$i++){
+			$key = key($node[$i]);
+			$value = $node[$i];
 			if($item!=""){
 				$item.=",";
 			}
 			if($key!='name'){
 				$item.="'".$key."'=>'".$value."'";
-			}
-			if(!next($node)){
-				break;
-			}
+			}			
 		}
-		$str.=");\r\n";
+		echo $item;
+		$str.=$item.");\r\n";
 		fwrite($fp,$str);
 	}
 }

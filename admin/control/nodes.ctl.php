@@ -60,5 +60,15 @@ class NodesControl extends Control {
 	{
 		
 	}
+	public function flush()
+	{
+		$result = apicall('nodes','flush');
+		if($result){
+			$this->_tpl->assign('msg','更新配置文件成功');
+		}else{
+			$this->_tpl->assign('msg','更新配置文件失败');
+		}
+		return $this->listNode();
+	}
 }
 ?>

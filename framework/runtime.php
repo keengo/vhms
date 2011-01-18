@@ -220,7 +220,7 @@ function modcall($module,$method,$args = array()) {
 /**
  * API调用
  */
-function apicall($module,$method,$args) {
+function apicall($module,$method,$args=null) {
 	//加载系统接口文件
 	load_api($module);
 	$className	= exportClass($module,"API");
