@@ -69,7 +69,7 @@ function db_query(PDO $db,$sql, $ret_type = 'result')
 			return false;
 		case "rows":
 			if($result ){
-				return $result->fetchAll();			
+				return $result->fetchAll(PDO::FETCH_ASSOC);			
 			}
 			return false;
 

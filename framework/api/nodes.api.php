@@ -61,17 +61,17 @@ class NodesAPI extends API
 	{
 		$str = "\$node_cfg['".$node['name']."']=array(";
 		$item = "";
-		for($i=0;$i<count($node);$i++){
-			$key = key($node[$i]);
-			$value = $node[$i];
+		$keys = array_keys($node);
+		for($i=0;$i<count($keys);$i++){
+			$key = $keys[$i];
+			$value = $node[$key];
 			if($item!=""){
 				$item.=",";
 			}
 			if($key!='name'){
 				$item.="'".$key."'=>'".$value."'";
-			}			
+			}
 		}
-		echo $item;
 		$str.=$item.");\r\n";
 		fwrite($fp,$str);
 	}
