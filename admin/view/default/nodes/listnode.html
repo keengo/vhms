@@ -1,6 +1,7 @@
 ﻿{{include file='common/head.html'}}
 <body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
 <div id="container">
+{{$msg}}
 <div class="topimg pal1">共计 {{$sum}} 条记录</div>
 <div align='left'>[<a href='?c=nodes&a=flush'>更新配置文件</a>]</div>
   <div id="main" class="wid">
@@ -17,7 +18,7 @@
       <tr>
         <td class="right">[<a href="javascript:if(confirm('确定删除{{$row.name}}?')){location='?c=nodes&a=del&name={{$row.name}}';}" title="删除主机"> 删除</a>]
           [<a href="?c=nodes&a=editForm&name={{$row.name}}" title="更改信息">修改 </a>]
-          [<a href='?c=vhostproduct&a=refreshTemplete&name={{$row.name}}'>初始化</a><a href="?c=vhostproduct&a=exportConfig&name={{$row.name}}"></a>] </td>
+          [<a href='?c=nodes&a=init&name={{$row.name}}'>初始化</a><a href="?c=vhostproduct&a=exportConfig&name={{$row.name}}"></a>] </td>
         <td class="right">{{$row.name}}</td>
 		<td class="right">{{$row.host}}</td>
 		<td class="right">{{$row.port}}</td>

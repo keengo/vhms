@@ -2,16 +2,10 @@
 class NodesAPI extends API
 {
 	private $MAP_ARR;
-	/**
-	 * ���캯��
-	 **/
 	public function __construct()
 	{
-		load_lib("pub:whm");
+		
 	}
-	/**
-	 * �������� 
-	 **/
 	public function __destruct()
 	{
 		parent::__destruct();
@@ -24,18 +18,55 @@ class NodesAPI extends API
 	{
 		
 	}
+	public function makeWhm($node)
+	{
+		load_conf('pub:node');
+		$node_cfg = $GLOBALS['node_cfg'][$node];
+		if(!is_array($node_cfg)){
+			return trigger_error('没有节点'.$node.'的配置文件，请更新配置文件');
+		}
+		load_lib("pub:whm");
+		$whm = new WhmClient();
+		$whmUrl = "http://".$node_cfg['host'].":".$node_cfg['port']."/";
+		$whm->setUrl($whmUrl);
+		$whm->setAuth($node_cfg['user'], $node_cfg['passwd']);
+		return $whm;
+	}
+	public function isWindows($node)
+	{
+		if(strncmp($node,'win_',4)==0){
+			return true;
+		}
+		return false;
+	}
 	public function init($node)
 	{
+		$whm = $this->makeWhm($node);
 		$driver = "bin/vhs_mysql.so";
-		Control::$_tpl->assign('driver',$driver);
-		Control::$_tpl->assign('col_map',daocall('vhost','getColMap', array(null)));
-		Control::$_tpl->assign('load_sql',daocall('vhost','getLoadSql', array(null)));
-		Control::$_tpl->assign('flush_sql',daocall('vhost','getFlushSql', array(null)));
-		Control::$_tpl->assign('load_host_sql',daocall('domain','getLoadHostSql', array(null)));
+		$tpl = tpl::singleton();
+		$tpl->assign('driver',$driver);
+		$tpl->assign('col_map',daocall('vhost','getColMap', array(null)));
+		$tpl->assign('load_sql',daocall('vhost','getLoadSql', array($node)));
+		$tpl->assign('flush_sql',daocall('vhost','getFlushSql', array(null)));
+		$tpl->assign('load_host_sql',daocall('domain','getLoadHostSql', array(null)));
 		global $db_cfg;
-		Control::$_tpl->assign('db',$db_cfg['default']);
-		$str = Control::$_tpl->fetch('config/vh.xml');
-		
+		$db_local = $this->isLocalHost($db_cfg['default']['host']);
+		$node_local = $this->isLocalHost($GLOBALS['node_cfg'][$node]['host']);
+		if($db_local && !$node_local){
+			//如果db host是local,而节点不是local,则要替换db的host为公网IP
+			$db_cfg['default']['host'] = $_SERVER['SERVER_ADDR'];
+		}
+		$tpl->assign('db',$db_cfg['default']);
+		$whmCall = new WhmCall('core.whm','write_ext');
+		$whmCall->addParam('file', 'vh_db.xml');		
+		$content = $tpl->fetch('config/vh.xml');
+		$whmCall->addParam('content',base64_encode($content));
+		$result = $whm->call($whmCall);
+		if($result){
+			$whmCall = new WhmCall('core.whm','reboot');
+			return $whm->call($whmCall);
+		}
+		return false;
 	}
 	/**
 	 * 
@@ -59,7 +90,7 @@ class NodesAPI extends API
 	}
 	private function write_node_config($fp,$node)
 	{
-		$str = "\$node_cfg['".$node['name']."']=array(";
+		$str = "\$GLOBALS['node_cfg']['".$node['name']."']=array(";
 		$item = "";
 		$keys = array_keys($node);
 		for($i=0;$i<count($keys);$i++){
@@ -74,6 +105,19 @@ class NodesAPI extends API
 		}
 		$str.=$item.");\r\n";
 		fwrite($fp,$str);
+	}
+	public function isLocalHost($host)
+	{
+		if(strcasecmp($host,'localhost')==0){
+			return true;
+		}
+		if(strncmp($host,'127.0.0.',8)==0){
+			return true;
+		}
+		if($host=='::1'){
+			return true;
+		}
+		return false;
 	}
 }
 ?>

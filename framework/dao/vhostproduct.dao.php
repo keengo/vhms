@@ -40,7 +40,7 @@ class VhostproductDAO extends DAO {
 	}
 	public function getSellProducts()
 	{
-		$where = $this->MAP_ARR['state'].' != 0';
+		$where = '('.$this->MAP_ARR['state'].' & '.Product::PRODUCT_ACTIVE.') > 0';
 		return $this->getData2(array('id','name'),$where);
 	}
 }
