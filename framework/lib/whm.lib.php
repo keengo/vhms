@@ -1,13 +1,14 @@
 <?php
 class WhmCall
 {
-	public function WhmCall($callName)
+	public function WhmCall($package,$callName)
 	{
+		$this->package = $package;
 		$this->callName = $callName;
 	}
 	public function addParam($name,$value)
 	{
-		$params[$name] = $value;
+		$this->params[$name] = $value;
 	}
 	public function getCallName()
 	{
@@ -15,16 +16,18 @@ class WhmCall
 	}
 	public function buildUrl()
 	{
-		$url = "whm_call=".$this->callName;
-		if($params){
-			reset($params);
-			while (list($name, $val) = each($params)) {
+		//print_r($this->params);
+		$url = $this->package."?whm_call=".$this->callName;
+		if($this->params){
+			reset($this->params);
+			while (list($name, $val) = each($this->params)) {
 				$url.="&".$name."=".urlencode($val);
 			}
 		}
 		return $url;
 	}
 	private $callName = '';
+	private $package = '';
 	private $params = array();
 }
 class WhmResult
@@ -47,7 +50,7 @@ class WhmClient
 	{
 		$this->auth = "Basic ".base64_encode($user.":".$password);
 	}
-	public function setWhmUrl($url)
+	public function setUrl($url)
 	{
 		$this->whm_url = $url;
 	}
@@ -61,7 +64,7 @@ class WhmClient
 		'http'=>array(
 			'header'=>"Authorization: ".$this->auth."\r\n")
 		);
-		$url = $this->whm_url."?".$call->buildUrl();
+		$url = $this->whm_url.$call->buildUrl();
 		//echo $url;
 		$msg = file_get_contents($url, false, stream_context_create($opts));   
 		if($msg === FALSE){

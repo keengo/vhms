@@ -58,9 +58,6 @@ class NodesDAO extends DAO {
 		return $ret;
 	}
 
-	/**
-	 * �����û���Ϣ
-	 */
 	public function updateNode($name, $arr)
 	{
 		$tbl = $this->_TABLE;
@@ -71,9 +68,6 @@ class NodesDAO extends DAO {
 		$sql = "UPDATE {$tbl} SET ".$update_str." WHERE `name` = '{$name}' limit 1";
 		return $this->execute($host, $dbname, $sql);
 	}
-	/**
-	 * ɾ���û���Ϣ
-	 */
 	public function del($name)
 	{
 		$tbl = $this->_TABLE;
@@ -92,9 +86,6 @@ class NodesDAO extends DAO {
 	{
 		return $this->getData2(array('name'));
 	}
-	/**
-	 * ɾ���û���Ϣ
-	 */
 	public function listNodes()
 	{
 		$sql = "SELECT ".$this->AllQueryFields()." FROM ".$this->_TABLE;

@@ -33,12 +33,27 @@ class DomainControl extends Control
 		$attr['domain'] = $_REQUEST['domain'];
 		$attr['dir'] = '/';
 		daocall('domain','insertData',array($attr));
+		$this->noticeChange();
 		$this->show();
 	}
 	public function del()
 	{
 		daocall('domain', 'delDomain', array(getRole('vhost'),$_REQUEST['domain']));
+		$this->noticeChange();
 		$this->show();
+	}
+	private function noticeChange()
+	{
+		$vhost = getRole('vhost');
+		$node = $_SESSION[$vhost]['node'];
+		if(empty($node)){
+			$node = daocall('vhost','getNode',array($vhost));
+			$_SESSION[$vhost]['node'] = $node;			
+		}
+		$whm = apicall('nodes','makeWhm',array($node));
+		$whmCall = new WhmCall('core.whm','reload_vh');
+		$whmCall->addParam('name', $vhost);
+		$whm->call($whmCall);
 	}
 }
 ?>

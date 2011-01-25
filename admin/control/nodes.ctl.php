@@ -50,7 +50,9 @@ class NodesControl extends Control {
 			'host'=> $_REQUEST['host'],
 			'port'=>intval($_REQUEST['port']),
 			'user'=>$_REQUEST['user'],
-			'passwd'=>$_REQUEST['passwd']);
+			'passwd'=>$_REQUEST['passwd'],
+			'db_user'=>$_REQUEST['db_user'],
+			'db_passwd'=>$_REQUEST['db_passwd']);
 		$ret = daocall("nodes","insertNode",array($data));
 		if($ret !== false ){
 			header("Location: ?c=nodes&a=listNode");
@@ -58,7 +60,12 @@ class NodesControl extends Control {
 	}
 	public function init()
 	{
-		
+		if(apicall('nodes','init',array($_REQUEST['name']))){
+			$this->_tpl->assign('msg','初始化成功');
+		}else{
+			$this->_tpl->assign('msg','初始化失败');
+		}
+		return $this->listNode();
 	}
 	public function flush()
 	{

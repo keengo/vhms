@@ -4,7 +4,6 @@
  */
 class VhostDAO extends DAO{
 	private $vh_col_map = array('name','doc_root','user','group','templete');
-	
 	public function __construct()
 	{	//加载基本db文件
 		parent::__construct();
@@ -142,18 +141,27 @@ class VhostDAO extends DAO{
 	}
 	public function getFlushSql()
 	{
-		return "WHERE ".$this->MAP_ARR['name']."='%s'";
+		return " AND ".$this->MAP_ARR['name']."='%s'";
 	}
-	public function getLoadSql()
+	public function getLoadSql($node)
 	{
 		$sql = "SELECT ";
 		for($i=0;$i<count($this->vh_col_map);$i++){
 			if($i>0){
-				$col_map.=',';
+				$sql.=',';
 			}
-			$sql.=$this->MAP_ARR[$this->vh_col_map[$i]];
+			$col_name = $this->vh_col_map[$i];
+			if($col_name=='user'){
+				$col_name = $this->getUserColName($node);
+			}else if($col_name=='group'){
+				$col_name = $this->getGroupColName($node);
+			}else{
+				$col_name = $this->MAP_ARR[$col_name];
+			}
+			$sql.= $col_name;
 		}
-		$sql .= " FROM ".$this->_TABLE;
+		$sql .= " FROM ".$this->_TABLE." WHERE ";
+		$sql.=$this->getFieldValue2('node', $node);
 		return $sql;
 	}
 	public function getColMap()
@@ -165,6 +173,27 @@ class VhostDAO extends DAO{
 			$col_map.=$this->vh_col_map[$i];
 		}
 		return $col_map;
+	}
+	private function getGroupColName($node)
+	{
+		if(apicall('nodes','isWindows',array($node))){
+			return $this->MAP_ARR['gid'];
+		}else{
+			return "CONCAT('#',".$this->MAP_ARR['gid'].")";
+		}
+	}
+	private function getUserColName($node)
+	{
+		if(apicall('nodes','isWindows',array($node))){
+			return "CONCAT('a',".$this->MAP_ARR['uid'].")";
+		}else{
+			return "CONCAT('#',".$this->MAP_ARR['uid'].")";
+		}
+	}
+	public function getNode($name){
+		$sql = "SELECT ".$this->MAP_ARR['node']." FROM ".$this->_TABLE." WHERE ".$this->getFieldValue2('name', $name);
+		$row = $this->executex($sql,'row');
+		return $row['node'];
 	}
 }
 ?>

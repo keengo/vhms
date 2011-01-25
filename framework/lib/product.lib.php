@@ -81,7 +81,7 @@ abstract class Product
 			return false;
 		}
 		if($default_db->commit()){
-			$this->sync($user,$param);
+			$this->sync($user,$param,$params,$info);
 			return true;
 		}
 		return false;
@@ -118,7 +118,7 @@ abstract class Product
 	 * @param  $user
 	 * @param  $param
 	 */
-	abstract protected function sync($user,$param);
+	abstract protected function sync($user,$param,$params,$product_info);
 	abstract public function checkParam($params=array());
 }
 ?>

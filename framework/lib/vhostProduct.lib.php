@@ -1,8 +1,9 @@
 <?php 
 class VhostProduct extends Product
 {
-	const VHOST_PRODUCT_CLOSE=0;
-	const VHOST_PRODUCT_ACTIVE=1;
+	
+	const VHOST_PRODUCT_ACTIVE=0;
+	const VHOST_PRODUCT_CLOSE=1;
 	const VHOST_PRODUCT_PAUSE=2;
 	
 	public function __construct()
@@ -51,9 +52,16 @@ class VhostProduct extends Product
 	 * @param  $user
 	 * @param  $param
 	 */
-	protected function sync($user,$param)
+	protected function sync($user,$param,$params,$product_info)
 	{
-		return false;
+		//print_r($product_info);
+		//die();
+		$whm = apicall('nodes','makeWhm',array($product_info['node']));
+		$whmCall = new WhmCall('core.whm','reload_vh');
+		$whmCall->addParam('name',$param);
+		$whmCall->addParam('init','1');
+		return $whm->call($whmCall);
+		//return false;
 	}
 	public function checkParam($params=array())
 	{
