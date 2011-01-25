@@ -33,70 +33,78 @@ function check_register()
 }
 </script>
 <div id="container">
+<div class="topimg">当前位置：用户管理 -> 增加用户</div>
 <div class="topimg"></div>
   <div id="main" class="wid">
   <form  name='reg' action="?c=public&a=register" method='post'>
-    <table width="500" border="0" cellpadding="0" cellspacing="0">
+    <table align="center" border="0" cellpadding="0" cellspacing="10" width="80%">
+<tr>
+  <td>
+     <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#C2DADA">
+       <tr>
+  <td height="30" bgcolor="#51A3EC"><font color="#FFFFFF">　增加用户</font></td>
+	</tr>
+	</table>
+	</td>
+</tr>
   <tr>
-    <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
-      <tr>
-        <td width="12" height="49"><img src="{{$STATIC}}/images/left_2.jpg" width="12" height="49"></td>
-        <td background="{{$STATIC}}/images/bg3.jpg" align="left">
-		  <table width="122" border="0" cellpadding="0" cellspacing="0">
-            <tr>
-              <td width="122" height="10"></td>
-            </tr>
-            <tr>
-              <td><img src="{{$STATIC}}/images/bg19.png" width="121" height="29" /></td>
-            </tr>
-            <tr>
-              <td></td>
-            </tr>
-          </table>		</td>
-        <td width="12" height="49"><img src="{{$STATIC}}/images/righ_2.jpg" width="12" height="49"></td>
-      </tr>
-    </table></td>
-  </tr>
+    <td>
+<table bgcolor="#CEE1F3" border="0" cellspacing="1" width="100%">
   <tr>
-    <td height="218" align="center" valign="top" background="{{$STATIC}}/images/bg_10.jpg"><table width="350" height="210" border="0" cellpadding="0" cellspacing="0">
-	<tr><td>&nbsp;</td></tr>
+    <td bgcolor="#ffffff" width="9%" height="30">
+<table width="100%" height="300" border="0" cellpadding="0" cellspacing="1" bgcolor="#e6f4f9">
       <tr>
-        <td class='color01 right'>&nbsp;用户名</td>
-        <td>&nbsp;<input name='username' type='text' id='username' onBlur="checkUsername();" value="" size="16"/>
-          <span class="STYLE1">*</span>
+        <td bgcolor="#f5f5f5" colspan="3">&nbsp;</td>
+        </tr>
+      <tr>
+        <td bgcolor="#f5f5f5" width="172">　<span class="color01 right">用户名</span>：</td>
+        <td width="473" bgcolor="#fafaf5">
+          <input name='username' type='text' id='username' onBlur="checkUsername();" value="" size="16"/><span class="STYLE1"><span class="color01 right">*</span>
+		  </span>
            <input type="button" name="Submit" value="检测用户名" onClick="check_user()"></td>
+        <td width="298" bgcolor="#fafaf5">&nbsp;</td>
       </tr>
       <tr>
-        <td class='color01 right'>&nbsp;密码</td>
-        <td>&nbsp;<input name='passwd' type='password' id='passwd' value="" size="16"/>
-          <span id='check'><span class="STYLE1">*</span></span></td>
+        <td bgcolor="#f5f5f5"><span class="color01 right">　密码：</span></td>
+        <td bgcolor="#fafaf5"><input name='passwd' type='password' id='passwd' value="" size="16"/><span class="STYLE1"><span class="color01 right">*</span></span></td>
+        <td bgcolor="#fafaf5">&nbsp;</td>
       </tr>
       <tr>
-        <td class='color01 right'>&nbsp;确认密码</td>
-        <td>&nbsp;<input name='passwd2' type='password' id='passwd2'  value="" size="16"/>
-	      <span id='check'><span class="STYLE1">*</span></span></td>
+        <td bgcolor="#f5f5f5">　<span class="color01 right">确认密码：</span></td>
+        <td bgcolor="#fafaf5"><input name='passwd2' type='password' id='passwd2'  value="" size="16"/><span class="STYLE1"><span class="color01 right">*</span></span>
+		</td>
+        <td bgcolor="#fafaf5">&nbsp;</td>
       </tr>
       <tr>
-        <td><span class="color01 right">&nbsp;电子邮件</span></td>
-        <td>&nbsp;<input name='email' type='text' id='email' value="" size="16"/>
-	      <span class="STYLE1">*</span>&nbsp;&nbsp;<span id='check'></span></td>
+        <td bgcolor="#f5f5f5"><span class="color01 right">　电子邮件</span></td>
+        <td bgcolor="#fafaf5"><input name='email' type='text' id='email' value="" size="16"/><span class="STYLE1"><span class="color01 right">*</span></span></td>
+        <td bgcolor="#fafaf5">&nbsp;</td>
       </tr>
       <tr>
-        <td><span class="color01 right">&nbsp;真实姓名</span></td>
-        <td>&nbsp;<input name='name' type='text' id='name'  value="" size="16"/></td>
+        <td bgcolor="#f5f5f5"><span class="color01 right">　真实姓名</span></td>
+        <td bgcolor="#fafaf5"><input name='name' type='text' id='name'  value="" size="16"/></td>
+        <td bgcolor="#fafaf5">&nbsp;</td>
       </tr>
       <tr>
-        <td><span class="color01 right">&nbsp;身份证</span></td>
-        <td>&nbsp;<input type='text' name='id' id='id' value="" /></td>
+        <td bgcolor="#f5f5f5"><span class="color01 right">　身份证</span></td>
+        <td bgcolor="#fafaf5"><input type='text' name='id' id='id' value="" /></td>
+        <td bgcolor="#fafaf5">&nbsp;</td>
       </tr>
       <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;<input name="agree" type="checkbox" id="agree" value="1">
+        <td bgcolor="#f5f5f5">&nbsp;</td>
+        <td bgcolor="#fafaf5"><input name="agree" type="checkbox" id="agree" value="1">
 	      我已阅读并同意<a href="?c=">注册协议</a></td>
+        <td bgcolor="#fafaf5">&nbsp;</td>
       </tr>
       <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;<button type="button" onClick="check_register()">注册</button></td>
+        <td bgcolor="#f5f5f5">&nbsp;</td>
+        <td bgcolor="#fafaf5"><button type="button" onClick="check_register()">注册</button></td>
+        <td bgcolor="#fafaf5">&nbsp;</td>
+      </tr>
+	    <tr>
+        <td bgcolor="#f5f5f5" colspan="3">&nbsp;</td>
+        </tr>
+    </table></td>
       </tr>
     </table></td>
   </tr>

@@ -4,70 +4,78 @@
 <div class="topimg">{{if $action=='addProduct'}}增加虚拟主机产品{{else}}修改虚拟主机产品{{/if}}</div>
   <div id="main" class="wid" align="center">
   <form name='nodeform' action="?c=vhostproduct&a={{$action}}&id={{$vhostproduct.id}}" method="post">
-    <table width="500" border="0" cellpadding="0" cellspacing="0">
+    <table align="center" border="0" cellpadding="0" cellspacing="10" width="80%">
+<tr>
+  <td>
+     <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#C2DADA">
+       <tr>
+  <td height="30" bgcolor="#51A3EC"><font color="#FFFFFF">　增加虚拟主机产品</span></font></td>
+	</tr>
+	</table>
+	</td>
+</tr>
   <tr>
-    <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
-      <tr>
-        <td width="12" height="49"><img src="{{$STATIC}}/images/left_2.jpg" width="12" height="49"></td>
-        <td background="{{$STATIC}}/images/bg3.jpg" align="left">
-		  <table width="122" border="0" cellpadding="0" cellspacing="0">
-            <tr>
-              <td width="122" height="10"></td>
-            </tr>
-            <tr>
-              <td><img src="{{$STATIC}}/images/bg16.png" width="121" height="29"></td>
-            </tr>
-            <tr>
-              <td></td>
-            </tr>
-          </table>		</td>
-        <td width="12" height="49"><img src="{{$STATIC}}/images/righ_2.jpg" width="12" height="49"></td>
-      </tr>
-    </table></td>
-  </tr>
+    <td>
+<table bgcolor="#CEE1F3" border="0" cellspacing="1" width="100%">
   <tr>
-    <td height="300" align="center" valign="top" background="{{$STATIC}}/images/bg_10.jpg"><table width="350" height="240" border="0" cellpadding="0" cellspacing="0">
-	<tr><td>&nbsp;</td></tr>
+    <td bgcolor="#ffffff" width="9%" height="30">
+<table width="100%" height="300" border="0" cellpadding="0" cellspacing="1" bgcolor="#e6f4f9">
+	    <tr>
+        <td height="20" colspan="3" bgcolor="#f5f5f5">&nbsp;</td>
+        </tr>
       <tr>
-        <td class='color01 right'>产品名称</td>
-        <td><input name='name' type='text' id='name' onBlur="checkName();" value="{{$vhostproduct.name}}" size="16"></td>
+        <td bgcolor="#f5f5f5" width="203" class="color01 right">　产品名称：</td>
+        <td width="412" bgcolor="#fafaf5"><input name='name' type='text' id='name' onBlur="checkName();" value="{{$vhostproduct.name}}" size="16"></td>
+        <td width="219" bgcolor="#fafaf5">&nbsp;</td>
       </tr>
       <tr>
-        <td class='color01 right'>空间大小(M)</td>
-        <td><input name="web_quota" type="text" value="{{$vhostproduct.web_quota}}" size="16"></td>
+        <td bgcolor="#f5f5f5"  class="color01 right">　空间大小(M)：</td>
+        <td bgcolor="#fafaf5"><input name="web_quota" type="text" value="{{$vhostproduct.web_quota}}" size="16"></td>
+        <td bgcolor="#fafaf5">&nbsp;</td>
       </tr>
       <tr>
-        <td class='color01 right'>数据库大小(M)</td>
-        <td><input name="db_quota" type="text" id="db_quota" value="{{$vhostproduct.db_quota}}"></td>
+        <td bgcolor="#f5f5f5" class="color01 right">　数据库大小(M)：</td>
+        <td bgcolor="#fafaf5"><input name="db_quota" type="text" id="db_quota" value="{{$vhostproduct.db_quota}}"></td>
+        <td bgcolor="#fafaf5">&nbsp;</td>
       </tr>
       <tr>
-        <td><span class="color01 right">价格(分/年)</span></td>
-        <td><input name="price" type="text" id="price" value="{{$vhostproduct.price}}"></td>
+        <td bgcolor="#f5f5f5" class="color01 right">　价格(分/年)</td>
+        <td bgcolor="#fafaf5"><input name="price" type="text" id="price" value="{{$vhostproduct.price}}"></td>
+        <td bgcolor="#fafaf5">&nbsp;</td>
       </tr>
       <tr>
-        <td><span class="color01 right">模板</span></td>
-        <td><input name="templete" type="text" value="{{$vhostproduct.templete}}"></td>
+        <td bgcolor="#f5f5f5" class="color01 right">　模板</td>
+        <td bgcolor="#fafaf5"><input name="templete" type="text" value="{{$vhostproduct.templete}}"></td>
+        <td bgcolor="#fafaf5">&nbsp;</td>
       </tr>
       <tr>
-        <td><span class="color01 right">主机</span></td>
-        <td><select name='node'>
+        <td bgcolor="#f5f5f5" class="color01 right">　主机</td>
+        <td bgcolor="#fafaf5"><select name='node'>
 			 {{foreach from=$nodes item=node}}
 			 <option value='{{$node.name}}' {{if $node.name==$vhostproduct.node}} selected {{/if}}>{{$node.name}}</option>
 			 {{/foreach}}
 			 </select></td>
+        <td bgcolor="#fafaf5">&nbsp;</td>
       </tr>
       <tr>
-        <td><span class="color01 right">状态</span></td>
-        <td><input type="radio" name="state" value="0" {{if $vhostproduct.state==0}} checked {{/if}}>
+        <td bgcolor="#f5f5f5" class="color01 right">　状态</td>
+        <td bgcolor="#fafaf5"><input type="radio" name="state" value="0" {{if $vhostproduct.state==0}} checked {{/if}}>
 		  	     暂停销售
 		  	<input type="radio" name="state" value="1" {{if $vhostproduct.state==1}} checked {{/if}}>
 		  	       购买
 		  	<input type="radio" name="state" value="2" {{if $vhostproduct.state==2}} checked {{/if}}>
 试用</td>
+        <td bgcolor="#fafaf5">&nbsp;</td>
       </tr>
       <tr>
-        <td>&nbsp;</td>
-        <td><button type="submit">确定</button></td>
+        <td bgcolor="#f5f5f5">&nbsp;</td>
+        <td bgcolor="#fafaf5"><button type="submit">确定</button></td>
+        <td bgcolor="#fafaf5">&nbsp;</td>
+      </tr>
+	    <tr>
+        <td height="20" colspan="3" bgcolor="#f5f5f5">&nbsp;</td>
+        </tr>
+    </table></td>
       </tr>
     </table></td>
   </tr>

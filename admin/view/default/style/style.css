@@ -60,7 +60,7 @@ background:#4298e1;
 }
 h1 {
 font-size:12px;
-color:#036;
+1C20BF
 text-align:center;
 margin:2px 0 1px 0;
 background:#c0dcff;
@@ -315,4 +315,5 @@ padding:5px;
 
 .color01 a {color: #fff;}
 .color01 a:visited {color: #fff;}
-.color01 a:hover {color: red;text-decoration: underline;}
+.color01 a:hover {color: red;text-decoration: underline;
+}

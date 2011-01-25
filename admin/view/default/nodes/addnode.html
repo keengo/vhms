@@ -4,72 +4,81 @@
 <div class="topimg">当前位置：主机管理 -> 增加主机</div>
   <div id="main" class="wid" align="center">
   <form name='nodeform' action="?c=nodes&a={{$action}}&oldname={{$node.name}}" method="post">
-    <table width="500" border="0" cellpadding="0" cellspacing="0">
+    <table align="center" border="0" cellpadding="0" cellspacing="10" width="80%">
+<tr>
+  <td>
+     <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#C2DADA">
+       <tr>
+  <td height="30" bgcolor="#51A3EC"><font color="#FFFFFF">　增加主机</span></font></td>
+	</tr>
+	</table>
+	</td>
+</tr>
   <tr>
-    <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
-      <tr>
-        <td width="12" height="49"><img src="{{$STATIC}}/images/left_2.jpg" width="12" height="49"></td>
-        <td background="{{$STATIC}}/images/bg3.jpg" align="left">
-		  <table width="122" border="0" cellpadding="0" cellspacing="0">
-            <tr>
-              <td width="122" height="10"></td>
-            </tr>
-            <tr>
-              <td><img src="{{$STATIC}}/images/bg15.png" width="121" height="29"></td>
-            </tr>
-            <tr>
-              <td></td>
-            </tr>
-          </table>		</td>
-        <td width="12" height="49"><img src="{{$STATIC}}/images/righ_2.jpg" width="12" height="49"></td>
-      </tr>
-    </table></td>
-  </tr>
+    <td>
+<table bgcolor="#CEE1F3" border="0" cellspacing="1" width="100%">
   <tr>
-    <td height="218" align="center" valign="top" background="{{$STATIC}}/images/bg_10.jpg"><table width="385" height="200" border="0" cellpadding="0" cellspacing="0">
-	<tr><td width="126">&nbsp;</td></tr>
+    <td bgcolor="#ffffff" width="9%" height="30">
+<table width="100%" height="300" border="0" cellpadding="0" cellspacing="1" bgcolor="#e6f4f9">
+	    <tr>
+        <td height="20" colspan="3" bgcolor="#f5f5f5">&nbsp;</td>
+        </tr>
       <tr>
-        <td class='color01 right'>名字</td>
-        <td width="259"><input type='text' name='name' id='name' value="{{$node.name}}" onBlur="checkName();"
+        <td bgcolor="#f5f5f5" width="203" class="color01 right">　名字：</td>
+        <td width="412" bgcolor="#fafaf5">
+          <input type='text' name='name' id='name' value="{{$node.name}}" onBlur="checkName();"
         {{if $action=="edit"}}
         	readonly
         {{/if}}
         />
           &nbsp;<font color=red>*必填</font></td>
+        <td width="219" bgcolor="#fafaf5">&nbsp;</td>
       </tr>
       <tr>
-        <td class='color01 right'>主机</td>
-        <td><input name="host" type="text" id="host" value="{{$node.host}}">
+        <td bgcolor="#f5f5f5"  class="color01 right">　主机：</td>
+        <td bgcolor="#fafaf5"><input name="host" type="text" id="host" value="{{$node.host}}">
 		      <font color=red>*必填</font></td>
+        <td bgcolor="#fafaf5">&nbsp;</td>
       </tr>
       <tr>
-        <td class='color01 right'>管理端口</td>
-        <td><input name="port" value="{{$node.port}}" type="text">
+        <td bgcolor="#f5f5f5" class="color01 right">　管理端口：</td>
+        <td bgcolor="#fafaf5"><input name="port" value="{{$node.port}}" type="text">
 			   <font color=red>*必填</font></td>
+        <td bgcolor="#fafaf5">&nbsp;</td>
       </tr>
       <tr>
-        <td><span class="color01 right">用户名</span></td>
-        <td><input name="user" type="text" id="user" value="{{$node.user}}">
+        <td bgcolor="#f5f5f5" class="color01 right">　用户名</td>
+        <td bgcolor="#fafaf5"><input name="user" type="text" id="user" value="{{$node.user}}">
 				   <font color=red>*必填</font></td>
+        <td bgcolor="#fafaf5">&nbsp;</td>
       </tr>
       <tr>
-        <td><span class="color01 right">密码</span></td>
-        <td><input name="passwd" type="text" id="passwd" value="{{$node.passwd}}">
+        <td bgcolor="#f5f5f5" class="color01 right">　密码</td>
+        <td bgcolor="#fafaf5"><input name="passwd" type="text" id="passwd" value="{{$node.passwd}}">
             <font color=red>*必填</font></td>
+        <td bgcolor="#fafaf5">&nbsp;</td>
       </tr>
       <tr>
-        <td><span class="color01 right">数据库管理账号</span></td>
-        <td><input name="passwd" type="text" id="passwd" value="{{$node.db_user}}">
+        <td bgcolor="#f5f5f5" class="color01 right">　数据库管理账号</td>
+        <td bgcolor="#fafaf5"><input name="passwd" type="text" id="passwd" value="{{$node.db_user}}">
             <font color=red>*必填</font></td>
+        <td bgcolor="#fafaf5">&nbsp;</td>
       </tr>
       <tr>
-        <td><span class="color01 right">数据库管理密码</span></td>
-        <td><input name="passwd" type="text" id="passwd" value="{{$node.db_passwd}}">
+        <td bgcolor="#f5f5f5" class="color01 right">　数据库管理密码</td>
+        <td bgcolor="#fafaf5"><input name="passwd" type="text" id="passwd" value="{{$node.db_passwd}}">
             <font color=red>*必填</font></td>
+        <td bgcolor="#fafaf5">&nbsp;</td>
       </tr>
       <tr>
-        <td>&nbsp;</td>
-        <td> <button type="submit">确认提交</button></td>
+        <td bgcolor="#f5f5f5">&nbsp;</td>
+        <td bgcolor="#fafaf5"><button type="submit">确认提交</button></td>
+        <td bgcolor="#fafaf5">&nbsp;</td>
+      </tr>
+	    <tr>
+        <td height="20" colspan="3" bgcolor="#f5f5f5">&nbsp;</td>
+        </tr>
+    </table></td>
       </tr>
     </table></td>
   </tr>
