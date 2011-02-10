@@ -72,7 +72,7 @@ class InstallControl extends Control
 		}
 		fwrite($fp,$str);
 		fclose($fp);
-		@chmod($config_file,600);
+		@chmod($config_file,0600);
 		
 		return true;		
 	}

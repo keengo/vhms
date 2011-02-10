@@ -8,7 +8,7 @@ define('SYS_ROOT', dirname(dirname(__FILE__)).'/framework');
 //定义默认控制器
 define('DEFAULT_CONTROL', 'public');
 include(SYS_ROOT . '/runtime.php');
-include("../config.php");
+include(APPLICATON_ROOT."/../config.php");
 $c=$_REQUEST['c'];
 $a=$_REQUEST['a'];
 if($c==""){

@@ -16,7 +16,7 @@ class IndexControl extends Control
 	}
 	public function top()
 	{
-		$this->_tpl->display('top.html');
+		return $this->_tpl->fetch('top.html');
 	}
 	public function left()
 	{
@@ -34,7 +34,7 @@ class IndexControl extends Control
 	{
 		$user = daocall('vhost','getVhost',array(getRole('vhost')));
 		$this->_tpl->assign('user',$user);
-		$this->_tpl->display('kfinfo.html');
+		return $this->_tpl->fetch('kfinfo.html');
 	}
 }
 ?>

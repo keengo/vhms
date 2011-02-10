@@ -14,7 +14,7 @@ function db_connectx($driver,$host,$port,$dbname,$user,$passwd)
 	$dsn.=';dbname='.$dbname;
 	//die("host=".$host." dsn=".$dsn);
 	try{
-		return @new PDO($dsn,$user,$passwd,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+		return new PDO($dsn,$user,$passwd,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 	}catch(Exception $e){
 		return false;
 	}
@@ -30,7 +30,7 @@ function db_connect($host)
 	$db_cfg[$host]['user'],
 	$db_cfg[$host]['passwd']);
 	if(!$dlink){
-		die("无法连接数据库");
+		die("无法连接数据库,请联系管理员!");
 	}
 	return $dlink;
 }

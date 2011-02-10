@@ -18,6 +18,27 @@ class NodesAPI extends API
 	{
 		
 	}
+	public function listTemplete($node)
+	{
+		$whm = $this->makeWhm($node);
+		if(!$whm){
+			return false;
+		}
+		$call = new WhmCall('core.whm',"list_tvh");
+		$result = $whm->call($call);
+		if(!$result){
+			return false;
+		}
+		$templete = array();
+		for($i=0;;$i++){
+			$value = $result->get("name",$i);
+			if(!$value){
+				break;
+			}
+			$templete[] = $value;
+		}
+		return $templete;
+	}
 	public function makeWhm($node)
 	{
 		load_conf('pub:node');
@@ -53,8 +74,13 @@ class NodesAPI extends API
 		$db_local = $this->isLocalHost($db_cfg['default']['host']);
 		$node_local = $this->isLocalHost($GLOBALS['node_cfg'][$node]['host']);
 		if($db_local && !$node_local){
+			$host = $_SERVER['SERVER_ADDR'];
+			if($host=="" || $this->isLocalHost($host)){
+				trigger_error("Cann't init node,I Cann't translate the db host.");
+				return false;
+			}
 			//如果db host是local,而节点不是local,则要替换db的host为公网IP
-			$db_cfg['default']['host'] = $_SERVER['SERVER_ADDR'];
+			$db_cfg['default']['host'] = $host;
 		}
 		$tpl->assign('db',$db_cfg['default']);
 		$whmCall = new WhmCall('core.whm','write_ext');
@@ -64,9 +90,13 @@ class NodesAPI extends API
 		$result = $whm->call($whmCall);
 		if($result){
 			$whmCall = new WhmCall('core.whm','reboot');
-			return $whm->call($whmCall);
+			$result = $whm->call($whmCall);
 		}
-		return false;
+		if(!$result){
+			trigger_error($whm->err_msg);
+			return false;
+		}
+		return true;		
 	}
 	/**
 	 * 

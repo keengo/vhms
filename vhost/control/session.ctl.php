@@ -31,7 +31,7 @@ class SessionControl extends Control {
 	public function changePasswordForm()
 	{
 		needRole('vhost');
-		$this->_tpl->display('changePassword.html');
+		return $this->_tpl->fetch('changePassword.html');
 	}
 	public function changePassword()
 	{

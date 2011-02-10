@@ -6,7 +6,7 @@ define('APPLICATON_ROOT', dirname(__FILE__));
 define('SYS_ROOT', dirname(dirname(__FILE__)).'/framework');
 define('DEFAULT_CONTROL', 'public');
 include(SYS_ROOT . '/runtime.php');
-include("../config.php");
+include(APPLICATON_ROOT."/../config.php");
 $c=$_REQUEST['c'];
 $a=$_REQUEST['a'];
 $e=$_REQUEST['e'];
@@ -21,10 +21,10 @@ if($c=='frame' && $a=='index'){
 	$fc = $_REQUEST['fc'];
 	$fa = $_REQUEST['fa'];
 	if($fc==""){
-		$fc = 'frame';
+		$fc = 'user';
 	}
 	if($fa==""){
-		$fa = 'main';
+		$fa = 'index';
 	}
 	$tpl->assign("fc",$fc);
 	$tpl->assign("fa",$fa);

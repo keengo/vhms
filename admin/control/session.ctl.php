@@ -33,7 +33,7 @@ class SessionControl extends Control {
 		global $_REQUEST;
 		$user = $this->checkPassword($_REQUEST['username'],$_REQUEST['passwd']);
 		if(!$user){
-			die('登录错误');
+			die('登录错误![<a href="javascript:history.go(-1);">返回</a>]');
 		}
 		registerRole('admin',$user['username']);
 		header("Location: index.php");

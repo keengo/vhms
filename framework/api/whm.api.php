@@ -1,4 +1,5 @@
 <?php
+//@过时
 class WhmAPI extends API{
 	public function __construct()
 	{
@@ -8,6 +9,10 @@ class WhmAPI extends API{
 	public function __destruct()
 	{
 		parent::__destruct();
+	}
+	public function getTemplete($node)
+	{
+		
 	}
 	public function refreshTemplete($host)
 	{

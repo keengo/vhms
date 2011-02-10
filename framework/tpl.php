@@ -15,7 +15,11 @@ class TPL
             self::$instance = new Smarty();
 			self::$instance->use_sub_dirs = false;
 			self::$instance->template_dir = APPLICATON_ROOT . '/view/default';
-			self::$instance->assign("STATIC",dirname($_SERVER['SCRIPT_NAME']).'/view/default/');			
+			if(!defined(TPL_ROOT)){
+				define(TPL_ROOT,dirname($_SERVER['SCRIPT_NAME']));
+			}
+			self::$instance->assign("STATIC",TPL_ROOT.'/view/default/');
+			//self::$instance->assign("PSTATIC","/");			
 			self::$instance->assign('lang',get_lang());
 			self::$instance->assign('role',getRoles());
 			self::$instance->caching = false;

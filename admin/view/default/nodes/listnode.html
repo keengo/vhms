@@ -18,8 +18,8 @@
       <tr>
         <td class="right">[<a href="javascript:if(confirm('确定删除{{$row.name}}?')){location='?c=nodes&a=del&name={{$row.name}}';}" title="删除主机"> 删除</a>]
           [<a href="?c=nodes&a=editForm&name={{$row.name}}" title="更改信息">修改 </a>]
-          [<a href='?c=nodes&a=init&name={{$row.name}}'>初始化</a><a href="?c=vhostproduct&a=exportConfig&name={{$row.name}}"></a>] </td>
-        <td class="right">{{$row.name}}</td>
+          [<a href="javascript:if(confirm('确定初始化{{$row.name}}?')){location='?c=nodes&a=init&name={{$row.name}}';}">初始化</a><a href="?c=vhostproduct&a=exportConfig&name={{$row.name}}"></a>] </td>
+        <td class="right"><a href='http://{{$row.host}}:{{$row.port}}/' target=_blank'>{{$row.name}}</a></td>
 		<td class="right">{{$row.host}}</td>
 		<td class="right">{{$row.port}}</td>
 		<td class="right">{{$row.user}}</td>

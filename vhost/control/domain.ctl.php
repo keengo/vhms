@@ -16,12 +16,12 @@ class DomainControl extends Control
 		$sum = count($list);
 		$this->_tpl->assign('sum',$sum);
 		$this->_tpl->assign('list',$list);		
-		$this->_tpl->display('domain/show.html');
+		return $this->_tpl->fetch('domain/show.html');
 	}
 	public function addForm()
 	{
 		$this->_tpl->assign('action','add');
-		$this->_tpl->display('domain/add.html');
+		return $this->_tpl->fetch('domain/add.html');
 	}
 	public function add()
 	{
@@ -34,13 +34,13 @@ class DomainControl extends Control
 		$attr['dir'] = '/';
 		daocall('domain','insertData',array($attr));
 		$this->noticeChange();
-		$this->show();
+		return $this->show();
 	}
 	public function del()
 	{
 		daocall('domain', 'delDomain', array(getRole('vhost'),$_REQUEST['domain']));
 		$this->noticeChange();
-		$this->show();
+		return $this->show();
 	}
 	private function noticeChange()
 	{

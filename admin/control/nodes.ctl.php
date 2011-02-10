@@ -35,12 +35,14 @@ class NodesControl extends Control {
 	}
 	public function edit(){
 		daocall('nodes','updateNode', array($_REQUEST["name"],$_REQUEST));
-		header("Location: ?c=nodes&a=listNode");
+		$this->flush();
+		//header("Location: ?c=nodes&a=listNode");
 	}
 	public function del()
 	{
 		daocall("nodes","del",array($_REQUEST["name"]));
-		header("Location: ?c=nodes&a=listNode");
+		$this->flush();
+		//header("Location: ?c=nodes&a=listNode");
 	}
 	public function check(){
 	}
@@ -55,8 +57,9 @@ class NodesControl extends Control {
 			'db_passwd'=>$_REQUEST['db_passwd']);
 		$ret = daocall("nodes","insertNode",array($data));
 		if($ret !== false ){
-			header("Location: ?c=nodes&a=listNode");
+		//	header("Location: ?c=nodes&a=listNode");
 		}
+		$this->flush();
 	}
 	public function init()
 	{

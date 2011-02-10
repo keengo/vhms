@@ -66,7 +66,7 @@ class WhmClient
 		);
 		$url = $this->whm_url.$call->buildUrl();
 		//echo $url;
-		$msg = file_get_contents($url, false, stream_context_create($opts));   
+		$msg = @file_get_contents($url, false, stream_context_create($opts));   
 		if($msg === FALSE){
 			$this->err_msg = "cann't connect to host";
 			return false;

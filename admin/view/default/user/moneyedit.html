@@ -1,17 +1,17 @@
-!{include file='common/head.html'}
+{{include file='common/head.html'}}
 <body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
 <div id="container">
 <div class="topimg">当前位置：<span class="color01 right">增减余额</span></div>
   <div id="main" class="wid">
-  <form  action="?c=user&a=editMoney&username=!{$user.username}" method='post'>
+  <form  action="?c=user&a=editMoney&username={{$user.username}}" method='post'>
     <table cellpadding=0 cellspacing=1>
       <tr>
         <td width="99" bgcolor='#efefef' class='color01 right'>用户名</td>
-        <td width="168">!{$user.username}</td>
+        <td width="168">{{$user.username}}</td>
       </tr>
       <tr>
         <td class='color01 right' bgcolor='#efefef'>当前余额(分)</td>
-        <td>!{$user.money}</td>
+        <td>{{$user.money}}</td>
       </tr>
       <tr>
         <td class='color01 right' bgcolor='#efefef'>增减余额(分)<br></td>
@@ -30,4 +30,4 @@
   </div>
 </div>
 </body>
-!{include file='common/foot.html'}
+{{include file='common/foot.html'}}
