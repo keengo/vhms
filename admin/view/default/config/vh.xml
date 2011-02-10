@@ -1,0 +1,22 @@
+<!--#start 500 -->
+<config>
+<vhs>
+<vh_templete name='html' inherit='0'>
+<init_event cmd='mkdir -m 700 -p ${doc_root}' />
+<init_event cmd='chown -R ${user}:${group} ${doc_root}'/>
+<destroy_event cmd='rm -rf ${doc_root}'/>
+</vh_templete>
+<vh_database
+driver='{{$driver}}'
+col_map='{{$col_map}}'
+host='{{$db.host}}'
+port='{{$db.port}}'
+user='{{$db.user}}'
+password='{{$db.passwd}}'
+db='{{$db.dbname}}'
+load_sql="{{$load_sql}}"
+flush_sql=" {{$flush_sql}}"
+load_host_sql="{{$load_host_sql}}"
+/>
+</vhs>
+</config>

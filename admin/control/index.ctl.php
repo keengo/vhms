@@ -47,7 +47,7 @@ class IndexControl extends Control
 	}
 	public function main()
 	{
-		$this->_tpl->display('kfinfo.html');
+		$this->_tpl->display('main.html');
 	}
 }
 ?>

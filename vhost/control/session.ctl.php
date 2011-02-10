@@ -53,6 +53,7 @@ class SessionControl extends Control {
 		if(strtolower($user["passwd"])!=strtolower(md5($passwd))){
 			return false;
 		}
+
 		return $user;
 	}
 }

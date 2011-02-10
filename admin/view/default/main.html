@@ -1,0 +1,24 @@
+<html>
+<head>
+<meta http-equiv='Content-Language' content='zh-cn'>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+<title>信息显示</title>
+<link rel='stylesheet' type='text/css' href='css/style.css'>
+</head>
+<body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
+<table width="512" height="193" border="1">
+  <tr>
+    <td width="105">用户名:</td>
+    <td width="391">{{$role.admin}}</td>
+  </tr>
+  <tr>
+    <td>最后登录时间</td>
+    <td>{{$smarty.session.admin_last_login}}</td>
+  </tr>
+  <tr>
+    <td>最后登录IP</td>
+    <td>{{$smarty.session.admin_last_ip}}</td>
+  </tr>
+</table>
+</body>
+</html>

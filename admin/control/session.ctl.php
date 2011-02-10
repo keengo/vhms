@@ -36,6 +36,8 @@ class SessionControl extends Control {
 			die('登录错误![<a href="javascript:history.go(-1);">返回</a>]');
 		}
 		registerRole('admin',$user['username']);
+		$_SESSION['admin_last_login'] = $user['last_login'];
+		$_SESSION['admin_last_ip'] = $user['last_ip'];
 		header("Location: index.php");
 	}
 	public function logout()
@@ -53,6 +55,9 @@ class SessionControl extends Control {
 		if(strtolower($user["passwd"])!=strtolower(md5($passwd))){
 			return false;
 		}
+		$attr['last_login'] = 'NOW()';
+		$attr['last_ip'] = $_SERVER['REMOTE_ADDR'];
+		daocall('admin_user','updateUser',array($username,$attr));
 		return $user;
 	}
 }

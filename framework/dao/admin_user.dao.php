@@ -15,7 +15,8 @@ class AdminUserDAO extends DAO{
 			"right" => 'right'
 		);
 		$this->MAP_TYPE = array(
-		'passwd'=>FIELD_TYPE_MD5
+		'passwd'=>FIELD_TYPE_MD5,
+		'last_login'=>FIELD_TYPE_DATETIME
 		);
 		$this->_TABLE = DBPRE . 'admin_users';
 	}
