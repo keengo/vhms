@@ -1,11 +1,6 @@
 <!--#start 500 -->
 <config>
 <vhs>
-<vh_templete name='html' inherit='0'>
-<init_event cmd='mkdir -m 700 -p ${doc_root}' />
-<init_event cmd='chown -R ${user}:${group} ${doc_root}'/>
-<destroy_event cmd='rm -rf ${doc_root}'/>
-</vh_templete>
 <vh_database
 driver='{{$driver}}'
 col_map='{{$col_map}}'

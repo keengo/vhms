@@ -164,13 +164,17 @@ class VhostDAO extends DAO{
 		$sql.=$this->getFieldValue2('node', $node);
 		return $sql;
 	}
-	public function getColMap()
+	public function getColMap($node)
 	{
 		for($i=0;$i<count($this->vh_col_map);$i++){
 			if($i>0){
 				$col_map.=',';
 			}
-			$col_map.=$this->vh_col_map[$i];
+			if($this->vh_col_map[$i]=="group"){
+				$col_map.=$this->getGroupKangleName($node);
+			}else{
+				$col_map.=$this->vh_col_map[$i];
+			}
 		}
 		return $col_map;
 	}
@@ -194,6 +198,13 @@ class VhostDAO extends DAO{
 		$sql = "SELECT ".$this->MAP_ARR['node']." FROM ".$this->_TABLE." WHERE ".$this->getFieldValue2('name', $name);
 		$row = $this->executex($sql,'row');
 		return $row['node'];
+	}
+	public function getGroupKangleName($node)
+	{
+		if(apicall('nodes','isWindows',array($node))){
+			return "password";
+		}
+		return "group";
 	}
 }
 ?>

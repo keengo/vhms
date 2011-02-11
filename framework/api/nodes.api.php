@@ -39,6 +39,15 @@ class NodesAPI extends API
 		}
 		return $templete;
 	}
+	public function makeWhm2($host,$port,$user,$passwd)
+	{
+		load_lib("pub:whm");
+		$whm = new WhmClient();
+		$whmUrl = "http://".$host.":".$port."/";
+		$whm->setUrl($whmUrl);
+		$whm->setAuth($user, $passwd);
+		return $whm;
+	}
 	public function makeWhm($node)
 	{
 		load_conf('pub:node');
@@ -46,27 +55,29 @@ class NodesAPI extends API
 		if(!is_array($node_cfg)){
 			return trigger_error('没有节点'.$node.'的配置文件，请更新配置文件');
 		}
-		load_lib("pub:whm");
-		$whm = new WhmClient();
-		$whmUrl = "http://".$node_cfg['host'].":".$node_cfg['port']."/";
-		$whm->setUrl($whmUrl);
-		$whm->setAuth($node_cfg['user'], $node_cfg['passwd']);
-		return $whm;
+		return $this->makeWhm2($node_cfg['host'],$node_cfg['port'],$node_cfg['user'],$node_cfg['passwd']);
 	}
 	public function isWindows($node)
 	{
-		if(strncmp($node,'win_',4)==0){
-			return true;
+		load_conf('pub:node');	
+		$node_cfg = $GLOBALS['node_cfg'][$node];
+		if(!is_array($node_cfg)){
+			return trigger_error('没有节点'.$node.'的配置文件，请更新配置文件');
 		}
-		return false;
+		return $node_cfg['win'] == 1;		
 	}
 	public function init($node)
 	{
 		$whm = $this->makeWhm($node);
-		$driver = "bin/vhs_mysql.so";
+		$win = $GLOBALS['node_cfg'][$node]['win'];
+		if($win){
+			$driver = "bin/vhs_mysql.dll";
+		}else{
+			$driver = "bin/vhs_mysql.so";
+		}
 		$tpl = tpl::singleton();
 		$tpl->assign('driver',$driver);
-		$tpl->assign('col_map',daocall('vhost','getColMap', array(null)));
+		$tpl->assign('col_map',daocall('vhost','getColMap', array($node)));
 		$tpl->assign('load_sql',daocall('vhost','getLoadSql', array($node)));
 		$tpl->assign('flush_sql',daocall('vhost','getFlushSql', array(null)));
 		$tpl->assign('load_host_sql',daocall('domain','getLoadHostSql', array(null)));
@@ -84,10 +95,21 @@ class NodesAPI extends API
 		}
 		$tpl->assign('db',$db_cfg['default']);
 		$whmCall = new WhmCall('core.whm','write_ext');
-		$whmCall->addParam('file', 'vh_db.xml');		
+		$whmCall->addParam('file', 'vh.xml');
+		
 		$content = $tpl->fetch('config/vh.xml');
 		$whmCall->addParam('content',base64_encode($content));
 		$result = $whm->call($whmCall);
+		
+		if($win){
+			$content = $tpl->fetch('config/win_templete.xml');
+		}else{
+			$content = $tpl->fetch('config/templete.xml');
+		}
+		$whmCall = new WhmCall('core.whm','write_ext');
+		$whmCall->addParam('file', 'templete.xml');
+		$whmCall->addParam('content',base64_encode($content));
+		$result = $whm->call($whmCall);		
 		if($result){
 			$whmCall = new WhmCall('core.whm','reboot');
 			$result = $whm->call($whmCall);

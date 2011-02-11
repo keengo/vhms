@@ -73,7 +73,7 @@ class VhostProduct extends Product
 	}
 	private function getNodeGroup($node)
 	{
-		if(strncasecmp($node,'win_',4)==0){
+		if(apicall('nodes', 'isWindows',array($node))){
 			return parent::getRandPasswd(8);
 		}
 		return "1100";

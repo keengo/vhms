@@ -34,9 +34,13 @@ class NodesControl extends Control {
 		$this->_tpl->display('nodes/addnode.html');
 	}
 	public function edit(){
+		$os = $this->getOs();
+		if(!$os){
+			return false;
+		}
+		$_REQUEST['win'] = (strcasecmp($os, 'windows')==0?1:0);
 		daocall('nodes','updateNode', array($_REQUEST["name"],$_REQUEST));
 		$this->flush();
-		//header("Location: ?c=nodes&a=listNode");
 	}
 	public function del()
 	{
@@ -47,6 +51,10 @@ class NodesControl extends Control {
 	public function check(){
 	}
 	public function insert(){
+		$os = $this->getOs();
+		if(!$os){
+			return false;
+		}		
 		$data = array(
 			'name'=>$_REQUEST['name'],
 			'host'=> $_REQUEST['host'],
@@ -54,7 +62,9 @@ class NodesControl extends Control {
 			'user'=>$_REQUEST['user'],
 			'passwd'=>$_REQUEST['passwd'],
 			'db_user'=>$_REQUEST['db_user'],
-			'db_passwd'=>$_REQUEST['db_passwd']);
+			'db_passwd'=>$_REQUEST['db_passwd'],
+			'win'=>(strcasecmp($os, 'windows')==0?1:0)
+		);
 		$ret = daocall("nodes","insertNode",array($data));
 		if($ret !== false ){
 		//	header("Location: ?c=nodes&a=listNode");
@@ -79,6 +89,17 @@ class NodesControl extends Control {
 			$this->_tpl->assign('msg','更新配置文件失败');
 		}
 		return $this->listNode();
+	}
+	public function getOs()
+	{
+		$whm = apicall('nodes','makeWhm2',array($_REQUEST['host'],$_REQUEST['port'],$_REQUEST['user'],$_REQUEST['passwd']));
+		$whmCall = new WhmCall('core.whm','info');
+		$result = $whm->call($whmCall);
+		if(!$result){
+			trigger_error("call whm info failed");
+			return false;
+		}
+		return $result->get("os");
 	}
 }
 ?>

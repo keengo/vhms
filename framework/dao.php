@@ -134,26 +134,9 @@ class DAO
 	  * @param Array 插入数据
 	  * @param Array 映射数组
 	  */
-	 protected function insertSql($table,&$infoAry,$mapArr) {
-	 	$fields  = "";
-		$values	 = "";
-		foreach($infoAry as $key=>$value) {
-			if(!array_key_exists($key,$mapArr) || $mapArr[$key][1] === 0)
-				 continue;//映射不存在的数据，或禁止插入的数据屏蔽
-			$fields .= $mapArr[$key].",";
-			if($mapArr[$key] == 'ftppasswd'){
-				$values	.= "password('$value'),";
-			}else{
-				$values	.= "'".$this->daddslashes($value)."',";
-			}			
-		}
-		$fields  = trim($fields,',');
-		$values  = trim($values,',');
-		if(empty($fields) || empty($values))
-			return false;
-		$sql = "INSERT INTO {$table} ({$fields}) VALUES ({$values})";
-		return $sql;
-	 }
+	protected function insertSql($table,&$infoAry,$mapArr) {
+		return $this->insertData($infoAry);
+	}
 	protected function AllQueryFields() {
 		$fieldstr = "";
 		foreach($this->MAP_ARR as $field) {

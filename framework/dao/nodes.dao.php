@@ -18,10 +18,14 @@ class NodesDAO extends DAO {
 			"passwd"=>'passwd',
 			"db_user"=>'db_user',
 			'db_passwd'=>'db_passwd',
-			"state"=>'state'
+			"state"=>'state',
+			"type"=>'type',
+			"win"=>'win'
 		);
 		$this->MAP_TYPE = array(
-			'port'=>FIELD_TYPE_INT
+			'port'=>FIELD_TYPE_INT,
+			'type'=>FIELD_TYPE_INT,
+			'win'=>FIELD_TYPE_INT
 		);
 		$this->_TABLE = DBPRE . 'nodes';
 	}
@@ -55,6 +59,7 @@ class NodesDAO extends DAO {
 		}
 		$sql = $this->insertSql($tbl,$arr,$this->MAP_ARR);
 		$ret = $this->execute($host, $dbname, $sql);
+		
 		return $ret;
 	}
 
