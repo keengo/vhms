@@ -155,6 +155,8 @@ class VhostDAO extends DAO{
 				$col_name = $this->getUserColName($node);
 			}else if($col_name=='group'){
 				$col_name = $this->getGroupColName($node);
+			}else if($col_name=='doc_root'){
+				$col_name = $this->getDocRootColName($node);
 			}else{
 				$col_name = $this->MAP_ARR[$col_name];
 			}
@@ -185,6 +187,15 @@ class VhostDAO extends DAO{
 		}else{
 			return "CONCAT('#',".$this->MAP_ARR['gid'].")";
 		}
+	}
+	private function getDocRootColName($node)
+	{
+		load_conf('pub:node');
+		$node_cfg = $GLOBALS['node_cfg'][$node];
+		if(is_array($node_cfg) && $node_cfg['win'] == 1){
+			return "CONCAT('".$node_cfg['dev']."'".",".$this->MAP_ARR['doc_root'].")";
+		}
+		return $this->MAP_ARR['doc_root'];
 	}
 	private function getUserColName($node)
 	{

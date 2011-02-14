@@ -63,7 +63,8 @@ class NodesControl extends Control {
 			'passwd'=>$_REQUEST['passwd'],
 			'db_user'=>$_REQUEST['db_user'],
 			'db_passwd'=>$_REQUEST['db_passwd'],
-			'win'=>(strcasecmp($os, 'windows')==0?1:0)
+			'win'=>(strcasecmp($os, 'windows')==0?1:0),
+			'dev'=>$_REQUEST['dev']
 		);
 		$ret = daocall("nodes","insertNode",array($data));
 		if($ret !== false ){
