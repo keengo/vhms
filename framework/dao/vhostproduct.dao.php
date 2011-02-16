@@ -12,14 +12,18 @@ class VhostproductDAO extends DAO {
 			"templete"=>'templete',
 			'price'=>'price',
 			'state'=>'state',
-			'node'=>'node'
+			'node'=>'node',
+			'try_flag'=>'try_flag',
+			'month_flag'=>'month_flag'
 		);
 		$this->MAP_TYPE = array(
 			'id'=>FIELD_TYPE_INT|FIELD_TYPE_AUTO,
 			'web_quota'=>FIELD_TYPE_INT,
 			'db_quota'=>FIELD_TYPE_INT,
 			'price'=>FIELD_TYPE_INT,
-			'state'=>FIELD_TYPE_INT
+			'state'=>FIELD_TYPE_INT,
+			'try_flag'=>FIELD_TYPE_INT,
+			'month_flag'=>FIELD_TYPE_INT,
 		);
 		$this->_TABLE = DBPRE .'vhost_product';
 	}

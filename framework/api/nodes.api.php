@@ -10,10 +10,6 @@ class NodesAPI extends API
 	{
 		parent::__destruct();
 	}
-	public function checkNodes($node)
-	{
-		return $ret;
-	}
 	public function edit($arr = array())
 	{
 		
@@ -69,7 +65,16 @@ class NodesAPI extends API
 	public function init($node)
 	{
 		$whm = $this->makeWhm($node);
-		$win = $GLOBALS['node_cfg'][$node]['win'];
+		$node_cfg = $GLOBALS['node_cfg'][$node];
+		/*
+		 * 生成数据库连接文件etc/vh_db.xml
+		 * 这个文件为什么要放到etc呢？而不放到ext下面?
+		 * 问得好！权限问题，数据库连接文件包含重要的密码信息，要确保除超级用户外无人可访问。
+		 * 而ext目录下面是扩展目录，普通用户需要读和运行的权限。
+		 * 我们可以在ext/templete.xml放入一条<!--#include etc/vh_db.xml -->,把数据库连接文件包含进来.
+		 * 这样就可以加载etc/vh_db.xml文件了。
+		 */
+		$win = $node_cfg['win'];
 		if($win){
 			$driver = "bin/vhs_mysql.dll";
 		}else{
@@ -83,7 +88,7 @@ class NodesAPI extends API
 		$tpl->assign('load_host_sql',daocall('domain','getLoadHostSql', array(null)));
 		global $db_cfg;
 		$db_local = $this->isLocalHost($db_cfg['default']['host']);
-		$node_local = $this->isLocalHost($GLOBALS['node_cfg'][$node]['host']);
+		$node_local = $this->isLocalHost($node_cfg['host']);
 		if($db_local && !$node_local){
 			$host = $_SERVER['SERVER_ADDR'];
 			if($host=="" || $this->isLocalHost($host)){
@@ -94,25 +99,36 @@ class NodesAPI extends API
 			$db_cfg['default']['host'] = $host;
 		}
 		$tpl->assign('db',$db_cfg['default']);
+		$tpl->assign('dev',$node_cfg['dev']);
 		$whmCall = new WhmCall('core.whm','write_ext');
-		$whmCall->addParam('file', 'vh.xml');
+		$whmCall->addParam('file', 'etc/vh_db.xml');
 		
-		$content = $tpl->fetch('config/vh.xml');
+		$content = $tpl->fetch('config/vh_db.xml');
 		$whmCall->addParam('content',base64_encode($content));
-		$result = $whm->call($whmCall);
+		$result = $whm->call($whmCall);	
 		
-		if($win){
-			$content = $tpl->fetch('config/win_templete.xml');
-		}else{
-			$content = $tpl->fetch('config/templete.xml');
-		}
+		/*
+		 * 写入模板文件,etc/templete.xml
+		 */
+		$content = $tpl->fetch('config/templete.xml');
 		$whmCall = new WhmCall('core.whm','write_ext');
-		$whmCall->addParam('file', 'templete.xml');
+		$whmCall->addParam('file', 'ext/templete.xml');
 		$whmCall->addParam('content',base64_encode($content));
 		$result = $whm->call($whmCall);		
 		if($result){
-			$whmCall = new WhmCall('core.whm','reboot');
+			/*
+			 * 调用init_node，初始化节点，如开启磁盘quota等等操作
+			 */
+			$whmCall = new WhmCall('vhost.whm','init_node');
+			$whmCall->addParam('dev',$node_cfg['dev']);
 			$result = $whm->call($whmCall);
+			if($result){
+				/*
+				 * 调用重启,使设置生效
+				 */
+				$whmCall = new WhmCall('core.whm','reboot');
+				$result = $whm->call($whmCall);
+			}
 		}
 		if(!$result){
 			trigger_error($whm->err_msg);
@@ -170,6 +186,30 @@ class NodesAPI extends API
 			return true;
 		}
 		return false;
+	}
+	public function checkNode($node)
+	{
+		$whm = $this->makeWhm($node);
+		if(!$whm){
+			return false;
+		}
+		$whmCall = new WhmCall('core.whm','check_vh_db');
+		$result = $whm->call($whmCall);
+		if($result && intval($result->get('status'))==1){
+			return true;
+		}
+		return false;
+	}
+	public function checkNodes()
+	{
+		load_conf('pub:node');
+		$node_cfgs = $GLOBALS['node_cfg'];
+		$nodes = array();
+		$keys = array_keys($node_cfgs);
+		for($i = 0;$i<count($keys);$i++){
+			$nodes[$keys[$i]] = $this->checkNode($keys[$i]);
+		}
+		return $nodes;
 	}
 }
 ?>

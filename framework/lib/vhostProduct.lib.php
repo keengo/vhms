@@ -2,10 +2,6 @@
 class VhostProduct extends Product
 {
 	
-	const VHOST_PRODUCT_ACTIVE=0;
-	const VHOST_PRODUCT_CLOSE=1;
-	const VHOST_PRODUCT_PAUSE=2;
-	
 	public function __construct()
 	{
 		

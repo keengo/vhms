@@ -1,6 +1,7 @@
 <!--#start 500 -->
 <config>
 <vhs>
+<env dev='{{$dev}}'/>
 <vh_database
 driver='{{$driver}}'
 col_map='{{$col_map}}'

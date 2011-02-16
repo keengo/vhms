@@ -1,10 +1,11 @@
 <!--#start 60 -->
+<!--#include etc/vh_db.xml  -->
 <config>
 <vhs>
+<env dev='{{$dev}}'/>
 <vh_templete name='html' inherit='0'>
-<init_event cmd='mkdir -m 700 -p ${doc_root}' />
-<init_event cmd='chown -R ${user}:${group} ${doc_root}'/>
-<destroy_event cmd='rm -rf ${doc_root}'/>
+<init_event event='vhost.whm:init_vh' />
+<destroy_event event='vhost.whm:destroy_vh'/>
 </vh_templete>
 <vh_templete name='all' inherit='1' templete='html'>
 </vh_templete>

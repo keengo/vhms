@@ -24,6 +24,27 @@ class NodesControl extends Control {
 		$this->_tpl->assign('action','insert');
 		$this->_tpl->display('nodes/addnode.html');
 	}
+	public function ajaxCheckNode()
+	{
+		$node = $_REQUEST['node'];
+		$result = apicall('nodes','checkNode',array($_REQUEST['node']));
+		header("Content-Type: text/xml; charset=utf-8");
+		$str = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+		$str .="<result node='".$_REQUEST['node']."' status='";
+		if($result){
+			$str.="1";
+		}else{
+			$str.="0";
+		}
+		$str.="'/>";
+		return $str;
+	}
+	public function checkNodes()
+	{
+		$node_status = apicall('nodes','checkNodes');
+		$this->_tpl->assign('node_status',$node_status);
+		return $this->listNode();
+	}
 	public function editForm(){
 		$node = daocall('nodes','getNode',array($_REQUEST['name']));
 		if(!$node){
