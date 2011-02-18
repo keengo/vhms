@@ -1,9 +1,6 @@
 <?php 
 abstract class Product
 {
-	const PRODUCT_ACTIVE=1;
-	const PRODUCT_TRY=2;
-	const PRODUCT_MONTH=4;
 	/**
 	 * 计算金额
 	 * @param $price 每年的价格
@@ -44,11 +41,11 @@ abstract class Product
 			trigger_error('产品错误');
 			return false;
 		}
-		if(!($info['state'] & Product::PRODUCT_ACTIVE)){
+		if($info['pause_flag']!=0){
 			trigger_error('该产品不能购买');
 			return false;
 		}
-		if(!($info['state'] & Product::PRODUCT_MONTH) && !$this->isYears($month)){
+		if($info['month_flag']!=0 && !$this->isYears($month)){
 			trigger_error('该产品不支持月付');
 			return false;
 		}
@@ -72,7 +69,7 @@ abstract class Product
 		}
 		if($price>0 && !apicall('money','decMoney', array($user,$price))){
 			$default_db->rollBack();
-			trigger_error('余额不足');
+			trigger_error('余额不足,所需金额:'.($price/100));
 			return false;
 		}
 		if(!$this->give($user,$month,$param,$params,$info)){
@@ -92,10 +89,10 @@ abstract class Product
         srand((double)microtime()*1000000);
         $base_len=strlen($base_passwd);
         if($len<8){
-                $len=8;
+            $len=8;
         }
         for($i=0;$i<$len;$i++){
-                $passwd.=$base_passwd[rand()%$base_len];
+            $passwd.=$base_passwd[rand()%$base_len];
         }
         return $passwd;
 	}
@@ -112,13 +109,13 @@ abstract class Product
 	 * @param  $param
 	 * @param  $params
 	 */
-	abstract protected function give($user="",$month=12,$param="",$params=array(),$product_info=array());
+	abstract protected function give($user="",$month=12,$param="",&$params=array(),$product_info=array());
 	/**
 	 * 同步产品到磁盘或者远程
 	 * @param  $user
 	 * @param  $param
 	 */
-	abstract protected function sync($user,$param,$params,$product_info);
+	abstract protected function sync($user,$param,&$params,$product_info);
 	abstract public function checkParam($params=array());
 }
 ?>

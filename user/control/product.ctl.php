@@ -29,7 +29,7 @@ class ProductControl extends Control {
 		switch($product[0]){
 			case 'vhost':
 				$product_info = daocall('vhostproduct','getProduct',array($product[1]));
-				if(!$product_info || intval($product_info['state'])==0){
+				if(!$product_info || intval($product_info['pause_flag'])!=0){
 					return trigger_error('虚拟主机产品ID错误');
 				}
 				$this->_tpl->assign('product',$product_info);

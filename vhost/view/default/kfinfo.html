@@ -29,9 +29,23 @@
     <td>&nbsp;到期时间</td>
     <td>&nbsp;{{$user.expire_time}}</td>
   </tr>
+   <tr>
+    <td>&nbsp;空间配额</td>
+    <td>&nbsp;总大小:{{$quota.web_limit}}M/已使用:{{$quota.web_used}}M</td>
+  </tr>
+  {{if $quota.db_limit}}
+    <tr>
+    <td>&nbsp;数据库配额</td>
+    <td>&nbsp;总大小:{{$quota.db_limit}}M/已使用:{{$quota.db_used}}M</td>
+  </tr>
+   <tr>
+    <td>&nbsp;数据库信息</td>
+    <td>&nbsp;用户名: a{{$user.uid}} , 数据库名: a{{$user.uid}}</td>
+    </tr>
+  {{/if}}
   <tr>
     <td>&nbsp;状态</td>
-    <td>&nbsp;{{$user.state}}</td>
+    <td>&nbsp;{{$user.status}}</td>
   </tr>
 </table></td>
 </tr>

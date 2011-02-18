@@ -16,6 +16,7 @@ class NodesDAO extends DAO {
 			"port"=> 'port',
 			"user"=>'user',
 			"passwd"=>'passwd',
+			'db_type'=>'db_type',
 			"db_user"=>'db_user',
 			'db_passwd'=>'db_passwd',
 			"state"=>'state',

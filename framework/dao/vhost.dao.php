@@ -54,7 +54,18 @@ class VhostDAO extends DAO{
 		$arr['product_id'] = $product_id;
 		$arr['create_time'] = 'NOW()';
 		$arr['expire_time'] = 'ADDDATE(NOW(),INTERVAL '.$month.' MONTH)';
-		return $this->insertData($arr);		
+		$result = $this->insertData($arr);
+		
+		if($result){
+			try{
+				$id = $this->db->lastInsertId();				
+			}catch(PDOException $e){
+				//print_r($e);
+				//todo alter use select to select id;
+			}
+			return $id;
+		}
+		return false;
 	}
 	public function updatePassword($username,$passwd)
 	{

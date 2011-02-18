@@ -52,16 +52,15 @@ function db_query(PDO $db,$sql, $ret_type = 'result')
 	}else{
 		$result = $db->query($sql);
 	}	
-	if(!$result && $db->errorCode()>0)
+	if(!$result)
 	{
-		//trigger_error('在MYSQL服务器端执行SQL语句失败.<br />SQL: ' . $sql . '<br />原因: '. $db->errorCode() . '<br />');
+		trigger_error('在MYSQL服务器端执行SQL语句失败.<br />SQL: ' . $sql . '<br />原因: '. $db->errorCode() . '<br />');
 		return false;
 	}
 	switch($ret_type)
 	{
 		case "result":
 			return $result;
-			break;
 		case "row":
 			if($result){
 				return $result->fetch();			
@@ -72,7 +71,6 @@ function db_query(PDO $db,$sql, $ret_type = 'result')
 				return $result->fetchAll(PDO::FETCH_ASSOC);			
 			}
 			return false;
-
 		default:
 			trigger_error(__FUNCTION__ . " unknowd query type");
 			return false;

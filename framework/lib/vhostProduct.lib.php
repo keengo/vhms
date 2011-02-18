@@ -27,9 +27,9 @@ class VhostProduct extends Product
 	 * @param  $params
 	 * @param  $product_info
 	 */
-	protected function give($user="",$month=12,$param="",$params=array(),$product_info=array())
+	protected function give($user="",$month=12,$param="",&$params=array(),$product_info=array())
 	{
-		return daocall('vhost', 'insertVhost', 
+		$uid = daocall('vhost', 'insertVhost', 
 		array($user,
 			$param,
 			$params['passwd'],
@@ -42,21 +42,37 @@ class VhostProduct extends Product
 			$month
 			)
 		);
+		if($uid && $uid<1000){
+			trigger_error('uid小于1000,请手工运行SQL: ALTER TABLE `vhost` AUTO_INCREMENT =1000');
+			return false;
+		}
+		if($uid >= 1000){
+			$params['uid'] = $uid;
+			return true;
+		}
+		return false;
 	}
 	/**
 	 * 同步产品到磁盘或者远程
 	 * @param  $user
 	 * @param  $param
 	 */
-	protected function sync($user,$param,$params,$product_info)
+	protected function sync($user,$param,&$params,$product_info)
 	{
 		//print_r($product_info);
 		//die();
+		//echo "uid in sync=".$uid;
+		if($product_info['db_quota']>0){
+			$db = apicall('nodes','makeDbProduct',array($product_info['node']));
+			if(is_object($db)){
+				$db->add($params['uid'],$params['passwd']);
+			}
+		}
 		$whm = apicall('nodes','makeWhm',array($product_info['node']));
 		$whmCall = new WhmCall('core.whm','reload_vh');
 		$whmCall->addParam('name',$param);
 		$whmCall->addParam('init','1');
-		$whmCall->addParam('quota',$product_info['web_quota']);
+		$whmCall->addParam('quota_limit',$product_info['web_quota']);
 		return $whm->call($whmCall);
 		//return false;
 	}

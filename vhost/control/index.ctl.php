@@ -33,6 +33,12 @@ class IndexControl extends Control
 	public function main()
 	{
 		$user = daocall('vhost','getVhost',array(getRole('vhost')));
+		if($user){
+			$quota = apicall('vhost','getQuota',array(getRole('vhost'),$user['uid'],$user['node'],$user['product_id']));
+			if($quota){
+				$this->_tpl->assign('quota',$quota);
+			}
+		}
 		$this->_tpl->assign('user',$user);
 		return $this->_tpl->fetch('kfinfo.html');
 	}

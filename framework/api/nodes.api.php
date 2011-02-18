@@ -4,15 +4,11 @@ class NodesAPI extends API
 	private $MAP_ARR;
 	public function __construct()
 	{
-		
+		load_conf('pub:node');
 	}
 	public function __destruct()
 	{
 		parent::__destruct();
-	}
-	public function edit($arr = array())
-	{
-		
 	}
 	public function listTemplete($node)
 	{
@@ -44,9 +40,28 @@ class NodesAPI extends API
 		$whm->setAuth($user, $passwd);
 		return $whm;
 	}
+	public function makeDbProduct($node)
+	{
+		$node_cfg = $GLOBALS['node_cfg'][$node];
+		if(!is_array($node_cfg)){
+			return trigger_error('没有节点'.$node.'的配置文件，请更新配置文件');
+		}
+		load_lib('pub:dbProduct');
+		$db_type = $node_cfg['db_type'];
+		if(!$db_type){
+			return trigger_error('该节点数据库类型出错!');
+		}
+		$className = $db_type."DbProduct";
+		load_lib('pub:'.$className);
+		$className[0] = strtoupper($className[0]);
+		$db = new $className;
+		if(!$db->connect($node_cfg)){
+			return trigger_error('不能连接节点数据库');
+		}
+		return $db;
+	}
 	public function makeWhm($node)
 	{
-		load_conf('pub:node');
 		$node_cfg = $GLOBALS['node_cfg'][$node];
 		if(!is_array($node_cfg)){
 			return trigger_error('没有节点'.$node.'的配置文件，请更新配置文件');
@@ -55,7 +70,6 @@ class NodesAPI extends API
 	}
 	public function isWindows($node)
 	{
-		load_conf('pub:node');	
 		$node_cfg = $GLOBALS['node_cfg'][$node];
 		if(!is_array($node_cfg)){
 			return trigger_error('没有节点'.$node.'的配置文件，请更新配置文件');
@@ -222,7 +236,6 @@ class NodesAPI extends API
 	}
 	public function checkNodes()
 	{
-		load_conf('pub:node');
 		$node_cfgs = $GLOBALS['node_cfg'];
 		$nodes = array();
 		$keys = array_keys($node_cfgs);

@@ -35,6 +35,7 @@ class ProductAPI extends API
 		$className = $product_type.'Product';
 		$lib = 'pub:'.$className;
 		load_lib($lib);
+		$className[0] = strtoupper($className[0]);
 		return new $className;
 	}
 }
