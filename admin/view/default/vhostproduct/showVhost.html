@@ -11,11 +11,11 @@
    <div id="main" class="wid"> 
   <table width="80%" border="0" align="center" cellpadding="0" cellspacing="1" id="td1">
 	<tr>
-  <td height="30" id="td2" colspan="2" class="color01 right"><font color="#FFFFFF">用户空间信息</font></td>
+  <td height="30" id="td2" colspan="2" class="color01 right"><font color="#FFFFFF">产品信息</font></td>
 	</tr>
   <tr>
     <td>
-<table width="100%" height="300" border="0" cellpadding="0" cellspacing="1" id="td5">
+<table width="100%" height="250" border="0" cellpadding="0" cellspacing="1" id="td5">
 		 <tr>
         <td id="td3" colspan="2" align="center">
 		[<a href='?c={{$smarty.request.c}}&a=resync&user={{$row.name}}'>重建空间</a>] 
@@ -39,15 +39,7 @@
         <td id="td3" class="color01 right">产品ID</td>
         <td id="td4">{{$row.product_id}}</td>
 	  </tr>
-	  <tr>
-        <td id="td3" class="color01 right">网页大小</td>
-        <td id="td4"> {{$row.web_quota}}</td>
-        </tr>
-	  <tr>
-        <td id="td3" class="color01 right">数据库大小</td>
-        <td id="td4">{{$row.db_quota}}</td>
-	  </tr>
-	  <tr>
+	   <tr>
         <td id="td3"  class="color01 right">所在服务器</td>
         <td id="td4">{{$row.node}}</td>
         </tr>
