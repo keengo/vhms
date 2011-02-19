@@ -11,30 +11,47 @@
   {{if $sum>0}}
 <div class="topimg pal1">共计 {{$sum}} 条记录</div>
   <div id="main" class="wid"> 
-    <table cellpadding=0 cellspacing=1 id="table">
-      <tr id="ttitle">	
-	  <td class='color01 right' bgcolor='#efefef'>操作</td>
-        <td class='color01 right' bgcolor='#efefef'>用户名</td>
-		<td class='color01 right' bgcolor='#efefef'>真实姓名</td>
-		<td class='color01 right' bgcolor='#efefef'>身份号码</td>
-		<td class='color01 right' bgcolor='#efefef'>电子邮件</td>
-		<td class='color01 right' bgcolor='#efefef'>注册时间</td>
-		<td class='color01 right' bgcolor='#efefef'>余额(分)</td>
-	
-	  </tr>
-	  {{foreach from=$list item=row}}
+    <table align="center" id="td1" border="0" cellpadding="0" cellspacing="1" width="70%">
+  {{foreach from=$list item=row}}
+	<tr>
+  <td height="30" id="td2" colspan="2"><font color="#FFFFFF">　用户查询</font></td>
+	</tr>
+  <tr>
+    <td>
+<table width="100%" height="210" border="0" cellpadding="0" cellspacing="1" id="td5">
       <tr>
-	  <td class="right">[<a href="?c=user&a=editForm&username={{$row.username}}" title="更改信息">更改</a>][<a href="?c=user&a=impLogin&username={{$row.username}}" target="_blank">模拟登录</a>]</td>
-	  <td ><a href="?c=user&a=editForm&username={{$row.username}}">{{$row.username}}</a></td>
-        <td>{{$row.name}}</td>
-		 <td>{{$row.id}}</td>
-		  <td>{{$row.email}}</td>
-		   <td>{{$row.regtime}}</td>
-		 <td><a href="?c=user&a=editMoneyForm&username={{$row.username}}">{{$row.money}}</a></td>
-		  </tr>
-	  {{/foreach}}
-    </table>
-   </div>
+        <td id="td3" width="189" class="color01 right">操作：</td>
+        <td width="423" id="td4">[<a href="?c=user&a=editForm&username={{$row.username}}" title="更改信息">更改</a>][<a href="?c=user&a=impLogin&username={{$row.username}}" target="_blank">模拟登录</a>]</td>
+        </tr>
+      <tr>
+        <td id="td3" class="color01 right">用户名：</td>
+        <td id="td4"><a href="?c=user&a=editForm&username={{$row.username}}">{{$row.username}}</a></td>
+        </tr>
+      <tr>
+        <td id="td3" class="color01 right">真实姓名：</td>
+        <td id="td4">{{$row.name}}</td>
+        </tr>
+	  <tr>
+        <td id="td3" class="color01 right">身份号码</td>
+        <td id="td4">{{$row.id}}</td>
+        </tr>
+	  <tr>
+        <td id="td3" class="color01 right">电子邮件</td>
+        <td id="td4">{{$row.email}}</td>
+        </tr>
+	  <tr>
+        <td id="td3" class="color01 right">注册时间</td>
+        <td id="td4">{{$row.regtime}}</td>
+        </tr>
+	  <tr>
+        <td id="td3" class="color01 right">余额(分)</td>
+        <td id="td4"><a href="?c=user&a=editMoneyForm&username={{$row.username}}">{{$row.money}}</a></td>
+        </tr>
+	    </table></td>
+  </tr>
+  {{/foreach}}
+</table>
+ </div>
 </div>
 {{/if}}
 </body>
