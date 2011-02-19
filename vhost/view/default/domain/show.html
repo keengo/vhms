@@ -15,9 +15,9 @@
 	  </tr>
 	  {{foreach from=$list item=row}}
       <tr>
-        <td class="right">[<a href="javascript:if(confirm('确定删除{{$row.name}}?')){location='?c=domain&a=del&domain={{$row.domain}}';}" title="删除域名"> 删除</a>]</td>
-        <td class="right">{{$row.domain}}</td>
-        <td class="right">{{$row.dir}}</td>
+        <td class="right">[<a href="javascript:if(confirm('确定删除{{$row.name}}?')){location='?c=domain&a=del&domain={{$row.name}}';}" title="删除域名"> 删除</a>]</td>
+        <td class="right">{{$row.name}}</td>
+        <td class="right">{{$row.value}}</td>
 	  </tr>
 	  {{/foreach}}
     </table>

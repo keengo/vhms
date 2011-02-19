@@ -44,7 +44,7 @@ class VhostControl extends Control {
 		$whmCall = new WhmCall('core.whm','reload_vh');
 		$whmCall->addParam('name',$vhost);
 		if($product){
-			$whmCall->addParam('quota',$product['web_quota']);
+			$whmCall->addParam('quota_limit',$product['web_quota']);
 		}
 		$whmCall->addParam('init','1');
 		if($whm->call($whmCall)){
