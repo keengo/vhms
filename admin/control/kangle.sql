@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 16, 2011 at 09:37 AM
+-- Generation Time: Feb 19, 2011 at 10:25 AM
 -- Server version: 5.1.53
 -- PHP Version: 5.2.16
 
@@ -37,20 +37,6 @@ CREATE TABLE IF NOT EXISTS `admin_users` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `domain`
---
-
-CREATE TABLE IF NOT EXISTS `domain` (
-  `name` varchar(255) NOT NULL,
-  `domain` varchar(255) NOT NULL,
-  `dir` varchar(255) NOT NULL DEFAULT '/',
-  UNIQUE KEY `domain` (`domain`),
-  KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `nodes`
 --
 
@@ -60,6 +46,7 @@ CREATE TABLE IF NOT EXISTS `nodes` (
   `port` int(11) NOT NULL,
   `user` varchar(32) NOT NULL,
   `passwd` varchar(32) NOT NULL,
+  `db_type` enum('mysql','dblib','pgsql') DEFAULT NULL,
   `db_user` varchar(255) DEFAULT NULL,
   `db_passwd` varchar(255) DEFAULT NULL,
   `state` tinyint(4) NOT NULL DEFAULT '0',
@@ -120,16 +107,31 @@ CREATE TABLE IF NOT EXISTS `vhost` (
   `uid` int(11) NOT NULL AUTO_INCREMENT,
   `gid` varchar(32) NOT NULL DEFAULT '1100',
   `templete` varchar(255) NOT NULL,
+  `subtemplete` varchar(255) NOT NULL DEFAULT '',
   `create_time` datetime NOT NULL,
   `expire_time` datetime NOT NULL,
-  `state` tinyint(4) NOT NULL DEFAULT '0',
+  `status` tinyint(4) NOT NULL DEFAULT '0',
   `node` varchar(32) NOT NULL,
   `product_id` int(11) NOT NULL,
   `username` varchar(32) NOT NULL,
   PRIMARY KEY (`uid`),
   KEY `name` (`name`),
   KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='虚拟主机表' AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='虚拟主机表' AUTO_INCREMENT=1009 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vhost_info`
+--
+
+CREATE TABLE IF NOT EXISTS `vhost_info` (
+  `user` varchar(32) NOT NULL,
+  `type` tinyint(4) NOT NULL DEFAULT '0',
+  `name` varchar(64) NOT NULL,
+  `value` varchar(255) DEFAULT NULL,
+  KEY `user` (`user`,`type`,`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -143,12 +145,11 @@ CREATE TABLE IF NOT EXISTS `vhost_product` (
   `describe` text,
   `templete` varchar(32) NOT NULL,
   `web_quota` bigint(11) NOT NULL,
-  `db_type` tinyint(4) NOT NULL DEFAULT '1',
   `db_quota` bigint(20) NOT NULL DEFAULT '0',
   `price` int(11) NOT NULL,
-  `status` tinyint(4) DEFAULT '0',
+  `pause_flag` tinyint(4) DEFAULT '0',
   `node` varchar(32) NOT NULL,
   `try_flag` tinyint(4) DEFAULT '0',
   `month_flag` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='产品列表' AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='产品列表' AUTO_INCREMENT=5 ;
