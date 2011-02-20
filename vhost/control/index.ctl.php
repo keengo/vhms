@@ -21,11 +21,18 @@ class IndexControl extends Control
 		if($node){
 			$node_info = apicall('nodes','getInfo',array($node));
 			$url = "http://".$_SERVER[HTTP_HOST].$_SERVER[PHP_SELF]."?c=session&a=sso";
-			$webftp_url = "http://".$node_info['host'].":3312/webftp/sso.php?action=hello&url=".urlencode($url);
-			$this->_tpl->assign('webftp_url',$webftp_url);			
+			$webftp_url = "http://".$node_info['host'].":3312/sso.php?action=hello&url=".urlencode($url);
+			$this->_tpl->assign('webftp_url',$webftp_url);	
+			$quota = $_SESSION['quota'][$vhost];
+			//print_r($quota);
+			if($quota['db_limit']>0){
+				$dbadmin_url = "http://".$node_info['host'].":3313/".$node_info['db_type']."/";
+				$this->_tpl->assign('dbadmin_url',$dbadmin_url);
+			}		
 		}else{
 			trigger_error('没有找到在线文件管理URL');
-		}		
+		}
+		
 		return $this->_tpl->fetch('top.html');
 	}
 	public function left()
@@ -42,7 +49,8 @@ class IndexControl extends Control
 	}
 	public function main()
 	{
-		$user = daocall('vhost','getVhost',array(getRole('vhost')));
+		$vhost = getRole('vhost');
+		$user = daocall('vhost','getVhost',array($vhost));
 		if($user){
 			$node_info = apicall('nodes','getInfo',array($user['node']));
 			if($node_info){
@@ -50,6 +58,7 @@ class IndexControl extends Control
 			}
 			$quota = apicall('vhost','getQuota',array(getRole('vhost'),$user['uid'],$user['node'],$user['product_id']));
 			if($quota){
+				$_SESSION['quota'][$vhost] = $quota;
 				$this->_tpl->assign('quota',$quota);
 			}
 		}

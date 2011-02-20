@@ -35,10 +35,16 @@ class VhostAPI extends API
 	{
 		$node = $_SESSION['node'][$name];
 		if(empty($node)){
-			$node = daocall('vhost','getNode',array($name));
-			$_SESSION['node'][$name] = $node;			
+			$node = daocall('vhost','getVhost',array($vhost,array('node','product_id')));
+			//$node = daocall('vhost','getNode',array($name));
+			$_SESSION['node'][$name] = $node['node'];
+			$_SESSION['product_id'][$name] = $node['product_id'];			
 		}
 		return $node;
+	}
+	public function getPrefix()
+	{
+		return '/home/ftp/';
 	}
 }
 ?>

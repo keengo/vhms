@@ -3,11 +3,7 @@
 <CreateProcess>AsUser</CreateProcess>
 <vhs>
 <env dev='{{$dev}}'/>
-<vh name='_phpmyadmin' doc_root='nodewww/phpmyadmin' index='index.html,index.php' app='_phpmyadmin' inherit='off' user='phpmyadmin' password='{{$phpmyadmin_password}}'>
-<map file_ext='php' extend='api:php53' allow_method='*'/>
-<port>3313</port>
-<host>*</host>
-</vh>
+
 <vh_database
 driver='{{$driver}}'
 col_map='{{$col_map}}'

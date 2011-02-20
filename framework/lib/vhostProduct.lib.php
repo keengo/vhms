@@ -82,7 +82,8 @@ class VhostProduct extends Product
 	}
 	private function getDocRoot($name)
 	{
-		return '/home/ftp/'.$name[0].'/'.$name;
+		$prefix = apicall('vhost','getPrefix');
+		return $prefix.$name[0].'/'.$name;
 	}
 	private function getNodeGroup($node)
 	{
