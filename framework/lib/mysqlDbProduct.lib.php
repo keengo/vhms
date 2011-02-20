@@ -18,12 +18,12 @@ class MysqlDbProduct extends DbProduct
 			"DROP USER '".$user."'@'%'",
 			"DROP DATABASE '".$user."'"
 			);
-			return $this->query($user);
+		return $this->query($sqls);
 	}
 	public function password($uid,$passwd)
 	{
 		$user = DbProduct::getUser($uid);
-		return $this->query($node,array("SET PASSWORD FOR '".$user."'@'%' = PASSWORD( '".$passwd."' )"));		
+		return $this->query(array("SET PASSWORD FOR '".$user."'@'%' = PASSWORD( '".$passwd."' )"));		
 	}
 	public function used($uid)
 	{
@@ -41,8 +41,12 @@ class MysqlDbProduct extends DbProduct
 	private function query(array $sqls)
 	{
 		for($i=0;$i<count($sqls);$i++){
-			$this->pdo->exec($sqls[$i]);
+			$result = $this->pdo->exec($sqls[$i]);
+			if(!$result && $this->pdo->errorCode()!='00000'){
+				return false;
+			}
 		}
+		return true;
 	}
 }
 ?>

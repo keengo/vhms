@@ -39,11 +39,6 @@ class VhostproductControl extends Control {
 		$this->_tpl->assign('list',$list);
 		$this->_tpl->display('vhostproduct/showTemplete.html');
 	}
-	public function delTemplete()
-	{
-		daocall('vhosttemplete','del',array($_REQUEST['node'],$_REQUEST['templete']));
-		$this->showTemplete();
-	}
 	public function showProduct()
 	{
 		$product_flag = $_REQUEST['product_flag'];
@@ -53,6 +48,7 @@ class VhostproductControl extends Control {
 		$this->_tpl->assign('product_flag',$product_flag);
 		$this->_tpl->display('vhostproduct/showProduct.html');
 	}
+
 	protected function assignHosts()
 	{
 		$nodes = daocall('nodes','getAllNodes',null);
@@ -84,24 +80,6 @@ class VhostproductControl extends Control {
 			return false;
 		}
 		$this->_tpl->display('vhostproduct/addProduct.html');
-	}
-	public function editTempleteForm()
-	{
-		$templete = daocall('vhosttemplete','getTemplete',array($_REQUEST['node'],$_REQUEST['templete']));
-		if(!$templete){
-			trigger_error("指定主机上没有该模板");
-			return;
-		}
-		$this->_tpl->assign("templete",$templete);
-		$this->_tpl->display('vhostproduct/editTemplete.html');
-	}
-	public function editTemplete()
-	{
-		if(!daocall('vhosttemplete', 'updateNodeTempleteWeight', array($_REQUEST['node'],$_REQUEST['templete'],$_REQUEST['weight']))){
-			trigger_error("更新出错");
-			return;
-		}
-		return $this->showTemplete();
 	}
 	public function addProduct()
 	{

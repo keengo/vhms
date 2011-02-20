@@ -85,7 +85,7 @@ class UserControl extends Control {
 		if(daocall('user','updatePassword',array($_REQUEST['username'],$passwd))){
 			$msg = "新密码是: ".$passwd;
 		}else{
-			$msg = "随机密码出错";
+			$msg = "重设密码出错";
 		}
 		$this->_tpl->assign('msg',$msg);
 		return $this->listUser();

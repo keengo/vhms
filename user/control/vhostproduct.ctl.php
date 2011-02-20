@@ -19,9 +19,16 @@ class VhostproductControl extends Control {
 	}
 	public function impLogin()
 	{
-		registerRole('vhost',$_REQUEST['name']);
-		header("Location: /vhost/");
-		die();
+		$vhost = $_REQUEST['name'];
+		$vhost_info = daocall('vhost','getVhost',array($vhost,array('username')));
+		if($vhost_info && $vhost_info['username'] == getRole('user')){					
+			registerRole('vhost',$vhost);
+			header("Location: /vhost/");
+			die();
+		}else{
+			print_r($vhost_info);
+			trigger_error('不是你的虚拟主机!或者找不到该虚拟主机');
+		}
 	}
 	public function left()
 	{

@@ -31,5 +31,14 @@ class VhostAPI extends API
 		}	
 		return $ret; 
 	}
+	public function getNode($name)
+	{
+		$node = $_SESSION['node'][$name];
+		if(empty($node)){
+			$node = daocall('vhost','getNode',array($name));
+			$_SESSION['node'][$name] = $node;			
+		}
+		return $node;
+	}
 }
 ?>

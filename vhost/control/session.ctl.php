@@ -12,6 +12,24 @@ class SessionControl extends Control {
 	public function loginForm(){
 		$this->_tpl->display('login.html');
 	}
+	public function sso()
+	{
+		$name = getRole('vhost');
+		//echo "name=".$name;
+		if($name){
+			$sign = md5($name.$_REQUEST['r'].$GLOBALS['skey']);
+			$url = $_REQUEST['url'];
+			if(strchr($url,'?')){
+				$url.='&';
+			}else{
+				$url.='?';
+			}
+			$url.='action=login&name='.$name."&s=".$sign;
+			header("Location: ".$url);
+			die();
+		}
+		die("no login");
+	}
 	public function login()
 	{
 		session_start();

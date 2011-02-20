@@ -10,6 +10,14 @@ class NodesAPI extends API
 	{
 		parent::__destruct();
 	}
+	public function getInfo($node)
+	{
+		$node_cfg = $GLOBALS['node_cfg'][$node];
+		if(!is_array($node_cfg)){
+			return trigger_error('没有节点'.$node.'的配置文件，请更新配置文件');
+		}
+		return $node_cfg;
+	}
 	public function listTemplete($node)
 	{
 		$whm = $this->makeWhm($node);
@@ -76,7 +84,15 @@ class NodesAPI extends API
 		}
 		return $node_cfg['win'] == 1;		
 	}
-	public function init($node)
+	/**
+	 * 
+	 * 初始化一个节点
+	 * @param $node 节点名称
+	 * @param $level 初始化级别
+	 * 0   全部(首次初始化开始)
+	 * 1  除首次初始化全部
+	 */
+	public function init($node,$level=0)
 	{
 		$whm = $this->makeWhm($node);
 		$node_cfg = $GLOBALS['node_cfg'][$node];
@@ -94,7 +110,12 @@ class NodesAPI extends API
 		}else{
 			$driver = "bin/vhs_mysql.so";
 		}
+		$phpmyadmin_password = getRandPasswd(12);
+	
 		$tpl = tpl::singleton();
+		$tpl->assign('phpmyadmin_password',$phpmyadmin_password);
+		$tpl->assign('win',$win);
+		$tpl->assign('skey',$GLOBALS['skey']);
 		$tpl->assign('node',$node);
 		$tpl->assign('driver',$driver);
 		$tpl->assign('col_map',daocall('vhost','getColMap', array($node)));
@@ -105,7 +126,12 @@ class NodesAPI extends API
 		$tpl->assign('col',daocall('vhost','getCols'));
 		
 		global $db_cfg;
-		$db_local = $this->isLocalHost($db_cfg['default']['host']);
+		if($db_cfg['ftp']){
+			$db = $db_cfg['ftp'];
+		}else{
+			$db = $db_cfg['default'];
+		}
+		$db_local = $this->isLocalHost($db['host']);
 		$node_local = $this->isLocalHost($node_cfg['host']);
 		if($db_local && !$node_local){
 			$host = $_SERVER['SERVER_ADDR'];
@@ -117,9 +143,9 @@ class NodesAPI extends API
 				return false;
 			}
 			//如果db host是local,而节点不是local,则要替换db的host为公网IP
-			$db_cfg['default']['host'] = $host;
+			$db['host'] = $host;
 		}
-		$tpl->assign('db',$db_cfg['default']);
+		$tpl->assign('db',$db);	
 		$tpl->assign('dev',$node_cfg['dev']);
 		$whmCall = new WhmCall('core.whm','write_file');
 		$whmCall->addParam('file', 'etc/vh_db.xml');
@@ -149,19 +175,32 @@ class NodesAPI extends API
 		$whmCall->addParam('content',base64_encode($content));
 		$result = $whm->call($whmCall);
 		
+		
+		/*
+		 * 写do_config.php
+		 */
+		$content = $tpl->fetch('config/db_config.conf');
+		$whmCall = new WhmCall('core.whm','write_file');
+		$whmCall->addParam('file', 'etc/db_config.php');
+		$whmCall->addParam('content',base64_encode($content));
+		$result = $whm->call($whmCall);
+		
 		if($result){
-			/*
-			 * 调用init_node，初始化节点，如开启磁盘quota等等操作
-			 */
-			$whmCall = new WhmCall('vhost.whm','init_node');
-			$whmCall->addParam('dev',$node_cfg['dev']);
-			$result = $whm->call($whmCall);
+			if($level == 0){
+				/*
+				 * 调用init_node，初始化节点，如开启磁盘quota等等操作
+				 */
+				$whmCall = new WhmCall('vhost.whm','init_node');
+				$whmCall->addParam('dev',$node_cfg['dev']);
+				$whmCall->addParam('phpmyadmin_password',$phpmyadmin_password);
+				$result = $whm->call($whmCall);
+			}
 			if($result){
 				/*
 				 * 调用重启,使设置生效
 				 */
 				$whmCall = new WhmCall('core.whm','reboot');
-				$result = $whm->call($whmCall);
+				$whm->call($whmCall);
 			}
 		}
 		if(!$result){

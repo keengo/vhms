@@ -64,6 +64,7 @@ class InstallControl extends Control
 		$str.="'user'=>'".$user."',\r\n";
 		$str.="'passwd'=>'".$passwd."',\r\n";
 		$str.="'dbname'=>'".$dbname."');\r\n";
+		$str.='$GLOBALS[\'skey\'] = \''.getRandPasswd(16).'\';\r\n';
 		$str.="?>";
 		$config_file = dirname(dirname(dirname(__FILE__)))."/config.php";
 		$fp = @fopen($config_file,"wt");

@@ -46,11 +46,7 @@ class DomainControl extends Control
 	private function noticeChange()
 	{
 		$vhost = getRole('vhost');
-		$node = $_SESSION[$vhost]['node'];
-		if(empty($node)){
-			$node = daocall('vhost','getNode',array($vhost));
-			$_SESSION[$vhost]['node'] = $node;			
-		}
+		$node = apicall('vhost','getNode',array($vhost));
 		return apicall('vhost','noticeChange',array($node,$vhost));
 	}
 }

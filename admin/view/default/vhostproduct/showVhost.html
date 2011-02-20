@@ -6,7 +6,7 @@
     <input type="submit" name="Submit" value="搜索">
   </form>
 <div id="container">
-
+{{if $msg}}<font color=red>{{$msg}}</font>{{/if}}
   {{if $row}}
    <div id="main" class="wid"> 
   <table width="80%" border="0" align="center" cellpadding="0" cellspacing="1" id="td1">
@@ -18,10 +18,10 @@
 <table width="100%" height="250" border="0" cellpadding="0" cellspacing="1" id="td5">
 		 <tr>
         <td id="td3" colspan="2" align="center">
-		[<a href='?c={{$smarty.request.c}}&a=resync&user={{$row.name}}'>重建空间</a>] 
-        [<a href='?c={{$smarty.request.c}}&a=resync&user={{$row.name}}'>重设密码</a>] 
-        [<a href='?c={{$smarty.request.c}}&a=resync&user={{$row.name}}'>重设数据库密码</a>]
-		</td>
+		[<a href='?c={{$smarty.request.c}}&a=resync&name={{$row.name}}'>重建空间</a>] 
+        [<a href='javascript:if(confirm("真的要重设用户密码吗")){ window.location="?c={{$smarty.request.c}}&a=randPassword&name={{$row.name}}";}'>重设密码</a>] 
+        [<a href='javascript:if(confirm("真的要重设数据库密码吗")){ window.location="?c={{$smarty.request.c}}&a=randDbPassword&name={{$row.name}}";}'>重设数据库密码</a>]
+		[<a href='?c={{$smarty.request.c}}&a=impLogin&name={{$row.name}}'>控制面板</a>]</td>
           </tr>
       <tr>
         <td id="td3" width="189" class="color01 right">用户名</td>
@@ -58,7 +58,7 @@
 			  <tr>
         <td id="td3"  class="color01 right">状态</td>
         <td id="td4">
-        <form action='?c={{$smarty.request.c}}&a=setStatus&user={{$row.name}}' method='post' name='status_form'>
+        <form action='?c={{$smarty.request.c}}&a=setStatus&name={{$row.name}}' method='post' name='status_form'>
         <select name='status' onChange="javascript:status_form.submit()">
         {{for $i=0; $i<10; $i++}}
         <option value='{{$i}}' {{if $i==$row.status}} selected {{/if}}>
