@@ -333,6 +333,19 @@ function getTitle()
 	global $__core_env;
 	return $__core_env['title'];
 }
+function getRandPasswd($len=8)
+{
+        $base_passwd='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-0123456789';
+        srand((double)microtime()*1000000);
+        $base_len=strlen($base_passwd);
+        if($len<8){
+            $len=8;
+        }
+        for($i=0;$i<$len;$i++){
+            $passwd.=$base_passwd[rand()%$base_len];
+        }
+        return $passwd;
+}
 function needRole($role)
 {
 	if(!isRole($role)){

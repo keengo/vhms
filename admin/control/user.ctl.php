@@ -33,15 +33,7 @@ class UserControl extends Control {
 	}
 	public function edit()
 	{
-		$arr = array();
-		$passwd = $_REQUEST["passwd"];
-		if($passwd!=""){
-			$arr['passwd'] = $passwd;
-		}
-		$arr['name'] = $_REQUEST['name'];
-		$arr['id'] = $_REQUEST['id'];
-		$arr['email'] = $_REQUEST['email'];
-		daocall('user','updateUser',array($_REQUEST['username'],$arr));
+		daocall('user','updateUser',array($_REQUEST['username'],$_REQUEST['name'],$_REQUEST['email'],$_REQUEST['id']));
 		return $this->listUser();
 	}
 	public function editMoney()
@@ -85,6 +77,18 @@ class UserControl extends Control {
 			$this->_tpl->assign('row',$ret);
 			$this->_tpl->display('user/userinfo.html');
 		}
+		
+	}
+	public function randPassword()
+	{
+		$passwd = getRandPasswd();
+		if(daocall('user','updatePassword',array($_REQUEST['username'],$passwd))){
+			$msg = "新密码是: ".$passwd;
+		}else{
+			$msg = "随机密码出错";
+		}
+		$this->_tpl->assign('msg',$msg);
+		return $this->listUser();
 		
 	}
 	public function getHomedir($username){
