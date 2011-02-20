@@ -4,23 +4,31 @@
 <div class="topimg">当前位置：绑定域名列表</div>
 <div class="topimg pal1">共计 {{$sum}} 条记录</div>
   <div id="main" class="wid">
-  <table width='436' >
+  <table width='80%' align="center" >
   <tr><td>[<a href='?c=domain&a=addForm'>新增域名绑定</a>]</td></tr>
   </table>
-    <table width="436" cellpadding=0 cellspacing=1 id="table">
-      <tr id="ttitle">
-        <td id="td4" class='color01 right'>域名</td>
-        <td id="td4" class='color01 right'>目录</td>
-		<td id="td4" class='color01 right'>操作</td>
-	  </tr>
+    <table align="center" id="td1" border="0" cellpadding="0" cellspacing="1" width="80%">
+	<tr>
+  <td height="30" id="td2" colspan="2" class="color01 right"><font color="#FFFFFF">绑定域名列表</font></td>
+	</tr>
+  <tr>
+    <td>
+<table width="100%" border="0" cellpadding="0" cellspacing="1" id="td5">
+      <tr>
+        <td width="189" height="25" class="color01 right" id="td4">域名</td>
+        <td id="td4">目录</td>
+        <td id="td4">操作</td>
+      </tr>
 	  {{foreach from=$list item=row}}
       <tr>
-        <td class="right">{{$row.name}}</td>
-        <td class="right">{{$row.value}}</td>
-		<td class="right">[<a href="javascript:if(confirm('确定删除{{$row.name}}?')){location='?c=domain&a=del&domain={{$row.name}}';}" title="删除域名">删除</a>]</td>
-	  </tr>
-	  {{/foreach}}
-    </table>
+        <td height="25" class="color01 right" id="td3">{{$row.name}}</td>
+        <td id="td4">{{$row.value}}</td>
+        <td id="td4">[<a href="javascript:if(confirm('确定删除{{$row.name}}?')){location='?c=domain&a=del&domain={{$row.name}}';}" title="删除域名">删除</a>]</td>
+      </tr>
+	  	  {{/foreach}}
+	    </table></td>
+  </tr>
+</table>
     <div align="left">
 	</div>
   </div>
