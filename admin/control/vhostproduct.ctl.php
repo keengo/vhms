@@ -32,6 +32,36 @@ class VhostproductControl extends Control {
 		$str.="</result>";
 		return $str;		
 	}
+	public function ajaxChangeNode()
+	{
+		header("Content-Type: text/xml; charset=utf-8");
+		$str = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+		$id = $_REQUEST['id'];
+		$node = $_REQUEST['node'];
+		$templete = $_REQUEST['templete'];
+		$templetes = apicall('nodes','listTemplete',array($node));
+		$finded = false;
+		for($i=0;$i<count($templetes);$i++){
+			if($templetes[$i] == $templete){
+				$finded = true;
+				break;
+			}	
+		}
+		if(!$finded){
+			$str .="<result code='2'/>";
+			return $str;
+		}
+		$result = daocall('vhostproduct','updateNode',array($id,$node));
+		if($result){
+			$str.="<result code='1'/>";
+			apicall('product','flushVhostProduct');
+		}else{
+			$str.="<result code='0'/>";
+		}
+		return $str;
+		
+		
+	}
 	public function showTemplete()
 	{
 		$list = daocall('vhosttemplete','getData',array());
@@ -46,6 +76,8 @@ class VhostproductControl extends Control {
 		$this->_tpl->assign('sum',count($list));
 		$this->_tpl->assign('list',$list);
 		$this->_tpl->assign('product_flag',$product_flag);
+		load_conf('pub:node');
+		$this->_tpl->assign('nodes',array_keys($GLOBALS['node_cfg']));
 		$this->_tpl->display('vhostproduct/showProduct.html');
 	}
 
@@ -84,16 +116,19 @@ class VhostproductControl extends Control {
 	public function addProduct()
 	{
 		daocall('vhostproduct', 'insertData', array($_REQUEST));
+		apicall('product','flushVhostProduct');
 		$this->showProduct();
 	}
 	public function editProduct()
 	{
-		daocall('vhostproduct', 'update', array($_REQUEST));
+		daocall('vhostproduct', 'updateProduct', array($_REQUEST));
+		apicall('product','flushVhostProduct');
 		$this->showProduct();
 	}
 	public function del()
 	{
 		daocall('vhostproduct','delProduct',$_REQUEST["id"]);
+		apicall('product','flushVhostProduct');
 		$this->showProduct();
 	}
 

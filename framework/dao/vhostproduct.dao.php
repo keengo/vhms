@@ -36,7 +36,11 @@ class VhostproductDAO extends DAO {
 		$where = $this->getFieldValue2('id',$id);
 		return $this->getData2($fields,$where,'row');
 	}
-	public function update($arr)
+	public function updateNode($id,$node)
+	{
+		return $this->update(array('node'=>$node),$this->getFieldValue2('id', $id));
+	}
+	public function updateProduct($arr)
 	{
 		$fields = $this->getFields(array('name','web_quota','db_quota','templete','price','pause_flag','node'), $arr);
 		$sql = "UPDATE ".$this->_TABLE." SET ".$fields." WHERE ".$this->getFieldValue2('id',$arr['id']);

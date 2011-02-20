@@ -14,7 +14,15 @@ class VhostproductControl extends Control {
 	{
 		$list = daocall('vhost','listMyVhost',array(getRole('user')));
 		$this->_tpl->assign('sum',count($list));
+	
+		load_conf('pub:vhostproduct');
+		//print_r($list);
+		for($i=0;$i<count($list);$i++){
+			$list[$i]['product_name'] = $GLOBALS['vhostproduct_cfg'][$list[$i]['product_id']]['name'];
+		}
+		//print_r($list);
 		$this->_tpl->assign('list',$list);
+		//$this->_tpl->assign('product',$GLOBALS['vhostproduct_cfg']);
 		return $this->_tpl->fetch('vhostproduct/showVhostProduct.html');
 	}
 	public function impLogin()

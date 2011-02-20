@@ -30,13 +30,9 @@ class NodesControl extends Control {
 		$result = apicall('nodes','checkNode',array($_REQUEST['node']));
 		header("Content-Type: text/xml; charset=utf-8");
 		$str = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
-		$str .="<result node='".$_REQUEST['node']."' status='";
-		if($result){
-			$str.="1";
-		}else{
-			$str.="0";
-		}
-		$str.="'/>";
+		$str .="<result node='".$_REQUEST['node']."' whm='";
+		$str.=$result['whm'];	
+		$str.="' db='".$result['db']."'/>";
 		return $str;
 	}
 	public function checkNodes()
@@ -82,6 +78,7 @@ class NodesControl extends Control {
 			'port'=>intval($_REQUEST['port']),
 			'user'=>$_REQUEST['user'],
 			'passwd'=>$_REQUEST['passwd'],
+			'db_type'=>'mysql',
 			'db_user'=>$_REQUEST['db_user'],
 			'db_passwd'=>$_REQUEST['db_passwd'],
 			'win'=>(strcasecmp($os, 'windows')==0?1:0),

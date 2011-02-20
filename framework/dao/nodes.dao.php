@@ -55,14 +55,7 @@ class NodesDAO extends DAO {
 	 */
 	public function insertNode($arr)
 	{
-		$tbl = $this->_TABLE;
-		if(!$tbl) {
-			return false;
-		}
-		$sql = $this->insertSql($tbl,$arr,$this->MAP_ARR);
-		$ret = $this->execute($host, $dbname, $sql);
-		
-		return $ret;
+		return $this->insertData($arr);		
 	}
 
 	public function updateNode($name, $arr)

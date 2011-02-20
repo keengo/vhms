@@ -17,7 +17,7 @@ class IndexControl extends Control
 	public function top()
 	{
 		$vhost = getRole('vhost');
-		$node = apicall('vhost','getNode',array($vhost));
+		$node = $_SESSION['user'][$vhost]['node'];
 		if($node){
 			$node_info = apicall('nodes','getInfo',array($node));
 			$url = "http://".$_SERVER[HTTP_HOST].$_SERVER[PHP_SELF]."?c=session&a=sso";
@@ -52,10 +52,13 @@ class IndexControl extends Control
 		$vhost = getRole('vhost');
 		$user = daocall('vhost','getVhost',array($vhost));
 		if($user){
+			$_SESSION['user'][$vhost] = $user;
 			$node_info = apicall('nodes','getInfo',array($user['node']));
 			if($node_info){
 				$this->_tpl->assign('node_host',$node_info['host']);
 			}
+			$product_info = apicall('product','getVhostProduct',array($user['product_id']));
+			$user['product_name'] = $product_info['name'];
 			$quota = apicall('vhost','getQuota',array(getRole('vhost'),$user['uid'],$user['node'],$user['product_id']));
 			if($quota){
 				$_SESSION['quota'][$vhost] = $quota;

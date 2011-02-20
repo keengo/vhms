@@ -21,6 +21,20 @@ class ProductAPI extends API
 			$products[] = array('name'=>$data[$i]['name'],'type'=>'vhost','id'=>$data[$i]['id']);
 		}		
 	}
+	public function getVhostProduct($id)
+	{
+		load_conf('pub:vhostproduct');
+		$vproducts = $GLOBALS['vhostproduct_cfg'][$id];
+		if(is_array($vproducts)){
+			return $vproducts;
+		}
+		return false;
+	}
+	public function flushVhostProduct()
+	{
+		$products = daocall('vhostproduct','getProducts',array(0));
+		return apicall('utils','writeConfig',array($products,'id','vhostproduct'));
+	}
 	public function getProducts()
 	{
 			$products = array();

@@ -25,7 +25,7 @@ class NodesAPI extends API
 			return false;
 		}
 		$call = new WhmCall('core.whm',"list_gtvh");
-		$result = $whm->call($call);
+		$result = $whm->call($call,5);
 		if(!$result){
 			return false;
 		}
@@ -64,7 +64,8 @@ class NodesAPI extends API
 		$className[0] = strtoupper($className[0]);
 		$db = new $className;
 		if(!$db->connect($node_cfg)){
-			return trigger_error('不能连接节点数据库');
+			//return trigger_error('不能连接节点数据库');
+			return false;
 		}
 		return $db;
 	}
@@ -215,38 +216,10 @@ class NodesAPI extends API
 	 */
 	public function flush()
 	{
-		$file = dirname(dirname(__FILE__))."/configs/node.cfg.php";
-		$fp = fopen($file,"wt");
-		if(!$fp){
-			return trigger_error("cann't open ".$file." to write!Please check right");
-		}
-		fwrite($fp,"<?php\r\n");
 		$nodes = daocall('nodes','listNodes');
-		for($i=0;$i<count($nodes);$i++){
-			$this->write_node_config($fp,$nodes[$i]);
-		}
-		fwrite($fp,"?>");
-		fclose($fp);
-		return true;
+		return apicall('utils','writeConfig',array($nodes,'name','node'));
 	}
-	private function write_node_config($fp,$node)
-	{
-		$str = "\$GLOBALS['node_cfg']['".$node['name']."']=array(";
-		$item = "";
-		$keys = array_keys($node);
-		for($i=0;$i<count($keys);$i++){
-			$key = $keys[$i];
-			$value = $node[$key];
-			if($item!=""){
-				$item.=",";
-			}
-			if($key!='name'){
-				$item.="'".$key."'=>'".$value."'";
-			}
-		}
-		$str.=$item.");\r\n";
-		fwrite($fp,$str);
-	}
+
 	public function isLocalHost($host)
 	{
 		if(strcasecmp($host,'localhost')==0){
@@ -263,15 +236,27 @@ class NodesAPI extends API
 	public function checkNode($node)
 	{
 		$whm = $this->makeWhm($node);
-		if(!$whm){
-			return false;
+		$ret = array();
+		$ret['whm'] = 0;
+		if($whm){		
+			$whmCall = new WhmCall('core.whm','check_vh_db');
+			$result = $whm->call($whmCall,5);
+			if($result && intval($result->get('status'))==1){
+				$ret['whm'] = 1;
+			}
 		}
-		$whmCall = new WhmCall('core.whm','check_vh_db');
-		$result = $whm->call($whmCall,5);
-		if($result && intval($result->get('status'))==1){
-			return true;
+		$node_cfg = $GLOBALS['node_cfg'][$node];
+		if($node_cfg['db_type'] != "" && $node_cfg['db_user']!=""){
+			$db = $this->makeDbProduct($node);
+			if($db){
+				$ret['db'] = 1;
+			}else{
+				$ret['db'] = 0;
+			}
+		}else{
+			$ret['db'] = 2;
 		}
-		return false;
+		return $ret;
 	}
 	public function checkNodes()
 	{

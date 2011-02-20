@@ -49,18 +49,33 @@ class SessionControl extends Control {
 	public function changePasswordForm()
 	{
 		needRole('vhost');
+		$vhost = getRole('vhost');
+		$this->_tpl->assign('db_limit',$_SESSION['quota'][$vhost]['db_limit']);
 		return $this->_tpl->fetch('changePassword.html');
 	}
 	public function changePassword()
 	{
-		needRole('vhost');
-		if(!$this->checkPassword(getRole('vhost'), $_REQUEST['oldpasswd'])){
-			$this->_tpl->assign('msg','旧密码不对!');
+		needRole('vhost');	
+		daocall('vhost', 'updatePassword', array(getRole('vhost'),$_REQUEST['passwd']));
+		$this->_tpl->assign('msg','修改密码成功');		
+		return $this->_tpl->fetch('msg.html');				
+	} 
+	public function changeDbPassword()
+	{
+		needRole('vhost');	
+		$vhost = getRole('vhost');
+		$user = $_SESSION['user'][$vhost];
+		if($_SESSION['quota'][$vhost]==0){
+			$this->_tpl->assign('msg','该产品没有数据库');
 		}else{
-			daocall('vhost', 'updatePassword', array(getRole('vhost'),$_REQUEST['passwd']));
-			$this->_tpl->assign('msg','修改密码成功');
-		}
-		return $this->_tpl->display('msg.html');		
+			$db = apicall('nodes','makeDbProduct',array($user['node']));
+			if($db && $db->password($user['uid'],$_REQUEST['passwd'])){
+				$this->_tpl->assign('msg','修改数据库密码成功!');				
+			}else{
+				$this->_tpl->assign('msg','修改数据库密码失败');
+			}
+		}			
+		return $this->_tpl->fetch('msg.html');		
 	} 
 	private function checkPassword($username,$passwd)
 	{

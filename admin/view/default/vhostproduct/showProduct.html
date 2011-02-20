@@ -1,5 +1,45 @@
 ﻿{{include file='common/head.html'}}
 <body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
+<script language='javascript' src='{{$PSTATIC}}/style/common.js'></script>
+<script language='javascript'>
+var xmlhttp2=new Array();
+function changeNodeResult(id) { 
+	var recv_msg=false;
+	try{
+	 if (xmlhttp2[id].readyState==4) {
+		if(xmlhttp2[id].status==200){	
+			//alert(xmlhttp2[id].responseText);	
+			xxkf_obj('busy'+id).innerHTML = "";
+		 	var dataArray = xmlhttp2[id].responseXML.getElementsByTagName('result');
+		 	var code = dataArray[0].getAttribute('code');
+		 	if(code==2){
+			 	alert('更新主机失败，该主机上没有相应模板');
+		 	}else if(code==0){
+			 	alert('更新主机失败');
+		 	}		 		
+		}
+	  }
+	}catch(e){
+		alert(e);
+	}
+}
+function changeNode(id,templete)
+{
+	//alert('id='+id);
+	//alert(xxkf_obj('node'+id).selectedIndex);
+	var node = xxkf_obj('node'+id).value;
+	//alert(node_value);
+	var url='?c={{$smarty.request.c}}&a=ajaxChangeNode&id='+id + '&node=' + node + '&templete=' + templete;
+	xxkf_obj('busy'+id).innerHTML="<img src='{{$PSTATIC}}/style/busy.gif'/>";
+	xmlhttp2[id] = create_xmlhttp();	
+	xmlhttp2[id].open("GET",url,true);
+	xmlhttp2[id].onreadystatechange=function (){
+		changeNodeResult(id);
+	};
+	xmlhttp2[id].send(null);
+}
+
+</script>
 <div id="container">
 <div class="topimg pal1">共计 {{$sum}} 条记录</div>
   <div id="main" class="wid">
@@ -36,7 +76,16 @@
 		<td class="right">{{$row.db_quota}}</td>
 		<td class="right">{{$row.price}}</td>
 		<td class="right">{{$row.templete}}</td>
-		<td class="right">{{$row.node}}</td>
+		<td class="right">
+			<select id='node{{$row.id}}' name='node' onChange="changeNode('{{$row.id}}','{{$row.templete}}')"">
+		{{foreach from=$nodes item=node}}
+		<option value='{{$node}}' {{if $row.node==$node}}selected{{/if}}>
+		{{$node}}
+		</option>
+		{{/foreach}}
+		</select>
+		<div id='busy{{$row.id}}'></div>
+		</td>
 		<td class="right">{{if $row.pause_flag!=0}}暂停销售{{/if}}</td>
         </td>
       </tr>

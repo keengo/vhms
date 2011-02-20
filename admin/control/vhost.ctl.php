@@ -24,8 +24,11 @@ class VhostControl extends Control {
 				$call = 'listVhostByName';
 			}
 			$list = daocall('vhost',$call,array($user,'row'));
-			$this->_tpl->assign('row',$list);
+			
 			if($list){
+				$product_info = apicall('product','getVhostProduct',array($list['product_id']));
+				$list['product_name'] = $product_info['name'];
+				$this->_tpl->assign('row',$list);
 				$list = daocall('vhostinfo','getDomain',array($list['name']));
 				$this->_tpl->assign('sum',count($list));
 				$this->_tpl->assign('list',$list);

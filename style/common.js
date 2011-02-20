@@ -7,6 +7,10 @@ function xxkf_obj(id)
 			return document.all(id);
 		return document.layers[id];
 }
+function $(id)
+{
+	return xxkf_obj(id);
+}
 function create_xmlhttp(){
 	var obj=false;
 	/*@cc_on @*/
