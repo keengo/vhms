@@ -1,5 +1,6 @@
 <!--#start 60 -->
 <!--#include etc/vh_db.xml  -->
+<!--#include etc/dbadmin.xml  -->
 <config>
 <vhs>
 <env dev='{{$dev}}'/>

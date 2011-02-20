@@ -124,7 +124,6 @@ class NodesAPI extends API
 		$tpl->assign('load_info_sql',daocall('vhostinfo','getLoadInfoSql', array(null)));
 		$tpl->assign('table',daocall('vhost','getTable'));
 		$tpl->assign('col',daocall('vhost','getCols'));
-		
 		global $db_cfg;
 		if($db_cfg['ftp']){
 			$db = $db_cfg['ftp'];
@@ -192,6 +191,7 @@ class NodesAPI extends API
 				 */
 				$whmCall = new WhmCall('vhost.whm','init_node');
 				$whmCall->addParam('dev',$node_cfg['dev']);
+				$whmCall->addParam('prefix',apicall('vhost','getPrefix'));
 				$whmCall->addParam('phpmyadmin_password',$phpmyadmin_password);
 				$result = $whm->call($whmCall);
 			}
