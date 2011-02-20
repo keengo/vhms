@@ -11,7 +11,7 @@
   {{if $msg}}<font color='red'>{{$msg}}</font>{{/if}}
   {{if $sum>0}}
   <div id="main" class="wid"> 
-    <table align="center" id="td1" border="0" cellpadding="0" cellspacing="1" width="70%">
+    <table align="center" id="td1" border="0" cellpadding="0" cellspacing="1" width="80%">
   {{foreach from=$list item=row}}
 	<tr>
   <td height="30" id="td2" colspan="2"><font color="#FFFFFF">　用户查询</font></td>
@@ -20,15 +20,14 @@
     <td>
 <table width="100%" height="210" border="0" cellpadding="0" cellspacing="1" id="td5">
       <tr>
-        <td id="td3" width="189" class="color01 right">操作：</td>
-        <td width="423" id="td4">
+        <td id="td4" colspan="2" align="center">
         [<a href="?c=user&a=editForm&username={{$row.username}}" title="更改信息">更改</a>]
         [<a href='javascript:if(confirm("真的要重设用户密码吗")){ window.location="?c=user&a=randPassword&username={{$row.username}}";}'>重设密码</a>]
         [<a href="?c=user&a=impLogin&username={{$row.username}}" target="_blank">模拟登录</a>]
         </td>
         </tr>
       <tr>
-        <td id="td3" class="color01 right">用户名：</td>
+        <td width="189" class="color01 right" id="td3">用户名：</td>
         <td id="td4"><a href="?c=user&a=editForm&username={{$row.username}}">{{$row.username}}</a></td>
         </tr>
       <tr>

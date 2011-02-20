@@ -72,14 +72,27 @@
 </table></td>
   </tr>
 </table>
+<div><br></div>
     {{if $list}}
-  <table >
-  <tr id="ttitle"><td class='color01 right' bgcolor='#efefef'>域名</td><td class='color01 right' bgcolor='#efefef'>目录</td></tr>
-  {{foreach from=$list item=row}}
-  <tr><td>{{$row.domain}}</td><td>{{$row.dir}}</td></tr>
-  {{/foreach}}
-  {{/if}}
-  </table>
+  <table align="center" id="td1" border="0" cellpadding="0" cellspacing="1" width="80%">
+	<tr>
+  <td height="25" colspan="2" class="color01 right" id="td2"><font color="#FFFFFF">域名绑定目录</font></td>
+	</tr>
+  <tr>
+    <td>
+<table width="100%" border="0" cellpadding="0" cellspacing="1" id="td5">
+      <tr>
+        <td width="189" height="25" class="color01 right" id="td3">域名</td>
+        <td width="423" id="td4">目录</td></tr>
+		 {{foreach from=$list item=row}}
+      <tr>
+        <td class="color01 right" id="td3">{{$row.domain}}</td>
+        <td id="td4">{{$row.dir}}</td></tr>
+		  {{/foreach}}
+          {{/if}}
+     </table></td>
+  </tr>
+</table>
    {{/if}}
 </div>
 </body>
