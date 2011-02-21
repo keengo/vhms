@@ -27,13 +27,13 @@ class VhostProduct extends Product
 	 * @param  $params
 	 * @param  $product_info
 	 */
-	protected function give($user="",&$params=array(),$product_info=array())
+	protected function create($susername,&$params=array(),$product_info=array())
 	{
 		$uid = daocall('vhost', 'insertVhost', 
-		array($user,
+		array($susername,
 			$params['name'],
 			$params['passwd'],
-			$this->getDocRoot($param),
+			$this->getDocRoot($params['name']),
 			$this->getNodeGroup($product_info['node']),
 			$product_info['templete'],
 			0,
@@ -89,20 +89,20 @@ class VhostProduct extends Product
 	private function getNodeGroup($node)
 	{
 		if(apicall('nodes', 'isWindows',array($node))){
-			return parent::getRandPasswd(8);
+			return getRandPasswd(12);
 		}
 		return "1100";
 	}
-	public function addMonth($susername, $month)
+	protected function addMonth($susername, $month)
 	{
 		//echo $susername." 续费: ".$month;
 		return daocall('vhost','addMonth',array($susername,$month));
 	}
-	public function changeProduct($susername, $product_id)
+	protected function changeProduct($susername, $product_id)
 	{
 		return daocall('vhost','changeProduct',array($susername,$product_id));
 	}
-	public function resync($username,$suser,$oproduct,$nproduct=null)
+	protected function resync($username,$suser,$oproduct,$nproduct=null)
 	{
 		if($nproduct==null){
 			//续费

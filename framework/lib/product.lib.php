@@ -140,7 +140,7 @@ abstract class Product
 			trigger_error('余额不足,所需金额:'.($price/100));
 			return false;
 		}
-		if(!$this->give($username,$suser,$info)){
+		if(!$this->create($username,$suser,$info)){
 			$default_db->rollBack();
 			trigger_error('开通产品出错');
 			return false;
@@ -151,20 +151,6 @@ abstract class Product
 		}
 		return false;
 	}
-	static protected function getRandPasswd($len=8)
-	{
-        $base_passwd='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-0123456789';
-        srand((double)microtime()*1000000);
-        $base_len=strlen($base_passwd);
-        if($len<8){
-            $len=8;
-        }
-        for($i=0;$i<$len;$i++){
-            $passwd.=$base_passwd[rand()%$base_len];
-        }
-        return $passwd;
-	}
-	
 	/**
 	 * 得到产品信息
 	 * @param $product_id 产品ID
@@ -178,7 +164,7 @@ abstract class Product
 	 * @param  $param
 	 * @param  $params
 	 */
-	abstract protected function give($username="",&$suser=array(),$product_info=array());
+	abstract protected function create($username,&$suser=array(),$product_info=array());
 	/**
 	 * 
 	 * 更新用户数据
@@ -186,8 +172,8 @@ abstract class Product
 	 * @param $month      月份
 	 * @param $product_id 新产品ID,如果是0，则不更新
 	 */
-	abstract public function addMonth($susername,$month);
-	abstract public function changeProduct($susername,$product_id);
+	abstract protected function addMonth($susername,$month);
+	abstract protected function changeProduct($susername,$product_id);
 	/**
 	 * 同步产品到磁盘或者远程
 	 * @param  $user
