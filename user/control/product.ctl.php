@@ -80,6 +80,21 @@ class ProductControl extends Control {
 		}
 		return "购买成功";
 	}
+	public function renew()
+	{
+		$user = getRole('user');
+		$product = apicall('product', 'newProduct',array($_REQUEST['product_type']));
+		if(!is_object($product)){
+			trigger_error('没有该产品类型:'.$_REQUEST['product_type']);
+			return false;
+		}
+		$param = $_REQUEST["param"];
+		if($param==""){
+			trigger_error('参数错误');
+			return false;
+		}
+		return $product->renew($user,$param,intval($_REQUEST['month']));
+	}
 	public function left()
 	{
 
