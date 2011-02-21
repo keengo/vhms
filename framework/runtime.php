@@ -4,7 +4,7 @@
  * 
  * @package core
  */
-
+@include_once("../config.php");
 //ob_start();
 
 if(!defined('VHOST_ROOT'))

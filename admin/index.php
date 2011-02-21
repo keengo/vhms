@@ -9,7 +9,6 @@ define('SYS_ROOT', dirname(dirname(__FILE__)).'/framework');
 define('DEFAULT_CONTROL', 'index');
 //die(print_r($_REQUEST));
 include(SYS_ROOT . '/runtime.php');
-@include("../config.php");
 //@load_conf('pub:test');
 startFramework();
 ?>

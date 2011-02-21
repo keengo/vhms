@@ -219,5 +219,10 @@ class VhostDAO extends DAO{
 		}
 		return "group";
 	}
+	public function expireUser()
+	{
+		$sql = "UPDATE ".$this->_TABLE." SET ".$this->getFieldValue2('status', 9)." WHERE ".$this->MAP_ARR['expire_time']."<NOW()";
+		return $this->executex($sql,'result');
+	}
 }
 ?>

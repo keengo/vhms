@@ -32,6 +32,13 @@ abstract class Product
 	{
 		return $month/12*12==$month;
 	}
+	/**
+	 * 
+	 * 续费操作
+	 * @param $username
+	 * @param $susername
+	 * @param $month
+	 */
 	public function renew($username,$susername,$month)
 	{
 		global $default_db;
@@ -168,11 +175,17 @@ abstract class Product
 	/**
 	 * 
 	 * 更新用户数据
-	 * @param $username   用户名
+	 * @param $susername  用户名
 	 * @param $month      月份
 	 * @param $product_id 新产品ID,如果是0，则不更新
 	 */
 	abstract protected function addMonth($susername,$month);
+	/**
+	 * 
+	 * 更改产品类型
+	 * @param $susername
+	 * @param $product_id
+	 */
 	abstract protected function changeProduct($susername,$product_id);
 	/**
 	 * 同步产品到磁盘或者远程
