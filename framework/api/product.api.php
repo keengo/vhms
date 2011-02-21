@@ -21,6 +21,11 @@ class ProductAPI extends API
 			$products[] = array('name'=>$data[$i]['name'],'type'=>'vhost','id'=>$data[$i]['id']);
 		}		
 	}
+	/**
+	 * @deprecated 请使用product.lib.php接口
+	 * Enter description here ...
+	 * @param unknown_type $id
+	 */
 	public function getVhostProduct($id)
 	{
 		load_conf('pub:vhostproduct');
@@ -30,6 +35,10 @@ class ProductAPI extends API
 		}
 		return false;
 	}
+	/**
+	 * @deprecated 请使用product.lib.php接口
+	 * Enter description here ...
+	 */
 	public function flushVhostProduct()
 	{
 		$products = daocall('vhostproduct','getProducts',array(0));

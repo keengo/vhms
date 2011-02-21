@@ -42,5 +42,6 @@ class UserControl extends Control {
 		$this->_tpl->assign('user',$user);
 		return $this->_tpl->fetch('user/changeForm.html');
 	}
+
 }
 ?>

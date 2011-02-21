@@ -26,7 +26,8 @@ class IndexControl extends Control
 			$quota = $_SESSION['quota'][$vhost];
 			//print_r($quota);
 			if($quota['db_limit']>0){
-				$dbadmin_url = "http://".$node_info['host'].":3313/".$node_info['db_type']."/";
+				$dbadmin_url = "http://".$node_info['host'].":3313/".$node_info['db_type']."/?uid=".$_SESSION['user'][$vhost]['uid'];
+				
 				$this->_tpl->assign('dbadmin_url',$dbadmin_url);
 			}		
 		}else{

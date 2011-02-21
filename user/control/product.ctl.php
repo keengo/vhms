@@ -33,13 +33,12 @@ class ProductControl extends Control {
 					return trigger_error('虚拟主机产品ID错误');
 				}
 				$this->_tpl->assign('product',$product_info);
-				return $this->_tpl->fetch('vhostproduct/sell_vproduct.html');
+				return $this->_tpl->fetch('vhostproduct/sell.html');
 				break;
 			default:
 				return trigger_error('产品类型错误');
 		}
-
-	}
+	}	
 	public function check()
 	{
 		$product_type = $_REQUEST['product_type'];
@@ -85,5 +84,6 @@ class ProductControl extends Control {
 	{
 
 	}
+	
 }
 ?>

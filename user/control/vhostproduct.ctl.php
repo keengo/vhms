@@ -34,13 +34,29 @@ class VhostproductControl extends Control {
 			header("Location: /vhost/");
 			die();
 		}else{
-			print_r($vhost_info);
+			//print_r($vhost_info);
 			trigger_error('不是你的虚拟主机!或者找不到该虚拟主机');
 		}
 	}
 	public function left()
 	{
 		return dispatch('user','left');
+	}
+	public function renewForm()
+	{
+		$vhost = $_REQUEST['name'];
+		$vhost_info = daocall('vhost','getVhost',array($vhost,array('username','product_id')));
+		if(!$vhost_info || $vhost_info['username'] != getRole('user')){
+			trigger_error('没有找到该虚拟主机');
+			return false;
+		}
+		//$id = $_REQUEST['id'];
+		$product = apicall('product','newProduct',array('vhost'));
+		$product_info = $product->getInfo($vhost_info['product_info']);
+		if($product_info){
+			$this->_tpl->assign("product",$product_info);
+		}
+		return $this->_tpl->fetch('vhostproduct/renew.html');
 	}
 }
 ?>

@@ -38,7 +38,7 @@ class UserControl extends Control {
 	}
 	public function editMoney()
 	{
-		$money = intval($_REQUEST['money']);
+		$money = 100*intval($_REQUEST['money']);
 		if($money>0){
 			daocall('user','addMoney', array($_REQUEST['username'],abs($money)));
 		}else{
@@ -90,10 +90,6 @@ class UserControl extends Control {
 		$this->_tpl->assign('msg',$msg);
 		return $this->listUser();
 		
-	}
-	public function getHomedir($username){
-		$homedir = "/home/ftp/".$username[0]."/".$username[1]."/".$username[2]."/".$username;
-		return $homedir;
 	}
 	public function listUser(){
 		$username = $_REQUEST['username'];

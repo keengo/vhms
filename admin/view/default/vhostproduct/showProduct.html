@@ -57,7 +57,7 @@ function changeNode(id,templete)
         <td class='color01 right' bgcolor='#efefef'>产品名称</td>
 		<td class='color01 right' bgcolor='#efefef'>空间配额(M)</td>
 		<td class='color01 right' bgcolor='#efefef'>数据库配额(M)</td>
-		<td class='color01 right' bgcolor='#efefef'>价格(分/年)</td>
+		<td class='color01 right' bgcolor='#efefef'>价格(元/年)</td>
 		
 		<td class='color01 right' bgcolor='#efefef'>模板</td>
 		<td class='color01 right' bgcolor='#efefef'>主机</td>
@@ -74,7 +74,7 @@ function changeNode(id,templete)
 		<td class="right">{{$row.name}}</td>
 		<td class="right">{{$row.web_quota}}</td>
 		<td class="right">{{$row.db_quota}}</td>
-		<td class="right">{{$row.price}}</td>
+		<td class="right">{{$row.price/100}}</td>
 		<td class="right">{{$row.templete}}</td>
 		<td class="right">
 			<select id='node{{$row.id}}' name='node' onChange="changeNode('{{$row.id}}','{{$row.templete}}')"">

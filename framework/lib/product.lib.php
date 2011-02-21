@@ -25,6 +25,14 @@ abstract class Product
 	{
 		return $month/12*12==$month;
 	}
+	public function renew($user="",$product_id,$month=12)
+	{
+		
+	}
+	public function upgrade($user="",$old_product_id,$new_product_id)
+	{
+		
+	}
 	/**
 	 * 购买产品
 	 * @param $user 用户名	 
@@ -96,6 +104,7 @@ abstract class Product
         }
         return $passwd;
 	}
+	
 	/**
 	 * 得到产品信息
 	 * @param $product_id 产品ID
@@ -116,6 +125,6 @@ abstract class Product
 	 * @param  $param
 	 */
 	abstract protected function sync($user,$param,&$params,$product_info);
-	abstract public function checkParam($params=array());
+	abstract public function checkParam($params=array());	
 }
 ?>
