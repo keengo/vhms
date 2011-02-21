@@ -15,7 +15,7 @@ class VhostProduct extends Product
 	 * @param $product_id 产品ID
 	 * @return array(产品价格,是否支持月付<true|false>,是否支持试用<true|false>)
 	 */
-	public function getInfo($product_id)
+	public function getInfo($product_id,$susername=null)
 	{
 		return daocall('vhostproduct', 'getProduct', array($product_id));
 	}
@@ -27,19 +27,19 @@ class VhostProduct extends Product
 	 * @param  $params
 	 * @param  $product_info
 	 */
-	protected function give($user="",$month=12,$param="",&$params=array(),$product_info=array())
+	protected function create($susername,&$params=array(),$product_info=array())
 	{
 		$uid = daocall('vhost', 'insertVhost', 
-		array($user,
-			$param,
+		array($susername,
+			$params['name'],
 			$params['passwd'],
-			$this->getDocRoot($param),
+			$this->getDocRoot($params['name']),
 			$this->getNodeGroup($product_info['node']),
 			$product_info['templete'],
 			0,
 			$product_info['node'],
 			$product_info['id'],
-			$month
+			$params['month']
 			)
 		);
 		if($uid && $uid<1000){
@@ -57,11 +57,12 @@ class VhostProduct extends Product
 	 * @param  $user
 	 * @param  $param
 	 */
-	protected function sync($user,$param,&$params,$product_info)
+	protected function sync($user,$params,$product_info)
 	{
 		//print_r($product_info);
 		//die();
 		//echo "uid in sync=".$uid;
+		$param = $params['name'];
 		if($product_info['db_quota']>0){
 			$db = apicall('nodes','makeDbProduct',array($product_info['node']));
 			if(is_object($db)){
@@ -88,9 +89,32 @@ class VhostProduct extends Product
 	private function getNodeGroup($node)
 	{
 		if(apicall('nodes', 'isWindows',array($node))){
-			return parent::getRandPasswd(8);
+			return getRandPasswd(12);
 		}
 		return "1100";
+	}
+	protected function addMonth($susername, $month)
+	{
+		//echo $susername." 续费: ".$month;
+		return daocall('vhost','addMonth',array($susername,$month));
+	}
+	protected function changeProduct($susername, $product_id)
+	{
+		return daocall('vhost','changeProduct',array($susername,$product_id));
+	}
+	protected function resync($username,$suser,$oproduct,$nproduct=null)
+	{
+		if($nproduct==null){
+			//续费
+			return true;
+		}
+		//TODO:重新设置quota操作
+		return false;
+		//$whm = apicall('nodes','')
+	}
+	public function getSuser($susername)
+	{
+		return daocall('vhost','getVhost',array($susername));
 	}
 }
 ?>

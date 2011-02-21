@@ -37,6 +37,16 @@ class VhostDAO extends DAO{
 		$sql = "SELECT 1 FROM ".$this->_TABLE." WHERE ".$this->getFieldValue2('name', $user);
 		return $this->executex($sql,'row');
 	}
+	public function addMonth($name,$month)
+	{
+		$arr = array('expire_time' => 'ADDDATE('.$this->MAP_ARR['expire_time'].',INTERVAL '.$month.' MONTH)');
+		return $this->update($arr, $this->getFieldValue2('name', $name));
+	}
+	public function changeProduct($name,$product_id)
+	{
+		$arr = array('product_id'=>$product_id);
+		return $this->update($arr,$this->getFieldValue2('name', $name));
+	}
 	/**
 	 * 插入用户信息信息
 	 */
