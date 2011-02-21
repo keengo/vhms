@@ -42,12 +42,12 @@ class ProductControl extends Control {
 	public function check()
 	{
 		$product_type = $_REQUEST['product_type'];
-		$param = $_REQUEST['param'];
+		$name = $_REQUEST['name'];
 		$this->_tpl->assign('product_type',$product_type);
-		$this->_tpl->assign('param',$param);
+		$this->_tpl->assign('param',$name);
 		switch($product_type){
 			case 'vhost':
-				$result = daocall('vhost', 'check',array($param));
+				$result = daocall('vhost', 'check',array($name));
 		}
 		if($result){
 			$this->_tpl->assign('result',1);
@@ -70,12 +70,7 @@ class ProductControl extends Control {
 			return false;
 		}
 		$user = getRole('user');
-		$param = $_REQUEST["param"];
-		if($param==""){
-			trigger_error('参数错误');
-			return false;
-		}
-		if(!$product->sell($user,intval($_REQUEST['product_id']),intval($_REQUEST['month']),$param,$_REQUEST)){
+		if(!$product->sell($user,intval($_REQUEST['product_id']),$_REQUEST)){
 			return false;
 		}
 		return "购买成功";
@@ -88,12 +83,10 @@ class ProductControl extends Control {
 			trigger_error('没有该产品类型:'.$_REQUEST['product_type']);
 			return false;
 		}
-		$param = $_REQUEST["param"];
-		if($param==""){
-			trigger_error('参数错误');
-			return false;
+		if($product->renew($user,$_REQUEST['name'],intval($_REQUEST['month']))){
+			return "续费成功";
 		}
-		return $product->renew($user,$param,intval($_REQUEST['month']));
+		return "续费失败";
 	}
 	public function left()
 	{

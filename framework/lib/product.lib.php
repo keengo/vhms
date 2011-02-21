@@ -1,4 +1,11 @@
 <?php 
+/**
+ * 
+ * 产品抽象类
+ * 一种产品类型
+ * @author Administrator
+ *
+ */
 abstract class Product
 {
 	/**
@@ -25,13 +32,15 @@ abstract class Product
 	{
 		return $month/12*12==$month;
 	}
-	public function renew($username,$param,$month)
+	public function renew($username,$susername,$month)
 	{
-		$user = $this->loadUser($param);
-		if($user['username'] != $username){
+		global $default_db;
+		$suser = $this->getSuser($susername);
+		if(!$suser || $suser['username']!=$username){
+			trigger_error('不是你的产品哦');
 			return false;
 		}
-		$info = $this->getInfo($user['product_id']);
+		$info = $this->getInfo($suser['product_id']);
 		if(!$info){
 			trigger_error('产品错误');
 			return false;
@@ -49,33 +58,39 @@ abstract class Product
 			trigger_error('价格错误');
 			return false;
 		}
+		daocall('product','open_db');
 		if($default_db==null){
+			trigger_error('没有连接数据库');
 			return false;
 		}
 		/*
 		 * 开始事务
 		 */
 		if(!$default_db->beginTransaction()){
+			trigger_error('开始事务失败');
 			return false;
 		}
-		if($price>0 && !apicall('money','decMoney', array($user,$price))){
+		//echo "haha";
+		if($price>0 && !apicall('money','decMoney', array($username,$price))){
 			$default_db->rollBack();
 			trigger_error('余额不足,所需金额:'.($price/100));
 			return false;
 		}
-		if(!$this->update($param,$month,0)){
+		if(!$this->addMonth($susername,$month)){
 			$default_db->rollBack();
 			trigger_error('续费产品出错');
 			return false;
 		}
 		if($default_db->commit()){
-			$this->sync($user,$param,$params,$info);
+			$this->resync($username,$suser,$info);
 			return true;
 		}
+		return false;
 	}
-	public function upgrade($username="",$param,$new_product_id)
+	public function upgrade($username,$suser,$new_product_id)
 	{
-		
+		//产品升级操作
+		return false;
 	}
 	/**
 	 * 购买产品
@@ -85,9 +100,10 @@ abstract class Product
 	 * @param $param 产品主键 
 	 * @param $params 产品其它参数
 	 */
-	public function sell($user="",$product_id=0,$month=12,$param="",$params=array())
+	public function sell($username,$product_id,$suser)
 	{
 		global $default_db;
+		$month = $suser['month'];
 		$info = $this->getInfo($product_id);
 		if(!$info){
 			trigger_error('产品错误');
@@ -119,18 +135,18 @@ abstract class Product
 		if(!$default_db->beginTransaction()){
 			return false;
 		}
-		if($price>0 && !apicall('money','decMoney', array($user,$price))){
+		if($price>0 && !apicall('money','decMoney', array($username,$price))){
 			$default_db->rollBack();
 			trigger_error('余额不足,所需金额:'.($price/100));
 			return false;
 		}
-		if(!$this->give($user,$month,$param,$params,$info)){
+		if(!$this->give($username,$suser,$info)){
 			$default_db->rollBack();
 			trigger_error('开通产品出错');
 			return false;
 		}
 		if($default_db->commit()){
-			$this->sync($user,$param,$params,$info);
+			$this->sync($username,$suser,$info);
 			return true;
 		}
 		return false;
@@ -153,7 +169,7 @@ abstract class Product
 	 * 得到产品信息
 	 * @param $product_id 产品ID
 	 */
-	abstract public function getInfo($product_id);
+	abstract public function getInfo($product_id,$susername = null);
 	/**
 	 * 给付产品,这一步只插入数据库
 	 * @param  $user
@@ -162,15 +178,7 @@ abstract class Product
 	 * @param  $param
 	 * @param  $params
 	 */
-	abstract protected function give($user="",$month=12,$param="",&$params=array(),$product_info=array());
-	/**
-	 * 同步产品到磁盘或者远程
-	 * @param  $user
-	 * @param  $param
-	 */
-	abstract protected function sync($user,$param,&$params,$product_info);
-	abstract public function checkParam($params=array());
-	abstract public function loadUser($param);
+	abstract protected function give($username="",&$suser=array(),$product_info=array());
 	/**
 	 * 
 	 * 更新用户数据
@@ -178,6 +186,15 @@ abstract class Product
 	 * @param $month      月份
 	 * @param $product_id 新产品ID,如果是0，则不更新
 	 */
-	abstract public function update($username,$month,$product_id);
+	abstract public function addMonth($susername,$month);
+	abstract public function changeProduct($susername,$product_id);
+	/**
+	 * 同步产品到磁盘或者远程
+	 * @param  $user
+	 * @param  $param
+	 */
+	abstract protected function sync($username,$suser,$product_info);
+	abstract protected function resync($username,$suser,$oproduct,$nproduct=null);
+	abstract public function getSuser($susername);
 }
 ?>
