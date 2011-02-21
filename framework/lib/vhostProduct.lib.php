@@ -15,7 +15,7 @@ class VhostProduct extends Product
 	 * @param $product_id 产品ID
 	 * @return array(产品价格,是否支持月付<true|false>,是否支持试用<true|false>)
 	 */
-	protected function getInfo($product_id)
+	public function getInfo($product_id)
 	{
 		return daocall('vhostproduct', 'getProduct', array($product_id));
 	}

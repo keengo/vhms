@@ -23,7 +23,7 @@ class VhostproductControl extends Control {
 		//print_r($list);
 		$this->_tpl->assign('list',$list);
 		//$this->_tpl->assign('product',$GLOBALS['vhostproduct_cfg']);
-		return $this->_tpl->fetch('vhostproduct/showVhostProduct.html');
+		return $this->_tpl->fetch('vhostproduct/list.html');
 	}
 	public function impLogin()
 	{
@@ -50,9 +50,9 @@ class VhostproductControl extends Control {
 			trigger_error('没有找到该虚拟主机');
 			return false;
 		}
-		//$id = $_REQUEST['id'];
+		$this->_tpl->assign("name",$vhost);
 		$product = apicall('product','newProduct',array('vhost'));
-		$product_info = $product->getInfo($vhost_info['product_info']);
+		$product_info = $product->getInfo($vhost_info['product_id']);
 		if($product_info){
 			$this->_tpl->assign("product",$product_info);
 		}
