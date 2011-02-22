@@ -6,7 +6,6 @@ define('APPLICATON_ROOT', dirname(__FILE__));
 define('SYS_ROOT', dirname(dirname(__FILE__)).'/framework');
 define('DEFAULT_CONTROL', 'public');
 include(SYS_ROOT . '/runtime.php');
-include(APPLICATON_ROOT."/../config.php");
 $c=$_REQUEST['c'];
 $a=$_REQUEST['a'];
 $e=$_REQUEST['e'];
