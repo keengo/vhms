@@ -1,27 +1,25 @@
 {{include file='common/head.html'}}
+{{include file='common/head2.html'}}
 <body text='#000000' leftmargin='0' topmargin='0'>
-<div>&nbsp;<br><br></div>
-<table align="center" id="td1" border="0" cellpadding="0" cellspacing="1" width="60%">
-	<tr>
-  <td height="30" id="td2" colspan="2" class="color01 right"><font color="#FFFFFF">我的信息</font></td>
-	</tr>
-  <tr>
-    <td>
-<table width="100%" height="90" border="0" cellpadding="0" cellspacing="1" id="td5">
+<div>&nbsp;<br></div>
+<div class="head_block">&nbsp;我的信息</div>
+<div class="block">
+<table id="table_2" border="0" cellpadding="0" cellspacing="1">
 	  <tr>
-        <td width="200" id="td3" class="color01 right">用户名:</td>
-        <td id="td4">{{$role.admin}}</td>
+        <td class="td_bgc right_2 td_width">用户名:</td>
+        <td class="td_bgc">{{$role.admin}}</td>
 	  </tr>
 	  <tr>
-        <td id="td3" class="color01 right">最后登录时间:</td>
-        <td id="td4"> {{$smarty.session.admin_last_login}}</td>
+        <td class="td_bgc right_2">最后登录时间:</td>
+        <td class="td_bgc"> {{$smarty.session.admin_last_login}}</td>
         </tr>
 	  <tr>
-        <td id="td3" class="color01 right">最后登录IP:</td>
-        <td id="td4">{{$smarty.session.admin_last_ip}}</td>
+        <td class="td_bgc right_2">最后登录IP:</td>
+        <td class="td_bgc">{{$smarty.session.admin_last_ip}}</td>
 	  </tr>
       </table></td>
   </tr>
 </table>
+</div>
 {{include file='common/foot.html'}}
 
