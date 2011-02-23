@@ -5,9 +5,24 @@ function show(url)
 }
 function check_user()
 {
-	show('?c=product&a=check&product_type=vhost&name='+document.vhostform.name.value);
+	show('?c=product&a=check&product_type=vhost&name='+document.reg.name.value);
 }
-
+function check_register()
+{
+	if(reg.name.value.length<3){
+		alert('用户名长度最小为3个字母');
+		return false;
+	}
+	if(reg.passwd.value.length<5){
+		alert('密码长度最小要6位');
+		return false;
+	}
+	if(reg.passwd.value!=reg.passwd2.value){
+		alert('两次密码不对');
+		return false;
+	}
+	reg.submit();
+}
 </script>
 <div id="container">
 <div class="topimg">购买虚拟主机产品</div>
