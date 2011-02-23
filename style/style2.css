@@ -18,6 +18,14 @@
 	MARGIN-RIGHT: auto; 
 	MARGIN-LEFT: auto;
 }
+#table_2 {
+width:100%;
+border:0px;
+line-height:30px;
+}
+.td_hg{
+height:30px;
+}
 .tb_wid{
 width:50%;
 }
@@ -27,19 +35,15 @@ width:60%;
 #tb_wid3{
 width:130px;
 }
+.tb_wid4{
+width:70%;
+}
 .td_bgc {
 background-color:#f5f5f5;
 }
 .right_2 {
 padding-left:10px;
 }
-#table_2 {
-width:100%;
-border:0px;
-line-height:30px;
-}
-.td_hg{
-height:30px;
-}
+
 
 

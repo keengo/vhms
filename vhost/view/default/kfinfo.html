@@ -1,51 +1,46 @@
-<div class="topimg STYLE1">当前位置：帐户信息</div>
-<div id="main" class="wid">
-<table align="center" id="td1" border="0" cellpadding="0" cellspacing="1" width="80%">
-	<tr>
-  <td height="30" id="td2" colspan="2" class="color01 right"><font color="#FFFFFF">帐号信息</font></td>
-	</tr>
+{{include file='common/head2.html'}}
+<div align="center">
+<div class="head_block tb_wid2">&nbsp;帐号信息</div>
+<div class="block tb_wid2">
+	<table id="table_2" cellpadding="0" cellspacing="1">
   <tr>
-    <td><table width="100%" height="225" border="0" cellpadding="0" cellspacing="1" id="td5">
-  <tr>
-   <td id="td3" class="color01 right">用户名</td>
-    <td id="td4">{{$user.name}}</td>
+   <td class="td_bgc right_2">用户名</td>
+    <td class="td_bgc">{{$user.name}}</td>
   </tr>
   <tr>
-    <td id="td3" class="color01 right">服务器</td>
-    <td id="td4">名称: {{$user.node}} , 地址: {{$node_host}}</td>
+    <td class="td_bgc right_2">服务器</td>
+    <td class="td_bgc">名称: {{$user.node}} , 地址: {{$node_host}}</td>
   </tr>
   <tr>
-    <td id="td3" class="color01 right">产品名称</td>
-    <td id="td4">{{$user.product_name}}</td>
+    <td class="td_bgc right_2">产品名称</td>
+    <td class="td_bgc">{{$user.product_name}}</td>
   </tr>
   <tr>
-    <td id="td3" class="color01 right">创建时间</td>
-    <td id="td4">{{$user.create_time}}</td>
+    <td class="td_bgc right_2">创建时间</td>
+    <td class="td_bgc">{{$user.create_time}}</td>
   </tr>
   <tr>
-    <td id="td3" class="color01 right">到期时间</td>
-    <td id="td4">{{$user.expire_time}}</td>
+    <td class="td_bgc right_2">到期时间</td>
+    <td class="td_bgc">{{$user.expire_time}}</td>
   </tr>
    <tr>
-    <td id="td3" class="color01 right">空间配额</td>
-    <td id="td4">总大小:{{$quota.web_limit}}M/已使用:{{$quota.web_used}}M</td>
+    <td class="td_bgc right_2">空间配额</td>
+    <td class="td_bgc">总大小:{{$quota.web_limit}}M/已使用:{{$quota.web_used}}M</td>
   </tr>
   {{if $quota.db_limit}}
     <tr>
-    <td id="td3" class="color01 right">数据库配额</td>
-    <td id="td4">总大小:{{$quota.db_limit}}M/已使用:{{$quota.db_used}}M</td>
+    <td class="td_bgc right_2">数据库配额</td>
+    <td class="td_bgc">总大小:{{$quota.db_limit}}M/已使用:{{$quota.db_used}}M</td>
   </tr>
    <tr>
-    <td id="td3" class="color01 right">数据库信息</td>
-    <td id="td4">用户名: a{{$user.uid}} , 数据库名: a{{$user.uid}}</td>
+    <td class="td_bgc right_2">数据库信息</td>
+    <td class="td_bgc">用户名: a{{$user.uid}} , 数据库名: a{{$user.uid}}</td>
     </tr>
   {{/if}}
   <tr>
-    <td id="td3" class="color01 right">状态</td>
-    <td id="td4">{{$user.status}}</td>
+    <td class="td_bgc right_2">状态</td>
+    <td class="td_bgc">{{$user.status}}</td>
   </tr>
-</table></td>
-</tr>
 </table>
 </div>
 
