@@ -5,14 +5,29 @@ function show(url)
 }
 function check_user()
 {
-	show('?c=product&a=check&product_type=vhost&name='+document.vhostform.name.value);
+	show('?c=product&a=check&product_type=vhost&name='+document.reg.name.value);
 }
-
+function check_register()
+{
+	if(reg.name.value.length<3){
+		alert('用户名长度最小为3个字母');
+		return false;
+	}
+	if(reg.passwd.value.length<5){
+		alert('密码长度最小要6位');
+		return false;
+	}
+	if(reg.passwd.value!=reg.passwd2.value){
+		alert('两次密码不对');
+		return false;
+	}
+	reg.submit();
+}
 </script>
 <div id="container">
 <div class="topimg">购买虚拟主机产品</div>
   <div id="main" class="wid">
-  <form name='vhostform' action="?c=product&a=sell&product_id={{$product.id}}&product_type=vhost" method="post">
+  <form name='reg' action="?c=product&a=sell&product_id={{$product.id}}&product_type=vhost" method="post">
     <table align="center" bgcolor="#7FBBF4" border="0" cellpadding="0" cellspacing="1" width="70%">
 	<tr>
   <td height="30" bgcolor="#51A3EC" colspan="2"><font color="#FFFFFF">　购买虚拟主机产品</font></td>
@@ -25,7 +40,7 @@ function check_user()
         <td width="423" bgcolor="#fafaf5">{{$product.name}}</td>
         </tr>
       <tr>
-        <td bgcolor="#f5f5f5" class="color01 right">　FTP用户名：</td>
+        <td bgcolor="#f5f5f5" class="color01 right">　用户名：</td>
         <td bgcolor="#fafaf5"><input name="name" type="text" id="name">
 		    <input type="button" name="Submit" value="检测用户名" onClick="check_user()"></td>
       </tr>
@@ -59,7 +74,7 @@ function check_user()
 	    <td height="20" bgcolor="#f5f5f5" colspan="2">
 		<table width="100%" border="0" cellpadding="0" cellspacing="0">
 		  <tr><td width="260" height="40"></td>
-		  <td><button type="submit">确定</button></td></tr></table></td>
+		  <td><button type="button" onClick="check_register()">确定</button></td></tr></table></td>
         </tr>
 
     </table></td>
