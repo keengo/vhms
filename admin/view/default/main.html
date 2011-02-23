@@ -1,25 +1,25 @@
 {{include file='common/head.html'}}
 {{include file='common/head2.html'}}
 <body text='#000000' leftmargin='0' topmargin='0'>
-<div>&nbsp;<br></div>
-<div class="head_block">&nbsp;我的信息</div>
-<div class="block">
+<div align="center">
+<div class="head_block tb_wid">&nbsp;我的信息</div>
+<div class="block tb_wid">
 <table id="table_2" border="0" cellpadding="0" cellspacing="1">
 	  <tr>
-        <td class="td_bgc right_2 td_width">用户名:</td>
+        <td class="td_bgc right_2">用户名:</td>
         <td class="td_bgc">{{$role.admin}}</td>
 	  </tr>
 	  <tr>
         <td class="td_bgc right_2">最后登录时间:</td>
         <td class="td_bgc"> {{$smarty.session.admin_last_login}}</td>
-        </tr>
+      </tr>
 	  <tr>
         <td class="td_bgc right_2">最后登录IP:</td>
         <td class="td_bgc">{{$smarty.session.admin_last_ip}}</td>
 	  </tr>
-      </table></td>
-  </tr>
-</table>
-</div>
+    </table>
+  </div>
+	  </div>
+	  </div></div>
 {{include file='common/foot.html'}}
 

@@ -2,47 +2,37 @@
 <head>
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
 <title>主机列表</title>
-<link rel='stylesheet' type='text/css' href='{{$STATIC}}style/style.css'>
+<link rel='stylesheet' type='text/css' href='{{$STATIC}}/style/style.css'>
+<link rel='stylesheet' type='text/css' href='{{$pSTATIC}}/style/style2.css'>
 <script language="javascript" src="scripts/jquery.js"></script>
 <script language="javascript" src="scripts/common.js"></script>
 </head>
 <body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
-<div>&nbsp;<br></div>
-<div id="container">
-  <div id="main" class="wid" align="center">
+ <div align="center">
   <form  action="?c=adminuser&a=insert" method='post'>
-    <table align="center" id="td1" border="0" cellpadding="0" cellspacing="1" width="70%">
-	<tr>
-  <td height="30" id="td2" colspan="2" class="color01 right"><font color="#FFFFFF">增加管理员</font></td>
-	</tr>
-  <tr>
-    <td>
-<table width="100%" height="130" border="0" cellpadding="0" cellspacing="1" id="td5">
+<div class="head_block tb_wid">&nbsp;增加管理员</div>
+<div class="block tb_wid">
+<table id="table_2" cellpadding="0" cellspacing="1">
       <tr>
-        <td id="td3" width="189" class="color01 right">用户：</td>
-        <td width="423" id="td4">
-          <input type='text' name='username' id='username' value="" onBlur="checkUsername();"/></td>
+        <td class="td_bgc right_2">用户：</td>
+        <td class="td_bgc">
+          <input type='text' name='username' id='tb_wid3' value="" /></td>
         </tr>
       <tr>
-        <td id="td3" class="color01 right">密码：</td>
-        <td id="td4"><input type='password' name='passwd' id='passwd' value=""/></td>
+        <td class="td_bgc right_2">密码：</td>
+        <td class="td_bgc"><input type='password' name='passwd' id='tb_wid3' value=""/></td>
         </tr>
       <tr>
-        <td id="td3" class="color01 right">确认密码：</td>
-        <td id="td4"><input type='password' name='passwd2' id='passwd2' value="" onBlur="checkPasswd();"/></td>
+        <td class="td_bgc right_2">确认密码：</td>
+        <td class="td_bgc"><input type='password' name='passwd2' id='tb_wid3' value=""/></td>
         </tr>
 	    <tr>
-	    <td height="20" id="td3" colspan="2">
-		<table width="100%" border="0" cellpadding="0" cellspacing="0">
-		  <tr><td width="200" height="40"></td>
-		  <td><button type="submit">增加</button></td></tr></table></td>
+	    <td class="td_bgc td_hg" colspan="2" align="center">
+		<input type="submit" value="增加"></td>
         </tr>
-
-    </table></td>
-  </tr>
-</table>
+    </table>
+	</div>
 	</form>
   </div>
-</div>
 </body>
 </html>

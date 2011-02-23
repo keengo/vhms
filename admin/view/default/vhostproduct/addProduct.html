@@ -1,4 +1,5 @@
 {{include file='common/head.html'}}
+{{include file='common/head2.html'}}
 <body leftmargin="0" topmargin="0" bgcolor="#ffffff" text="#000000">
 <script language='javascript' src='{{$PSTATIC}}/style/common.js'></script>
 <script language='javascript'>
@@ -43,67 +44,56 @@ function changeNode()
 	ajax_open_url(url,list_templete_result);
 }
 </script>
-<div id="container">
-<div>&nbsp;<br></div>
-  <div id="main" class="wid" align="center">
+<div align="center">
   <form name='nodeform' action="?c=vhostproduct&a={{$action}}&id={{$vhostproduct.id}}" method="post">
-    <table align="center" id="td1" border="0" cellpadding="0" cellspacing="1" width="70%">
-	<tr>
-  <td height="30" id="td2" colspan="2"><font color="#FFFFFF">　增加产品</font></td>
-	</tr>
-  <tr>
-    <td>
-<table width="100%" height="240" border="0" cellpadding="0" cellspacing="1" id="td5">
+ <div class="head_block tb_wid">&nbsp;增加产品</div>
+<div class="block tb_wid">
+<table id="table_2" cellpadding="0" cellspacing="1">
       <tr>
-        <td id="td3" width="189" class="color01 right">产品名称：</td>
-        <td width="423" id="td4"><input name='name' type='text' id='name' value="{{$vhostproduct.name}}" size="16">
+        <td class="td_bgc right_2">产品名称：</td>
+        <td class="td_bgc"><input name='name' type='text' id='tb_wid3' value="{{$vhostproduct.name}}" size="16">
          </td>
         </tr>
       <tr>
-        <td id="td3" class="color01 right">空间大小(M)：</td>
-        <td id="td4"><input name="web_quota" type="text" value="{{$vhostproduct.web_quota}}" size="16"></td>
+        <td class="td_bgc right_2">空间大小(M)：</td>
+        <td class="td_bgc"><input name="web_quota" type="text" id='tb_wid3' value="{{$vhostproduct.web_quota}}" size="16"></td>
         </tr>
       <tr>
-        <td id="td3" class="color01 right">数据库大小(M)：</td>
-        <td id="td4"><input name="db_quota" type="text" id="db_quota" value="{{$vhostproduct.db_quota}}"></td>
+        <td class="td_bgc right_2">数据库大小(M)：</td>
+        <td class="td_bgc"><input name="db_quota" type="text" id='tb_wid3' value="{{$vhostproduct.db_quota}}"></td>
         </tr>
 	  <tr>
-        <td id="td3" class="color01 right">价格(元/年)</td>
-        <td id="td4"><input name="price" type="text" id="price" value="{{$vhostproduct.price/100}}"></td>
+        <td class="td_bgc right_2">价格(元/年)</td>
+        <td class="td_bgc"><input name="price" type="text" id='tb_wid3' value="{{$vhostproduct.price/100}}"></td>
         </tr>
 	  <tr>
-        <td id="td3" class="color01 right">模板</td>
-        <td id="td4"> <div id='templete'>
+        <td class="td_bgc right_2">模板</td>
+        <td class="td_bgc"> <div id='templete'>
         <input name="templete" type="text" value="{{$vhostproduct.templete}}">
         </div></td>
         </tr>
 	  <tr>
-        <td id="td3" class="color01 right">主机</td>
-        <td id="td4"><select name='node' onChange='changeNode()'>
+        <td class="td_bgc right_2">主机</td>
+        <td class="td_bgc"><select name='node' onChange='changeNode()'>
 			 {{foreach from=$nodes item=node}}
 			 <option value='{{$node.name}}' {{if $node.name==$vhostproduct.node}} selected {{/if}}>{{$node.name}}</option>
 			 {{/foreach}}
 			 </select></td>
         </tr>
 	  <tr>
-        <td id="td3"  class="color01 right">状态</td>
-        <td id="td4"><input type="checkbox" name="pause_flag" value="1" {{if $vhostproduct.pause_flag!=0}} checked {{/if}}>
+        <td class="td_bgc right_2">状态</td>
+        <td class="td_bgc"><input type="checkbox" name="pause_flag" value="1" {{if $vhostproduct.pause_flag!=0}} checked {{/if}}>
 		  	     暂停销售
 		  </td>
         </tr>
 	    <tr>
-	    <td height="20" id="td3" colspan="2">
-		<table width="100%" border="0" cellpadding="0" cellspacing="0">
-		  <tr><td width="200" height="40"></td>
-		  <td><button type="submit">确认提交</button></td></tr></table></td>
+	    <td class="td_bgc td_hg" colspan="2" align="center">
+		<input type="submit" value="确认提交"></td>
         </tr>
-
-    </table></td>
-  </tr>
-</table>
+    </table>
+	</div>
   </form>
   </div>
-</div>
 <script language='javascript'>
 changeNode();
 </script>
