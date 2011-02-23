@@ -1,0 +1,45 @@
+.head_block {
+	border: 1px solid #0099FF;
+	border-bottom-width:0px;
+	background-color:#51A3EC;
+	color:#FFFFFF;
+	padding-top:6px;
+	padding-bottom:6px;
+	text-align:left;
+	/* 表格居中 */
+	margin-top:15px;
+	MARGIN-RIGHT: auto; 
+	MARGIN-LEFT: auto;
+}
+.block {
+	border: 1px solid #7FBBF4;	
+	background-color:#C7EAF6;
+	 /* 表格居中 */
+	MARGIN-RIGHT: auto; 
+	MARGIN-LEFT: auto;
+}
+.tb_wid{
+width:50%;
+}
+.tb_wid2{
+width:60%;
+}
+#tb_wid3{
+width:130px;
+}
+.td_bgc {
+background-color:#f5f5f5;
+}
+.right_2 {
+padding-left:10px;
+}
+#table_2 {
+width:100%;
+border:0px;
+line-height:30px;
+}
+.td_hg{
+height:30px;
+}
+
+

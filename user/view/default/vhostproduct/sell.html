@@ -1,4 +1,3 @@
-{{include file='common/head2.html'}}
 <script language="javascript">
 function show(url) 
 { 
@@ -10,52 +9,63 @@ function check_user()
 }
 
 </script>
-<div align="center">
+<div id="container">
+<div class="topimg">购买虚拟主机产品</div>
+  <div id="main" class="wid">
   <form name='vhostform' action="?c=product&a=sell&product_id={{$product.id}}&product_type=vhost" method="post">
-<div class="head_block tb_wid">&nbsp;购买虚拟主机产品</div>
-<div class="block tb_wid">
-<table id="table_2" cellpadding="0" cellspacing="1">
+    <table align="center" bgcolor="#7FBBF4" border="0" cellpadding="0" cellspacing="1" width="70%">
+	<tr>
+  <td height="30" bgcolor="#51A3EC" colspan="2"><font color="#FFFFFF">购买虚拟主机产品</font></td>
+	</tr>
+  <tr>
+    <td>
+<table width="100%" height="240" border="0" cellpadding="0" cellspacing="1" bgcolor="#C7EAF6">
       <tr>
-        <td class="td_bgc right_2">产品名称</td>
-        <td class="td_bgc">{{$product.name}}</td>
+        <td width="189" height="25" bgcolor="#f5f5f5" class="color01 right">产品名称</td>
+        <td width="423" bgcolor="#fafaf5">{{$product.name}}</td>
         </tr>
       <tr>
-        <td class="td_bgc right_2">FTP用户名：</td>
-        <td class="td_bgc"><input name="name" type="text" id='tb_wid3'>
+        <td bgcolor="#f5f5f5" class="color01 right">FTP用户名：</td>
+        <td bgcolor="#fafaf5"><input name="name" type="text" id="name">
 		    <input type="button" name="Submit" value="检测用户名" onClick="check_user()"></td>
       </tr>
       <tr>
-        <td class="td_bgc right_2">密码：</td>
-        <td class="td_bgc"><input name="passwd" type="password" id='tb_wid3'></td>
+        <td bgcolor="#f5f5f5" class="color01 right">密码：</td>
+        <td bgcolor="#fafaf5"><input name="passwd" type="password" id="passwd"></td>
       </tr>
 	  <tr>
-        <td class="td_bgc right_2">确认密码:</td>
-        <td class="td_bgc"><input name="passwd2" type="password" id='tb_wid3'></td>
+        <td bgcolor="#f5f5f5" class="color01 right">确认密码:</td>
+        <td bgcolor="#fafaf5"><input name="passwd2" type="password" id="passwd2"></td>
 	  </tr>
 	  <tr>
-        <td class="td_bgc right_2">购买时间:</td>
-        <td class="td_bgc"><input type=radio name=month value=12 checked>1年
+        <td bgcolor="#f5f5f5" class="color01 right">购买时间:</td>
+        <td bgcolor="#fafaf5"><input type=radio name=month value=12 checked>1年
 			<input type=radio name=month value=24>2年
 			<input type=radio name=month value=36>3年</td>
 	  </tr>
 	  <tr>
-        <td class="td_bgc right_2">空间大小:</td>
-        <td class="td_bgc">{{$product.web_quota}}M</td>
+        <td bgcolor="#f5f5f5" class="color01 right">空间大小:</td>
+        <td bgcolor="#fafaf5">{{$product.web_quota}}M</td>
 	  </tr>
 	  <tr>
-        <td class="td_bgc right_2">数据库大小:</td>
-        <td class="td_bgc">{{$product.db_quota}}M</td>
+        <td bgcolor="#f5f5f5" class="color01 right">数据库大小:</td>
+        <td bgcolor="#fafaf5">{{$product.db_quota}}M</td>
 	  </tr>
 	  <tr>
-        <td class="td_bgc right_2">价格</td>
-        <td class="td_bgc">{{$product.price/100}}元/年</td>
+        <td bgcolor="#f5f5f5">价格</td>
+        <td bgcolor="#fafaf5">{{$product.price/100}}元/年</td>
         </tr>
 	    <tr>
-	    <td class="td_bgc td_hg" colspan="2" align="center">
-		<input type="submit" value="确定"></td>
+	    <td height="20" bgcolor="#f5f5f5" colspan="2">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		  <tr><td width="260" height="40"></td>
+		  <td><button type="submit">确定</button></td></tr></table></td>
         </tr>
-    </table>
-    </form>
-  </div>
-  </div>
 
+    </table></td>
+  </tr>
+</table>
+    </form>
+
+  </div>
+</div>
