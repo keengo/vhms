@@ -9,45 +9,38 @@ function check_user()
 }
 </script>
 <div id="container">
+<div class="padd2 mar_top">
 <div class="topimg">购买虚拟主机产品</div>
-  <div id="main" class="wid">
+</div>
   <form name='vhostform' action="?c=product&a=renew&product_id={{$product.id}}&product_type=vhost&name={{$name}}" method="post">
-    <table align="center" bgcolor="#7FBBF4" border="0" cellpadding="0" cellspacing="1" width="70%">
-	<tr>
-  <td height="30" bgcolor="#51A3EC" colspan="2"><font color="#FFFFFF">购买虚拟主机产品</font></td>
-	</tr>
+<div class="head_block tb_wid">&nbsp;购买虚拟主机产品</div>
+<div class="block tb_wid">
+<table id="table_2" cellpadding="0" cellspacing="1">
   <tr>
-    <td>
-<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#C7EAF6">
-  <tr>
-        <td width="189"  bgcolor="#f5f5f5" class="color01 right">用户名</td>
-        <td width="423" bgcolor="#fafaf5">{{$name}}</td>
+        <td class="td_bgc right_2">用户名</td>
+        <td class="td_bgc">{{$name}}</td>
         </tr>
       <tr>
-        <td width="189" bgcolor="#f5f5f5" class="color01 right">产品名称</td>
-        <td width="423" bgcolor="#fafaf5">{{$product.name}}</td>
+        <td class="td_bgc right_2">产品名称</td>
+        <td class="td_bgc">{{$product.name}}</td>
         </tr>
     
-        <td bgcolor="#f5f5f5" class="color01 right">续费时间:</td>
-        <td bgcolor="#fafaf5"><input type=radio name=month value=12 checked>1年
+        <td class="td_bgc right_2">续费时间:</td>
+        <td class="td_bgc"><input type=radio name=month value=12 checked>1年
 			<input type=radio name=month value=24>2年
 			<input type=radio name=month value=36>3年</td>
 	  </tr>	 
 	  <tr>
-        <td bgcolor="#f5f5f5">　价格</td>
-        <td bgcolor="#fafaf5">{{$product.price/100}}元/年</td>
+        <td class="td_bgc right_2">价格</td>
+        <td class="td_bgc">{{$product.price/100}}元/年</td>
         </tr>
 	    <tr>
-	    <td bgcolor="#f5f5f5" colspan="2">
-		<table width="100%" border="0" cellpadding="0" cellspacing="0">
-		  <tr><td width="260" height="40"></td>
-		  <td><button type="submit">确定</button></td></tr></table></td>
+	    <td class="td_bgc td_hg" colspan="2" align="center">
+		  <input type="submit" value="确定">
+		  </td>
         </tr>
-
-    </table></td>
-  </tr>
-</table>
+    </table>
+	</div>
     </form>
-
   </div>
-</div>
+
