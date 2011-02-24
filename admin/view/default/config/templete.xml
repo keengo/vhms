@@ -8,7 +8,5 @@
 <init_event event='vhost.whm:init_vh' />
 <destroy_event event='vhost.whm:destroy_vh'/>
 </vh_templete>
-<vh_templete name='all' inherit='1' templete='html'>
-</vh_templete>
 </vhs>
 </config>

@@ -31,6 +31,7 @@ if($c=='frame' && $a=='index'){
 $main = dispatch($c,$a);
 //echo $main;
 //startFramework();
+$tpl->assign("title",getTitle());
 $tpl->assign('main',$main);
 $tpl->display('frame.html');
 ?>
