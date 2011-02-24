@@ -1,5 +1,4 @@
 ﻿{{include file='common/head.html'}}
-{{include file='common/head2.html'}}
 <body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
 <script language='javascript' src='{{$PSTATIC}}/style/common.js'></script>
 <script language='javascript'>
@@ -42,7 +41,9 @@ function changeNode(id,templete)
 
 </script>
 <div id="container">
+<div class="padd mar_top">
 <div class="topimg pal1">共计 {{$sum}} 条记录</div>
+</div>
   <div id="main" class="wid">
   <div align="left">
   <form action='?c={{$smarty.request.c}}&a={{$smarty.request.a}}' method='post' name='product_form'>
