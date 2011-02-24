@@ -7,7 +7,10 @@
     <input type="submit" name="Submit" value="搜索">
   </form>
   </div>
-{{if $msg}}<font color=red>{{$msg}}</font>{{/if}}
+{{if $msg}}
+<div align="center">
+<div class="block tb_wid2 mar_top" align="center"><font color=red>{{$msg}}</font></div></div>
+{{/if}}
   {{if $row}}
   <div align="center">
 <div class="head_block tb_wid2">&nbsp;产品信息</div>

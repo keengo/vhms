@@ -7,13 +7,19 @@
     <input name="username" type="text" id="username" value="{{$username}}">
     <input type="submit" name="Submit" value="搜索">
   </form>
-  </div>
-  {{if $msg}}<font color='red'>{{$msg}}</font>{{/if}}
-  {{if $sum>0}}
-  <div id="main" class="wid"> 
+</div>
+{{if $msg}}
+<div align="center">
+<div class="block tb_wid mar_top" align="center"> 
+  <font color='red'>{{$msg}}</font>
+</div>
+</div>
+{{/if}}
+ {{if $sum>0}}
+
   {{foreach from=$list item=row}}
-<div class="head_block tb_wid2">&nbsp;用户信息</div>
-<div class="block tb_wid2">
+<div class="head_block tb_wid">&nbsp;用户信息</div>
+<div class="block tb_wid">
 <table id="table_2" cellpadding="0" cellspacing="1">
       <tr>
         <td class="td_bgc td_hg" colspan="2" align="center">
@@ -21,31 +27,31 @@
         [<a href='javascript:if(confirm("真的要重设用户密码吗")){ window.location="?c=user&a=randPassword&username={{$row.username}}";}'>重设密码</a>]
         [<a href="?c=user&a=impLogin&username={{$row.username}}" target="_blank">模拟登录</a>]
         </td>
-        </tr>
+      </tr>
       <tr>
         <td class="td_bgc right_2">用户名：</td>
         <td class="td_bgc"><a href="?c=user&a=editForm&username={{$row.username}}">{{$row.username}}</a></td>
-        </tr>
+      </tr>
       <tr>
         <td class="td_bgc right_2">真实姓名：</td>
         <td class="td_bgc">{{$row.name}}</td>
-        </tr>
+      </tr>
 	  <tr>
         <td class="td_bgc right_2">身份号码</td>
         <td class="td_bgc">{{$row.id}}</td>
-        </tr>
+      </tr>
 	  <tr>
         <td class="td_bgc right_2">电子邮件</td>
         <td class="td_bgc">{{$row.email}}</td>
-        </tr>
+      </tr>
 	  <tr>
         <td class="td_bgc right_2">注册时间</td>
         <td class="td_bgc">{{$row.regtime}}</td>
-        </tr>
+      </tr>
 	  <tr>
         <td class="td_bgc right_2">余额</td>
         <td class="td_bgc"><a href="?c=user&a=editMoneyForm&username={{$row.username}}">{{$row.money/100}}元</a></td>
-        </tr>
+      </tr>
 	    {{/foreach}}
 </table>
  </div>
