@@ -1,5 +1,4 @@
 <?php
-define('KANGLE_VHS_VERSION',"1");
 $GLOBALS['lock_file'] = dirname(__FILE__).'/install.lock';
 if(file_exists($GLOBALS['lock_file'])){
 	die("已经安装过了，如果要重新安装，请删除文件:".$GLOBALS['lock_file']);
@@ -46,7 +45,7 @@ class InstallControl extends Control
 			die('没能写文件:'.$GLOBALS['lock_file']);
 		}
 		//写入version
-		fwrite($fp,KANGLE_VHS_VERSION);
+		fwrite($fp,VHMS_VERSION);
 		fclose($fp);
 		return $this->_tpl->fetch('install/step2.html');
 	}

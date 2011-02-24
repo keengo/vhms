@@ -8,7 +8,10 @@ define('SYS_ROOT', dirname(dirname(__FILE__)).'/framework');
 //定义默认控制器
 define('DEFAULT_CONTROL', 'index');
 //die(print_r($_REQUEST));
+
 include(SYS_ROOT . '/runtime.php');
+$tpl = TPL::singleton();
+$tpl->assign('title',getTitle());
 //@load_conf('pub:test');
 startFramework();
 ?>

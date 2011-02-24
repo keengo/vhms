@@ -351,7 +351,11 @@ function getRandPasswd($len=8)
 }
 function needRole($role)
 {
+
 	if(!isRole($role)){
+		if($_SERVER["QUERY_STRING"]=='c=session&a=loginForm'){
+			die("");
+		}
 		die('<html><body><script language="javascript">window.top.location.href="?c=session&a=loginForm";</script></body></html>');
 	}
 }
