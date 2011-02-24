@@ -103,13 +103,14 @@ abstract class Product
 	 * 购买产品
 	 * @param $user 用户名	 
 	 * @param $product_id 产品ID
-	 * @param $month 购买时间(月份)
-	 * @param $param 产品主键 
-	 * @param $params 产品其它参数
+	 * @param $suser 产品参数
 	 */
 	public function sell($username,$product_id,$suser)
 	{
 		global $default_db;
+		if(!$this->checkParam($username, $suser)){
+			return false;
+		}
 		$month = $suser['month'];
 		$info = $this->getInfo($product_id);
 		if(!$info){
@@ -195,5 +196,6 @@ abstract class Product
 	abstract protected function sync($username,$suser,$product_info);
 	abstract protected function resync($username,$suser,$oproduct,$nproduct=null);
 	abstract public function getSuser($susername);
+	abstract public function checkParam($username,$suser);
 }
 ?>

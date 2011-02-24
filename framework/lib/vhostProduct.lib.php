@@ -77,8 +77,12 @@ class VhostProduct extends Product
 		return $whm->call($whmCall);
 		//return false;
 	}
-	public function checkParam($params=array())
+	public function checkParam($username,$suser)
 	{
+		if(!preg_match('/^[a-z0-9][a-z0-9_]{2,11}$/', $suser['name'])){
+			trigger_error("用户名不符合标准");
+			return false;
+		}
 		return true;
 	}
 	private function getDocRoot($name)

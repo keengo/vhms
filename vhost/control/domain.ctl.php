@@ -29,8 +29,20 @@ class DomainControl extends Control
 		if($ret){
 			die('该域名已被绑定，请联系管理员');
 		}
-		$attr['user'] = getRole('vhost');
+		$attr['user'] = getRole('vhost');		
 		$attr['name'] = $_REQUEST['domain'];
+		load_conf('pub:reserv_domain');
+		if(is_array($GLOBALS['reserv_domain'])){
+			for($i=0;$i<count($GLOBALS['reserv_domain']);$i++){
+				if(strcasecmp($attr['name'],$GLOBALS['reserv_domain'][$i])==0){
+					die("该域名为保留域名!");
+				}
+			}
+		}
+		if(!preg_match('/^[a-z0-9_*.]{2,32}$/i', $attr['name'])){
+			trigger_error('域名不合法');
+			return false;
+		}
 		$attr['type'] = 0;
 		$attr['value'] = '/';
 		daocall('vhostinfo','insertData',array($attr));

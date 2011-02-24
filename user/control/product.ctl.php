@@ -65,10 +65,6 @@ class ProductControl extends Control {
 			trigger_error('没有该产品类型:'.$_REQUEST['product_type']);
 			return false;
 		}
-		if(!$product->checkParam(array($_REQUEST))){
-			trigger_error('参数错误');
-			return false;
-		}
 		$user = getRole('user');
 		if(!$product->sell($user,intval($_REQUEST['product_id']),$_REQUEST)){
 			return false;
