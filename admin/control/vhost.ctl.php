@@ -32,6 +32,8 @@ class VhostControl extends Control {
 				$list = daocall('vhostinfo','getDomain',array($list['name']));
 				$this->_tpl->assign('sum',count($list));
 				$this->_tpl->assign('list',$list);
+			}else{
+				$this->_tpl->assign("msg","没有找到该虚拟主机");
 			}
 		}
 		$this->_tpl->display('vhostproduct/showVhost.html');

@@ -96,6 +96,9 @@ class UserControl extends Control {
 		if($username!=""){
 			$this->_tpl->assign('username',$username);
 			$list = daocall('user','listUser',array($username));
+			if(!$list){
+				$this->_tpl->assign("msg","没有找到用户:".$username);
+			}
 		}
 		//if($list){
 		$this->_tpl->assign('sum',count($list));
