@@ -31,6 +31,10 @@ class VhostAPI extends API
 		}	
 		return $ret; 
 	}
+	public function getProduct($name)
+	{
+		return $_SESSION['product_id'][$name];
+	}
 	public function getNode($name)
 	{
 		$node = $_SESSION['node'][$name];

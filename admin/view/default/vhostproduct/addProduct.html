@@ -44,55 +44,78 @@ function changeNode()
 }
 </script>
 <div align="center">
-  <form name='nodeform' action="?c=vhostproduct&a={{$action}}&id={{$vhostproduct.id}}" method="post">
- <div class="head_block tb_wid">&nbsp;增加产品</div>
+<form name='nodeform'
+	action="?c=vhostproduct&a={{$action}}&id={{$vhostproduct.id}}"
+	method="post">
+<div class="head_block tb_wid">&nbsp;增加产品</div>
 <div class="block tb_wid">
 <table id="table_2" cellpadding="0" cellspacing="1">
-      <tr>
-        <td class="td_bgc right_2">产品名称：</td>
-        <td class="td_bgc"><input name='name' type='text' id='tb_wid3' value="{{$vhostproduct.name}}" size="16">
-         </td>
-        </tr>
-      <tr>
-        <td class="td_bgc right_2">空间大小(M)：</td>
-        <td class="td_bgc"><input name="web_quota" type="text" id='tb_wid3' value="{{$vhostproduct.web_quota}}" size="16"></td>
-        </tr>
-      <tr>
-        <td class="td_bgc right_2">数据库大小(M)：</td>
-        <td class="td_bgc"><input name="db_quota" type="text" id='tb_wid3' value="{{$vhostproduct.db_quota}}"></td>
-        </tr>
-	  <tr>
-        <td class="td_bgc right_2">价格(元/年)</td>
-        <td class="td_bgc"><input name="price" type="text" id='tb_wid3' value="{{$vhostproduct.price/100}}"></td>
-        </tr>
-	  <tr>
-        <td class="td_bgc right_2">模板</td>
-        <td class="td_bgc"> <div id='templete'>
-        <input name="templete" type="text" value="{{$vhostproduct.templete}}">
-        </div></td>
-        </tr>
-	  <tr>
-        <td class="td_bgc right_2">主机</td>
-        <td class="td_bgc"><select name='node' onChange='changeNode()'>
-			 {{foreach from=$nodes item=node}}
-			 <option value='{{$node.name}}' {{if $node.name==$vhostproduct.node}} selected {{/if}}>{{$node.name}}</option>
-			 {{/foreach}}
-			 </select></td>
-        </tr>
-	  <tr>
-        <td class="td_bgc right_2">状态</td>
-        <td class="td_bgc"><input type="checkbox" name="pause_flag" value="1" {{if $vhostproduct.pause_flag!=0}} checked {{/if}}>
-		  	     暂停销售
-		  </td>
-        </tr>
-	    <tr>
-	    <td class="td_bgc td_hg" colspan="2" align="center">
-		<input type="submit" value="确认提交"></td>
-        </tr>
-    </table>
-	</div>
-  </form>
-  </div>
+	<tr>
+		<td class="td_bgc right_2">产品名称：</td>
+		<td class="td_bgc"><input name='name' type='text' id='tb_wid3'
+			value="{{$vhostproduct.name}}" size="16"></td>
+	</tr>
+	<tr>
+		<td class="td_bgc right_2">空间大小(M)：</td>
+		<td class="td_bgc"><input name="web_quota" type="text"
+			id='tb_wid3' value="{{$vhostproduct.web_quota}}" size="16"></td>
+	</tr>
+	<tr>
+		<td class="td_bgc right_2">数据库大小(M)：</td>
+		<td class="td_bgc"><input name="db_quota" type="text"
+			id='tb_wid3' value="{{$vhostproduct.db_quota}}"></td>
+	</tr>
+	<tr>
+		<td class="td_bgc right_2">价格(元/年)</td>
+		<td class="td_bgc"><input name="price" type="text" id='tb_wid3'
+			value="{{$vhostproduct.price/100}}"></td>
+	</tr>
+	<tr>
+		<td class="td_bgc right_2">绑定子目录</td>
+		<td class="td_bgc"><input type='checkbox' name='subdir_flag' value='1' {{if $vhostproduct.subdir_flag}}checked{{/if}}>允许绑定子目录
+		</td>
+	</tr>
+	<tr>
+		<td class="td_bgc right_2">默认绑定子目录:</td>
+		<td class="td_bgc"><input name="subdir" type="text" id='tb_wid3'
+			value="{{$vhostproduct.subdir}}" size="16"></td>
+	</tr>
+	<tr>
+		<td class="td_bgc right_2">空间大小(M)：</td>
+		<td class="td_bgc"><input name="web_quota" type="text"
+			id='tb_wid3' value="{{$vhostproduct.web_quota}}" size="16"></td>
+	</tr>
+	<tr>
+		<td class="td_bgc right_2">模板</td>
+		<td class="td_bgc">
+		<div id='templete'><input name="templete" type="text"
+			value="{{$vhostproduct.templete}}"></div>
+		</td>
+	</tr>
+	<tr>
+		<td class="td_bgc right_2">主机</td>
+		<td class="td_bgc"><select name='node' onChange='changeNode()'>
+			{{foreach from=$nodes item=node}}
+			<option value='{{$node.name}}'
+				{{if $node.name==$vhostproduct.node}}selected{{/if}}>{{$node.name}}</option>
+			{{/foreach}}
+		</select></td>
+	</tr>
+	<tr>
+
+		<td class="td_bgc right_2">状态</td>
+		<td class="td_bgc"><input type="checkbox" name="pause_flag"
+			value="1" {{if $vhostproduct.pause_flag!=0}}checked{{/if}}>
+		暂停销售</td>
+	</tr>
+	<tr>
+		<td class="td_bgc td_hg" colspan="2" align="center"><input
+			type="submit" value="确认提交"></td>
+	</tr>
+</table>
+</div>
+</form>
+</div>
 <script language='javascript'>
 changeNode();
 </script>

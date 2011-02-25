@@ -116,6 +116,7 @@ class VhostproductControl extends Control {
 	public function addProduct()
 	{
 		$_REQUEST['price'] *= 100;
+		print_r($_REQUEST);
 		daocall('vhostproduct', 'insertData', array($_REQUEST));
 		apicall('product','flushVhostProduct');
 		$this->showProduct();

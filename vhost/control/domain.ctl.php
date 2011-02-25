@@ -21,6 +21,11 @@ class DomainControl extends Control
 	public function addForm()
 	{
 		$this->_tpl->assign('action','add');
+		$product = apicall('product','newProduct',array('vhost'));
+		$info = $product->getInfo($_SESSION['product_id'][getRole('vhost')]);
+		
+		$this->_tpl->assign('subdir_flag',$info['subdir_flag']);
+		$this->_tpl->assign('default_subdir',$info['subdir']);
 		return $this->_tpl->fetch('domain/add.html');
 	}
 	public function add()
@@ -42,8 +47,14 @@ class DomainControl extends Control
 		if(!preg_match('/^[a-z0-9_*.]{2,32}$/i', $attr['name'])){
 			return '域名不合法';			
 		}
+		$product = apicall('product','newProduct',array('vhost'));
+		$info = $product->getInfo($_SESSION['product_id'][getRole('vhost')]);
 		$attr['type'] = 0;
-		$attr['value'] = '/';
+		if($info['subdir_flag']==1){
+			$attr['value'] = $_REQUEST['subdir'];
+		}else{
+			$attr['value'] = $info['subdir'];
+		}	
 		daocall('vhostinfo','insertData',array($attr));
 		$this->noticeChange();
 		return $this->show();
