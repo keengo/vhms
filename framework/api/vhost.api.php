@@ -34,12 +34,15 @@ class VhostAPI extends API
 	public function getNode($name)
 	{
 		$node = $_SESSION['node'][$name];
-		if(empty($node)){
-			$node = daocall('vhost','getVhost',array($vhost,array('node','product_id')));
+		if($node=="" || empty($node)){
+			$node_info = daocall('vhost','getVhost',array($name,array('node','product_id')));
 			//$node = daocall('vhost','getNode',array($name));
-			$_SESSION['node'][$name] = $node['node'];
-			$_SESSION['product_id'][$name] = $node['product_id'];			
+			//print_r($node_info);
+			$_SESSION['node'][$name] = $node_info['node'];
+			$node = $_SESSION['node'][$name];
+			$_SESSION['product_id'][$name] = $node_info['product_id'];			
 		}
+		//echo "name=".$name." node=".$node;
 		return $node;
 	}
 	public function getPrefix()
