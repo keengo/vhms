@@ -23,7 +23,6 @@ class ProductAPI extends API
 	}
 	/**
 	 * @deprecated 请使用product.lib.php接口
-	 * Enter description here ...
 	 * @param unknown_type $id
 	 */
 	public function getVhostProduct($id)
@@ -36,8 +35,7 @@ class ProductAPI extends API
 		return false;
 	}
 	/**
-	 * @deprecated 请使用product.lib.php接口
-	 * Enter description here ...
+	 * @deprecated 未来，请使用product.lib.php接口
 	 */
 	public function flushVhostProduct()
 	{

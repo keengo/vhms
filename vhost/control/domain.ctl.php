@@ -36,7 +36,7 @@ class DomainControl extends Control
 		}
 		$attr['user'] = getRole('vhost');		
 		$attr['name'] = $_REQUEST['domain'];
-		load_conf('pub:reserv_domain');
+		@load_conf('pub:reserv_domain');
 		if(is_array($GLOBALS['reserv_domain'])){
 			for($i=0;$i<count($GLOBALS['reserv_domain']);$i++){
 				if(strcasecmp($attr['name'],$GLOBALS['reserv_domain'][$i])==0){
