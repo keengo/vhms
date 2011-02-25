@@ -12,16 +12,16 @@ function go_back()
 <table id="table_2" cellpadding="0" cellspacing="1">
 	<form name='frm' action='?c=nodes&a=init&name={{$name}}' method='post'>
 	<tr>
-		<td class="td_bgc" align="center"><input name="init_flag"
+		<td class="td_bgc td_hg padd4"><input name="init_flag"
 			type="checkbox" id="init_flag" value="1" checked> 初始化磁盘配额</td>
 	</tr>
 	<tr>
-		<td class="td_bgc td_hg" colspan="2" align="center"><input
+		<td class="td_bgc td_hg padd4" colspan="2"><input
 			name="config_flag" type="checkbox" id="config_flag" value="1" checked>
-		更新配置文件</td>
+		更新配置文件,重启FTP</td>
 	</tr>
 	<tr>
-		<td class="td_bgc td_hg" colspan="2" align="center"><input
+		<td class="td_bgc td_hg padd4" colspan="2"><input
 			name="reboot_flag" type="checkbox" id="reboot_flag" value="1" checked>
 		重起kangle</td>
 	</tr>
