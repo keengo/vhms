@@ -1,21 +1,21 @@
 ﻿<div id="container">
-<div class="padd3 mar_top">
-<div class="topimg">{{if $action=='add'}}增加域名绑定{{else}}修改域名绑定{{/if}}</div>
-</div>
-  <form name='nodeform' action="?c=domain&a={{$action}}" method="post">
-	<div class="head_block tb_wid2">&nbsp;增加域名绑定</div>
-<div class="block tb_wid2">
-<table id="table_2" cellpadding="0" cellspacing="1">
-  <tr>
-    <td class="td_bgc right_2">域名绑定：</td>
-        <td class="td_bgc">
-          <input type='text' name='domain' id='domain' value="{{$domain.domain}}" onBlur="checkName();"></td>
-       </tr>
-      <tr>
-        <td class="td_bgc right_2" colspan="2" align="center"><button type="submit">确定</button></td>
-       </tr>
-    </table>
+	<div class="padd3 mar_top">
+		<div class="topimg">{{if $action=='add'}}增加域名绑定{{else}}修改域名绑定{{/if}}</div>
 	</div>
-  </form>
-    </div>
+	<form name='nodeform' action="?c=domain&a={{$action}}" method="post">
+	<div class="head_block tb_wid2">&nbsp;增加域名绑定</div>
+	<div class="block tb_wid2">
+		<table id="table_2" cellpadding="0" cellspacing="1">
+		  <tr>
+			<td class="td_bgc right_2">域名绑定：</td>
+				<td class="td_bgc">
+				  <input type='text' name='domain' id='domain' value="{{$domain.domain}}"></td>
+			   </tr>
+			  <tr>
+				<td class="td_bgc right_2" colspan="2" align="center"><input type="submit" value="确定"></td>
+			   </tr>
+		</table>
+	</div>
+	</form>	
+</div>
 
