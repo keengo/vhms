@@ -70,8 +70,7 @@ function changeNode(id,templete)
       </tr>
 	  {{foreach from=$list item=row}}
       <tr>
-        <td class="right">[<a href="javascript:if(confirm('确定删除{{$row.name}}?')){location='?c=vhostproduct&a=del&id={{$row.id}}';}" title="删除">
-        删除</a>]
+        <td class="right">[<a href="javascript:if(confirm('确定删除{{$row.name}}?')){location='?c=vhostproduct&a=del&id={{$row.id}}';}" title="删除">删除</a>]
         [<a href="?c=vhostproduct&a=editProductForm&id={{$row.id}}">
         更改</a>]
         <td class="right">{{$row.id}}</td>
