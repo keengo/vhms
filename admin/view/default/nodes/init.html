@@ -1,37 +1,40 @@
 {{include file='common/head.html'}}
 <body leftmargin="0" topmargin="0" bgcolor="#ffffff" text="#000000">
 <div align="center">
-<div class="head_block tb_wid">&nbsp;³õÊ¼»¯</div>
+<div class="head_block tb_wid">&nbsp;åˆå§‹åŒ–æœåŠ¡å™¨{{$name}}</div>
 <div class="block tb_wid">
-	<table id="table_2" cellpadding="0" cellspacing="1" >
-	<form name='frm'>
-		<tr>
-		   <td class="td_bgc" align="center"><input name="init_flag" type="checkbox" id="init_flag" value="1" checked> 
-		   ³õÊ¼»¯´ÅÅÌÅä¶î		   
-		   </td>
-		</tr>
-			    <tr>
+<script language='javascript'>
+function go_back()
+{
+	windows.location="?c=nodes&a=listNode";
+}
+</script>
+<table id="table_2" cellpadding="0" cellspacing="1">
+	<form name='frm' action='?c=nodes&a=init&name={{$name}}' method='post'>
+	<tr>
+		<td class="td_bgc" align="center"><input name="init_flag"
+			type="checkbox" id="init_flag" value="1" checked> åˆå§‹åŒ–ç£ç›˜é…é¢</td>
+	</tr>
+	<tr>
+		<td class="td_bgc td_hg" colspan="2" align="center"><input
+			name="config_flag" type="checkbox" id="config_flag" value="1" checked>
+		æ›´æ–°é…ç½®æ–‡ä»¶</td>
+	</tr>
+	<tr>
+		<td class="td_bgc td_hg" colspan="2" align="center"><input
+			name="reboot_flag" type="checkbox" id="reboot_flag" value="1" checked>
+		é‡èµ·kangle</td>
+	</tr>
+	<tr>
 		<td class="td_bgc td_hg" colspan="2" align="center">
-		<input name="config_flag" type="checkbox" id="config_flag" value="1" checked>
-		   ¸üĞÂÅäÖÃÎÄ¼ş
-		</td>
-	  </tr>
-	  	    <tr>
-		<td class="td_bgc td_hg" colspan="2" align="center">
-		<input name="rebot_flag" type="checkbox" id="rebot_flag" value="1" checked>
-		   ÖØÆğkangle
-		</td>
-	  </tr>
-	    <tr>
-		<td class="td_bgc td_hg" colspan="2" align="center">
-		<input type="submit" value="ÏÂÒ»²½">
-		</td>
-	  </tr>
-	  </form>
-	</table>
-	
+		<input type='button' onClick='javascript:window.location="?c=nodes&a=listNode"' value='è¿”å›'/> <input
+			type="submit" value="ç¡®å®š"></td>
+	</tr>
+	</form>
+</table>
+
 </div>
 
-  </div>
+</div>
 </body>
 {{include file='common/foot.html'}}

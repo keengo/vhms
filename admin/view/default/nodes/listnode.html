@@ -82,7 +82,7 @@ function checkAllNode()
       <tr>
         <td class="right">
           [<a href="javascript:if(confirm('确定删除{{$row.name}}?')){location='?c=nodes&a=del&name={{$row.name}}';}" title="删除主机">删除</a>]
-          [<a href="javascript:if(confirm('确定初始化{{$row.name}}?')){location='?c=nodes&a=init&name={{$row.name}}';}">初始化</a><a href="?c=vhostproduct&a=exportConfig&name={{$row.name}}"></a>] 
+          [<a href='?c=nodes&a=initForm&name={{$row.name}}'>初始化</a><a href="?c=vhostproduct&a=exportConfig&name={{$row.name}}"></a>] 
        
           [<a href="?c=nodes&a=editForm&name={{$row.name}}" title="更改信息">修改</a>]
          </td>

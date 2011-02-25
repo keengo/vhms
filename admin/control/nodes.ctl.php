@@ -50,16 +50,10 @@ class NodesControl extends Control {
 		$this->_tpl->assign('node',$node);
 		$this->_tpl->display('nodes/addnode.html');
 	}
-	public function init(){
-		$node = daocall('nodes','getNode',array($_REQUEST['name']));
-		if(!$node){
-			die("no such node");
-		}
-		$this->_tpl->assign('action','edit');
-		$this->_tpl->assign('node',$node);
+	public function initForm(){
+		$this->_tpl->assign('name',$_REQUEST['name']);
 		$this->_tpl->display('nodes/init.html');
 	}
-
 	public function edit(){
 		$os = $this->getOs();
 		if(!$os){
