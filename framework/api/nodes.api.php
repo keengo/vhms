@@ -93,116 +93,117 @@ class NodesAPI extends API
 	 * 0   全部(首次初始化开始)
 	 * 1  除首次初始化全部
 	 */
-	public function init($node,$level=0)
+	public function init($node,$config_flag ,$init_flag ,$reboot_flag)
 	{
 		$whm = $this->makeWhm($node);
-		$node_cfg = $GLOBALS['node_cfg'][$node];
-		/*
-		 * 生成数据库连接文件etc/vh_db.xml
-		 * 这个文件为什么要放到etc呢？而不放到ext下面?
-		 * 问得好！权限问题，数据库连接文件包含重要的密码信息，要确保除超级用户外无人可访问。
-		 * 而ext目录下面是扩展目录，普通用户需要读和运行的权限。
-		 * 我们可以在ext/templete.xml放入一条<!--#include etc/vh_db.xml -->,把数据库连接文件包含进来.
-		 * 这样就可以加载etc/vh_db.xml文件了。
-		 */
-		$win = $node_cfg['win'];
-		if($win){
-			$driver = "bin/vhs_mysql.dll";
-		}else{
-			$driver = "bin/vhs_mysql.so";
-		}
-		$phpmyadmin_password = getRandPasswd(12);
-	
-		$tpl = tpl::singleton();
-		$tpl->assign('phpmyadmin_password',$phpmyadmin_password);
-		$tpl->assign('win',$win);
-		$tpl->assign('skey',$GLOBALS['skey']);
-		$tpl->assign('node',$node);
-		$tpl->assign('driver',$driver);
-		$tpl->assign('col_map',daocall('vhost','getColMap', array($node)));
-		$tpl->assign('load_sql',daocall('vhost','getLoadSql', array($node)));
-		$tpl->assign('flush_sql',daocall('vhost','getFlushSql', array(null)));
-		$tpl->assign('load_info_sql',daocall('vhostinfo','getLoadInfoSql', array(null)));
-		$tpl->assign('table',daocall('vhost','getTable'));
-		$tpl->assign('col',daocall('vhost','getCols'));
-		global $db_cfg;
-		if($db_cfg['ftp']){
-			$db = $db_cfg['ftp'];
-		}else{
-			$db = $db_cfg['default'];
-		}
-		$db_local = $this->isLocalHost($db['host']);
-		$node_local = $this->isLocalHost($node_cfg['host']);
-		if($db_local && !$node_local){
-			$host = $_SERVER['SERVER_ADDR'];
-			if($host==""){
-				$host = $_SERVER['SERVER_NAME'];
+		$result = true;
+		if($config_flag == 1){
+			$node_cfg = $GLOBALS['node_cfg'][$node];
+			/*
+			 * 生成数据库连接文件etc/vh_db.xml
+			 * 这个文件为什么要放到etc呢？而不放到ext下面?
+			 * 问得好！权限问题，数据库连接文件包含重要的密码信息，要确保除超级用户外无人可访问。
+			 * 而ext目录下面是扩展目录，普通用户需要读和运行的权限。
+			 * 我们可以在ext/templete.xml放入一条<!--#include etc/vh_db.xml -->,把数据库连接文件包含进来.
+			 * 这样就可以加载etc/vh_db.xml文件了。
+			 */
+			$win = $node_cfg['win'];
+			if($win){
+				$driver = "bin/vhs_mysql.dll";
+			}else{
+				$driver = "bin/vhs_mysql.so";
 			}
-			if($host=="" || $this->isLocalHost($host)){
-				trigger_error("Cann't init node,I Cann't translate the db host.");
-				return false;
+			$phpmyadmin_password = getRandPasswd(12);
+		
+			$tpl = tpl::singleton();
+			$tpl->assign('phpmyadmin_password',$phpmyadmin_password);
+			$tpl->assign('win',$win);
+			$tpl->assign('skey',$GLOBALS['skey']);
+			$tpl->assign('node',$node);
+			$tpl->assign('driver',$driver);
+			$tpl->assign('col_map',daocall('vhost','getColMap', array($node)));
+			$tpl->assign('load_sql',daocall('vhost','getLoadSql', array($node)));
+			$tpl->assign('flush_sql',daocall('vhost','getFlushSql', array(null)));
+			$tpl->assign('load_info_sql',daocall('vhostinfo','getLoadInfoSql', array(null)));
+			$tpl->assign('table',daocall('vhost','getTable'));
+			$tpl->assign('col',daocall('vhost','getCols'));
+			global $db_cfg;
+			if($db_cfg['ftp']){
+				$db = $db_cfg['ftp'];
+			}else{
+				$db = $db_cfg['default'];
 			}
-			//如果db host是local,而节点不是local,则要替换db的host为公网IP
-			$db['host'] = $host;
+			$db_local = $this->isLocalHost($db['host']);
+			$node_local = $this->isLocalHost($node_cfg['host']);
+			if($db_local && !$node_local){
+				$host = $_SERVER['SERVER_ADDR'];
+				if($host==""){
+					$host = $_SERVER['SERVER_NAME'];
+				}
+				if($host=="" || $this->isLocalHost($host)){
+					trigger_error("Cann't init node,I Cann't translate the db host.");
+					return false;
+				}
+				//如果db host是local,而节点不是local,则要替换db的host为公网IP
+				$db['host'] = $host;
+			}
+			$tpl->assign('db',$db);	
+			$tpl->assign('dev',$node_cfg['dev']);
+			$whmCall = new WhmCall('core.whm','write_file');
+			$whmCall->addParam('file', 'etc/vh_db.xml');
+			
+			$content = $tpl->fetch('config/vh_db.xml');
+			$whmCall->addParam('content',base64_encode($content));
+			$result = $whm->call($whmCall);	
+			
+			/*
+			 * 写入模板文件,etc/templete.xml
+			 */
+			$content = $tpl->fetch('config/templete.xml');
+			$whmCall = new WhmCall('core.whm','write_file');
+			$whmCall->addParam('file', 'ext/templete.xml');
+			$whmCall->addParam('content',base64_encode($content));
+			$result = $whm->call($whmCall);
+			/*
+			 * 写入ftp配置文件
+			 */
+			$whmCall = new WhmCall('core.whm','write_file');
+			if($win){
+				$content = $tpl->fetch('config/linxftp.conf');			
+				$whmCall->addParam('file','etc/linxftp.conf');
+			}else{
+				$content = $tpl->fetch('config/proftpd.conf');
+				$whmCall->addParam('file','/vhs/proftpd/etc/proftpd.conf');
+			}
+			$whmCall->addParam('content',base64_encode($content));
+			$result = $whm->call($whmCall);			
+			/*
+			 * 写do_config.php
+			 */
+			$content = $tpl->fetch('config/db_config.conf');
+			$whmCall = new WhmCall('core.whm','write_file');
+			$whmCall->addParam('file', 'etc/db_config.php');
+			$whmCall->addParam('content',base64_encode($content));
+			$result = $whm->call($whmCall);
+			$whmCall = new WhmCall('vhost.whm','reboot_ftp');
+			$result = $whm->call($whmCall);
 		}
-		$tpl->assign('db',$db);	
-		$tpl->assign('dev',$node_cfg['dev']);
-		$whmCall = new WhmCall('core.whm','write_file');
-		$whmCall->addParam('file', 'etc/vh_db.xml');
-		
-		$content = $tpl->fetch('config/vh_db.xml');
-		$whmCall->addParam('content',base64_encode($content));
-		$result = $whm->call($whmCall);	
-		
-		/*
-		 * 写入模板文件,etc/templete.xml
-		 */
-		$content = $tpl->fetch('config/templete.xml');
-		$whmCall = new WhmCall('core.whm','write_file');
-		$whmCall->addParam('file', 'ext/templete.xml');
-		$whmCall->addParam('content',base64_encode($content));
-		$result = $whm->call($whmCall);
-		/*
-		 * 写入ftp配置文件
-		 */
-		$whmCall = new WhmCall('core.whm','write_file');
-		if($win){
-			$content = $tpl->fetch('config/linxftp.conf');			
-			$whmCall->addParam('file','etc/linxftp.conf');
-		}else{
-			//linux写proftpd的配置文件
+		if($init_flag == 1){
+			/*
+			 * 调用init_node，初始化节点，如开启磁盘quota等等操作
+			 */
+			$whmCall = new WhmCall('vhost.whm','init_node');
+			$whmCall->addParam('dev',$node_cfg['dev']);
+			$whmCall->addParam('prefix',apicall('vhost','getPrefix'));
+			$whmCall->addParam('phpmyadmin_password',$phpmyadmin_password);
+			$result = $whm->call($whmCall);
 		}
-		$whmCall->addParam('content',base64_encode($content));
-		$result = $whm->call($whmCall);
-		
-		
-		/*
-		 * 写do_config.php
-		 */
-		$content = $tpl->fetch('config/db_config.conf');
-		$whmCall = new WhmCall('core.whm','write_file');
-		$whmCall->addParam('file', 'etc/db_config.php');
-		$whmCall->addParam('content',base64_encode($content));
-		$result = $whm->call($whmCall);
-		
-		if($result){
-			if($level == 0){
-				/*
-				 * 调用init_node，初始化节点，如开启磁盘quota等等操作
-				 */
-				$whmCall = new WhmCall('vhost.whm','init_node');
-				$whmCall->addParam('dev',$node_cfg['dev']);
-				$whmCall->addParam('prefix',apicall('vhost','getPrefix'));
-				$whmCall->addParam('phpmyadmin_password',$phpmyadmin_password);
-				$result = $whm->call($whmCall);
-			}
-			if($result){
-				/*
-				 * 调用重启,使设置生效
-				 */
-				$whmCall = new WhmCall('core.whm','reboot');
-				$whm->call($whmCall);
-			}
+		if($reboot_flag == 1){
+			/*
+			 * 调用重启,使设置生效
+			 */
+			$whmCall = new WhmCall('core.whm','reboot');
+			$whm->call($whmCall);
 		}
 		if(!$result){
 			trigger_error($whmCall->getCallName()." ".$whm->err_msg);
