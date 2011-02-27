@@ -1,7 +1,8 @@
 <div align="center">
 <div class="head_block tb_wid2">&nbsp;帐号信息</div>
 <div class="block tb_wid2">
-	<table id="table_2" cellpadding="0" cellspacing="1">
+
+<table id="table_2" cellpadding="0" cellspacing="1">
   <tr>
    <td class="td_bgc right_2">用户名</td>
     <td class="td_bgc">{{$user.name}}</td>
@@ -40,6 +41,22 @@
     <td class="td_bgc right_2">状态</td>
     <td class="td_bgc">{{$user.status}}</td>
   </tr>
+{{if count($subtempletes)>1}}
+<form name='frm' action='?c=index&a=changeSubtemplete' method='post'>
+ <tr>
+   <td class="td_bgc right_2">引擎切换</td>
+    <td class="td_bgc" valign='middle'>
+    <select name='subtemplete' onChange='frm.submit()'>
+    {{foreach from=$subtempletes item=subtemplete}}
+    <option value='{{$subtemplete}}' {{if $subtemplete==$user.subtemplete}}selected{{/if}}>
+    {{$subtemplete}}</option>
+    {{/foreach}}
+    </select>
+    </td>
+    
+ </tr>
+ </form>
+{{/if}}
 </table>
 </div>
 

@@ -65,9 +65,20 @@ class IndexControl extends Control
 				$_SESSION['quota'][$vhost] = $quota;
 				$this->_tpl->assign('quota',$quota);
 			}
+			$subtempletes = apicall('nodes','listSubTemplete',array($user['node'],$user['templete']));
+			$this->_tpl->assign('subtempletes',$subtempletes);
 		}
 		$this->_tpl->assign('user',$user);
 		return $this->_tpl->fetch('kfinfo.html');
+	}
+	public function changeSubtemplete()
+	{
+		$arr['subtemplete'] = $_REQUEST['subtemplete'];
+		$vhost = getRole('vhost');
+		daocall('vhost','updateVhost',array($vhost,$arr));
+		$node = apicall('vhost','getNode',array($vhost));
+		apicall('vhost','noticeChange',array($node,$vhost));
+		return $this->main();
 	}
 }
 ?>

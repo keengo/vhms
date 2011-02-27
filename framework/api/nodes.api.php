@@ -39,6 +39,28 @@ class NodesAPI extends API
 		}
 		return $templete;
 	}
+	public function listSubTemplete($node,$templete)
+	{
+		$whm = $this->makeWhm($node);
+		if(!$whm){
+			return false;
+		}
+		$call = new WhmCall('core.whm',"list_tvh");
+		$call->addParam('name', $templete);
+		$result = $whm->call($call,5);
+		if(!$result){
+			return false;
+		}
+		$subtemplete = array();
+		for($i=0;;$i++){
+			$value = $result->get("name",$i);
+			if(!$value){
+				break;
+			}
+			$subtemplete[] = $value;
+		}
+		return $subtemplete;
+	}
 	public function makeWhm2($host,$port,$user,$passwd)
 	{
 		load_lib("pub:whm");
