@@ -11,13 +11,6 @@
 	MARGIN-RIGHT: auto; 
 	MARGIN-LEFT: auto;
 }
-.block {
-	border: 1px solid #7FBBF4;	
-	background-color:#C7EAF6;
-	 /* 表格居中 */
-	MARGIN-RIGHT: auto; 
-	MARGIN-LEFT: auto;
-}
 .head_block2 {
 	border: 1px solid #0099FF;
 	border-bottom-width:0px;
@@ -27,6 +20,13 @@
 	padding-bottom:6px;
 	text-align:left;
 }
+.block {
+	border: 1px solid #7FBBF4;	
+	background-color:#C7EAF6;
+	 /* 表格居中 */
+	MARGIN-RIGHT: auto; 
+	MARGIN-LEFT: auto;
+}
 #table_2 {
 width:100%;
 border:0px;
@@ -34,6 +34,10 @@ line-height:30px;
 }
 .td_hg{
 height:30px;
+}
+.td_hg2{
+padding-top:30px;
+height:100px;
 }
 .tb_wid{
 width:50%;
@@ -70,6 +74,14 @@ padding-left:19%;
 .padd4{
 padding-left:38%;
 }
+#header{
+width:100%;
+background:#464646;
+height:35px;
+color:#FFFFFF;
+margin-bottom:60px;
+}
+
 
 
 
