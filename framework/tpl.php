@@ -11,8 +11,9 @@ class TPL
 		require_once( SYS_ROOT . "/smarty/Smarty.class.php");
 		if (!isset(self::$instance)) {
             self::$instance = new Smarty();
-			self::$instance->use_sub_dirs = false;
+			self::$instance->use_sub_dirs = true;
 			self::$instance->template_dir = APPLICATON_ROOT . '/view/default';
+			self::$instance->compile_dir = SYS_ROOT.'/templates_c';
 			if(!defined(TPL_ROOT)){
 				define(TPL_ROOT,dirname($_SERVER['SCRIPT_NAME']));
 			}
