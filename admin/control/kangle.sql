@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 19, 2011 at 10:25 AM
+-- Generation Time: Feb 27, 2011 at 03:08 AM
 -- Server version: 5.1.53
--- PHP Version: 5.2.16
+-- PHP Version: 5.3.5
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `vhost` (
   PRIMARY KEY (`uid`),
   KEY `name` (`name`),
   KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='虚拟主机表' AUTO_INCREMENT=1009 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='虚拟主机表' AUTO_INCREMENT=1000 ;
 
 -- --------------------------------------------------------
 
@@ -151,5 +151,7 @@ CREATE TABLE IF NOT EXISTS `vhost_product` (
   `node` varchar(32) NOT NULL,
   `try_flag` tinyint(4) DEFAULT '0',
   `month_flag` tinyint(4) DEFAULT '0',
+  `subdir_flag` tinyint(4) NOT NULL DEFAULT '0',
+  `subdir` varchar(255) NOT NULL DEFAULT '/',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='产品列表' AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='产品列表' AUTO_INCREMENT=7 ;
