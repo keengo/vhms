@@ -7,6 +7,20 @@ class InstallControl extends Control
 {
 	public function step1()
 	{
+		if(!class_exists('PDO')){
+			die("没有开启PDO支持");
+		}
+		$drivers = PDO::getAvailableDrivers();
+		$finded = false;
+		for($i=0;$i<count($drivers);$i++){
+			if($drivers[$i]=='mysql'){
+				$finded = true;
+				break;
+			}
+		}
+		if(!$finded){
+			die("PDO没有mysql驱动");
+		}
 		//测试空间是否可写
 		$test_file = dirname(__FILE__)."test_write.txt";
 		$fp = @fopen($test_file,"wt");
