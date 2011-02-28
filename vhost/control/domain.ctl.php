@@ -20,10 +20,11 @@ class DomainControl extends Control
 	}
 	public function addForm()
 	{
+		$vhost = getRole('vhost');
 		$this->_tpl->assign('action','add');
 		$product = apicall('product','newProduct',array('vhost'));
-		$info = $product->getInfo($_SESSION['product_id'][getRole('vhost')]);
-		
+		$info = $product->getInfo($_SESSION['user'][$vhost]['product_id']);
+		//print_r($info);
 		$this->_tpl->assign('subdir_flag',$info['subdir_flag']);
 		$this->_tpl->assign('default_subdir',$info['subdir']);
 		return $this->_tpl->fetch('domain/add.html');
@@ -34,7 +35,8 @@ class DomainControl extends Control
 		if($ret){
 			return '该域名已被绑定，请联系管理员';
 		}
-		$attr['user'] = getRole('vhost');		
+		$vhost = getRole('vhost');
+		$attr['user'] = $vhost;		
 		$attr['name'] = $_REQUEST['domain'];
 		@load_conf('pub:reserv_domain');
 		if(is_array($GLOBALS['reserv_domain'])){
@@ -48,7 +50,7 @@ class DomainControl extends Control
 			return '域名不合法';			
 		}
 		$product = apicall('product','newProduct',array('vhost'));
-		$info = $product->getInfo($_SESSION['product_id'][getRole('vhost')]);
+		$info = $product->getInfo($_SESSION['user'][$vhost]['product_id']);
 		$attr['type'] = 0;
 		if($info['subdir_flag']==1){
 			$attr['value'] = $_REQUEST['subdir'];

@@ -23,7 +23,7 @@
       <tr>
         <td class="td_bgc right_2">管理端口：</td>
         <td class="td_bgc"><input name="port" id='tb_wid3' value="{{$node.port}}" type="text">
-			   <font color=red>*必填</font></td>
+			   <font color=red>*必填(如:3311)</font></td>
         </tr>
 	  <tr>
         <td class="td_bgc right_2">管理用户名：</td>
@@ -46,9 +46,9 @@
            </td>
         </tr>
 	  <tr>
-        <td class="td_bgc right_2">物理盘：</td>
+        <td class="td_bgc right_2">物理盘/挂载点：</td>
         <td class="td_bgc"><input name="dev" type="text" id='tb_wid3' value="{{$node.dev}}">
-            <font color=red>*必填(windows写c:,d:等，unix写/dev/sda1等)</font></td>
+            <font color=red>*必填(windows写c:,d:等，unix写/home等)</font></td>
         </tr>
 	    <tr>
 	    <td class="td_bgc td_hg" colspan="2" align="center">
