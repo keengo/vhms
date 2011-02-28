@@ -4,11 +4,9 @@
 <config>
 <vhs>
 <env dev='{{$dev}}'/>
-<vh_templete name='html' inherit='0'>
+<vh_templete name='html' inherit='0' index='index.html,index.htm'>
 <init_event event='vhost.whm:init_vh' />
 <destroy_event event='vhost.whm:destroy_vh'/>
-</vh_templete>
-<vh_templete name='all' inherit='1' templete='html'>
 </vh_templete>
 </vhs>
 </config>
