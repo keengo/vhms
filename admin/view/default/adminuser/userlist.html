@@ -1,9 +1,11 @@
 {{include file='common/head.html'}}
 <body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
 <div id="container">
-<div class="topimg">当前位置：主机管理 -> 用户列表</div>
-<div class="topimg pal1">共计 {{$sum}} 条记录</div>
-  <div id="main" class="wid">
+<div class="padd2 mar_top">
+<div class="topimg">共计 {{$sum}} 条记录</div>
+</div>
+<div align="center">
+  <div class="tb_wid">
     <table cellpadding=0 cellspacing=1 id="table">
       <tr id="ttitle">
         <td class='color01 right' bgcolor='#efefef'>用户名</td>
@@ -18,9 +20,8 @@
       </tr>
 	  {{/foreach}}
     </table>
-    <div align="left">
-	</div>
   </div>
+</div>
 </div>
 </body>
 </html>

@@ -1,0 +1,88 @@
+.head_block {
+	border: 1px solid #0099FF;
+	border-bottom-width:0px;
+	background-color:#51A3EC;
+	color:#FFFFFF;
+	padding-top:6px;
+	padding-bottom:6px;
+	text-align:left;
+	/* 表格居中 */
+	margin-top:15px;
+	MARGIN-RIGHT: auto; 
+	MARGIN-LEFT: auto;
+}
+.head_block2 {
+	border: 1px solid #0099FF;
+	border-bottom-width:0px;
+	background-color:#51A3EC;
+	color:#FFFFFF;
+	padding-top:6px;
+	padding-bottom:6px;
+	text-align:left;
+}
+.block {
+	border: 1px solid #7FBBF4;	
+	background-color:#C7EAF6;
+	 /* 表格居中 */
+	MARGIN-RIGHT: auto; 
+	MARGIN-LEFT: auto;
+}
+#table_2 {
+width:100%;
+border:0px;
+line-height:30px;
+}
+.td_hg{
+height:30px;
+}
+.td_hg2{
+padding-top:30px;
+height:100px;
+}
+.tb_wid{
+width:50%;
+}
+.tb_wid2{
+width:60%;
+}
+#tb_wid3{
+width:130px;
+}
+.tb_wid4{
+width:70%;
+}
+.td_bgc {
+background-color:#f5f5f5;
+}
+.right_2 {
+padding-left:10px;
+}
+.mar_top {
+margin-top:15px;
+margin-bottom:5px;
+line-height:30px;
+}
+.padd{
+padding-left:7%;
+}
+.padd2{
+padding-left:24%;
+}
+.padd3{
+padding-left:19%;
+}
+.padd4{
+padding-left:38%;
+}
+#header{
+width:100%;
+background:#464646;
+height:35px;
+color:#FFFFFF;
+margin-bottom:60px;
+}
+
+
+
+
+

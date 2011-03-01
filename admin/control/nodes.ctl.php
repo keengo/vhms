@@ -1,7 +1,7 @@
 <?php
 needRole('admin');
 class NodesControl extends Control {
-	
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -31,7 +31,7 @@ class NodesControl extends Control {
 		header("Content-Type: text/xml; charset=utf-8");
 		$str = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
 		$str .="<result node='".$_REQUEST['node']."' whm='";
-		$str.=$result['whm'];	
+		$str.=$result['whm'];
 		$str.="' db='".$result['db']."'/>";
 		return $str;
 	}
@@ -49,6 +49,10 @@ class NodesControl extends Control {
 		$this->_tpl->assign('action','edit');
 		$this->_tpl->assign('node',$node);
 		$this->_tpl->display('nodes/addnode.html');
+	}
+	public function initForm(){
+		$this->_tpl->assign('name',$_REQUEST['name']);
+		$this->_tpl->display('nodes/init.html');
 	}
 	public function edit(){
 		$os = $this->getOs();
@@ -71,7 +75,7 @@ class NodesControl extends Control {
 		$os = $this->getOs();
 		if(!$os){
 			return false;
-		}		
+		}
 		$data = array(
 			'name'=>$_REQUEST['name'],
 			'host'=> $_REQUEST['host'],
@@ -86,13 +90,18 @@ class NodesControl extends Control {
 		);
 		$ret = daocall("nodes","insertNode",array($data));
 		if($ret !== false ){
-		//	header("Location: ?c=nodes&a=listNode");
+			//	header("Location: ?c=nodes&a=listNode");
 		}
 		$this->flush();
 	}
 	public function init()
 	{
-		if(apicall('nodes','init',array($_REQUEST['name']))){
+		if(apicall('nodes','init',array(
+		$_REQUEST['name'],
+		$_REQUEST['config_flag'],
+		$_REQUEST['init_flag'],
+		$_REQUEST['reboot_flag']
+		))){
 			$this->_tpl->assign('msg','初始化成功');
 		}else{
 			$this->_tpl->assign('msg','初始化失败');

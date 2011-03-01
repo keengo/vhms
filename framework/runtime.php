@@ -21,7 +21,7 @@ if(!defined('SYS_ROOT'))
 {
 	trigger_error('未定义常量 SYS_ROOT.', E_USER_ERROR);
 }
-
+define(VHMS_VERSION,"1.0 beta1");
 /**
  * 框架全局变量
  */
@@ -331,7 +331,10 @@ function setTitle($title)
 function getTitle()
 {
 	global $__core_env;
-	return $__core_env['title'];
+	if($__core_env['title']==""){
+		$__core_env['title'] = "kangle虚拟主机管理系统";
+	}
+	return $__core_env['title']." - Powered by kangle vhms ".VHMS_VERSION;
 }
 function getRandPasswd($len=8)
 {
@@ -348,7 +351,11 @@ function getRandPasswd($len=8)
 }
 function needRole($role)
 {
+
 	if(!isRole($role)){
+		if($_SERVER["QUERY_STRING"]=='c=session&a=loginForm'){
+			die("");
+		}
 		die('<html><body><script language="javascript">window.top.location.href="?c=session&a=loginForm";</script></body></html>');
 	}
 }

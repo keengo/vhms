@@ -30,6 +30,10 @@ class PublicControl extends  Control
 	}
 	public function register()
 	{
+		$username = $_REQUEST['username'];
+		if(!preg_match('/^[a-z0-9][a-z0-9_]{2,11}$/', $username)){
+			return "用户名不符合标准";
+		}
 		$result = daocall('user','newUser',array(
 		$_REQUEST['username'],
 		$_REQUEST['passwd'],

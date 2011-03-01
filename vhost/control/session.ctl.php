@@ -11,6 +11,7 @@ class SessionControl extends Control {
 	}
 	public function loginForm(){
 		$this->_tpl->display('login.html');
+		//return "没有登录";
 	}
 	public function sso()
 	{

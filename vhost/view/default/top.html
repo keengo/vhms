@@ -1,9 +1,13 @@
-<div id='product_menu' align='center'> 
+<div align="center">
+<div class="block tb_wid2 mar_top" align="center"> 
 [<a href='?c=index&a=main'>产品信息</a>] 
 [<a href='?c=session&a=changePasswordForm'>修改密码</a>] 
 [<a href='?c=domain&a=show'>域名绑定</a>] 
+{{if $webftp_url}}
 [<a href='{{$webftp_url}}' target='_blank'>在线文件管理</a>]
+{{/if}}
 {{if $dbadmin_url}}
 [<a href='{{$dbadmin_url}}' target='_blank'>数据库管理</a>]
 {{/if}}
+</div>
 </div>

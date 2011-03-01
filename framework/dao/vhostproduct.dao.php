@@ -14,7 +14,9 @@ class VhostproductDAO extends DAO {
 			'pause_flag'=>'pause_flag',
 			'node'=>'node',
 			'try_flag'=>'try_flag',
-			'month_flag'=>'month_flag'
+			'month_flag'=>'month_flag',
+			'subdir_flag'=>'subdir_flag',
+			'subdir'=>'subdir'
 		);
 		$this->MAP_TYPE = array(
 			'id'=>FIELD_TYPE_INT|FIELD_TYPE_AUTO,
@@ -24,6 +26,7 @@ class VhostproductDAO extends DAO {
 			'pause_flag'=>FIELD_TYPE_INT,
 			'try_flag'=>FIELD_TYPE_INT,
 			'month_flag'=>FIELD_TYPE_INT,
+			'subdir_flag'=>FIELD_TYPE_INT
 		);
 		$this->_TABLE = DBPRE .'vhost_product';
 	}
@@ -42,7 +45,7 @@ class VhostproductDAO extends DAO {
 	}
 	public function updateProduct($arr)
 	{
-		$fields = $this->getFields(array('name','web_quota','db_quota','templete','price','pause_flag','node'), $arr);
+		$fields = $this->getFields(array('name','web_quota','db_quota','templete','price','pause_flag','node','subdir_flag','subdir'), $arr);
 		$sql = "UPDATE ".$this->_TABLE." SET ".$fields." WHERE ".$this->getFieldValue2('id',$arr['id']);
 		return $this->executex($sql);
 	}

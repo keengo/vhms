@@ -4,35 +4,29 @@
 <div class="topimg">当前位置：用户管理-> 用户列表-> 修改用户资料</div>
   <div id="main" class="wid">
   <form  action="?c=user&a=edit&username={{$user.username}}" method='post'>
-    <table align="center" id="td1" border="0" cellpadding="0" cellspacing="1" width="80%">
-  <tr><td height="30" id="td2" colspan="2" class="color01 right"><font color="#FFFFFF">修改用户资料</font></td></tr>
-  <tr>
-    <td>
-<table width="100%" height="125" border="0" cellpadding="0" cellspacing="1" id="td5">
+<div class="head_block tb_wid">&nbsp;修改用户资料</div>
+<div class="block tb_wid">
+<table id="table_2" cellpadding="0" cellspacing="1">
       <tr>
-        <td width="203" height="25" class="color01 right" id="td3">用户名：</td>
-        <td width="412" id="td4">{{$user.username}}</td>
+        <td class="td_bgc right_2">用户名：</td>
+        <td class="td_bgc">{{$user.username}}</td>
         </tr>
       <tr>
-        <td id="td3" class="color01 right">姓名：</td>
-        <td id="td4"><input name='name' value="{{$user.name}}"/></td>
+        <td class="td_bgc right_2">姓名：</td>
+        <td class="td_bgc"><input name='name' value="{{$user.name}}"/></td>
         </tr>
       <tr>
-        <td id="td3" class="color01 right">身份证:</td>
-        <td id="td4"><input name='id'  value="{{$user.id}}"/></td>
+        <td class="td_bgc right_2">身份证:</td>
+        <td class="td_bgc"><input name='id'  value="{{$user.id}}"/></td>
         </tr>
       <tr>
-        <td id="td3" class="color01 right">电子邮件:</td>
-        <td id="td4"><input name='email' value="{{$user.email}}"/></td>
+        <td class="td_bgc right_2">电子邮件:</td>
+        <td class="td_bgc"><input name='email' value="{{$user.email}}"/></td>
        </tr>
 	   <tr>
-        <td id="td3" class="color01 right">　</td>
-        <td id="td4"><button type="submit">修改</button></td>
+        <td class="td_bgc td_hg" colspan="2" align="center"><input type="submit" value="修改"></td>
         </tr>
-    </table></td>
-  </tr>
-</table>
-	<div><!--E 协议-->
+    </table>
 	</div>
 	</form>
   </div>

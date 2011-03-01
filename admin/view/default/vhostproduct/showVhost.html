@@ -1,63 +1,68 @@
 ﻿{{include file='common/head.html'}}
 <body leftmargin="0" topmargin="0" bgcolor="#ffffff" text="#000000"> 
+<div id="main">
  <form name="form1" method="post" action="?c=vhost&a=showVhost">
     输入ftp用户名或#uid或域名
     <input name="user" type="text" id="user" value="{{$user}}">
     <input type="submit" name="Submit" value="搜索">
   </form>
-<div id="container">
-{{if $msg}}<font color=red>{{$msg}}</font>{{/if}}
+  </div>
+{{if $msg}}
+<div align="center">
+<div class="block tb_wid2 mar_top" align="center"><font color=red>{{$msg}}</font></div>
+</div>
+{{/if}}
   {{if $row}}
-   <div id="main" class="wid"> 
-  <table width="80%" border="0" align="center" cellpadding="0" cellspacing="1" id="td1">
-	<tr>
-  <td height="30" id="td2" colspan="2" class="color01 right"><font color="#FFFFFF">产品信息</font></td>
-	</tr>
-  <tr>
-    <td>
-<table width="100%" height="250" border="0" cellpadding="0" cellspacing="1" id="td5">
+  <div align="center">
+<div class="head_block tb_wid2">&nbsp;产品信息</div>
+<div class="block tb_wid2">
+<table id="table_2" cellpadding="0" cellspacing="1">
 		 <tr>
-        <td id="td3" colspan="2" align="center">
+        <td class="td_bgc td_hg" colspan="2" align="center">
 		[<a href='?c={{$smarty.request.c}}&a=resync&name={{$row.name}}'>重建空间</a>] 
         [<a href='javascript:if(confirm("真的要重设用户密码吗")){ window.location="?c={{$smarty.request.c}}&a=randPassword&name={{$row.name}}";}'>重设密码</a>] 
         [<a href='javascript:if(confirm("真的要重设数据库密码吗")){ window.location="?c={{$smarty.request.c}}&a=randDbPassword&name={{$row.name}}";}'>重设数据库密码</a>]
 		[<a href='?c={{$smarty.request.c}}&a=impLogin&name={{$row.name}}'>控制面板</a>]</td>
           </tr>
       <tr>
-        <td id="td3" width="189" class="color01 right">用户名</td>
-        <td width="423" id="td4">{{$row.name}}</td>
+        <td class="td_bgc right_2">用户名</td>
+        <td class="td_bgc">{{$row.name}}</td>
         </tr>
       <tr>
-        <td id="td3" class="color01 right">UID：</td>
-        <td id="td4">{{$row.uid}}</td>
+        <td class="td_bgc right_2">UID：</td>
+        <td class="td_bgc">{{$row.uid}}</td>
       </tr>
       <tr>
-        <td id="td3" class="color01 right">所属用户：</td>
-        <td id="td4"><a href='?c=user&a=listUser&username={{$row.username}}'>{{$row.username}}</a></td>
+        <td class="td_bgc right_2">所属用户：</td>
+        <td class="td_bgc"><a href='?c=user&a=listUser&username={{$row.username}}'>{{$row.username}}</a></td>
       </tr>
 	  <tr>
-        <td id="td3" class="color01 right">产品名称</td>
-        <td id="td4">{{$row.product_name}}</td>
+        <td class="td_bgc right_2">产品名称</td>
+        <td class="td_bgc">{{$row.product_name}}</td>
+	  </tr>
+	  <tr>
+        <td class="td_bgc right_2">模板</td>
+        <td class="td_bgc">{{$row.templete}}:{{$row.sub_templete}}</td>
 	  </tr>
 	   <tr>
-        <td id="td3"  class="color01 right">所在服务器</td>
-        <td id="td4">{{$row.node}}</td>
+        <td class="td_bgc right_2">所在服务器</td>
+        <td class="td_bgc">{{$row.node}}</td>
         </tr>
        <tr>
-        <td id="td3"  class="color01 right">路径</td>
-        <td id="td4">{{$row.doc_root}}</td>
+        <td class="td_bgc right_2">路径</td>
+        <td class="td_bgc">{{$row.doc_root}}</td>
         </tr>
 	   <tr>
-        <td id="td3"  class="color01 right">创建时间</td>
-        <td id="td4">{{$row.create_time}}</td>
+        <td class="td_bgc right_2">创建时间</td>
+        <td class="td_bgc">{{$row.create_time}}</td>
         </tr>
 			  <tr>
-        <td id="td3"  class="color01 right">过期时间</td>
-        <td id="td4">{{$row.expire_time}}</td>
+        <td class="td_bgc right_2">过期时间</td>
+        <td class="td_bgc">{{$row.expire_time}}</td>
         </tr>
 			  <tr>
-        <td id="td3"  class="color01 right">状态</td>
-        <td id="td4">
+        <td class="td_bgc right_2">状态</td>
+        <td class="td_bgc">
         <form action='?c={{$smarty.request.c}}&a=setStatus&name={{$row.name}}' method='post' name='status_form'>
         <select name='status' onChange="javascript:status_form.submit()">
         {{for $i=0; $i<10; $i++}}
@@ -67,33 +72,27 @@
  		{{/for}}
  </select>
  </form>
- </td>
-        </tr>
-</table></td>
-  </tr>
+ </td></tr>
 </table>
+</div>
 <div><br></div>
     {{if $list}}
-  <table align="center" id="td1" border="0" cellpadding="0" cellspacing="1" width="80%">
-	<tr>
-  <td height="25" colspan="2" class="color01 right" id="td2"><font color="#FFFFFF">域名绑定目录</font></td>
-	</tr>
-  <tr>
-    <td>
-<table width="100%" border="0" cellpadding="0" cellspacing="1" id="td5">
+<div class="head_block tb_wid2">&nbsp;域名绑定目录</div>
+<div class="block tb_wid2">
+<table id="table_2" cellpadding="0" cellspacing="1">
       <tr>
-        <td width="189" height="25" class="color01 right" id="td3">域名</td>
-        <td width="423" id="td4">目录</td></tr>
+        <td class="td_bgc right_2">域名</td>
+        <td class="td_bgc right_2">目录</td></tr>
 		 {{foreach from=$list item=row}}
       <tr>
-        <td class="color01 right" id="td3">{{$row.domain}}</td>
-        <td id="td4">{{$row.dir}}</td></tr>
+        <td class="td_bgc right_2 tb_wid">{{$row.name}}</td>
+        <td class="td_bgc right_2">{{$row.value}}</td></tr>
 		  {{/foreach}}
           {{/if}}
-     </table></td>
-  </tr>
-</table>
+     </table>
+	 </div>
    {{/if}}
+</div>
 </div>
 </body>
 {{include file='common/foot.html'}}

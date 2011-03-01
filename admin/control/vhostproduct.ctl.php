@@ -58,6 +58,7 @@ class VhostproductControl extends Control {
 		}else{
 			$str.="<result code='0'/>";
 		}
+		daocall('product','flushVhostProduct');
 		return $str;
 		
 		
