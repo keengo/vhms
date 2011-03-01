@@ -60,7 +60,9 @@ class VhostControl extends Control {
 		}
 		$whmCall->addParam('init','1');
 		if($whm->call($whmCall)){
-			
+			$this->_tpl->assign('msg','重建空间成功');
+		}else{
+			$this->_tpl->assign('msg','重建空间失败');
 		}
 		return $this->showVhost();
 	}

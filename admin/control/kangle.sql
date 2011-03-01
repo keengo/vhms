@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 27, 2011 at 03:08 AM
+-- Generation Time: Mar 01, 2011 at 03:28 AM
 -- Server version: 5.1.53
 -- PHP Version: 5.3.5
 
@@ -30,7 +30,6 @@ CREATE TABLE IF NOT EXISTS `admin_users` (
   `passwd` varchar(255) NOT NULL,
   `last_login` datetime DEFAULT NULL,
   `last_ip` varchar(255) DEFAULT NULL,
-  `rights` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='管理员列表';
 
@@ -55,27 +54,6 @@ CREATE TABLE IF NOT EXISTS `nodes` (
   `dev` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='服务器';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `shopping_cart`
---
-
-CREATE TABLE IF NOT EXISTS `shopping_cart` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `username` varchar(32) NOT NULL,
-  `product_type` tinyint(4) NOT NULL,
-  `state` tinyint(4) NOT NULL DEFAULT '0',
-  `price` int(11) NOT NULL,
-  `param` varchar(255) NOT NULL,
-  `mem` text NOT NULL,
-  `month` int(11) NOT NULL,
-  `add_time` datetime NOT NULL,
-  `end_time` datetime NOT NULL,
-  `product_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='购物车' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -154,4 +132,4 @@ CREATE TABLE IF NOT EXISTS `vhost_product` (
   `subdir_flag` tinyint(4) NOT NULL DEFAULT '0',
   `subdir` varchar(255) NOT NULL DEFAULT '/',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='产品列表' AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='产品列表' AUTO_INCREMENT=10 ;

@@ -11,8 +11,7 @@ class AdminUserDAO extends DAO{
 			"username" => 'username',
 			"passwd" => 'passwd',
 			"last_login" => 'last_login',
-			"last_ip" => 'last_ip',
-			"right" => 'right'
+			"last_ip" => 'last_ip'
 		);
 		$this->MAP_TYPE = array(
 		'passwd'=>FIELD_TYPE_MD5,
