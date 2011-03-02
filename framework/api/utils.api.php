@@ -3,7 +3,9 @@ class UtilsAPI extends API
 {
 	public function writeConfig($nodes,$keyname,$cfg_name)
 	{
-		$file = dirname(dirname(__FILE__))."/configs/".$cfg_name.".cfg.php";
+		$dir = dirname(dirname(__FILE__))."/configs/";
+		@mkdir($dir);
+		$file = $dir.$cfg_name.".cfg.php";
 		$fp = fopen($file,"wt");
 		if(!$fp){
 			return trigger_error("cann't open ".$file." to write!Please check right");
