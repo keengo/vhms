@@ -21,7 +21,7 @@ if(!defined('SYS_ROOT'))
 {
 	trigger_error('未定义常量 SYS_ROOT.', E_USER_ERROR);
 }
-define(VHMS_VERSION,"1.0 beta1");
+define(VHMS_VERSION,"1.1");
 /**
  * 框架全局变量
  */
@@ -93,6 +93,7 @@ function __load_core($file, $dir = "", $return = false)
 	else
 	{
 		trigger_error('文件不存在: ' . $file, E_USER_WARNING);
+		//debug_print_backtrace();
 		return false;
 	}
 }

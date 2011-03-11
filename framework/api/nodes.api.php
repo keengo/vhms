@@ -4,7 +4,7 @@ class NodesAPI extends API
 	private $MAP_ARR;
 	public function __construct()
 	{
-		load_conf('pub:node');
+		@load_conf('pub:node');
 	}
 	public function __destruct()
 	{
