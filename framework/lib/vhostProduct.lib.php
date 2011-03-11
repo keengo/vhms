@@ -1,14 +1,14 @@
-<?php 
+<?php
 class VhostProduct extends Product
 {
-	
+
 	public function __construct()
 	{
-		
+
 	}
 	public function __destruct()
 	{
-		
+
 	}
 	/**
 	 * 得到产品信息
@@ -29,18 +29,22 @@ class VhostProduct extends Product
 	 */
 	protected function create($susername,&$params=array(),$product_info=array())
 	{
-		$uid = daocall('vhost', 'insertVhost', 
+		$params['doc_root'] = $this->getDocRoot($params['name']);
+		$params['gid'] = $this->getNodeGroup($product_info['node']);
+		$params['node'] = $product_info['node'];
+		$params['init'] = '1';
+		$uid = daocall('vhost', 'insertVhost',
 		array($susername,
-			$params['name'],
-			$params['passwd'],
-			$this->getDocRoot($params['name']),
-			$this->getNodeGroup($product_info['node']),
-			$product_info['templete'],
-			0,
-			$product_info['node'],
-			$product_info['id'],
-			$params['month']
-			)
+		$params['name'],
+		$params['passwd'],
+		$params['doc_root'],
+		$params['gid'],
+		$product_info['templete'],
+		0,
+		$params['node'],
+		$product_info['id'],
+		$params['month']
+		)
 		);
 		if($uid && $uid<1000){
 			trigger_error('uid小于1000,请手工运行SQL: ALTER TABLE `vhost` AUTO_INCREMENT =1000');
@@ -53,29 +57,77 @@ class VhostProduct extends Product
 		return false;
 	}
 	/**
+	 * 同步额外信息，比如域名绑定
+	 * @param unknown_type $suser
+	 */
+	public function syncExtraInfo($suser,$node)
+	{
+		if($GLOBALS['node_db']!='sqlite'){
+			return true;
+		}
+		$info = daocall('vhostinfo','getInfo',array($suser));
+		$whm = apicall('nodes','makeWhm',array($node));
+		for($i=0;$i<count($info);$i++){
+			$whmCall = new WhmCall('core.whm','add_vh_info');
+			$whmCall->addParam('vhost',$suser);
+			$whmCall->addParam('name',$info[$i]['name']);
+			$whmCall->addParam('type',$info[$i]['type']);
+			$whmCall->addParam('value',$info[$i]['value']);	
+			$whm->call($whmCall);		
+		}
+		return true;
+	}
+	/**
 	 * 同步产品到磁盘或者远程
 	 * @param  $user
 	 * @param  $param
 	 */
-	protected function sync($user,$params,$product_info)
+	public function sync($user,$params,$product_info)
 	{
 		//print_r($product_info);
 		//die();
 		//echo "uid in sync=".$uid;
 		$param = $params['name'];
 		if($product_info['db_quota']>0){
-			$db = apicall('nodes','makeDbProduct',array($product_info['node']));
+			$db = apicall('nodes','makeDbProduct',array($params['node']));
 			if(is_object($db)){
 				$db->add($params['uid'],$params['passwd']);
 			}
 		}
-		$whm = apicall('nodes','makeWhm',array($product_info['node']));
-		$whmCall = new WhmCall('core.whm','reload_vh');
+		$whm = apicall('nodes','makeWhm',array($params['node']));
+		if($GLOBALS['node_db']=='sqlite'){
+			if($params['resync'] == '1'){
+				$whmCall = new WhmCall('core.whm','del_vh');
+				$whmCall->addParam('name',$param);
+				$whm->call($whmCall);
+			}
+			$whmCall = new WhmCall('core.whm', 'add_vh');
+			$whmCall->addParam('doc_root',$params['doc_root']);
+			if($GLOBALS['node_cfg'][$params['node']]['win']==1){
+				$whmCall->addParam('user','a'.$params['uid']);
+			}else{
+				$whmCall->addParam('user',$params['uid']);
+			}
+			$whmCall->addParam('group', $params['gid']);
+			$whmCall->addParam('templete',$params['templete']);
+			if($params['md5passwd']){
+				$whmCall->addParam('passwd',$params['md5passwd']);
+			}else{
+				$whmCall->addParam('passwd',md5($params['passwd']));
+			}
+			if($params['status']){
+				$whmCall->addParam('status',$params['status']);
+			}
+		}else{
+			$whmCall = new WhmCall('core.whm','reload_vh');
+		}
 		$whmCall->addParam('name',$param);
-		$whmCall->addParam('init','1');
+		$whmCall->addParam('init',$params['init']);
 		$whmCall->addParam('quota_limit',$product_info['web_quota']);
+		echo $whmCall->buildPostData();
+		die();
+		
 		return $whm->call($whmCall);
-		//return false;
 	}
 	public function checkParam($username,$suser)
 	{

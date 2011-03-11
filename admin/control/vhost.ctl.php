@@ -24,7 +24,7 @@ class VhostControl extends Control {
 				$call = 'listVhostByName';
 			}
 			$list = daocall('vhost',$call,array($user,'row'));
-			
+
 			if($list){
 				$product_info = apicall('product','getVhostProduct',array($list['product_id']));
 				$list['product_name'] = $product_info['name'];
@@ -40,36 +40,49 @@ class VhostControl extends Control {
 	}
 	public function setStatus()
 	{
-		$arr['status'] = $_REQUEST['status'];
+		//$arr['status'] = $_REQUEST['status'];
 		$vhost = $_REQUEST['name'];
-		daocall('vhost','updateVhost',array($vhost,$arr));
+		//daocall('vhost','updateVhost',array($vhost,$arr));
 		$node = daocall('vhost','getNode',array($vhost));
-		apicall('vhost','noticeChange',array($node,$vhost));
+		apicall('vhost','changeStatus',array($node,$vhost,$_REQUEST['status']));
+		//apicall('vhost','noticeChange',array($node,$vhost));
 		return $this->showVhost();
 	}
 	public function resync()
 	{
 		$vhost = $_REQUEST['name'];
-		$node = daocall('vhost','getVhost',array($vhost,array('node','product_id')));
-		$product = daocall('vhostproduct','getProduct',array($node['product_id'],array('web_quota')));
-		$whm = apicall('nodes','makeWhm',array($node['node']));
-		$whmCall = new WhmCall('core.whm','reload_vh');
-		$whmCall->addParam('name',$vhost);
-		if($product){
-			$whmCall->addParam('quota_limit',$product['web_quota']);
-		}
-		$whmCall->addParam('init','1');
-		if($whm->call($whmCall)){
+		$attr = daocall('vhost','getVhost',array($vhost,array(
+			'node',
+			'product_id',
+			'name',
+			'passwd',
+			'doc_root',
+			'uid',
+			'gid',
+			'templete',
+			'subtemplete',
+			'status'
+		)));
+		$attr['resync'] = '1';
+		$attr['init'] = '1';
+		$attr['md5passwd'] = $attr['passwd'];
+		$product_info = daocall('vhostproduct','getProduct',array($attr['product_id'],array('web_quota')));
+		$product = apicall('product','newProduct',array('vhost'));
+		//$product->sync($vhost,$attr,$product_info);
+		if($product->sync($vhost,$attr,$product_info)){
 			$this->_tpl->assign('msg','重建空间成功');
 		}else{
 			$this->_tpl->assign('msg','重建空间失败');
 		}
+		$product->syncExtraInfo($vhost,$attr['node']);
 		return $this->showVhost();
 	}
 	public function randPassword()
 	{
+		$vhost = $_REQUEST['name'];
 		$passwd = getRandPasswd();
-		if(daocall('vhost','updatePassword',array($_REQUEST['name'],$passwd))){
+		$node = daocall('vhost','getVhost',array($vhost,array('node')));
+		if(apicall('vhost','changePassword',array($node['node'],$vhost,$passwd))){
 			$msg = "新密码是: ".$passwd;
 		}else{
 			$msg = "重设密码出错";

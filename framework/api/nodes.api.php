@@ -129,51 +129,60 @@ class NodesAPI extends API
 			 * 我们可以在ext/templete.xml放入一条<!--#include etc/vh_db.xml -->,把数据库连接文件包含进来.
 			 * 这样就可以加载etc/vh_db.xml文件了。
 			 */
+		
+			$driver = "bin/vhs_";
+			if($GLOBALS['node_db'] == 'sqlite'){
+				$driver .= "sqlite";
+			}else{
+				$driver .= "mysql";
+			}
 			$win = $node_cfg['win'];
 			if($win){
-				$driver = "bin/vhs_mysql.dll";
+				$driver .= ".dll";
 			}else{
-				$driver = "bin/vhs_mysql.so";
+				$driver .= ".so";
 			}
-			$phpmyadmin_password = getRandPasswd(12);
+			//$phpmyadmin_password = getRandPasswd(12);
 		
 			$tpl = tpl::singleton();
-			$tpl->assign('phpmyadmin_password',$phpmyadmin_password);
+			//$tpl->assign('phpmyadmin_password',$phpmyadmin_password);
 			$tpl->assign('win',$win);
 			$tpl->assign('skey',$GLOBALS['skey']);
 			$tpl->assign('node',$node);
 			$tpl->assign('driver',$driver);
-			$tpl->assign('col_map',daocall('vhost','getColMap', array($node)));
-			$tpl->assign('load_sql',daocall('vhost','getLoadSql', array($node)));
-			$tpl->assign('flush_sql',daocall('vhost','getFlushSql', array(null)));
-			$tpl->assign('load_info_sql',daocall('vhostinfo','getLoadInfoSql', array(null)));
-			$tpl->assign('table',daocall('vhost','getTable'));
-			$tpl->assign('col',daocall('vhost','getCols'));
-			global $db_cfg;
-			if($db_cfg['ftp']){
-				$db = $db_cfg['ftp'];
-			}else{
-				$db = $db_cfg['default'];
-			}
-			$db_local = $this->isLocalHost($db['host']);
-			$node_local = $this->isLocalHost($node_cfg['host']);
-			if($db_local && !$node_local){
-				$host = $_SERVER['SERVER_ADDR'];
-				if($host==""){
-					$host = $_SERVER['SERVER_NAME'];
+			$tpl->assign('node_db',$GLOBALS['node_db']);
+			if($GLOBALS['node_db'] != 'sqlite'){
+				$tpl->assign('col_map',daocall('vhost','getColMap', array($node)));
+				$tpl->assign('load_sql',daocall('vhost','getLoadSql', array($node)));
+				$tpl->assign('flush_sql',daocall('vhost','getFlushSql', array(null)));
+				$tpl->assign('load_info_sql',daocall('vhostinfo','getLoadInfoSql', array(null)));
+				$tpl->assign('table',daocall('vhost','getTable'));
+				$tpl->assign('col',daocall('vhost','getCols'));		
+				global $db_cfg;
+				if($db_cfg['ftp']){
+					$db = $db_cfg['ftp'];
+				}else{
+					$db = $db_cfg['default'];
 				}
-				if($host=="" || $this->isLocalHost($host)){
-					trigger_error("Cann't init node,I Cann't translate the db host.");
-					return false;
+				$db_local = $this->isLocalHost($db['host']);
+				$node_local = $this->isLocalHost($node_cfg['host']);
+				if($db_local && !$node_local){
+					$host = $_SERVER['SERVER_ADDR'];
+					if($host==""){
+						$host = $_SERVER['SERVER_NAME'];
+					}
+					if($host=="" || $this->isLocalHost($host)){
+						trigger_error("Cann't init node,I Cann't translate the db host.");
+						return false;
+					}
+					//如果db host是local,而节点不是local,则要替换db的host为公网IP
+					$db['host'] = $host;
 				}
-				//如果db host是local,而节点不是local,则要替换db的host为公网IP
-				$db['host'] = $host;
+				$tpl->assign('db',$db);	
 			}
-			$tpl->assign('db',$db);	
 			$tpl->assign('dev',$node_cfg['dev']);
 			$whmCall = new WhmCall('core.whm','write_file');
-			$whmCall->addParam('file', 'etc/vh_db.xml');
-			
+			$whmCall->addParam('file', 'etc/vh_db.xml');			
 			$content = $tpl->fetch('config/vh_db.xml');
 			$whmCall->addParam('content',base64_encode($content));
 			$result = $whm->call($whmCall);	
@@ -217,7 +226,7 @@ class NodesAPI extends API
 			$whmCall = new WhmCall('vhost.whm','init_node');
 			$whmCall->addParam('dev',$node_cfg['dev']);
 			$whmCall->addParam('prefix',apicall('vhost','getPrefix'));
-			$whmCall->addParam('phpmyadmin_password',$phpmyadmin_password);
+			//$whmCall->addParam('phpmyadmin_password',$phpmyadmin_password);
 			$result = $whm->call($whmCall);
 		}
 		if($reboot_flag == 1){

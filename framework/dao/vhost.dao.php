@@ -154,7 +154,7 @@ class VhostDAO extends DAO{
 			}else if($col_name=='doc_root'){
 				$col_name = $this->getDocRootColName($node);
 			}else if($col_name=='templete'){
-				$col_name = "CONCAT(".$this->MAP_ARR['templete'].",':',".$this->MAP_ARR['subtemplete'].")";
+				$col_name = "CONCAT(".$this->MAP_ARR['templete'].",':',".$this->MAP_ARR['subtemplete'].") AS templete";
 			}else{
 				$col_name = $this->MAP_ARR[$col_name];
 			}
@@ -181,9 +181,9 @@ class VhostDAO extends DAO{
 	private function getGroupColName($node)
 	{
 		if(apicall('nodes','isWindows',array($node))){
-			return $this->MAP_ARR['gid'];
+			return $this->MAP_ARR['gid']." AS `group`";
 		}else{
-			return "CONCAT('#',".$this->MAP_ARR['gid'].")";
+			return "CONCAT('#',".$this->MAP_ARR['gid'].") AS `group`";
 		}
 	}
 	private function getDocRootColName($node)
@@ -191,16 +191,16 @@ class VhostDAO extends DAO{
 		load_conf('pub:node');
 		$node_cfg = $GLOBALS['node_cfg'][$node];
 		if(is_array($node_cfg) && $node_cfg['win'] == 1){
-			return "CONCAT('".$node_cfg['dev']."'".",".$this->MAP_ARR['doc_root'].")";
+			return "CONCAT('".$node_cfg['dev']."'".",".$this->MAP_ARR['doc_root'].") AS doc_root";
 		}
 		return $this->MAP_ARR['doc_root'];
 	}
 	private function getUserColName($node)
 	{
 		if(apicall('nodes','isWindows',array($node))){
-			return "CONCAT('a',".$this->MAP_ARR['uid'].")";
+			return "CONCAT('a',".$this->MAP_ARR['uid'].") AS user";
 		}else{
-			return "CONCAT('#',".$this->MAP_ARR['uid'].")";
+			return "CONCAT('#',".$this->MAP_ARR['uid'].") AS user";
 		}
 	}
 	public function getVhost($name,$fields=null)

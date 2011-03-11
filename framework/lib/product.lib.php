@@ -193,7 +193,7 @@ abstract class Product
 	 * @param  $user
 	 * @param  $param
 	 */
-	abstract protected function sync($username,$suser,$product_info);
+	abstract public function sync($username,$suser,$product_info);
 	abstract protected function resync($username,$suser,$oproduct,$nproduct=null);
 	abstract public function getSuser($susername);
 	abstract public function checkParam($username,$suser);

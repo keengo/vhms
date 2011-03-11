@@ -56,9 +56,13 @@ class SessionControl extends Control {
 	}
 	public function changePassword()
 	{
-		needRole('vhost');	
-		daocall('vhost', 'updatePassword', array(getRole('vhost'),$_REQUEST['passwd']));
-		$this->_tpl->assign('msg','修改密码成功');		
+		needRole('vhost');
+		if(apicall('vhost','changePassword',array(null,getRole('vhost'),$_REQUEST['passwd']))){
+		//daocall('vhost', 'updatePassword', array(getRole('vhost'),$_REQUEST['passwd']));
+			$this->_tpl->assign('msg','修改密码成功');		
+		}else{
+			$this->_tpl->assign('msg','修改密码失败');
+		}
 		return $this->_tpl->fetch('msg.html');				
 	} 
 	public function changeDbPassword()
@@ -87,7 +91,6 @@ class SessionControl extends Control {
 		if(strtolower($user["passwd"])!=strtolower(md5($passwd))){
 			return false;
 		}
-
 		return $user;
 	}
 }

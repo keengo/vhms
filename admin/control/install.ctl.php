@@ -78,6 +78,7 @@ class InstallControl extends Control
 		$str.="'passwd'=>'".$passwd."',\r\n";
 		$str.="'dbname'=>'".$dbname."');\r\n";
 		$str.="\$GLOBALS['skey'] = '".getRandPasswd(16)."';\r\n";
+		$str.="\$GLOBALS['node_db']='sqlite';\r\n";
 		$str.="?>";
 		$config_file = dirname(dirname(dirname(__FILE__)))."/config.php";
 		$fp = @fopen($config_file,"wt");

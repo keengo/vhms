@@ -1,6 +1,10 @@
 <?php
 class VhostAPI extends API
 {
+	function __construct()
+	{
+		//load_lib('pub:whm');
+	}
 	public function noticeChange($node,$name)
 	{
 		$whm = apicall('nodes','makeWhm',array($node));
@@ -40,18 +44,128 @@ class VhostAPI extends API
 		$node = $_SESSION['node'][$name];
 		if($node=="" || empty($node)){
 			$node_info = daocall('vhost','getVhost',array($name,array('node','product_id')));
-			//$node = daocall('vhost','getNode',array($name));
-			//print_r($node_info);
 			$_SESSION['node'][$name] = $node_info['node'];
 			$node = $_SESSION['node'][$name];
 			$_SESSION['product_id'][$name] = $node_info['product_id'];			
 		}
-		//echo "name=".$name." node=".$node;
 		return $node;
 	}
 	public function getPrefix()
 	{
 		return '/home/ftp/';
+	}
+	public function changeSubtemplete($node,$name,$subtemplete)
+	{
+		if($node==null){
+			$node = $this->getNode($name);
+		}
+		$attr = array('subtemplete'=>$subtemplete);
+		if($GLOBALS['node_db']=='sqlite'){
+			if(!$this->sqliteUpdateVirtualHost($node,$name, $attr)){
+				return false;
+			}
+		}
+		if(daocall('vhost','updateVhost',array($name,$attr))){		
+			if($GLOBALS['node_db']!='sqlite'){
+				$this->noticeChange($node,$name);
+			}
+			return true;
+		}
+		return false;		
+	}
+	public function changeStatus($node,$name,$status)
+	{
+		$attr = array('status'=>$status);
+		if($GLOBALS['node_db']=='sqlite'){
+			if(!$this->sqliteUpdateVirtualHost($node,$name, $attr)){
+				return false;
+			}
+		}
+		if(daocall('vhost','updateVhost',array($name,$attr))){		
+			if($GLOBALS['node_db']!='sqlite'){
+				$this->noticeChange($node,$name);
+			}
+			return true;
+		}
+		return false;
+	}
+	/**
+	 * 
+	 * 更改虚拟主机的ftp密码，
+	 * @param  $node 节点，可为null
+	 * @param  $user ftp名
+	 * @param  $passwd 密码
+	 */
+	public function changePassword($node,$name,$passwd)
+	{
+		if($node==null){
+			$node = $this->getNode($name);
+		}
+		if($GLOBALS['node_db']=='sqlite'){
+			if(!$this->sqliteUpdateVirtualHost($node,$name, array('passwd'=>md5($passwd)))){
+				return false;
+			}
+		}
+		return daocall('vhost','updatePassword',array($name,$passwd));
+	}
+	public function delInfo($user,$name,$type,$value)
+	{
+		$node = $this->getNode($user);
+		if($GLOBALS['node_db']=='sqlite'){
+			$whm = apicall('nodes','makeWhm',array($node));
+			$whmCall = new WhmCall('core.whm','del_vh_info');
+			$whmCall->addParam('vhost',$user);
+			$whmCall->addParam('name',$name);
+			$whmCall->addParam('type',$type);
+			if($value!=null){
+				$whmCall->addParam('value',$value);
+			}
+			if(!$whm->call($whmCall)){
+				return false;
+			}
+		}		
+		if(daocall('vhostinfo','delInfo',array($user,$name,$type,$value))){
+			if($GLOBALS['node_db']!='sqlite'){
+				return $this->noticeChange($node,$user);
+			}
+			return true;
+		}
+		return false;
+	}
+	public function addInfo($user,$name,$type,$value)
+	{
+		$node = $this->getNode($user);
+		if($GLOBALS['node_db']=='sqlite'){
+			$whm = apicall('nodes','makeWhm',array($node));
+			$whmCall = new WhmCall('core.whm','add_vh_info');
+			$whmCall->addParam('vhost',$user);
+			$whmCall->addParam('name',$name);
+			$whmCall->addParam('type',$type);
+			$whmCall->addParam('value',$value);
+			if(!$whm->call($whmCall)){
+				return false;
+			}
+		}		
+		if(daocall('vhostinfo','addInfo',array($user,$name,$type,$value))){
+			if($GLOBALS['node_db']!='sqlite'){
+				return $this->noticeChange($node,$user);
+			}
+			return true;
+		}
+		return false;
+	}
+	private function sqliteUpdateVirtualHost($node,$name,$attr)
+	{
+		$whm = apicall('nodes','makeWhm',array($node));
+		$whmCall = new WhmCall('core.whm','update_vh');
+		$whmCall->addParam('name',$name);
+		$key = array_keys($attr);
+		for($i=0;$i<count($key);$i++){
+			$whmCall->addParam($key[$i],$attr[$key[$i]]);
+			//echo "addParam name=".$key[$i]." value=".$attr[$key[$i]]."<br>";
+		}
+		//echo $whmCall->buildUrl().$whmCall->buildPostData();
+		return $whm->call($whmCall);
 	}
 }
 ?>

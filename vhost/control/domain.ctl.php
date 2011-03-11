@@ -36,9 +36,8 @@ class DomainControl extends Control
 			return '该域名已被绑定，请联系管理员';
 		}
 		$vhost = getRole('vhost');
-		$attr['user'] = $vhost;		
-		$attr['name'] = $_REQUEST['domain'];
 		@load_conf('pub:reserv_domain');
+		$name = $_REQUEST['domain'];
 		if(is_array($GLOBALS['reserv_domain'])){
 			for($i=0;$i<count($GLOBALS['reserv_domain']);$i++){
 				if(strcasecmp($attr['name'],$GLOBALS['reserv_domain'][$i])==0){
@@ -46,25 +45,26 @@ class DomainControl extends Control
 				}
 			}
 		}
-		if(!preg_match('/^[a-z0-9_*.]{2,32}$/i', $attr['name'])){
+		if(!preg_match('/^[a-z0-9_*.]{2,32}$/i', $name)){
 			return '域名不合法';			
 		}
 		$product = apicall('product','newProduct',array('vhost'));
 		$info = $product->getInfo($_SESSION['user'][$vhost]['product_id']);
-		$attr['type'] = 0;
 		if($info['subdir_flag']==1){
-			$attr['value'] = $_REQUEST['subdir'];
+			$value = $_REQUEST['subdir'];
 		}else{
-			$attr['value'] = $info['subdir'];
-		}	
-		daocall('vhostinfo','insertData',array($attr));
-		$this->noticeChange();
+			$value = $info['subdir'];
+		}
+		if(!apicall('vhost','addInfo',array($vhost,$name,0,$value))){
+			trigger_error('绑定域名失败');
+		}
 		return $this->show();
 	}
 	public function del()
 	{
-		daocall('vhostinfo', 'delDomain', array(getRole('vhost'),$_REQUEST['domain']));
-		$this->noticeChange();
+		if(!apicall('vhost','delInfo',array(getRole('vhost'),$_REQUEST['domain'],0,null))){
+			trigger_error('删除域名失败');
+		}
 		return $this->show();
 	}
 	private function noticeChange()

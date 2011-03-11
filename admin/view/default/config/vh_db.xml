@@ -4,7 +4,9 @@
 <vhs>
 <vh_database
 driver='{{$driver}}'
-col_map='{{$col_map}}'
+{{if $node_db == 'sqlite'}}
+dbname='etc/vhs.db'
+{{else}}
 host='{{$db.host}}'
 port='{{$db.port}}'
 user='{{$db.user}}'
@@ -13,6 +15,7 @@ db='{{$db.dbname}}'
 load_sql="{{$load_sql}}"
 flush_sql=" {{$flush_sql}}"
 load_info_sql="{{$load_info_sql}}"
+{{/if}}
 />
 </vhs>
 </config>

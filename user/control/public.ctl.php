@@ -27,11 +27,11 @@ class PublicControl extends  Control
 		);
 		$this->_tpl->assign("menus",$menus);
 		return $this->_tpl->fetch("public/head.html");
-	}
+	}	
 	public function register()
 	{
 		$username = $_REQUEST['username'];
-		if(!preg_match('/^[a-z0-9][a-z0-9_]{2,11}$/', $username)){
+		if(!$this->checkRight($username)){
 			return "用户名不符合标准";
 		}
 		$result = daocall('user','newUser',array(
@@ -43,7 +43,13 @@ class PublicControl extends  Control
 		);
 		if($result){
 			registerRole('user',$_REQUEST['username']);
-			header("Location: ?c=user&a=index");
+			$external = $_REQUEST['external'];
+			if ($external == '1') {
+				$url = "?fc=user&fa=index";
+			} else {
+				$url = "?c=user&a=index";
+			}
+			header("Location: ".$url);
 			die();
 		}else{
 			return '注册失败';
@@ -56,6 +62,9 @@ class PublicControl extends  Control
 	public function checkUser()
 	{
 		$username = $_REQUEST['username'];
+		if(!$this->checkRight($username)){
+			return "用户名不符合标准";
+		}
 		$result = daocall('user','checkUser',array($username));
 		$this->_tpl->assign('param',$username);
 		if($result){
@@ -69,6 +78,10 @@ class PublicControl extends  Control
 	public function left()
 	{
 		return "";
+	}
+	private function checkRight($username)
+	{
+		return preg_match('/^[a-z0-9][a-z0-9_]{2,11}$/', $username);	
 	}
 }
 ?>
