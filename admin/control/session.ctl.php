@@ -21,7 +21,7 @@ class SessionControl extends Control {
 	{
 		needRole('admin');
 		if(!$this->checkPassword(getRole('admin'), $_REQUEST['oldpasswd'])){
-			$this->_tpl->assign('msg','旧密码不对!');			
+			$this->_tpl->assign('msg','原密码不对!');			
 		}else{
 			daocall('admin_user', 'updatePassword', array(getRole('admin'),$_REQUEST['passwd']));
 			$this->_tpl->assign('msg','修改密码成功');

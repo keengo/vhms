@@ -48,12 +48,12 @@ class SessionControl extends Control {
 	{
 		needRole('user');
 		if(!$this->checkPassword(getRole('user'), $_REQUEST['oldpasswd'])){
-			return '旧密码不对!';
+			$this->_tpl->assign('msg','原密码不对!');	
 		}else{
 			daocall('user', 'updatePassword', array(getRole('user'),$_REQUEST['passwd']));
-			return '修改密码成功';
+			$this->_tpl->assign('msg','修改密码成功');
 		}
-		die();
+		return $this->_tpl->display('public/msg.html');
 	}
 	public function left()
 	{

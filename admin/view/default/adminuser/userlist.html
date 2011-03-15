@@ -13,8 +13,8 @@
       </tr>
 	  {{foreach from=$list item=row}}
       <tr>
-        <td class="right">{{$row.username}}</td>
-        <td>
+        <td class="right_2">{{$row.username}}</td>
+        <td  class="right_2">
 		[<a href="javascript:if(confirm('确定删除{{$row.username}}?')){location='?c=adminuser&a=del&username={{$row.username}}';}" title="删除用户">删除用户</a>]
 		</td>
       </tr>
