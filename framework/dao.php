@@ -183,11 +183,13 @@ class DAO
 		return $fields_str;
 	}
 	/**
+	 *  DEPRICATED
 	  * 更新数据库字段组装
 	  * @param Array updateAry	更新数组
 	  * @param Array mapArr	映射数组
 	  */
 	 protected function updateFields(&$updateAry,&$mapArr) {
+	 	trigger_error('the function is DEPRECATED');
 		$fields_str = "";
 		foreach($updateAry as $field => $value) {
 	 		if(!array_key_exists($field,$mapArr) || $mapArr[$field][2] === 0)
@@ -199,6 +201,7 @@ class DAO
 		return $fields_str;
 	 }
 	 protected function daddslashes($string, $force = 0) {
+	 	trigger_error('the function is DEPRECATED');
 		!defined('MAGIC_QUOTES_GPC') && define('MAGIC_QUOTES_GPC', get_magic_quotes_gpc());
 		if(!MAGIC_QUOTES_GPC || $force) {
 			if(is_array($string)) {
@@ -218,7 +221,7 @@ class DAO
 	protected function getFieldValue($name,$value)
 	{
 		if($this->MAP_TYPE==null){
-			return '\''.$value.'\'';
+			return '\''.addslashes($value).'\'';
 		}
 		switch($this->MAP_TYPE[$name] & 0xFF){
 			case FIELD_TYPE_INT:
@@ -228,7 +231,7 @@ class DAO
 			case FIELD_TYPE_DATETIME:
 				return $value;
 		}
-		return '\''.$value.'\'';	
+		return '\''.addslashes($value).'\'';
 	}
 }
 ?>

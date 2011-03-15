@@ -41,8 +41,7 @@ class AdminUserControl extends Control {
 		$ret = daocall('admin_user','delUser',array($_REQUEST['username']));
 		if($ret){
 		}
-		header("Location: ?c=adminuser&a=listUser");
-		
+		header("Location: ?c=adminuser&a=listUser");		
 	}
 	public function info(){
 		$arr = $_GET;
