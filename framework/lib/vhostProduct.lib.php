@@ -33,6 +33,7 @@ class VhostProduct extends Product
 		$params['gid'] = $this->getNodeGroup($product_info['node']);
 		$params['node'] = $product_info['node'];
 		$params['init'] = '1';
+		$params['templete'] = $product_info['templete'];
 		$uid = daocall('vhost', 'insertVhost',
 		array($susername,
 		$params['name'],
