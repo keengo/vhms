@@ -31,18 +31,9 @@ class AdminUserControl extends Control {
 	}
 	public function insert(){
 		$data = $_POST;
-		//$data['homedir'] = $this->getHomedir($data['username']);
-		$data['passwd'] = md5($data['passwd']);
-		//$data['regtime'] = "now()";
 		$uid = apicall('admin_user','insertUser',array($data));
-		if($uid !== false ){
-			/*$ret = apicall('whm','coreWhmResult',array($paramArr));
-			if($ret['status'] == 200 ){
-				header("Location: /?c=user&a=listUser");
-			}
-			*/
-		}else{
-			echo 'insert user error';
+		if(!$uid){
+			die('增加管理员失败');
 		}
 		header("Location: ?c=adminuser&a=listUser");
 	}

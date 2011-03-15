@@ -124,9 +124,6 @@ class VhostProduct extends Product
 		$whmCall->addParam('name',$param);
 		$whmCall->addParam('init',$params['init']);
 		$whmCall->addParam('quota_limit',$product_info['web_quota']);
-		echo $whmCall->buildPostData();
-		die();
-		
 		return $whm->call($whmCall);
 	}
 	public function checkParam($username,$suser)
