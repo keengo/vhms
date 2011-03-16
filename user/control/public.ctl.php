@@ -59,6 +59,24 @@ class PublicControl extends  Control
 	{
 		return $this->_tpl->fetch('public/register.html');
 	}
+	public function ajaxCheckUser()
+	{
+		$username = $_REQUEST['username'];
+		$result = false;
+		if(!$this->checkRight($username)){
+			$msg = "用户名不符合标准";
+		}else{
+			if(!daocall('user','checkUser',array($username))){
+				$result = true;
+			}else{
+				$msg = "该用户已经被注册了";
+			}
+		}
+		header("Content-Type: text/xml; charset=utf-8");
+		$str = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+		$str .="<result ret='".$result."' msg='".$msg."'/>";
+		die($str);
+	}
 	public function checkUser()
 	{
 		$username = $_REQUEST['username'];
