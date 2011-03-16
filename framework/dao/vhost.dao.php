@@ -3,7 +3,7 @@
  * 用户信息信息DAO层基本函数生成
  */
 class VhostDAO extends DAO{
-	private $vh_col_map = array('name','doc_root','user','group','templete');
+	private $vh_col_map = array('name','doc_root','user','group','templete','status');
 	public function __construct()
 	{	//加载基本db文件
 		parent::__construct();
@@ -16,7 +16,7 @@ class VhostDAO extends DAO{
 		 	'templete'=>'templete',
 			'create_time'=>'create_time',
 			'expire_time'=>'expire_time',
-			'state'=>'state',
+			'status'=>'status',
 			'node'=>'node',
 			'product_id'=>'product_id',
 			'username'=>'username'
@@ -58,7 +58,7 @@ class VhostDAO extends DAO{
 	/**
 	 * 插入用户信息信息
 	 */
-	public function insertVhost($username,$name,$passwd,$doc_root,$group,$templete,$state,$node,$product_id,$month)
+	public function insertVhost($username,$name,$passwd,$doc_root,$group,$templete,$status,$node,$product_id,$month)
 	{
 		$arr=array();
 		$arr['username']=$username;
@@ -67,7 +67,7 @@ class VhostDAO extends DAO{
 		$arr['doc_root'] = $doc_root;
 		$arr['gid'] = $group;
 		$arr['templete'] = $templete;
-		$arr['state'] = $state;
+		$arr['status'] = $status;
 		$arr['node'] = $node;
 		$arr['product_id'] = $product_id;
 		$arr['create_time'] = 'NOW()';
@@ -84,15 +84,8 @@ class VhostDAO extends DAO{
 	 */
 	public function updateVhost($vhostName, $arr)
 	{
-		$tbl = $this->_TABLE;
-		if(!$tbl) {
-			return false;
-		}
-		$update_str = $this->updateFields($arr,$this->MAP_ARR);
-		$sql = "UPDATE {$tbl} SET ".$update_str." WHERE `name` = '{$vhostName}' limit 1";
-		return $this->execute($host, $dbname, $sql);
+		return $this->update($arr,$this->getFieldValue2('name', $vhostName));
 	}
-
 	/**
 	 * 删除用户信息
 	 */

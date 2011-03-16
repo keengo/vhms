@@ -46,9 +46,11 @@ class VhostproductControl extends Control {
 	}
 	public function showProduct()
 	{
-		$list = daocall('vhostproduct','getData',array());
+		$product_flag = $_REQUEST['product_flag'];
+		$list = daocall('vhostproduct','getProducts',array($product_flag));
 		$this->_tpl->assign('sum',count($list));
 		$this->_tpl->assign('list',$list);
+		$this->_tpl->assign('product_flag',$product_flag);
 		$this->_tpl->display('vhostproduct/showProduct.html');
 	}
 	protected function assignHosts()
@@ -116,30 +118,6 @@ class VhostproductControl extends Control {
 		daocall('vhostproduct','delProduct',$_REQUEST["id"]);
 		$this->showProduct();
 	}
-	public function showVhost()
-	{
-		$user = $_REQUEST['user'];
-		$this->_tpl->assign('user',$user);
-		if($user){
-			$result = daocall('domain','findDomain',array($user));
-			if($result){
-				$user = $result['name'];
-			}
-			if($user[0]=='#'){
-				$user = substr($user,1);
-				$call = 'listVhostByUid';
-			}else{
-				$call = 'listVhostByName';
-			}
-			$list = daocall('vhost',$call,array($user,'row'));
-			$this->_tpl->assign('row',$list);
-			if($list){
-				$list = daocall('domain','getDomain',array($list['name']));
-				$this->_tpl->assign('sum',count($list));
-				$this->_tpl->assign('list',$list);
-			}
-		}
-		$this->_tpl->display('vhostproduct/showVhost.html');
-	}
+
 }
 ?>

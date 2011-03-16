@@ -11,7 +11,7 @@ class VhostproductDAO extends DAO {
 			"db_quota"=>'db_quota',
 			"templete"=>'templete',
 			'price'=>'price',
-			'state'=>'state',
+			'pause_flag'=>'pause_flag',
 			'node'=>'node',
 			'try_flag'=>'try_flag',
 			'month_flag'=>'month_flag'
@@ -21,7 +21,7 @@ class VhostproductDAO extends DAO {
 			'web_quota'=>FIELD_TYPE_INT,
 			'db_quota'=>FIELD_TYPE_INT,
 			'price'=>FIELD_TYPE_INT,
-			'state'=>FIELD_TYPE_INT,
+			'pause_flag'=>FIELD_TYPE_INT,
 			'try_flag'=>FIELD_TYPE_INT,
 			'month_flag'=>FIELD_TYPE_INT,
 		);
@@ -29,7 +29,7 @@ class VhostproductDAO extends DAO {
 	}
 	public function delProduct($id)
 	{
-		return $this->delData("id=".intval($id));
+		return $this->delData($this->getFieldValue2('id',intval($id)));
 	}
 	public function getProduct($id)
 	{
@@ -38,14 +38,28 @@ class VhostproductDAO extends DAO {
 	}
 	public function update($arr)
 	{
-		$fields = $this->getFields(array('name','web_quota','db_quota','templete','price','state','node'), $arr);
+		$fields = $this->getFields(array('name','web_quota','db_quota','templete','price','pause_flag','node'), $arr);
 		$sql = "UPDATE ".$this->_TABLE." SET ".$fields." WHERE ".$this->getFieldValue2('id',$arr['id']);
 		return $this->executex($sql);
 	}
 	public function getSellProducts()
 	{
-		$where = '('.$this->MAP_ARR['state'].' & '.Product::PRODUCT_ACTIVE.') > 0';
+		$where = $this->MAP_ARR['pause_flag'].'=0';
 		return $this->getData2(array('id','name'),$where);
+	}
+	public function getProducts($flag)
+	{
+		
+		switch($flag){
+			case 1:
+				$where = $this->MAP_ARR['pause_flag']."!=0";
+				break;
+			case 2:
+				$where = $this->MAP_ARR['pause_flag']."=0";
+				break;
+		}
+		//die("where=".$where);
+		return $this->getData($where);
 	}
 }
 ?>

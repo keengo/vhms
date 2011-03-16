@@ -50,10 +50,7 @@ class DomainControl extends Control
 			$node = daocall('vhost','getNode',array($vhost));
 			$_SESSION[$vhost]['node'] = $node;			
 		}
-		$whm = apicall('nodes','makeWhm',array($node));
-		$whmCall = new WhmCall('core.whm','reload_vh');
-		$whmCall->addParam('name', $vhost);
-		$whm->call($whmCall);
+		return apicall('vhost','noticeChange',array($node,$vhost));
 	}
 }
 ?>
