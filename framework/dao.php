@@ -81,7 +81,7 @@ class DAO
 	public function getData($where='',$type='rows')
 	{
 		$tbl = $this->_TABLE;
-		$sql = "SELECT ".$this->AllQueryFields()." FROM {$tbl}";
+		$sql = "SELECT ".$this->AllQueryFields()." FROM ".$this->_TABLE;
 		if($where!=''){
 			$sql.=' WHERE '.$where;
 		}
@@ -90,7 +90,13 @@ class DAO
 	public function getData2($fields,$where='',$type='rows')
 	{
 		$tbl = $this->_TABLE;
-		$sql = "SELECT ".$this->queryFields($fields)." FROM {$tbl}";
+		$sql = "SELECT ";
+		if($fields){
+			$sql.=$this->queryFields($fields);
+		}else{
+			$sql.=$this->AllQueryFields();
+		}
+		$sql.=" FROM ".$this->_TABLE;
 		if($where!=''){
 			$sql.=' WHERE '.$where;
 		}

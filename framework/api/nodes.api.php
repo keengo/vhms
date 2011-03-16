@@ -214,7 +214,7 @@ class NodesAPI extends API
 			return false;
 		}
 		$whmCall = new WhmCall('core.whm','check_vh_db');
-		$result = $whm->call($whmCall);
+		$result = $whm->call($whmCall,5);
 		if($result && intval($result->get('status'))==1){
 			return true;
 		}

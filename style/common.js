@@ -46,3 +46,12 @@ function ajax_open_url(url,result_func)
 	xmlhttp.onreadystatechange=result_func;
 	xmlhttp.send(null);
 }
+function ajax_open_url2(url,result_func)
+{
+	xmlhttp2=create_xmlhttp();	
+	xmlhttp2.open("GET",url,true);
+	xmlhttp2.onreadystatechange=function (){
+		result_func(xmlhttp2);
+	};
+	xmlhttp2.send(null);
+}

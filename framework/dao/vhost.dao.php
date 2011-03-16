@@ -37,25 +37,6 @@ class VhostDAO extends DAO{
 		return $this->executex($sql,'row');
 	}
 	/**
-	 * 查询用户信息信息
-	 */
-	public function getVhost($vhostName)
-	{
-		$tbl = $this->_TABLE;
-		if(!$tbl) {
-			return false;
-		}
-		$sql = "SELECT * FROM {$tbl} WHERE `name`='{$vhostName}'";
-		$value = $this->execute($host, $dbname, $sql, "row");
-		if($value === false) {
-			return false;
-		}
-		if(!$value && is_array($value)) {
-			return null;
-		}
-		return $value;
-	}
-	/**
 	 * 插入用户信息信息
 	 */
 	public function insertVhost($username,$name,$passwd,$doc_root,$group,$templete,$status,$node,$product_id,$month)
@@ -123,7 +104,7 @@ class VhostDAO extends DAO{
 		if($username){
 			$where = $this->getFieldValue2('username', $username);
 		}
-		return $this->getData2(array('name','uid','create_time','expire_time','state','node','product_id'),$where,$result);
+		return $this->getData2(array('name','uid','create_time','expire_time','status','node','product_id'),$where,$result);
 	}
 	public function listMyVhost($username,$result='rows')
 	{
@@ -197,6 +178,10 @@ class VhostDAO extends DAO{
 		}else{
 			return "CONCAT('#',".$this->MAP_ARR['uid'].")";
 		}
+	}
+	public function getVhost($name,$fields=null)
+	{
+		return $this->getData2($fields,$this->getFieldValue2('name', $name),'row');
 	}
 	public function getNode($name){
 		$sql = "SELECT ".$this->MAP_ARR['node']." FROM ".$this->_TABLE." WHERE ".$this->getFieldValue2('name', $name);

@@ -18,6 +18,18 @@ class WhmCall
 	{
 		//print_r($this->params);
 		$url = $this->package."?whm_call=".$this->callName;
+	/*	if($this->params){
+			reset($this->params);
+			while (list($name, $val) = each($this->params)) {
+				$url.="&".$name."=".urlencode($val);
+			}
+		}
+		*/
+		return $url;
+	}
+	public function buildPostData()
+	{
+		$url = "";
 		if($this->params){
 			reset($this->params);
 			while (list($name, $val) = each($this->params)) {
@@ -57,13 +69,19 @@ class WhmClient
 	/*
 	failed return false.otherwise return WhmResult
 	*/
-	public function call(WhmCall $call)
+	public function call(WhmCall $call,$tmo=0)
 	{	
 		$this->result = array();
+		
 		$opts = array(
 		'http'=>array(
+			'method'=>"POST",			
+			'content'=>$call->buildPostData(),
 			'header'=>"Authorization: ".$this->auth."\r\n")
 		);
+		if($tmo>0){
+			$opts['http']['timeout'] = $tmo;
+		}
 		$url = $this->whm_url.$call->buildUrl();
 		//echo $url;
 		$msg = @file_get_contents($url, false, stream_context_create($opts));   

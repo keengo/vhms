@@ -4,26 +4,34 @@
 <script language='javascript' src='{{$PSTATIC}}/style/common.js'>
 </script>
 <script language='javascript'>
-function checkNodeResult()
+var xmlhttp2=new Array();
+function checkNodeResult(node)
 {
-	var recv_msg=false;
-	 if (xmlhttp.readyState==4) {
-		if(xmlhttp.status==200){		
-			var dataArray = xmlhttp.responseXML.getElementsByTagName('result');
-			var node = dataArray[0].getAttribute('node');
-			var status = dataArray[0].getAttribute('status');
-			var img = "{{$PSTATIC}}/style/check_error.gif";
-			if(status==1){
-				img = "{{$PSTATIC}}/style/check_right.gif";
-			}
-			xxkf_obj(node).innerHTML = "<img src='" + img + "'/>";
+	if (xmlhttp2[node].readyState==4) {
+		var status = 0;
+		if(xmlhttp2[node].status == 200){		
+			var dataArray = xmlhttp2[node].responseXML.getElementsByTagName('result');
+			//var node = dataArray[0].getAttribute('node');
+			status = dataArray[0].getAttribute('status');			
 		}
-	 }
+		var img = "{{$PSTATIC}}/style/check_error.gif";
+		if(status==1){
+			img = "{{$PSTATIC}}/style/check_right.gif";
+		}
+		xxkf_obj(node).innerHTML = "<img src='" + img + "'/>";
+	}
 }
 function checkNode(node)
 {
+	var url = '?c=nodes&a=ajaxCheckNode&node=' + node;
 	xxkf_obj(node).innerHTML="<img src='{{$PSTATIC}}/style/busy.gif'/>";
-	ajax_open_url('?c=nodes&a=ajaxCheckNode&node=' + node,checkNodeResult);
+	//ajax_open_url2(,checkNodeResult);
+	xmlhttp2[node] = create_xmlhttp();	
+	xmlhttp2[node].open("GET",url,true);
+	xmlhttp2[node].onreadystatechange=function (){
+		checkNodeResult(node);
+	};
+	xmlhttp2[node].send(null);
 }
 </script>
 <div id="container">
