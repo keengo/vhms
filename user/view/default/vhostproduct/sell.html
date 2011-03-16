@@ -31,38 +31,38 @@ function check_register()
 <table id="table_2" cellpadding="0" cellspacing="1">
       <tr>
         <td class="td_bgc right_2">产品名称</td>
-        <td class="td_bgc">{{$product.name}}</td>
+        <td class="td_bgc right_2">{{$product.name}}</td>
         </tr>
       <tr>
         <td class="td_bgc right_2">FTP用户名：</td>
-        <td class="td_bgc"><input name="name" type="text" id="name">
+        <td class="td_bgc right_2"><input name="name" type="text" id="name">
 		    <input type="button" name="Submit" value="检测用户名" onClick="check_user()"></td>
       </tr>
       <tr>
         <td class="td_bgc right_2">密码：</td>
-        <td class="td_bgc"><input name="passwd" type="password" id="passwd"></td>
+        <td class="td_bgc right_2"><input name="passwd" type="password" id="passwd"></td>
       </tr>
 	  <tr>
         <td class="td_bgc right_2">确认密码:</td>
-        <td class="td_bgc"><input name="passwd2" type="password" id="passwd2"></td>
+        <td class="td_bgc right_2"><input name="passwd2" type="password" id="passwd2"></td>
 	  </tr>
 	  <tr>
         <td class="td_bgc right_2">购买时间:</td>
-        <td class="td_bgc"><input type=radio name=month value=12 checked>1年
+        <td class="td_bgc right_2"><input type=radio name=month value=12 checked>1年
 			<input type=radio name=month value=24>2年
 			<input type=radio name=month value=36>3年</td>
 	  </tr>
 	  <tr>
         <td class="td_bgc right_2">空间大小:</td>
-        <td class="td_bgc">{{$product.web_quota}}M</td>
+        <td class="td_bgc right_2">{{$product.web_quota}}M</td>
 	  </tr>
 	  <tr>
         <td class="td_bgc right_2">数据库大小:</td>
-        <td class="td_bgc">{{$product.db_quota}}M</td>
+        <td class="td_bgc right_2">{{$product.db_quota}}M</td>
 	  </tr>
 	  <tr>
         <td class="td_bgc right_2">价格</td>
-        <td class="td_bgc">{{$product.price/100}}元/年</td>
+        <td class="td_bgc right_2">{{$product.price/100}}元/年</td>
         </tr>
 	    <tr>
 	    <td class="td_bgc td_hg" colspan="2" align="center">

@@ -69,7 +69,8 @@ class ProductControl extends Control {
 		if(!$product->sell($user,intval($_REQUEST['product_id']),$_REQUEST)){
 			return false;
 		}
-		return "购买成功";
+		$this->_tpl->assign('msg','购买成功');
+		return $this->_tpl->display('public/msg.html');
 	}
 	public function renew()
 	{
@@ -80,9 +81,11 @@ class ProductControl extends Control {
 			return false;
 		}
 		if($product->renew($user,$_REQUEST['name'],intval($_REQUEST['month']))){
-			return "续费成功";
+			$this->_tpl->assign('msg','续费成功');
+		}else{
+			$this->_tpl->assign('msg','续费失败');
 		}
-		return "续费失败";
+		return $this->_tpl->display('public/msg.html');
 	}
 	public function left()
 	{
