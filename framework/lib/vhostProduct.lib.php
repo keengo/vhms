@@ -36,7 +36,7 @@ class VhostProduct extends Product
 			$this->getDocRoot($param),
 			$this->getNodeGroup($product_info['node']),
 			$product_info['templete'],
-			self::VHOST_PRODUCT_ACTIVE,
+			0,
 			$product_info['node'],
 			$product_info['id'],
 			$month
@@ -56,6 +56,7 @@ class VhostProduct extends Product
 		$whmCall = new WhmCall('core.whm','reload_vh');
 		$whmCall->addParam('name',$param);
 		$whmCall->addParam('init','1');
+		$whmCall->addParam('quota',$product_info['web_quota']);
 		return $whm->call($whmCall);
 		//return false;
 	}

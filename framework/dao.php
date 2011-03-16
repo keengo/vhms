@@ -52,6 +52,14 @@ class DAO
 		$row = db_query($this->db,$sql,$type);
 		return $row;
 	}
+	public function getTable()
+	{
+		return $this->_TABLE;
+	}
+	public function getCols()
+	{
+		return $this->MAP_ARR;
+	}
 	public function delData($where)
 	{
 		$sql = "DELETE FROM ".$this->_TABLE;

@@ -81,16 +81,23 @@ class NodesAPI extends API
 			$driver = "bin/vhs_mysql.so";
 		}
 		$tpl = tpl::singleton();
+		$tpl->assign('node',$node);
 		$tpl->assign('driver',$driver);
 		$tpl->assign('col_map',daocall('vhost','getColMap', array($node)));
 		$tpl->assign('load_sql',daocall('vhost','getLoadSql', array($node)));
 		$tpl->assign('flush_sql',daocall('vhost','getFlushSql', array(null)));
 		$tpl->assign('load_host_sql',daocall('domain','getLoadHostSql', array(null)));
+		$tpl->assign('table',daocall('vhost','getTable'));
+		$tpl->assign('col',daocall('vhost','getCols'));
+		
 		global $db_cfg;
 		$db_local = $this->isLocalHost($db_cfg['default']['host']);
 		$node_local = $this->isLocalHost($node_cfg['host']);
 		if($db_local && !$node_local){
 			$host = $_SERVER['SERVER_ADDR'];
+			if($host==""){
+				$host = $_SERVER['SERVER_NAME'];
+			}
 			if($host=="" || $this->isLocalHost($host)){
 				trigger_error("Cann't init node,I Cann't translate the db host.");
 				return false;
@@ -100,7 +107,7 @@ class NodesAPI extends API
 		}
 		$tpl->assign('db',$db_cfg['default']);
 		$tpl->assign('dev',$node_cfg['dev']);
-		$whmCall = new WhmCall('core.whm','write_ext');
+		$whmCall = new WhmCall('core.whm','write_file');
 		$whmCall->addParam('file', 'etc/vh_db.xml');
 		
 		$content = $tpl->fetch('config/vh_db.xml');
@@ -111,10 +118,23 @@ class NodesAPI extends API
 		 * 写入模板文件,etc/templete.xml
 		 */
 		$content = $tpl->fetch('config/templete.xml');
-		$whmCall = new WhmCall('core.whm','write_ext');
+		$whmCall = new WhmCall('core.whm','write_file');
 		$whmCall->addParam('file', 'ext/templete.xml');
 		$whmCall->addParam('content',base64_encode($content));
-		$result = $whm->call($whmCall);		
+		$result = $whm->call($whmCall);
+		/*
+		 * 写入ftp配置文件
+		 */
+		$whmCall = new WhmCall('core.whm','write_file');
+		if($win){
+			$content = $tpl->fetch('config/linxftp.conf');			
+			$whmCall->addParam('file','etc/linxftp.conf');
+		}else{
+			//linux写proftpd的配置文件
+		}
+		$whmCall->addParam('content',base64_encode($content));
+		$result = $whm->call($whmCall);
+		
 		if($result){
 			/*
 			 * 调用init_node，初始化节点，如开启磁盘quota等等操作
@@ -131,7 +151,7 @@ class NodesAPI extends API
 			}
 		}
 		if(!$result){
-			trigger_error($whm->err_msg);
+			trigger_error($whmCall->getCallName()." ".$whm->err_msg);
 			return false;
 		}
 		return true;		

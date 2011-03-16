@@ -15,4 +15,5 @@ flush_sql=" {{$flush_sql}}"
 load_host_sql="{{$load_host_sql}}"
 />
 </vhs>
+<CreateProcess>AsUser</CreateProcess>
 </config>
