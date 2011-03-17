@@ -20,7 +20,7 @@ class NodesAPI extends API
 		if(!$whm){
 			return false;
 		}
-		$call = new WhmCall('core.whm',"list_tvh");
+		$call = new WhmCall('core.whm',"list_gtvh");
 		$result = $whm->call($call);
 		if(!$result){
 			return false;

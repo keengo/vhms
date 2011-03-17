@@ -14,6 +14,7 @@ class VhostDAO extends DAO{
 			'uid'=>'uid',
 			'gid'=>'gid',
 		 	'templete'=>'templete',
+			'subtemplete'=>'subtemplete',
 			'create_time'=>'create_time',
 			'expire_time'=>'expire_time',
 			'status'=>'status',
@@ -131,6 +132,8 @@ class VhostDAO extends DAO{
 				$col_name = $this->getGroupColName($node);
 			}else if($col_name=='doc_root'){
 				$col_name = $this->getDocRootColName($node);
+			}else if($col_name=='templete'){
+				$col_name = "CONCAT(".$this->MAP_ARR['templete'].",':',".$this->MAP_ARR['subtemplete'].")";
 			}else{
 				$col_name = $this->MAP_ARR[$col_name];
 			}
