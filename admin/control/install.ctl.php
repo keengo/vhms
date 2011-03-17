@@ -54,13 +54,9 @@ class InstallControl extends Control
 		$this->create_sql($GLOBALS['default_db']);	
 		$this->create_config($host, "3306", $dbname, $user, $passwd);
 		daocall('admin_user', 'newUser', array($_REQUEST['admin_user'],$_REQUEST['admin_passwd']));
-		$fp = @fopen($GLOBALS['lock_file'],'wt');
-		if(!$fp){
-			die('没能写文件:'.$GLOBALS['lock_file']);
+		if(!apicall('install','writeVersion')){
+			die("未能写入版本信息");
 		}
-		//写入version
-		fwrite($fp,VHMS_VERSION);
-		fclose($fp);
 		return $this->_tpl->fetch('install/step2.html');
 	}
 	public function check_connect($host,$port,$dbname,$user,$passwd)
