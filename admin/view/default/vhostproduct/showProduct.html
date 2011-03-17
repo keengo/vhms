@@ -44,9 +44,10 @@ function changeNode(id,templete)
 <div class="padd mar_top">
 <div class="topimg pal1">共计 {{$sum}} 条记录</div>
 </div>
-  <div id="main" class="wid">
-  <div align="left">
+  <div id="main" class="wid"> 
+  <div align="left"> 
   <form action='?c={{$smarty.request.c}}&a={{$smarty.request.a}}' method='post' name='product_form'>
+  [<a href='?c=vhostproduct&a=flush'>更新配置文件</a>]
   <select name='product_flag' onChange="javascript:product_form.submit();">
   <option value='0' {{if $product_flag==0}}selected{{/if}}>所有产品</option>
   <option value='1' {{if $product_flag==1}}selected{{/if}}>暂停产品</option>
@@ -70,9 +71,9 @@ function changeNode(id,templete)
       </tr>
 	  {{foreach from=$list item=row}}
       <tr>
-        <td class="right">[<a href="javascript:if(confirm('确定删除{{$row.name}}?')){location='?c=vhostproduct&a=del&id={{$row.id}}';}" title="删除">删除</a>]
-        [<a href="?c=vhostproduct&a=editProductForm&id={{$row.id}}">
-        更改</a>]
+        <td class="right">
+        [<a href="javascript:if(confirm('确定删除{{$row.name}}?')){location='?c=vhostproduct&a=del&id={{$row.id}}';}" title="删除">删除</a>]
+        [<a href="?c=vhostproduct&a=editProductForm&id={{$row.id}}">更改</a>]
         <td class="right">{{$row.id}}</td>
 		<td class="right">{{$row.name}}</td>
 		<td class="right">{{$row.web_quota}}</td>

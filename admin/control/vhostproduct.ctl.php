@@ -136,6 +136,10 @@ class VhostproductControl extends Control {
 		apicall('product','flushVhostProduct');
 		$this->showProduct();
 	}
-
+	public function flush()
+	{
+		apicall('product','flushVhostProduct');
+		$this->showProduct();
+	}
 }
 ?>

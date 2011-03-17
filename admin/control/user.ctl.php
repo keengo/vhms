@@ -88,8 +88,7 @@ class UserControl extends Control {
 			$msg = "重设密码出错";
 		}
 		$this->_tpl->assign('msg',$msg);
-		return $this->listUser();
-		
+		return $this->listUser();		
 	}
 	public function listUser(){
 		$username = $_REQUEST['username'];
