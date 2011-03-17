@@ -59,9 +59,11 @@ function checkAllNode()
 }
 </script>
 <div id="container">
+{{if $msg}}
 <div align="center"><br />
 <div class="block tb_wid mar_top" align="center"><font color='red'>{{$msg}}</font></div>
 </div>
+{{/if}}
 <div class="padd mar_top">
 <div class="topimg pal1">共计 {{$sum}} 条记录</div>
 </div>
