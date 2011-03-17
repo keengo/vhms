@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `vhost` (
   `product_id` int(11) NOT NULL,
   `username` varchar(32) NOT NULL,
   PRIMARY KEY (`uid`),
-  KEY `name` (`name`),
+  UNIQUE KEY `name` (`name`),
   KEY `username` (`username`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='ÐéÄâÖ÷»ú±í' AUTO_INCREMENT=1000 ;
 

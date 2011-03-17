@@ -35,21 +35,23 @@ class VhostProduct extends Product
 		$params['init'] = '1';
 		$params['templete'] = $product_info['templete'];
 		$uid = daocall('vhost', 'insertVhost',
-		array($susername,
-		$params['name'],
-		$params['passwd'],
-		$params['doc_root'],
-		$params['gid'],
-		$product_info['templete'],
-		0,
-		$params['node'],
-		$product_info['id'],
-		$params['month']
-		)
+			array($susername,
+			$params['name'],
+			$params['passwd'],
+			$params['doc_root'],
+			$params['gid'],
+			$product_info['templete'],
+			0,
+			$params['node'],
+			$product_info['id'],
+			$params['month']
+			)
 		);
-		if($uid && $uid<1000){
-			trigger_error('uid小于1000,请手工运行SQL: ALTER TABLE `vhost` AUTO_INCREMENT =1000');
-			return false;
+		if($uid && $uid < 1000){
+			if(!daocall('vhost','updateMinUid',array($uid))){
+				//trigger_error('uid小于1000,请手工运行SQL: ALTER TABLE `vhost` AUTO_INCREMENT =1000');
+				return false;
+			}		
 		}
 		if($uid >= 1000){
 			$params['uid'] = $uid;

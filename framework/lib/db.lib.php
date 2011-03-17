@@ -23,12 +23,13 @@ function db_connect($host)
 {
 	global $db_cfg;
 	$dlink = db_connectx(
-	$db_cfg[$host]['driver'],
-	$db_cfg[$host]['host'],
-	$db_cfg[$host]['port'],
-	$db_cfg[$host]['dbname'],
-	$db_cfg[$host]['user'],
-	$db_cfg[$host]['passwd']);
+				$db_cfg[$host]['driver'],
+				$db_cfg[$host]['host'],
+				$db_cfg[$host]['port'],
+				$db_cfg[$host]['dbname'],
+				$db_cfg[$host]['user'],
+				$db_cfg[$host]['passwd']
+			);
 	if(!$dlink){
 		die("无法连接数据库,请联系管理员!");
 	}

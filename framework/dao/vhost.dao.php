@@ -32,6 +32,16 @@ class VhostDAO extends DAO{
 		);
 		$this->_TABLE = DBPRE . 'vhost';
 	}
+	public function updateMinUid(&$uid)
+	{
+		$min_uid = 1000;
+		$arr = array('uid'=>$min_uid+$uid);
+		$result = $this->update($arr,$this->getFieldValue2('uid', $uid));
+		if($result){
+			$uid += $min_uid;
+		}
+		return $result;
+	}
 	public function check($user)
 	{
 		$sql = "SELECT 1 FROM ".$this->_TABLE." WHERE ".$this->getFieldValue2('name', $user);

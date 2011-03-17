@@ -10,6 +10,9 @@ class UpgradeControl extends Control
 		if($this->getInstallVersion() == VHMS_VERSION){
 			die("已经升级过了.");
 		}
+		load_lib("pub:db");
+		$db = db_connect('default');
+		$db->exec("ALTER TABLE `vhost` DROP INDEX `name` , ADD UNIQUE `name` ( `name` ) ");
 		if(!apicall('install','writeVersion')){
 			die("未能写入版本信息");
 		}
