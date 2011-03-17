@@ -30,27 +30,27 @@
       </tr>
       <tr>
         <td class="td_bgc right_2">用户名：</td>
-        <td class="td_bgc"><a href="?c=user&a=editForm&username={{$row.username}}">{{$row.username}}</a></td>
+        <td class="td_bgc right_2"><a href="?c=user&a=editForm&username={{$row.username}}">{{$row.username}}</a></td>
       </tr>
       <tr>
         <td class="td_bgc right_2">真实姓名：</td>
-        <td class="td_bgc">{{$row.name}}</td>
+        <td class="td_bgc right_2">{{$row.name}}</td>
       </tr>
 	  <tr>
         <td class="td_bgc right_2">身份号码</td>
-        <td class="td_bgc">{{$row.id}}</td>
+        <td class="td_bgc right_2">{{$row.id}}</td>
       </tr>
 	  <tr>
         <td class="td_bgc right_2">电子邮件</td>
-        <td class="td_bgc">{{$row.email}}</td>
+        <td class="td_bgc right_2">{{$row.email}}</td>
       </tr>
 	  <tr>
         <td class="td_bgc right_2">注册时间</td>
-        <td class="td_bgc">{{$row.regtime}}</td>
+        <td class="td_bgc right_2">{{$row.regtime}}</td>
       </tr>
 	  <tr>
         <td class="td_bgc right_2">余额</td>
-        <td class="td_bgc"><a href="?c=user&a=editMoneyForm&username={{$row.username}}">{{$row.money/100}}元</a></td>
+        <td class="td_bgc right_2"><a href="?c=user&a=editMoneyForm&username={{$row.username}}">{{$row.money/100}}元</a></td>
       </tr>
 	    {{/foreach}}
 </table>
