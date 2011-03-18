@@ -23,20 +23,26 @@ class VhostinfoDAO extends DAO
 	public function delInfo($user,$name,$type,$value)
 	{
 		$where = $this->getFieldValue2('user',$user);
-		$where.=' AND '.$this->getFieldValue2('type', 0);
+		$where.=' AND '.$this->getFieldValue2('type', $type);
 		$where.=' AND '.$this->getFieldValue2('name', $name);
 		if($value!=null){
 			$where.=' AND '.$this->getFieldValue2('value', $value);
 		}
 		return $this->delData($where);
 	}
-	public function addInfo($user,$name,$type,$value)
+	public function addInfo($user,$name,$type,$value,$multi=true)
 	{
+		if(!$multi){
+			$this->delInfo($user,$name,$type,null);
+		}
 		return $this->insertData(array('user'=>$user,'name'=>$name,'type'=>$type,'value'=>$value));
 	}
-	public function getInfo($name)
+	public function getInfo($name,$type=null)
 	{
 		$where = $this->getFieldValue2('user',$name);
+		if($type){
+			$where.=" AND ".$this->getFieldValue2('type', $type);
+		}
 		return $this->getData2(array('name','type','value'),$where);
 	}
 	public function getDomain($name)

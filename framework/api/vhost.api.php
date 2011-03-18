@@ -132,7 +132,7 @@ class VhostAPI extends API
 		}
 		return false;
 	}
-	public function addInfo($user,$name,$type,$value)
+	public function addInfo($user,$name,$type,$value,$multi = true)
 	{
 		$node = $this->getNode($user);
 		if($GLOBALS['node_db']=='sqlite'){
@@ -142,11 +142,12 @@ class VhostAPI extends API
 			$whmCall->addParam('name',$name);
 			$whmCall->addParam('type',$type);
 			$whmCall->addParam('value',$value);
+			$whmCall->addParam('multi',$multi);
 			if(!$whm->call($whmCall)){
 				return false;
 			}
 		}		
-		if(daocall('vhostinfo','addInfo',array($user,$name,$type,$value))){
+		if(daocall('vhostinfo','addInfo',array($user,$name,$type,$value,$multi))){
 			if($GLOBALS['node_db']!='sqlite'){
 				return $this->noticeChange($node,$user);
 			}

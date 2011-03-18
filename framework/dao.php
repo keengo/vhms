@@ -66,7 +66,8 @@ class DAO
 		if($where && $where!=""){
 			$sql.=' WHERE '.$where;
 		}
-		$sql.=" LIMIT 1";
+		//$sql.=" LIMIT 1";
+		//echo $sql;
 		return $this->executex($sql);
 	}
 	public function select($fields,$where='',$type='rows')

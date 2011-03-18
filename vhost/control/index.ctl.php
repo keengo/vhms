@@ -17,7 +17,10 @@ class IndexControl extends Control
 	public function top()
 	{
 		$vhost = getRole('vhost');
-		$node = $_SESSION['user'][$vhost]['node'];
+		$user = $_SESSION['user'][$vhost];
+		$node = $user['node'];
+		$hasEnv = apicall('tplenv','hasEnv',array($user['templete'],$user['subtemplete']));
+		$this->_tpl->assign('hasEnv',$hasEnv);
 		if($node){
 			$node_info = apicall('nodes','getInfo',array($node));
 			$url = "http://".$_SERVER[HTTP_HOST].$_SERVER[PHP_SELF]."?c=session&a=sso";
