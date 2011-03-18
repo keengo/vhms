@@ -13,7 +13,7 @@ password='{{$db.passwd}}'
 db='{{$db.dbname}}'
 load_sql="{{$load_sql}}"
 flush_sql=" {{$flush_sql}}"
-load_host_sql="{{$load_host_sql}}"
+load_info_sql="{{$load_info_sql}}"
 />
 </vhs>
 </config>

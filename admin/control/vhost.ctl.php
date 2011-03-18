@@ -6,7 +6,7 @@ class VhostControl extends Control {
 		$user = $_REQUEST['user'];
 		$this->_tpl->assign('user',$user);
 		if($user){
-			$result = daocall('domain','findDomain',array($user));
+			$result = daocall('vhostinfo','findDomain',array($user));
 			if($result){
 				$user = $result['name'];
 			}
@@ -19,7 +19,7 @@ class VhostControl extends Control {
 			$list = daocall('vhost',$call,array($user,'row'));
 			$this->_tpl->assign('row',$list);
 			if($list){
-				$list = daocall('domain','getDomain',array($list['name']));
+				$list = daocall('vhostinfo','getDomain',array($list['name']));
 				$this->_tpl->assign('sum',count($list));
 				$this->_tpl->assign('list',$list);
 			}

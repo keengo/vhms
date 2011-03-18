@@ -12,7 +12,7 @@ class DomainControl extends Control
 	}
 	public function show()
 	{
-		$list = daocall('domain', 'getDomain', array(getRole('vhost')));
+		$list = daocall('vhostinfo', 'getDomain', array(getRole('vhost')));
 		$sum = count($list);
 		$this->_tpl->assign('sum',$sum);
 		$this->_tpl->assign('list',$list);		
@@ -25,20 +25,21 @@ class DomainControl extends Control
 	}
 	public function add()
 	{
-		$ret = daocall('domain','findDomain',array($_REQUEST['domain']));
+		$ret = daocall('vhostinfo','findDomain',array($_REQUEST['domain']));
 		if($ret){
 			die('该域名已被绑定，请联系管理员');
 		}
-		$attr['name'] = getRole('vhost');
-		$attr['domain'] = $_REQUEST['domain'];
-		$attr['dir'] = '/';
-		daocall('domain','insertData',array($attr));
+		$attr['user'] = getRole('vhost');
+		$attr['name'] = $_REQUEST['domain'];
+		$attr['type'] = 0;
+		$attr['value'] = '/';
+		daocall('vhostinfo','insertData',array($attr));
 		$this->noticeChange();
 		return $this->show();
 	}
 	public function del()
 	{
-		daocall('domain', 'delDomain', array(getRole('vhost'),$_REQUEST['domain']));
+		daocall('vhostinfo', 'delDomain', array(getRole('vhost'),$_REQUEST['domain']));
 		$this->noticeChange();
 		return $this->show();
 	}

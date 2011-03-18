@@ -86,7 +86,7 @@ class NodesAPI extends API
 		$tpl->assign('col_map',daocall('vhost','getColMap', array($node)));
 		$tpl->assign('load_sql',daocall('vhost','getLoadSql', array($node)));
 		$tpl->assign('flush_sql',daocall('vhost','getFlushSql', array(null)));
-		$tpl->assign('load_host_sql',daocall('domain','getLoadHostSql', array(null)));
+		$tpl->assign('load_info_sql',daocall('vhostinfo','getLoadInfoSql', array(null)));
 		$tpl->assign('table',daocall('vhost','getTable'));
 		$tpl->assign('col',daocall('vhost','getCols'));
 		
