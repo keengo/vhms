@@ -134,7 +134,7 @@ class DAO
 				$fields.=",";
 				$values.=",";
 			}
-			$fields .= $this->MAP_ARR[$key];
+			$fields .= "`".$this->MAP_ARR[$key]."`";
 			$values .= $this->getFieldValue($key,$value);						
 		}
 		if(empty($fields) || empty($values)){
@@ -158,7 +158,7 @@ class DAO
 			if($fieldstr!=""){
 				$fieldstr.=',';
 			}
-			$fieldstr .= $this->MAP_ARR[$field]." AS ".$field;
+			$fieldstr .= "`".$this->MAP_ARR[$field]."` AS `".$field."`";
 		}
 		return $fieldstr;
 	}
@@ -168,7 +168,7 @@ class DAO
 			if($fieldstr!=""){
 				$fieldstr.=',';
 			}
-			$fieldstr .= $this->MAP_ARR[$field]." AS ".$field;
+			$fieldstr .= "`".$this->MAP_ARR[$field]."` AS `".$field."`";
 		}
 		return $fieldstr;
 	}
@@ -217,7 +217,7 @@ class DAO
 	}
 	protected function getFieldValue2($name,$value)
 	{
-		return $this->MAP_ARR[$name]."=".$this->getFieldValue($name,$value);
+		return "`".$this->MAP_ARR[$name]."`"."=".$this->getFieldValue($name,$value);
 	}
 	protected function getFieldValue($name,$value)
 	{

@@ -62,6 +62,7 @@ class IndexControl extends Control
 				$this->_tpl->assign('node_host',$node_info['host']);
 			}
 			$product_info = apicall('product','getVhostProduct',array($user['product_id']));
+			$this->_tpl->assign("product",$product_info);
 			$user['product_name'] = $product_info['name'];
 			$quota = apicall('vhost','getQuota',array(getRole('vhost'),$user['uid'],$user['node'],$user['product_id']));
 			if($quota){

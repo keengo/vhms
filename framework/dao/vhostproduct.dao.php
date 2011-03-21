@@ -16,7 +16,8 @@ class VhostproductDAO extends DAO {
 			'try_flag'=>'try_flag',
 			'month_flag'=>'month_flag',
 			'subdir_flag'=>'subdir_flag',
-			'subdir'=>'subdir'
+			'subdir'=>'subdir',
+			'describe'=>'describe'
 		);
 		$this->MAP_TYPE = array(
 			'id'=>FIELD_TYPE_INT|FIELD_TYPE_AUTO,
@@ -45,7 +46,7 @@ class VhostproductDAO extends DAO {
 	}
 	public function updateProduct($arr)
 	{
-		$fields = $this->getFields(array('name','web_quota','db_quota','templete','price','pause_flag','node','subdir_flag','subdir'), $arr);
+		$fields = $this->getFields(array('name','web_quota','db_quota','templete','price','pause_flag','node','subdir_flag','subdir','describe'), $arr);
 		$sql = "UPDATE ".$this->_TABLE." SET ".$fields." WHERE ".$this->getFieldValue2('id',$arr['id']);
 		return $this->executex($sql);
 	}

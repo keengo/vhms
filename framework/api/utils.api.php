@@ -31,7 +31,7 @@ class UtilsAPI extends API
 				$item.=",";
 			}
 			if($key!=$keyname){
-				$item.="'".$key."'=>'".$value."'";
+				$item.="'".$key."'=>'".addslashes($value)."'";
 			}
 		}
 		$str.=$item.");\r\n";
