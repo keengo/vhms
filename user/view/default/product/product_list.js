@@ -1,6 +1,6 @@
 function go_product_form(product)
 {
-	if(product[0]=='_'){
+	if(product.substr(0,1)=='_'){
 		return;
 	}
 	{{$target}}.window.location='?c=product&a=sellForm&product='+product;
