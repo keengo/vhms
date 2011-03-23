@@ -150,6 +150,7 @@ class DAO
 	  * @param Array 映射数组
 	  */
 	protected function insertSql($table,&$infoAry,$mapArr) {
+		trigger_error('DEPRECATED insertSql use insertData');
 		return $this->insertData($infoAry);
 	}
 	protected function AllQueryFields() {

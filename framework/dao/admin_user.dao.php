@@ -36,13 +36,7 @@ class AdminUserDAO extends DAO{
 	 */
 	public function insertUser($arr)
 	{
-		$tbl = $this->_TABLE;
-		if(!$tbl) {
-			return false;
-		}
-		$sql = $this->insertSql($tbl,$arr,$this->MAP_ARR);
-		$ret = $this->execute($host, $dbname, $sql);
-		return $ret;
+		return $this->insertData($arr);
 	}
 	public function newUser($username,$passwd)
 	{
