@@ -29,13 +29,7 @@ class UserDAO extends DAO{
 	 */
 	public function getUser($username)
 	{
-		$tbl = $this->_TABLE;
-		if(!$tbl) {
-			return false;
-		}
-		$sql = "SELECT * FROM {$tbl} WHERE ".$this->getFieldValue2('username',$username);
-	//	echo $sql;
-		return $this->executex($sql, "row");		
+		return $this->getData($this->getFieldValue2('username',$username),'row');		
 	}
 	public function checkUser($username)
 	{

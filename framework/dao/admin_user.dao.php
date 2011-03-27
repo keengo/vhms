@@ -24,12 +24,7 @@ class AdminUserDAO extends DAO{
 	 */
 	public function getUser($username)
 	{
-		$tbl = $this->_TABLE;
-		if(!$tbl) {
-			return false;
-		}
-		$sql = "SELECT * FROM {$tbl} WHERE `username`='{$username}'";
-		return $this->executex($sql, "row");
+		return $this->getData($this->getFieldValue2('username',$username),'row');
 	}
 	/**
 	 * 插入用户信息信息
@@ -80,17 +75,7 @@ class AdminUserDAO extends DAO{
 	 */
 	public function list_user()
 	{
-		$tbl = $this->_TABLE;
-		if(!$tbl) {
-			return false;
-		}
-		$sql = "SELECT * FROM {$tbl}";
-		$ret = $this->execute($host, $dbname, $sql,'rows');
-		if($ret) {
-			return $ret;
-		}else {
-			return false;
-		}
+		return $this->getData();
 	}
 
 }

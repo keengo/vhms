@@ -48,14 +48,15 @@ class VhostProduct extends Product
 			)
 		);
 		if($uid && $uid < 1000){
-			if(!daocall('vhost','updateMinUid',array($uid))){
-				//trigger_error('uid小于1000,请手工运行SQL: ALTER TABLE `vhost` AUTO_INCREMENT =1000');
+			daocall('vhost','updateMinUid',array(&$uid));	
+			if($uid<1000){
+				trigger_error('uid小于1000,请手工运行SQL: ALTER TABLE `vhost` AUTO_INCREMENT =1000');
 				return false;
-			}		
+			}			
 		}
 		if($uid >= 1000){
 			$params['uid'] = $uid;
-			return true;
+			return true;	
 		}
 		return false;
 	}

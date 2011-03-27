@@ -150,7 +150,7 @@ class DAO
 	  * @param Array 映射数组
 	  */
 	protected function insertSql($table,&$infoAry,$mapArr) {
-		trigger_error('DEPRECATED insertSql use insertData');
+		//trigger_error('DEPRECATED insertSql use insertData');
 		return $this->insertData($infoAry);
 	}
 	protected function AllQueryFields() {
@@ -191,7 +191,7 @@ class DAO
 	  * @param Array mapArr	映射数组
 	  */
 	 protected function updateFields(&$updateAry,&$mapArr) {
-	 	trigger_error('the function is DEPRECATED');
+	 	//trigger_error('the function is DEPRECATED');
 		$fields_str = "";
 		foreach($updateAry as $field => $value) {
 	 		if(!array_key_exists($field,$mapArr) || $mapArr[$field][2] === 0)
@@ -203,7 +203,7 @@ class DAO
 		return $fields_str;
 	 }
 	 protected function daddslashes($string, $force = 0) {
-	 	trigger_error('the function is DEPRECATED');
+	 	//trigger_error('the function is DEPRECATED');
 		!defined('MAGIC_QUOTES_GPC') && define('MAGIC_QUOTES_GPC', get_magic_quotes_gpc());
 		if(!MAGIC_QUOTES_GPC || $force) {
 			if(is_array($string)) {
