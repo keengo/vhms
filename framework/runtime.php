@@ -21,7 +21,7 @@ if(!defined('SYS_ROOT'))
 {
 	trigger_error('未定义常量 SYS_ROOT.', E_USER_ERROR);
 }
-define(VHMS_VERSION,"1.1");
+define(VHMS_VERSION,"1.2");
 /**
  * 框架全局变量
  */
