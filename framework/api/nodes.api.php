@@ -117,10 +117,10 @@ class NodesAPI extends API
 	 */
 	public function init($node,$config_flag ,$init_flag ,$reboot_flag)
 	{
+		$node_cfg = $GLOBALS['node_cfg'][$node];
 		$whm = $this->makeWhm($node);
 		$result = true;
-		if($config_flag == 1){
-			$node_cfg = $GLOBALS['node_cfg'][$node];
+		if($config_flag == 1){		
 			/*
 			 * 生成数据库连接文件etc/vh_db.xml
 			 * 这个文件为什么要放到etc呢？而不放到ext下面?
