@@ -7,7 +7,7 @@ class TplenvAPI extends API
 	public function __construct()
 	{
 		parent::__construct();
-		load_conf('pub:tplenv');
+		@load_conf('pub:tplenv');
 	}
 	public function hasEnv($templete,$subtemplete)
 	{
