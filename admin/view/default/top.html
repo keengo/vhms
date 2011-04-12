@@ -12,48 +12,48 @@
 <base target="content" />
 </head>
 <body>
-<table width="100%" id="t" cellpadding="0" cellspacing="0">
+<table width="100%" id="t" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td>
-	<table width="100%" cellpadding="0" cellspacing="0">
-      <tr>
-        <td id="t1" width="100%" class="right2"><img src="{{$STATIC}}/images/logo.gif"></td>
-        <td id="t2" align="right">
-<SCRIPT language="javascript">
-<!--
-function initArray()
- {
-  for(i=0;i<initArray.arguments.length;i++)
-  this[i]=initArray.arguments[i];
- }
- var isnMonths=new initArray("1.","2.","3.","4.","5.","6.","7.","8.","9.","10.","11.","12.");
- var isnDays=new initArray("星期日","星期一","星期二","星期三","星期四","星期五","星期六","星期日");
- today=new Date();
- hrs=today.getHours();
- min=today.getMinutes();
- sec=today.getSeconds();
- clckh=""+((hrs>12)?hrs-12:hrs);
- clckm=((min<10)?"0":"")+min;clcks=((sec<10)?"0":"")+sec;
- clck=(hrs>=12)?"下午":"上午";
- var stnr="";
- var ns="0123456789";
- var a="";
-
-function getFullYear(d)
-{
-  yr=d.getYear();if(yr<1000)
-  yr+=1900;return yr;}
-  document.write("<table>");
-    document.write("<TR><TD>"+getFullYear(today)+"."+isnMonths[today.getMonth()]+""+today.getDate()+" "+isnDays[today.getDay()]+"</tr></td>");
-  document.write("</table>");
-//-->
-</SCRIPT>
-</td>
+    <td background="{{$STATIC}}style/top_bg2.jpg" width="289" height="65" valign="top">
+	      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td><a href="index.php"><img src="{{$STATIC}}style/logo.gif" border="0" /></a></td>
         </tr>
-    </table>	</td>
+      </table>	</td>
+    <td background="{{$STATIC}}style/top_bg2.jpg" align="center">
+		<font color="#FFFFFF">
+		<SCRIPT language="javascript">
+		<!--
+		function initArray()
+		 {
+		  for(i=0;i<initArray.arguments.length;i++)
+		  this[i]=initArray.arguments[i];
+		 }
+		 var isnMonths=new initArray("1.","2.","3.","4.","5.","6.","7.","8.","9.","10.","11.","12.");
+		 var isnDays=new initArray("星期日","星期一","星期二","星期三","星期四","星期五","星期六","星期日");
+		 today=new Date();
+		 hrs=today.getHours();
+		 min=today.getMinutes();
+		 sec=today.getSeconds();
+		 clckh=""+((hrs>12)?hrs-12:hrs);
+		 clckm=((min<10)?"0":"")+min;clcks=((sec<10)?"0":"")+sec;
+		 clck=(hrs>=12)?"下午":"上午";
+		 var stnr="";
+		 var ns="0123456789";
+		 var a="";
+		
+		function getFullYear(d)
+		{
+		  yr=d.getYear();if(yr<1000)
+		  yr+=1900;return yr;}
+		  document.write("<table>");
+			document.write("<TR><TD>"+getFullYear(today)+"."+isnMonths[today.getMonth()]+""+today.getDate()+" "+isnDays[today.getDay()]+"</tr></td>");
+		  document.write("</table>");
+		//-->
+		</SCRIPT>
+		</font>	</td>
   </tr>
 </table>
-
 </body>
 </html>
 <!--
