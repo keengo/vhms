@@ -292,6 +292,7 @@ function BaseCall($module,$className,$method,$args,$mul_mod = false,$is_stat = t
 			$__core_env['STRACE']["{$module}/".$className."/".$method]['return']  =  "ERROR: The Method {$method} in {$className} is not exist";
 			echo $__core_env['STRACE']["{$module}/".$className."/".$method]['return'];
 		}
+		//throw new Exception("method not exsit", )
 		return false;
 	}
 }

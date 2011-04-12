@@ -168,5 +168,17 @@ class VhostAPI extends API
 		//echo $whmCall->buildUrl().$whmCall->buildPostData();
 		return $whm->call($whmCall);
 	}
+	public function sync($attr)
+	{
+		$attr['resync'] = '1';
+		$attr['init'] = '1';
+		$attr['md5passwd'] = $attr['passwd'];
+		$product_info = daocall('vhostproduct','getProduct',array($attr['product_id'],array('web_quota','db_quota')));
+		$product = apicall('product','newProduct',array('vhost'));
+		if (!$product->sync($attr['name'],$attr,$product_info)){
+			return false;
+		}
+		return $product->syncExtraInfo($attr['name'],$attr['node']);
+	}
 }
 ?>
