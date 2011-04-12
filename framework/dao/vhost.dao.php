@@ -120,6 +120,10 @@ class VhostDAO extends DAO{
 			return false;
 		}
 	}
+	public function listVhostByNode($node)
+	{
+		return $this->getData($this->getFieldValue2('node', $node));
+	}
 	public function listVhostByUid($uid,$result='rows')
 	{
 		$where = $this->getFieldValue2('uid', $uid);

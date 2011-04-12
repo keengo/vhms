@@ -62,18 +62,12 @@ class VhostControl extends Control {
 			'templete',
 			'subtemplete',
 			'status'
-		)));
-		$attr['resync'] = '1';
-		$attr['init'] = '1';
-		$attr['md5passwd'] = $attr['passwd'];
-		$product_info = daocall('vhostproduct','getProduct',array($attr['product_id'],array('web_quota','db_quota')));
-		$product = apicall('product','newProduct',array('vhost'));
-		if($product->sync($vhost,$attr,$product_info)){
+			)));
+		if(apicall('vhost','sync',array($attr))){
 			$this->_tpl->assign('msg','重建空间成功');
 		}else{
 			$this->_tpl->assign('msg','重建空间失败');
 		}
-		$product->syncExtraInfo($vhost,$attr['node']);
 		return $this->showVhost();
 	}
 	public function randPassword()
