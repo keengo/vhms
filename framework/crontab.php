@@ -1,4 +1,5 @@
 <?php
+@set_time_limit(0);
 function Usage()
 {
 	die("Usage: ".$_SERVER['argv'][0]." <hour|day>\n");

@@ -1,4 +1,5 @@
 <?php
+@set_time_limit(0);
 function Usage()
 {
 	die("Usage: ".$_SERVER['argv'][0]." <sync>\n");
@@ -10,7 +11,7 @@ include(SYS_ROOT . '/runtime.php');
 if($_SERVER["argv"]== null || $_REQUEST!=null ){
 	die("crontab cann't run in web model.please run in cli.");
 }
-if($_SERVER['argc']!=2){
+if($_SERVER['argc']<2){
 	Usage();
 }
 $argv = $_SERVER['argv'];

@@ -103,7 +103,7 @@ class VhostProduct extends Product
 			if($params['resync'] == '1'){
 				$whmCall = new WhmCall('core.whm','del_vh');
 				$whmCall->addParam('name',$param);
-				$whm->call($whmCall);
+				$whm->call($whmCall,10);
 			}
 			$whmCall = new WhmCall('core.whm', 'add_vh');
 			$whmCall->addParam('doc_root',$params['doc_root']);
@@ -128,7 +128,7 @@ class VhostProduct extends Product
 		$whmCall->addParam('name',$param);
 		$whmCall->addParam('init',$params['init']);
 		$whmCall->addParam('quota_limit',$product_info['web_quota']);
-		return $whm->call($whmCall);
+		return $whm->call($whmCall,10);
 	}
 	public function checkParam($username,$suser)
 	{
