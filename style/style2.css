@@ -20,6 +20,17 @@
 	padding-bottom:6px;
 	text-align:left;
 }
+.head_block3 {
+	border: 1px solid #9BCEF0;
+	border-bottom-width:1px;
+	background-color:#D6EAF8;		
+	color:#FFFFFF;
+	padding-top:6px;
+	padding-bottom:6px;
+	text-align:left;
+	width:50%;
+	height:45px;	
+}
 .block {
 	border: 1px solid #7FBBF4;	
 	background-color:#C7EAF6;
@@ -81,6 +92,7 @@ height:35px;
 color:#FFFFFF;
 margin-bottom:60px;
 }
+.STYLE1 {color: #000000}
 
 
 
