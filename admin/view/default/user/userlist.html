@@ -1,12 +1,16 @@
 {{include file='common/head.html'}}
-<body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
+<body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0' onLoad="javascript:form1.username.focus();">
 <div id="container">
-<div class="topimg">
-  <form name="form1" method="post" action="?c={{$smarty.request.c}}&a=listUser">
-    用户名:
-    <input name="username" type="text" id="username" value="{{$username}}">
-    <input type="submit" name="Submit" value="搜索">
-  </form>
+	<div align="center">
+		<form name="form1" method="post" action="?c={{$smarty.request.c}}&a=listUser">
+		<div class="head_block3">
+		<p align="center">
+		 <span class="topimg STYLE1">用户名:</span>
+    	<input name="username" type="text" id="username" value="{{$username}}" size="35">
+    	<input type="submit" name="Submit" value="搜索">
+		 </p>
+	</div>
+	</form>
 </div>
 {{if $msg}}
 <div align="center">

@@ -1,12 +1,18 @@
 ﻿{{include file='common/head.html'}}
-<body leftmargin="0" topmargin="0" bgcolor="#ffffff" text="#000000"> 
+<body leftmargin="0" topmargin="0" bgcolor="#ffffff" text="#000000" onLoad="javascript:form1.user.focus();"> 
 <div id="main">
- <form name="form1" method="post" action="?c=vhost&a=showVhost">
-    输入ftp用户名或#uid或域名
-    <input name="user" type="text" id="user" value="{{$user}}">
-    <input type="submit" name="Submit" value="搜索">
-  </form>
-  </div>
+  	<div align="center">
+		<form name="form1" method="post" action="?c=vhost&a=showVhost">
+		<div class="head_block3">
+			<p>
+  			 <span class="topimg STYLE1">输入ftp用户名或#uid或域名:</span>
+   			<input name="user" type="text" id="user" value="{{$user}}" size="25">
+   			<input type="submit" name="Submit" value="搜索">
+			 </p>
+ 		</div>
+   		</form>
+   </div>
+</div>
 {{if $msg}}
 <div align="center">
 <div class="block tb_wid2 mar_top" align="center"><font color=red>{{$msg}}</font></div>
