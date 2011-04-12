@@ -66,9 +66,8 @@ class VhostControl extends Control {
 		$attr['resync'] = '1';
 		$attr['init'] = '1';
 		$attr['md5passwd'] = $attr['passwd'];
-		$product_info = daocall('vhostproduct','getProduct',array($attr['product_id'],array('web_quota')));
+		$product_info = daocall('vhostproduct','getProduct',array($attr['product_id'],array('web_quota','db_quota')));
 		$product = apicall('product','newProduct',array('vhost'));
-		//$product->sync($vhost,$attr,$product_info);
 		if($product->sync($vhost,$attr,$product_info)){
 			$this->_tpl->assign('msg','重建空间成功');
 		}else{
