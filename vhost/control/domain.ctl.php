@@ -45,7 +45,7 @@ class DomainControl extends Control
 				}
 			}
 		}
-		if(!preg_match('/^[a-z0-9_*.]{2,32}$/i', $name)){
+		if(!preg_match('/^[-a-z0-9_*.]{2,32}$/i', $name)){
 			return '域名不合法';			
 		}
 		$product = apicall('product','newProduct',array('vhost'));
