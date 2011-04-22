@@ -23,6 +23,26 @@ class DAO
 	{
 		
 	}
+	
+	public function selectPage($fields,$where,$order_field,$desc,$page,$page_count,&$count)
+	{
+		if($where && $where!=''){
+			$where = ' WHERE '.$where;
+		}
+		$count_sql = "SELECT COUNT(*) AS count FROM ".$this->_TABLE.$where;
+		$ret = $this->executex($count_sql,'row');
+		$count = $ret['count'];
+		$sql = "SELECT ".$this->queryFields($fields)." FROM ".$this->_TABLE.$where;
+		if($order_field){
+			$sql.=' ORDER BY `'.$this->MAP_ARR[$order_field].'`';
+			if($desc){
+				$sql.=' DESC';
+			}
+		}
+		$sql.=' LIMIT '.(($page-1)*$page_count).','.$page_count;
+		return $this->executex($sql,'rows');
+	}
+	
 	protected function connect()
 	{
 		global $default_db;

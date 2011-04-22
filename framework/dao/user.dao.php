@@ -24,6 +24,20 @@ class UserDAO extends DAO{
 		);
 		$this->_TABLE = DBPRE . 'users';
 	}
+	
+	public function pageUsers($page,$page_count,&$count)
+	{
+		return $this->selectPage(
+					array('username','email','name','money','id','regtime'),
+					null, 
+					'username', 
+					false, 
+					$page,
+					$page_count,
+					$count
+				);
+	}
+		
 	/**
 	 * 查询用户信息信息
 	 */
