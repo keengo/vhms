@@ -32,6 +32,20 @@ class VhostDAO extends DAO{
 		);
 		$this->_TABLE = DBPRE . 'vhost';
 	}
+	
+	public function pageVhost($page,$page_count,&$count)
+	{
+		return $this->selectPage(
+					array('name','uid','username','templete','node','doc_root','create_time','expire_time','status'),
+					null, 
+					'uid', 
+					true, 
+					$page,
+					$page_count,
+					$count
+				);
+	}
+	
 	public function updateMinUid(&$uid)
 	{
 		$min_uid = 1000;

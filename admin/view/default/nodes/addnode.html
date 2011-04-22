@@ -13,7 +13,7 @@
         	readonly
         {{/if}}
         />
-          <font color=red>*必填</font></td>
+          <font color=red>*必填.服务器别名.不可以为中文</font></td>
         </tr>
       <tr>
         <td class="td_bgc right_2">主机IP：</td>
@@ -23,17 +23,17 @@
       <tr>
         <td class="td_bgc right_2">管理端口：</td>
         <td class="td_bgc right_2"><input name="port" id='tb_wid3' value="{{$node.port}}" type="text">
-			   <font color=red>*必填(如:3311)</font></td>
+			   <font color=red>*必填(默认:3311)</font></td>
         </tr>
 	  <tr>
         <td class="td_bgc right_2">管理用户名：</td>
         <td class="td_bgc right_2"><input name="user" type="text" id='tb_wid3' value="{{$node.user}}">
-				   <font color=red>*必填</font></td>
+				   <font color=red>*必填.默认:admin</font></td>
         </tr>
 	  <tr>
         <td class="td_bgc right_2">管理密码：</td>
         <td class="td_bgc right_2"><input name="passwd" type="text" id='tb_wid3' value="{{$node.passwd}}">
-            <font color=red>*必填</font></td>
+            <font color=red>*必填.默认:kangle</font></td>
         </tr>
 	  <tr>
         <td class="td_bgc right_2">数据库管理账号：</td>

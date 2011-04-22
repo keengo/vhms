@@ -38,6 +38,31 @@ class VhostControl extends Control {
 		}
 		$this->_tpl->display('vhostproduct/showVhost.html');
 	}
+	
+	public function pageVhost()
+	{
+		$page = intval($_REQUEST['page']);
+		if($page<=0){
+			$page = 1;
+		}
+		$page_count = 20;
+		$count = 0;
+		$list = daocall('vhost','pageVhost',array($page,$page_count,&$count));
+		foreach($list AS $row){
+			
+		}
+		$total_page = ceil($count/$page_count);
+		if($page>=$total_page){
+			$page = $total_page;
+		}
+		$this->_tpl->assign('count',$count);
+		$this->_tpl->assign('total_page',$total_page);
+		$this->_tpl->assign('page',$page);
+		$this->_tpl->assign('page_count',$page_count);
+		$this->_tpl->assign('list',$list);
+		$this->_tpl->display('vhostproduct/listVhost.html');	
+		
+	}
 	public function setStatus()
 	{
 		//$arr['status'] = $_REQUEST['status'];
