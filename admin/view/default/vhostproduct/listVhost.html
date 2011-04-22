@@ -1,9 +1,7 @@
 {{include file='common/head.html'}}
 <body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
 <div id="container">
-<div class="padd2 mar_top">
-<div class="topimg">共计 {{$count}} 条记录</div>
-</div>
+	<div align="center">
 	<div class="mar_top tb_wid4" align="right">
 			{{if $page>1}}
 			<a href='?c=vhost&a=pageVhost&page=0'>首页</a> 
@@ -61,6 +59,7 @@
 			{{/if}} 
 			{{$page}}/{{$total_page}}&nbsp;
 			共计{{$count}}记录
+		</div>
 		</div>
 </div>
 </body>
