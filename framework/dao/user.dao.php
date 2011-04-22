@@ -30,8 +30,8 @@ class UserDAO extends DAO{
 		return $this->selectPage(
 					array('username','email','name','money','id','regtime'),
 					null, 
-					'username', 
-					false, 
+					'regtime', 
+					true, 
 					$page,
 					$page_count,
 					$count
