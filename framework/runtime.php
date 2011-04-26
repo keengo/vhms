@@ -304,16 +304,22 @@ function getRoles()
 function getRole($role)
 {
 	global $_SESSION;
+	if($_SESSION['janbao_role_ip'][$role] != $_SERVER['REMOTE_ADDR']){
+		unregisterRole($role);
+		return null;
+	}
 	return $_SESSION['janbao_role'][$role];
 }
 function unregisterRole($role)
 {
 	global $_SESSION;
+	unset($_SESSION['janbao_role_ip'][$role]);
 	unset($_SESSION['janbao_role'][$role]);
 }
 function registerRole($role,$user)
 {
 	global $_SESSION;
+	$_SESSION['janbao_role_ip'][$role] = $_SERVER['REMOTE_ADDR'];
 	$_SESSION['janbao_role'][$role]=$user;
 	assert(isRole($role));
 }
