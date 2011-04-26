@@ -77,7 +77,7 @@ class IndexControl extends Control
 	}
 	public function changeSubtemplete()
 	{
-		echo $_REQUEST['subtemplete'];
+		//echo $_REQUEST['subtemplete'];
 		$vhost = getRole('vhost');
 		apicall('vhost','changeSubtemplete',array(null,$vhost,$_REQUEST['subtemplete']));
 		//daocall('vhost','updateVhost',array($vhost,$arr));
