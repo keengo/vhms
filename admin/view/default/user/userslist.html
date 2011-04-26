@@ -29,7 +29,7 @@
 						</tr>
 						{{foreach from=$list item=row}}
 					<tr>
-						<td class="td_bgc right_2">{{$row.username}}</td>
+						<td class="td_bgc right_2"><a href='?c=user&a=listUser&username={{$row.username}}' >{{$row.username}}</a></td>
 						<td class="td_bgc right_2">{{$row.id}}</td>
 						<td class="td_bgc right_2">{{$row.name}}</td>
 						<td class="td_bgc right_2">{{$row.money}}元</td>

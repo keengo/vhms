@@ -55,6 +55,7 @@ function SwitchMenu(obj,sty)
 	<h1 id="m5" onClick="SwitchMenu('sub5','m5')" class="menu"><ol id="p5">用户管理</ol></h1>
 	<ul class="submenu" id="sub5" >
 		<li><a href="?c=user&a=listUser" target='main'>用户查询</a></li>
+		<li><a href="?c=user&a=pageUsers" target='main'>用户列表</a></li>
 		<li><a href="/user/frame.php?c=public&a=registerForm" target='main'>注册用户</a></li>	
 	</ul>
 
@@ -63,7 +64,8 @@ function SwitchMenu(obj,sty)
 	</ol>
 	</h1>
 	<ul class="submenu" id="sub6" >
-		<li><a href="?c=vhost&a=showVhost" target='main'>虚拟主机查询</a></li>	
+		<li><a href="?c=vhost&a=showVhost" target='main'>虚拟主机查询</a></li>
+		<li><a href="?c=vhost&a=pageVhost" target='main'>虚拟主机列表</a></li>	
 		<li><a href="?c=vhostproduct&a=showProduct" target='main'>产品列表</a></li>	
 		<li><a href="?c=vhostproduct&a=addProductForm" target='main'>增加产品</a></li>
 	</ul>

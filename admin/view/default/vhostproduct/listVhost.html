@@ -32,9 +32,9 @@
 					</tr>
 					{{foreach from=$list item=row}}
 				<tr>
-					<td class="td_bgc right_2">{{$row.name}}</td>
+					<td class="td_bgc right_2"><a href='?c=vhost&a=showVhost&user={{$row.name}}'>{{$row.name}}</a></td>
 					<td class="td_bgc right_2">{{$row.uid}}</td>
-					<td class="td_bgc right_2">{{$row.username}}</td>
+					<td class="td_bgc right_2"><a href='?c=user&a=listUser&username={{$row.username}}'>{{$row.username}}</a></td>
 					<td class="td_bgc right_2">{{$row.templete}}</td>
 					<td class="td_bgc right_2">{{$row.node}}</td>
 					<td class="td_bgc right_2">{{$row.doc_root}}</td>
