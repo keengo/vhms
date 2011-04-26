@@ -55,12 +55,24 @@ class NodesControl extends Control {
 		$this->_tpl->display('nodes/init.html');
 	}
 	public function edit(){
-		$os = $this->getOs();
-		if(!$os){
-			return false;
+
+		$arr['host'] = $_REQUEST['host'];
+		$arr['port'] = $_REQUEST['port'];
+		$arr['user'] = $_REQUEST['user'];
+		$arr['db_user'] = $_REQUEST['db_user'];
+		$arr['dev'] = $_REQUEST['dev'];
+		if($_REQUEST['passwd']!=""){
+			$arr['passwd'] = $_REQUEST['passwd'];				
+			$os = $this->getOs();
+			if(!$os){
+				return false;
+			}			
+			$arr['win'] = (strcasecmp($os, 'windows')==0?1:0);
 		}
-		$_REQUEST['win'] = (strcasecmp($os, 'windows')==0?1:0);
-		daocall('nodes','updateNode', array($_REQUEST["name"],$_REQUEST));
+		if($_REQUEST['db_passwd']!=""){
+			$arr['db_passwd'] = $_REQUEST['db_passwd'];
+		}
+		daocall('nodes','updateNode', array($_REQUEST["name"],$arr));
 		$this->flush();
 	}
 	public function del()
