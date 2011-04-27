@@ -17,7 +17,7 @@ class UserControl extends Control {
 		if($page<=0){
 			$page = 1;
 		}
-		$page_count = 20;
+		$page_count = 25;
 		$count = 0;
 		$list = daocall('user','pageUsers',array($page,$page_count,&$count));
 		foreach($list AS $row){

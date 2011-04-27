@@ -38,14 +38,14 @@ class VhostControl extends Control {
 		}
 		$this->_tpl->display('vhostproduct/showVhost.html');
 	}
-	
+
 	public function pageVhost()
 	{
 		$page = intval($_REQUEST['page']);
 		if($page<=0){
 			$page = 1;
 		}
-		$page_count = 20;
+		$page_count = 25;
 		$count = 0;
 		$list = daocall('vhost','pageVhost',array($page,$page_count,&$count));
 		foreach($list AS $row){
