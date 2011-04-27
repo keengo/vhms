@@ -33,7 +33,8 @@ class SessionControl extends Control {
 		global $_REQUEST;
 		$user = $this->checkPassword($_REQUEST['username'],$_REQUEST['passwd']);
 		if(!$user){
-			die('登录错误![<a href="javascript:history.go(-1);">返回</a>]');
+			return $this->_tpl->display('login_error.html');
+			//die('登录错误![<a href="javascript:history.go(-1);">返回</a>]');
 		}
 		registerRole('admin',$user['username']);
 		$_SESSION['admin_last_login'] = $user['last_login'];
