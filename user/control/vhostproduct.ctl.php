@@ -10,6 +10,36 @@ class VhostproductControl extends Control {
 		parent::__destruct();
 	}
 
+	public function pageVhostByuser()
+	{
+		$page = intval($_REQUEST['page']);
+		if($page<=0){
+			$page = 1;
+		}
+		$page_count = 2;
+		$count = 0;
+		$list = daocall('vhost','pageVhostByuser',array(getRole('user'),$page,$page_count,&$count));
+		load_conf('pub:vhostproduct');
+		for($i=0;$i<count($list);$i++){
+			$list[$i]['product_name'] = $GLOBALS['vhostproduct_cfg'][$list[$i]['product_id']]['name'];
+		}
+		foreach($list AS $row){
+						
+		}
+		$total_page = ceil($count/$page_count);
+		if($page>=$total_page){
+			$page = $total_page;
+		}
+		$this->_tpl->assign('username',getRole('user'));
+		$this->_tpl->assign('count',$count);
+		$this->_tpl->assign('total_page',$total_page);
+		$this->_tpl->assign('page',$page);
+		$this->_tpl->assign('page_count',$page_count);
+		$this->_tpl->assign('list',$list);
+		$this->_tpl->display('vhostproduct/listVhost.html');
+		
+	}
+	
 	public function show()
 	{
 		$list = daocall('vhost','listMyVhost',array(getRole('user')));
@@ -20,11 +50,13 @@ class VhostproductControl extends Control {
 		for($i=0;$i<count($list);$i++){
 			$list[$i]['product_name'] = $GLOBALS['vhostproduct_cfg'][$list[$i]['product_id']]['name'];
 		}
-		//print_r($list);
+		print_r($list);
 		$this->_tpl->assign('list',$list);
 		//$this->_tpl->assign('product',$GLOBALS['vhostproduct_cfg']);
 		return $this->_tpl->fetch('vhostproduct/list.html');
 	}
+	
+	
 	public function impLogin()
 	{
 		$vhost = $_REQUEST['name'];

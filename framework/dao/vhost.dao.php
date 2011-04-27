@@ -33,10 +33,26 @@ class VhostDAO extends DAO{
 		$this->_TABLE = DBPRE . 'vhost';
 	}
 	
+	public function getVhostByname($name)
+	{
+		
+	}
+	public function pageVhostByuser($username,$page,$page_count,&$count)
+	{
+		return $this->selectPage(
+					array('name','uid','templete','node','create_time','expire_time','status','product_id','username'),
+					$this->getFieldValue2('username',$username), 
+					'name', 
+					true, 
+					$page,
+					$page_count,
+					$count
+				);
+	}
 	public function pageVhost($page,$page_count,&$count)
 	{
 		return $this->selectPage(
-					array('name','uid','username','templete','node','doc_root','create_time','expire_time','status'),
+					array('name','uid','username','templete','node','doc_root','create_time','expire_time','product_id','status'),
 					null, 
 					'uid', 
 					true, 

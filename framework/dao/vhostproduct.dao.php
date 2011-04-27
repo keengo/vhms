@@ -31,6 +31,7 @@ class VhostproductDAO extends DAO {
 		);
 		$this->_TABLE = DBPRE .'vhost_product';
 	}
+
 	public function delProduct($id)
 	{
 		return $this->delData($this->getFieldValue2('id',intval($id)));
