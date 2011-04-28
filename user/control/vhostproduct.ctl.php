@@ -9,14 +9,24 @@ class VhostproductControl extends Control {
 	{
 		parent::__destruct();
 	}
-
+	
+	public function getVhostByname()
+	{	
+		$name=$_REQUEST['name'];
+		
+		$host=daocall('vhost','getVhostByname',array($name));
+		if($host['username']!=getRole('user'))
+		{
+			return false;
+		}
+	}
 	public function pageVhostByuser()
 	{
 		$page = intval($_REQUEST['page']);
 		if($page<=0){
 			$page = 1;
 		}
-		$page_count = 2;
+		$page_count = 30;
 		$count = 0;
 		$list = daocall('vhost','pageVhostByuser',array(getRole('user'),$page,$page_count,&$count));
 		load_conf('pub:vhostproduct');

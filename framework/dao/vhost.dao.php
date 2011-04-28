@@ -32,11 +32,12 @@ class VhostDAO extends DAO{
 		);
 		$this->_TABLE = DBPRE . 'vhost';
 	}
-	
+	/*
 	public function getVhostByname($name)
 	{
-		
+		return $this->select(null,$this->getFieldValue2('name', $name),'row');
 	}
+	*/
 	public function pageVhostByuser($username,$page,$page_count,&$count)
 	{
 		return $this->selectPage(
