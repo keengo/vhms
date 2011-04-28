@@ -1,0 +1,67 @@
+{{include file='common/head.html'}}
+<body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
+<div id="container">
+	<div align="center">
+		<div class="mar_top tb_wid4" align="right">
+			{{if $page>1}}
+			<a href='?c=vhostproduct&a=pageVhostByuser&page=0'>首页</a> 
+			<a href='?c=vhostproduct&a=pageVhostByuser&page={{$page-1}}'>上一页</a> 
+			{{else}}
+			首页 上一页 
+			{{/if}}
+			{{if $page!=$total_page}} 
+			<a href='?c=vhostproduct&a=pageVhostByuser&page={{$page+1}}'>下一页</a>
+			<a href='?c=vhostproduct&a=pageVhostByuser&page={{$total_page}}'>尾页</a>
+			{{else}}下一页 尾页
+			{{/if}} 
+			{{$page}}/{{$total_page}}&nbsp;
+			共计{{$count}}记录
+			</div>
+			<div class="block tb_wid4">
+				<table id="table" border="0" cellpadding="0" cellspacing="1">
+					<tr id="ttitle">
+					  	<td  bgcolor='#efefef' class='color01 right'>操作</td>
+						<td class="td_bgc right_2">空间名</td>
+						<td class="td_bgc right_2">uid</td>
+						<td class="td_bgc right_2">产品</td>
+						<td class="td_bgc right_2">服务器</td>
+						<td class="td_bgc right_2">注册时间</td>
+						<td class="td_bgc right_2">过期时间</td>
+						<td class="td_bgc right_2">空间状态</td>
+						
+						</tr>
+						{{foreach from=$list item=row}}
+					<tr>
+					   <td class="right"> 
+						[<a href="?c=vhostproduct&a=renewForm&name={{$row.name}}" >续费</a>]
+       			 		[<a href="?c=vhostproduct&a=impLogin&name={{$row.name}}" >控制面板</a>]</td>
+						<td class="td_bgc right_2"><a href='?c=vhostproduct&a=impLogin&name={{$row.name}}'>{{$row.name}}</a></td>
+						<td class="td_bgc right_2">{{$row.uid}}</td>
+						<td class="td_bgc right_2">{{$row.product_name}}</td>
+						<td class="td_bgc right_2">{{$row.node}}</td>
+						<td class="td_bgc right_2">{{$row.create_time}}</td>
+						<td class="td_bgc right_2">{{$row.expire_time}}</td>
+						<td class="td_bgc right_2">{{$row.status}}</td>
+						</tr>
+						{{/foreach}}
+			  </table>
+			</div>
+			<div class="mar_top tb_wid4" align="right">
+			{{if $page>1}}
+			<a href='?c=vhostproduct&a=pageVhostByuser&page=0'>首页</a> 
+			<a href='?c=vhostproduct&a=pageVhostByuser&page={{$page-1}}'>上一页</a> 
+			{{else}}
+			首页 上一页 
+			{{/if}}
+			{{if $page!=$total_page}} 
+			<a href='?c=vhostproduct&a=pageVhostByuser&page={{$page+1}}'>下一页</a>
+			<a href='?c=vhostproduct&a=pageVhostByuser&page={{$total_page}}'>尾页</a>
+			{{else}}下一页 尾页
+			{{/if}} 
+			{{$page}}/{{$total_page}}&nbsp;
+			共计{{$count}}记录
+		</div>
+	</div>
+</div>
+</body>
+</html>
