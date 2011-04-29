@@ -4,7 +4,7 @@
 <config>
 <vhs>
 <env dev='{{$dev}}'/>
-<vh_templete name='html' inherit='0' index='index.html,index.htm'>
+<vh_templete name='html' inherit='0' index='index.html,index.htm' htaccess='.htaccess'>
 <init_event event='vhost.whm:init_vh' />
 <destroy_event event='vhost.whm:destroy_vh'/>
 </vh_templete>

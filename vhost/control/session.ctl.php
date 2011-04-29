@@ -62,6 +62,7 @@ class SessionControl extends Control {
 			$this->_tpl->assign('msg','修改密码成功');		
 		}else{
 			$this->_tpl->assign('msg','修改密码失败');
+			
 		}
 		return $this->_tpl->fetch('msg.html');				
 	} 
