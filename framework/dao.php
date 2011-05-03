@@ -93,12 +93,24 @@ class DAO
 	public function select($fields,$where='',$type='rows')
 	{
 		$tbl = $this->_TABLE;
-		$sql = "SELECT ".$this->queryFields($fields)." FROM {$tbl}";
+		$sql = "SELECT ";
+		if($fields){
+			$sql.=$this->queryFields($fields);
+		}else{
+			$sql.=$this->AllQueryFields();
+		}
+		$sql.=" FROM ".$this->_TABLE;
 		if($where!=''){
 			$sql.=' WHERE '.$where;
 		}
 		return $this->executex($sql, $type);
 	}
+	/**
+	 * @deprecated use select
+	 * Enter description here ...
+	 * @param unknown_type $where
+	 * @param unknown_type $type
+	 */
 	public function getData($where='',$type='rows')
 	{
 		$tbl = $this->_TABLE;
@@ -108,6 +120,13 @@ class DAO
 		}
 		return $this->executex($sql, $type);
 	}
+	/**
+	 * @deprecated use select
+	 * Enter description here ...
+	 * @param unknown_type $fields
+	 * @param unknown_type $where
+	 * @param unknown_type $type
+	 */
 	public function getData2($fields,$where='',$type='rows')
 	{
 		$tbl = $this->_TABLE;
