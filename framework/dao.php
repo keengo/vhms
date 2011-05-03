@@ -22,8 +22,7 @@ class DAO
 	function __destruct()
 	{
 		
-	}
-	
+	}	
 	public function selectPage($fields,$where,$order_field,$desc,$page,$page_count,&$count)
 	{
 		if($where && $where!=''){
@@ -41,8 +40,7 @@ class DAO
 		}
 		$sql.=' LIMIT '.(($page-1)*$page_count).','.$page_count;
 		return $this->executex($sql,'rows');
-	}
-	
+	}	
 	protected function connect()
 	{
 		global $default_db;
@@ -62,7 +60,7 @@ class DAO
 	}
 	/**
 	 * 执行sql语句
-	 * @param String host 	    主机
+	 * @param String host 	          主机
 	 * @param String dbname 	数据库名称
 	 * @param String sql		sql语句
 	 * @param String type		执行类型。row:单条查询；rows:多条查询；result:执行动作

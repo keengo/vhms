@@ -1,6 +1,54 @@
 <?php
 class WebappAPI extends API
 {
+	public function getDomainInfo($vhost)
+	{
+		$node = apicall('vhost','getNode',array($vhost));
+		if(!$node){
+			return false;
+		}
+		$whm = apicall('nodes','makeWhm',array($node));
+		$whmCall = new WhmCall('core.whm','info_domain');
+		$whmCall->addParam('name',$vhost);
+		return $whm->call($whmCall,10);
+	}
+	public function getPhyDir($vhost,$domain,$dir)
+	{
+		$node = apicall('vhost','getNode',array($vhost));
+		if(!$node){
+			return false;
+		}
+		$whm = apicall('nodes','makeWhm',array($node));
+		$whmCall = new WhmCall('core.whm','info_vh');
+		$whmCall->addParam('name',$vhost);
+		$result = $whm->call($whmCall,10);
+		if(!$result){
+			return false;
+		}
+		$doc_root = $result->get("doc_root");
+		$add_dir = $result->get("add_dir");
+		$hosts = $result->get("host");
+		$host = explode("\n", $hosts);
+		$finded = false;
+		foreach($host as $h){
+			$hi = explode('|',$h);
+			if(trim($hi[0])==$domain){
+				$finded = true;
+				$subdir=$hi[1];
+				break;
+				
+			}
+		}
+		if(!$finded){
+			return false;
+		}
+		$phy_dir = $doc_root.$subdir.$add_dir;
+		if($dir[0]!='/'){
+			$phy_dir.='/';
+		}
+		$phy_dir.=$dir;
+		return $phy_dir;
+	}
 	public function getinfo($appid)
 	{
 		$url = "http://webapp.kanglesoft.com/info.php?appid=".$appid;

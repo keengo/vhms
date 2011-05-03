@@ -53,6 +53,10 @@ class WhmResult
 		$value = $this->result[$name];
 		return $value[$index];
 	}
+	public function getAll($name)
+	{
+		return $this->result[$name];
+	}
 	private $status = '';
 	private $result = array();
 }
