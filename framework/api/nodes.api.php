@@ -29,15 +29,7 @@ class NodesAPI extends API
 		if(!$result){
 			return false;
 		}
-		$templete = array();
-		for($i=0;;$i++){
-			$value = $result->get("name",$i);
-			if(!$value){
-				break;
-			}
-			$templete[] = $value;
-		}
-		return $templete;
+		return $result->getAll('name');
 	}
 	public function listSubTemplete($node,$templete)
 	{
@@ -51,15 +43,7 @@ class NodesAPI extends API
 		if(!$result){
 			return false;
 		}
-		$subtemplete = array();
-		for($i=0;;$i++){
-			$value = $result->get("name",$i);
-			if(!$value){
-				break;
-			}
-			$subtemplete[] = $value;
-		}
-		return $subtemplete;
+		return $result->getAll('name');
 	}
 	public function makeWhm2($host,$port,$user,$passwd)
 	{

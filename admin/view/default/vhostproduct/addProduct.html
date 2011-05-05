@@ -15,6 +15,9 @@ function list_subtemplete_result() {
 		  if(dataArrayLen>0){
 		   	insertData = "默认引擎:<select name='subtemplete'>";
 		  	for(i=0;i<dataArrayLen;i++){			 
+				if(dataArray[i].firstChild==null){
+					continue;
+				}
 			  var templete = dataArray[i].firstChild.data;
 			  insertData += "<option value='" + templete + "' ";
 			  if(templete == '{{$vhostproduct.subtemplete}}'){
