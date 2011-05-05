@@ -1,0 +1,12 @@
+{{include file='common/head.html'}}
+<body leftmargin="0" topmargin="0" bgcolor="#ffffff" text="#000000">
+<div><br /></div>
+<div align="center">
+<div class="block tb_wid2">
+	您的域名{{$domain}}没有正确解析到节点IP:{{$node_ip}}上，可能无法正确安装程序.
+	[<a href='?c=webapp&a=install&step=0&force=1&appid={{$appid}}&dir={{$dir}}&appname={{$appname}}&appver={{$appver}}&domain={{$domain}}'>重新选过域名</a>]
+	[<a href='?c=webapp&a=install&step=1&force=1&appid={{$appid}}&dir={{$dir}}&appname={{$appname}}&appver={{$appver}}&domain={{$domain}}'>点这里继续安装</a>]
+</div>
+</div>
+</body>
+{{include file='common/foot.html'}}

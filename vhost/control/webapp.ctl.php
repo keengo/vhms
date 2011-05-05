@@ -16,16 +16,28 @@ class WebappControl extends Control
 		if(!$result){
 			die("不能连接节点，请联系管理员");
 		}
+		$url = strcasecmp($_SERVER['HTTPS'],"ON")==0?"https://":"http://";
+		$url.= $_SERVER['HTTP_HOST'];
+		$url.= $_SERVER['SCRIPT_NAME'];
+		$url.= "?c=webapp";
+		$gourl = "http://webapp.kanglesoft.com/admin/?c=webapp&a=pageApp";
+		$gourl .= "&url=".urlencode($url);
 		$file_exts = $result->getAll('file_ext');
-		return $this->install();
+		foreach($file_exts as $file_ext){
+			$gourl.="&file_ext[]=".$file_ext;
+		}
+		header("Location: ".$gourl);
+		die();
 	}
 	public function install()
 	{
-		$step = intval($_REQUEST['step']);	
+		$step = intval($_REQUEST['step']);
+		$this->_tpl->assign("id",$_REQUEST['id']);
 		if ($step==0) {
-			$this->_tpl->assign('appid','KKK1.zip');
-			$this->_tpl->assign('appname','phpwind');
-			$this->_tpl->assign('appver','8.5');
+			$this->_tpl->assign('appid',$_REQUEST['appid']);
+			$this->_tpl->assign('appname',$_REQUEST['appname']);
+			$this->_tpl->assign('appver',$_REQUEST['appver']);
+			$this->_tpl->assign('dir',$_REQUEST['dir']);
 			$result = apicall('webapp','getDomainInfo',array(getRole('vhost')));
 			if(!$result){
 				die("不能连接节点，请联系管理员");
@@ -33,20 +45,48 @@ class WebappControl extends Control
 			$this->_tpl->assign('domain',$result->getAll('domain'));
 			return $this->_tpl->fetch('webapp/step0.html');
 		}
+		$node_name = apicall('vhost','getNode',array(getRole('vhost')));
+		$node = apicall('nodes','getInfo',array($node_name));
+		if(!$node){
+			die("得到节点信息错误，请联系管理员");					
+		}
 		if ($step==1) {
 			$appid = $_REQUEST['appid'];
 			$appname = $_REQUEST['appname'];
 			$appver = $_REQUEST['appver'];
 			$domain = $_REQUEST['domain'];
 			$dir = $_REQUEST['dir'];
+			$force = intval($_REQUEST['force']);
 			if(strstr($dir,"..")!=""){
 				die("安装目录不合法");
 			}
-			$phy_dir = apicall('webapp','getPhyDir',array(getRole('vhost'),$domain,$dir));
-			if(!$phy_dir){
-				die("不能得到物理路径");
+			$this->_tpl->assign('appid',$_REQUEST['appid']);
+			$this->_tpl->assign('appname',$_REQUEST['appname']);
+			$this->_tpl->assign('appver',$_REQUEST['appver']);
+			$this->_tpl->assign('dir',$dir);
+			$this->_tpl->assign('domain',$domain);			
+			if($force==0){
+				//check domain
+				$node_ip = gethostbyname($node['host']);
+				$this->_tpl->assign('node_ip',$node_ip);
+				if (gethostbyname($domain) != $node_ip) {
+					return $this->_tpl->fetch("webapp/wrongdomain.html");
+				}				
 			}
-			daocall('vhostwebapp','add',array(getRole('vhost'),$appid,$appname,$appver,$domain,$dir,$phy_dir));
+			$appinfo = apicall('webapp','getInfo',array($appid));
+			if(!$appinfo){
+				die("不能得到程序信息，请联系管理员");
+			}		
+			$whm = apicall('nodes','makeWhm',array($node_name));
+			$whmcall = new WhmCall('webapp.whm','download');
+			$whmcall->addParam('appid',$appinfo['appid']);
+			$whmcall->addParam('url',$appinfo['url']);
+			$whmcall->addParam('md5',$appinfo['md5']);
+			$result = $whm->call($whmcall,10);
+			if(!$result || $result->getCode()!=200){
+				die("不能下载程序，请联系管理员。");
+			}
+			return $this->_tpl->fetch("webapp/downinstall.html");
 			//echo "phy_dir=".$phy_dir;
 		}
 	}
@@ -61,6 +101,78 @@ class WebappControl extends Control
 		daocall('vhostwebapp','remove',array($id,getRole('vhost')));
 		return $this->index();
 	}
-	
+	public function ajaxInstall()
+	{
+		header("Content-Type: text/xml; charset=utf-8");
+		echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+		$appid = $_REQUEST['appid'];
+		$appname = $_REQUEST['appname'];
+		$appver = $_REQUEST['appver'];
+		$domain = $_REQUEST['domain'];
+		$dir = $_REQUEST['dir'];
+		$phy_dir = apicall('webapp','getPhyDir',array(getRole('vhost'),$domain,$dir));
+		if(!$phy_dir){
+			die("<result code='500' msg='不能得到物理路径'/>");
+		}
+		$appinfo = apicall('webapp','getInfo',array($appid));
+		if(!$appinfo){
+			die("<result code='500' msg='不能得到程序信息，请联系管理员'/>");
+		}
+		$node_name = apicall('vhost','getNode',array(getRole('vhost')));
+		$whm = apicall('nodes','makeWhm',array($node_name));
+		$whmcall = new WhmCall('webapp.whm','install');
+		$whmcall->addParam('appid', $appid);
+		$whmcall->addParam('appdir',$appinfo['appdir']);
+		$whmcall->addParam('vh',getRole('vhost'));
+		$whmcall->addParam('phy_dir',$phy_dir);
+		$id = intval($_REQUEST['id']);
+		if($id==0){
+			$id = daocall('vhostwebapp','add',array(getRole('vhost'),$appid,$appname,$appver,$domain,$dir,$phy_dir));
+		}	
+		$result = $whm->call($whmcall);
+		$install = $appinfo['install'];
+		$str = "<result code='".$result->getCode()."'";
+		if($install!=""){
+			$url = "http://".$domain;
+			if($dir[0]!='/'){
+				$url.='/';
+			}
+			$url.=$dir;
+			$url.=$install;
+			$str.=" install='".$url."'";
+		}
+		$str.=" id='".$id."'";
+		$str.="/>";
+		die($str);		
+	}
+	public function ajaxCheckDownload()
+	{
+		header("Content-Type: text/xml; charset=utf-8");
+		$str = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+		$str .="<result appid='".$_REQUEST['appid']."' code='";
+		$node_name = apicall('vhost','getNode',array(getRole('vhost')));
+		$whm = apicall('nodes','makeWhm',array($node_name));
+		$whmcall = new WhmCall('webapp.whm','querydownload');
+		$whmcall->addParam('appid',$_REQUEST['appid']);
+		$result = $whm->call($whmcall,10);		
+		if(!$result){
+			$str.="500";
+		}else{
+			$str.=$result->getCode();
+		}
+		$str.="' ";
+		if ($result->getCode()==201) {
+			$str.=" total='".$result->get("total");
+			$str.="' finished='".$result->get("finished");
+			$str.="'";
+		}
+		$str.="/>";
+		die($str);
+	}
+	public function installComplete()
+	{
+		daocall('vhostwebapp','updateApp',array($_REQUEST['id'],getRole('vhost')));
+		return $this->index();
+	}
 }
 ?>

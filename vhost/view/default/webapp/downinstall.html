@@ -1,0 +1,99 @@
+{{include file='common/head.html'}}
+<body leftmargin="0" topmargin="0" bgcolor="#ffffff" text="#000000">
+<script language='javascript' src='{{$PSTATIC}}/style/common.js'>
+</script>
+<script language='javascript'>
+var xmlhttp2=new Array();
+var checkDownInterval = 0;
+function installResult(node)
+{
+	if (xmlhttp2[node].readyState==4) {
+		var whm = 0;
+		var db = 0;
+		try{
+			if(xmlhttp2[node].status == 200){
+				//alert(xmlhttp2[node].responseText);
+				var dataArray = xmlhttp2[node].responseXML.getElementsByTagName('result');
+				code = dataArray[0].getAttribute('code');
+				if (code==200) {
+					msg='复制数据完成.';
+					var url = dataArray[0].getAttribute('install');
+					var id = dataArray[0].getAttribute('id');
+					if(url!=""){
+						msg += '[<a href="'+ url +'" target="_blank">点这里继续安装程序</a>]';
+						msg += '[<a href="?c=webapp&a=installComplete&id=';
+						msg += id+'">安装完成请再点这里返回</a>]';
+					}
+				}else{
+					msg=dataArray[0].getAttribute('msg');
+				}
+				xxkf_obj(node).innerHTML = msg;
+			}		
+		}catch(e){
+			msg='有问题,请联系管理员.';
+			xxkf_obj(node).innerHTML = msg;
+			alert(xmlhttp2[node].responseText);
+		}
+	}
+}
+function ajaxInstall()
+{
+	var url = '?c=webapp&a=ajaxInstall&appid={{$appid}}&appname={{$appname}}&appver={{$appver}}&domain={{$domain}}&dir={{$dir}}&id={{$id}}';
+	var node = 'msg';
+	xmlhttp2[node] = create_xmlhttp();	
+	xmlhttp2[node].open("GET",url,true);
+	xmlhttp2[node].onreadystatechange=function (){
+		installResult(node);
+	};
+	xmlhttp2[node].send(null);
+}
+function checkResult(node)
+{
+	if (xmlhttp2[node].readyState==4) {
+		var whm = 0;
+		var db = 0;
+		try{
+			if(xmlhttp2[node].status == 200){		
+				var dataArray = xmlhttp2[node].responseXML.getElementsByTagName('result');
+				code = dataArray[0].getAttribute('code');
+				if(code==200){
+					clearInterval(checkDownInterval);
+					msg='下载完成,正在复制数据...';
+					xxkf_obj(node).innerHTML = msg;
+					ajaxInstall();
+				}else if(code==201){
+					var total = dataArray[0].getAttribute('total');
+					var finished = dataArray[0].getAttribute('finished');
+					var percent = Math.floor(finished*100/total);
+					msg='正在下载中...总大小:'+total+',已完成:'+percent+'%';
+				}else{
+					msg='下载出错';
+				}
+			}
+			xxkf_obj(node).innerHTML = msg;
+		}catch(e){}
+	}
+}
+function checkDownload()
+{
+	var url = '?c=webapp&a=ajaxCheckDownload&appid={{$appid}}';
+	var node = 'msg';
+	//xxkf_obj(node).innerHTML="<img src='{{$PSTATIC}}/style/busy.gif'/>正在下载中...";
+	xmlhttp2[node] = create_xmlhttp();	
+	xmlhttp2[node].open("GET",url,true);
+	xmlhttp2[node].onreadystatechange=function (){
+		checkResult(node);
+	};
+	xmlhttp2[node].send(null);
+}
+checkDownInterval = setInterval("checkDownload()",2000);
+</script>
+<div align="center">
+<div class="block tb_wid2">
+<div id='msg'>
+正在下载中...
+</div>
+</div>
+</div>
+</body>
+{{include file='common/foot.html'}}

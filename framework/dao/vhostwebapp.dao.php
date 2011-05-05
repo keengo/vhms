@@ -11,7 +11,7 @@ class VhostwebappDAO extends DAO
 			"domain"=>'domain',
 			"dir"=>'dir',
 			'phy_dir'=>'phy_dir',
-			"step"=>'step',
+			"status"=>'status',
 			'install_time'=>'install_time',
 			'appname'=>'appname',
 			'appver'=>'appver'
@@ -33,7 +33,18 @@ class VhostwebappDAO extends DAO
 		$arr['install_time'] = 'NOW()';
 		$arr['appname'] = $appname;
 		$arr['appver'] = $appver;
-		return $this->insertData($arr);
+		$arr['status'] = 0;
+		$result = $this->insertData($arr);
+		if($result){
+			try{
+				$id = $this->db->lastInsertId();				
+			}catch(PDOException $e){
+				//print_r($e);
+				//todo alter use select to select id;
+			}
+			return $id;
+		}
+		return false;
 	}
 	public function getAll($user)
 	{
@@ -46,6 +57,10 @@ class VhostwebappDAO extends DAO
 	public function remove($id,$user)
 	{
 		return $this->delData($this->getFieldValue2('id', $id)." AND ".$this->getFieldValue2('user', $user));
+	}
+	public function updateApp($id,$user)
+	{
+		return $this->update(array('status'=>1),$this->getFieldValue2('id', $id)." AND ".$this->getFieldValue2('user', $user));
 	}
 }
 ?>

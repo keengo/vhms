@@ -57,7 +57,11 @@ class WhmResult
 	{
 		return $this->result[$name];
 	}
-	private $status = '';
+	public function getCode()
+	{
+		return intval($this->status);
+	}
+	public $status = '';
 	private $result = array();
 }
 class WhmClient
@@ -102,12 +106,13 @@ class WhmClient
 		$result_node = $whm->getElementsByTagName("result")->item(0);
 		$status = $result_node->attributes->getNamedItem("status")->nodeValue;//->childNodes;
 		//echo "status=".$status;
-		if(intval($status)!=200){
-			$this->err_msg = $status;
-			return false;
-		}
+		//if(intval($status)!=200){
+		//	$this->err_msg = $status;
+		//	return false;
+		//}
 		$nodes = $result_node->childNodes;
 		$result = new WhmResult;
+		$result->status = $status;
 		for($i=0;;$i++){
 			$node = $nodes->item($i);
 			if(!$node){

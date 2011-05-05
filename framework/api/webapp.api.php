@@ -49,9 +49,9 @@ class WebappAPI extends API
 		$phy_dir.=$dir;
 		return $phy_dir;
 	}
-	public function getinfo($appid)
+	public function getInfo($appid)
 	{
-		$url = "http://webapp.kanglesoft.com/info.php?appid=".$appid;
+		$url = "http://webapp.kanglesoft.com/admin/?c=webapp&a=info&appid=".$appid;
 		$opts = array(
 		'http'=>array(
 			'method'=>"GET",
@@ -63,7 +63,7 @@ class WebappAPI extends API
 			return false;
 		}
 		$whm = new DOMDocument();
-		echo "<br>".$msg."<br>***********\n";
+		//echo "<br>".$msg."<br>***********\n";
 		if(!$whm->loadXML($msg)){
 			$this->err_msg = "cann't parse whm xml";
 			return false;
@@ -88,7 +88,7 @@ class WebappAPI extends API
 			$result[$node->nodeName] = $node->nodeValue;
 			//$result->add($node->nodeName, $node->nodeValue);
 		}
-		print_r($result);
+		//print_r($result);
 		return $result;
 	}
 }
