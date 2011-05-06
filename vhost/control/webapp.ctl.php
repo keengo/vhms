@@ -97,9 +97,24 @@ class WebappControl extends Control
 		if(!$app){
 			die("没有该程序");
 		}
-		//TODO:uninstall the app
-		daocall('vhostwebapp','remove',array($id,getRole('vhost')));
-		return $this->index();
+		$appinfo = apicall('webapp','getInfo',array($app['appid']));
+		if(!$appinfo){
+			die("不能得到程序信息，请联系管理员");
+		}
+		$node_name = apicall('vhost','getNode',array(getRole('vhost')));
+		$whm = apicall('nodes','makeWhm',array($node_name));
+		$whmcall = new WhmCall('webapp.whm','uninstall');
+		$whmcall->addParam('appid', $app['appid']);
+		$whmcall->addParam('appdir',$appinfo['appdir']);
+		$whmcall->addParam('vh',getRole('vhost'));
+		$whmcall->addParam('phy_dir',$app['phy_dir']);
+		$result = $whm->call($whmcall);
+		if(!$result || $result->getCode()!=200){
+			die("删除程序错误，请联系管理员.");
+		}
+		$this->_tpl->assign("app",$app);
+		$this->_tpl->assign('appinfo',$appinfo);
+		return $this->_tpl->fetch("webapp/uninstall.html");
 	}
 	public function ajaxInstall()
 	{
@@ -141,9 +156,30 @@ class WebappControl extends Control
 			$url.=$install;
 			$str.=" install='".$url."'";
 		}
-		$str.=" id='".$id."'";
+		$str.=" id='".$id."' ";
+		$str.=" phy_dir='".$phy_dir."' ";
 		$str.="/>";
 		die($str);		
+	}
+	public function ajaxCheckAppinstall()
+	{
+		header("Content-Type: text/xml; charset=utf-8");
+		$str = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+		$str .="<result code='";
+		$node_name = apicall('vhost','getNode',array(getRole('vhost')));
+		$whm = apicall('nodes','makeWhm',array($node_name));
+		$op = $_REQUEST['op'];	
+		$whmcall = new WhmCall('webapp.whm',($op=='install'?'query_install':'query_uninstall'));
+		$whmcall->addParam('vh',getRole('vhost'));
+		$whmcall->addParam('phy_dir',$_REQUEST['phy_dir']);
+		$result = $whm->call($whmcall,10);
+		if(!$result){
+			$str.="500";
+		}else{
+			$str.=$result->getCode();
+		}
+		$str.="'/>";
+		die($str);
 	}
 	public function ajaxCheckDownload()
 	{
@@ -152,7 +188,7 @@ class WebappControl extends Control
 		$str .="<result appid='".$_REQUEST['appid']."' code='";
 		$node_name = apicall('vhost','getNode',array(getRole('vhost')));
 		$whm = apicall('nodes','makeWhm',array($node_name));
-		$whmcall = new WhmCall('webapp.whm','querydownload');
+		$whmcall = new WhmCall('webapp.whm','query_download');
 		$whmcall->addParam('appid',$_REQUEST['appid']);
 		$result = $whm->call($whmcall,10);		
 		if(!$result){
@@ -174,5 +210,10 @@ class WebappControl extends Control
 		daocall('vhostwebapp','updateApp',array($_REQUEST['id'],getRole('vhost')));
 		return $this->index();
 	}
+	public function uninstallComplete()
+	{
+		daocall('vhostwebapp','remove',array($_REQUEST['id'],getRole('vhost')));
+		return $this->index();
+	} 
 }
 ?>

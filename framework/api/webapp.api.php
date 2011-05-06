@@ -25,7 +25,7 @@ class WebappAPI extends API
 		if(!$result){
 			return false;
 		}
-		$doc_root = $result->get("doc_root");
+		//$doc_root = $result->get("doc_root");
 		$add_dir = $result->get("add_dir");
 		$hosts = $result->get("host");
 		$host = explode("\n", $hosts);
@@ -42,7 +42,7 @@ class WebappAPI extends API
 		if(!$finded){
 			return false;
 		}
-		$phy_dir = $doc_root.$subdir.$add_dir;
+		$phy_dir = $subdir.$add_dir;
 		if($dir[0]!='/'){
 			$phy_dir.='/';
 		}

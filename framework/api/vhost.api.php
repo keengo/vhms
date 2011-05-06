@@ -29,9 +29,11 @@ class VhostAPI extends API
 		$product = daocall('vhostproduct','getProduct',array($product_id,array('db_quota')));
 		if($product && $product['db_quota']>0){
 			$db = apicall('nodes','makeDbProduct',array($node));
-			$used = $db->used($uid);
-			$ret['db_limit'] = $product['db_quota'];
-			$ret['db_used'] = $used;
+			if(is_object($db)){
+				$used = $db->used($uid);
+				$ret['db_limit'] = $product['db_quota'];
+				$ret['db_used'] = $used;
+			}
 		}	
 		return $ret; 
 	}
