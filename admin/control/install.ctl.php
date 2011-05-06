@@ -89,25 +89,8 @@ class InstallControl extends Control
 	}
 	private function create_sql($pdo)
 	{
-		$files = file(dirname(__FILE__).'/kangle.sql');
-		if(!$files || count($files)<=0){
-			trigger_error('无法打开kangle.sql文件');
-			return false;
-		}
-		$sql = "";
-		for($i=0;$i<count($files);$i++){
-			if(strncmp($files[$i],'-- ',3)==0){
-				//it is a comment
-				continue;
-			}
-			$sql.= $files[$i];
-			//rtrim($files[$i]);
-			if(substr($files[$i],-2)==";\n" || substr($files[$i],-3)==";\r\n"){
-				//echo "sql=".$sql;
-				$pdo->exec($sql);
-				$sql = "";
-			}
-		}
+		$file = dirname(__FILE__).'/kangle.sql';
+		return apicall('install','executeSql',array($pdo,$file));
 	}
 }
 ?>

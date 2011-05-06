@@ -10,6 +10,7 @@ var phy_dir = null;
 var uninstall_url = '{{$appinfo.uninstall}}';
 function checkUnstallResult()
 {
+	var msg='';
 	if (xmlhttp2.readyState==4) {
 		try{
 			//alert(xmlhttp2.responseText);

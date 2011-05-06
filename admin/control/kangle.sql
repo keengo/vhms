@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `admin_users` (
   `last_login` datetime DEFAULT NULL,
   `last_ip` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='¹ÜÀíÔ±ÁÐ±í';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ï¿½ï¿½ï¿½ï¿½Ô±ï¿½Ð±ï¿½';
 
 -- --------------------------------------------------------
 
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `nodes` (
   `win` tinyint(4) NOT NULL DEFAULT '0',
   `dev` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='·þÎñÆ÷';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
 
 -- --------------------------------------------------------
 
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `id` varchar(255) DEFAULT NULL,
   `regtime` datetime NOT NULL,
   PRIMARY KEY (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ÓÃ»§ÁÐ±í';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ï¿½Ã»ï¿½ï¿½Ð±ï¿½';
 
 -- --------------------------------------------------------
 
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `vhost` (
   PRIMARY KEY (`uid`),
   UNIQUE KEY `name` (`name`),
   KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='ÐéÄâÖ÷»ú±í' AUTO_INCREMENT=1000 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½' AUTO_INCREMENT=1000 ;
 
 -- --------------------------------------------------------
 
@@ -132,4 +132,20 @@ CREATE TABLE IF NOT EXISTS `vhost_product` (
   `subdir_flag` tinyint(4) NOT NULL DEFAULT '0',
   `subdir` varchar(255) NOT NULL DEFAULT '/',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='²úÆ·ÁÐ±í' AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='ï¿½ï¿½Æ·ï¿½Ð±ï¿½' AUTO_INCREMENT=10 ;
+
+CREATE TABLE IF NOT EXISTS `vhost_webapp` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(32) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  `install_time` datetime DEFAULT NULL,
+  `appid` varchar(16) NOT NULL,
+  `domain` varchar(255) NOT NULL,
+  `dir` varchar(32) NOT NULL,
+  `phy_dir` varchar(255) NOT NULL,
+  `appname` varchar(64) DEFAULT NULL,
+  `appver` varchar(16) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user` (`user`,`appid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=65 ;
+
