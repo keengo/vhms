@@ -11,6 +11,7 @@ var install_url = null;
 var install_id = 0;
 function checkInstallResult()
 {
+	var msg='';
 	if (xmlhttp2.readyState==4) {
 		try{
 			//alert(xmlhttp2.responseText);
@@ -44,6 +45,7 @@ function checkInstallResult()
 }
 function installResult(node)
 {
+	var msg='';
 	if (xmlhttp2.readyState==4) {
 		try{			
 			if(xmlhttp2.status == 200){
@@ -57,9 +59,9 @@ function installResult(node)
 					phy_dir = dataArray[0].getAttribute('phy_dir');
 					setTimeout("checkInstall()",3000);
 				}else{
-					msg=dataArray[0].getAttribute('msg');
+					msg = dataArray[0].getAttribute('msg');
 				}
-				$('msg').innerHTML = msg;
+				//$('msg').innerHTML = msg;
 			}		
 		}catch(e){
 			msg='有问题,请联系管理员.';
@@ -81,13 +83,14 @@ function ajaxInstall()
 }
 function checkResult()
 {
+	var msg='';
 	if (xmlhttp2.readyState==4) {
 		try{
 			if(xmlhttp2.status == 200){		
-				var dataArray = xmlhttp2.responseXML.getElementsByTagName('result');
+				var dataArray = xmlhttp2.responseXML.getElementsByTagName('result');				
 				code = dataArray[0].getAttribute('code');
 				if(code==200){
-					clearInterval(checkDownInterval);
+					//clearInterval(checkDownInterval);
 					msg='下载完成,正在复制数据...';
 					$('msg').innerHTML = msg;
 					ajaxInstall();
@@ -96,12 +99,17 @@ function checkResult()
 					var finished = dataArray[0].getAttribute('finished');
 					var percent = Math.floor(finished*100/total);
 					msg='正在下载中...总大小:'+total+',已完成:'+percent+'%';
+					setTimeout("checkDownload()",2000);
 				}else{
 					msg='下载出错';
 				}
 			}
 			$('msg').innerHTML = msg;
-		}catch(e){}
+		}catch(e){
+			msg='有异常，请重新安装过.';
+			$('msg').innerHTML = msg;
+			alert(xmlhttp2.responseText);
+		}
 	}
 }
 function checkInstall()
@@ -126,7 +134,8 @@ function checkDownload()
 	};
 	xmlhttp2.send(null);
 }
-checkDownInterval = setInterval("checkDownload()",2000);
+setTimeout("checkDownload()",2000);
+//alert(checkDownInterval);
 </script>
 <div align="center">
 <div><br></div>
