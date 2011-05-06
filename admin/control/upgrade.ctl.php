@@ -12,11 +12,13 @@ class UpgradeControl extends Control
 		}
 		load_lib("pub:db");
 		$db = db_connect('default');
-		$db->exec("ALTER TABLE `vhost` DROP INDEX `name` , ADD UNIQUE `name` ( `name` ) ");
+		$sqlfile = dirname(__FILE__).'/upgrade.sql';
+		apicall('install','executeSql',array($db,$sqlfile));
+		//$db->exec("ALTER TABLE `vhost` DROP INDEX `name` , ADD UNIQUE `name` ( `name` ) ");
 		if(!apicall('install','writeVersion')){
 			die("未能写入版本信息");
 		}
-		die("成功升级,<a href='?c=session&a=loginForm'>登录</a>");		
+		die("成功升级,<a href='?c=session&a=loginForm'>登录</a>");
 	}
 	private function getInstallVersion()
 	{
