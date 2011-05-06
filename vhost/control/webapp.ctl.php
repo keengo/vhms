@@ -18,7 +18,7 @@ class WebappControl extends Control
 		}
 		$url = strcasecmp($_SERVER['HTTPS'],"ON")==0?"https://":"http://";
 		$url.= $_SERVER['HTTP_HOST'];
-		$url.= $_SERVER['SCRIPT_NAME'];
+		$url.= $_SERVER['PHP_SELF'];
 		$url.= "?c=webapp";
 		$gourl = "http://webapp.kanglesoft.com/admin/?c=webapp&a=pageApp";
 		$gourl .= "&url=".urlencode($url);
