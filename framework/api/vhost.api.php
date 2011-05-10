@@ -61,7 +61,7 @@ class VhostAPI extends API
 		if($node==null){
 			$node = $this->getNode($name);
 		}
-		$attr = array('subtemplete'=>$subtemplete);
+		$attr = array('subtemplete'=>$subtemplete,'init'=>1);
 		if($GLOBALS['node_db']=='sqlite'){
 			if(!$this->sqliteUpdateVirtualHost($node,$name, $attr)){
 				return false;
