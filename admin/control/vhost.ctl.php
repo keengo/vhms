@@ -14,7 +14,7 @@ class VhostControl extends Control {
 			if(!$skip_search){
 				$result = daocall('vhostinfo','findDomain',array($user));
 				if($result){
-					$user = $result['name'];
+					$user = $result['user'];
 				}
 			}
 			if($user[0]=='#'){

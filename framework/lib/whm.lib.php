@@ -80,7 +80,7 @@ class WhmClient
 	public function call(WhmCall $call,$tmo=0)
 	{	
 		$this->result = array();
-		
+		//echo "whm call=".$call->getCallName().",tmo=".$tmo."<br>";
 		$opts = array(
 		'http'=>array(
 			'method'=>"POST",			
@@ -96,9 +96,9 @@ class WhmClient
 		if($msg === FALSE){
 			$this->err_msg = "cann't connect to host";
 			return false;
-		}
+		}		
+		//echo "msg=".$msg."<br>***********\n";
 		$whm = new DOMDocument();
-		//echo "<br>".$msg."<br>***********\n";
 		if(!$whm->loadXML($msg)){
 			$this->err_msg = "cann't parse whm xml";
 			return false;

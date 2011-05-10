@@ -52,13 +52,13 @@
    <td class="td_bgc right_2">引擎切换</td>
     <td class="td_bgc" valign='middle'>
     <select name='subtemplete' onChange='frm.submit()'>
+    <option value=''>--请选择引擎--</option>
     {{foreach from=$subtempletes item=subtemplete}}
     <option value='{{$subtemplete}}' {{if $subtemplete==$user.subtemplete}}selected{{/if}}>
     {{$subtemplete}}</option>
     {{/foreach}}
     </select>
-    </td>
-    
+    </td>    
  </tr>
  </form>
 {{/if}}

@@ -18,7 +18,7 @@ class VhostinfoDAO extends DAO
 	public function findDomain($domain)
 	{
 		$where = $this->getFieldValue2('name',$domain)." AND ".$this->getFieldValue2('type', 0);
-		return $this->getData2(array('name'),$where);
+		return $this->getData2(array('user'),$where,'row');
 	}
 	public function delInfo($user,$name,$type,$value)
 	{
