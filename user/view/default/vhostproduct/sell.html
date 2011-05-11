@@ -48,7 +48,11 @@ function check_register()
 	  </tr>
 	  <tr>
         <td class="td_bgc right_2">购买时间:</td>
-        <td class="td_bgc right_2"><input type=radio name=month value=12 checked>1年
+        <td class="td_bgc right_2">
+        {{if $product.month_flag}}
+       	 	<input type=radio name=month value='1' checked>1个月
+        {{/if}}
+            <input type=radio name=month value=12 {{if !$product.month_flag}}checked{{/if}}>1年
 			<input type=radio name=month value=24>2年
 			<input type=radio name=month value=36>3年</td>
 	  </tr>

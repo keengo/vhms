@@ -103,9 +103,10 @@ function changeNode()
 	<tr>
 
 		<td class="td_bgc right_2">状态</td>
-		<td class="td_bgc right_2"><input type="checkbox" name="pause_flag"
-			value="1" {{if $vhostproduct.pause_flag!=0}}checked{{/if}}>
-		暂停销售</td>
+		<td class="td_bgc right_2">
+		<input type="checkbox" name="pause_flag" value="1" {{if $vhostproduct.pause_flag!=0}}checked{{/if}}>暂停销售
+		<input type="checkbox" name="month_flag" value="1" {{if $vhostproduct.month_flag!=0}}checked{{/if}}>月付
+		</td>
 	</tr>
 	<tr>
 		<td class="td_bgc td_hg" colspan="2" align="center"><input
