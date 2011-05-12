@@ -28,6 +28,6 @@ class Money_inControl extends Control {
 	}
 	public function add()
 	{
-		$log=daocall('money_in','add',array($_REQUEST['username'],$_REQUEST['money'],$_REQUEST['gw'],$_REQUEST['gwid'],1));
+		$add=daocall('moneyin','add',array(getRole('user'),$_REQUEST['money'],$_REQUEST['gw'],1));
 	}
 }

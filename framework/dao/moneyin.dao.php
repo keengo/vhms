@@ -1,5 +1,5 @@
 <?php
-class Money_inDAO extends DAO{
+class MoneyinDAO extends DAO{
 	public function __construct()
 	{	//加载基本db文件
 		parent::__construct();
@@ -19,12 +19,12 @@ class Money_inDAO extends DAO{
 		);
 		$this->_TABLE = DBPRE . 'money_in';
 	}
-	public function add($username,$money,$gw,$gwid,$status)
+	public function add($username,$money,$gw,$status)
 	{
 		$arr['username']=$username;
 		$arr['money']=$money;
 		$arr['gw']=$gw;
-		$arr['gwid']=$gwid;
+		//$arr['gwid']=$gwid;
 		$arr['status']=$status;
 		$arr['start_time']='NOW()';
 		return $this->insertData($arr);
