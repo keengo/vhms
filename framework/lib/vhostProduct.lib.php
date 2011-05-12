@@ -41,6 +41,7 @@ class VhostProduct extends Product
 			$params['doc_root'],
 			$params['gid'],
 			$product_info['templete'],
+			$product_info['subtemplete'],
 			0,
 			$params['node'],
 			$product_info['id'],

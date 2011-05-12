@@ -91,7 +91,7 @@ class VhostDAO extends DAO{
 	/**
 	 * 插入用户信息信息
 	 */
-	public function insertVhost($username,$name,$passwd,$doc_root,$group,$templete,$status,$node,$product_id,$month)
+	public function insertVhost($username,$name,$passwd,$doc_root,$group,$templete,$subtemplete,$status,$node,$product_id,$month)
 	{
 		$arr=array();
 		$arr['username']=$username;
@@ -100,6 +100,7 @@ class VhostDAO extends DAO{
 		$arr['doc_root'] = $doc_root;
 		$arr['gid'] = $group;
 		$arr['templete'] = $templete;
+		$arr['subtemplete'] = $subtemplete;
 		$arr['status'] = $status;
 		$arr['node'] = $node;
 		$arr['product_id'] = $product_id;

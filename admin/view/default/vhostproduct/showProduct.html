@@ -91,8 +91,9 @@ function changeNode(id,templete)
 		<td class="right">{{$row.price/100}}</td>
 		<td class="right">{{$row.domain}}</td>
 		<td class="right">{{if $row.subdir_flag}}允许{{/if}} {{$row.subdir}}</td>
-		<td class="right">{{$row.templete}}</td>
-
+		<td class="right">{{$row.templete}}
+		{{if $row.subtemplete}}:{{$row.subtemplete}}{{/if}}
+		</td>
 		<td class="right">
 		{{if $row.pause_flag!=0}}暂停销售 {{/if}}
 		{{if $row.month_flag!=0}}月付 {{/if}}
