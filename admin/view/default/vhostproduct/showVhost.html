@@ -25,6 +25,7 @@
 <table id="table_2" cellpadding="0" cellspacing="1">
 		 <tr>
         <td class="td_bgc td_hg" colspan="2" align="center">
+        [<a href='javascript:if(confirm("真的要删除空间吗,为将导致数据无法恢复,如果你想关闭空间，可以把该空间的状态改为非0")){ window.location="?c=vhost&a=del&name={{$row.name}}";}'>删除空间</a>]
 		[<a href='?c={{$smarty.request.c}}&a=resync&name={{$row.name}}'>重建空间</a>] 
         [<a href='javascript:if(confirm("真的要重设用户密码吗")){ window.location="?c={{$smarty.request.c}}&a=randPassword&name={{$row.name}}";}'>重设密码</a>] 
         [<a href='javascript:if(confirm("真的要重设数据库密码吗")){ window.location="?c={{$smarty.request.c}}&a=randDbPassword&name={{$row.name}}";}'>重设数据库密码</a>]

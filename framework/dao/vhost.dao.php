@@ -131,26 +131,17 @@ class VhostDAO extends DAO{
 	{
 		return $this->update($arr,$this->getFieldValue2('name', $vhostName));
 	}
+
 	/**
 	 * 删除用户信息
 	 */
 	public function delVhost($vhostName,$username)
 	{
-		$tbl = $this->_TABLE;
-		if(!$tbl) {
-			return false;
-		}
+		$where = $this->getFieldValue2('name', $vhostName);
 		if($username){
-			$sql = "DELETE FROM {$tbl} WHERE `name` = '{$vhostName}' and `username`='{$username}' LIMIT 1";
-		}else{
-			$sql = "DELETE FROM {$tbl} WHERE `name` = '{$vhostName}' LIMIT 1";
+			$where.=' AND '.$this->getFieldValue2('username', $username);
 		}
-		$ret = $this->execute($host, $dbname, $sql);
-		if($ret || is_array($ret) && count($ret) == 1) {
-			return true;
-		}else {
-			return false;
-		}
+		return $this->delData($where);
 	}
 	public function listVhostByNode($node)
 	{

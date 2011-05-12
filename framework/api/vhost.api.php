@@ -182,5 +182,17 @@ class VhostAPI extends API
 		}
 		return $product->syncExtraInfo($attr['name'],$attr['node']);
 	}
+	public function del($node,$name)
+	{
+		$whm = apicall('nodes','makeWhm',array($node));
+		$whmCall = new WhmCall('core.whm','del_vh');
+		$whmCall->addParam('destroy',1);
+		$whmCall->addParam('name',$name);
+		if($whm->call($whmCall)){
+			//daocall('vhostinfo','delAllInfo',array($name));
+			//return daocall('vhost','delVhost',array($name,null));
+		}
+		return false;
+	}
 }
 ?>

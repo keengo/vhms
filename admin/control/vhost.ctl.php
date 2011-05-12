@@ -63,6 +63,13 @@ class VhostControl extends Control {
 		$this->_tpl->display('vhostproduct/listVhost.html');	
 		
 	}
+	public function del()
+	{
+		$vhost = $_REQUEST['name'];
+		$node = daocall('vhost','getNode',array($vhost));
+		apicall('vhost','del',array($node,$vhost));
+		return $this->showVhost();
+	}
 	public function setStatus()
 	{
 		//$arr['status'] = $_REQUEST['status'];
