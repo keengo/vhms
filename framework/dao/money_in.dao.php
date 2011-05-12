@@ -1,5 +1,5 @@
 <?php
-class Money_logDAO extends DAO{
+class Money_inDAO extends DAO{
 	public function __construct()
 	{	//加载基本db文件
 		parent::__construct();
@@ -17,7 +17,7 @@ class Money_logDAO extends DAO{
 		'start_time'=>FIELD_TYPE_DATETIME,
 		'end_time'=>FIELD_TYPE_DATETIME
 		);
-		$this->_TABLE = DBPRE . 'money_log';
+		$this->_TABLE = DBPRE . 'money_in';
 	}
 	public function add($username,$money,$gw,$gwid,$status)
 	{
@@ -29,7 +29,7 @@ class Money_logDAO extends DAO{
 		$arr['start_time']='NOW()';
 		return $this->insertData($arr);
 	}
-	public function pageMoney_logByUsername($username,$page,$page_count,&$count)
+	public function pageMoney_inByUsername($username,$page,$page_count,&$count)
 	{
 		
 		return $this->selectPage(
