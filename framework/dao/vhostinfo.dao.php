@@ -15,6 +15,15 @@ class VhostinfoDAO extends DAO
 			);
 			$this->_TABLE = DBPRE . 'vhost_info';
 	}
+	public function getDomainCount($user)
+	{
+		$sql = "SELECT COUNT(*) FROM ".$this->_TABLE." WHERE ".$this->getFieldValue2('user',$user)." AND ".$this->getFieldValue2('type', 0);
+		$ret = $this->executex($sql,'row');
+		if (!$ret) {
+			return false;
+		}
+		return $ret[0];
+	}
 	public function findDomain($domain)
 	{
 		$where = $this->getFieldValue2('name',$domain)." AND ".$this->getFieldValue2('type', 0);

@@ -50,6 +50,15 @@ class DomainControl extends Control
 		}
 		$product = apicall('product','newProduct',array('vhost'));
 		$info = $product->getInfo($_SESSION['user'][$vhost]['product_id']);
+		if($info['domain']==0){
+			return "该空间不允许绑定域名";
+		}
+		if($info['domain']>0){
+			$count = daocall('vhostinfo','getDomainCount',array($vhost));
+			if($count && $count>=$info['domain']){
+				return "该空间绑定域名数限制为:".$info['domain']."个";
+			} 
+		}
 		if($info['subdir_flag']==1){
 			$value = $_REQUEST['subdir'];
 		}else{
