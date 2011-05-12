@@ -189,8 +189,8 @@ class VhostAPI extends API
 		$whmCall->addParam('destroy',1);
 		$whmCall->addParam('name',$name);
 		if($whm->call($whmCall)){
-			//daocall('vhostinfo','delAllInfo',array($name));
-			//return daocall('vhost','delVhost',array($name,null));
+			daocall('vhostinfo','delAllInfo',array($name));
+			return daocall('vhost','delVhost',array($name,null));
 		}
 		return false;
 	}
