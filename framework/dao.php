@@ -156,6 +156,35 @@ class DAO
 		//die($sql);
 		return $this->executex($sql);
 	}
+	public function insert($arr,$cmd='INSERT')
+	{
+		$fields = "";
+		$values	 = "";
+		foreach($arr as $key=>$value) {
+			if(!array_key_exists($key,$this->MAP_ARR)){
+				 continue;
+			}
+			if($this->MAP_TYPE!=null && ($this->MAP_TYPE[$key] & FIELD_TYPE_AUTO)){
+				continue;
+			}
+			if($fields!=""){
+				$fields.=",";
+				$values.=",";
+			}
+			$fields.= "`".$this->MAP_ARR[$key]."`";
+			$values .= $this->getFieldValue($key,$value);						
+		}
+		if(empty($fields) || empty($values)){
+			return false;
+		}
+		$sql = $cmd." INTO ".$this->_TABLE." ({$fields}) VALUES ({$values})";
+		return $this->executex($sql);
+	}
+	/**
+	 * @deprecated use insert
+	 * Enter description here ...
+	 * @param unknown_type $arr
+	 */
 	public function insertData($arr)
 	{
 		$fields  = "";

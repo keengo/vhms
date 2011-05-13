@@ -48,7 +48,7 @@ class VhostinfoDAO extends DAO
 		if(!$multi){
 			$this->delInfo($user,$name,$type,null);
 		}
-		return $this->insertData(array('user'=>$user,'name'=>$name,'type'=>$type,'value'=>$value));
+		return $this->insert(array('user'=>$user,'name'=>$name,'type'=>$type,'value'=>$value));
 	}
 	public function getInfo($name,$type=null)
 	{

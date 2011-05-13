@@ -67,7 +67,8 @@ class VhostAPI extends API
 				return false;
 			}
 		}
-		if(daocall('vhost','updateVhost',array($name,$attr))){		
+		$arr2 = array('subtemplete'=>$subtemplete);
+		if(daocall('vhost','updateVhost',array($name,$arr2))){		
 			if($GLOBALS['node_db']!='sqlite'){
 				$this->noticeChange($node,$name);
 			}
