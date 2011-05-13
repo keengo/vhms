@@ -131,6 +131,9 @@ CREATE TABLE IF NOT EXISTS `vhost_product` (
   `month_flag` tinyint(4) DEFAULT '0',
   `subdir_flag` tinyint(4) NOT NULL DEFAULT '0',
   `subdir` varchar(255) NOT NULL DEFAULT '/',
+ `subtemplete` VARCHAR( 255 ) NULL DEFAULT NULL,
+ `domain` INT NOT NULL DEFAULT '-1' ,
+ `upid` INT NOT NULL DEFAULT '0'
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='��Ʒ�б�' AUTO_INCREMENT=10 ;
 

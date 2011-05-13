@@ -19,9 +19,9 @@ abstract class Product
 			return $price*$month/12;
 		}
 		$price=$price/12;
-		$price*$month;
-		if($month==1){
-			$price*=0.5;
+		$price*=$month;
+		if ($month==1) {
+		//	$price*=1.5;
 		}
 		return $price;
 	}
@@ -94,9 +94,62 @@ abstract class Product
 		}
 		return false;
 	}
-	public function upgrade($username,$suser,$new_product_id)
+	public function upgrade($username,$susername,$new_product_id)
 	{
 		//产品升级操作
+		global $default_db;
+		$suser = $this->getSuser($susername);
+		if(!$suser || $suser['username']!=$username){
+			trigger_error('不是你的产品哦');
+			return false;
+		}
+		$info = $this->getInfo($suser['product_id']);
+		if(!$info){
+			trigger_error('产品错误');
+			return false;
+		}
+		$ninfo = $this->getInfo($new_product_id);
+		//计算差价
+		$diff_price = $ninfo['price'] - $info['price'];
+		if ($diff_price<0) {
+			trigger_error('升级产品价格错误,请联系管理员');
+		}
+		$expire_time = strtotime($suser['expire_time']);
+		$month = ($expire_time - time())/(30*24*3600);
+		//die("expire_time=".$suser['expire_time']." ".$expire_time." month=".$month);	
+		$price = $this->caculatePrice($diff_price,$month);		
+		if($price<0){
+			trigger_error('价格错误');
+			return false;
+		}
+		//echo "price=".$price;
+		daocall('product','open_db');
+		if($default_db==null){
+			trigger_error('没有连接数据库');
+			return false;
+		}
+		/*
+		 * 开始事务
+		 */
+		if(!$default_db->beginTransaction()){
+			trigger_error('开始事务失败');
+			return false;
+		}
+		//echo "haha";
+		if($price>0 && !apicall('money','decMoney', array($username,$price))){
+			$default_db->rollBack();
+			trigger_error('余额不足,所需金额:'.($price/100));
+			return false;
+		}
+		if(!$this->changeProduct($susername,$ninfo)){
+			$default_db->rollBack();
+			trigger_error('续费产品出错');
+			return false;
+		}
+		if($default_db->commit()){
+			$this->resync($username,$suser,$info,$ninfo);
+			return true;
+		}
 		return false;
 	}
 	/**

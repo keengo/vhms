@@ -33,6 +33,7 @@
 						{{foreach from=$list item=row}}
 					<tr>
 					   <td class="right"> 
+					    [<a href="?c=vhostproduct&a=upgradeForm&name={{$row.name}}" >升级</a>]
 						[<a href="?c=vhostproduct&a=renewForm&name={{$row.name}}" >续费</a>]
        			 		[<a href="?c=vhostproduct&a=impLogin&name={{$row.name}}" >控制面板</a>]</td>
 						<td class="td_bgc right_2"><a href='?c=vhostproduct&a=impLogin&name={{$row.name}}'>{{$row.name}}</a></td>

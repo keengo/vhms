@@ -87,10 +87,20 @@ class ProductControl extends Control {
 		}
 		return $this->_tpl->display('public/msg.html');
 	}
+	public function upgrade()
+	{
+		$user = getRole('user');
+		$product = apicall('product', 'newProduct',array($_REQUEST['product_type']));
+		if($product->upgrade($user,$_REQUEST['name'],$_REQUEST['product_id'])){
+			$this->_tpl->assign('msg','升级成功');
+		} else {
+			$this->_tpl->assign('msg','升级失败');
+		}
+		return $this->_tpl->fetch('public/msg.html');
+	}
 	public function left()
 	{
 
 	}
-	
 }
 ?>

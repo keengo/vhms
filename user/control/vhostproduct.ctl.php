@@ -84,6 +84,49 @@ class VhostproductControl extends Control {
 	{
 		return dispatch('user','left');
 	}
+	public function upgradeForm()
+	{
+		$vhost = $_REQUEST['name'];
+		$vhost_info = daocall('vhost','getVhost',array($vhost,array('username','product_id')));
+		if(!$vhost_info || $vhost_info['username'] != getRole('user')){
+			trigger_error('没有找到该虚拟主机');
+			return false;
+		}
+		$this->_tpl->assign("name",$vhost);
+		//$product = apicall('product','newProduct',array('vhost'));
+		//$product_info = $product->getInfo($vhost_info['product_id']);
+		//if(!$product_info || $product_info['upid']==0){
+		//	return "没有其它产品可供升级了";
+		//}
+		$product_id = $vhost_info['product_id'];
+		@load_conf('pub:vhostproduct');
+		$upproduct = array();
+		//echo "product_id=".$product_id;
+		//print_r($GLOBALS['vhostproduct_cfg'][$product_id]);
+		if ($GLOBALS['vhostproduct_cfg'][$product_id]['upid']>0) {
+			foreach($GLOBALS['vhostproduct_cfg'] AS $product){
+				if ($product_id == $product['id']) {
+					//相同
+					continue;
+				}
+				if ($GLOBALS['vhostproduct_cfg'][$product_id]['upid']!=$product['upid']) {
+					//uid不相同
+					continue;
+				}
+				if ($GLOBALS['vhostproduct_cfg'][$product_id]['price'] > $product['price']) {
+					//价格只能向上升级
+					continue;
+				}
+				$upproduct[] = $product;								
+			}		
+		}
+		//print_r($upproduct);
+		if (count($upproduct)<=0) {
+			return "没有其它产品可供升级了";
+		}
+		$this->_tpl->assign('products',$upproduct);
+		return $this->_tpl->fetch('vhostproduct/upgrade.html');
+	}
 	public function renewForm()
 	{
 		$vhost = $_REQUEST['name'];

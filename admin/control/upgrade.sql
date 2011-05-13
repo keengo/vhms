@@ -15,4 +15,5 @@ CREATE TABLE IF NOT EXISTS `vhost_webapp` (
   KEY `user` (`user`,`appid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=65 ;
 ALTER TABLE `vhost_product` ADD `domain` INT NOT NULL DEFAULT '-1',
-ADD `subtemplete` VARCHAR( 255 ) NULL DEFAULT NULL ;
+ADD `subtemplete` VARCHAR( 255 ) NULL DEFAULT NULL ,
+ADD `upid` INT NOT NULL DEFAULT '0';

@@ -83,9 +83,9 @@ class VhostDAO extends DAO{
 		$arr = array('expire_time' => 'ADDDATE('.$this->MAP_ARR['expire_time'].',INTERVAL '.$month.' MONTH)');
 		return $this->update($arr, $this->getFieldValue2('name', $name));
 	}
-	public function changeProduct($name,$product_id)
+	public function changeProduct($name,$product_id,$templete)
 	{
-		$arr = array('product_id'=>$product_id);
+		$arr = array('product_id'=>$product_id,'templete'=>$templete);
 		return $this->update($arr,$this->getFieldValue2('name', $name));
 	}
 	/**

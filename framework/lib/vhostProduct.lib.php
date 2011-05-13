@@ -156,19 +156,22 @@ class VhostProduct extends Product
 		//echo $susername." 续费: ".$month;
 		return daocall('vhost','addMonth',array($susername,$month));
 	}
-	protected function changeProduct($susername, $product_id)
+	protected function changeProduct($susername, $product)
 	{
-		return daocall('vhost','changeProduct',array($susername,$product_id));
+		return daocall('vhost','changeProduct',array($susername,$product['id'],$product['templete']));
 	}
 	protected function resync($username,$suser,$oproduct,$nproduct=null)
 	{
 		if($nproduct==null){
 			//续费
 			return true;
-		}
-		//TODO:重新设置quota操作
-		return false;
-		//$whm = apicall('nodes','')
+		}		
+		$suser['resync'] = '1';
+		$suser['init'] = '1';
+		$suser['md5passwd'] = $suser['passwd'];
+		$suser['templete'] = $nproduct['templete'];
+		$suser['id'] = $nproduct['id'];
+		return $this->sync($username,$suser,$nproduct);
 	}
 	public function getSuser($susername)
 	{

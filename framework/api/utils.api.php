@@ -30,9 +30,7 @@ class UtilsAPI extends API
 			if($item!=""){
 				$item.=",";
 			}
-			if($key!=$keyname){
-				$item.="'".$key."'=>'".addslashes($value)."'";
-			}
+			$item.="'".$key."'=>'".addslashes($value)."'";
 		}
 		$str.=$item.");\r\n";
 		fwrite($fp,$str);
