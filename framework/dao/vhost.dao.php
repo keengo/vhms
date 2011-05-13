@@ -38,12 +38,16 @@ class VhostDAO extends DAO{
 		return $this->select(null,$this->getFieldValue2('name', $name),'row');
 	}
 	*/
-	public function pageVhostByuser($username,$page,$page_count,&$count)
+	public function pageVhostByuser($username,$name,$page,$page_count,&$count)
 	{
+		$where = $this->getFieldValue2('username',$username);
+		if($name!=""){
+			$where.=" AND ".$this->getFieldValue2('name', $name);
+		}
 		return $this->selectPage(
 					array('name','uid','templete','node','create_time','expire_time','status','product_id','username'),
-					$this->getFieldValue2('username',$username), 
-					'name', 
+					$where, 
+					'uid', 
 					true, 
 					$page,
 					$page_count,

@@ -22,25 +22,31 @@ class VhostproductControl extends Control {
 	}
 	public function pageVhostByuser()
 	{
+		$name = $_REQUEST['name'];
+		$search_key = $name;
+		if(strchr($name,'.')){
+			$domain = daocall('vhostinfo','findDomain',array($name));
+			if($domain){
+				$search_key = $domain['user'];
+			}
+		}	
 		$page = intval($_REQUEST['page']);
 		if($page<=0){
 			$page = 1;
 		}
 		$page_count = 30;
 		$count = 0;
-		$list = daocall('vhost','pageVhostByuser',array(getRole('user'),$page,$page_count,&$count));
-		load_conf('pub:vhostproduct');
+		$list = daocall('vhost','pageVhostByuser',array(getRole('user'),$search_key,$page,$page_count,&$count));
+		@load_conf('pub:vhostproduct');
 		for($i=0;$i<count($list);$i++){
 			$list[$i]['product_name'] = $GLOBALS['vhostproduct_cfg'][$list[$i]['product_id']]['name'];
-		}
-		foreach($list AS $row){
-						
 		}
 		$total_page = ceil($count/$page_count);
 		if($page>=$total_page){
 			$page = $total_page;
 		}
 		$this->_tpl->assign('username',getRole('user'));
+		$this->_tpl->assign('name',$name);
 		$this->_tpl->assign('count',$count);
 		$this->_tpl->assign('total_page',$total_page);
 		$this->_tpl->assign('page',$page);

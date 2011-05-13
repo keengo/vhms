@@ -170,7 +170,7 @@ class VhostProduct extends Product
 		$suser['init'] = '1';
 		$suser['md5passwd'] = $suser['passwd'];
 		$suser['templete'] = $nproduct['templete'];
-		$suser['id'] = $nproduct['id'];
+		$suser['product_id'] = $nproduct['id'];
 		return $this->sync($username,$suser,$nproduct);
 	}
 	public function getSuser($susername)
