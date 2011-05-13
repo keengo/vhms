@@ -14,6 +14,16 @@ class MoneyinAPI extends API
 		$result1=daocall('moneyin','updateStatus',array($id));
 		$money=$user['money']+$moneyin['money'];
 		$result2=daocall('user','updateMoney',array($moneyin['username'],$money));
+		if($moneyin['money']<0){
+			$default_db->rollBack();
+			trigger_error('充值失败');			//回滚
+			return false;
+		}
+		if($moneyin['status']!=0){
+			$default_db->rollBack();
+			trigger_error('充值失败');			//回滚
+			return false;
+		}
 		if(!$result1){
 			$default_db->rollBack();
 			trigger_error('充值失败');			//回滚

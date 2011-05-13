@@ -21,6 +21,7 @@ class MoneyinDAO extends DAO{
 	}
 	public function updateStatus($id){
 		$arr['status']=1;
+		$arr['end_time']='NOW()';
 		return $this->update($arr,$this->getFieldValue2('id', $id));
 	}
 	public function add($username,$money,$gw)
@@ -58,7 +59,7 @@ class MoneyinDAO extends DAO{
 	{
 		
 		return $this->selectPage(
-							array('id','username','money','start_time','end_time','gw','gwid','status'),
+							array('username','money','start_time','end_time','gw','gwid','status'),
 							$this->getFieldValue2('username', $username),
 							'start_time',
 							true,
