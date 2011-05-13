@@ -25,5 +25,30 @@ class MoneyoutDAO extends DAO{
 		$arr['add_time'] = 'NOW()';
 		return $this->insert($arr);
 	}
+	public function pageMoneyin($page,$page_count,&$count)
+	{
+		return $this->selectPage(
+							array('id','username','money','add_time','mem'),
+							null,
+							'id',
+							true,
+							$page,
+							$page_count,
+							$count
+						);
+	}
+	
+	public function pageByUser($username,$page,$page_count,&$count)
+	{
+		return $this->selectPage(
+							array('username','money','add_time','mem'),
+							$this->getFieldValue2('username', $username),
+							'id',
+							true,
+							$page,
+							$page_count,
+							$count
+						);
+	}
 }
 ?>

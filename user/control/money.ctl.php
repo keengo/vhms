@@ -30,7 +30,7 @@ class MoneyControl extends Control {
 		}
 		$page_count = 20;
 		$count = 0;
-		$list = daocall('moneyin','pageByUser',array(getRole('user'),$page,$page_count,&$count));
+		$list = daocall('moneyout','pageByUser',array(getRole('user'),$page,$page_count,&$count));
 		$total_page = ceil($count/$page_count);
 		if($page>=$total_page){
 			$page = $total_page;
@@ -40,8 +40,7 @@ class MoneyControl extends Control {
 		$this->_tpl->assign('page',$page);
 		$this->_tpl->assign('page_count',$page_count);
 		$this->_tpl->assign('list',$list);
-		$this->_tpl->display('money_in/pagelist.html');
-		
+		$this->_tpl->display('money/moneyout.html');		
 	}
 	public function addFrom()
 	{

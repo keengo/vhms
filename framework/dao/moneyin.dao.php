@@ -51,7 +51,7 @@ class MoneyinDAO extends DAO{
 		return $this->selectPage(
 							array('id','username','money','start_time','end_time','gw','gwid','status'),
 							null,
-							'start_time',
+							'id',
 							true,
 							$page,
 							$page_count,
@@ -64,8 +64,8 @@ class MoneyinDAO extends DAO{
 		
 		return $this->selectPage(
 							array('username','money','start_time','end_time','gw','gwid','status'),
-							$this->getFieldValue2('username', $username),
-							'start_time',
+							$this->getFieldValue2('username', $username)." AND ".$this->getFieldValue2('status', 1),
+							'id',
 							true,
 							$page,
 							$page_count,
