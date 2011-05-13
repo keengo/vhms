@@ -79,6 +79,11 @@ class UserDAO extends DAO{
 		$arr['id'] = $id;
 		return $this->update($arr,$this->getFieldValue2('username', $username));
 	}
+	public function updateMoney($username,$money)
+	{
+		$arr['money']=$money;
+		return $this->update($arr,$this->getFieldValue2('username', $username));
+	}
 	public function addMoney($username,$money)
 	{
 		$where = $this->getFieldValue2('username', $username);

@@ -19,22 +19,47 @@ class MoneyinDAO extends DAO{
 		);
 		$this->_TABLE = DBPRE . 'money_in';
 	}
-	public function add($username,$money,$gw,$status)
+	public function updateStatus($id){
+		$arr['status']=1;
+		return $this->update($arr,$this->getFieldValue2('id', $id));
+	}
+	public function add($username,$money,$gw)
 	{
 		$arr['username']=$username;
 		$arr['money']=$money;
 		$arr['gw']=$gw;
-		//$arr['gwid']=$gwid;
-		$arr['status']=$status;
 		$arr['start_time']='NOW()';
-		return $this->insertData($arr);
+		$result=$this->insertData($arr);
+		if($result){
+			try{
+				$id = $this->db->lastInsertId();				
+			}catch(PDOException $e){
+				//print_r($e);
+				//todo alter use select to select id;
+			}
+			return $id;
+		}
+		return false;
 	}
-	public function pageMoney_inByUsername($username,$page,$page_count,&$count)
+	public function pageMoneyinByStatus($status,$page,$page_count,&$count)
+	{
+		return $this->selectPage(
+							array('id','username','money','start_time','end_time','gw','gwid','status'),
+							$this->getFieldValue2('status', $status),
+							'start_time',
+							true,
+							$page,
+							$page_count,
+							$count
+						);
+	}
+	
+	public function pageByUser($username,$page,$page_count,&$count)
 	{
 		
 		return $this->selectPage(
-							array('id','username','money','start_time','end_time','gw','gwid'),
-							'username',
+							array('id','username','money','start_time','end_time','gw','gwid','status'),
+							$this->getFieldValue2('username', $username),
 							'start_time',
 							true,
 							$page,
