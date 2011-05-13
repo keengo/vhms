@@ -48,7 +48,8 @@ class MoneyControl extends Control {
 	}
 	public function add()
 	{
-		$add=daocall('moneyin','add',array(getRole('user'),$_REQUEST['money'],$_REQUEST['gw']));
+		$money=$_REQUEST['money']*100;
+		$add=daocall('moneyin','add',array(getRole('user'),$money,$_REQUEST['gw']));
 		if($add){
 			$user=daocall('moneyin','get',array(getRole('user')));//get $user['id']
 			return $user;//传递数组给支付宝接口

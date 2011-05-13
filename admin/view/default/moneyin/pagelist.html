@@ -33,7 +33,7 @@
 				<tr>
 					<td class="td_bgc right_2">{{$row.id}}</td>
 					<td class="td_bgc right_2">{{$row.username}}</td>
-					<td class="td_bgc right_2">{{$row.money}}元</td>
+					<td class="td_bgc right_2">{{$row.money/100}}元</td>
 					<td class="td_bgc right_2">{{$row.start_time}}</td>
 					<td class="td_bgc right_2">{{$row.end_time}}</td>
 					<td class="td_bgc right_2">{{if $row.status==1}}成功{{else}} <font color=red>失败</font>{{/if}}</td>
