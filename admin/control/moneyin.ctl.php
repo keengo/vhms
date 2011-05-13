@@ -30,9 +30,13 @@ class MoneyinControl extends Control {
 		$this->_tpl->assign('list',$list);
 		$this->_tpl->display('moneyin/pagelist.html');
 	}
-	public function by_return()
+	public function manPayReturn()
 	{
-		apicall('money_in','add_return',array($_REQUEST['id']));
+		if(apicall('money','payReturn',array($_REQUEST['id']))){
+			$this->_tpl->assign('msg','充值成功');
+		} else {
+			$this->_tpl->assign('msg','充值失败');
+		}
 	}
 }
 ?>

@@ -26,7 +26,7 @@ class MoneyinDAO extends DAO{
 	public function updateStatus($id){
 		$arr['status']=1;
 		$arr['end_time']='NOW()';
-		return $this->update($arr,$this->getFieldValue2('id', $id));
+		return $this->update($arr,$this->getFieldValue2('id', $id)." AND ".$this->getFieldValue2('status', 0));
 	}
 	public function add($username,$money,$gw)
 	{

@@ -44,23 +44,23 @@ class MoneyControl extends Control {
 	}
 	public function addFrom()
 	{
-		$this->_tpl->display('money/rechargeFrom.html');
+		$this->_tpl->display('money/add.html');
 	}
 	public function add()
 	{
-		$money=$_REQUEST['money']*100;
-		$add=daocall('moneyin','add',array(getRole('user'),$money,$_REQUEST['gw']));
-		if($add){
-			$user=daocall('moneyin','get',array(getRole('user')));//get $user['id']
-			return $user;//传递数组给支付宝接口
+		$money=intval($_REQUEST['money'])*100;
+		if($money<=0){
+			die("金额填写不正确.");
 		}
-		
-	}
-	public function add_return($id)
-	{
-		if($id)
-		{
-			$add=apicall('money_in','add_return',array($id));
+		$gw = intval($_REQUEST['gw']);
+		if($gw!=1 && $gw!=2){
+			die("支付网关不正确");
 		}
+		$user = getRole('user');
+		$id = daocall('moneyin','add',array($user,$money,$gw));
+		if (!$id) {
+			die("数据库操作出错.请联系管理员");
+		}
+		return apicall('paygw'.$gw,'pay',array($id,$user,$money));	
 	}
 }
