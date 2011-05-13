@@ -10,35 +10,40 @@ class VhostControl extends Control {
 			$skip_search = true;
 		}
 		$this->_tpl->assign('user',$user);
-		if($user){
-			if(!$skip_search){
-				$result = daocall('vhostinfo','findDomain',array($user));
-				if($result){
-					$user = $result['user'];
-				}
-			}
+		if($user){			
 			if($user[0]=='#'){
 				$user = substr($user,1);
 				$call = 'listVhostByUid';
 			}else{
 				$call = 'listVhostByName';
 			}
-			$list = daocall('vhost',$call,array($user,'row'));
-
-			if($list){
-				$product_info = apicall('product','getVhostProduct',array($list['product_id']));
-				$list['product_name'] = $product_info['name'];
-				$this->_tpl->assign('row',$list);
-				$list = daocall('vhostinfo','getDomain',array($list['name']));
-				$this->_tpl->assign('sum',count($list));
-				$this->_tpl->assign('list',$list);
-			}else{
+			$result = $this->getUser($user,$call);
+			if(!$result && !$skip_search){
+				$result = daocall('vhostinfo','findDomain',array($user));
+				if($result){
+					$user = $result['user'];
+					$result = $this->getUser($user,'listVhostByName');
+				}			
+			}
+			if(!$result){
 				$this->_tpl->assign("msg","没有找到该虚拟主机");
 			}
 		}
 		$this->_tpl->display('vhostproduct/showVhost.html');
 	}
-
+	private function getUser($user,$call)
+	{
+		$list = daocall('vhost',$call,array($user,'row'));
+		if($list){
+			$product_info = apicall('product','getVhostProduct',array($list['product_id']));
+			$list['product_name'] = $product_info['name'];
+			$this->_tpl->assign('row',$list);
+			$list = daocall('vhostinfo','getDomain',array($list['name']));
+			$this->_tpl->assign('list',$list);
+			return true;
+		}
+		return false;
+	}
 	public function pageVhost()
 	{
 		$page = intval($_REQUEST['page']);
