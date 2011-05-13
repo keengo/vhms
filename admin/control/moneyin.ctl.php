@@ -10,7 +10,7 @@ class MoneyinControl extends Control {
 	{
 		parent::__destruct();
 	}
-	public function pageMoneyinByStatus()
+	public function pageMoneyin()
 	{
 		$page = intval($_REQUEST['page']);
 		if($page<=0){
@@ -18,7 +18,7 @@ class MoneyinControl extends Control {
 		}
 		$page_count = 12;
 		$count = 0;
-		$list = daocall('moneyin','pageMoneyinByStatus',array(1,$page,$page_count,&$count));
+		$list = daocall('moneyin','pageMoneyin',array($page,$page_count,&$count));
 		$total_page = ceil($count/$page_count);
 		if($page>=$total_page){
 			$page = $total_page;
@@ -29,9 +29,10 @@ class MoneyinControl extends Control {
 		$this->_tpl->assign('page_count',$page_count);
 		$this->_tpl->assign('list',$list);
 		$this->_tpl->display('moneyin/pagelist.html');
-		
-	
 	}
-	
+	public function by_return()
+	{
+		apicall('money_in','add_return',array($_REQUEST['id']));
+	}
 }
 ?>

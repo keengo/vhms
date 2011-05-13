@@ -41,11 +41,11 @@ class MoneyinDAO extends DAO{
 		}
 		return false;
 	}
-	public function pageMoneyinByStatus($status,$page,$page_count,&$count)
+	public function pageMoneyin($page,$page_count,&$count)
 	{
 		return $this->selectPage(
 							array('id','username','money','start_time','end_time','gw','gwid','status'),
-							$this->getFieldValue2('status', $status),
+							null,
 							'start_time',
 							true,
 							$page,
@@ -67,7 +67,7 @@ class MoneyinDAO extends DAO{
 							$count
 						);
 	}
-	public function get($username)
+	public function get($id)
 	{
 		return $this->select(null,$this->getFieldValue2('id',$id),'row');
 	}
