@@ -39,7 +39,6 @@ class DAO
 			}
 		}
 		$sql.=' LIMIT '.(($page-1)*$page_count).','.$page_count;
-		echo "sql=".$sql;
 		return $this->executex($sql,'rows');
 	}	
 	protected function connect()
