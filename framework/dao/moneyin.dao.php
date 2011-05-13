@@ -14,8 +14,12 @@ class MoneyinDAO extends DAO{
 			"gwid"=>'gwid'
 		);
 		$this->MAP_TYPE = array(
-		'start_time'=>FIELD_TYPE_DATETIME,
-		'end_time'=>FIELD_TYPE_DATETIME
+			'id'=>FIELD_TYPE_AUTO,
+			'money'=>FIELD_TYPE_INT,
+			'gw'=>FIELD_TYPE_INT,
+			'status'=>FIELD_TYPE_INT,
+			'start_time'=>FIELD_TYPE_DATETIME,
+			'end_time'=>FIELD_TYPE_DATETIME
 		);
 		$this->_TABLE = DBPRE . 'money_in';
 	}
