@@ -18,8 +18,8 @@ class TPL
 				define(TPL_ROOT,dirname($_SERVER["REQUEST_URI"]));
 			}
 			self::$instance->assign("STATIC",TPL_ROOT.'/view/default/');
-			//self::$instance->assign("PSTATIC","/");			
-			self::$instance->assign('lang',get_lang());
+			//self::$instance->assign("PSTATIC","/");
+		
 			self::$instance->assign('role',getRoles());
 			self::$instance->caching = false;
 			self::$instance->left_delimiter = '{{';

@@ -12,11 +12,11 @@ class SettingDAO extends DAO
 		);
 		$this->_TABLE = DBPRE . 'setting';
 	}
-	public function set($name,$value)
+	public function add($name,$value)
 	{
 		$arr['name'] = $name;
 		$arr['value'] = $value;
-		return $this->insertData($arr,'REPLACE');
+		return $this->insert($arr,'REPLACE');
 	}
 	public function get($name)
 	{

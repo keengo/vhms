@@ -36,32 +36,30 @@ class TplenvAPI extends API
 			return false;
 		}
 		return apicall('vhost','addInfo',array($vhost,$name,100,$value,false));
-	}	
-	private function checkEnv($name,$value,$arr)
+	}
+	public function checkEnv($name,$value,$arr)
 	{
-		for($i=0;$i<count($arr);$i++){
-			//echo $arr[$i]['name'];
-			if($arr[$i]['name'] == $name){
-				switch($arr[$i]['value'][0]){
-					case 'TEXT':
-						//echo 'patten='.$arr[$i]['value'][1]." value=".$value;
-						if(preg_match($arr[$i]['value'][1], $value)){
-							return ENV_CHECK_SUCCESS;
-						}
-						return ENV_CHECK_FAILED;
-					case 'RADIO':
-						for($n=0;$n<count($arr[$i]['value'][1]);$n++){
-							if($value==$arr[$i]['value'][1][$n][1]){
-								return ENV_CHECK_SUCCESS;
-							}
-						}
-						return ENV_CHECK_FAILED;
-					default:
-						return ENV_CHECK_FAILED;
-				}
-			}
+		if (!is_array($arr[$name])){
+			return ENV_CHECK_NOT_FOUND;
 		}
-		return ENV_CHECK_NOT_FOUND;
+		//die("value=".$value);		
+		switch($arr[$name]['value'][0]){
+			case 'TEXT':
+				//echo 'patten='.$arr[$i]['value'][1]." value=".$value;
+				if(preg_match($arr[$name]['value'][1], $value)){
+					return ENV_CHECK_SUCCESS;
+				}
+				return ENV_CHECK_FAILED;
+			case 'RADIO':
+				for($n=0;$n<count($arr[$name]['value'][1]);$n++){
+					if($value==$arr[$name]['value'][1][$n][1]){
+						return ENV_CHECK_SUCCESS;
+					}
+				}
+				return ENV_CHECK_FAILED;
+			default:
+				return ENV_CHECK_FAILED;
+		}
 	}
 }
 ?>

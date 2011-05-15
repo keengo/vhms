@@ -2,9 +2,35 @@
 needRole('admin');
 class SettingControl extends Control
 {
-	public function money()
+	public function index()
 	{
-		
+		@load_conf('pub:settingrule');
+		@load_conf('pub:setting');
+		$sub = $_REQUEST['sub'];
+		$info = $GLOBALS['settingrule'][$sub];
+		$this->assign('env',$info);
+		$this->assign('val',$GLOBALS['setting_cfg']);
+		$this->assign('sub',$sub);
+		return $this->fetch('setting/show.html');
+	}
+	public function set()
+	{
+		@load_conf('pub:settingrule');
+		$vhost = getRole('vhost');
+		$user = $_SESSION['user'][$vhost];
+		$names = $_REQUEST['name'];
+		$sub = $_REQUEST['sub'];
+		foreach($names AS $name){
+			$ret = apicall('tplenv','checkEnv',array($name,$_REQUEST[$name],$GLOBALS['settingrule'][$sub]));
+			if($ret!=ENV_CHECK_SUCCESS){
+				$this->_tpl->assign('msg','设置:'.$name.'失败');
+				return $this->index();
+			}
+			daocall('setting','add',array($name,$_REQUEST[$name]));
+		}
+		$list = daocall('setting','getAll');
+		apicall('utils','writeConfig',array($list,'name','setting'));
+		return $this->index();
 	}
 }
 ?>

@@ -9,7 +9,6 @@ class Control
 	static $__instance;						// 当前类的实例
 	static $__out;
 	static $_tpl;
-	static $_kangleUrl;
 	/**
 	 * 控制器构造函数
 	 *
@@ -18,12 +17,10 @@ class Control
 	function __construct()
 	{
 		global $__core_env;
-		//$UID  = snscall("getUID", array());
 		$rand = rand(1000,9999);
 		$__core_env['__LIUSHUIHAO__'] = time().$UID.$rand;
 		$this->__out = &$__core_env['out'];
 		$this->_tpl = tpl::singleton();
-		//$this->_kangleUrl = "http://kpanel.jx116.net:83";
 	}
 
 	/**
@@ -35,7 +32,20 @@ class Control
 	{
 		global $__core_env;
 	}
-	
+	public function assign($tpl_var, $value = null, $nocache = false)
+	{
+		return $this->_tpl->assign($tpl_var,$value,$nocache);
+	}
+	public function fetch($template)
+	{
+		$locale = 'zh_CN';
+		$lang = get_lang();
+		if(is_array($GLOBALS['lang'][$locale])){
+			$lang = array_merge($lang,$GLOBALS['lang'][$locale]);
+		}
+		$this->_tpl->assign('lang',$lang);
+		return $this->_tpl->fetch($template);
+	}
 	/**
 	 * 错误异常抛出
 	 * @param string msg

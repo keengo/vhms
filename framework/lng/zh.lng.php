@@ -1,6 +1,6 @@
 <?php
 function get_lang()
-{
+{	
 return array(
 	'myinfo'=>'我的信息',
 	'account_manage'=>'账号管理'	,
