@@ -36,6 +36,10 @@ class Control
 	{
 		return $this->_tpl->assign($tpl_var,$value,$nocache);
 	}
+	public function display($template)
+	{
+		echo $this->fetch($template);		
+	}
 	public function fetch($template)
 	{
 		$locale = 'zh_CN';
