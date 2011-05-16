@@ -2,6 +2,11 @@
 needRole('admin');
 class SettingControl extends Control
 {
+	public function setFrom()
+	{
+		return $this->fetch('setting/setFrom.html');
+	}
+	
 	public function index()
 	{
 		@load_conf('pub:settingrule');

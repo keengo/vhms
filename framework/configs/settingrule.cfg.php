@@ -1,5 +1,5 @@
 <?php
-$GLOBALS['settingrule']['alipay']['ALIPAY_NAME'] = array('name'=>'ALIPAY_NAME','value'=>array('TEXT','/^[a-z0-9A-Z_]{2,32}$/'));
+$GLOBALS['settingrule']['alipay']['ALIPAY_NAME'] = array('name'=>'ALIPAY_NAME','value'=>array('TEXT','/^[a-z0-9A-Z]{2,32}@[a-z0-9A-Z]{2,32}.[a-z]{2,32}$/',32));
 $GLOBALS['settingrule']['alipay']['ALIPAY_KEY'] = array('name'=>'ALIPAY_KEY','value'=>array('TEXT','/^[a-z0-9A-Z_]{2,64}$/',32));
 $GLOBALS['settingrule']['alipay']['ALIPAY_PARTNER'] = array('name'=>'ALIPAY_PARTNER','value'=>array('TEXT','/^2088[0-9]{12}$/',32));
 $GLOBALS['settingrule']['alipay']['ALIPAY_MAINNAME'] = array('name'=>'ALIPAY_MAINNAME','value'=>array('TEXT','/^[a-z0-9A-Z_]{2,64}$/',32));
