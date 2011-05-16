@@ -32,5 +32,6 @@ class SettingControl extends Control
 		apicall('utils','writeConfig',array($list,'name','setting'));
 		return $this->index();
 	}
+    								
 }
 ?>
