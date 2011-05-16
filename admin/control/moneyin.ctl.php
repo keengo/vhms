@@ -37,6 +37,7 @@ class MoneyinControl extends Control {
 		} else {
 			$this->_tpl->assign('msg','充值失败');
 		}
+		return $this->display('msg.html');
 	}
 }
 ?>

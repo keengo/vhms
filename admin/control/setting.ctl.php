@@ -21,8 +21,6 @@ class SettingControl extends Control
 	public function set()
 	{
 		@load_conf('pub:settingrule');
-		$vhost = getRole('vhost');
-		$user = $_SESSION['user'][$vhost];
 		$names = $_REQUEST['name'];
 		$sub = $_REQUEST['sub'];
 		foreach($names AS $name){

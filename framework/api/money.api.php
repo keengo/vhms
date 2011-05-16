@@ -30,13 +30,13 @@ class MoneyAPI extends API
 		$result=daocall('moneyin','updateStatus',array($id));
 		if (!$result) {
 			$default_db->rollBack();
-			trigger_error('充值失败');			//回滚
+			//trigger_error('充值失败');			//回滚
 			return false;
 		}
 		$result = $this->addMoney($moneyin['username'], $moneyin['money']);
 		if(!$result){
 			$default_db->rollBack();
-			trigger_error('充值失败');			//回滚
+			//trigger_error('充值失败');			//回滚
 			return false;			
 		}
 		return $default_db->commit();			//提交
