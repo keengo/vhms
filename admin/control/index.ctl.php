@@ -5,20 +5,6 @@ class IndexControl extends Control
 	public function __construct()
 	{
 		parent::__construct();
-		/*
-		$user = '1';
-		$pwd = '1';
-		if (!isset($_SERVER['PHP_AUTH_USER']) || !isset($_SERVER['PHP_AUTH_PW']) ||
-		           $_SERVER['PHP_AUTH_USER'] != $user ||$_SERVER['PHP_AUTH_PW'] != $pwd) {
-				Header("WWW-Authenticate: Basic realm=\"kpanel Admin Login\"");
-				Header("HTTP/1.0 401 Unauthorized");
-				echo '<html><body>
-					<h1>Rejected!</h1>
-					<big>Wrong Username or Password!</big>
-					</body></html>';
-				exit;
-		}
-		*/
 	}
 
 	public function __destruct()
@@ -27,27 +13,27 @@ class IndexControl extends Control
 	}
 	public function index()
 	{
-		$this->_tpl->display('kpanel.html');
+		$this->display('kpanel.html');
 	}
 	public function top()
 	{
-		$this->_tpl->display('top.html');
+		$this->display('top.html');
 	}
 	public function controltop()
 	{
-		$this->_tpl->display('controltop.html');
+		$this->display('controltop.html');
 	}
 	public function left()
 	{
-		$this->_tpl->display('left.html');
+		$this->display('left.html');
 	}
 	public function controlleft()
 	{
-		$this->_tpl->display('controlleft.html');
+		$this->display('controlleft.html');
 	}
 	public function main()
 	{
-		$this->_tpl->display('main.html');
+		$this->display('main.html');
 	}
 }
 ?>
