@@ -24,7 +24,7 @@ class MoneyControl extends Control {
 	}
 	public function add()
 	{
-		$money=intval($_REQUEST['money'])*100;
+		$money=intval($_REQUEST['money']*100);
 		if($money<=0){
 			die("金额填写不正确.");
 		}

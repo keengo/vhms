@@ -7,6 +7,7 @@ class Paygw1API extends API
 		$return_url = strcasecmp($_SERVER['HTTPS'],"ON")==0?"https://":"http://";
 		$return_url.= $_SERVER['HTTP_HOST'];
 		$return_url.= $_SERVER['PHP_SELF'];
+		$return_url.= "?c=money&a=";
 		/*
 		 *功能：设置商品有关信息（确认订单支付宝在线购买入口页）
 		 *详细：该页面是接口入口页面，生成支付时的URL
@@ -82,8 +83,8 @@ class Paygw1API extends API
         "payment_type"		=> "1",               			//交易类型，不需要修改
 
 		//获取配置文件(alipay_config.php)中的值
-        "partner"			=> $GLOBALS['setting_cfg']['ALIPAY_PARTNER'],
-        "seller_email"		=> $GLOBALS['setting_cfg']['ALIPAY_SELLER_EMAIL'],
+        "partner"			=> $GLOBALS['setting_cfg']['ALIPAY_PARTNER']['value'],
+        "seller_email"		=> $GLOBALS['setting_cfg']['ALIPAY_SELLER_EMAIL']['value'],
         "return_url"		=> $return_url,
         "notify_url"		=> $notify_url,
         "_input_charset"	=> 'utf-8',
@@ -113,7 +114,7 @@ class Paygw1API extends API
 		);
 
 		//构造请求函数
-		$alipay = new alipay_service($parameter,$GLOBALS['setting_cfg']['ALIPAY_KEY'],'MD5');
+		$alipay = new alipay_service($parameter,$GLOBALS['setting_cfg']['ALIPAY_KEY']['value'],'MD5');
 		$sHtmlText = $alipay->build_form();
 		echo $sHtmlText;
 	}

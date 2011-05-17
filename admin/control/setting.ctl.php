@@ -26,7 +26,9 @@ class SettingControl extends Control
 		foreach($names AS $name){
 			$ret = apicall('tplenv','checkEnv',array($name,$_REQUEST[$name],$GLOBALS['settingrule'][$sub]));
 			if($ret!=ENV_CHECK_SUCCESS){
-				$this->_tpl->assign('msg','设置:'.$name.'失败');
+				$this->_tpl->assign('msg','设置:'.$GLOBALS['lang']['zh_CN'][$name].' 失败');
+				$list = daocall('setting','getAll');
+				apicall('utils','writeConfig',array($list,'name','setting'));
 				return $this->index();
 			}
 			daocall('setting','add',array($name,$_REQUEST[$name]));
