@@ -48,6 +48,7 @@ function changeNode(id,templete)
   <div align="left"> 
   <form action='?c={{$smarty.request.c}}&a={{$smarty.request.a}}' method='post' name='product_form'>
   [<a href='?c=vhostproduct&a=flush'>更新配置文件</a>]
+  [<a href="?c=vhostproduct&a=addProductForm" target='main'>增加产品</a>]
   <select name='product_flag' onChange="javascript:product_form.submit();">
   <option value='0' {{if $product_flag==0}}selected{{/if}}>所有产品</option>
   <option value='1' {{if $product_flag==1}}selected{{/if}}>暂停产品</option>
