@@ -17,9 +17,18 @@ class QuestionDAO extends DAO{
 		$this->MAP_TYPE = array(
 			'id'=>FIELD_TYPE_AUTO,
 			'status'=>FIELD_TYPE_INT,
-			'add_time'=>FIELD_TYPE_DATETIME		
+			'add_time'=>FIELD_TYPE_DATETIME,
+			'reply_time'=>FIELD_TYPE_DATETIME			
 		);
 		$this->_TABLE = DBPRE . 'question';
+	}
+	public function updateReply($id,$reply,$admin)
+	{
+		$arr['reply']=$reply;
+		$arr['admin']=$admin;
+		$arr['reply_time']='NOW()';
+		$arr['status']=1;
+		return $this->update($arr,$this->getFieldValue2('id', $id));
 	}
 	public function add($username,$title,$body)
 	{
@@ -29,13 +38,8 @@ class QuestionDAO extends DAO{
 		$arr['add_time']='NOW()';
 		return $this->insertData($arr);
 	}
-	public function updateStatus($id,$body)
-	{
-		$arr['status']=1;
-		$arr['body']=$body;
-		return $this->insertData($arr,$this->getFieldValue2('id', $id));
-	}
-	public function pageMsg_log($page,$page_count,&$count)
+
+	public function pageQuestion($page,$page_count,&$count)
 	{		
 		return $this->selectPage(
 							array('id','username','title','add_time','body','status'),
