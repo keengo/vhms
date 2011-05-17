@@ -1,4 +1,6 @@
 <?php
+//define(WHM_CALL_METHOD, 'GET');
+define(WHM_CALL_METHOD, 'POST');
 class WhmCall
 {
 	public function WhmCall($package,$callName)
@@ -30,11 +32,19 @@ class WhmCall
 	public function buildPostData()
 	{
 		$url = "";
+		/*
 		if($this->params){
 			reset($this->params);
 			while (list($name, $val) = each($this->params)) {
 				$url.="&".$name."=".urlencode($val);
 			}
+		}
+		*/
+		foreach($this->params AS $name=>$val){
+			if($url!=""){
+				$url.='&';
+			}
+			$url.=$name."=".urlencode($val);
 		}
 		return $url;
 	}
@@ -83,14 +93,19 @@ class WhmClient
 		//echo "whm call=".$call->getCallName().",tmo=".$tmo."<br>";
 		$opts = array(
 		'http'=>array(
-			'method'=>"POST",			
-			'content'=>$call->buildPostData(),
+			'method'=>WHM_CALL_METHOD,
 			'header'=>"Authorization: ".$this->auth."\r\n")
 		);
-		if($tmo>0){
+		if (WHM_CALL_METHOD=='POST') {
+			$opts['http']['content'] = $call->buildPostData();
+		}
+		if ($tmo>0) {
 			$opts['http']['timeout'] = $tmo;
 		}
 		$url = $this->whm_url.$call->buildUrl();
+		if (WHM_CALL_METHOD!='POST') {
+			$url.='&'.$call->buildPostData();
+		}
 		//echo $url;
 		$msg = @file_get_contents($url, false, stream_context_create($opts));   
 		if($msg === FALSE){

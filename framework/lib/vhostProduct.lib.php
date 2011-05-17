@@ -115,6 +115,7 @@ class VhostProduct extends Product
 			}
 			$whmCall->addParam('group', $params['gid']);
 			$whmCall->addParam('templete',$params['templete']);
+			$whmCall->addParam('subtemplete',$params['subtemplete']);
 			if($params['md5passwd']){
 				$whmCall->addParam('passwd',$params['md5passwd']);
 			}else{
