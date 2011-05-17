@@ -1,6 +1,7 @@
 <?php 
 date_default_timezone_set('Asia/Shanghai');
 header("Cache-Control: no-cache, must-revalidate");
+header("Content-Type: text/html; charset=utf-8");
 define('SYS_ROOT', dirname(dirname(dirname(__FILE__))).'/framework');
 include(SYS_ROOT . '/runtime.php');
 @load_conf('pub:setting');

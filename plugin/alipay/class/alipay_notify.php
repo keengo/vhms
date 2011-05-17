@@ -101,13 +101,15 @@ class alipay_notify {
 
         //生成签名结果
 		if(empty($_GET)) {							//判断GET来的数组是否为空
+			//die("get is empty");
 			return false;
 		}
 		else {
 			$get          = para_filter($_GET);	    //对所有GET反馈回来的数据去空
 			$sort_get     = arg_sort($get);		    //对所有GET反馈回来的数据排序
 			$this->mysign  = build_mysign($sort_get,$this->_key,$this->sign_type);    //生成签名结果
-	
+			//echo "mysign=".$this->mysign." get sign=".$_GET["sign"]."<br>";
+			//echo $veryfy_result;
 			//写日志记录
 			//log_result("veryfy_result=".$veryfy_result."\n return_url_log:sign=".$_GET["sign"]."&mysign=".$this->mysign."&".create_linkstring($sort_get));
 	
@@ -129,6 +131,7 @@ class alipay_notify {
 	*return 服务器ATN结果集
      */
     function get_verify($url,$time_out = "60") {
+    	//echo "url=".$url;
         $urlarr     = parse_url($url);
         $errno      = "";
         $errstr     = "";
@@ -154,6 +157,8 @@ class alipay_notify {
                 $info[]=@fgets($fp, 1024);
             }
             fclose($fp);
+            //echo $urlarr["query"];
+           // print_r($info);
             $info = implode(",",$info);
             return $info;
         }
