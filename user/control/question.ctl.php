@@ -4,7 +4,7 @@ class QuestionControl extends Control {
 	
 	public function addFrom()
 	{
-		return $this->_tpl->fetch('question/add.html');
+		return $this->fetch('question/add.html');
 	}
 	public function add()
 	{
@@ -15,13 +15,13 @@ class QuestionControl extends Control {
 		}else{
 			 $this->assign('msg','提交失败');
 		}
-		return $this->display('msg.html');
+		return $this->fetch('msg.html');
 	}
 	public function get()
 	{
 		$log=daocall('question','get',array($_REQUEST['id']));
 		$this->assign('log',$log);
-		$this->_tpl->display('question/list.html');	
+		return $this->fetch('question/list.html');	
 	}
 	public function pageByuser()
 	{
