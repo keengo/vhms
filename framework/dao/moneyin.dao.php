@@ -23,10 +23,14 @@ class MoneyinDAO extends DAO{
 		);
 		$this->_TABLE = DBPRE . 'money_in';
 	}
-	public function updateStatus($id){
+	public function updateStatus($id,$money){
 		$arr['status']=1;
 		$arr['end_time']='NOW()';
-		return $this->update($arr,$this->getFieldValue2('id', $id)." AND ".$this->getFieldValue2('status', 0));
+		$where = $this->getFieldValue2('id', $id)." AND ".$this->getFieldValue2('status', 0);
+		if($money!=null){
+			$where .=' AND '.$this->getFieldValue2('money', $money);
+		}
+		return $this->update($arr,$where);
 	}
 	public function add($username,$money,$gw)
 	{

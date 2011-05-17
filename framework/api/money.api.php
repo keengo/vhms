@@ -18,7 +18,7 @@ class MoneyAPI extends API
 		}
 		return daocall('user', 'addMoney', array($user,$money));
 	}
-	public function payReturn($id)
+	public function payReturn($id,$money=null)
 	{
 		global $default_db;
 		$moneyin=daocall('moneyin','get',array($id));
@@ -27,7 +27,7 @@ class MoneyAPI extends API
 			trigger_error('开始事务失败');
 			return false;
 		}
-		$result=daocall('moneyin','updateStatus',array($id));
+		$result=daocall('moneyin','updateStatus',array($id,$money));
 		if (!$result) {
 			$default_db->rollBack();
 			//trigger_error('充值失败');			//回滚

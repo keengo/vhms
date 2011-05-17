@@ -1,13 +1,8 @@
 <?php
-class Paygw1API extends API
-{
-	public function pay($id,$user,$money)
-	{
-		$tpl = Control::$_tpl;
-		$return_url = strcasecmp($_SERVER['HTTPS'],"ON")==0?"https://":"http://";
-		$return_url.= $_SERVER['HTTP_HOST'];
-		$return_url.= $_SERVER['PHP_SELF'];
-		$return_url.= "?c=money&a=";
+		$url_base = strcasecmp($_SERVER['HTTPS'],"ON")==0?"https://":"http://";
+		$url_base.= $_SERVER['HTTP_HOST'];
+		$return_url = $url_base."/plugin/alipay/return_url.php";
+		$notify_url = $url_base."/plugin/alipay/notice_url.php";
 		/*
 		 *功能：设置商品有关信息（确认订单支付宝在线购买入口页）
 		 *详细：该页面是接口入口页面，生成支付时的URL
@@ -27,7 +22,7 @@ class Paygw1API extends API
 		/////////////////////////////////////////////////
 
 		//require_once("alipay_config.php");
-		require_once(SYS_ROOT.'/plugin/alipay/class/alipay_service.php');
+		require_once('class/alipay_service.php');
 
 		/*以下参数是需要通过下单时的订单数据传入进来获得*/
 		//必填参数
@@ -117,6 +112,4 @@ class Paygw1API extends API
 		$alipay = new alipay_service($parameter,$GLOBALS['setting_cfg']['ALIPAY_KEY']['value'],'MD5');
 		$sHtmlText = $alipay->build_form();
 		echo $sHtmlText;
-	}
-}
 ?>

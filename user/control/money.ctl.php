@@ -37,8 +37,13 @@ class MoneyControl extends Control {
 		if (!$id) {
 			die("数据库操作出错.请联系管理员");
 		}
-		
-		return apicall('paygw'.$gw,'pay',array($id,$user,$money));	
+		switch($gw){
+			case 1:
+				require_once(SYS_ROOT.'/../plugin/alipay/pay.php');
+				break;
+			default:
+				die("暂时不支持该支付网关");
+		}
 	}
 	public function moneyout()
 	{
