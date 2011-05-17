@@ -8,7 +8,7 @@ class QuestionControl extends Control {
 		if($page<=0){
 			$page = 1;
 		}
-		$page_count = 20;
+		$page_count = 30;
 		$count = 0;
 		$list = daocall('question','pageQuestion',array($page,$page_count,&$count));
 		$total_page = ceil($count/$page_count);
