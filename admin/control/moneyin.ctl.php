@@ -10,6 +10,27 @@ class MoneyinControl extends Control {
 	{
 		parent::__destruct();
 	}
+	public function pageMoneyout()
+	{	
+		$page = intval($_REQUEST['page']);
+		if($page<=0){
+			$page = 1;
+		}
+		$page_count = 20;
+		$count = 0;
+		$list = daocall('moneyout','pageMoneyout',array($page,$page_count,&$count));
+		$total_page = ceil($count/$page_count);
+		if($page>=$total_page){
+			$page = $total_page;
+		}
+		$this->_tpl->assign('count',$count);
+		$this->_tpl->assign('total_page',$total_page);
+		$this->_tpl->assign('page',$page);
+		$this->_tpl->assign('page_count',$page_count);
+		$this->_tpl->assign('list',$list);
+		$this->_tpl->display('moneyin/pageMoneyout.html');
+		
+	}
 	public function pageMoneyin()
 	{
 		$page = intval($_REQUEST['page']);
@@ -28,7 +49,7 @@ class MoneyinControl extends Control {
 		$this->_tpl->assign('page',$page);
 		$this->_tpl->assign('page_count',$page_count);
 		$this->_tpl->assign('list',$list);
-		$this->_tpl->display('moneyin/pagelist.html');
+		$this->_tpl->display('moneyin/pagemoneyin.html');
 	}
 	public function manPayReturn()
 	{
@@ -39,5 +60,6 @@ class MoneyinControl extends Control {
 		}
 		return $this->display('msg.html');
 	}
+	
 }
 ?>

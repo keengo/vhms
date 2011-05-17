@@ -147,6 +147,7 @@ class VhostproductControl extends Control {
 		if($product_info){
 			$this->_tpl->assign("product",$product_info);
 		}
+		
 		return $this->_tpl->fetch('vhostproduct/renew.html');
 	}
 }
