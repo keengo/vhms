@@ -9,6 +9,13 @@ class QuestionControl extends Control {
 	public function add()
 	{
 		$add=daocall('question','add',array(getRole('user'),$_REQUEST['title'],$_REQUEST['body']));
+		if($add)
+		{
+			 $this->assign('msg','提交成功');
+		}else{
+			 $this->assign('msg','提交失败');
+		}
+		return $this->display('msg.html');
 	}
 	public function get()
 	{
@@ -22,7 +29,7 @@ class QuestionControl extends Control {
 		if($page<=0){
 			$page = 1;
 		}
-		$page_count = 5;
+		$page_count = 20;
 		$count = 0;
 		$list = daocall('question','pageByuser',array(getRole('user'),$page,$page_count,&$count));
 		$total_page = ceil($count/$page_count);
