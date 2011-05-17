@@ -51,24 +51,31 @@ class alipay_service {
 	*return 表单提交HTML文本
      */
     function build_form() {
+    	$url = $this->gateway;
 		//GET方式传递
-        $sHtml = "<form id='alipaysubmit' name='alipaysubmit' action='".$this->gateway."_input_charset=".$this->parameter['_input_charset']."' method='get'>";
+       // $sHtml = "<form id='alipaysubmit' name='alipaysubmit' action='".$this->gateway."_input_charset=".$this->parameter['_input_charset']."' method='get'>";
 		//POST方式传递（GET与POST二必选一）
 		//$sHtml = "<form id='alipaysubmit' name='alipaysubmit' action='".$this->gateway."_input_charset=".$this->parameter['_input_charset']."' method='post'>";
-
+		
         while (list ($key, $val) = each ($this->parameter)) {
-            $sHtml.= "<input type='hidden' name='".$key."' value='".$val."'/>";
+        	$url.=$key;
+   			$url.="=";
+   			$url.=urlencode($val);
+   			$url.='&';
+            //$sHtml.= "<input type='hidden' name='".$key."' value='".$val."'/>";
         }
-
-        $sHtml = $sHtml."<input type='hidden' name='sign' value='".$this->mysign."'/>";
-        $sHtml = $sHtml."<input type='hidden' name='sign_type' value='".$this->sign_type."'/>";
+		$url.='sign='.$this->mysign;
+		$url.='&sign_type='.$this->sign_type;		
+		return $url;
+       // $sHtml = $sHtml."<input type='hidden' name='sign' value='".$this->mysign."'/>";
+        //$sHtml = $sHtml."<input type='hidden' name='sign_type' value='".$this->sign_type."'/>";
 
 		//submit按钮控件请不要含有name属性
-        $sHtml = $sHtml."<input type='submit' value='支付宝确认付款'></form>";
+       // $sHtml = $sHtml."<input type='submit' value='支付宝确认付款'></form>";
 		
-		$sHtml = $sHtml."<script>document.forms['alipaysubmit'].submit();</script>";
+		//$sHtml = $sHtml."<script>document.forms['alipaysubmit'].submit();</script>";
 		
-        return $sHtml;
+       // return $sHtml;
     }
     /********************************************************************************/
 

@@ -109,6 +109,11 @@
 
 		//构造请求函数
 		$alipay = new alipay_service($parameter,$GLOBALS['setting_cfg']['ALIPAY_KEY']['value'],'MD5');
-		$sHtmlText = $alipay->build_form();
-		echo $sHtmlText;
+		$url = $alipay->build_form();
+		//die($url);
+		//$sHtmlText = '<html><body><meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
+		header("Location:".$url);
+		die();
+		//$sHtmlText .= '</body></html>';
+		//die($sHtmlText);
 ?>

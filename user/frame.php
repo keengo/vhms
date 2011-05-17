@@ -1,5 +1,6 @@
 <?php
 session_start();
+header("Content-Type: text/html; charset=utf-8");
 date_default_timezone_set('Asia/Shanghai');
 header("Cache-Control: no-cache, must-revalidate");
 define('APPLICATON_ROOT', dirname(__FILE__));
