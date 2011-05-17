@@ -1,7 +1,7 @@
 <?php 
 date_default_timezone_set('Asia/Shanghai');
 header("Cache-Control: no-cache, must-revalidate");
-define('SYS_ROOT', dirname(dirname(__FILE__)).'/framework');
+define('SYS_ROOT', dirname(dirname(dirname(__FILE__))).'/framework');
 include(SYS_ROOT . '/runtime.php');
 @load_conf('pub:setting');
 if(!is_array($GLOBALS['setting_cfg']['ALIPAY_PARTNER'])){
