@@ -32,6 +32,10 @@ class MoneyControl extends Control {
 		if($gw!=1 && $gw!=2){
 			die("支付网关不正确");
 		}
+		load_conf('pub:setting');
+		if($gw==1 && !is_array($GLOBALS['setting_cfg']['ALIPAY_PARTNER'])){
+			die("没有设置支付参数,请联系管理员");
+		}
 		$user = getRole('user');
 		$id = daocall('moneyin','add',array($user,$money,$gw));
 		if (!$id) {
