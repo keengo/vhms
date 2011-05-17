@@ -1,0 +1,44 @@
+{{include file='common/head.html'}}
+<body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
+<div id="container">
+	<div align="center">
+		<div class="mar_top tb_wid2" align="right">
+			{{if $page>1}}
+			<a href='?c=question&a=pageByuser&page=0'>首页</a> 
+			<a href='?c=question&a=pageByuser&page={{$page-1}}'>上一页</a> 
+			{{else}}
+			首页 上一页 
+			{{/if}}
+			{{if $page!=$total_page}} 
+			<a href='?c=question&a=pageByuser&page={{$page+1}}'>下一页</a>
+			<a href='?c=question&a=pageByuser&page={{$total_page}}'>尾页</a>
+			{{else}}下一页 尾页
+			{{/if}} 
+			{{$page}}/{{$total_page}}&nbsp;
+			共计{{$count}}记录
+		</div>
+		<div class="block tb_wid2">
+			<table id="table" border="0" cellpadding="0" cellspacing="1">
+				<tr id="ttitle">
+						
+					<td class="right_2">序号</td>
+					<td class="right_2">标题</td>
+					<td class="right_2">提问时间</td>	
+					<td class="right_2">状态</td>
+					<td class="right_2">操作</td>	
+					</tr>
+					{{foreach from=$list item=row}}
+				<tr>
+					<td class="right_2">{{$row.id}}</td>
+					<td class="right_2">{{$row.title}}</td>
+					<td class="right_2">{{$row.add_time}}</td>
+					<td class="right_2">{{if $row.status==1}}已回复{{else}} <font color=red>未回复</font>{{/if}}</td>
+					<td class="right_2">[<a href='?c=question&a=get&id={{$row.id}}'>详细</a>]</td>
+					</tr>
+					{{/foreach}}
+		  </table>
+		</div>
+	
+	</div>
+</div>
+</body>
