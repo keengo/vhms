@@ -31,8 +31,9 @@ class QuestionControl extends Control {
 	}
 	public function addReply()
 	{
-		
-		$log=daocall('question','updateReply',array($_REQUEST['id'],$_REQUEST['reply'],getRole('admin')));
+		$reply=$_REQUEST['reply'];
+		apicall('utils','kEncode',array($reply));
+		$log=daocall('question','updateReply',array($_REQUEST['id'],$reply,getRole('admin')));
 		return $this->pageQuestion();
 	}
 }

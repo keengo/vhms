@@ -8,7 +8,9 @@ class QuestionControl extends Control {
 	}
 	public function add()
 	{
-		$add=daocall('question','add',array(getRole('user'),$_REQUEST['title'],$_REQUEST['body']));
+		$body=$_REQUEST['body'];
+		apicall('utils','klencode',array($body));
+		$add=daocall('question','add',array(getRole('user'),$_REQUEST['title'],$body));
 		if($add)
 		{
 			 $this->assign('msg','提交成功');

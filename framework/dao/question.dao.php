@@ -41,6 +41,7 @@ class QuestionDAO extends DAO{
 
 	public function pageQuestion($page,$page_count,&$count)
 	{		
+		
 		return $this->selectPage(
 							array('id','username','title','add_time','body','status'),
 							null,

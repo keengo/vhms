@@ -35,5 +35,27 @@ class UtilsAPI extends API
 		$str.=$item.");\r\n";
 		fwrite($fp,$str);
 	}
+	//输入时去除html标签
+	function klencode($str)
+	{
+		$str=str_replace("<","&lt;",$str);
+		$str=str_replace(">","&gt;",$str);
+		$str=str_replace(chr(34),"&quot;",$str);
+		$str=str_replace("\n","<br>",$str);
+		$str=str_replace("  "," &nbsp;",$str);
+		return $str;
+	}
+	//显示时去除html标签
+	function kldecode($msg)
+	{
+		$msg=str_replace("<br />",chr(10),$msg);
+		$msg=str_replace("<br>",chr(10),$msg);
+		$msg=str_replace("&quot;",chr(34),$msg);
+		$msg=str_replace("&lt;","<",$msg);
+		$msg=str_replace("&gt;",">",$msg);
+		$msg=str_replace("&nbsp;"," ",$msg);
+		return $msg;
+	}
+
 }
 ?>
