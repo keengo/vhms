@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `money_in` (
   `gwid` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='³äÖµ¼ÇÂ¼' AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='ï¿½ï¿½Öµï¿½ï¿½Â¼' AUTO_INCREMENT=9 ;
 
 
 CREATE TABLE IF NOT EXISTS `money_out` (
@@ -46,3 +46,18 @@ CREATE TABLE IF NOT EXISTS `money_out` (
   PRIMARY KEY (`id`),
   KEY `username` (`username`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+CREATE TABLE IF NOT EXISTS `question` (
+  `id` int(11) NOT NULL auto_increment,
+  `username` varchar(32) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `body` text NOT NULL,
+  `add_time` datetime NOT NULL,
+  `status` int(11) NOT NULL default '0',
+  `admin` varchar(32) default NULL,
+  `reply` text,
+  `reply_time` datetime default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `username` (`username`),
+  KEY `status` (`status`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;

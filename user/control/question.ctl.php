@@ -1,21 +1,20 @@
 <?php
 needRole('user');
 class QuestionControl extends Control {
-	
+
 	public function addFrom()
 	{
 		return $this->fetch('question/add.html');
 	}
 	public function add()
 	{
-		$body=$_REQUEST['body'];
-		apicall('utils','klencode',array($body));
-		$add=daocall('question','add',array(getRole('user'),$_REQUEST['title'],$body));
-		if($add)
-		{
-			 $this->assign('msg','提交成功');
+		$body = apicall('utils','klencode',array($_REQUEST['body']));
+		$title = apicall('utils','klencode',array($_REQUEST['title']));
+		$add=daocall('question','add',array(getRole('user'),$title,$body));
+		if($add) {
+			$this->assign('msg','提交成功');
 		}else{
-			 $this->assign('msg','提交失败');
+			$this->assign('msg','提交失败');
 		}
 		return $this->fetch('msg.html');
 	}
@@ -23,7 +22,7 @@ class QuestionControl extends Control {
 	{
 		$log=daocall('question','get',array($_REQUEST['id']));
 		$this->assign('log',$log);
-		return $this->fetch('question/list.html');	
+		return $this->fetch('question/list.html');
 	}
 	public function pageByuser()
 	{
@@ -43,9 +42,8 @@ class QuestionControl extends Control {
 		$this->_tpl->assign('page',$page);
 		$this->_tpl->assign('page_count',$page_count);
 		$this->_tpl->assign('list',$list);
-		$this->_tpl->display('question/pagelist.html');	
+		$this->_tpl->display('question/pagelist.html');
 	}
-	
+
 }
 
-	
