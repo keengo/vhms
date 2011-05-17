@@ -71,7 +71,6 @@
 
 
 		/////////////////////////////////////////////////
-		load_conf('pub:setting');
 		//构造要请求的参数数组，无需改动
 		$parameter = array(
         "service"			=> "create_direct_pay_by_user",	//接口名称，不需要修改
@@ -83,7 +82,7 @@
         "return_url"		=> $return_url,
         "notify_url"		=> $notify_url,
         "_input_charset"	=> 'utf-8',
-        "show_url"			=> $show_url,
+        "show_url"			=> $url_base.'/',
 
 		//从订单数据中动态获取到的必填参数
         "out_trade_no"		=> $out_trade_no,

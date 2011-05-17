@@ -24,6 +24,11 @@ class SettingControl extends Control
 		$names = $_REQUEST['name'];
 		$sub = $_REQUEST['sub'];
 		foreach($names AS $name){
+			if($GLOBALS['settingrule'][$sub][$name]['password']){
+				if($_REQUEST[$name]==""){
+					continue;
+				}
+			}
 			$ret = apicall('tplenv','checkEnv',array($name,$_REQUEST[$name],$GLOBALS['settingrule'][$sub]));
 			if($ret!=ENV_CHECK_SUCCESS){
 				$this->_tpl->assign('msg','设置:'.$GLOBALS['lang']['zh_CN'][$name].' 失败');
