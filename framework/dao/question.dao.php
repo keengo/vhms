@@ -39,18 +39,34 @@ class QuestionDAO extends DAO{
 		return $this->insertData($arr);
 	}
 
-	public function pageQuestion($page,$page_count,&$count)
+	public function pageQuestion($page,$page_count,&$count,$sortname)
 	{		
-		
+		switch($sortname){
+			case 0:
+				$sortname='status';
+				$des=true;
+				break;
+			case 1:
+				$sortname='status';
+				$des=false;
+				break;
+			case 2:
+				$sortname='id';
+				$des=false;
+			default:
+				$sortname='id';
+				$des=true;
+		}
 		return $this->selectPage(
 							array('id','username','title','add_time','body','status','reply_time','admin'),
 							null,
-							'id',
-							true,
+							$sortname,
+							$des,
 							$page,
 							$page_count,
 							$count
 						);
+						
 	}
 	public function pageByuser($username,$page,$page_count,&$count)
 	{		

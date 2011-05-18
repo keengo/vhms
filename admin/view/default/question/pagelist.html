@@ -5,7 +5,16 @@
 		<div class="mar_top tb_wid5" align="right">
 			<table cellpadding="0" cellspacing="0" id="table_2">
 				<tr><td align="right">
+					<form action='?c=question&a=pageQuestion' method='post'>
+					 <select name='sortname' onChange="submit()">
+					 <option value='2' {{if $sortname==2}}selected{{/if}}>默认</option>
+					 <option value='3' {{if $sortname==3}}selected{{/if}}>ID</option>
+					 <option value='1' {{if $sortname==1}}selected{{/if}}>未回复</option>
+					 <option value='0' {{if $sortname==0}}selected{{/if}}>已回复</option>
+					  </select>
+					  </form>
 					{{if $page>1}}
+				
 					<a href='?c=question&a=pageQuestion&page=0'>首页</a> 
 					<a href='?c=question&a=pageQuestion&page={{$page-1}}'>上一页</a> 
 					{{else}}
