@@ -20,15 +20,15 @@
 	  </tr>
 	  <tr>
         <td class="td_bgc right_2">账户余额(元)</td>
- 			<td class="td_bgc right_2"> {{$user.money/100}}<a href="?c=money&a=addFrom" target="{{$target}}">&nbsp;<span class="red">[在线充值]</span></a></td>
+ 			<td class="td_bgc right_2"> {{$user.money/100}} &nbsp;[<a href="?c=money&a=addFrom" target="{{$target}}">在线充值</a>]</td>
         </tr>
     </table>
     </div>
     
-    <div class="head_block tb_wid">&nbsp;公告栏</div>
+    <div class="head_block tb_wid">&nbsp;最新公告</div>
    <div class="block tb_wid">
 		<table id="table" border="0" cellpadding="0" cellspacing="1">
-				{{foreach from=$news item=row}}								
+			{{foreach from=$news item=row}}								
 				<tr><td><a href='?c=user&a=get&id={{$row.id}}'>{{$row.title}}</a></td><td>{{$row.add_time}}</td></tr>
 			{{/foreach}}		
 		</table>
