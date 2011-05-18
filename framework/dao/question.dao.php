@@ -43,7 +43,7 @@ class QuestionDAO extends DAO{
 	{		
 		
 		return $this->selectPage(
-							array('id','username','title','add_time','body','status'),
+							array('id','username','title','add_time','body','status','reply_time','admin'),
 							null,
 							'id',
 							true,
@@ -55,7 +55,7 @@ class QuestionDAO extends DAO{
 	public function pageByuser($username,$page,$page_count,&$count)
 	{		
 		return $this->selectPage(
-							array('id','username','title','add_time','body','status'),
+							array('id','username','title','add_time','body','status','reply_time','admin'),
 							$this->getFieldValue2('username', $username),
 							'id',
 							true,
