@@ -31,7 +31,8 @@
 					</tr>
 					{{foreach from=$list item=row}}
 				<tr>
-					<td class="right_2">{{if $row.status==0}}[<a href='?c=moneyin&a=manPayReturn&id={{$row.id}}'>确认</a>]{{/if}}</td>
+					<td class="right_2">{{if $row.status==0}}[<a href='?c=moneyin&a=manPayReturn&id={{$row.id}}'>确认</a>]{{/if}}
+					[<a href="javascript:if(confirm('确认付款{{$row.name}}?')){location='?c=moneyin&a=manPayReturn&id={{$row.id}}';}" title="确认">确认</a>]</td>
 					<td class="right_2">{{$row.id}}</td>
 					<td class="right_2">{{$row.username}}</td>
 					<td class="right_2">{{$row.money/100}}元</td>
