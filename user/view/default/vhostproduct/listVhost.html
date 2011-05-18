@@ -2,11 +2,11 @@
 <body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0' onLoad="javascript:form1.name.focus();">
 <div id="container">
 	<div align="center">
-	<table width='70%' align='center'>
+	<table class="tb_wid5" align='center'>
 	<form name='form1' action='?c=vhostproduct&a=pageVhostByuser' method='post'>
 	<tr><td>
 	用户名或域名:<input type='text' name='name' value='{{$name}}'><input type='submit' value='搜索'>
-	</td><td align='right'><div class="mar_top tb_wid4" align="right">
+	</td><td align='right'><div class="mar_top tb_wid5" align="right">
 			{{if $page>1}}
 			<a href='?c=vhostproduct&a=pageVhostByuser&page=0'>首页</a> 
 			<a href='?c=vhostproduct&a=pageVhostByuser&page={{$page-1}}'>上一页</a> 
@@ -22,7 +22,7 @@
 			共计{{$count}}记录
 			</div></td></tr></form></table>
 	
-			<div class="block tb_wid4">
+			<div class="block tb_wid5">
 				<table id="table" border="0" cellpadding="0" cellspacing="1">
 					<tr id="ttitle">
 					  	<td  bgcolor='#efefef' class='color01 right'>操作</td>
@@ -52,7 +52,7 @@
 						{{/foreach}}
 			  </table>
 			</div>
-			<div class="mar_top tb_wid4" align="right">
+			<div class="mar_top tb_wid5" align="right">
 			{{if $page>1}}
 			<a href='?c=vhostproduct&a=pageVhostByuser&page=0'>首页</a> 
 			<a href='?c=vhostproduct&a=pageVhostByuser&page={{$page-1}}'>上一页</a> 
