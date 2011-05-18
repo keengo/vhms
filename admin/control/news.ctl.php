@@ -12,6 +12,7 @@ class NewsControl extends Control {
 		return $this->pageNews();
 		
 	}
+	
 	public function pageNews()
 	{
 		$page = intval($_REQUEST['page']);

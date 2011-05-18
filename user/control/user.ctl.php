@@ -20,6 +20,7 @@ class UserControl extends Control {
 	public function index(){
 		$user = daocall('user','getUser',array(getRole('user')));
 		$this->_tpl->assign('user',$user);
+		$this->pageNewsByNumber();
 		return $this->_tpl->fetch('user/index.html');
 	}
 	public function left()
@@ -41,6 +42,20 @@ class UserControl extends Control {
 		$user = daocall('user','getUser',array(getRole('user')));
 		$this->_tpl->assign('user',$user);
 		return $this->_tpl->fetch('user/changeForm.html');
+	}
+	public function get()
+	{
+		$new=daocall('news','get',array($_REQUEST['id']));
+		$this->assign('new',$new);
+		return $this->fetch('user/list.html');	
+	}
+	private function pageNewsByNumber()
+	{
+		$page = 1;
+		$page_count = 5;
+		$count = 0;
+		$news = daocall('news','pageNews',array(10,$page,$page_count,&$count));
+		$this->assign('news',$news);
 	}
 
 }
