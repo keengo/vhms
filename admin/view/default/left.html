@@ -46,7 +46,7 @@ function SwitchMenu(obj,sty)
 	<ul class="submenu" id="sub3" >
 		<li><a href="?c=adminuser&a=listUser" target='main'>管理员列表</a></li>	
 		<li><a href="?c=adminuser&a=add" target='main'>增加管理员</a></li>
-		<li><a href='?c=news&a=pageNews' target='main'>公告列表</a></li>		
+		
 		</ul>
 	<h1 id="m4" onClick="SwitchMenu('sub4','m4')" class="menu"><ol id="p4">主机管理</ol></h1>
 	<ul class="submenu" id="sub4" >
@@ -57,7 +57,7 @@ function SwitchMenu(obj,sty)
 	<ul class="submenu" id="sub5" >
 		<li><a href="?c=user&a=listUser" target='main'>用户查询</a></li>
 		<li><a href="?c=user&a=pageUsers" target='main'>用户列表</a></li>
-		<li><a href='?c=question&a=pageQuestion' target='main'>用户提问</a></li>
+		
 		<li><a href="/user/frame.php?c=public&a=registerForm" target='main'>注册用户</a></li>	
 	</ul>
 
@@ -71,19 +71,27 @@ function SwitchMenu(obj,sty)
 		<li><a href="?c=vhostproduct&a=showProduct" target='main'>产品列表</a></li>	
 		<li><a href="?c=vhostproduct&a=addProductForm" target='main'>增加产品</a></li>
 	</ul>
+	
+	<h1 id="m8" onClick="SwitchMenu('sub8','m8')" class="menu">
+		<ol id="p8">财务管理</ol>
+	</h1>
+	<ul class="submenu" id="sub8" >
+		<li><a href='?c=moneyin&a=pageMoneyin' target='main'>充值记录</a></li>
+		<li><a href='?c=moneyin&a=pageMoneyout' target='main'>消费记录</a></li>	
+	</ul>	
+	<h1 id="m9" onClick="SwitchMenu('sub9','m9')" class="menu">
+		<ol id="p9">信息管理</ol>
+	</h1>
+	<ul class="submenu" id="sub8" >
+		<li><a href='?c=question&a=pageQuestion' target='main'>用户提问</a></li>
+		<li><a href='?c=news&a=pageNews' target='main'>公告管理</a></li>		
+	</ul>	
 	<h1 id="m6" onClick="SwitchMenu('sub7','m7')" class="menu">
-	<ol id="p7">支付帐号设置</ol>
+		<ol id="p7">系统设置</ol>
 	</h1>
 	<ul class="submenu" id="sub6" >
 		<li><a href='?c=setting&a=index&sub=alipay' target='main'>网上支付设置</a></li>
 	 	</ul>
-	<h1 id="m8" onClick="SwitchMenu('sub8','m8')" class="menu">
-	<ol id="p8">财务管理</ol>
-	</h1>
-	<ul class="submenu" id="sub8" >
-		<li><a href='?c=moneyin&a=pageMoneyin' target='main'>充值列表</a></li>
-		<li><a href='?c=moneyin&a=pageMoneyout' target='main'>消费列表</a></li>
-		
 </div>
 </td></tr>
 </table>
