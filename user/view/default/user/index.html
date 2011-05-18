@@ -1,27 +1,36 @@
 <div align="center">
-	<div class="head_block tb_wid">&nbsp;帐户信息</div>
-	<div class="block tb_wid">
-		<table id="table_2" cellpadding="0" cellspacing="1">
-		  <tr>
-			<td class="td_bgc right_2">用户名：</td>
-			<td class="td_bgc tb_wid2 right_2">{{$user.username}}</td>
-			</tr>
-		  <tr>
-			<td class="td_bgc right_2">姓名：</td>
-			<td class="td_bgc right_2">{{$user.name}}</td>
-		  </tr>
-		  <tr>
-			<td class="td_bgc right_2">身份证：</td>
-			<td class="td_bgc right_2">{{$user.id}}</td>
-		  </tr>
-		  <tr>
-			<td class="td_bgc right_2">电子邮件</td>
-			<td class="td_bgc right_2">{{$user.email}}</td>
-		  </tr>
-		  <tr>
-			<td class="td_bgc right_2">账户余额(元)</td>
-			<td class="td_bgc right_2"> {{$user.money/100}}<a href="?c=money&a=addFrom" target="{{$target}}">&nbsp;<span class="red">[在线充值]</span></a></td>
-			</tr>
+<div class="head_block tb_wid">&nbsp;帐户信息</div>
+<div class="block tb_wid">
+<table id="table_2" cellpadding="0" cellspacing="1">
+      <tr>
+        <td class="td_bgc right_2">用户名：</td>
+        <td class="td_bgc tb_wid2 right_2">{{$user.username}}</td>
+        </tr>
+      <tr>
+        <td class="td_bgc right_2">姓名：</td>
+        <td class="td_bgc right_2">{{$user.name}}</td>
+      </tr>
+      <tr>
+        <td class="td_bgc right_2">身份证：</td>
+        <td class="td_bgc right_2">{{$user.id}}</td>
+      </tr>
+	  <tr>
+        <td class="td_bgc right_2">电子邮件</td>
+        <td class="td_bgc right_2">{{$user.email}}</td>
+	  </tr>
+	  <tr>
+        <td class="td_bgc right_2">账户余额(元)</td>
+ 			<td class="td_bgc right_2"> {{$user.money/100}} &nbsp;[<a href="?c=money&a=addFrom" target="{{$target}}">在线充值</a>]</td>
+        </tr>
+    </table>
+    </div>
+    
+    <div class="head_block tb_wid">&nbsp;最新公告</div>
+   <div class="block tb_wid">
+		<table id="table" border="0" cellpadding="0" cellspacing="1">
+			{{foreach from=$news item=row}}								
+				<tr><td><a href='?c=user&a=get&id={{$row.id}}'>{{$row.title}}</a></td><td>{{$row.add_time}}</td></tr>
+			{{/foreach}}		
 		</table>
 	</div>
 </div>
