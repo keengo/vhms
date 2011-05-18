@@ -6,9 +6,9 @@ class NewsControl extends Control {
 	{
 		return $this->display('news/add.html');
 	}
-	public function add()
+	public function addNews()
 	{
-		$new=daocall('news','add',array($_REQUEST['title'],$_REQUEST['body']));
+		$new=daocall('news','addNews',array($_REQUEST['title'],$_REQUEST['body']));
 		return $this->pageNews();
 		
 	}
@@ -34,9 +34,9 @@ class NewsControl extends Control {
 		$this->_tpl->display('news/pagelist.html');	
 		
 	}
-	public function del()
+	public function delNews()
 	{
-		daocall('news','del',array($_REQUEST['id']));
+		daocall('news','delNews',array($_REQUEST['id']));
 		return $this->pageNews();
 	}
 	public function getNews()

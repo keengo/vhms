@@ -15,7 +15,7 @@ class NewsDAO extends DAO{
 		);
 		$this->_TABLE = DBPRE . 'news';
 	}
-	public function add($title,$body)
+	public function addNews($title,$body)
 	{
 		$arr['title']=$title;
 		$arr['body']=$body;
@@ -32,7 +32,7 @@ class NewsDAO extends DAO{
 		$arr['body']=$body;
 		return $this->update($arr,$this->getFieldValue2('id', $id));
 	}
-	public function del($id)
+	public function delNews($id)
 	{
 		return $this->delData($this->getFieldValue2('id', $id));
 	}
