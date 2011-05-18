@@ -21,7 +21,7 @@ class NewsControl extends Control {
 		}
 		$page_count = 30;
 		$count = 0;
-		$list = daocall('news','pageNews',array($page,$page_count,&$count));
+		$list = daocall('news','pageNew',array($page,$page_count,&$count));
 		$total_page = ceil($count/$page_count);
 		if($page>=$total_page){
 			$page = $total_page;
@@ -39,9 +39,9 @@ class NewsControl extends Control {
 		daocall('news','del',array($_REQUEST['id']));
 		return $this->pageNews();
 	}
-	public function get()
+	public function getNews()
 	{
-		$new=daocall('news','get',array($_REQUEST['id']));
+		$new=daocall('news','getNews',array($_REQUEST['id']));
 		$this->assign('new',$new);
 		return $this->fetch('news/list.html');	
 	}

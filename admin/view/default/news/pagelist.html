@@ -31,16 +31,16 @@
 					<td class="right_2">序号</td>
 					<td class="right_2">标题</td>
 					<td class="right_2">更新时间</td>
-					<td class="right_2">操作</td>		
+						
 					</tr>
 					{{foreach from=$list item=row}}
 				<tr>
-					<td class="right_2">[<a href='?c=news&a=get&id={{$row.id}}'>更新</a>]</td>
+					<td class="right_2">[<a href='?c=news&a=get&id={{$row.id}}'>更新</a>][<a href='javascript:if(confirm("确定要删除吗?"))
+					{ window.location="?c=news&a=del&id={{$row.id}}";}'>删除</a>]</td>
 					<td class="right_2">{{$row.id}}</td>
-					<td class="right_2">{{$row.title}}</td>
+					<td class="right_2"><a href='?c=news&a=get&id={{$row.id}}'>{{$row.title}}</a></td>
 					<td class="right_2">{{$row.add_time}}</td>
-					<td class="right_2">[<a href='javascript:if(confirm("确定要删除吗?"))
-					{ window.location="?c=news&a=del&id={{$row.id}}";}'>删除</a>]</td>	
+					
 					</tr>
 					{{/foreach}}
 		  </table>

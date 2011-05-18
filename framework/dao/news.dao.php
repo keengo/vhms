@@ -22,7 +22,7 @@ class NewsDAO extends DAO{
 		$arr['add_time']='NOW()';
 		return $this->insert($arr);
 	}
-	public function get($id)
+	public function getNews($id)
 	{
 		return $this->select(null,$this->getFieldValue2('id', $id),'row');
 	}
@@ -43,6 +43,18 @@ class NewsDAO extends DAO{
 			$where .= 'order by id desc limit'.$number;
 		}
 		return $this->selectPage(
+							array('id','title','body','add_time'),
+							null,
+							'id',
+							true,
+							$page,
+							$page_count,
+							$count
+						);
+	}
+	public function pageNew($page,$page_count,&$count)
+	{		
+			return $this->selectPage(
 							array('id','title','body','add_time'),
 							null,
 							'id',

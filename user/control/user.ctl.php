@@ -43,9 +43,9 @@ class UserControl extends Control {
 		$this->_tpl->assign('user',$user);
 		return $this->_tpl->fetch('user/changeForm.html');
 	}
-	public function get()
+	public function getNews()
 	{
-		$new=daocall('news','get',array($_REQUEST['id']));
+		$new=daocall('news','getNews',array($_REQUEST['id']));
 		$this->assign('new',$new);
 		return $this->fetch('user/list.html');	
 	}
