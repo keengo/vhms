@@ -3,21 +3,25 @@
 <div id="container">
 	<div align="center">
 		<div class="mar_top tb_wid2" align="right">
-		<a href="?c=question&a=addFrom" target="{{$target}}">在线提问</a>
-			{{if $page>1}}
-			
-			<a href='?c=question&a=pageQuestion&page=0'>首页</a> 
-			<a href='?c=question&a=pageQuestion&page={{$page-1}}'>上一页</a> 
-			{{else}}
-			首页 上一页 
-			{{/if}}
-			{{if $page!=$total_page}} 
-			<a href='?c=question&a=pageQuestion&page={{$page+1}}'>下一页</a>
-			<a href='?c=question&a=pageQuestion&page={{$total_page}}'>尾页</a>
-			{{else}}下一页 尾页
-			{{/if}} 
-			{{$page}}/{{$total_page}}&nbsp;
-			共计{{$count}}记录
+			<table cellpadding="0" cellspacing="0" id="table_2">
+				<tr><td align="left">
+					<a href="?c=question&a=addFrom" target="{{$target}}"><b>在线提问</b></a>
+				</td><td align="right">
+					{{if $page>1}}
+					<a href='?c=question&a=pageQuestion&page=0'>首页</a> 
+					<a href='?c=question&a=pageQuestion&page={{$page-1}}'>上一页</a> 
+					{{else}}
+					首页 上一页 
+					{{/if}}
+					{{if $page!=$total_page}} 
+					<a href='?c=question&a=pageQuestion&page={{$page+1}}'>下一页</a>
+					<a href='?c=question&a=pageQuestion&page={{$total_page}}'>尾页</a>
+					{{else}}下一页 尾页
+					{{/if}} 
+					{{$page}}/{{$total_page}}&nbsp;
+					共计{{$count}}记录
+				</td></tr>
+			</table>
 		</div>
 		<div class="block tb_wid2">
 			<table id="table" border="0" cellpadding="0" cellspacing="1">

@@ -13,7 +13,7 @@ class MoneyoutDAO extends DAO{
 		$this->MAP_TYPE = array(
 			'id'=>FIELD_TYPE_AUTO,
 			'money'=>FIELD_TYPE_INT,
-			'add_time'=>FIELD_TYPE_DATETIME,
+			'add_time'=>FIELD_TYPE_DATETIME
 		);
 		$this->_TABLE = DBPRE . 'money_out';
 	}

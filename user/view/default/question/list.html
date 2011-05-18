@@ -10,11 +10,22 @@
        <tr>
         <td class="td_bgc right_2">提问内容:</td>
         <td class="td_bgc right_2" >{{$log.body}}</td>
+<<<<<<< HEAD
      	</tr>  
 		<tr>
+=======
+     	</tr>
+      <tr>
+>>>>>>> 6aab648b07169249435f35be3c75d5f8f790c472
         <td class="td_bgc right_2">管理员回复:</td>
         <td class="td_bgc right_2" >{{$log.reply}}</td>
      	</tr>
+     	{{if $log.reply_time!=""}}
+     	 <tr>
+        <td class="td_bgc right_2">回复时间:</td>
+        <td class="td_bgc right_2" >{{$log.reply_time}}</td>
+     	</tr>
+     	{{/if}}
     </table>
 </div>
 </div>

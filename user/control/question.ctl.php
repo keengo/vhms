@@ -13,6 +13,7 @@ class QuestionControl extends Control {
 		$add=daocall('question','add',array(getRole('user'),$title,$body));
 		if($add) {
 			$this->assign('msg','提交成功');
+
 		}else{
 			$this->assign('msg','提交失败');
 		}
@@ -30,7 +31,7 @@ class QuestionControl extends Control {
 		if($page<=0){
 			$page = 1;
 		}
-		$page_count = 20;
+		$page_count = 30;
 		$count = 0;
 		$list = daocall('question','pageByuser',array(getRole('user'),$page,$page_count,&$count));
 		$total_page = ceil($count/$page_count);
