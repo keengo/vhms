@@ -21,7 +21,7 @@
 			<table id="table" border="0" cellpadding="0" cellspacing="1">
 				<tr id="ttitle">
 					<td class="right_2">操作</td>	
-					<td class="right_2">序号</td>
+					<td class="right_2">编号</td>
 					<td class="right_2">会员账号</td>
 					<td class="right_2">充值金额</td>
 					<td class="right_2">充值开始时间</td>
@@ -32,7 +32,7 @@
 					{{foreach from=$list item=row}}
 				<tr>
 					<td class="right_2">{{if $row.status==0}}
-						[<a href="javascript:if(confirm('确认付款{{$row.name}}?')){location='?c=money&a=manPayReturn&id={{$row.id}}';}" title="确认">确认</a>]{{/if}}
+						[<a href="javascript:if(confirm('确定编号{{$row.id}}，用户名{{$row.username}}的充值金额{{$row.money/100}}元')){location='?c=money&a=manPayReturn&id={{$row.id}}';}" title="确认">确认</a>]{{/if}}
 					</td>
 					<td class="right_2">{{$row.id}}</td>
 					<td class="right_2">{{$row.username}}</td>
