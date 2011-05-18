@@ -1,4 +1,5 @@
 {{include file='common/head.html'}}
+<body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0' onLoad="javascript:reg.title.focus();">
 <div align="center">
   <form  name='reg' action="?c=question&a=add" method='post'>
 <div class="head_block tb_wid">&nbsp;在线提问</div>
@@ -7,13 +8,13 @@
  	  <tr>
         <td class="td_bgc right_2">标题:</td> 
         <td class="td_bgc right_2">
-        <input name='title' type='text' id="tb_wid3"  value="" size="4"/>
+        <input name='title' type='text' value="" size="35"/>
        </td>
        </tr>
        <tr>
         <td class="td_bgc right_2">内容:</td>
         <td class="td_bgc right_2">
-       <textarea name='body' MaxLength="500" rows='6' cols='35'></textarea>
+       <textarea name='body' MaxLength="500" rows='8' cols='40'></textarea>
        	</td>
      	</tr>
       <tr>
@@ -25,4 +26,6 @@
 	</div>
 	</form>
 </div>
+</body>
+</html>
 
