@@ -1,6 +1,6 @@
 <?php
 needRole('admin');
-class MoneyinControl extends Control {
+class MoneyControl extends Control {
 	
 	public function __construct()
 	{

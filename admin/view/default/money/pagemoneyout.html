@@ -4,14 +4,14 @@
 	<div align="center">
 		<div class="mar_top tb_wid2" align="right">
 			{{if $page>1}}
-			<a href='?c=moneyin&a=pageMoneyout&page=0'>首页</a> 
-			<a href='?c=moneyin&a=pageMoneyout&page={{$page-1}}'>上一页</a> 
+			<a href='?c=money&a=pageMoneyout&page=0'>首页</a> 
+			<a href='?c=money&a=pageMoneyout&page={{$page-1}}'>上一页</a> 
 			{{else}}
 			首页 上一页 
 			{{/if}}
 			{{if $page!=$total_page}} 
-			<a href='?c=moneyin&a=pageMoneyout&page={{$page+1}}'>下一页</a>
-			<a href='?c=moneyin&a=pageMoneyout&page={{$total_page}}'>尾页</a>
+			<a href='?c=money&a=pageMoneyout&page={{$page+1}}'>下一页</a>
+			<a href='?c=money&a=pageMoneyout&page={{$total_page}}'>尾页</a>
 			{{else}}下一页 尾页
 			{{/if}} 
 			{{$page}}/{{$total_page}}&nbsp;
