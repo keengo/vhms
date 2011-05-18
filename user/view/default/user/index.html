@@ -29,9 +29,9 @@
    <div class="block tb_wid">
 		<table id="table_2" border="0" cellpadding="0" cellspacing="1">
 			{{foreach from=$news item=row}}								
-				<tr><td class="td_bgc right_2"><a href='?c=user&a=get&id={{$row.id}}'>{{$row.title}}</a></td>
-				<td class="td_bgc right_2">{{$row.add_time}}
-				</td></tr>
+
+				<tr><td><a href='?c=public&a=readNews&id={{$row.id}}'>{{$row.title}}</a></td><td>{{$row.add_time}}</td></tr>
+
 			{{/foreach}}
 		</table>
 	</div>

@@ -21,7 +21,7 @@ class NewsControl extends Control {
 		}
 		$page_count = 30;
 		$count = 0;
-		$list = daocall('news','pageNew',array($page,$page_count,&$count));
+		$list = daocall('news','pageNews',array($page,$page_count,&$count));
 		$total_page = ceil($count/$page_count);
 		if($page>=$total_page){
 			$page = $total_page;

@@ -36,7 +36,7 @@ class NewsDAO extends DAO{
 	{
 		return $this->delData($this->getFieldValue2('id', $id));
 	}
-	public function pageNews($number,$page,$page_count,&$count)
+	public function pageNewsByNumber($number,$page,$page_count,&$count)
 	{		
 		$where=null;
 		if($number!=""){
@@ -52,7 +52,7 @@ class NewsDAO extends DAO{
 							$count
 						);
 	}
-	public function pageNew($page,$page_count,&$count)
+	public function pageNews($page,$page_count,&$count)
 	{		
 			return $this->selectPage(
 							array('id','title','body','add_time'),

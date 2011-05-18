@@ -28,7 +28,7 @@ class MoneyinControl extends Control {
 		$this->_tpl->assign('page',$page);
 		$this->_tpl->assign('page_count',$page_count);
 		$this->_tpl->assign('list',$list);
-		$this->_tpl->display('moneyin/pageMoneyout.html');
+		$this->_tpl->display('money/pageMoneyout.html');
 		
 	}
 	public function pageMoneyin()
@@ -49,7 +49,7 @@ class MoneyinControl extends Control {
 		$this->_tpl->assign('page',$page);
 		$this->_tpl->assign('page_count',$page_count);
 		$this->_tpl->assign('list',$list);
-		$this->_tpl->display('moneyin/pagemoneyin.html');
+		$this->_tpl->display('money/pagemoneyin.html');
 	}
 	public function manPayReturn()
 	{

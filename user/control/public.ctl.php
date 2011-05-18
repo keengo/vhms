@@ -28,6 +28,12 @@ class PublicControl extends  Control
 		$this->_tpl->assign("menus",$menus);
 		return $this->_tpl->fetch("public/head.html");
 	}	
+	public function readNews()
+	{
+		$new=daocall('news','getNews',array($_REQUEST['id']));
+		$this->assign('new',$new);
+		return $this->fetch('public/news.html');	
+	}
 	public function register()
 	{
 		$username = $_REQUEST['username'];
