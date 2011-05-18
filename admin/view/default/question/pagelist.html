@@ -30,7 +30,8 @@
 					<td class="right_2">序号</td>
 					<td class="right_2">用户名</td>
 					<td class="right_2">标题</td>
-					<td class="right_2">提问时间</td>	
+					<td class="right_2">提问时间</td>
+					<td class="right_2">回复时间</td>	
 					<td class="right_2">状态</td>
 					
 					</tr>
@@ -41,6 +42,7 @@
 					<td class="right_2">{{$row.username}}</td>
 					<td class="right_2" title="{{$row.body}}"><a href='?c=question&a=get&id={{$row.id}}'>{{$row.title}}</a></td>
 					<td class="right_2">{{$row.add_time}}</td>
+					<td class="right_2">{{$row.reply_time}}</td>
 					<td class="right_2">{{if $row.status==1}}已回复{{else}} <font color=red>未回复</font>{{/if}}</td>
 					
 					</tr>
