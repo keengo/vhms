@@ -7,22 +7,20 @@
 				<tr><td align="right">
 					<form action='?c=question&a=pageQuestion' method='post'>
 					 <select name='sortname' onChange="submit()">
-					 <option value='2' {{if $sortname==2}}selected{{/if}}>默认</option>
-					 <option value='3' {{if $sortname==3}}selected{{/if}}>ID</option>
+					 <option value='2' {{if $sortname==2}}selected{{/if}}>全部</option>
 					 <option value='1' {{if $sortname==1}}selected{{/if}}>未回复</option>
-					 <option value='0' {{if $sortname==0}}selected{{/if}}>已回复</option>
-					  </select>
+					 </select>
 					  </form>
 					{{if $page>1}}
 				
-					<a href='?c=question&a=pageQuestion&page=0'>首页</a> 
-					<a href='?c=question&a=pageQuestion&page={{$page-1}}'>上一页</a> 
+					<a href='?c=question&a=pageQuestion&sortname={{$smarty.request.sortname}}&page=0'>首页</a> 
+					<a href='?c=question&a=pageQuestion&sortname={{$smarty.request.sortname}}&page={{$page-1}}'>上一页</a> 
 					{{else}}
 					首页 上一页 
 					{{/if}}
 					{{if $page!=$total_page}} 
-					<a href='?c=question&a=pageQuestion&page={{$page+1}}'>下一页</a>
-					<a href='?c=question&a=pageQuestion&page={{$total_page}}'>尾页</a>
+					<a href='?c=question&a=pageQuestion&sortname={{$smarty.request.sortname}}&page={{$page+1}}'>下一页</a>
+					<a href='?c=question&a=pageQuestion&sortname={{$smarty.request.sortname}}&page={{$total_page}}'>尾页</a>
 					{{else}}下一页 尾页
 					{{/if}} 
 					{{$page}}/{{$total_page}}&nbsp;

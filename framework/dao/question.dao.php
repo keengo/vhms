@@ -41,32 +41,21 @@ class QuestionDAO extends DAO{
 
 	public function pageQuestion($page,$page_count,&$count,$sortname)
 	{		
-		switch($sortname){
-			case 0:
-				$sortname='status';
-				$des=true;
-				break;
-			case 1:
-				$sortname='status';
-				$des=false;
-				break;
-			case 2:
-				$sortname='id';
-				$des=false;
-			default:
-				$sortname='id';
-				$des=true;
+		if($sortname==1){
+			$where=$this->getFieldValue2('status', '0');
+		}else{
+			$where=null;
 		}
+	
 		return $this->selectPage(
 							array('id','username','title','add_time','body','status','reply_time','admin'),
-							null,
-							$sortname,
-							$des,
+							$where,
+							'id',
+							true,
 							$page,
 							$page_count,
 							$count
 						);
-						
 	}
 	public function pageByuser($username,$page,$page_count,&$count)
 	{		

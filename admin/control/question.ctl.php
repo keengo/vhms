@@ -4,19 +4,20 @@ class QuestionControl extends Control {
 	
 	public function pageQuestion()
 	{
-		
+		$sortname=$_REQUEST['sortname'];
 		$page = intval($_REQUEST['page']);
 		if($page<=0){
 			$page = 1;
 		}
-		$page_count = 10;
+		$page_count = 4;
 		$count = 0;
-		$list = daocall('question','pageQuestion',array($page,$page_count,&$count,$_REQUEST['sortname']));
+		$list = daocall('question','pageQuestion',array($page,$page_count,&$count,$sortname));
 		$total_page = ceil($count/$page_count);
 		if($page>=$total_page){
 			$page = $total_page;
 		}
-		print_r($_REQUEST['sortname']);
+		print_r($sortname);
+		$this->_tpl->assign('sortname',$sortname);
 		$this->_tpl->assign('count',$count);
 		$this->_tpl->assign('total_page',$total_page);
 		$this->_tpl->assign('page',$page);
