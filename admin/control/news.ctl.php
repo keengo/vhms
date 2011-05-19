@@ -8,7 +8,8 @@ class NewsControl extends Control {
 	}
 	public function addNews()
 	{
-		$new=daocall('news','addNews',array($_REQUEST['title'],$_REQUEST['body']));
+		$body = apicall('utils','klencode',array($_REQUEST['body'],true));
+		$new=daocall('news','addNews',array($_REQUEST['title'],$body));
 		return $this->pageNews();
 		
 	}
@@ -31,8 +32,7 @@ class NewsControl extends Control {
 		$this->_tpl->assign('page',$page);
 		$this->_tpl->assign('page_count',$page_count);
 		$this->_tpl->assign('list',$list);
-		$this->_tpl->display('news/pagelist.html');	
-		
+		$this->_tpl->display('news/pagelist.html');
 	}
 	public function delNews()
 	{
@@ -42,12 +42,16 @@ class NewsControl extends Control {
 	public function getNews()
 	{
 		$new=daocall('news','getNews',array($_REQUEST['id']));
+		if($new){
+			$new['body'] = apicall('utils','kldecode',array($new['body'],true));
+		}
 		$this->assign('new',$new);
-		return $this->fetch('news/list.html');	
+		return $this->fetch('news/list.html');
 	}
 	public function updateNews()
 	{
-		$new=daocall('news','updateNews',array($_REQUEST['id'],$_REQUEST['title'],$_REQUEST['body']));
+		$body = apicall('utils','klencode',array($_REQUEST['body'],true));
+		$new=daocall('news','updateNews',array($_REQUEST['id'],$_REQUEST['title'],$body));
 		return $this->pageNews();
 	}
 }
