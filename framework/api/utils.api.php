@@ -17,6 +17,7 @@ class UtilsAPI extends API
 		}
 		fwrite($fp,"?>");
 		fclose($fp);
+		@chmod($file,0600);
 		return true;
 	}
 	private function writeItemConfig($fp,$node,$keyname,$cfg_name)
