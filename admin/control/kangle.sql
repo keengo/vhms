@@ -133,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `vhost_product` (
   `subdir` varchar(255) NOT NULL DEFAULT '/',
  `subtemplete` VARCHAR( 255 ) NULL DEFAULT NULL,
  `domain` INT NOT NULL DEFAULT '-1' ,
- `upid` INT NOT NULL DEFAULT '0'
+ `upid` INT NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -179,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `money_out` (
   `mem` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `username` (`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `question` (
   `id` int(11) NOT NULL auto_increment,
@@ -202,4 +202,4 @@ CREATE TABLE IF NOT EXISTS `news` (
   `body` text NOT NULL,
   `add_time` datetime NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

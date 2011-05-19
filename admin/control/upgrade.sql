@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `money_out` (
   `mem` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `username` (`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 CREATE TABLE IF NOT EXISTS `question` (
   `id` int(11) NOT NULL auto_increment,
@@ -68,4 +68,4 @@ CREATE TABLE IF NOT EXISTS `news` (
   `body` text NOT NULL,
   `add_time` datetime NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
