@@ -45,7 +45,10 @@ class MoneyControl extends Control {
 			case 1:
 				require_once(SYS_ROOT.'/../plugin/alipay/pay.php');
 				break;
-			default:
+			case 2:
+				require_once(SYS_ROOT.'/../plugin/chinabank/Send.php');
+				break;
+			default:				
 				die("暂时不支持该支付网关");
 		}
 	}

@@ -11,6 +11,8 @@
 					 <option value='1' {{if $sortname==1}}selected{{/if}}>未回复</option>
 					 </select>
 					  </form>
+					  </td>
+					  <td align="right">
 					{{if $page>1}}
 				
 					<a href='?c=question&a=pageQuestion&sortname={{$smarty.request.sortname}}&page=0'>首页</a> 
@@ -36,18 +38,20 @@
 					<td class="right_2">用户名</td>
 					<td class="right_2">标题</td>
 					<td class="right_2">提问时间</td>
-					<td class="right_2">回复时间</td>	
+					<td class="right_2">回复时间</td>
+					<td class="right_2">管理员</td>
 					<td class="right_2">状态</td>
 					
 					</tr>
 					{{foreach from=$list item=row}}
 				<tr>
-					<td class="right_2">[<a href='?c=question&a=get&id={{$row.id}}'>回复</a>]</td>
+					<td class="right_2">[<a href='?c=question&a=getQuestion&id={{$row.id}}'>回复</a>]</td>
 					<td class="right_2">{{$row.id}}</td>
-					<td class="right_2">{{$row.username}}</td>
-					<td class="right_2" title="{{$row.body}}"><a href='?c=question&a=get&id={{$row.id}}'>{{$row.title}}</a></td>
+					<td class="right_2"><a href='?c=user&a=listuser&username={{$row.username}}'>{{$row.username}}</a></td>
+					<td class="right_2" title="{{$row.body}}"><a href='?c=question&a=getQuestion&id={{$row.id}}'>{{substr($row.title,0,30)}}</a></td>
 					<td class="right_2">{{$row.add_time}}</td>
 					<td class="right_2">{{$row.reply_time}}</td>
+					<td class="right_2">{{$row.admin}}</td>
 					<td class="right_2">{{if $row.status==1}}已回复{{else}} <font color=red>未回复</font>{{/if}}</td>
 					
 					</tr>

@@ -47,7 +47,7 @@
 						<td class="td_bgc right_2">{{$row.node}}</td>
 						<td class="td_bgc right_2">{{$row.create_time}}</td>
 						<td class="td_bgc right_2">{{$row.expire_time}}</td>
-						<td class="td_bgc right_2">{{$row.status}}</td>
+						<td class="td_bgc right_2" title='{{$row.status}}'>{{if $row.status==0}}正常{{else}}<font color='red'>非正常</font>{{/if}}</td>
 						</tr>
 						{{/foreach}}
 			  </table>
