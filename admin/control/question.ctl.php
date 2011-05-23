@@ -9,14 +9,14 @@ class QuestionControl extends Control {
 		if($page<=0){
 			$page = 1;
 		}
-		$page_count = 4;
+		$page_count = 25;
 		$count = 0;
 		$list = daocall('question','pageQuestion',array($page,$page_count,&$count,$sortname));
 		$total_page = ceil($count/$page_count);
 		if($page>=$total_page){
 			$page = $total_page;
 		}
-		print_r($sortname);
+	
 		$this->_tpl->assign('sortname',$sortname);
 		$this->_tpl->assign('count',$count);
 		$this->_tpl->assign('total_page',$total_page);
@@ -26,9 +26,9 @@ class QuestionControl extends Control {
 		$this->_tpl->display('question/pagelist.html');	
 	}
 	
-	public function get()
+	public function getQuestion()
 	{
-		$log=daocall('question','get',array($_REQUEST['id']));
+		$log=daocall('question','getQuestion',array($_REQUEST['id']));
 		$this->assign('log',$log);
 		return $this->fetch('question/list.html');	
 	}

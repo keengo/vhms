@@ -57,11 +57,16 @@ class QuestionDAO extends DAO{
 							$count
 						);
 	}
-	public function pageByuser($username,$page,$page_count,&$count)
+	public function pageByuser($username,$page,$page_count,&$count,$sortname)
 	{		
+		if($sortname==1){
+			$where=$this->getFieldValue2('username', $username).' AND '.$this->getFieldValue2('status', '0');
+		}else{
+			$where=$this->getFieldValue2('username', $username);
+		}
 		return $this->selectPage(
 							array('id','username','title','add_time','body','status','reply_time','admin'),
-							$this->getFieldValue2('username', $username),
+							$where,
 							'id',
 							true,
 							$page,
@@ -73,7 +78,7 @@ class QuestionDAO extends DAO{
 	{
 		return $this->delete($this->getFieldValue2('id', $id));
 	}
-	public function get($id)
+	public function getQuestion($id)
 	{
 		return $this->select(null,$this->getFieldValue2('id',$id),'row');
 	}
