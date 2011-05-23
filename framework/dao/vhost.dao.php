@@ -25,7 +25,7 @@ class VhostDAO extends DAO{
 		$this->MAP_TYPE = array(
 			'passwd'=>FIELD_TYPE_MD5,
 			'uid'=>FIELD_TYPE_INT,
-			'state'=>FIELD_TYPE_INT,
+			'status'=>FIELD_TYPE_INT,
 			'product_id'=>FIELD_TYPE_INT,
 			'create_time'=>FIELD_TYPE_DATETIME,
 			'expire_time'=>FIELD_TYPE_DATETIME		
