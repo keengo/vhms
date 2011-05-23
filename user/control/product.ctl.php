@@ -74,6 +74,7 @@ class ProductControl extends Control {
 	}
 	public function renew()
 	{
+		needRole('user');
 		$user = getRole('user');
 		$product = apicall('product', 'newProduct',array($_REQUEST['product_type']));
 		if(!is_object($product)){
@@ -89,6 +90,7 @@ class ProductControl extends Control {
 	}
 	public function upgrade()
 	{
+		needRole('user');
 		$user = getRole('user');
 		$product = apicall('product', 'newProduct',array($_REQUEST['product_type']));
 		if($product->upgrade($user,$_REQUEST['name'],$_REQUEST['product_id'])){
