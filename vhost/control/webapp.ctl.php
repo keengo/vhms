@@ -66,8 +66,11 @@ class WebappControl extends Control
 			$this->_tpl->assign('dir',$dir);
 			$this->_tpl->assign('domain',$domain);			
 			if($force==0){
-				//check domain
-				$node_ip = gethostbyname($node['host']);
+				if($node['host']=='localhost'){
+					$node_ip = gethostbyname($_SERVER['HTTP_HOST']);
+				}else{
+					$node_ip = gethostbyname($node['host']);
+				}
 				$this->_tpl->assign('node_ip',$node_ip);
 				if (gethostbyname($domain) != $node_ip) {
 					return $this->_tpl->fetch("webapp/wrongdomain.html");
