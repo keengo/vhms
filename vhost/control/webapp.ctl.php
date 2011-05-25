@@ -67,7 +67,7 @@ class WebappControl extends Control
 			$this->_tpl->assign('domain',$domain);			
 			if($force==0){
 				if($node['host']=='localhost'){
-					$node_ip = gethostbyname($_SERVER['HTTP_HOST']);
+					$node_ip = gethostbyname($_SERVER["SERVER_NAME"]);
 				}else{
 					$node_ip = gethostbyname($node['host']);
 				}
