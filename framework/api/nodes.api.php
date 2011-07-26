@@ -1,5 +1,4 @@
 <?php
-define(WHM_CALL_POST, '3310');
 class NodesAPI extends API
 {
 	private $MAP_ARR;
@@ -46,13 +45,13 @@ class NodesAPI extends API
 		}
 		return $result->getAll('name');
 	}
-	public function makeWhm2($host,$port,$user,$passwd)
+	public function makeWhm2($host,$port,$passwd)
 	{
 		load_lib("pub:whm");
 		$whm = new WhmClient();
-		$whmUrl = "http://".$host.":".WHM_CALL_POST."/";
+		$whmUrl = "http://".$host.":".$port."/";
 		$whm->setUrl($whmUrl);
-		$whm->setAuth($user, $passwd);
+		$whm->setSecurityKey($passwd);
 		return $whm;
 	}
 	public function makeDbProduct($node)
@@ -82,7 +81,7 @@ class NodesAPI extends API
 		if(!is_array($node_cfg)){
 			return trigger_error('没有节点'.$node.'的配置文件，请更新配置文件');
 		}
-		return $this->makeWhm2($node_cfg['host'],WHM_CALL_POST,$node_cfg['user'],$node_cfg['passwd']);
+		return $this->makeWhm2($node_cfg['host'],$node_cfg['port'],$node_cfg['passwd']);
 	}
 	public function isWindows($node)
 	{
@@ -99,9 +98,11 @@ class NodesAPI extends API
 	 * @param $level 初始化级别
 	 * 0   全部(首次初始化开始)
 	 * 1  除首次初始化全部
+	 * @deprecated vhms上不应该调用这个方法
 	 */
 	public function init($node,$config_flag ,$init_flag ,$reboot_flag)
 	{
+		trigger_error('init方法废弃');
 		$node_cfg = $GLOBALS['node_cfg'][$node];
 		$whm = $this->makeWhm($node);
 		$result = true;
@@ -115,12 +116,8 @@ class NodesAPI extends API
 			 * 这样就可以加载etc/vh_db.xml文件了。
 			 */
 		
-			$driver = "bin/vhs_";
-			if($GLOBALS['node_db'] == 'sqlite'){
-				$driver .= "sqlite";
-			}else{
-				$driver .= "mysql";
-			}
+			$driver = "bin/vhs_sqlite";
+		
 			$win = $node_cfg['win'];
 			if($win){
 				$driver .= ".dll";
@@ -256,22 +253,12 @@ class NodesAPI extends API
 		$ret = array();
 		$ret['whm'] = 0;
 		if($whm){		
-			$whmCall = new WhmCall('core.whm','check_vh_db');
+			$whmCall = new WhmCall('check_vh_db');
 			$result = $whm->call($whmCall,5);
-			if($result && intval($result->get('status'))==1){
-				$ret['whm'] = 1;
+			if($result){
+				$ret['whm'] = $result->get('whm');
+				$ret['db'] = $result->get("db");
 			}
-		}
-		$node_cfg = $GLOBALS['node_cfg'][$node];
-		if($node_cfg['db_type'] != "" && $node_cfg['db_user']!=""){
-			$db = $this->makeDbProduct($node);
-			if($db){
-				$ret['db'] = 1;
-			}else{
-				$ret['db'] = 0;
-			}
-		}else{
-			$ret['db'] = 2;
 		}
 		return $ret;
 	}

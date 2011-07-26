@@ -58,7 +58,18 @@ class VhostDAO extends DAO{
 					$page_count,
 					$count
 				);
-	}	
+	}
+	
+	public function updateMinUid(&$uid)
+	{
+		$min_uid = 1000;
+		$arr = array('uid'=>$min_uid+$uid);
+		$result = $this->update($arr,$this->getFieldValue2('uid', $uid));
+		if($result){
+			$uid += $min_uid;
+		}
+		return $result;
+	}
 	public function check($user)
 	{
 		$sql = "SELECT 1 FROM ".$this->_TABLE." WHERE ".$this->getFieldValue2('name', $user);
@@ -84,6 +95,7 @@ class VhostDAO extends DAO{
 		$arr['name'] = $name;
 		$arr['passwd'] = $passwd;
 		$arr['doc_root'] = $doc_root;
+		$arr['gid'] = $group;
 		$arr['templete'] = $templete;
 		$arr['subtemplete'] = $subtemplete;
 		$arr['status'] = $status;
@@ -157,49 +169,6 @@ class VhostDAO extends DAO{
 		}
 		return $this->listVhost($username,$result);
 	}
-	public function getFlushSql()
-	{
-		return " AND ".$this->MAP_ARR['name']."='%s'";
-	}
-	public function getLoadSql($node)
-	{
-		$sql = "SELECT ";
-		for($i=0;$i<count($this->vh_col_map);$i++){
-			if($i>0){
-				$sql.=',';
-			}
-			$col_name = $this->vh_col_map[$i];
-			if($col_name=='user'){
-				$col_name = $this->getUserColName($node);
-			}else if($col_name=='group'){
-				$col_name = $this->getGroupColName($node);
-			}else if($col_name=='doc_root'){
-				$col_name = $this->getDocRootColName($node);
-			}else if($col_name=='templete'){
-				$col_name = "CONCAT(".$this->MAP_ARR['templete'].",':',".$this->MAP_ARR['subtemplete'].") AS templete";
-			}else{
-				$col_name = $this->MAP_ARR[$col_name];
-			}
-			$sql.= $col_name;
-		}
-		$sql .= " FROM ".$this->_TABLE." WHERE ";
-		$sql.=$this->getFieldValue2('node', $node);
-		return $sql;
-	}
-	public function getColMap($node)
-	{
-		for($i=0;$i<count($this->vh_col_map);$i++){
-			if($i>0){
-				$col_map.=',';
-			}
-			if($this->vh_col_map[$i]=="group"){
-				$col_map.=$this->getGroupKangleName($node);
-			}else{
-				$col_map.=$this->vh_col_map[$i];
-			}
-		}
-		return $col_map;
-	}
 	public function getVhost($name,$fields=null)
 	{
 		return $this->getData2($fields,$this->getFieldValue2('name', $name),'row');
@@ -208,13 +177,6 @@ class VhostDAO extends DAO{
 		$sql = "SELECT ".$this->MAP_ARR['node']." FROM ".$this->_TABLE." WHERE ".$this->getFieldValue2('name', $name);
 		$row = $this->executex($sql,'row');
 		return $row['node'];
-	}
-	public function getGroupKangleName($node)
-	{
-		if(apicall('nodes','isWindows',array($node))){
-			return "password";
-		}
-		return "group";
 	}
 	public function expireUser()
 	{

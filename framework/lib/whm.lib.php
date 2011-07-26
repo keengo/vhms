@@ -3,9 +3,8 @@ define(WHM_CALL_METHOD, 'GET');
 //define(WHM_CALL_METHOD, 'POST');
 class WhmCall
 {
-	public function __construct($callName,$package=null)
+	public function __construct($callName)
 	{
-		$this->package = $package;
 		$this->callName = $callName;
 	}
 	public function addParam($name,$value)
@@ -19,16 +18,18 @@ class WhmCall
 	{
 		return $this->callName;
 	}
-	public function buildUrl()
+	public function buildUrl($skey)
 	{
-		return  "api/?c=whm&a=".$this->callName;
+		$r = rand();
+		$src = $this->callName.$skey.$r;
+		$s = md5($src);
+		return  "api/?c=whm&a=".$this->callName."&r=".$r."&s=".$s;
 	}
 	public function buildPostData()
 	{
 		return $this->url;
 	}
 	private $callName = '';
-	private $package = '';
 	private $url = '';
 }
 class WhmResult
@@ -55,9 +56,13 @@ class WhmResult
 }
 class WhmClient
 {
+	public function setSecurityKey($skey)
+	{
+		$this->skey = $skey;
+	}
 	public function setAuth($user,$password)
 	{
-		$this->auth = "Basic ".base64_encode($user.":".$password);
+		//$this->auth = "Basic ".base64_encode($user.":".$password);
 	}
 	public function setUrl($url)
 	{
@@ -72,8 +77,9 @@ class WhmClient
 		//echo "whm call=".$call->getCallName().",tmo=".$tmo."<br>";
 		$opts = array(
 		'http'=>array(
-			'method'=>WHM_CALL_METHOD,
-			'header'=>"Authorization: ".$this->auth."\r\n")
+			'method'=>WHM_CALL_METHOD
+			//'header'=>"Authorization: ".$this->auth."\r\n"
+			)
 		);
 		if (WHM_CALL_METHOD=='POST') {
 			$opts['http']['content'] = $call->buildPostData();
@@ -81,13 +87,13 @@ class WhmClient
 		if ($tmo>0) {
 			$opts['http']['timeout'] = $tmo;
 		}
-		$url = $this->whm_url.$call->buildUrl();
+		$url = $this->whm_url.$call->buildUrl($this->skey);
 		if (WHM_CALL_METHOD!='POST') {
 			$url.='&'.$call->buildPostData();
 		}
-		echo "</br>";
-		echo "url=".$url;
-		echo "</br>";
+		//echo "</br>";
+		//echo "url=".$url;
+		//echo "</br>";
 		$msg = @file_get_contents($url, false, stream_context_create($opts)); 
 		if($msg === FALSE){
 			$this->err_msg = "cann't connect to host";
@@ -127,7 +133,8 @@ class WhmClient
 	{
 		return $this->err_msg;
 	}
-	public $auth='';
+	public $skey = '';
+	//public $auth='';
 	public $whm_url='';
 	public $err_msg='';
 	private $result;
