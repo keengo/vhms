@@ -55,24 +55,18 @@ class VhostproductControl extends Control {
 		$this->_tpl->display('vhostproduct/listVhost.html');
 		
 	}
-	
 	public function show()
 	{
 		$list = daocall('vhost','listMyVhost',array(getRole('user')));
 		$this->_tpl->assign('sum',count($list));
-	
 		load_conf('pub:vhostproduct');
-		//print_r($list);
 		for($i=0;$i<count($list);$i++){
 			$list[$i]['product_name'] = $GLOBALS['vhostproduct_cfg'][$list[$i]['product_id']]['name'];
 		}
-		print_r($list);
 		$this->_tpl->assign('list',$list);
 		//$this->_tpl->assign('product',$GLOBALS['vhostproduct_cfg']);
 		return $this->_tpl->fetch('vhostproduct/list.html');
 	}
-	
-	
 	public function impLogin()
 	{
 		$vhost = $_REQUEST['name'];
@@ -82,7 +76,6 @@ class VhostproductControl extends Control {
 			header("Location: /vhost/");
 			die();
 		}else{
-			//print_r($vhost_info);
 			trigger_error('不是你的虚拟主机!或者找不到该虚拟主机');
 		}
 	}

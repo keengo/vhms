@@ -1,4 +1,5 @@
 <?php
+define(WHM_CALL_POST, '3310');
 class NodesAPI extends API
 {
 	private $MAP_ARR;
@@ -24,7 +25,7 @@ class NodesAPI extends API
 		if(!$whm){
 			return false;
 		}
-		$call = new WhmCall('core.whm',"list_gtvh");
+		$call = new WhmCall("list_gtvh");
 		$result = $whm->call($call,5);
 		if(!$result){
 			return false;
@@ -37,7 +38,7 @@ class NodesAPI extends API
 		if(!$whm){
 			return false;
 		}
-		$call = new WhmCall('core.whm',"list_tvh");
+		$call = new WhmCall("list_tvh");
 		$call->addParam('name', $templete);
 		$result = $whm->call($call,5);
 		if(!$result){
@@ -49,7 +50,7 @@ class NodesAPI extends API
 	{
 		load_lib("pub:whm");
 		$whm = new WhmClient();
-		$whmUrl = "http://".$host.":".$port."/";
+		$whmUrl = "http://".$host.":".WHM_CALL_POST."/";
 		$whm->setUrl($whmUrl);
 		$whm->setAuth($user, $passwd);
 		return $whm;
@@ -81,7 +82,7 @@ class NodesAPI extends API
 		if(!is_array($node_cfg)){
 			return trigger_error('没有节点'.$node.'的配置文件，请更新配置文件');
 		}
-		return $this->makeWhm2($node_cfg['host'],$node_cfg['port'],$node_cfg['user'],$node_cfg['passwd']);
+		return $this->makeWhm2($node_cfg['host'],WHM_CALL_POST,$node_cfg['user'],$node_cfg['passwd']);
 	}
 	public function isWindows($node)
 	{

@@ -8,7 +8,7 @@ class VhostAPI extends API
 	public function noticeChange($node,$name)
 	{
 		$whm = apicall('nodes','makeWhm',array($node));
-		$whmCall = new WhmCall('core.whm','reload_vh');
+		$whmCall = new WhmCall('reload_vh');
 		$whmCall->addParam('name', $name);
 		if(!$whm->call($whmCall)){
 			return false;
@@ -18,7 +18,7 @@ class VhostAPI extends API
 	public function getQuota($name,$uid,$node,$product_id)
 	{
 		$whm = apicall('nodes','makeWhm',array($node));
-		$whmCall = new WhmCall('vhost.whm','get_quota',5);
+		$whmCall = new WhmCall('get_quota',5);
 		$whmCall->addParam('vh', $name);
 		$result = $whm->call($whmCall,5);
 		if(!$result){
@@ -116,7 +116,7 @@ class VhostAPI extends API
 		$node = $this->getNode($user);
 		if($GLOBALS['node_db']=='sqlite'){
 			$whm = apicall('nodes','makeWhm',array($node));
-			$whmCall = new WhmCall('core.whm','del_vh_info');
+			$whmCall = new WhmCall('del_vh_info');
 			$whmCall->addParam('vhost',$user);
 			$whmCall->addParam('name',$name);
 			$whmCall->addParam('type',$type);
@@ -140,7 +140,7 @@ class VhostAPI extends API
 		$node = $this->getNode($user);
 		if($GLOBALS['node_db']=='sqlite'){
 			$whm = apicall('nodes','makeWhm',array($node));
-			$whmCall = new WhmCall('core.whm','add_vh_info');
+			$whmCall = new WhmCall('add_vh_info');
 			$whmCall->addParam('vhost',$user);
 			$whmCall->addParam('name',$name);
 			$whmCall->addParam('type',$type);
@@ -161,7 +161,7 @@ class VhostAPI extends API
 	private function sqliteUpdateVirtualHost($node,$name,$attr)
 	{
 		$whm = apicall('nodes','makeWhm',array($node));
-		$whmCall = new WhmCall('core.whm','update_vh');
+		$whmCall = new WhmCall('update_vh');
 		$whmCall->addParam('name',$name);
 		$key = array_keys($attr);
 		for($i=0;$i<count($key);$i++){
@@ -186,7 +186,7 @@ class VhostAPI extends API
 	public function del($node,$name)
 	{
 		$whm = apicall('nodes','makeWhm',array($node));
-		$whmCall = new WhmCall('core.whm','del_vh');
+		$whmCall = new WhmCall('del_vh');
 		$whmCall->addParam('destroy',1);
 		$whmCall->addParam('name',$name);
 		if($whm->call($whmCall)){

@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `vhost` (
 --
 
 CREATE TABLE IF NOT EXISTS `vhost_info` (
-  `user` varchar(32) NOT NULL,
+  `vhost` varchar(32) NOT NULL,
   `type` tinyint(4) NOT NULL DEFAULT '0',
   `name` varchar(64) NOT NULL,
   `value` varchar(255) DEFAULT NULL,

@@ -5,7 +5,7 @@ class VhostinfoDAO extends DAO
 	{
 		parent::__construct();
 		$this->MAP_ARR 	= array(
-			"user" => 'user',
+			"vhost" => 'vhost',
 			'type'=> 'type',
 			"name" => 'name',
 			"value"=> 'value'
@@ -15,9 +15,9 @@ class VhostinfoDAO extends DAO
 			);
 			$this->_TABLE = DBPRE . 'vhost_info';
 	}
-	public function getDomainCount($user)
+	public function getDomainCount($vhost)
 	{
-		$sql = "SELECT COUNT(*) FROM ".$this->_TABLE." WHERE ".$this->getFieldValue2('user',$user)." AND ".$this->getFieldValue2('type', 0);
+		$sql = "SELECT COUNT(*) FROM ".$this->_TABLE." WHERE ".$this->getFieldValue2('vhost',$vhost)." AND ".$this->getFieldValue2('type', 0);
 		$ret = $this->executex($sql,'row');
 		if (!$ret) {
 			return false;
@@ -27,15 +27,15 @@ class VhostinfoDAO extends DAO
 	public function findDomain($domain)
 	{
 		$where = $this->getFieldValue2('name',$domain)." AND ".$this->getFieldValue2('type', 0);
-		return $this->getData2(array('user'),$where,'row');
+		return $this->getData2(array('vhost'),$where,'row');
 	}
-	public function delAllInfo($user)
+	public function delAllInfo($vhost)
 	{
-		return $this->delData($this->getFieldValue2('user',$user));
+		return $this->delData($this->getFieldValue2('vhost',$vhost));
 	}
-	public function delInfo($user,$name,$type,$value)
+	public function delInfo($vhost,$name,$type,$value)
 	{
-		$where = $this->getFieldValue2('user',$user);
+		$where = $this->getFieldValue2('vhost',$vhost);
 		$where.=' AND '.$this->getFieldValue2('type', $type);
 		$where.=' AND '.$this->getFieldValue2('name', $name);
 		if($value!=null){
@@ -43,16 +43,16 @@ class VhostinfoDAO extends DAO
 		}
 		return $this->delData($where);
 	}
-	public function addInfo($user,$name,$type,$value,$multi=true)
+	public function addInfo($vhost,$name,$type,$value,$multi=true)
 	{
 		if(!$multi){
-			$this->delInfo($user,$name,$type,null);
+			$this->delInfo($vhost,$name,$type,null);
 		}
-		return $this->insert(array('user'=>$user,'name'=>$name,'type'=>$type,'value'=>$value));
+		return $this->insert(array('vhost'=>$vhost,'name'=>$name,'type'=>$type,'value'=>$value));
 	}
 	public function getInfo($name,$type=null)
 	{
-		$where = $this->getFieldValue2('user',$name);
+		$where = $this->getFieldValue2('vhost',$name);
 		if($type){
 			$where.=" AND ".$this->getFieldValue2('type', $type);
 		}
@@ -60,19 +60,19 @@ class VhostinfoDAO extends DAO
 	}
 	public function getDomain($name)
 	{
-		$where = $this->getFieldValue2('user',$name)." AND ".$this->getFieldValue2('type', 0);
+		$where = $this->getFieldValue2('vhost',$name)." AND ".$this->getFieldValue2('type', 0);
 		return $this->getData2(array('name','value'),$where);
 	}
 	public function delDomain($name,$domain)
 	{
-		$where = $this->getFieldValue2('user',$name)." AND ".$this->getFieldValue2('type', 0);
+		$where = $this->getFieldValue2('vhost',$name)." AND ".$this->getFieldValue2('type', 0);
 		$where.=' AND ';
 		$where.= $this->getFieldValue2('name', $domain);
 		return $this->delData($where);
 	}
 	public function getLoadInfoSql()
 	{
-		$sql = "SELECT ".$this->MAP_ARR['type'].",".$this->MAP_ARR['name'].",".$this->MAP_ARR['value']." FROM ".$this->_TABLE." WHERE ".$this->MAP_ARR['user']."='%s'";
+		$sql = "SELECT ".$this->MAP_ARR['type'].",".$this->MAP_ARR['name'].",".$this->MAP_ARR['value']." FROM ".$this->_TABLE." WHERE ".$this->MAP_ARR['vhost']."='%s'";
 		return $sql;
 	}
 }

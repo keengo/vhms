@@ -6,7 +6,6 @@ class SettingControl extends Control
 	{
 		return $this->fetch('setting/setFrom.html');
 	}
-	
 	public function index()
 	{
 		@load_conf('pub:settingrule');

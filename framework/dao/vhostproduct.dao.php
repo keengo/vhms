@@ -20,7 +20,12 @@ class VhostproductDAO extends DAO {
 			'describe'=>'describe',
 			'domain'=>'domain',
 			'subtemplete'=>'subtemplete',
-			'upid'=>'upid'
+			'upid'=>'upid',
+			'htaccess'=>'htaccess',
+			'max_connect'=>'max_connect',
+			'ftp'=>'ftp',
+			'log_file'=>'log_file',
+			'access'=>'access'
 		);
 		$this->MAP_TYPE = array(
 			'id'=>FIELD_TYPE_INT|FIELD_TYPE_AUTO,
@@ -32,7 +37,9 @@ class VhostproductDAO extends DAO {
 			'month_flag'=>FIELD_TYPE_INT,
 			'subdir_flag'=>FIELD_TYPE_INT,
 			'domain'=>FIELD_TYPE_INT,
-			'upid'=>FIELD_TYPE_INT
+			'upid'=>FIELD_TYPE_INT,
+			'ftp'=>FIELD_TYPE_INT,
+			'max_connect'=>FIELD_TYPE_INT
 		);
 		$this->_TABLE = DBPRE .'vhost_product';
 	}

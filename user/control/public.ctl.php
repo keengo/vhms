@@ -41,11 +41,11 @@ class PublicControl extends  Control
 			return "用户名不符合标准";
 		}
 		$result = daocall('user','newUser',array(
-		$_REQUEST['username'],
-		$_REQUEST['passwd'],
-		$_REQUEST['email'],
-		$_REQUEST['name'],
-		$_REQUEST['id'])
+										$_REQUEST['username'],
+										$_REQUEST['passwd'],
+										$_REQUEST['email'],
+										$_REQUEST['name'],
+										$_REQUEST['id'])
 		);
 		if($result){
 			registerRole('user',$_REQUEST['username']);

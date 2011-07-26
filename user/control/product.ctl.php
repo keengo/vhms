@@ -9,7 +9,7 @@ class ProductControl extends Control {
 	{
 		parent::__destruct();
 	}
-	public function productList()
+        public function productList()
 	{
 		if($_REQUEST['target']==''){
 			$_REQUEST['target'] = 'self';
@@ -43,6 +43,12 @@ class ProductControl extends Control {
 	{
 		$product_type = $_REQUEST['product_type'];
 		$name = $_REQUEST['name'];
+		if($name=="")
+		{
+			$this->_tpl->assign('result',2);
+			$this->_tpl->display('product/product_check_result.html');
+			die();
+		}
 		$this->_tpl->assign('product_type',$product_type);
 		$this->_tpl->assign('param',$name);
 		switch($product_type){
@@ -69,6 +75,7 @@ class ProductControl extends Control {
 		if(!$product->sell($user,intval($_REQUEST['product_id']),$_REQUEST)){
 			return false;
 		}
+		
 		$this->_tpl->assign('msg','购买成功');
 		return $this->_tpl->display('public/msg.html');
 	}

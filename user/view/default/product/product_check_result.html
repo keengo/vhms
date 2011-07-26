@@ -7,6 +7,8 @@
 <body>
 {{if $result==1}}
 {{$param}}已经被别人注册了!请选过一个吧.
+{{else if $result==2}}
+请输入用户名!
 {{else}}
 {{$param}}可用
 {{/if}}

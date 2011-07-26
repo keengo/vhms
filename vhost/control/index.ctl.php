@@ -24,7 +24,8 @@ class IndexControl extends Control
 		if($node){
 			$node_info = apicall('nodes','getInfo',array($node));
 			$url = "http://".$_SERVER[HTTP_HOST].$_SERVER[PHP_SELF]."?c=session&a=sso";
-			$webftp_url = "http://".$node_info['host'].":3312/sso.php?action=hello&url=".urlencode($url);
+			$webftp_url = "http://".$node_info['host'].":3312/vhost/?c=index&a=webftp&url=".urlencode($url);
+			//$webftp_url = "http://".$node_info['host'].":3312/vhost/?c=index&a=webftp&url=".urlencode($url);
 			$this->_tpl->assign('webftp_url',$webftp_url);	
 			$quota = $_SESSION['quota'][$vhost];
 			//print_r($quota);

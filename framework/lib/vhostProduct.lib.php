@@ -88,34 +88,48 @@ class VhostProduct extends Product
 	 * @param  $param
 	 */
 	public function sync($user,$params,$product_info)
-	{
-		//print_r($product_info);
-		//die();
-		//echo "uid in sync=".$uid;
+	{	
+		/*
+		echo "<br>";
+		echo "<br>";
+		print_r($product_info);
+		echo "<br>";
+		echo "<br>";
+		print_r($params);
+		*/
 		$param = $params['name'];
-		if($product_info['db_quota']>0){
-			$db = apicall('nodes','makeDbProduct',array($params['node']));
-			if(is_object($db)){
-				$db->add($params['uid'],$params['passwd']);
-			}
-		}
 		$whm = apicall('nodes','makeWhm',array($params['node']));
 		if($GLOBALS['node_db']=='sqlite'){
 			if($params['resync'] == '1'){
-				$whmCall = new WhmCall('core.whm','del_vh');
+				$whmCall = new WhmCall('del_vh');
 				$whmCall->addParam('name',$param);
 				$whm->call($whmCall,10);
 			}
-			$whmCall = new WhmCall('core.whm', 'add_vh');
+			$whmCall = new WhmCall('add_vh');
 			$whmCall->addParam('doc_root',$params['doc_root']);
 			if($GLOBALS['node_cfg'][$params['node']]['win']==1){
 				$whmCall->addParam('user','a'.$params['uid']);
 			}else{
 				$whmCall->addParam('user',$params['uid']);
 			}
+			if($product_info['db_quota']>0){
+				$whmCall->addParam('db_quota', $product_info['db_quota']);
+			}
 			$whmCall->addParam('group', $params['gid']);
 			$whmCall->addParam('templete',$params['templete']);
-			$whmCall->addParam('subtemplete',$params['subtemplete']);
+			$whmCall->addParam('product_id', $params['product_id']);
+			
+			$whmCall->addParam('subtemplete',$product_info['subtemplete']);
+			$whmCall->addParam('domain', $product_info['domain']);
+			$whmCall->addParam('subdir', $product_info['subdir']);
+			$whmCall->addParam('subdir_flag', $product_info['subdir_flag']);
+			$whmCall->addParam('htaccess', $product_info['htaccess']);
+			$whmCall->addParam('ftp', $product_info['ftp']);
+			$whmCall->addParam('log_file', $product_info['log_file']);
+			$whmCall->addParam('access', $product_info['access']);
+			$whmCall->addParam('db_name', $product_info['db_name']);
+			$whmCall->addParam('max_connect', $product_info['max_connect']);
+		//	$whmCall->addParam($name, $value)
 			if($params['md5passwd']){
 				$whmCall->addParam('passwd',$params['md5passwd']);
 			}else{
@@ -125,12 +139,13 @@ class VhostProduct extends Product
 				$whmCall->addParam('status',$params['status']);
 			}
 		}else{
-			$whmCall = new WhmCall('core.whm','reload_vh');
+			$whmCall = new WhmCall('add');
 		}
 		$whmCall->addParam('name',$param);
 		$whmCall->addParam('init',$params['init']);
-		$whmCall->addParam('quota_limit',$product_info['web_quota']);
+		$whmCall->addParam('web_quota',$product_info['web_quota']);
 		return $whm->call($whmCall,10);
+	
 	}
 	public function checkParam($username,$suser)
 	{

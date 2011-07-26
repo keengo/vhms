@@ -1,4 +1,5 @@
 {{include file='common/head.html'}}
+
 <body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
 <div id="container">
 	<div align="center">
@@ -44,7 +45,8 @@
 					
 					</tr>
 					{{foreach from=$list item=row}}
-				<tr>
+					
+				<tr >
 					<td class="right_2">[<a href='?c=question&a=getQuestion&id={{$row.id}}'>回复</a>]</td>
 					<td class="right_2">{{$row.id}}</td>
 					<td class="right_2"><a href='?c=user&a=listuser&username={{$row.username}}'>{{$row.username}}</a></td>

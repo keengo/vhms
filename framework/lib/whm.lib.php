@@ -1,16 +1,19 @@
 <?php
-//define(WHM_CALL_METHOD, 'GET');
-define(WHM_CALL_METHOD, 'POST');
+define(WHM_CALL_METHOD, 'GET');
+//define(WHM_CALL_METHOD, 'POST');
 class WhmCall
 {
-	public function WhmCall($package,$callName)
+	public function __construct($callName,$package=null)
 	{
 		$this->package = $package;
 		$this->callName = $callName;
 	}
 	public function addParam($name,$value)
 	{
-		$this->params[$name] = $value;
+		if($this->url!=""){
+			$this->url.='&';
+		}
+		$this->url.=$name."=".urlencode($value);
 	}
 	public function getCallName()
 	{
@@ -18,39 +21,15 @@ class WhmCall
 	}
 	public function buildUrl()
 	{
-		//print_r($this->params);
-		$url = $this->package."?whm_call=".$this->callName;
-	/*	if($this->params){
-			reset($this->params);
-			while (list($name, $val) = each($this->params)) {
-				$url.="&".$name."=".urlencode($val);
-			}
-		}
-		*/
-		return $url;
+		return  "api/?c=whm&a=".$this->callName;
 	}
 	public function buildPostData()
 	{
-		$url = "";
-		/*
-		if($this->params){
-			reset($this->params);
-			while (list($name, $val) = each($this->params)) {
-				$url.="&".$name."=".urlencode($val);
-			}
-		}
-		*/
-		foreach($this->params AS $name=>$val){
-			if($url!=""){
-				$url.='&';
-			}
-			$url.=$name."=".urlencode($val);
-		}
-		return $url;
+		return $this->url;
 	}
 	private $callName = '';
 	private $package = '';
-	private $params = array();
+	private $url = '';
 }
 class WhmResult
 {
@@ -106,38 +85,28 @@ class WhmClient
 		if (WHM_CALL_METHOD!='POST') {
 			$url.='&'.$call->buildPostData();
 		}
-		//echo $url;
-		$msg = @file_get_contents($url, false, stream_context_create($opts));   
+		echo "</br>";
+		echo "url=".$url;
+		echo "</br>";
+		$msg = @file_get_contents($url, false, stream_context_create($opts)); 
 		if($msg === FALSE){
 			$this->err_msg = "cann't connect to host";
 			return false;
 		}		
+		
 		//echo "msg=".$msg."<br>***********\n";
-		$whm = new DOMDocument();
-		if(!$whm->loadXML($msg)){
-			$this->err_msg = "cann't parse whm xml";
-			return false;
-		}
-		$result_node = $whm->getElementsByTagName("result")->item(0);
-		$status = $result_node->attributes->getNamedItem("status")->nodeValue;//->childNodes;
-		//echo "status=".$status;
-		//if(intval($status)!=200){
-		//	$this->err_msg = $status;
-		//	return false;
-		//}
-		$nodes = $result_node->childNodes;
+		$xml = new SimpleXMLElement($msg);
 		$result = new WhmResult;
-		$result->status = $status;
-		for($i=0;;$i++){
-			$node = $nodes->item($i);
-			if(!$node){
+		foreach($xml->children() as $child){
+			if($child->getName()=='result'){				
+				$result->status = $child['status'];
+				foreach($child->children() as $node)
+				{
+					$result->add($node->getName(), $node[0]);
+				}
 				break;
 			}
-			if($node->nodeType!=1){
-				continue;
-			}
-			$result->add($node->nodeName, $node->nodeValue);
-		}
+		}		
 		return $result;
 	}
 	public function get($name,$index=0)
