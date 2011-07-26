@@ -14,20 +14,12 @@ class NodesDAO extends DAO {
 			"name" => 'name',
 			"host" => 'host',
 			"port"=> 'port',
-			"user"=>'user',
 			"passwd"=>'passwd',
-			'db_type'=>'db_type',
-			"db_user"=>'db_user',
-			'db_passwd'=>'db_passwd',
 			"state"=>'state',
-			"type"=>'type',
-			"win"=>'win',
-			'dev'=>'dev'
 		);
 		$this->MAP_TYPE = array(
 			'port'=>FIELD_TYPE_INT,
 			'type'=>FIELD_TYPE_INT,
-			'win'=>FIELD_TYPE_INT
 		);
 		$this->_TABLE = DBPRE . 'nodes';
 	}
