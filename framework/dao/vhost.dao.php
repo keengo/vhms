@@ -12,7 +12,6 @@ class VhostDAO extends DAO{
 			'passwd'=>'passwd',
 			'doc_root'=>'doc_root',
 			'uid'=>'uid',
-			'gid'=>'gid',
 		 	'templete'=>'templete',
 			'subtemplete'=>'subtemplete',
 			'create_time'=>'create_time',
@@ -32,12 +31,6 @@ class VhostDAO extends DAO{
 		);
 		$this->_TABLE = DBPRE . 'vhost';
 	}
-	/*
-	public function getVhostByname($name)
-	{
-		return $this->select(null,$this->getFieldValue2('name', $name),'row');
-	}
-	*/
 	public function pageVhostByuser($username,$name,$page,$page_count,&$count)
 	{
 		$where = $this->getFieldValue2('username',$username);
@@ -65,18 +58,7 @@ class VhostDAO extends DAO{
 					$page_count,
 					$count
 				);
-	}
-	
-	public function updateMinUid(&$uid)
-	{
-		$min_uid = 1000;
-		$arr = array('uid'=>$min_uid+$uid);
-		$result = $this->update($arr,$this->getFieldValue2('uid', $uid));
-		if($result){
-			$uid += $min_uid;
-		}
-		return $result;
-	}
+	}	
 	public function check($user)
 	{
 		$sql = "SELECT 1 FROM ".$this->_TABLE." WHERE ".$this->getFieldValue2('name', $user);
@@ -102,7 +84,6 @@ class VhostDAO extends DAO{
 		$arr['name'] = $name;
 		$arr['passwd'] = $passwd;
 		$arr['doc_root'] = $doc_root;
-		$arr['gid'] = $group;
 		$arr['templete'] = $templete;
 		$arr['subtemplete'] = $subtemplete;
 		$arr['status'] = $status;
@@ -218,31 +199,6 @@ class VhostDAO extends DAO{
 			}
 		}
 		return $col_map;
-	}
-	private function getGroupColName($node)
-	{
-		if(apicall('nodes','isWindows',array($node))){
-			return $this->MAP_ARR['gid']." AS `group`";
-		}else{
-			return "CONCAT('#',".$this->MAP_ARR['gid'].") AS `group`";
-		}
-	}
-	private function getDocRootColName($node)
-	{
-		load_conf('pub:node');
-		$node_cfg = $GLOBALS['node_cfg'][$node];
-		if(is_array($node_cfg) && $node_cfg['win'] == 1){
-			return "CONCAT('".$node_cfg['dev']."'".",".$this->MAP_ARR['doc_root'].") AS doc_root";
-		}
-		return $this->MAP_ARR['doc_root'];
-	}
-	private function getUserColName($node)
-	{
-		if(apicall('nodes','isWindows',array($node))){
-			return "CONCAT('a',".$this->MAP_ARR['uid'].") AS user";
-		}else{
-			return "CONCAT('#',".$this->MAP_ARR['uid'].") AS user";
-		}
 	}
 	public function getVhost($name,$fields=null)
 	{
