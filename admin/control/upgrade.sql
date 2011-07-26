@@ -69,3 +69,10 @@ CREATE TABLE IF NOT EXISTS `news` (
   `add_time` datetime NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+alter table vhost_product add column ftp int(11) NOT NULL DEFAULT '1';
+alter table vhost_product add column htaccess varchar(64);
+alter table vhost_product add column access varchar(64);
+alter table vhost_product add column log_file varchar(128);
+alter table vhost_product add column max_connect int(11) NOT NULL DEFAULT '0';
+
