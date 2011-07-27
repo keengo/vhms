@@ -135,10 +135,11 @@ CREATE TABLE IF NOT EXISTS `vhost_product` (
   `domain` INT NOT NULL DEFAULT '-1' ,
   `upid` INT NOT NULL DEFAULT '0',
   `ftp` int(11) NOT NULL DEFAULT '1',
-  `htaccess` varchar(64),
-  `access` varchar(64),
-  `log_file` varchar(128),
+  `htaccess` tinyint(4) DEFAULT '1',
+  `access` tinyint(4) DEFAULT '1',
+  `log_file` tinyint(4) DEFAULT '1',
   `max_connect` int(11) NOT NULL DEFAULT '0',
+  `speed_limit` INTEGER DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 

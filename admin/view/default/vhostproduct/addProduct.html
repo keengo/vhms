@@ -92,6 +92,15 @@ function changeNode()
 <div class="block tb_wid2">
 <table id="table_2" cellpadding="0" cellspacing="1">
 	<tr>
+		<td class="td_bgc right_2">主机</td>
+		<td class="td_bgc right_2"><select name='node' onChange='changeNode()'>
+			{{foreach from=$nodes item=node}}
+			<option value='{{$node.name}}'
+				{{if $node.name==$vhostproduct.node}}selected{{/if}}>{{$node.name}}</option>
+			{{/foreach}}
+			</select></td>
+		</tr>
+	<tr>
 		<td class="td_bgc right_2">产品名称：</td>
 		<td class="td_bgc right_2 tb_wid2"><input name='name' type='text' id='tb_wid3'
 			value="{{$vhostproduct.name}}" size="16"></td>
@@ -143,28 +152,24 @@ function changeNode()
 		</td>
 	</tr>
 	<tr>
-		<td class="td_bgc right_2">主机</td>
-		<td class="td_bgc right_2"><select name='node' onChange='changeNode()'>
-			{{foreach from=$nodes item=node}}
-			<option value='{{$node.name}}'
-				{{if $node.name==$vhostproduct.node}}selected{{/if}}>{{$node.name}}</option>
-			{{/foreach}}
-		</select></td>
-	</tr>
-	<tr>
 		<td class="td_bgc right_2">最大连接数(0无限)</td>
 		<td class="td_bgc right_2"><input name="max_connect" type="text"
 			size='5' value="{{if $vhostproduct}}{{$vhostproduct.max_connect}}{{else}}0{{/if}}">
 		</td>
 	</tr>
 	<tr>
+		<td class="td_bgc right_2">带宽限制(0无限)</td>
+		<td class="td_bgc right_2"><input name="speed_limit" type="text"
+			size='5' value="{{if $vhostproduct}}{{$vhostproduct.speed_limit}}{{else}}0{{/if}}">&nbspK/每秒
+		</td>
+	</tr>
+	<tr>
 		<td class="td_bgc right_2">其它选项</td>
 		<td class="td_bgc right_2">
-			<input type='checkbox' name='htaccess' value='.htaccess' {{if $vhostproduct.htaccess || !$vhostproduct}}checked{{/if}}>.htaccess支持
+			<input type='checkbox' name='htaccess' value='1' {{if $vhostproduct.htaccess || !$vhostproduct}}checked{{/if}}>.htaccess支持
 			<input type='checkbox' name='ftp' value='1' {{if $vhostproduct.ftp || !$vhostproduct}}checked{{/if}}>开启ftp
-			<input type='checkbox' name='log_file' value='logs/access.log' {{if $vhostproduct.log_file || !$vhostproduct}}checked{{/if}}>日志独立
-			<input type='checkbox' name='access' value='access.xml' {{if $vhostproduct.access || !$vhostproduct}}checked{{/if}}>自定义控制
-			
+			<input type='checkbox' name='log_file' value='1' {{if $vhostproduct.log_file || !$vhostproduct}}checked{{/if}}>日志独立
+			<input type='checkbox' name='access' value='1' {{if $vhostproduct.access || !$vhostproduct}}checked{{/if}}>自定义控制
 		</td>
 	</tr>
 	<tr>

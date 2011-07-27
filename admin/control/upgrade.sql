@@ -71,8 +71,9 @@ CREATE TABLE IF NOT EXISTS `news` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 alter table vhost_product add column ftp int(11) NOT NULL DEFAULT '1';
-alter table vhost_product add column htaccess varchar(64);
-alter table vhost_product add column access varchar(64);
-alter table vhost_product add column log_file varchar(128);
+alter table vhost_product add column htaccess tinyint(4) DEFAULT '1';
+alter table vhost_product add column access tinyint(4) DEFAULT '1';
+alter table vhost_product add column log_file tinyint(4) DEFAULT '1';
 alter table vhost_product add column max_connect int(11) NOT NULL DEFAULT '0';
+alter table vhost_product add column speed_limit INTEGER DEFAULT '0',
 
