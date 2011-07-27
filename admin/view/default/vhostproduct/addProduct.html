@@ -161,7 +161,7 @@ function changeNode()
 		<td class="td_bgc right_2">其它选项</td>
 		<td class="td_bgc right_2">
 			<input type='checkbox' name='htaccess' value='.htaccess' {{if $vhostproduct.htaccess || !$vhostproduct}}checked{{/if}}>.htaccess支持
-			<input type='checkbox' name='ftp' value='1' {{if $vhost.ftp || !$vhostproduct}}checked{{/if}}>开启ftp
+			<input type='checkbox' name='ftp' value='1' {{if $vhostproduct.ftp || !$vhostproduct}}checked{{/if}}>开启ftp
 			<input type='checkbox' name='log_file' value='logs/access.log' {{if $vhostproduct.log_file || !$vhostproduct}}checked{{/if}}>日志独立
 			<input type='checkbox' name='access' value='access.xml' {{if $vhostproduct.access || !$vhostproduct}}checked{{/if}}>自定义控制
 			
