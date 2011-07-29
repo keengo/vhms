@@ -133,7 +133,7 @@ class NodesControl extends Control {
 	public function getOs()
 	{
 		$whm = apicall('nodes','makeWhm2',array($_REQUEST['host'],$_REQUEST['port'],$_REQUEST['user'],$_REQUEST['passwd']));
-		$whmCall = new WhmCall('core.whm','info');
+		$whmCall = new WhmCall('info');
 		$result = $whm->call($whmCall);
 		if(!$result){
 			trigger_error("call whm info failed");

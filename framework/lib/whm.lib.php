@@ -91,9 +91,6 @@ class WhmClient
 		if (WHM_CALL_METHOD!='POST') {
 			$url.='&'.$call->buildPostData();
 		}
-		//echo "</br>";
-		//echo "url=".$url;
-		//echo "</br>";
 		$msg = @file_get_contents($url, false, stream_context_create($opts)); 
 		if($msg === FALSE){
 			$this->err_msg = "cann't connect to host";

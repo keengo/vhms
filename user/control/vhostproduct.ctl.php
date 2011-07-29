@@ -13,7 +13,6 @@ class VhostproductControl extends Control {
 	public function getVhostByname()
 	{	
 		$name=$_REQUEST['name'];
-		
 		$host=daocall('vhost','getVhostByname',array($name));
 		if($host['username']!=getRole('user'))
 		{
@@ -53,7 +52,6 @@ class VhostproductControl extends Control {
 		$this->_tpl->assign('page_count',$page_count);
 		$this->_tpl->assign('list',$list);
 		$this->_tpl->display('vhostproduct/listVhost.html');
-		
 	}
 	public function show()
 	{
@@ -70,6 +68,20 @@ class VhostproductControl extends Control {
 	public function impLogin()
 	{
 		$vhost = $_REQUEST['name'];
+		$vhostinfo=daocall('vhost','getVhost',array($vhost));
+		$node=$vhostinfo['node'];
+		load_conf('pub:node');
+		$skey=$GLOBALS['node_cfg'][$node]['passwd'];
+		//$skey="32324";
+		$r=rand();
+		$a='doing';
+		$src=$a.$skey.$r;
+		$s=md5($src);
+		$url="http://".$node.":3310/vhost/index.php?c=session&a=doing&name=".$vhost."&r=".$r."&s=".$s;
+		//echo $url;
+		header("Location: ".$url);
+		die();
+		/*		
 		$vhost_info = daocall('vhost','getVhost',array($vhost,array('username')));
 		if($vhost_info && $vhost_info['username'] == getRole('user')){					
 			registerRole('vhost',$vhost);
@@ -78,6 +90,8 @@ class VhostproductControl extends Control {
 		}else{
 			trigger_error('不是你的虚拟主机!或者找不到该虚拟主机');
 		}
+		*/
+	
 	}
 	public function left()
 	{

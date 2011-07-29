@@ -66,6 +66,11 @@ class ProductControl extends Control {
 	public function sell()
 	{
 		needRole('user');
+		if(strcasecmp($_REQUEST['name'],'root')==0)
+		{
+			$this->_tpl->assign('msg','注册失败：root为保留账号');
+			return $this->_tpl->display('public/msg.html');
+		}
 		$product = apicall('product', 'newProduct',array($_REQUEST['product_type']));
 		if(!is_object($product)){
 			trigger_error('没有该产品类型:'.$_REQUEST['product_type']);

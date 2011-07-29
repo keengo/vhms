@@ -61,10 +61,10 @@ class NodesAPI extends API
 			return trigger_error('没有节点'.$node.'的配置文件，请更新配置文件');
 		}
 		load_lib('pub:dbProduct');
-		$db_type = $node_cfg['db_type'];
-		if(!$db_type){
-			return trigger_error('该节点数据库类型出错!');
-		}
+		$db_type = 'mysql';
+//		if(!$db_type){
+//			return trigger_error('该节点数据库类型出错!');
+//		}
 		$className = $db_type."DbProduct";
 		load_lib('pub:'.$className);
 		$className[0] = strtoupper($className[0]);
