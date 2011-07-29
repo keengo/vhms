@@ -72,13 +72,11 @@ class VhostproductControl extends Control {
 		$node=$vhostinfo['node'];
 		load_conf('pub:node');
 		$skey=$GLOBALS['node_cfg'][$node]['passwd'];
-		//$skey="32324";
 		$r=rand();
 		$a='doing';
-		$src=$a.$skey.$r;
+		$src=$a.$skey.$r.$vhost;
 		$s=md5($src);
-		$url="http://".$node.":3310/vhost/index.php?c=session&a=doing&name=".$vhost."&r=".$r."&s=".$s;
-		//echo $url;
+		$url="http://".$node.":".$GLOBALS['node_cfg'][$node][port]."/vhost/index.php?c=session&a=doing&name=".$vhost."&r=".$r."&s=".$s;
 		header("Location: ".$url);
 		die();
 		/*		
