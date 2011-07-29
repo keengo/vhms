@@ -1,4 +1,5 @@
 #!/bin/bash
+git pull
 VERSION=`cat framework/runtime.php |grep VHMS_VERSION|grep -E '[.0-9]+' -o -m 1`
 rm -rf /tmp/vhms-$VERSION
 rm -f /tmp/vhms-$VERSION.zip
