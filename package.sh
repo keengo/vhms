@@ -9,4 +9,5 @@ rm -rf /tmp/vhms-$VERSION/upload/readme
 rm -f /tmp/vhms-$VERSION/upload/*.sh
 cp readme /tmp/vhms-$VERSION -ar
 zip -qr /tmp/vhms-$VERSION.zip /tmp/vhms-$VERSION
+rm -rf /tmp/vhms-$VERSION
 echo "success package to zip file : /tmp/vhms-$VERSION.zip"
