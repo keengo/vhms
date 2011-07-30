@@ -65,6 +65,19 @@ class VhostproductControl extends Control {
 		//$this->_tpl->assign('product',$GLOBALS['vhostproduct_cfg']);
 		return $this->_tpl->fetch('vhostproduct/list.html');
 	}
+	public function impLogin2()
+	{
+		$vhost = $_REQUEST['name'];
+		$vhostinfo=daocall('vhost','getVhost',array($vhost));
+		$node=$vhostinfo['node'];
+		load_conf('pub:node');
+		$skey=$GLOBALS['node_cfg'][$node]['passwd'];
+		$r = rand();
+		$s=md5($r.$vhost.$_REQUEST['r'].$skey);
+		$url="http://".$node.":".$GLOBALS['node_cfg'][$node][port]."/vhost/?c=sso&a=login&name=".$vhost."&action=login&s=".$s."&r=".$r;
+		header("Location: ".$url);
+		die();
+	}
 	public function impLogin()
 	{
 		$vhost = $_REQUEST['name'];
@@ -72,24 +85,10 @@ class VhostproductControl extends Control {
 		$node=$vhostinfo['node'];
 		load_conf('pub:node');
 		$skey=$GLOBALS['node_cfg'][$node]['passwd'];
-		$r=rand();
-		$a='doing';
-		$src=$a.$skey.$r.$vhost;
-		$s=md5($src);
-		$url="http://".$node.":".$GLOBALS['node_cfg'][$node][port]."/vhost/index.php?c=session&a=doing&name=".$vhost."&r=".$r."&s=".$s;
-		header("Location: ".$url);
+		$url="http://".$_SERVER['HTTP_HOST'].$_SERVER["REQUEST_URI"]."?c=vhostproduct&a=impLogin2&name=".$vhost;
+		$hellourl="http://".$node.":".$GLOBALS['node_cfg'][$node][port]."/vhost/?c=sso&a=hello&name=".$vhost."&url=".urlencode($url);
+		header("Location: ".$hellourl);
 		die();
-		/*		
-		$vhost_info = daocall('vhost','getVhost',array($vhost,array('username')));
-		if($vhost_info && $vhost_info['username'] == getRole('user')){					
-			registerRole('vhost',$vhost);
-			header("Location: /vhost/");
-			die();
-		}else{
-			trigger_error('不是你的虚拟主机!或者找不到该虚拟主机');
-		}
-		*/
-	
 	}
 	public function left()
 	{
