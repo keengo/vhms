@@ -1,6 +1,6 @@
 <?php
-define(WHM_CALL_METHOD, 'GET');
-//define(WHM_CALL_METHOD, 'POST');
+//define(WHM_CALL_METHOD, 'GET');
+define(WHM_CALL_METHOD, 'POST');
 class WhmCall
 {
 	public function __construct($callName)
