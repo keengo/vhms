@@ -84,10 +84,10 @@ class NodesControl extends Control {
 	public function check(){
 	}
 	public function insert(){
-		$os = $this->getOs();
-		if(!$os){
-			return false;
-		}
+//		$os = $this->getOs();
+//		if(!$os){
+//			return false;
+//		}
 		$data = array(
 			'name'=>$_REQUEST['name'],
 			'host'=> $_REQUEST['host'],

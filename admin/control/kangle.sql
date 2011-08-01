@@ -43,15 +43,15 @@ CREATE TABLE IF NOT EXISTS `nodes` (
   `name` varchar(32) NOT NULL,
   `host` varchar(64) NOT NULL,
   `port` int(11) NOT NULL,
-  `user` varchar(32) NOT NULL,
+  `user` varchar(32)  NULL,
   `passwd` varchar(32) NOT NULL,
   `db_type` enum('mysql','dblib','pgsql') DEFAULT NULL,
   `db_user` varchar(255) DEFAULT NULL,
   `db_passwd` varchar(255) DEFAULT NULL,
-  `state` tinyint(4) NOT NULL DEFAULT '0',
-  `type` int(11) NOT NULL DEFAULT '0',
-  `win` tinyint(4) NOT NULL DEFAULT '0',
-  `dev` varchar(255) DEFAULT NULL,
+  `state` tinyint(4)  DEFAULT '0',
+  `type` int(11) null,
+  `win` tinyint(4) null,
+  `dev` varchar(255) null,
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
