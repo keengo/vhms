@@ -75,8 +75,9 @@ alter table vhost_product add column htaccess tinyint(4) DEFAULT '1';
 alter table vhost_product add column access tinyint(4) DEFAULT '1';
 alter table vhost_product add column log_file tinyint(4) DEFAULT '1';
 alter table vhost_product add column max_connect int(11) NOT NULL DEFAULT '0';
-alter table vhost_product add column speed_limit INTEGER DEFAULT '0',
+alter table vhost_product add column speed_limit INTEGER DEFAULT '0';
 
-ALTER TABLE `nodes` CHANGE `user` `user` VARCHAR( 32 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL;
+
 ALTER TABLE `nodes` CHANGE `win` `win` TINYINT( 4 ) NULL DEFAULT '0';
 ALTER TABLE `nodes` CHANGE `type` `type` INT( 11 ) NULL DEFAULT '0';
+ALTER TABLE `nodes` CHANGE `user` `user` VARCHAR( 32 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL;

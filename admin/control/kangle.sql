@@ -100,20 +100,6 @@ CREATE TABLE IF NOT EXISTS `vhost` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vhost_info`
---
-
-CREATE TABLE IF NOT EXISTS `vhost_info` (
-  `vhost` varchar(32) NOT NULL,
-  `type` tinyint(4) NOT NULL DEFAULT '0',
-  `name` varchar(64) NOT NULL,
-  `value` varchar(255) DEFAULT NULL,
-  KEY `user` (`user`,`type`,`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `vhost_product`
 --
 
