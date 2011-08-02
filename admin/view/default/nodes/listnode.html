@@ -1,6 +1,6 @@
 {{include file='common/head.html'}}
 <body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
-<!-- ajax ²éÑ¯½Úµã×´Ì¬ -->
+<!-- ajax æŸ¥è¯¢èŠ‚ç‚¹çŠ¶æ€ -->
 <script language='javascript' src='{{$PSTATIC}}/style/common.js'>
 </script>
 <script language='javascript'>
@@ -34,7 +34,7 @@ function checkNodeResult(node)
 			msg+="'/>";
 		}
 		}catch(e){
-			msg = "²éÑ¯³ö´í";
+			msg = "æŸ¥è¯¢å‡ºé”™";
 		}
 		xxkf_obj(node).innerHTML = msg;
 	}
@@ -65,29 +65,29 @@ function checkAllNode()
 </div>
 {{/if}}
 <div class="padd mar_top">
-<div class="topimg pal1">¹²¼Æ {{$sum}} Ìõ¼ÇÂ¼</div>
+<div class="topimg pal1">å…±è®¡ {{$sum}} æ¡è®°å½•</div>
 </div>
   <div id="main" class="wid">
   <table width="100%" align="center" cellspacing="3">
-<tr><td>[<a href='?c=nodes&a=flush'>¸üÐÂÅäÖÃÎÄ¼þ</a>][<a href='javascript:checkAllNode()'>²éÑ¯ËùÓÐÖ÷»ú×´Ì¬</a>][<a href="?c=nodes&a=addNode" target='main'>Ôö¼ÓÖ÷»ú</a>]</td></tr>
+<tr><td>[<a href='?c=nodes&a=flush'>æ›´æ–°é…ç½®æ–‡ä»¶</a>][<a href='javascript:checkAllNode()'>æŸ¥è¯¢æ‰€æœ‰ä¸»æœºçŠ¶æ€</a>][<a href="?c=nodes&a=addNode" target='main'>å¢žåŠ ä¸»æœº</a>]</td></tr>
     </table>
     <table width="90%" align="center" cellpadding=0 cellspacing=1 id="table">
       <tr id="ttitle">
-        <td bgcolor='#efefef' class='color01 right'>²Ù×÷</td>       
-        <td bgcolor='#efefef' class='color01 right'>Ãû³Æ</td>
-        <td bgcolor='#efefef' class='color01 right'>Ö÷»ú×´Ì¬</td>
-		<td bgcolor='#efefef' class='color01 right'>Ö÷»ú</td>
-		<td  bgcolor='#efefef' class='color01 right'>¹ÜÀí¶Ë¿Ú</td>
+        <td bgcolor='#efefef' class='color01 right'>æ“ä½œ</td>       
+        <td bgcolor='#efefef' class='color01 right'>åç§°</td>
+        <td bgcolor='#efefef' class='color01 right'>ä¸»æœºçŠ¶æ€</td>
+		<td bgcolor='#efefef' class='color01 right'>ä¸»æœº</td>
+		<td  bgcolor='#efefef' class='color01 right'>ç®¡ç†ç«¯å£</td>
       </tr>
 	  {{foreach from=$list item=row}}
       <tr>
         <td class="right">
-          [<a href="javascript:if(confirm('È·¶¨É¾³ý{{$row.name}}?')){location='?c=nodes&a=del&name={{$row.name}}';}" title="É¾³ýÖ÷»ú">É¾³ý</a>]        
-          [<a href="?c=nodes&a=editForm&name={{$row.name}}" title="¸ü¸ÄÐÅÏ¢">ÐÞ¸Ä</a>]
+          [<a href="javascript:if(confirm('ç¡®å®šåˆ é™¤{{$row.name}}?')){location='?c=nodes&a=del&name={{$row.name}}';}" title="åˆ é™¤ä¸»æœº">åˆ é™¤</a>]        
+          [<a href="?c=nodes&a=editForm&name={{$row.name}}" title="æ›´æ”¹ä¿¡æ¯">ä¿®æ”¹</a>]
          </td>
          <td class="right"><a href='http://{{$row.host}}:{{$row.port}}/admin/' target=_blank'>{{$row.name}}</a>       
         </td>
-        <td class="right"> <div id='{{$row.name}}'><a href="javascript:checkNode('{{$row.name}}')">²éÑ¯</a></div></td>
+        <td class="right"> <div id='{{$row.name}}'><a href="javascript:checkNode('{{$row.name}}')">æŸ¥è¯¢</a></div></td>
  		<td class="right">{{$row.host}}</td>
 		<td class="right">{{$row.port}}</td>
       </tr>
