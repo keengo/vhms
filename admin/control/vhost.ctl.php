@@ -1,7 +1,8 @@
 <?php
 needRole('admin');
 class VhostControl extends Control {
-	public function showVhost()
+	/*
+	public function showVhostold()
 	{
 		$user = $_REQUEST['user'];
 		$skip_search = false;
@@ -29,7 +30,31 @@ class VhostControl extends Control {
 				$this->_tpl->assign("msg","没有找到该虚拟主机");
 			}
 		}
-		$this->_tpl->display('vhostproduct/showVhost.html');
+		$this->_tpl->display('vhostproduct/listVhost.html');
+	}
+	*/
+	public function showVhost()
+	{
+		$user=$_REQUEST['user'];
+		if(strpos($user,'.')){
+			$return=daocall('vhostinfo','getInfoByDomin',array($user));
+			if(!$return){
+				$this->assign('msg','没有此域名');
+				return $this->fetch('msg.html');
+			}
+			$list=daocall('vhost','listVhostByName',array($return['vhost']));
+			$this->assign('list',$list);
+			return $this->_tpl->display('vhostproduct/listVhost.html');
+		}
+		if($user[0]=='#'){
+			$user=substr($user,1);
+			$call='listVhostByUid';
+		}else{
+			$call='listVhostByName';
+		}
+		$list=daocall('vhost',$call,array($user));
+		$this->assign('list',$list);
+		return $this->_tpl->display('vhostproduct/listVhost.html');
 	}
 	public function adminLogin2()
 	{
@@ -71,7 +96,10 @@ class VhostControl extends Control {
 			$this->_tpl->assign('row',$list);
 			$list = daocall('vhostinfo','getDomain',array($list['name']));
 			$this->_tpl->assign('list',$list);
+				print_r($list);
+		die();
 			return true;
+		
 		}
 		return false;
 	}
