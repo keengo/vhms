@@ -20,16 +20,16 @@ class VhostDAO extends DAO{
 			'node'=>'node',
 			'product_id'=>'product_id',
 			'username'=>'username'
-		);
-		$this->MAP_TYPE = array(
+			);
+			$this->MAP_TYPE = array(
 			'passwd'=>FIELD_TYPE_MD5,
 			'uid'=>FIELD_TYPE_INT,
 			'status'=>FIELD_TYPE_INT,
 			'product_id'=>FIELD_TYPE_INT,
 			'create_time'=>FIELD_TYPE_DATETIME,
 			'expire_time'=>FIELD_TYPE_DATETIME		
-		);
-		$this->_TABLE = DBPRE . 'vhost';
+			);
+			$this->_TABLE = DBPRE . 'vhost';
 	}
 	public function pageVhostByuser($username,$name,$page,$page_count,&$count)
 	{
@@ -38,28 +38,28 @@ class VhostDAO extends DAO{
 			$where.=" AND ".$this->getFieldValue2('name', $name);
 		}
 		return $this->selectPage(
-					array('name','uid','templete','node','create_time','expire_time','status','product_id','username'),
-					$where, 
+		array('name','uid','templete','node','create_time','expire_time','status','product_id','username'),
+		$where,
 					'uid', 
-					true, 
-					$page,
-					$page_count,
-					$count
-				);
+		true,
+		$page,
+		$page_count,
+		$count
+		);
 	}
 	public function pageVhost($page,$page_count,&$count)
 	{
 		return $this->selectPage(
-					array('name','uid','username','templete','node','doc_root','create_time','expire_time','product_id','status'),
-					null, 
+		array('name','uid','username','templete','node','doc_root','create_time','expire_time','product_id','status'),
+		null,
 					'uid', 
-					true, 
-					$page,
-					$page_count,
-					$count
-				);
+		true,
+		$page,
+		$page_count,
+		$count
+		);
 	}
-	
+
 	public function updateMinUid(&$uid)
 	{
 		$min_uid = 1000;
@@ -104,10 +104,10 @@ class VhostDAO extends DAO{
 		$arr['create_time'] = 'NOW()';
 		$arr['expire_time'] = 'ADDDATE(NOW(),INTERVAL '.$month.' MONTH)';
 		$result = $this->insertData($arr);
-		
+
 		if($result){
 			try{
-				$id = $this->db->lastInsertId();				
+				$id = $this->db->lastInsertId();
 			}catch(PDOException $e){
 				//print_r($e);
 				//todo alter use select to select id;
@@ -168,6 +168,13 @@ class VhostDAO extends DAO{
 			return false;
 		}
 		return $this->listVhost($username,$result);
+	}
+	public function getMyVhost($username,$name,$fields=null)
+	{
+		return $this->getData2(
+				$fields,
+				$this->getFieldValue2('username', $username)." AND ".$this->getFieldValue2('name', $name),
+				'row');
 	}
 	public function getVhost($name,$fields=null)
 	{

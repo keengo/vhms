@@ -84,10 +84,17 @@ class VhostAPI extends API
 				return false;
 			}
 		}
+		$whm = apicall('nodes','makeWhm',array($node));
+		$whmCall = new WhmCall('update_vh');
+		$whmCall->addParam('name', $name);
+		$whmCall->addParam('status', $status);
+		if(!$whm->call($whmCall)){
+			return false;
+		}
 		if(daocall('vhost','updateVhost',array($name,$attr))){		
-			if($GLOBALS['node_db']!='sqlite'){
-				$this->noticeChange($node,$name);
-			}
+			//if($GLOBALS['node_db']!='sqlite'){
+			$this->noticeChange($node,$name);
+			//}
 			return true;
 		}
 		return false;
@@ -176,21 +183,19 @@ class VhostAPI extends API
 		$attr['resync'] = '1';
 		$attr['init'] = '1';
 		$attr['md5passwd'] = $attr['passwd'];
-		$product_info = daocall('vhostproduct','getProduct',array($attr['product_id'],array('web_quota','db_quota')));
+		$product_info = daocall('vhostproduct','getProduct',array($attr['product_id'],null));
 		$product = apicall('product','newProduct',array('vhost'));
-		if (!$product->sync($attr['name'],$attr,$product_info)){
-			return false;
-		}
-		return $product->syncExtraInfo($attr['name'],$attr['node']);
+		return $product->sync($attr['name'],$attr,$product_info);
+		//return $product->syncExtraInfo($attr['name'],$attr['node']);
 	}
 	public function del($node,$name)
 	{
 		$whm = apicall('nodes','makeWhm',array($node));
 		$whmCall = new WhmCall('del_vh');
-		$whmCall->addParam('destroy',1);
+		$whmCall->addParam('destroy',1);  
 		$whmCall->addParam('name',$name);
 		if($whm->call($whmCall)){
-			daocall('vhostinfo','delAllInfo',array($name));
+		//	daocall('vhostinfo','delAllInfo',array($name));
 			return daocall('vhost','delVhost',array($name,null));
 		}
 		return false;

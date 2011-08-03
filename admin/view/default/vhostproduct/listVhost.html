@@ -20,6 +20,7 @@
 		<div class="block tb_wid5">
 			<table id="table" border="0" cellpadding="0" cellspacing="1">
 				<tr id="ttitle">
+					<td class="td_bgc right_2">操作</td>
 					<td class="td_bgc right_2">用户名</td>
 					<td class="td_bgc right_2">uid</td>
 					<td class="td_bgc right_2">所属用户</td>
@@ -32,7 +33,10 @@
 					</tr>
 					{{foreach from=$list item=row}}
 				<tr>
-					<td class="td_bgc right_2"><a href='?c=vhost&a=showVhost&user={{$row.name}}'>{{$row.name}}</a></td>
+					<td class="td_bgc right_2">
+						[<a href='javascript:if(confirm("真的要删除空间吗,此操作将导致数据无法恢复,如果你只是想关闭空间，可以把该空间的状态改为暂停")){ window.location="?c=vhost&a=del&name={{$row.name}}";}'>删除</a>]
+						[<a href="?c=vhost&a=resync&name={{$row.name}}">重建</a>]
+					<td class="td_bgc right_2">{{$row.name}}</td>
 					<td class="td_bgc right_2">{{$row.uid}}</td>
 					<td class="td_bgc right_2"><a href='?c=user&a=listUser&username={{$row.username}}'>{{$row.username}}</a></td>
 					<td class="td_bgc right_2">{{$row.templete}}</td>
@@ -40,7 +44,16 @@
 					<td class="td_bgc right_2">{{$row.doc_root}}</td>
 					<td class="td_bgc right_2">{{$row.create_time}}</td>
 					<td class="td_bgc right_2">{{$row.expire_time}}</td>
-					<td class="td_bgc right_2">{{$row.status}}</td>
+					<td class="td_bgc right_2">
+						<form action='?c={{$smarty.request.c}}&a=setStatus&name={{$row.name}}' method='post' name='status_form'>
+							<select name='status' onChange="javascript:status_form.submit()">
+							{{for $i=0; $i<2; $i++}}
+							<option value='{{$i}}' {{if $i==$row.status}} selected {{/if}}>
+							{{if $i==0}}正常{{else}}暂停{{/if}}
+							</option>
+							{{/for}}
+							</select>
+							</form></td>
 					</tr>
 					{{/foreach}}
 		  </table>

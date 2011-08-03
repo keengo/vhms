@@ -9,7 +9,7 @@ class ProductControl extends Control {
 	{
 		parent::__destruct();
 	}
-        public function productList()
+    public function productList()
 	{
 		if($_REQUEST['target']==''){
 			$_REQUEST['target'] = 'self';

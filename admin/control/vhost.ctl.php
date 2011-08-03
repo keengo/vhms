@@ -10,7 +10,7 @@ class VhostControl extends Control {
 			$skip_search = true;
 		}
 		$this->_tpl->assign('user',$user);
-		if($user){			
+		if($user){
 			if($user[0]=='#'){
 				$user = substr($user,1);
 				$call = 'listVhostByUid';
@@ -23,13 +23,44 @@ class VhostControl extends Control {
 				if($result){
 					$user = $result['user'];
 					$result = $this->getUser($user,'listVhostByName');
-				}			
+				}
 			}
 			if(!$result){
 				$this->_tpl->assign("msg","没有找到该虚拟主机");
 			}
 		}
 		$this->_tpl->display('vhostproduct/showVhost.html');
+	}
+	public function adminLogin2()
+	{
+		$vhost = $_REQUEST['name'];
+		$vhostinfo=daocall('vhost','getVhost',array($vhost));
+		if (!$vhostinfo) {
+			die("error! cann't find such vhost");
+		}
+		$node=$vhostinfo['node'];
+		load_conf('pub:node');
+		$skey=$GLOBALS['node_cfg'][$node]['passwd'];
+		$r = rand();
+		$s=md5($r.$vhost.$_REQUEST['r'].$skey);
+		$url="http://".$node.":".$GLOBALS['node_cfg'][$node][port]."/admin/?c=sso&a=login&name=".$vhost."&action=login&s=".$s."&r=".$r;
+		header("Location: ".$url);
+		die();
+	}
+	public function adminLogin()
+	{
+		$vhost = $_REQUEST['user'];
+		$vhostinfo=daocall('vhost','getVhost',array($vhost));
+		if (!$vhostinfo) {
+			die("error! cann't find such vhost");
+		}
+		$node=$vhostinfo['node'];
+		load_conf('pub:node');
+		$skey=$GLOBALS['node_cfg'][$node]['passwd'];
+		$url="http://".$_SERVER['HTTP_HOST'].$_SERVER["REQUEST_URI"]."?c=vhostproduct&a=adminLogin2&name=".$vhost;
+		$hellourl="http://".$node.":".$GLOBALS['node_cfg'][$node][port]."/admin/?c=sso&a=hello&name=".$vhost."&url=".urlencode($url);
+		header("Location: ".$hellourl);
+		die();
 	}
 	private function getUser($user,$call)
 	{
@@ -54,7 +85,7 @@ class VhostControl extends Control {
 		$count = 0;
 		$list = daocall('vhost','pageVhost',array($page,$page_count,&$count));
 		foreach($list AS $row){
-			
+
 		}
 		$total_page = ceil($count/$page_count);
 		if($page>=$total_page){
@@ -65,15 +96,28 @@ class VhostControl extends Control {
 		$this->_tpl->assign('page',$page);
 		$this->_tpl->assign('page_count',$page_count);
 		$this->_tpl->assign('list',$list);
-		$this->_tpl->display('vhostproduct/listVhost.html');	
-		
+		$this->_tpl->display('vhostproduct/listVhost.html');
+
 	}
 	public function del()
 	{
-		$vhost = $_REQUEST['name'];
-		$node = daocall('vhost','getNode',array($vhost));
-		apicall('vhost','del',array($node,$vhost));
-		return $this->showVhost();
+		$name=$_REQUEST['name'];
+		if(!$name)
+		{
+			return false;
+		}
+		$nameinfo=daocall('vhost','getVhost',array($name));
+		if(!apicall('vhost','del',array($nameinfo['node'],$name))){
+			$this->assign('msg','删除失败');
+			return $this->fetch('msg.html');
+		}
+		$this->assign('msg','删除成功');
+		return $this->fetch('msg.html');
+
+		//		$vhost = $_REQUEST['name'];
+		//		$node = daocall('vhost','getNode',array($vhost));
+		//		apicall('vhost','del',array($node,$vhost));
+		//		return $this->showVhost();
 	}
 	public function setStatus()
 	{
@@ -83,7 +127,7 @@ class VhostControl extends Control {
 		$node = daocall('vhost','getNode',array($vhost));
 		apicall('vhost','changeStatus',array($node,$vhost,$_REQUEST['status']));
 		//apicall('vhost','noticeChange',array($node,$vhost));
-		return $this->showVhost();
+		return $this->pageVhost();
 	}
 	public function resync()
 	{
@@ -92,20 +136,16 @@ class VhostControl extends Control {
 			'node',
 			'product_id',
 			'name',
-			'passwd',
 			'doc_root',
 			'uid',
-			'gid',
-			'templete',
-			'subtemplete',
 			'status'
 			)));
-		if(apicall('vhost','sync',array($attr))){
-			$this->_tpl->assign('msg','重建空间成功');
-		}else{
-			$this->_tpl->assign('msg','重建空间失败');
-		}
-		return $this->showVhost();
+			if(apicall('vhost','sync',array($attr))){
+				$this->_tpl->assign('msg','重建空间成功');
+			}else{
+				$this->_tpl->assign('msg','重建空间失败');
+			}
+			return $this->fetch('msg.html');
 	}
 	public function randPassword()
 	{

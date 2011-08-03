@@ -9,9 +9,9 @@ class VhostproductControl extends Control {
 	{
 		parent::__destruct();
 	}
-	
+
 	public function getVhostByname()
-	{	
+	{
 		$name=$_REQUEST['name'];
 		$host=daocall('vhost','getVhostByname',array($name));
 		if($host['username']!=getRole('user'))
@@ -28,7 +28,7 @@ class VhostproductControl extends Control {
 			if($domain){
 				$search_key = $domain['user'];
 			}
-		}	
+		}
 		$page = intval($_REQUEST['page']);
 		if($page<=0){
 			$page = 1;
@@ -68,7 +68,10 @@ class VhostproductControl extends Control {
 	public function impLogin2()
 	{
 		$vhost = $_REQUEST['name'];
-		$vhostinfo=daocall('vhost','getVhost',array($vhost));
+		$vhostinfo=daocall('vhost','getMyVhost',array(getRole('user'),$vhost));
+		if (!$vhostinfo) {
+			die("error! cann't find such vhost");
+		}
 		$node=$vhostinfo['node'];
 		load_conf('pub:node');
 		$skey=$GLOBALS['node_cfg'][$node]['passwd'];
@@ -82,6 +85,9 @@ class VhostproductControl extends Control {
 	{
 		$vhost = $_REQUEST['name'];
 		$vhostinfo=daocall('vhost','getVhost',array($vhost));
+		if (!$vhostinfo) {
+			die("error! cann't find such vhost");
+		}
 		$node=$vhostinfo['node'];
 		load_conf('pub:node');
 		$skey=$GLOBALS['node_cfg'][$node]['passwd'];
@@ -127,8 +133,8 @@ class VhostproductControl extends Control {
 					//价格只能向上升级
 					continue;
 				}
-				$upproduct[] = $product;								
-			}		
+				$upproduct[] = $product;
+			}
 		}
 		//print_r($upproduct);
 		if (count($upproduct)<=0) {
@@ -151,7 +157,7 @@ class VhostproductControl extends Control {
 		if($product_info){
 			$this->_tpl->assign("product",$product_info);
 		}
-		
+
 		return $this->_tpl->fetch('vhostproduct/renew.html');
 	}
 }

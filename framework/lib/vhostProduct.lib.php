@@ -92,26 +92,34 @@ class VhostProduct extends Product
 		$param = $params['name'];
 		$whm = apicall('nodes','makeWhm',array($params['node']));
 		if($GLOBALS['node_db']=='sqlite'){
+			/*
 			if($params['resync'] == '1'){
 				$whmCall = new WhmCall('del_vh');
 				$whmCall->addParam('name',$param);
 				$whm->call($whmCall,10);
 			}
+			*/
 			$whmCall = new WhmCall('add_vh');
 			$whmCall->addParam('doc_root',$params['doc_root']);
+			/*
 			if($GLOBALS['node_cfg'][$params['node']]['win']==1){
 				$whmCall->addParam('user','a'.$params['uid']);
 			}else{
-				$whmCall->addParam('user',$params['uid']);
+				
 			}
+			*/
+			$whmCall->addParam('user',$params['uid']);
 			if($product_info['db_quota']>0){
 				$whmCall->addParam('db_quota', $product_info['db_quota']);
 			}
-			$whmCall->addParam('group', $params['gid']);
-			$whmCall->addParam('templete',$params['templete']);
-			$whmCall->addParam('product_id', $params['product_id']);
+			//$whmCall->addParam('group', $params['gid']);
+			$whmCall->addParam('templete',$product_info['templete']);
+			//$whmCall->addParam('product_id', $params['product_id']);
 			$whmCall->addParam('uid', $params['uid']);
-			$whmCall->addParam('month', $params['month']);
+			//$whmCall->addParam('month', $params['month']);
+//			if($params['month']){
+//				$expire_time=time()
+//			}
 			$whmCall->addParam('subtemplete',$product_info['subtemplete']);
 			$whmCall->addParam('domain', $product_info['domain']);
 			$whmCall->addParam('subdir', $product_info['subdir']);
@@ -122,7 +130,9 @@ class VhostProduct extends Product
 			$whmCall->addParam('access', $product_info['access']);
 			$whmCall->addParam('max_connect', $product_info['max_connect']);
 			$whmCall->addParam('speed_limit', $product_info['speed_limit']);
-			$whmCall->addParam('passwd', $params['passwd']);
+			if($params['passwd']){
+				$whmCall->addParam('passwd', $params['passwd']);
+			}
 			if($params['status']){
 				$whmCall->addParam('status',$params['status']);
 			}
@@ -171,8 +181,8 @@ class VhostProduct extends Product
 		}		
 		$suser['resync'] = '1';
 		$suser['init'] = '1';
-		$suser['md5passwd'] = $suser['passwd'];
-		$suser['templete'] = $nproduct['templete'];
+		//$suser['md5passwd'] = $suser['passwd'];
+		//$suser['templete'] = $nproduct['templete'];
 		$suser['product_id'] = $nproduct['id'];
 		return $this->sync($username,$suser,$nproduct);
 	}
