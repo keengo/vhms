@@ -149,7 +149,7 @@ class VhostControl extends Control {
 	}
 	public function setStatus()
 	{
-		//$arr['status'] = $_REQUEST['status'];
+		//die($_REQUEST['name']);
 		$vhost = $_REQUEST['name'];
 		//daocall('vhost','updateVhost',array($vhost,$arr));
 		$node = daocall('vhost','getNode',array($vhost));
@@ -166,8 +166,14 @@ class VhostControl extends Control {
 			'name',
 			'doc_root',
 			'uid',
-			'status'
+			'status',
+			'create_time',
+			'expire_time'
 			)));
+			$attr['create_time']=strtotime($attr['create_time']);
+			$attr['expire_time']=strtotime($attr['expire_time']);
+//			print_r($attr);
+//			die();
 			if(apicall('vhost','sync',array($attr))){
 				$this->_tpl->assign('msg','重建空间成功');
 			}else{

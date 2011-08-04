@@ -35,29 +35,29 @@ class VhostProduct extends Product
 		$params['init'] = '1';
 		$params['templete'] = $product_info['templete'];
 		$uid = daocall('vhost', 'insertVhost',
-			array($susername,
-			$params['name'],
-			$params['passwd'],
-			$params['doc_root'],
-			$params['gid'],
-			$product_info['templete'],
-			$product_info['subtemplete'],
-			0,
-			$params['node'],
-			$product_info['id'],
-			$params['month']
-			)
+		array($susername,
+		$params['name'],
+		$params['passwd'],
+		$params['doc_root'],
+		$params['gid'],
+		$product_info['templete'],
+		$product_info['subtemplete'],
+		0,
+		$params['node'],
+		$product_info['id'],
+		$params['month']
+		)
 		);
 		if($uid && $uid < 1000){
-			daocall('vhost','updateMinUid',array(&$uid));	
+			daocall('vhost','updateMinUid',array(&$uid));
 			if($uid<1000){
 				trigger_error('uid小于1000,请手工运行SQL: ALTER TABLE `vhost` AUTO_INCREMENT =1000');
 				return false;
-			}			
+			}
 		}
 		if($uid >= 1000){
 			$params['uid'] = $uid;
-			return true;	
+			return true;
 		}
 		return false;
 	}
@@ -77,8 +77,8 @@ class VhostProduct extends Product
 			$whmCall->addParam('vhost',$suser);
 			$whmCall->addParam('name',$info[$i]['name']);
 			$whmCall->addParam('type',$info[$i]['type']);
-			$whmCall->addParam('value',$info[$i]['value']);	
-			$whm->call($whmCall);		
+			$whmCall->addParam('value',$info[$i]['value']);
+			$whm->call($whmCall);
 		}
 		return true;
 	}
@@ -88,27 +88,31 @@ class VhostProduct extends Product
 	 * @param  $param
 	 */
 	public function sync($user,$params,$product_info)
-	{	
+	{
+		//		print_r($params);
+		//		echo "<br>";
+		//		print_r($product_info);
+		//		die();
 		$param = $params['name'];
 		$whm = apicall('nodes','makeWhm',array($params['node']));
+		
 		if($GLOBALS['node_db']=='sqlite'){
-			/*
-			if($params['resync'] == '1'){
-				$whmCall = new WhmCall('del_vh');
-				$whmCall->addParam('name',$param);
-				$whm->call($whmCall,10);
-			}
-			*/
+				
+//			if($params['resync'] == '1'){
+//				$whmCall = new WhmCall('del_vh');
+//				$whmCall->addParam('name',$param);
+//				$whm->call($whmCall,10);
+//			}
+//			print_r($whmCall);
+//			die();
 			$whmCall = new WhmCall('add_vh');
 			$whmCall->addParam('doc_root',$params['doc_root']);
-			/*
+				
 			if($GLOBALS['node_cfg'][$params['node']]['win']==1){
 				$whmCall->addParam('user','a'.$params['uid']);
 			}else{
-				
+				$whmCall->addParam('user',$params['uid']);
 			}
-			*/
-			$whmCall->addParam('user',$params['uid']);
 			if($product_info['db_quota']>0){
 				$whmCall->addParam('db_quota', $product_info['db_quota']);
 			}
@@ -116,10 +120,16 @@ class VhostProduct extends Product
 			$whmCall->addParam('templete',$product_info['templete']);
 			//$whmCall->addParam('product_id', $params['product_id']);
 			$whmCall->addParam('uid', $params['uid']);
-			//$whmCall->addParam('month', $params['month']);
-//			if($params['month']){
-//				$expire_time=time()
-//			}
+			if($params['create_time']){
+				$whmCall->addParam('create_time', $params['create_time']);
+			}
+			if($params['expire_time']){
+				$whmCall->addParam('expire_time', $params['expire_time']);
+			}
+			if($params['month'])
+			{
+				$whmCall->addParam('expire_time', $params['month']*2592000+time());
+			}
 			$whmCall->addParam('subtemplete',$product_info['subtemplete']);
 			$whmCall->addParam('domain', $product_info['domain']);
 			$whmCall->addParam('subdir', $product_info['subdir']);
@@ -136,6 +146,7 @@ class VhostProduct extends Product
 			if($params['status']){
 				$whmCall->addParam('status',$params['status']);
 			}
+			
 		}else{
 			$whmCall = new WhmCall('add_vh');
 		}
@@ -178,7 +189,7 @@ class VhostProduct extends Product
 		if($nproduct==null){
 			//续费
 			return true;
-		}		
+		}
 		$suser['resync'] = '1';
 		$suser['init'] = '1';
 		//$suser['md5passwd'] = $suser['passwd'];

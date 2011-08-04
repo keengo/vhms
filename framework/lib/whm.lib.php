@@ -96,21 +96,25 @@ class WhmClient
 			$this->err_msg = "cann't connect to host";
 			return false;
 		}		
-		
-		//echo "msg=".$msg."<br>***********\n";
-		$xml = new SimpleXMLElement($msg);
-		$result = new WhmResult;
-		foreach($xml->children() as $child){
-			if($child->getName()=='result'){				
-				$result->status = $child['status'];
-				foreach($child->children() as $node)
-				{
-					$result->add($node->getName(), $node[0]);
+		try{
+			$xml = new SimpleXMLElement($msg);
+			//print_r($xml);
+			$result = new WhmResult;
+			foreach($xml->children() as $child){
+				if($child->getName()=='result'){				
+					$result->status = $child['status'];
+					foreach($child->children() as $node)
+					{
+						$result->add($node->getName(), $node[0]);
+					}
+					break;
 				}
-				break;
-			}
-		}		
-		return $result;
+			}		
+			return $result;
+		} catch (Exception $e) {
+			echo "msg=".$msg."<br>***********\n";
+			return null;
+		}
 	}
 	public function get($name,$index=0)
 	{
