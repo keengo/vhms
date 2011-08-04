@@ -1,10 +1,10 @@
-<?php
+﻿<?php
 /**
  * 框架内核启动
  * 
  * @package core
  */
-define(VHMS_VERSION,"1.7");
+define(VHMS_VERSION,"2.0.1");
 
 //ob_start();
 
