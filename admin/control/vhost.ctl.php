@@ -149,7 +149,6 @@ class VhostControl extends Control {
 	}
 	public function setStatus()
 	{
-		//die($_REQUEST['name']);
 		$vhost = $_REQUEST['name'];
 		//daocall('vhost','updateVhost',array($vhost,$arr));
 		$node = daocall('vhost','getNode',array($vhost));

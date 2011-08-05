@@ -89,10 +89,10 @@ class VhostProduct extends Product
 	 */
 	public function sync($user,$params,$product_info)
 	{
-		//		print_r($params);
-		//		echo "<br>";
-		//		print_r($product_info);
-		//		die();
+//		print_r($params);
+//		echo "<br>";
+//		print_r($product_info);
+//		die();
 		$param = $params['name'];
 		$whm = apicall('nodes','makeWhm',array($params['node']));
 		

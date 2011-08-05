@@ -75,9 +75,11 @@ class VhostproductControl extends Control {
 		$node=$vhostinfo['node'];
 		load_conf('pub:node');
 		$skey=$GLOBALS['node_cfg'][$node]['passwd'];
+		$host=$GLOBALS['node_cfg'][$node]['host'];
+		$port=$GLOBALS['node_cfg'][$node]['port'];
 		$r = rand();
 		$s=md5($r.$vhost.$_REQUEST['r'].$skey);
-		$url="http://".$node.":".$GLOBALS['node_cfg'][$node][port]."/vhost/?c=sso&a=login&name=".$vhost."&action=login&s=".$s."&r=".$r;
+		$url="http://".$host.":".$port."/vhost/?c=sso&a=login&name=".$vhost."&action=login&s=".$s."&r=".$r;
 		header("Location: ".$url);
 		die();
 	}
@@ -91,8 +93,10 @@ class VhostproductControl extends Control {
 		$node=$vhostinfo['node'];
 		load_conf('pub:node');
 		$skey=$GLOBALS['node_cfg'][$node]['passwd'];
+		$host=$GLOBALS['node_cfg'][$node]['host'];
+		$port=$GLOBALS['node_cfg'][$node]['port'];
 		$url="http://".$_SERVER['HTTP_HOST'].$_SERVER["REQUEST_URI"]."?c=vhostproduct&a=impLogin2&name=".$vhost;
-		$hellourl="http://".$node.":".$GLOBALS['node_cfg'][$node][port]."/vhost/?c=sso&a=hello&name=".$vhost."&url=".urlencode($url);
+		$hellourl="http://".$host.":".$port."/vhost/?c=sso&a=hello&name=".$vhost."&url=".urlencode($url);
 		header("Location: ".$hellourl);
 		die();
 	}
