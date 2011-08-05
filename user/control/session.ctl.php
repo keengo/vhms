@@ -50,7 +50,7 @@ class SessionControl extends Control {
 		if(!$this->checkPassword(getRole('user'), $_REQUEST['oldpasswd'])){
 			$this->_tpl->assign('msg','原密码不对!');	
 		}else{
-			daocall('user', 'updatePassword', array(getRole('user'),$_REQUEST['passwd']));
+			daocall('users', 'updatePassword', array(getRole('user'),$_REQUEST['passwd']));
 			$this->_tpl->assign('msg','修改密码成功');
 		}
 		return $this->_tpl->display('public/msg.html');
