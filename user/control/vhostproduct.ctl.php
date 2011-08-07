@@ -80,6 +80,7 @@ class VhostproductControl extends Control {
 		$r = rand();
 		$s=md5($r.$vhost.$_REQUEST['r'].$skey);
 		$url="http://".$host.":".$port."/vhost/?c=sso&a=login&name=".$vhost."&action=login&s=".$s."&r=".$r;
+		header("Cache-Control: no-cache,no-store");
 		header("Location: ".$url);
 		die();
 	}
