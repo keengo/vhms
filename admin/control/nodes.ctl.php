@@ -59,13 +59,8 @@ class NodesControl extends Control {
 		$arr['host'] = $_REQUEST['host'];
 		$arr['port'] = $_REQUEST['port'];
 		$arr['user'] = $_REQUEST['user'];
-		$arr['db_user'] = $_REQUEST['db_user'];
-		$arr['dev'] = $_REQUEST['dev'];
 		if($_REQUEST['passwd']!=""){
 			$arr['passwd'] = $_REQUEST['passwd'];				
-		}
-		if($_REQUEST['db_passwd']!=""){
-			$arr['db_passwd'] = $_REQUEST['db_passwd'];
 		}
 		daocall('nodes','updateNode', array($_REQUEST["name"],$arr));
 		$this->flush();
