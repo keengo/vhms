@@ -63,11 +63,6 @@ class NodesControl extends Control {
 		$arr['dev'] = $_REQUEST['dev'];
 		if($_REQUEST['passwd']!=""){
 			$arr['passwd'] = $_REQUEST['passwd'];				
-			$os = $this->getOs();
-			if(!$os){
-				return false;
-			}			
-			$arr['win'] = (strcasecmp($os, 'windows')==0?1:0);
 		}
 		if($_REQUEST['db_passwd']!=""){
 			$arr['db_passwd'] = $_REQUEST['db_passwd'];
