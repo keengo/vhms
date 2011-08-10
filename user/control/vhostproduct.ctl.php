@@ -96,7 +96,12 @@ class VhostproductControl extends Control {
 		$skey=$GLOBALS['node_cfg'][$node]['passwd'];
 		$host=$GLOBALS['node_cfg'][$node]['host'];
 		$port=$GLOBALS['node_cfg'][$node]['port'];
-		$url="http://".$_SERVER['HTTP_HOST'].$_SERVER["REQUEST_URI"]."?c=vhostproduct&a=impLogin2&name=".$vhost;
+		$path = $_SERVER["REQUEST_URI"];
+		$path_point = strpos($_SERVER["REQUEST_URI"],'?');
+		if($path_point>0){
+			$path = substr($path,0,$path_point);
+		}
+		$url="http://".$_SERVER['HTTP_HOST'].$path."?c=vhostproduct&a=impLogin2&name=".$vhost;
 		$hellourl="http://".$host.":".$port."/vhost/?c=sso&a=hello&name=".$vhost."&url=".urlencode($url);
 		header("Location: ".$hellourl);
 		die();
