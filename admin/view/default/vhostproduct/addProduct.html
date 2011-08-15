@@ -160,7 +160,7 @@ function changeNode()
 	<tr>
 		<td class="td_bgc right_2">带宽限制(0无限)</td>
 		<td class="td_bgc right_2"><input name="speed_limit" type="text"
-			size='5' value="{{if $vhostproduct}}{{$vhostproduct.speed_limit}}{{else}}0{{/if}}">&nbspK/每秒
+			size='5' value="{{if $vhostproduct}}{{$vhostproduct.speed_limit/1024}}{{else}}0{{/if}}">&nbspK/每秒
 		</td>
 	</tr>
 	<tr>

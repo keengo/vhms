@@ -131,6 +131,7 @@ class VhostproductControl extends Control {
 	public function addProduct()
 	{
 		$_REQUEST['price'] *= 100;
+		$_REQUEST['speed_limit']*=1024;
 		daocall('vhostproduct', 'insertData', array($_REQUEST));
 		apicall('product','flushVhostProduct');
 		$this->showProduct();
@@ -138,6 +139,7 @@ class VhostproductControl extends Control {
 	public function editProduct()
 	{
 		$_REQUEST['price'] *= 100;
+		$_REQUEST['speed_limit'] *= 1024;
 		daocall('vhostproduct', 'updateProduct', array($_REQUEST));
 		apicall('product','flushVhostProduct');
 		$this->showProduct();
