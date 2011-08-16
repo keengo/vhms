@@ -48,14 +48,14 @@ class VhostProduct extends Product
 		$params['month']
 		)
 		);
-		if($uid && $uid < 1000){
+		if($uid && $uid < 2000){
 			daocall('vhost','updateMinUid',array(&$uid));
-			if($uid<1000){
-				trigger_error('uid小于1000,请手工运行SQL: ALTER TABLE `vhost` AUTO_INCREMENT =1000');
+			if($uid<2000){
+				trigger_error('uid小于2000,请手工运行SQL: ALTER TABLE `vhost` AUTO_INCREMENT = 2000');
 				return false;
 			}
 		}
-		if($uid >= 1000){
+		if($uid >= 2000){
 			$params['uid'] = $uid;
 			return true;
 		}

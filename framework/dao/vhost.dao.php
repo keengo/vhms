@@ -62,7 +62,7 @@ class VhostDAO extends DAO{
 
 	public function updateMinUid(&$uid)
 	{
-		$min_uid = 1000;
+		$min_uid = 2000;
 		$arr = array('uid'=>$min_uid+$uid);
 		$result = $this->update($arr,$this->getFieldValue2('uid', $uid));
 		if($result){
