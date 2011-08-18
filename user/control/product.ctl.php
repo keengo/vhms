@@ -66,7 +66,7 @@ class ProductControl extends Control {
 	public function sell()
 	{
 		needRole('user');
-		if(strcasecmp($_REQUEST['name'],'root')==0)
+		if(strcasecmp(trim($_REQUEST['name']),'root')==0)
 		{
 			$this->_tpl->assign('msg','注册失败：root为保留账号');
 			return $this->_tpl->display('public/msg.html');

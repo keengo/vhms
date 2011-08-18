@@ -17,6 +17,10 @@ function check_register()
 		alert('密码长度最小要6位');
 		return false;
 	}
+	if(reg.passwd.value.length>16){
+		alert('密码长度最长16位');
+		return false;
+	}
 	if(reg.passwd.value!=reg.passwd2.value){
 		alert('两次密码不对');
 		return false;
