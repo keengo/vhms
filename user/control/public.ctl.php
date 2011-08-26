@@ -36,17 +36,33 @@ class PublicControl extends  Control
 	}
 	public function register()
 	{
+		if($GLOBALS['uc'] && $GLOBALS['uc']=='on'){
+			include dirname(__FILE__).'/../../config.inc.php';
+			if(UC_KEY=="" || UC_API=="")
+			{
+				return "注册失败，请检查uc配置文件.";
+			}
+			include dirname(__FILE__).'/../../include/db_mysql.class.php';
+			include dirname(__FILE__).'/../../uc_client/client.php';
+			$uid = uc_user_register($_REQUEST['username'], $_REQUEST['passwd'], $_REQUEST['email']);
+			if($uid <= 0) {
+				return '注册失败';
+			} else {
+				setcookie('Example_auth', uc_authcode($uid."\t".$_REQUEST['username'], 'ENCODE'));
+				if ($external == '1') {
+					$url = "?fc=user&fa=index";
+				} else {
+					$url = "?c=user&a=index";
+				}
+				header("Location: ".$url);
+				die();
+			}
+		}
 		$username = $_REQUEST['username'];
 		if(!$this->checkRight($username)){
 			return "用户名不符合标准";
 		}
-		$result = daocall('user','newUser',array(
-										$_REQUEST['username'],
-										$_REQUEST['passwd'],
-										$_REQUEST['email'],
-										$_REQUEST['name'],
-										$_REQUEST['id'])
-		);
+		$result = daocall('user','newUser',array($_REQUEST['username'],$_REQUEST['passwd'],$_REQUEST['email'],$_REQUEST['name'],$_REQUEST['id']));
 		if($result){
 			registerRole('user',$_REQUEST['username']);
 			$external = $_REQUEST['external'];

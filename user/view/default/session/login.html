@@ -1,5 +1,18 @@
 {{include file='common/head.html'}}
 <body>
+<SCRIPT>
+function ValidateForm() 
+{
+	if ( document.form1.username.value=="" || document.form1.passwd.value=="") 
+	{
+		alert("please enter ur name and passwd and checkcode!");
+		return false;
+	}
+	else { 
+		return true;
+	}
+}
+</SCRIPT>
 <link rel="stylesheet" rev="stylesheet" href="{{$STATIC}}style/login.css" type="text/css" media="all" />
 <div id="header"></div>
 
@@ -31,20 +44,6 @@
 	</div>
 </div>
 </body>
-
-  <SCRIPT>
-function ValidateForm() 
-{
-	if ( document.form1.LoginName.value=="" || document.form1.LoginPass.value=="" || document.form1.CheckCode.value=="") 
-	{
-		alert("please enter ur name and passwd and checkcode!");
-		return false;
-	}
-	else { 
-		return true;
-	}
-}
-</SCRIPT>
 
 </html>
 											

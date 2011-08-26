@@ -20,9 +20,43 @@ class SessionControl extends Control {
 	public function login()
 	{
 		session_start();
+		if($GLOBALS['uc'] && $GLOBALS['uc']=='on'){
+			include dirname(__FILE__).'/../../config.inc.php';
+			if(UC_KEY=="" || UC_API=="")
+			{
+				return "登陆失败，请检查uc配置文件.";
+			}
+			include dirname(__FILE__).'/../../include/db_mysql.class.php';
+			include dirname(__FILE__).'/../../uc_client/client.php';
+			list($uid, $username, $password, $email) = uc_user_login($_REQUEST['username'], $_REQUEST['passwd']);
+			setcookie('Example_auth', '', -86400);
+			if($uid > 0)
+			{
+				$sql="SELECT count(*) FROM  ".UC_DBNAME."."."{$tablepre}members WHERE uid='$uid'";
+				$db=new dbstuff();
+				$conn=$db->connect($dbhost, $dbuser, $dbpw);
+				if(!$db->result_first($sql)) {
+					//判断用户是否存在于用户表，不存在则跳转到激活页面
+					$auth = rawurlencode(uc_authcode("$username\t".time(), 'ENCODE'));
+					echo '您需要需要激活该帐号，才能进入本应用程序<br><a href="'.$_SERVER['PHP_SELF'].'?example=register&action=activation&auth='.$auth.'">继续</a>';
+					exit;
+				}
+				$ucsynlogin = uc_user_synlogin($uid);
+				echo $ucsynlogin;
+				registerRole('user',$username);
+				//用location则同步登失败
+				if($GLOBALS['frame']==1){
+					header("Location: ?c=frame&a=index");
+				}else{
+					header("Location: ?c=user&a=index");
+				}
+				die();
+			} else{
+				return '登陆失败';
+			}
+		}
 		$user = $this->checkPassword($_REQUEST['username'], $_REQUEST['passwd']);
 		if(!$user){
-			//die('登录错误');
 			return "登录错误";
 		}
 		registerRole('user',$user['username']);
@@ -48,7 +82,7 @@ class SessionControl extends Control {
 	{
 		needRole('user');
 		if(!$this->checkPassword(getRole('user'), $_REQUEST['oldpasswd'])){
-			$this->_tpl->assign('msg','原密码不对!');	
+			$this->_tpl->assign('msg','原密码不对!');
 		}else{
 			daocall('user', 'updatePassword', array(getRole('user'),$_REQUEST['passwd']));
 			$this->_tpl->assign('msg','修改密码成功');

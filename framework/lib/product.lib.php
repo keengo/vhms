@@ -1,6 +1,6 @@
-<?php 
+<?php
 /**
- * 
+ *
  * 产品抽象类
  * 一种产品类型
  * @author Administrator
@@ -21,7 +21,7 @@ abstract class Product
 		$price=$price/12;
 		$price*=$month;
 		if ($month==1) {
-		//	$price*=1.5;
+			//	$price*=1.5;
 		}
 		return $price;
 	}
@@ -33,7 +33,7 @@ abstract class Product
 		return $month/12*12==$month;
 	}
 	/**
-	 * 
+	 *
 	 * 续费操作
 	 * @param $username
 	 * @param $susername
@@ -60,7 +60,7 @@ abstract class Product
 			trigger_error('月份错误');
 			return false;
 		}
-		$price = $this->caculatePrice($info['price'],$month);		
+		$price = $this->caculatePrice($info['price'],$month);
 		if($price<0){
 			trigger_error('价格错误');
 			return false;
@@ -116,8 +116,8 @@ abstract class Product
 		}
 		$expire_time = strtotime($suser['expire_time']);
 		$month = ($expire_time - time())/(30*24*3600);
-		//die("expire_time=".$suser['expire_time']." ".$expire_time." month=".$month);	
-		$price = $this->caculatePrice($diff_price,$month);		
+		//die("expire_time=".$suser['expire_time']." ".$expire_time." month=".$month);
+		$price = $this->caculatePrice($diff_price,$month);
 		if($price<0){
 			trigger_error('价格错误');
 			return false;
@@ -154,12 +154,49 @@ abstract class Product
 	}
 	/**
 	 * 购买产品
-	 * @param $user 用户名	 
+	 * @param $user 用户名
 	 * @param $product_id 产品ID
 	 * @param $suser 产品参数
 	 */
 	public function sell($username,$product_id,$suser)
 	{
+		if($GLOBALS['uc'] && $GLOBALS['uc']=='on'){
+			include dirname(__FILE__).'/../../config.inc.php';
+			if(UC_KEY=="" || UC_API=="")
+			{
+				return "注册失败，请检查uc配置文件.";
+			}
+			include dirname(__FILE__).'/../../include/db_mysql.class.php';
+			include dirname(__FILE__).'/../../uc_client/client.php';
+			include dirname(__FILE__).'/../../uc_client/data/cache/apps.php';
+			if($data = uc_get_user(getRole('user'))) {
+				list($userid, $username, $email) = $data;
+				foreach ($_CACHE['apps'] as $apps){
+					//从config.php中获取dz的应用名，再用应用名去apps.php中获取appid;
+					if($apps['name']==$GLOBALS['dz']){
+						$appid=$apps['appid'];
+					}
+				}
+				//从DZ获取用户积分，$GLOBALS['credit']为积分编号，一般为金钱，也可以是声望,或贡献,在config.php中设置编号
+				$credit=uc_user_getcredit($appid,$userid,$GLOBALS['credit']);
+				$price = $this->caculatePrice($info['price'],$month);
+				$month = $suser['month'];
+				$info = $this->getInfo($product_id);
+				if($credit<$price){
+					return false;
+				}
+				if(!$this->checkParam($username, $suser)){
+					return false;
+				}
+				if(!$info || $month<=0 || $info['pause_flag']!=0){
+					return false;
+				}
+				if($info['month_flag']!=0 && !$this->isYears($month)){
+					trigger_error('该产品不支持月付');
+					return false;
+				}
+			}
+		}
 		global $default_db;
 		if(!$this->checkParam($username, $suser)){
 			return false;
@@ -182,7 +219,7 @@ abstract class Product
 			trigger_error('月份错误');
 			return false;
 		}
-		$price = $this->caculatePrice($info['price'],$month);		
+		$price = $this->caculatePrice($info['price'],$month);
 		if($price<0){
 			trigger_error('价格错误');
 			return false;
@@ -227,7 +264,7 @@ abstract class Product
 	 */
 	abstract protected function create($username,&$suser=array(),$product_info=array());
 	/**
-	 * 
+	 *
 	 * 更新用户数据
 	 * @param $susername  用户名
 	 * @param $month      月份
@@ -235,7 +272,7 @@ abstract class Product
 	 */
 	abstract protected function addMonth($susername,$month);
 	/**
-	 * 
+	 *
 	 * 更改产品类型
 	 * @param $susername
 	 * @param $product_id

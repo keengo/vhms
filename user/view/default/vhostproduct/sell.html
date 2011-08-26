@@ -50,7 +50,7 @@ function check_register()
         <td class="td_bgc right_2">确认密码:</td>
         <td class="td_bgc right_2"><input name="passwd2" type="password" id="passwd2"></td>
 	  </tr>
-	  <tr>
+	  <tr  >
         <td class="td_bgc right_2">购买时间:</td>
         <td class="td_bgc right_2">
         {{if $product.month_flag}}
@@ -94,10 +94,12 @@ function check_register()
         <td class="td_bgc right_2">产品说明:</td>
         <td class="td_bgc right_2">{{$product.describe}}</td>
 	  </tr>
-	  <tr>
-        <td class="td_bgc right_2">价格:</td>
-        <td class="td_bgc right_2">{{$product.price/100}}元/年</td>
+	  
+       <tr>
+       <td class="td_bgc right_2">价格:</td>
+       	<td class="td_bgc right_2">{{$product.price/100}}/年</td>
         </tr>
+        
 	    <tr>
 	    <td class="td_bgc td_hg" colspan="2" align="center">
 		<input type="button" onClick="check_register()" value="确定"></td>
