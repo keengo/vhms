@@ -44,6 +44,14 @@ class InstallControl extends Control
 		$dbname = $_REQUEST['db_name'];
 		$user = $_REQUEST['db_user'];
 		$passwd = $_REQUEST['db_passwd'];
+		$ucswitch=$_REQUEST['uc_switch'];
+		$dzappname=$_REQUEST['dz_appname'];
+		
+		$dbconnect=mysql_connect($host,$user,$passwd);
+		if(!mysql_query("CREATE DATABASE ".$dbname)){
+			exit("未能创建数据库，请检查数据库信息是否正确，或者手动创建该数据库");
+		}
+		mysql_close($dbconnect);
 		
 		$GLOBALS['default_db'] = $this->check_connect($host,"3306",$dbname,$user,$passwd);
 		if(!$GLOBALS['default_db']){
@@ -51,9 +59,11 @@ class InstallControl extends Control
 			$this->_tpl->assign("request",$_REQUEST);
 			return $this->_tpl->fetch('install/step1.html');
 		}
-		$this->create_sql($GLOBALS['default_db']);	
-		$this->create_config($host, "3306", $dbname, $user, $passwd);
+		
+		$this->create_sql($GLOBALS['default_db']);
+		$this->create_config($host, "3306", $dbname, $user, $passwd,$ucswitch,$dzappname);
 		daocall('admin_user', 'newUser', array($_REQUEST['admin_user'],$_REQUEST['admin_passwd']));
+		
 		if(!apicall('install','writeVersion')){
 			die("未能写入版本信息");
 		}

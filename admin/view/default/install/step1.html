@@ -10,7 +10,7 @@ function pop_dzinput(status)
 	var str="";
 	if(status==1){
 		 str=' <td class="td_bgc right_2">dz应用名：</td>';
-		 str+='<td class="td_bgc right_2"><input name="uc" type="text" id="tb_wid3" value="Discuz! Board" /></td>';
+		 str+='<td class="td_bgc right_2"><input name="dz_appname" type="text" id="tb_wid3" value="Discuz! Board" /></td>';
 		 document.getElementById('input_dz').innerHTML=str;
 	}
 	if(status==0){
@@ -52,8 +52,8 @@ function pop_dzinput(status)
 	<tr>
 		<td class="td_bgc right_2">开启uc应用：</td>
 		<td class="td_bgc right_2">
-			<input type="radio" name="uc" value="on" onclick="pop_dzinput(1)" />是 
-			<input type="radio" name="uc" value="off"  onclick="pop_dzinput(0)" checked="checked" />否
+			<input type="radio" name="uc_switch" value="on" onclick="pop_dzinput(1)" />是 
+			<input type="radio" name="uc_switch" value="off"  onclick="pop_dzinput(0)" checked="checked" />否
 	</tr>
 	<tr id="input_dz"></tr>
 
