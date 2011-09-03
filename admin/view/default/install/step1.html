@@ -18,10 +18,9 @@ function pop_dzinput(status)
 	}
 }
 </script>
-<!--  <script language='javascript' src="{{$STATIC}}/scripts/install.js"></script>-->
 
 <div id="header"></div>
-<div align="center">{{if $msg}}
+<div align="center">{{if $msg}}</div>
 <div class="block tb_wid mar_top" align="center"><font color=red>{{$msg}}</font></div>
 {{/if}}
 <div class="tb_wid head_block" align="center">&nbsp;欢迎安装kangle虚拟主机管理系统!</div>
@@ -51,11 +50,13 @@ function pop_dzinput(status)
 
 	<tr>
 		<td class="td_bgc right_2">开启uc应用：</td>
-		<td class="td_bgc right_2">
-			<input type="radio" name="uc_switch" value="on" onclick="pop_dzinput(1)" />是 
-			<input type="radio" name="uc_switch" value="off"  onclick="pop_dzinput(0)" checked="checked" />否
+		<td class="td_bgc right_2"><input type="radio" name="uc_switch"	value="on"  />是 <input type="radio"
+			name="uc_switch" value="off"  checked="checked" />否
 	</tr>
-	<tr id="input_dz"></tr>
+	<tr id="input_dz">
+		<td class="td_bgc right_2">dz应用名：</td>
+		<td class="td_bgc right_2"><input name="dz_appname" type="text" id="tb_wid3" value="Discuz! Board" /></td>
+	</tr>
 
 	<tr>
 		<td class="td_bgc right_2">域名</td>
