@@ -11,9 +11,12 @@ class FrameControl extends Control
 	{
 		parent::__destruct();
 	}
-	public function index()
+	public function login()
 	{
-		return $this->_tpl->fetch('frame/index.html');
+		return $this->display('user/index.html');
+	}
+	public function index(){
+		return $this->display('frame/index.html');
 	}
 	public function top()
 	{

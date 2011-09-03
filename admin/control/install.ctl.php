@@ -64,7 +64,7 @@ class InstallControl extends Control
 		load_lib('pub:db');
 		return db_connectx('mysql',$host, $port, $dbname, $user, $passwd);
 	}
-	private function create_config($host,$port,$dbname,$user,$passwd)
+	private function create_config($host,$port,$dbname,$user,$passwd,$ucswitch,$dzappname)
 	{
 		$str = "<?php\r\n\$db_cfg['default']=array(\r\n'";
 		$str.="driver'=>'mysql',\r\n";
@@ -75,6 +75,8 @@ class InstallControl extends Control
 		$str.="'dbname'=>'".$dbname."');\r\n";
 		$str.="\$GLOBALS['skey'] = '".getRandPasswd(16)."';\r\n";
 		$str.="\$GLOBALS['node_db']='sqlite';\r\n";
+		$str.="\$GLOBALS['uc']= '".$ucswitch."';\r\n";
+		$str.="\$GLOBALS['dz_app_name']= '".$dzappname."';\r\n";
 		$str.="?>";
 		$config_file = dirname(dirname(dirname(__FILE__)))."/config.php";
 		$fp = @fopen($config_file,"wt");

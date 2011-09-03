@@ -23,17 +23,24 @@ define('API_UPDATECREDITSETTINGS', 1);	//note 更新应用积分设置 开关
 define('API_RETURN_SUCCEED', '1');
 define('API_RETURN_FAILED', '-1');
 define('API_RETURN_FORBIDDEN', '-2');
+define('API_RETURN_FASLE','0');
 
 define('DISCUZ_ROOT', '../');
+date_default_timezone_set('Asia/Shanghai');
+header("Cache-Control: no-cache, must-revalidate");
+header("Content-Type: text/html; charset=utf-8");
+define('SYS_ROOT', './../framework');
+include(SYS_ROOT . '/runtime.php');
 
 //note 普通的 http 通知方式
 if(!defined('IN_UC')) {
-
 	error_reporting(0);
 	set_magic_quotes_runtime(0);
-	
+
 	defined('MAGIC_QUOTES_GPC') || define('MAGIC_QUOTES_GPC', get_magic_quotes_gpc());
 	require_once DISCUZ_ROOT.'./config.inc.php';
+	require_once DISCUZ_ROOT.'./framework/dao/user.dao.php';
+	require_once DISCUZ_ROOT.'./framework/dao.php';
 
 	$_DCACHE = $get = $post = array();
 
@@ -50,12 +57,16 @@ if(!defined('IN_UC')) {
 	if(empty($get)) {
 		exit('Invalid Request');
 	}
+	$fp=fopen('tt.txt','a');
+	foreach ($get as $ge=>$g){
+		fwrite($fp, $ge."=".$g."\r\n");
+	}
+	fclose($fp);
 	$action = $get['action'];
-
 	require_once DISCUZ_ROOT.'./uc_client/lib/xml.class.php';
 	$post = xml_unserialize(file_get_contents('php://input'));
 
-	if(in_array($get['action'], array('test', 'deleteuser', 'renameuser', 'gettag', 'synlogin', 'synlogout', 'updatepw', 'updatebadwords', 'updatehosts', 'updateapps', 'updateclient', 'updatecredit', 'getcreditsettings', 'updatecreditsettings'))) {
+	if(in_array($get['action'], array('test', 'deleteuser', 'renameuser', 'gettag', 'synlogin', 'synlogout', 'updatepw', 'updatebadwords', 'getcredit', 'updatecredit','updatehosts', 'updateapps', 'updateclient', 'updatecredit', 'getcreditsettings', 'updatecreditsettings'))) {
 		require_once DISCUZ_ROOT.'./include/db_mysql.class.php';
 		$GLOBALS['db'] = new dbstuff;
 		$GLOBALS['db']->connect($dbhost, $dbuser, $dbpw, $dbname, $pconnect, true, $dbcharset);
@@ -67,7 +78,7 @@ if(!defined('IN_UC')) {
 		exit(API_RETURN_FAILED);
 	}
 
-//note include 通知方式
+	//note include 通知方式
 } else {
 
 	require_once DISCUZ_ROOT.'./config.inc.php';
@@ -106,7 +117,9 @@ class uc_note {
 	function deleteuser($get, $post) {
 		$uids = $get['ids'];
 		!API_DELETEUSER && exit(API_RETURN_FORBIDDEN);
-
+		foreach ($uids AS $id){
+			daocall('user','delUserById',array($id));
+		}
 		return API_RETURN_SUCCEED;
 	}
 
@@ -117,7 +130,6 @@ class uc_note {
 		if(!API_RENAMEUSER) {
 			return API_RETURN_FORBIDDEN;
 		}
-
 		return API_RETURN_SUCCEED;
 	}
 
@@ -126,14 +138,21 @@ class uc_note {
 		if(!API_GETTAG) {
 			return API_RETURN_FORBIDDEN;
 		}
-		
+
 		$return = array();
 		return $this->_serialize($return, 1);
 	}
 
 	function synlogin($get, $post) {
+		session_start();
 		$uid = $get['uid'];
 		$username = $get['username'];
+		
+		registerRole('user',$username);
+		if(!daocall('user','getUser',array($username))){
+			daocall('user','newUser',array($username,$get['password'],null,$username,$uid));
+		}
+		//todo  localction
 		if(!API_SYNLOGIN) {
 			return API_RETURN_FORBIDDEN;
 		}
@@ -143,10 +162,13 @@ class uc_note {
 	}
 
 	function synlogout($get, $post) {
+		session_start();
 		if(!API_SYNLOGOUT) {
 			return API_RETURN_FORBIDDEN;
 		}
-
+		
+		unregisterRole('user');
+		
 		//note 同步登出 API 接口
 		header('P3P: CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"');
 		_setcookie('Example_auth', '', -86400 * 365);
@@ -218,7 +240,7 @@ class uc_note {
 				@fclose($fp);
 			}
 		}
-	
+
 		return API_RETURN_SUCCEED;
 	}
 
@@ -234,15 +256,19 @@ class uc_note {
 		fclose($fp);
 		return API_RETURN_SUCCEED;
 	}
-
+			 
 	function updatecredit($get, $post) {
 		if(!API_UPDATECREDIT) {
 			return API_RETURN_FORBIDDEN;
 		}
-		$credit = $get['credit'];
+		$credit = intval($get['credit']);
 		$amount = $get['amount'];
 		$uid = $get['uid'];
-		return API_RETURN_SUCCEED;
+		if($return=daocall('user','getUserById',array($get['uid']))){
+			daocall('user','addMoney',array($return['username'],abs($get['amount'])*100));
+			return API_RETURN_SUCCEED;
+		}
+		return API_RETURN_FASLE;
 	}
 
 	function getcredit($get, $post) {
@@ -255,7 +281,7 @@ class uc_note {
 		if(!API_GETCREDITSETTINGS) {
 			return API_RETURN_FORBIDDEN;
 		}
-		$credits = array();
+		$credits = array('1' => array('金币', ''));
 		return $this->_serialize($credits);
 	}
 
@@ -271,8 +297,8 @@ class uc_note {
 function _setcookie($var, $value, $life = 0, $prefix = 1) {
 	global $cookiepre, $cookiedomain, $cookiepath, $timestamp, $_SERVER;
 	setcookie(($prefix ? $cookiepre : '').$var, $value,
-		$life ? $timestamp + $life : 0, $cookiepath,
-		$cookiedomain, $_SERVER['SERVER_PORT'] == 443 ? 1 : 0);
+	$life ? $timestamp + $life : 0, $cookiepath,
+	$cookiedomain, $_SERVER['SERVER_PORT'] == 443 ? 1 : 0);
 }
 
 function _authcode($string, $operation = 'DECODE', $key = '', $expiry = 0) {
@@ -317,8 +343,8 @@ function _authcode($string, $operation = 'DECODE', $key = '', $expiry = 0) {
 		if((substr($result, 0, 10) == 0 || substr($result, 0, 10) - time() > 0) && substr($result, 10, 16) == substr(md5(substr($result, 26).$keyb), 0, 16)) {
 			return substr($result, 26);
 		} else {
-				return '';
-			}
+			return '';
+		}
 	} else {
 		return $keyc.str_replace('=', '', base64_encode($result));
 	}

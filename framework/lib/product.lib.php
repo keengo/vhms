@@ -160,43 +160,6 @@ abstract class Product
 	 */
 	public function sell($username,$product_id,$suser)
 	{
-		if($GLOBALS['uc'] && $GLOBALS['uc']=='on'){
-			include dirname(__FILE__).'/../../config.inc.php';
-			if(UC_KEY=="" || UC_API=="")
-			{
-				return "注册失败，请检查uc配置文件.";
-			}
-			include dirname(__FILE__).'/../../include/db_mysql.class.php';
-			include dirname(__FILE__).'/../../uc_client/client.php';
-			include dirname(__FILE__).'/../../uc_client/data/cache/apps.php';
-			if($data = uc_get_user(getRole('user'))) {
-				list($userid, $username, $email) = $data;
-				foreach ($_CACHE['apps'] as $apps){
-					//从config.php中获取dz的应用名，再用应用名去apps.php中获取appid;
-					if($apps['name']==$GLOBALS['dz']){
-						$appid=$apps['appid'];
-					}
-				}
-				//从DZ获取用户积分，$GLOBALS['credit']为积分编号，一般为金钱，也可以是声望,或贡献,在config.php中设置编号
-				$credit=uc_user_getcredit($appid,$userid,$GLOBALS['credit']);
-				$price = $this->caculatePrice($info['price'],$month);
-				$month = $suser['month'];
-				$info = $this->getInfo($product_id);
-				if($credit<$price){
-					return false;
-				}
-				if(!$this->checkParam($username, $suser)){
-					return false;
-				}
-				if(!$info || $month<=0 || $info['pause_flag']!=0){
-					return false;
-				}
-				if($info['month_flag']!=0 && !$this->isYears($month)){
-					trigger_error('该产品不支持月付');
-					return false;
-				}
-			}
-		}
 		global $default_db;
 		if(!$this->checkParam($username, $suser)){
 			return false;

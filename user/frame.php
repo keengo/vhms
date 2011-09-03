@@ -12,7 +12,7 @@ $a=$_REQUEST['a'];
 $e=$_REQUEST['e'];
 if($c==""){
 	$_REQUEST['c']=$c='frame';
-	$_REQUEST['a']=$a='index';
+	$_REQUEST['a']=$a='login';
 }
 $tpl = TPL::singleton();
 $tpl->assign('frame',1);

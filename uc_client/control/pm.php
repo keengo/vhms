@@ -1,19 +1,20 @@
 <?php
 
 /*
-	[UCenter] (C)2001-2009 Comsenz Inc.
+	[UCenter] (C)2001-2099 Comsenz Inc.
 	This is NOT a freeware, use is subject to license terms
 
-	$Id: pm.php 1008 2010-07-01 03:24:57Z zhaoxiongfei $
+	$Id: pm.php 1067 2011-03-08 10:06:51Z svn_project_zhangjie $
 */
 
 !defined('IN_UC') && exit('Access Denied');
 
-define('PMLIMIT1DAY_ERROR', -1);
+define('PRIVATEPMTHREADLIMIT_ERROR', -1);
 define('PMFLOODCTRL_ERROR', -2);
 define('PMMSGTONOTFRIEND', -3);
 define('PMSENDREGDAYS', -4);
-define('PMUSERLIMIT1DAY_ERROR', -5);
+define('CHATPMTHREADLIMIT_ERROR', -5);
+define('CHATPMMEMBERLIMIT_ERROR', -7);
 
 class pmcontrol extends base {
 
@@ -29,15 +30,33 @@ class pmcontrol extends base {
 
 	function oncheck_newpm() {
 		$this->init_input();
-		$this->user['uid'] = intval($this->input('uid'));
-		$more = $this->input('more');
-		$result = $_ENV['pm']->check_newpm($this->user['uid'], $more);
-		if($more == 3) {
-			require_once UC_ROOT.'lib/uccode.class.php';
-			$this->uccode = new uccode();
-			$result['lastmsg'] = $this->uccode->complie($result['lastmsg']);
+		$uid = intval($this->input('uid'));
+		$more = intval($this->input('more'));
+		if(!$_ENV['pm']->isnewpm($uid) && !$more) {
+			return 0;
 		}
-		return $result;
+		$newprvpm = $_ENV['pm']->getpmnum($uid, 1, 1);
+		$newchatpm = $_ENV['pm']->getpmnum($uid, 2, 1);
+		$newpm = $newprvpm + $newchatpm;
+		if($more == 0) {
+			return $newpm;
+		} elseif($more == 1) {
+			return array('newpm' => $newpm, 'newprivatepm' => $newprvpm);
+		} elseif($more == 2 || $more == 3) {
+			if($more == 2) {
+				return array('newpm' => $newpm, 'newprivatepm' => $newprvpm, 'newchatpm' => $newchatpm);
+			} else {
+				$lastpm = $_ENV['pm']->lastpm($uid);
+				require_once UC_ROOT.'lib/uccode.class.php';
+				$this->uccode = new uccode();
+				$lastpm['lastsummary'] = $this->uccode->complie($lastpm['lastsummary']);
+				return array('newpm' => $newpm, 'newprivatepm' => $newprvpm, 'newchatpm' => $newchatpm, 'lastdate' => $lastpm['lastdateline'], 'lastmsgfromid' => $lastpm['lastauthorid'], 'lastmsgfrom' => $lastpm['lastauthorusername'], 'lastmsg' => $lastpm['lastsummary']);
+			}
+		} elseif($more == 4) {
+			return array('newpm' => $newpm, 'newprivatepm' => $newprvpm, 'newchatpm' => $newchatpm);
+		} else {
+			return 0;
+		}
 	}
 
 	function onsendpm() {
@@ -48,78 +67,67 @@ class pmcontrol extends base {
 		$message = $this->input('message');
 		$replypmid = $this->input('replypmid');
 		$isusername = $this->input('isusername');
-		if($fromuid) {
-			$user = $_ENV['user']->get_user_by_uid($fromuid);
-			$user = daddslashes($user, 1);
-			if(!$user) {
-				return 0;
-			}
-			$this->user['uid'] = $user['uid'];
-			$this->user['username'] = $user['username'];
-		} else {
-			$this->user['uid'] = 0;
-			$this->user['username'] = '';
+		$type = $this->input('type');
+
+		if(!$fromuid) {
+			return 0;
 		}
+
+		$user = $_ENV['user']->get_user_by_uid($fromuid);
+		$user = daddslashes($user, 1);
+		if(!$user) {
+			return 0;
+		}
+		$this->user['uid'] = $user['uid'];
+		$this->user['username'] = $user['username'];
+
 		if($replypmid) {
-			$isusername = 1;
-			$pms = $_ENV['pm']->get_pm_by_pmid($this->user['uid'], $replypmid);
-			if($pms[0]['msgfromid'] == $this->user['uid']) {
-				$user = $_ENV['user']->get_user_by_uid($pms[0]['msgtoid']);
-				$msgto = $user['username'];
-			} else {
-				$msgto = $pms[0]['msgfrom'];
+			$isusername = 0;
+			$plid = $_ENV['pm']->getplidbypmid($replypmid);
+			$msgto = $_ENV['pm']->getuidbyplid($plid);
+			unset($msgto[$this->user['uid']]);
+		} else {
+			if(!empty($msgto)) {
+				$msgto = array_unique(explode(',', $msgto));
 			}
 		}
 
-		$msgto = array_unique(explode(',', $msgto));
-		$isusername && $msgto = $_ENV['user']->name2id($msgto);
-		$blackls = $_ENV['pm']->get_blackls($this->user['uid'], $msgto);
+		if($isusername) {
+			$msgto = $_ENV['user']->name2id($msgto);
+		}
+		$countmsgto = count($msgto);
 
-		if($fromuid) {
-			if($this->settings['pmsendregdays']) {
-				if($user['regdate'] > $this->time - $this->settings['pmsendregdays'] * 86400) {
-					return PMSENDREGDAYS;
-				}
-			}
-			$this->load('friend');
-			if(count($msgto) > 1 && !($is_friend = $_ENV['friend']->is_friend($fromuid, $msgto, 3))) {
-				return PMMSGTONOTFRIEND;
-			}
-			$pmlimit1day = $this->settings['pmlimit1day'] && $_ENV['pm']->count_pm_by_fromuid($this->user['uid'], 86400) > $this->settings['pmlimit1day'];
-			if($pmlimit1day || ($this->settings['pmfloodctrl'] && $_ENV['pm']->count_pm_by_fromuid($this->user['uid'], $this->settings['pmfloodctrl']))) {
-				if(!$_ENV['friend']->is_friend($fromuid, $msgto, 3)) {
-					if(!$_ENV['pm']->is_reply_pm($fromuid, $msgto)) {
-						if($pmlimit1day) {
-							return PMLIMIT1DAY_ERROR;
-						} else {
-							return PMFLOODCTRL_ERROR;
-						}
-					}
-				}
-			}
-			if(($pmuserlimit1day = $this->settings['pmuserlimit1day']) > 0) {
-				$num = count($msgto);
-				if($num == 1) {
-					if(!$_ENV['pm']->check_pm_user_period($this->user['uid'], $msgto[0], 86400)) {
-						if(($_ENV['pm']->countuser_by_fromuid($this->user['uid'], 86400) + 1) > $pmuserlimit1day) {
-							return PMUSERLIMIT1DAY_ERROR;
-						}
-					}
-				} else {
-					if(($_ENV['pm']->countuser_by_fromuid($this->user['uid'], 86400) + $num) > $pmuserlimit1day) {
-						return PMUSERLIMIT1DAY_ERROR;
-					}
-				}
+		if($this->settings['pmsendregdays']) {
+			if($user['regdate'] > $this->time - $this->settings['pmsendregdays'] * 86400) {
+				return PMSENDREGDAYS;
 			}
 		}
+		if($this->settings['chatpmmemberlimit']) {
+			if($type == 1 && ($countmsgto > ($this->settings['chatpmmemberlimit'] - 1))) {
+				return CHATPMMEMBERLIMIT_ERROR;
+			}
+		}
+		if($this->settings['pmfloodctrl']) {
+			if(!$_ENV['pm']->ispminterval($this->user['uid'], $this->settings['pmfloodctrl'])) {
+				return PMFLOODCTRL_ERROR;
+			}
+		}
+		if($this->settings['privatepmthreadlimit']) {
+			if(!$_ENV['pm']->isprivatepmthreadlimit($this->user['uid'], $this->settings['privatepmthreadlimit'])) {
+				return PRIVATEPMTHREADLIMIT_ERROR;
+			}
+		}
+		if($this->settings['chatpmthreadlimit']) {
+			if(!$_ENV['pm']->ischatpmthreadlimit($this->user['uid'], $this->settings['chatpmthreadlimit'])) {
+				return CHATPMTHREADLIMIT_ERROR;
+			}
+		}
+
 		$lastpmid = 0;
-		foreach($msgto as $uid) {
-			if(!$fromuid || !in_array('{ALL}', $blackls[$uid])) {
-				$blackls[$uid] = $_ENV['user']->name2id($blackls[$uid]);
-				if(!$fromuid || isset($blackls[$uid]) && !in_array($this->user['uid'], $blackls[$uid])) {
-					$lastpmid = $_ENV['pm']->sendpm($subject, $message, $this->user, $uid, $replypmid);
-				}
-			}
+		if($replypmid) {
+			$lastpmid = $_ENV['pm']->replypm($plid, $this->user['uid'], $this->user['username'], $message);
+		} else {
+			$lastpmid = $_ENV['pm']->sendpm($this->user['uid'], $this->user['username'], $msgto, $subject, $message, $type);
 		}
 		return $lastpmid;
 	}
@@ -127,21 +135,46 @@ class pmcontrol extends base {
 	function ondelete() {
 		$this->init_input();
 		$this->user['uid'] = intval($this->input('uid'));
-		$id = $_ENV['pm']->deletepm($this->user['uid'], $this->input('pmids'));
+		$pmids = $this->input('pmids');
+		if(empty($pmids)) {
+			return 0;
+		}
+		if(is_array($pmids)) {
+			$this->apps = $this->cache('apps');
+			if($this->apps[$this->app['appid']]['type'] == 'UCHOME') {
+				$id = $_ENV['pm']->deletepmbyplids($this->user['uid'], $this->input('pmids'));
+			} else {
+				$id = $_ENV['pm']->deletepmbypmids($this->user['uid'], $this->input('pmids'));
+			}
+		} else {
+			$id = $_ENV['pm']->deletepmbypmid($this->user['uid'], $this->input('pmids'));
+		}
 		return $id;
+	}
+
+	function ondeletechat() {
+		$this->init_input();
+		$this->user['uid'] = intval($this->input('uid'));
+		$plids = $this->input('plids');
+		$type = intval($this->input('type'));
+		if($type == 1) {
+			return $_ENV['pm']->deletepmbyplids($this->user['uid'], $plids);
+		} else {
+			return $_ENV['pm']->quitchatpm($this->user['uid'], $plids);
+		}
 	}
 
 	function ondeleteuser() {
 		$this->init_input();
 		$this->user['uid'] = intval($this->input('uid'));
-		$id = $_ENV['pm']->deleteuidpm($this->user['uid'], $this->input('touids'));
+		$id = $_ENV['pm']->deletepmbyplids($this->user['uid'], $this->input('touids'), 1);
 		return $id;
 	}
-	
+
 	function onreadstatus() {
 		$this->init_input();
 		$this->user['uid'] = intval($this->input('uid'));
-		$_ENV['pm']->set_pm_status($this->user['uid'], $this->input('uids'), $this->input('pmids'), $this->input('status'));
+		$_ENV['pm']->setpmstatus($this->user['uid'], $this->input('uids'), $this->input('plids'), $this->input('status'));
 	}
 
 	function onignore() {
@@ -150,93 +183,164 @@ class pmcontrol extends base {
 		return $_ENV['pm']->set_ignore($this->user['uid']);
 	}
 
- 	function onls() {
+	function onls() {
  		$this->init_input();
  		$pagesize = $this->input('pagesize');
- 		$folder = $this->input('folder');
  		$filter = $this->input('filter');
  		$page = $this->input('page');
- 		$folder = in_array($folder, array('newbox', 'inbox', 'outbox', 'searchbox')) ? $folder : 'inbox';
- 		if($folder != 'searchbox') {
- 			$filter = $filter ? (in_array($filter, array('newpm', 'privatepm', 'systempm', 'announcepm')) ? $filter : '') : '';
- 		}
- 		$msglen = $this->input('msglen');
+		$msglen = $this->input('msglen');
  		$this->user['uid'] = intval($this->input('uid'));
-		if($folder != 'searchbox') {
- 			$pmnum = $_ENV['pm']->get_num($this->user['uid'], $folder, $filter);
- 			$start = $this->page_get_start($page, $pagesize, $pmnum);
- 		} else {
- 			$pmnum = $pagesize;
- 			$start = ($page - 1) * $pagesize;
- 		}
+
+		$filter = $filter ? (in_array($filter, array('newpm', 'privatepm')) ? $filter : '') : '';
+		if($filter == 'newpm') {
+			$type = 0;
+			$new = 1;
+/*
+		} elseif($filter == 'privatepm') {
+			$type = 1;
+			$new = 0;
+		} elseif($filter == 'chatpm') {
+			$type = 2;
+			$new = 0;
+*/
+		} elseif($filter == 'privatepm') {
+			$type = 0;
+			$new = 0;
+		} else {
+			return array();
+		}
+		$pmnum = $_ENV['pm']->getpmnum($this->user['uid'], $type, $new);
+		$start = $this->page_get_start($page, $pagesize, $pmnum);
+
  		if($pagesize > 0) {
-	 		$pms = $_ENV['pm']->get_pm_list($this->user['uid'], $pmnum, $folder, $filter, $start, $pagesize);
+	 		$pms = $_ENV['pm']->getpmlist($this->user['uid'], $filter, $start, $pagesize);
 	 		if(is_array($pms) && !empty($pms)) {
 				foreach($pms as $key => $pm) {
 					if($msglen) {
-						$pms[$key]['message'] = htmlspecialchars($_ENV['pm']->removecode($pms[$key]['message'], $msglen));
+						$pms[$key]['lastsummary'] = $_ENV['pm']->removecode($pms[$key]['lastsummary'], $msglen);
 					} else {
-						unset($pms[$key]['message']);
+						unset($pms[$key]['lastsummary']);
 					}
-					unset($pms[$key]['folder']);
 				}
 			}
 			$result['data'] = $pms;
 		}
 		$result['count'] = $pmnum;
  		return $result;
- 	}
-
- 	function onviewnode() {
-  		$this->init_input();
-  		$this->user['uid'] = intval($this->input('uid'));
- 		$pmid = $_ENV['pm']->pmintval($this->input('pmid'));
- 		$type = $this->input('type');
- 		$pm = $_ENV['pm']->get_pmnode_by_pmid($this->user['uid'], $pmid, $type);
- 		if($pm) {
-			require_once UC_ROOT.'lib/uccode.class.php';
-			$this->uccode = new uccode();
-			$pm['message'] = $this->uccode->complie($pm['message']);
-			return $pm;
-		}
- 	}
+	}
 
  	function onview() {
  		$this->init_input();
  		$this->user['uid'] = intval($this->input('uid'));
+		$pmid = $this->input('pmid');
 		$touid = $this->input('touid');
-		$pmid = $_ENV['pm']->pmintval($this->input('pmid'));
 		$daterange = $this->input('daterange');
- 		if(empty($pmid)) {
-	 		$daterange = empty($daterange) ? 1 : $daterange;
-	 		$today = $this->time - ($this->time + $this->settings['timeoffset']) % 86400;
-	 		if($daterange == 1) {
-	 			$starttime = $today;
-	 		} elseif($daterange == 2) {
-	 			$starttime = $today - 86400;
-	 		} elseif($daterange == 3) {
-	 			$starttime = $today - 172800;
-	 		} elseif($daterange == 4) {
-	 			$starttime = $today - 604800;
-	 		} elseif($daterange == 5) {
-	 			$starttime = 0;
-	 		}
-	 		$endtime = $this->time;
-	 		$pms = $_ENV['pm']->get_pm_by_touid($this->user['uid'], $touid, $starttime, $endtime);
-	 	} else {
-	 		$pms = $_ENV['pm']->get_pm_by_pmid($this->user['uid'], $pmid);
-	 	}
+		$page = $this->input('page');
+		$pagesize = $this->input('pagesize');
+		$isplid = $this->input('isplid');
+		$type = $this->input('type');
+
+		$daterange = empty($daterange) ? 1 : $daterange;
+		$today = $this->time - ($this->time + $this->settings['timeoffset']) % 86400;
+		if($daterange == 1) {
+			$starttime = $today;
+		} elseif($daterange == 2) {
+			$starttime = $today - 86400;
+		} elseif($daterange == 3) {
+			$starttime = $today - 172800;
+		} elseif($daterange == 4) {
+			$starttime = $today - 604800;
+		} elseif($daterange == 5) {
+			$starttime = 0;
+		}
+		$endtime = $this->time;
+
+		if(!$isplid) {
+			$plid = $_ENV['pm']->getplidbytouid($this->user['uid'], $touid);
+		} else {
+			$plid = $touid;
+		}
+		if($page) {
+			$pmnum = $_ENV['pm']->getpmnumbyplid($this->user['uid'], $plid);
+			$start = $this->page_get_start($page, $pagesize, $pmnum);
+			$ppp = $pagesize;
+		} else {
+			$pmnum = 0;
+			$start = 0;
+			$ppp = 0;
+		}
+
+		if($pmid) {
+			$pms = $_ENV['pm']->getpmbypmid($this->user['uid'], $pmid);
+		} else {
+			$pms = $_ENV['pm']->getpmbyplid($this->user['uid'], $plid, $starttime, $endtime, $start, $ppp, $type);
+		}
 
  	 	require_once UC_ROOT.'lib/uccode.class.php';
 		$this->uccode = new uccode();
-		$status = FALSE;
-		foreach($pms as $key => $pm) {
-			$pms[$key]['message'] = $this->uccode->complie($pms[$key]['message']);
-			!$status && $status = $pm['msgtoid'] && $pm['new'];
+		if($pms) {
+			foreach($pms as $key => $pm) {
+				$pms[$key]['message'] = $this->uccode->complie($pms[$key]['message']);
+			}
 		}
-		$status && $_ENV['pm']->set_pm_status($this->user['uid'], $touid, $pmid);
 		return $pms;
  	}
+
+	function onviewnum() {
+		$this->init_input();
+ 		$this->user['uid'] = intval($this->input('uid'));
+		$touid = $this->input('touid');
+		$isplid = $this->input('isplid');
+		if(!$isplid) {
+			$plid = $_ENV['pm']->getplidbytouid($this->user['uid'], $touid);
+		} else {
+			$plid = $touid;
+		}
+		$pmnum = $_ENV['pm']->getpmnumbyplid($this->user['uid'], $plid);
+		return $pmnum;
+	}
+
+	function onviewnode() {
+ 		$this->init_input();
+ 		$this->user['uid'] = intval($this->input('uid'));
+		$type = $this->input('type');
+		$pmid = $this->input('pmid');
+		$type = 0;
+		$pms = $_ENV['pm']->getpmbypmid($this->user['uid'], $pmid);
+
+ 	 	require_once UC_ROOT.'lib/uccode.class.php';
+		$this->uccode = new uccode();
+		if($pms) {
+			foreach($pms as $key => $pm) {
+				$pms[$key]['message'] = $this->uccode->complie($pms[$key]['message']);
+			}
+		}
+		$pms = $pms[0];
+		return $pms;
+	}
+
+	function onchatpmmemberlist() {
+		$this->init_input();
+		$this->user['uid'] = intval($this->input('uid'));
+		$plid = intval($this->input('plid'));
+		return $_ENV['pm']->chatpmmemberlist($this->user['uid'], $plid);
+	}
+
+	function onkickchatpm() {
+		$this->init_input();
+		$this->user['uid'] = intval($this->input('uid'));
+		$plid = intval($this->input('plid'));
+		$touid = intval($this->input('touid'));
+		return $_ENV['pm']->kickchatpm($plid, $this->user['uid'], $touid);
+	}
+
+	function onappendchatpm() {
+		$this->init_input();
+		$this->user['uid'] = intval($this->input('uid'));
+		$plid = intval($this->input('plid'));
+		$touid = intval($this->input('touid'));
+		return $_ENV['pm']->appendchatpm($plid, $this->user['uid'], $touid);
+	}
 
   	function onblackls_get() {
   		$this->init_input();
@@ -264,7 +368,6 @@ class pmcontrol extends base {
  		$username = $this->input('username');
  		return $_ENV['pm']->update_blackls($this->user['uid'], $username, 2);
  	}
-
 }
 
 ?>

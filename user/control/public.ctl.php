@@ -27,40 +27,68 @@ class PublicControl extends  Control
 		);
 		$this->_tpl->assign("menus",$menus);
 		return $this->_tpl->fetch("public/head.html");
-	}	
+	}
 	public function readNews()
 	{
 		$new=daocall('news','getNews',array($_REQUEST['id']));
 		$this->assign('new',$new);
-		return $this->fetch('public/news.html');	
+		return $this->fetch('public/news.html');
 	}
 	public function register()
 	{
 		if($GLOBALS['uc'] && $GLOBALS['uc']=='on'){
-			include dirname(__FILE__).'/../../config.inc.php';
+			include_once dirname(__FILE__).'/../../config.inc.php';
 			if(UC_KEY=="" || UC_API=="")
 			{
-				return "注册失败，请检查uc配置文件.";
+				return "注册失败，请检查ucenter配置文件.";
 			}
-			include dirname(__FILE__).'/../../include/db_mysql.class.php';
-			include dirname(__FILE__).'/../../uc_client/client.php';
-			$uid = uc_user_register($_REQUEST['username'], $_REQUEST['passwd'], $_REQUEST['email']);
+			
+			include_once dirname(__FILE__).'/../../uc_client/client.php';
+			$request=$_POST;
+			$username=$request['username'];
+			$passwd=$request['passwd'];
+			$email=$request['email'];
+			$uid = uc_user_register($username, $passwd, $email);
 			if($uid <= 0) {
-				return '注册失败';
-			} else {
-				setcookie('Example_auth', uc_authcode($uid."\t".$_REQUEST['username'], 'ENCODE'));
-				if ($external == '1') {
-					$url = "?fc=user&fa=index";
-				} else {
-					$url = "?c=user&a=index";
+				if($uid==-6){
+					exit('注册失败,email已注册');
 				}
-				header("Location: ".$url);
-				die();
+				elseif($uid==-5){
+					exit('注册失败,Email 不允许注册');
+				}
+				elseif($uid==-4){
+					exit('注册失败,Email 格式有误');
+				}
+				elseif($uid==-3){
+					exit('注册失败,用户名已经存在');
+				}
+				elseif($uid==-2){
+					exit('注册失败,包含不允许注册的词语');
+				}
+				elseif($uid==-1){
+					exit('注册失败,用户名不合法');
+				}
+				exit('注册失败');
+			} else {
+				include_once  dirname(__FILE__).'/../../include/db_mysql.class.php';
+				$db=new dbstuff();
+				$conn=$db->connect($dbhost, $dbuser, $dbpw);
+				$password=md5(md5($passwd));
+				$sql="INSERT INTO ".UC_DBNAME.".common_member (`uid`,`email`,`username`,`password`)";
+				$sql.=" VALUES ('$uid','$email','$username','$password')";
+				@$db->query($sql);
+				registerRole('user',$_REQUEST['username']);
+				$ucsynlogin = uc_user_synlogin($uid);
+				echo $ucsynlogin;//echo 必需，用于ucenter的js返回数据
+				//setcookie('Example_auth', uc_authcode($uid."\t".$_REQUEST['username'], 'ENCODE'));
+				$userinfo=daocall('user','getUser',array($username));
+				$this->assign('user',$userinfo);
+				return $this->display('frame/index.html');
 			}
 		}
 		$username = $_REQUEST['username'];
 		if(!$this->checkRight($username)){
-			return "用户名不符合标准";
+			exit("用户名不符合标准");
 		}
 		$result = daocall('user','newUser',array($_REQUEST['username'],$_REQUEST['passwd'],$_REQUEST['email'],$_REQUEST['name'],$_REQUEST['id']));
 		if($result){
@@ -121,7 +149,7 @@ class PublicControl extends  Control
 	}
 	private function checkRight($username)
 	{
-		return preg_match('/^[a-z0-9][a-z0-9_]{2,11}$/', $username);	
+		return preg_match('/^[a-z0-9][a-z0-9_]{2,11}$/', $username);
 	}
 }
 ?>

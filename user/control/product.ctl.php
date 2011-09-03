@@ -71,31 +71,6 @@ class ProductControl extends Control {
 			$this->_tpl->assign('msg','注册失败：root为保留账号');
 			return $this->_tpl->display('public/msg.html');
 		}
-		if($GLOBALS['uc'] && $GLOBALS['uc']=='on'){
-			include dirname(__FILE__).'/../../config.inc.php';
-			if(UC_KEY=="" || UC_API=="")
-			{
-				return "注册失败，请检查uc配置文件.";
-			}
-			include dirname(__FILE__).'/../../include/db_mysql.class.php';
-			include dirname(__FILE__).'/../../uc_client/client.php';
-			include dirname(__FILE__).'/../../uc_client/data/cache/apps.php';
-			if($data = uc_get_user(getRole('user'))) {
-				list($userid, $username, $email) = $data;
-				foreach ($_CACHE['apps'] as $apps){
-					//从config.php中获取dz的应用名，再用应用名去apps.php中获取appid;
-					if($apps['name']==$GLOBALS['dz']){
-						$appid=$apps['appid'];
-					}
-				}
-				//从DZ获取用户积分，$GLOBALS['credit']为积分编号，一般为金钱，也可以是声望,或贡献,在config.php中设置编号
-				$credit=uc_user_getcredit($appid,$userid,$GLOBALS['credit']);
-				//todo
-
-			} else {
-				echo '用户不存在';
-			}
-		}
 		$product = apicall('product', 'newProduct',array($_REQUEST['product_type']));
 		if(!is_object($product)){
 			trigger_error('没有该产品类型:'.$_REQUEST['product_type']);
@@ -105,7 +80,6 @@ class ProductControl extends Control {
 		if(!$product->sell($user,intval($_REQUEST['product_id']),$_REQUEST)){
 			return false;
 		}
-
 		$this->_tpl->assign('msg','购买成功');
 		return $this->_tpl->display('public/msg.html');
 	}

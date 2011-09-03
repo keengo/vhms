@@ -18,6 +18,7 @@ class UserControl extends Control {
 		exit;
 	}
 	public function index(){
+		session_start();
 		$user = daocall('user','getUser',array(getRole('user')));
 		$this->_tpl->assign('user',$user);
 		$this->pageNewsByNumber();
