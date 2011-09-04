@@ -90,19 +90,20 @@ class PublicControl extends  Control
 		if(!$this->checkRight($username)){
 			exit("用户名不符合标准");
 		}
-		$result = daocall('user','newUser',array($_REQUEST['username'],$_REQUEST['passwd'],$_REQUEST['email'],$_REQUEST['name'],$_REQUEST['id']));
+		$result = daocall('user','newUser',array($_REQUEST['username'],$_REQUEST['passwd'],$_REQUEST['email'],$_REQUEST['name'],$_REQUEST['ids']));
 		if($result){
 			registerRole('user',$_REQUEST['username']);
 			$external = $_REQUEST['external'];
-			if ($external == '1') {
-				$url = "?fc=user&fa=index";
-			} else {
-				$url = "?c=user&a=index";
-			}
+//			if ($external == '1') {
+//				$url = "?fc=user&fa=index";
+//			} else {
+//				$url = "?c=user&a=index";
+//			}
+			$url="?c=frame&a=index";
 			header("Location: ".$url);
 			die();
 		}else{
-			return '注册失败';
+			exit('注册失败');
 		}
 	}
 	public function registerForm()

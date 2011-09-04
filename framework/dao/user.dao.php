@@ -19,6 +19,7 @@ class UserDAO extends DAO{
 			);
 			$this->MAP_TYPE = array(
 				'money'=>FIELD_TYPE_INT,
+				'passwd'=>FIELD_TYPE_MD5,
 				'regtime'=>FIELD_TYPE_DATETIME
 			);
 

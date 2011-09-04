@@ -20,6 +20,8 @@ class UserControl extends Control {
 	public function index(){
 		session_start();
 		$user = daocall('user','getUser',array(getRole('user')));
+		$login_ip=$_SERVER['REMOTE_ADDR'];
+		$this->_tpl->assign('login_ip',$login_ip);
 		$this->_tpl->assign('user',$user);
 		$this->pageNewsByNumber();
 		return $this->_tpl->fetch('user/index.html');

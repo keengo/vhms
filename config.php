@@ -5,9 +5,9 @@ $db_cfg['default']=array(
 'port'=>'3306',
 'user'=>'root',
 'passwd'=>'iamkyj99',
-'dbname'=>'kangle33');
-$GLOBALS['skey'] = '8fs-K5YxWXEtizwp';
+'dbname'=>'kangle08');
+$GLOBALS['skey'] = '1kNCTQJOv6FaLoBm';
 $GLOBALS['node_db']='sqlite';
-$GLOBALS['uc']= 'on';
-$GLOBALS['dz_app_name']= 'Discuz! Board';
+$GLOBALS['uc']= 'on';//uc应用开关
+$GLOBALS['dz_app_name']= 'Discuz! Board';//dz论坛uc应用名称
 ?>
