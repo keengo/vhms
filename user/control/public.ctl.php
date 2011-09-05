@@ -45,8 +45,8 @@ class PublicControl extends  Control
 			
 			include_once dirname(__FILE__).'/../../uc_client/client.php';
 			$request=$_POST;
-			$username=$request['username'];
-			$passwd=$request['passwd'];
+			$username=trim($request['username']);
+			$passwd=trim($request['passwd']);
 			$email=$request['email'];
 			$uid = uc_user_register($username, $passwd, $email);
 			if($uid <= 0) {
@@ -90,7 +90,7 @@ class PublicControl extends  Control
 		if(!$this->checkRight($username)){
 			exit("用户名不符合标准");
 		}
-		$result = daocall('user','newUser',array($_REQUEST['username'],$_REQUEST['passwd'],$_REQUEST['email'],$_REQUEST['name'],$_REQUEST['ids']));
+		$result = daocall('user','newUser',array(trim($_REQUEST['username']),trim($_REQUEST['passwd']),$_REQUEST['email'],$_REQUEST['name'],$_REQUEST['ids']));
 		if($result){
 			registerRole('user',$_REQUEST['username']);
 			$external = $_REQUEST['external'];

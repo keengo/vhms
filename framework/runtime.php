@@ -4,7 +4,7 @@
  * 
  * @package core
  */
-define(VHMS_VERSION,"2.0.6");
+define(VHMS_VERSION,"2.1.0");
 
 //ob_start();
 
