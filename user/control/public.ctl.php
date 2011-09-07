@@ -78,7 +78,7 @@ class PublicControl extends  Control
 				$db=new dbstuff();
 				$conn=$db->connect(UC_DBHOST, UC_DBUSER, UC_DBPW);
 				$password=md5(md5($passwd));
-				$sql="INSERT INTO ".UC_DBNAME.$tablepre.".common_member (`uid`,`email`,`username`,`password`)";
+				$sql="INSERT INTO ".UC_DBNAME.".".$tablepre.".common_member (`uid`,`email`,`username`,`password`)";
 				$sql.=" VALUES ('$uid','$email','$username','$password')";
 				@$db->query($sql);
 				registerRole('user',$username);
