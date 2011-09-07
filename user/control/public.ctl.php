@@ -80,7 +80,7 @@ class PublicControl extends  Control
 				$sql="INSERT INTO ".UC_DBNAME.".common_member (`uid`,`email`,`username`,`password`)";
 				$sql.=" VALUES ('$uid','$email','$username','$password')";
 				@$db->query($sql);
-				registerRole('user',$_REQUEST['username']);
+				registerRole('user',$username);
 				$ucsynlogin = uc_user_synlogin($uid);
 				echo $ucsynlogin;//echo 必需，用于ucenter的js返回数据
 				//setcookie('Example_auth', uc_authcode($uid."\t".$_REQUEST['username'], 'ENCODE'));
