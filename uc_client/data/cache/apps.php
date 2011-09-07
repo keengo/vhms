@@ -31,7 +31,9 @@ $_CACHE['apps'] = array (
     'extra' => 
     array (
       'apppath' => '',
+      'extraurl' => '			',
     ),
     'recvnote' => '1',
   ),
+  'UC_API' => 'http://127.0.0.98/uc_server',
 );

@@ -2,47 +2,27 @@
 define('UC_CONNECT', 'mysql');
 define('UC_DBHOST', 'localhost');
 define('UC_DBUSER', 'root');
-define('UC_DBPW', 'iamkyj99');
-define('UC_DBNAME', 'ucenter');
+define('UC_DBPW', 'test');
+define('UC_DBNAME', 'uc15');
 define('UC_DBCHARSET', 'gbk');
-define('UC_DBTABLEPRE', '`ucenter`.ucenter_');
+define('UC_DBTABLEPRE', '`uc15`.ucenter_');
 define('UC_DBCONNECT', '0');
-define('UC_KEY', '4e29eukzU4AsyfUWCgmQ3hHCSfMp3Vi3HPSM8Pk');
-define('UC_API', 'http://127.0.0.98/uc_server');
+define('UC_KEY', 'd1afY4xOT0Nsj1ZjzRZyzDJEJSQBqyM/nZONEVY');
+define('UC_API', 'http://127.0.0.100/uc_server');
 define('UC_CHARSET', 'gbk');
 define('UC_IP', '');
 define('UC_APPID', '3');
 define('UC_PPP', '20');
 
 
-/*
-define('UC_CONNECT', 'mysql');
-define('UC_DBHOST', 'localhost');
-define('UC_DBUSER', 'root');
-define('UC_DBPW', 'iamkyj99');
-define('UC_DBNAME', 'ucenter');
-define('UC_DBCHARSET', 'gbk');
-define('UC_DBTABLEPRE', '`ucenter`.ucenter_');
-define('UC_DBCONNECT', '0');
-define('UC_KEY', '63886pbisyhaVADWsKWOb9tZEbqn4NgDXMH6RdA');
-define('UC_API', 'http://127.0.0.98/uc_server');
-define('UC_CHARSET', 'gbk');
-define('UC_IP', '');
-define('UC_APPID', '2');
-define('UC_PPP', '20');
-*/
 
-
-
-			// µ±Ç°Ó¦ÓÃµÄ ID
-
-$dbhost = 'localhost';		// Êý¾Ý¿â·þÎñÆ÷
-$dbuser = 'root';			// Êý¾Ý¿âÓÃ»§Ãû
-$dbpw = 'iamkyj99';			// Êý¾Ý¿âÃÜÂë
-$dbname = 'ucenter';			// Êý¾Ý¿âÃû
-$pconnect = 0;				// Êý¾Ý¿â³Ö¾ÃÁ¬½Ó 0=¹Ø±Õ, 1=´ò¿ª
-$tablepre = 'ucenter_';   	// ±íÃûÇ°×º, Í¬Ò»Êý¾Ý¿â°²×°¶à¸öÂÛÌ³ÇëÐÞ¸Ä´Ë´¦
-$dbcharset = 'gbk';			// MySQL ×Ö·û¼¯, ¿ÉÑ¡ 'gbk', 'big5', 'utf8', 'latin1', Áô¿ÕÎª°´ÕÕÂÛÌ³×Ö·û¼¯Éè¶¨
-							//Í¬²½µÇÂ¼ Cookie ÉèÖÃ
-$cookiedomain = ''; 		// cookie ×÷ÓÃÓò
-$cookiepath = '/';			// cookie ×÷ÓÃÂ·¾¶
+$dbhost = 'localhost';		// ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+$dbuser = 'root';			// ï¿½ï¿½Ý¿ï¿½ï¿½Ã»ï¿½ï¿½ï¿½
+$dbpw = 'test';			// ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½
+$dbname = 'ucenter';			// ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½
+$pconnect = 0;				// ï¿½ï¿½Ý¿ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ 0=ï¿½Ø±ï¿½, 1=ï¿½ï¿½
+$tablepre = 'ucenter_';   	// ï¿½ï¿½ï¿½ï¿½Ç°×º, Í¬Ò»ï¿½ï¿½Ý¿â°²×°ï¿½ï¿½ï¿½ï¿½ï¿½Ì³ï¿½ï¿½ï¿½Þ¸Ä´Ë´ï¿½
+$dbcharset = 'gbk';			// MySQL ï¿½Ö·ï¿½, ï¿½ï¿½Ñ¡ 'gbk', 'big5', 'utf8', 'latin1', ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì³ï¿½Ö·ï¿½ï¿½è¶¨
+							//Í¬ï¿½ï¿½ï¿½ï¿½Â¼ Cookie ï¿½ï¿½ï¿½ï¿½
+$cookiedomain = ''; 		// cookie ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+$cookiepath = '/';			// cookie ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½

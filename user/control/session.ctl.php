@@ -25,6 +25,10 @@ class SessionControl extends Control {
 	public function login()
 	{
 		session_start();
+		$user=$_REQUEST['username'];
+		$user=trim($username);
+		$user=trim($username,'+');
+		$user=trim($username,'=');
 		if($GLOBALS['uc'] && $GLOBALS['uc']=='on'){
 			include dirname(__FILE__).'/../../config.inc.php';
 			if(UC_KEY=="" || UC_API=="")
@@ -33,20 +37,20 @@ class SessionControl extends Control {
 			}
 			include dirname(__FILE__).'/../../include/db_mysql.class.php';
 			include dirname(__FILE__).'/../../uc_client/client.php';
-			list($uid, $username, $password, $email) = uc_user_login($_REQUEST['username'], $_REQUEST['passwd']);
+			list($uid, $username, $password, $email) = uc_user_login($user, $_REQUEST['passwd']);
 			setcookie('Example_auth', '', -86400);
 			if($uid > 0)
 			{
-				$sql="SELECT count(*) FROM  ".UC_DBNAME.".{$tablepre}members WHERE uid='$uid'";
-				$db=new dbstuff();
-				$conn=$db->connect($dbhost, $dbuser, $dbpw);
-				if(!$db->result_first($sql)) {
-					//判断用户是否存在于用户表，不存在则跳转到激活页面
-					$auth = rawurlencode(uc_authcode("$username\t".time(), 'ENCODE'));
-					echo '您需要需要激活该帐号，才能进入本应用程序<br><a href="'.$_SERVER['PHP_SELF'].'?example=register&action=activation&auth='.$auth.'">继续</a>';
-					exit;
-				}
-				registerRole('user',$username);
+				//				$sql="SELECT count(*) FROM  ".UC_DBNAME.".{$tablepre}members WHERE uid='$uid'";
+				//				$db=new dbstuff();
+				//				$conn=$db->connect($dbhost, $dbuser, $dbpw);
+				//				if(!$db->result_first($sql)) {
+				//					//判断用户是否存在于用户表，不存在则跳转到激活页面
+				//					$auth = rawurlencode(uc_authcode("$username\t".time(), 'ENCODE'));
+				//					echo '您需要需要激活该帐号，才能进入本应用程序<br><a href="'.$_SERVER['PHP_SELF'].'?example=register&action=activation&auth='.$auth.'">继续</a>';
+				//					exit;
+				//				}
+				registerRole('user',$user);
 				$ucsynlogin = uc_user_synlogin($uid);
 				echo $ucsynlogin;//echo 必需，用于ucenter的js返回数据
 				return $this->_tpl->fetch('frame/index.html');
@@ -59,11 +63,12 @@ class SessionControl extends Control {
 				exit($str);
 			}
 		}
-		$user = $this->checkPassword($_REQUEST['username'], $_REQUEST['passwd']);
-		if(!$user){
+	
+		$userinfo = $this->checkPassword($user, $_REQUEST['passwd']);
+		if(!$userinfo){
 			return "登录错误";
 		}
-		registerRole('user',$user['username']);
+		registerRole('user',$userinfo['username']);
 		if($GLOBALS['frame']==1){
 			header("Location: ?c=frame&a=index");
 		}else{

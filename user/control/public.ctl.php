@@ -36,6 +36,10 @@ class PublicControl extends  Control
 	}
 	public function register()
 	{
+		$username = $_REQUEST['username'];
+		$username=trim($username);
+		$username=trim($username,'+');
+		$username=trim($username,'=');
 		if($GLOBALS['uc'] && $GLOBALS['uc']=='on'){
 			include_once dirname(__FILE__).'/../../config.inc.php';
 			if(UC_KEY=="" || UC_API=="")
@@ -44,10 +48,9 @@ class PublicControl extends  Control
 			}
 			
 			include_once dirname(__FILE__).'/../../uc_client/client.php';
-			$request=$_POST;
-			$username=trim($request['username']);
-			$passwd=trim($request['passwd']);
-			$email=$request['email'];
+			
+			$passwd=trim($_REQUEST['passwd']);
+			$email=$_REQUEST['email'];
 			$uid = uc_user_register($username, $passwd, $email);
 			if($uid <= 0) {
 				if($uid==-6){
@@ -86,13 +89,13 @@ class PublicControl extends  Control
 				return $this->display('frame/index.html');
 			}
 		}
-		$username = $_REQUEST['username'];
+		
 		if(!$this->checkRight($username)){
 			exit("用户名不符合标准");
 		}
-		$result = daocall('user','newUser',array(trim($_REQUEST['username']),trim($_REQUEST['passwd']),$_REQUEST['email'],$_REQUEST['name'],$_REQUEST['ids']));
+		$result = daocall('user','newUser',array($username,trim($_REQUEST['passwd']),$_REQUEST['email'],$_REQUEST['name'],$_REQUEST['ids']));
 		if($result){
-			registerRole('user',$_REQUEST['username']);
+			registerRole('user',$username);
 			$external = $_REQUEST['external'];
 //			if ($external == '1') {
 //				$url = "?fc=user&fa=index";

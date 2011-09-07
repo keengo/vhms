@@ -26,11 +26,8 @@ define('API_RETURN_FORBIDDEN', '-2');
 define('API_RETURN_FASLE','0');
 
 define('DISCUZ_ROOT', '../');
-date_default_timezone_set('Asia/Shanghai');
-header("Cache-Control: no-cache, must-revalidate");
-header("Content-Type: text/html; charset=utf-8");
 define('SYS_ROOT', './../framework');
-include(SYS_ROOT . '/runtime.php');
+include(SYS_ROOT.'/runtime.php');
 
 //note 普通的 http 通知方式
 if(!defined('IN_UC')) {
@@ -39,8 +36,8 @@ if(!defined('IN_UC')) {
 
 	defined('MAGIC_QUOTES_GPC') || define('MAGIC_QUOTES_GPC', get_magic_quotes_gpc());
 	require_once DISCUZ_ROOT.'./config.inc.php';
-	require_once DISCUZ_ROOT.'./framework/dao/user.dao.php';
-	require_once DISCUZ_ROOT.'./framework/dao.php';
+//	require_once DISCUZ_ROOT.'./framework/dao/user.dao.php';
+//	require_once DISCUZ_ROOT.'./framework/dao.php';
 
 	$_DCACHE = $get = $post = array();
 
@@ -87,6 +84,8 @@ if(!defined('IN_UC')) {
 	$GLOBALS['db']->connect($dbhost, $dbuser, $dbpw, $dbname, $pconnect, true, $dbcharset);
 	$GLOBALS['tablepre'] = $tablepre;
 	unset($dbhost, $dbuser, $dbpw, $dbname, $pconnect);
+	$uc_note = new uc_note();
+	exit($uc_note->$get['action']($get, $post));
 }
 
 class uc_note {
@@ -147,15 +146,16 @@ class uc_note {
 		session_start();
 		$uid = $get['uid'];
 		$username = $get['username'];
+		if(!API_SYNLOGIN) {
+			return API_RETURN_FORBIDDEN;
+		}
 		
 		registerRole('user',$username);
 		if(!daocall('user','getUser',array($username))){
 			daocall('user','newUser',array($username,$get['password'],null,$username,$uid));
 		}
-		//todo  localction
-		if(!API_SYNLOGIN) {
-			return API_RETURN_FORBIDDEN;
-		}
+		
+		
 
 		header('P3P: CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"');
 		_setcookie('Example_auth', _authcode($uid."\t".$username, 'ENCODE'));
