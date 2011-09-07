@@ -36,8 +36,8 @@ if(!defined('IN_UC')) {
 
 	defined('MAGIC_QUOTES_GPC') || define('MAGIC_QUOTES_GPC', get_magic_quotes_gpc());
 	require_once DISCUZ_ROOT.'./config.inc.php';
-//	require_once DISCUZ_ROOT.'./framework/dao/user.dao.php';
-//	require_once DISCUZ_ROOT.'./framework/dao.php';
+	//	require_once DISCUZ_ROOT.'./framework/dao/user.dao.php';
+	//	require_once DISCUZ_ROOT.'./framework/dao.php';
 
 	$_DCACHE = $get = $post = array();
 
@@ -54,11 +54,11 @@ if(!defined('IN_UC')) {
 	if(empty($get)) {
 		exit('Invalid Request');
 	}
-	$fp=fopen('tt.txt','a');
-	foreach ($get as $ge=>$g){
-		fwrite($fp, $ge."=".$g."\r\n");
-	}
-	fclose($fp);
+	//	$fp=fopen('tt.txt','a');
+	//	foreach ($get as $ge=>$g){
+	//		fwrite($fp, $ge."=".$g."\r\n");
+	//	}
+	//	fclose($fp);
 	$action = $get['action'];
 	require_once DISCUZ_ROOT.'./uc_client/lib/xml.class.php';
 	$post = xml_unserialize(file_get_contents('php://input'));
@@ -149,13 +149,11 @@ class uc_note {
 		if(!API_SYNLOGIN) {
 			return API_RETURN_FORBIDDEN;
 		}
-		
+
 		registerRole('user',$username);
 		if(!daocall('user','getUser',array($username))){
-			daocall('user','newUser',array($username,$get['password'],null,$username,$uid));
+			daocall('user','newUser',array($username,$get['password'],null,$username,0,$uid));
 		}
-		
-		
 
 		header('P3P: CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"');
 		_setcookie('Example_auth', _authcode($uid."\t".$username, 'ENCODE'));
@@ -166,9 +164,9 @@ class uc_note {
 		if(!API_SYNLOGOUT) {
 			return API_RETURN_FORBIDDEN;
 		}
-		
+
 		unregisterRole('user');
-		
+
 		//note 同步登出 API 接口
 		header('P3P: CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"');
 		_setcookie('Example_auth', '', -86400 * 365);
@@ -256,7 +254,7 @@ class uc_note {
 		fclose($fp);
 		return API_RETURN_SUCCEED;
 	}
-			 
+
 	function updatecredit($get, $post) {
 		if(!API_UPDATECREDIT) {
 			return API_RETURN_FORBIDDEN;

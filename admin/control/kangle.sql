@@ -62,6 +62,7 @@ CREATE TABLE IF NOT EXISTS `nodes` (
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
+  `uid` TINYINT( 11 ) NOT NULL DEFAULT '0', 
   `username` varchar(32) NOT NULL,
   `passwd` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
@@ -69,7 +70,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `money` int(11) NOT NULL DEFAULT '0',
   `id` varchar(255) DEFAULT NULL,
   `regtime` datetime NOT NULL,
-  PRIMARY KEY (`username`)
+  PRIMARY KEY (`username`),
+  KEY `uid` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------

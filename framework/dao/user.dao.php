@@ -9,6 +9,7 @@ class UserDAO extends DAO{
 	{	//加载基本db文件
 		parent::__construct();
 		$this->MAP_ARR 	= array(		//用户信息信息字段对照表
+			"uid"=>'uid',
 			"username" => 'username',
 			"passwd" => 'passwd',
 			"email" => 'email',
@@ -18,6 +19,7 @@ class UserDAO extends DAO{
 			"id"=>'id'
 			);
 			$this->MAP_TYPE = array(
+				'uid'=>FIELD_TYPE_INT,
 				'money'=>FIELD_TYPE_INT,
 				'passwd'=>FIELD_TYPE_MD5,
 				'regtime'=>FIELD_TYPE_DATETIME
@@ -37,8 +39,8 @@ class UserDAO extends DAO{
 	/**
 	 * 查询用户信息信息
 	 */
-	public function getUserById($id){
-		return $this->getData($this->getFieldValue2('id',$id),'row');
+	public function getUserById($uid){
+		return $this->getData($this->getFieldValue2('uid',$uid),'row');
 	}
 	public function getUser($username)
 	{
@@ -52,13 +54,14 @@ class UserDAO extends DAO{
 	/**
 	 * 插入用户信息信息
 	 */
-	public function newUser($username,$passwd,$email,$name,$id)
+	public function newUser($username,$passwd,$email,$name,$id,$uid)
 	{
 		$arr['username'] = $username;
 		$arr['passwd'] = $passwd;
 		$arr['email']= $email;
 		$arr['name'] = $name;
 		$arr['id'] = $id;
+		$arr['uid']=$uid;
 		$arr['regtime'] = 'NOW()';
 		return $this->insert($arr);
 	}
