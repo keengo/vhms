@@ -76,9 +76,9 @@ class PublicControl extends  Control
 			} else {
 				include_once  dirname(__FILE__).'/../../include/db_mysql.class.php';
 				$db=new dbstuff();
-				$conn=$db->connect($dbhost, $dbuser, $dbpw);
+				$conn=$db->connect(UC_DBHOST, UC_DBUSER, UC_DBPW);
 				$password=md5(md5($passwd));
-				$sql="INSERT INTO ".UC_DBNAME.$tablepre.".common_member (`uid`,`email`,`username`,`password`)";
+				$sql="INSERT INTO ".UC_DBTABLEPRE.".common_member (`uid`,`email`,`username`,`password`)";
 				$sql.=" VALUES ('$uid','$email','$username','$password')";
 				@$db->query($sql);
 				registerRole('user',$username);

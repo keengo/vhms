@@ -27,6 +27,10 @@ class UserDAO extends DAO{
 
 			$this->_TABLE = DBPRE . 'users';
 	}
+	public function updateUserUid($username,$uid){
+		$arr['uid']=$uid;
+		return $this->update($arr, $this->getFieldValue2('username', $username));
+	}
 	public function delUserById($id){
 		return $this->delData($this->getFieldValue2('id',$id),'row');
 	}

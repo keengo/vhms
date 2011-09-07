@@ -36,8 +36,6 @@ if(!defined('IN_UC')) {
 
 	defined('MAGIC_QUOTES_GPC') || define('MAGIC_QUOTES_GPC', get_magic_quotes_gpc());
 	require_once DISCUZ_ROOT.'./config.inc.php';
-	//	require_once DISCUZ_ROOT.'./framework/dao/user.dao.php';
-	//	require_once DISCUZ_ROOT.'./framework/dao.php';
 
 	$_DCACHE = $get = $post = array();
 
@@ -54,11 +52,6 @@ if(!defined('IN_UC')) {
 	if(empty($get)) {
 		exit('Invalid Request');
 	}
-	//	$fp=fopen('tt.txt','a');
-	//	foreach ($get as $ge=>$g){
-	//		fwrite($fp, $ge."=".$g."\r\n");
-	//	}
-	//	fclose($fp);
 	$action = $get['action'];
 	require_once DISCUZ_ROOT.'./uc_client/lib/xml.class.php';
 	$post = xml_unserialize(file_get_contents('php://input'));
@@ -66,6 +59,12 @@ if(!defined('IN_UC')) {
 	if(in_array($get['action'], array('test', 'deleteuser', 'renameuser', 'gettag', 'synlogin', 'synlogout', 'updatepw', 'updatebadwords', 'getcredit', 'updatecredit','updatehosts', 'updateapps', 'updateclient', 'updatecredit', 'getcreditsettings', 'updatecreditsettings'))) {
 		require_once DISCUZ_ROOT.'./include/db_mysql.class.php';
 		$GLOBALS['db'] = new dbstuff;
+		$dbhost=UC_DBHOST;
+		$dbuser=UC_DBUSER;
+		$dbpw=UC_DBPW;
+		$dbname=UC_DBNAME;
+		$pconnect=UC_DBCONNECT;
+		$dbcharset=UC_CHARSET;
 		$GLOBALS['db']->connect($dbhost, $dbuser, $dbpw, $dbname, $pconnect, true, $dbcharset);
 		$GLOBALS['tablepre'] = $tablepre;
 		unset($dbhost, $dbuser, $dbpw, $dbname, $pconnect);
@@ -81,6 +80,12 @@ if(!defined('IN_UC')) {
 	require_once DISCUZ_ROOT.'./config.inc.php';
 	require_once DISCUZ_ROOT.'./include/db_mysql.class.php';
 	$GLOBALS['db'] = new dbstuff;
+	$dbhost=UC_DBHOST;
+	$dbuser=UC_DBUSER;
+	$dbpw=UC_DBPW;
+	$dbname=UC_DBNAME;
+	$pconnect=UC_DBCONNECT;
+	$dbcharset=UC_CHARSET;
 	$GLOBALS['db']->connect($dbhost, $dbuser, $dbpw, $dbname, $pconnect, true, $dbcharset);
 	$GLOBALS['tablepre'] = $tablepre;
 	unset($dbhost, $dbuser, $dbpw, $dbname, $pconnect);
@@ -146,6 +151,7 @@ class uc_note {
 		session_start();
 		$uid = $get['uid'];
 		$username = $get['username'];
+
 		if(!API_SYNLOGIN) {
 			return API_RETURN_FORBIDDEN;
 		}
@@ -154,6 +160,9 @@ class uc_note {
 		if(!daocall('user','getUser',array($username))){
 			daocall('user','newUser',array($username,$get['password'],null,$username,0,$uid));
 		}
+		//		else{
+		//			daocall('user','updateUserUid',array($username,$uid));
+		//		}
 
 		header('P3P: CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"');
 		_setcookie('Example_auth', _authcode($uid."\t".$username, 'ENCODE'));
