@@ -25,10 +25,9 @@ class SessionControl extends Control {
 	public function login()
 	{
 		session_start();
-		$user=$_REQUEST['username'];
-		$user=trim($username);
-		$user=trim($username,'+');
-		$user=trim($username,'=');
+		$user1=trim($_REQUEST['username']);
+		$user2=trim($user1,"+");
+		$user=trim($user2,"=");
 		if($GLOBALS['uc'] && $GLOBALS['uc']=='on'){
 			include dirname(__FILE__).'/../../config.inc.php';
 			if(UC_KEY=="" || UC_API=="")

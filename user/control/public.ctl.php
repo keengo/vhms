@@ -36,19 +36,20 @@ class PublicControl extends  Control
 	}
 	public function register()
 	{
-		$username = $_REQUEST['username'];
-		$username=trim($username);
-		$username=trim($username,'+');
-		$username=trim($username,'=');
+		$username = trim($_REQUEST['username']);
+		if(!$this->checkRight($username)){
+			exit("用户名不符合标准");
+		}
 		if($GLOBALS['uc'] && $GLOBALS['uc']=='on'){
 			include_once dirname(__FILE__).'/../../config.inc.php';
+				
 			if(UC_KEY=="" || UC_API=="")
 			{
 				return "注册失败，请检查ucenter配置文件.";
 			}
-			
+				
 			include_once dirname(__FILE__).'/../../uc_client/client.php';
-			
+				
 			$passwd=trim($_REQUEST['passwd']);
 			$email=$_REQUEST['email'];
 			$uid = uc_user_register($username, $passwd, $email);
@@ -77,7 +78,7 @@ class PublicControl extends  Control
 				$db=new dbstuff();
 				$conn=$db->connect($dbhost, $dbuser, $dbpw);
 				$password=md5(md5($passwd));
-				$sql="INSERT INTO ".UC_DBNAME.".common_member (`uid`,`email`,`username`,`password`)";
+				$sql="INSERT INTO ".UC_DBNAME.$tablepre.".common_member (`uid`,`email`,`username`,`password`)";
 				$sql.=" VALUES ('$uid','$email','$username','$password')";
 				@$db->query($sql);
 				registerRole('user',$username);
@@ -89,19 +90,16 @@ class PublicControl extends  Control
 				return $this->display('frame/index.html');
 			}
 		}
-		
-		if(!$this->checkRight($username)){
-			exit("用户名不符合标准");
-		}
+
 		$result = daocall('user','newUser',array($username,trim($_REQUEST['passwd']),$_REQUEST['email'],$_REQUEST['name'],$_REQUEST['ids']));
 		if($result){
 			registerRole('user',$username);
 			$external = $_REQUEST['external'];
-//			if ($external == '1') {
-//				$url = "?fc=user&fa=index";
-//			} else {
-//				$url = "?c=user&a=index";
-//			}
+			//			if ($external == '1') {
+			//				$url = "?fc=user&fa=index";
+			//			} else {
+			//				$url = "?c=user&a=index";
+			//			}
 			$url="?c=frame&a=index";
 			header("Location: ".$url);
 			die();

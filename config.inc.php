@@ -16,7 +16,7 @@ define('UC_PPP', '20');
 
 
 
-$dbhost = 'localhost';		// ��ݿ������
+$dbhost = 'localhost';		// 
 $dbuser = 'root';			// ��ݿ��û���
 $dbpw = 'test';			// ��ݿ�����
 $dbname = 'ucenter';			// ��ݿ���

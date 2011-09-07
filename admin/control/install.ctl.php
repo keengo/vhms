@@ -47,9 +47,10 @@ class InstallControl extends Control
 		$ucswitch=$_REQUEST['uc_switch'];
 		$dzappname=$_REQUEST['dz_appname'];
 		$dbconnect=mysql_connect($host,$user,$passwd);
-		if(!mysql_query("CREATE DATABASE ".$dbname)){
-			exit("未能创建数据库，请检查数据库信息是否正确，或者手动创建该数据库");
+		if(!$dbconnect){
+			exit('数据库连接失败，请检查');
 		}
+		@mysql_query("CREATE DATABASE ".$dbname);
 		mysql_close($dbconnect);
 		
 		$GLOBALS['default_db'] = $this->check_connect($host,"3306",$dbname,$user,$passwd);
