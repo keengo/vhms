@@ -28,7 +28,10 @@ define('API_RETURN_FASLE','0');
 define('DISCUZ_ROOT', '../');
 define('SYS_ROOT', './../framework');
 include(SYS_ROOT.'/runtime.php');
-
+include('./../config.php');
+if(UC_START!="on"){
+	return false;
+}
 //note 普通的 http 通知方式
 if(!defined('IN_UC')) {
 	error_reporting(0);
@@ -155,7 +158,7 @@ class uc_note {
 		if(!API_SYNLOGIN) {
 			return API_RETURN_FORBIDDEN;
 		}
-
+		
 		registerRole('user',$username);
 		if(!daocall('user','getUser',array($username))){
 			daocall('user','newUser',array($username,$get['password'],null,$username,0,$uid));

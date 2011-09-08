@@ -58,7 +58,7 @@ class UserDAO extends DAO{
 	/**
 	 * 插入用户信息信息
 	 */
-	public function newUser($username,$passwd,$email,$name,$id,$uid)
+	public function newUser($username,$passwd,$email,$name,$id,$uid=0)
 	{
 		$arr['username'] = $username;
 		$arr['passwd'] = $passwd;

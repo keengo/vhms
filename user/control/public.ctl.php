@@ -96,7 +96,6 @@ class PublicControl extends  Control
 				die();
 			}
 		}
-		echo "sssss";
 		$result = daocall('user','newUser',array($username,trim($_REQUEST['passwd']),$_REQUEST['email'],$_REQUEST['name'],$_REQUEST['ids']));
 		if($result){
 			registerRole('user',$username);
