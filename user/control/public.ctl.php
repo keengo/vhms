@@ -36,7 +36,7 @@ class PublicControl extends  Control
 	}
 	public function register()
 	{
-		$username = trim($_REQUEST['username']);
+		$username = trim($_POST['username']);
 		if(!$this->checkRight($username)){
 			exit("用户名不符合标准");
 		}
@@ -45,11 +45,9 @@ class PublicControl extends  Control
 			exit("程序未安装");
 		}
 		include dirname(__FILE__).'./../../config.php';
-		if(UC_START && UC_START==1){
-			echo 111;
-			die();
+		if(UC_START && UC_START=='on'){
+			
 			include_once dirname(__FILE__).'/../../config.inc.php';
-
 			if(UC_KEY=="" || UC_API=="")
 			{
 				return "注册失败，请检查ucenter配置文件.";
@@ -84,7 +82,7 @@ class PublicControl extends  Control
 				include_once  dirname(__FILE__).'/../../include/db_mysql.class.php';
 				$db=new dbstuff();
 				$conn=$db->connect(UC_DBHOST, UC_DBUSER, UC_DBPW);
-				$password=md5(md5($passwd));
+				$password=null;
 				$sql="INSERT INTO ".UC_DBNAME.".".$tablepre."common_member (`uid`,`email`,`username`,`password`)";
 				$sql.=" VALUES ('$uid','$email','$username','$password')";
 				@$db->query($sql);
