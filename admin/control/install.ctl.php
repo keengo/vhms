@@ -85,8 +85,8 @@ class InstallControl extends Control
 		$str.="'dbname'=>'".$dbname."');\r\n";
 		$str.="\$GLOBALS['skey'] = '".getRandPasswd(16)."';\r\n";
 		$str.="\$GLOBALS['node_db']='sqlite';\r\n";
-		$str.="\$GLOBALS['uc']= '".$ucswitch."';//uc应用开关\r\n";
-		$str.="\$GLOBALS['dz_app_name']= '".$dzappname."';//dz论坛uc应用名称\r\n";
+		$str.="define('UC_START','".$ucswitch."');//uc应用开关\r\n";
+		$str.="define('DZ_APPNAME','".$dzappname."');//dz论坛uc应用名称\r\n";
 		$str.="?>";
 		$config_file = dirname(dirname(dirname(__FILE__)))."/config.php";
 		$fp = @fopen($config_file,"wt");

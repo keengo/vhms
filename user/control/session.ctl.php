@@ -28,7 +28,12 @@ class SessionControl extends Control {
 		$user1=trim($_REQUEST['username']);
 		$user2=trim($user1,"+");
 		$user=trim($user2,"=");
-		if($GLOBALS['uc'] && $GLOBALS['uc']=='on'){
+		$filename=dirname(__FILE__).'./../../config.php';
+		if(!file_exists($filename)){
+			exit("程序未安装");
+		}
+		include dirname(__FILE__).'./../../config.php';
+		if(UC_START && UC_START==1){
 			include dirname(__FILE__).'/../../config.inc.php';
 			if(UC_KEY=="" || UC_API=="")
 			{
@@ -62,7 +67,7 @@ class SessionControl extends Control {
 				exit($str);
 			}
 		}
-	
+
 		$userinfo = $this->checkPassword($user, $_REQUEST['passwd']);
 		if(!$userinfo){
 			return "登录错误";
