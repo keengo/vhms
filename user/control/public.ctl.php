@@ -86,6 +86,10 @@ class PublicControl extends  Control
 				$sql="INSERT INTO ".UC_DBNAME.".".$tablepre."common_member (`uid`,`email`,`username`,`password`)";
 				$sql.=" VALUES ('$uid','$email','$username','$password')";
 				@$db->query($sql);
+				if($_REQUEST['at']==1){
+					needRole('admin');
+					return header("Location:  /admin/index.php?c=user&a=pageUsers");
+				}
 				//				registerRole('user',$username);
 				//				$ucsynlogin = uc_user_synlogin($uid);
 				//				echo $ucsynlogin;//echo 必需，用于ucenter的js返回数据
@@ -113,6 +117,12 @@ class PublicControl extends  Control
 	}
 	public function registerForm()
 	{
+		if($_REQUEST['at']==1){
+			$at=1;
+		}else{
+			$at=0;
+		}
+		$this->_tpl->assign('at',$at);
 		return $this->_tpl->fetch('public/register.html');
 	}
 	public function ajaxCheckUser()

@@ -2,23 +2,23 @@
 
 define('IN_DISCUZ', TRUE);
 
-define('UC_CLIENT_VERSION', '1.5.0');	//note UCenter °æ±¾±êÊ¶
+define('UC_CLIENT_VERSION', '1.5.0');	//note UCenter ï¿½æ±¾ï¿½ï¿½Ê¶
 define('UC_CLIENT_RELEASE', '20081031');
 
-define('API_DELETEUSER', 1);		//note ÓÃ»§É¾³ý API ½Ó¿Ú¿ª¹Ø
-define('API_RENAMEUSER', 1);		//note ÓÃ»§¸ÄÃû API ½Ó¿Ú¿ª¹Ø
-define('API_GETTAG', 1);		//note »ñÈ¡±êÇ© API ½Ó¿Ú¿ª¹Ø
-define('API_SYNLOGIN', 1);		//note Í¬²½µÇÂ¼ API ½Ó¿Ú¿ª¹Ø
-define('API_SYNLOGOUT', 1);		//note Í¬²½µÇ³ö API ½Ó¿Ú¿ª¹Ø
-define('API_UPDATEPW', 1);		//note ¸ü¸ÄÓÃ»§ÃÜÂë ¿ª¹Ø
-define('API_UPDATEBADWORDS', 1);	//note ¸üÐÂ¹Ø¼ü×ÖÁÐ±í ¿ª¹Ø
-define('API_UPDATEHOSTS', 1);		//note ¸üÐÂÓòÃû½âÎö»º´æ ¿ª¹Ø
-define('API_UPDATEAPPS', 1);		//note ¸üÐÂÓ¦ÓÃÁÐ±í ¿ª¹Ø
-define('API_UPDATECLIENT', 1);		//note ¸üÐÂ¿Í»§¶Ë»º´æ ¿ª¹Ø
-define('API_UPDATECREDIT', 1);		//note ¸üÐÂÓÃ»§»ý·Ö ¿ª¹Ø
-define('API_GETCREDITSETTINGS', 1);	//note Ïò UCenter Ìá¹©»ý·ÖÉèÖÃ ¿ª¹Ø
-define('API_GETCREDIT', 1);		//note »ñÈ¡ÓÃ»§µÄÄ³Ïî»ý·Ö ¿ª¹Ø
-define('API_UPDATECREDITSETTINGS', 1);	//note ¸üÐÂÓ¦ÓÃ»ý·ÖÉèÖÃ ¿ª¹Ø
+define('API_DELETEUSER', 1);		//note ï¿½Ã»ï¿½É¾ï¿½ï¿½ API ï¿½Ó¿Ú¿ï¿½ï¿½ï¿½
+define('API_RENAMEUSER', 1);		//note ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ API ï¿½Ó¿Ú¿ï¿½ï¿½ï¿½
+define('API_GETTAG', 1);		//note ï¿½ï¿½È¡ï¿½ï¿½Ç© API ï¿½Ó¿Ú¿ï¿½ï¿½ï¿½
+define('API_SYNLOGIN', 1);		//note Í¬ï¿½ï¿½ï¿½ï¿½Â¼ API ï¿½Ó¿Ú¿ï¿½ï¿½ï¿½
+define('API_SYNLOGOUT', 1);		//note Í¬ï¿½ï¿½ï¿½Ç³ï¿½ API ï¿½Ó¿Ú¿ï¿½ï¿½ï¿½
+define('API_UPDATEPW', 1);		//note ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+define('API_UPDATEBADWORDS', 1);	//note ï¿½ï¿½ï¿½Â¹Ø¼ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½
+define('API_UPDATEHOSTS', 1);		//note ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+define('API_UPDATEAPPS', 1);		//note ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½
+define('API_UPDATECLIENT', 1);		//note ï¿½ï¿½ï¿½Â¿Í»ï¿½ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+define('API_UPDATECREDIT', 1);		//note ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+define('API_GETCREDITSETTINGS', 1);	//note ï¿½ï¿½ UCenter ï¿½á¹©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+define('API_GETCREDIT', 1);		//note ï¿½ï¿½È¡ï¿½Ã»ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+define('API_UPDATECREDITSETTINGS', 1);	//note ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 define('API_RETURN_SUCCEED', '1');
 define('API_RETURN_FAILED', '-1');
@@ -32,7 +32,7 @@ include('./../config.php');
 if(UC_START!="on"){
 	return false;
 }
-//note ÆÕÍ¨µÄ http Í¨Öª·½Ê½
+//note ï¿½ï¿½Í¨ï¿½ï¿½ http Í¨Öªï¿½ï¿½Ê½
 if(!defined('IN_UC')) {
 	error_reporting(0);
 	set_magic_quotes_runtime(0);
@@ -77,7 +77,7 @@ if(!defined('IN_UC')) {
 		exit(API_RETURN_FAILED);
 	}
 
-	//note include Í¨Öª·½Ê½
+	//note include Í¨Öªï¿½ï¿½Ê½
 } else {
 
 	require_once DISCUZ_ROOT.'./config.inc.php';
@@ -179,7 +179,7 @@ class uc_note {
 
 		unregisterRole('user');
 
-		//note Í¬²½µÇ³ö API ½Ó¿Ú
+		//note Í¬ï¿½ï¿½ï¿½Ç³ï¿½ API ï¿½Ó¿ï¿½
 		header('P3P: CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"');
 		_setcookie('Example_auth', '', -86400 * 365);
 	}
@@ -232,7 +232,7 @@ class uc_note {
 		}
 		$UC_API = $post['UC_API'];
 
-		//note Ð´ app »º´æÎÄ¼þ
+		//note Ð´ app ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
 		$cachefile = $this->appdir.'./uc_client/data/cache/apps.php';
 		$fp = fopen($cachefile, 'w');
 		$s = "<?php\r\n";
@@ -240,7 +240,7 @@ class uc_note {
 		fwrite($fp, $s);
 		fclose($fp);
 
-		//note Ð´ÅäÖÃÎÄ¼þ
+		//note Ð´ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
 		if(is_writeable($this->appdir.'./config.inc.php')) {
 			$configfile = trim(file_get_contents($this->appdir.'./config.inc.php'));
 			$configfile = substr($configfile, -2) == '?>' ? substr($configfile, 0, -2) : $configfile;
@@ -291,7 +291,7 @@ class uc_note {
 		if(!API_GETCREDITSETTINGS) {
 			return API_RETURN_FORBIDDEN;
 		}
-		$credits = array('1' => array('½ð±Ò', ''));
+		$credits = array('1' => array('ï¿½ï¿½ï¿½', ''));
 		return $this->_serialize($credits);
 	}
 
@@ -303,7 +303,7 @@ class uc_note {
 	}
 }
 
-//note Ê¹ÓÃ¸Ãº¯ÊýÇ°ÐèÒª require_once $this->appdir.'./config.inc.php';
+//note Ê¹ï¿½Ã¸Ãºï¿½ï¿½ï¿½Ç°ï¿½ï¿½Òª require_once $this->appdir.'./config.inc.php';
 function _setcookie($var, $value, $life = 0, $prefix = 1) {
 	global $cookiepre, $cookiedomain, $cookiepath, $timestamp, $_SERVER;
 	setcookie(($prefix ? $cookiepre : '').$var, $value,
