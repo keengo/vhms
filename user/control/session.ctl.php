@@ -25,30 +25,29 @@ class SessionControl extends Control {
 	public function login()
 	{
 		session_start();
-		$user1=trim($_REQUEST['username']);
-		$user2=trim($user1,"+");
-		$user=trim($user2,"=");
+		$user=trim($_REQUEST['username']);
+		if(!$this->checkRight($user))
+		{
+			exit("用户名不符合标准");
+		}
 		$err='<div align="center"><br />';
 		$err.='<div class="block tb_wid mar_top" align="center"> ';
 		$err.="<p>&nbsp</p><p>&nbsp</p><p>&nbsp</p><p>&nbsp</p><p>&nbsp</p><p>&nbsp</p>";
 		$err.=' <h2><font color=red>登陆失败,<a href="/user/?c=session&a=loginForm">返回</a></font></h2';
 		$err.='</div></div>';
-
-		//		$filename=dirname(__FILE__).'./../../config.php';
-		//		if(!file_exists($filename)){
-		//			exit("安装配置文件config.php不存在");
-		//		}
-		//		include dirname(__FILE__).'./../../config.php';
 		if(UC_START=='on'){
+			
 			include dirname(__FILE__).'/../../config.inc.php';
+			
 			if(UC_KEY=="" || UC_API=="")
 			{
 				exit("登陆失败，请检查uc配置文件config.inc.php");
 			}
+			
 			include dirname(__FILE__).'/../../include/db_mysql.class.php';
 			include dirname(__FILE__).'/../../uc_client/client.php';
+			
 			list($uid, $username, $password, $email) = uc_user_login($user, $_REQUEST['passwd']);
-			//setcookie('Example_auth', '', -86400);
 			if($uid > 0)
 			{
 				registerRole('user',$user);
@@ -85,7 +84,7 @@ class SessionControl extends Control {
 
 		include dirname(__FILE__).'./../../config.php';
 		if(UC_START && UC_START=='on'){
-				
+
 			include dirname(__FILE__).'/../../config.inc.php';
 			if(UC_KEY=="" || UC_API=="")
 			{
@@ -93,14 +92,14 @@ class SessionControl extends Control {
 			}
 			include dirname(__FILE__).'/../../include/db_mysql.class.php';
 			include dirname(__FILE__).'/../../uc_client/client.php';
-				
+
 			$user=getRole('user');
 			$userinfo=daocall('user','getUser',array($user));
-				
+
 			unregisterRole('user');
 			$ucsynlogout=uc_user_synlogout($userinfo['id']);
 			echo $ucsynlogout;
-				
+
 			return $this->loginForm();
 		}
 		unregisterRole('user');
@@ -136,6 +135,10 @@ class SessionControl extends Control {
 			return false;
 		}
 		return $user;
+	}
+	private function checkRight($username)
+	{
+		return preg_match('/^[a-z0-9][a-z0-9_]{2,11}$/', $username);
 	}
 
 }
