@@ -40,11 +40,6 @@ class PublicControl extends  Control
 		if(!$this->checkRight($username)){
 			exit("用户名不符合标准");
 		}
-		$filename=dirname(__FILE__).'./../../config.php';
-		if(!file_exists($filename)){
-			exit("程序未安装");
-		}
-		include dirname(__FILE__).'./../../config.php';
 		if(UC_START && UC_START=='on'){
 			
 			include_once dirname(__FILE__).'/../../config.inc.php';

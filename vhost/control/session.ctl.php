@@ -36,6 +36,7 @@ class SessionControl extends Control {
 		session_start();
 		$user = $this->checkPassword($_REQUEST['username'], $_REQUEST['passwd']);
 		if(!$user){
+			header('Content-Type: text/html; charset=utf-8');
 			die('登录错误');
 		}
 		registerRole('vhost',$user['name']);
