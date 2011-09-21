@@ -77,12 +77,6 @@ class SessionControl extends Control {
 	{
 		session_start();
 
-		$filename=dirname(__FILE__).'./../../config.php';
-		if(!file_exists($filename)){
-			exit("安装配置文件config.php不存在");
-		}
-
-		include dirname(__FILE__).'./../../config.php';
 		if(UC_START && UC_START=='on'){
 
 			include dirname(__FILE__).'/../../config.inc.php';

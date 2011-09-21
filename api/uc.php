@@ -28,7 +28,6 @@ define('API_RETURN_FASLE','0');
 define('DISCUZ_ROOT', '../');
 define('SYS_ROOT', './../framework');
 include(SYS_ROOT.'/runtime.php');
-include('./../config.php');
 if(UC_START!="on"){
 	return false;
 }
