@@ -1,3 +1,0 @@
-<?php
-$GLOBALS['vhostproduct_cfg']['1']=array('id'=>'1','name'=>'phpmysql','web_quota'=>'100','db_quota'=>'100','templete'=>'php','price'=>'1000','pause_flag'=>'0','node'=>'node2','try_flag'=>'0','month_flag'=>'0','subdir_flag'=>'1','subdir'=>'','describe'=>'','domain'=>'-1','subtemplete'=>'php52','upid'=>'0','htaccess'=>'1','max_connect'=>'0','ftp'=>'1','log_file'=>'1','access'=>'1','speed_limit'=>'0');
-?>
