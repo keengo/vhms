@@ -1,33 +1,69 @@
 {{include file='common/head.html'}}
 <body>
-<table width="{{$width}}" height="20" border="0" align="center" cellPadding=0 cellSpacing=0>
-  <tr><form id="form1" name="form1" method="post" action="?c=session&a=login" >
-    <td valign="middle">
-	{{if $role.user}}{{$role.user}},您好!  [<a href='?c=user&a=index'>进入会员中心</a>] [<a href='?c=session&a=logout'>退出</a>]{{else}}
-      用户名:
-      <input name="username" type="text" size="12" />
-        密码:
-        <input name="passwd" type="password" size="12" />
-        <input type="submit" name="Submit" value="登录" />
-        <a href="?c=public&a=registerForm"><font color='red'>注册</font></a>
-    忘记密码 
-   
-	{{/if}}
-    </td> </form>
-    <td align="right" valign="middle"><script language="javascript" src="?c=product&a=productList&target=self">
-</script></td>
-  </tr>
-</table>
-<table width='{{$width}}' border="0" align="center">
-<tr>
-<td width="120"><img src='{{$STATIC}}/style/logo.gif' border="0"/></td>
-<td width="650">banner</td>
-</tr></table>
-<table width="{{$width}}" border="0" align="center">
-  <tr><td>
-   {{foreach from=$menus item=menu}}
-    <a href="{{$menu.1}}">{{$menu.0}}</a>|
-   {{/foreach}}
-  </td>
-  </tr>
-</table>
+<style>
+a:link {color: #003366;text-decoration: none;}
+a:visited {color: #003366;text-decoration: none;}
+a:hover {color: #FCFCFD;text-decoration: underline;}
+a:active {color: #2583EA;text-decoration: none;}
+.right {text-align:left;padding-left:10px;}
+.white  {color: #FFFFFF}
+.right_r {text-align:left;padding-right:5px;}
+td {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+}
+.fl_le{ float:left}
+.fl_ri{ float:right}
+.foot{background-image:url(/user{{$STATIC}}images/footbg.jpg); background-repeat:repeat-x; width:960px;margin:0 auto; margin-bottom:6px; height:350px;}
+.foot .footmid{ width:900px; float:left;}
+.foot .link .wordlink{float:left;margin-top:30px; width:100%; color:#ccc; height:38px;}
+.foot .link .wordlink span{ color:#ea6210}
+.foot .link .wordlink a{margin-left:5px; margin-right:5px; color:#999999;}
+.foot .link .wordlink span a{margin-left:20px; margin-right:20px; color:#999999; text-decoration:none}
+.foot .link .wordlink span a:hover,.foot .link .wordlink a:hover { color: #FF6600;text-decoration:underline}
+</style>
+<div>
+	<table width="960" border="0" cellpadding="0" cellspacing="0" align="center">
+	<form id="form1" name="form1" method="post" action="?c=session&a=login" >
+	  <tr>
+		<td width="184"><img src='/user{{$STATIC}}/images/logo.jpg' height="80"></td>
+		<td valign="middle" align="center">
+			{{if $role.user}}{{$role.user}},您好!  [<a href='?c=user&a=index'>进入会员中心</a>] [<a href='?c=session&a=logout'>退出</a>]{{else}}
+      		用户名:
+      		<input name="username" type="text" size="12" />
+			密码:
+			<input name="passwd" type="password" size="12" />
+			<input type="submit" name="Submit" value="登录" />
+			<a href="?c=public&a=registerForm"><font color='red'>注册</font></a>
+			忘记密码 
+			{{/if}}
+		</td>
+		<td><script language="javascript" src="?c=product&a=productList&target=self"></script></td>
+	  </tr>
+	  </form>
+	  <tr>
+	  <tr>
+	    <td colspan="3">
+			<table width="100%" border="0" cellpadding="0" cellspacing="0">
+			  <tr>
+				<td width="6" height="42"><img src='/user{{$STATIC}}images/menu-home-red1.jpg'></td>
+				<td background='/user{{$STATIC}}images/menu-dxt-red2.jpg' class="right white ">
+					{{foreach from=$menus item=menu}}
+					<a href="{{$menu.1}}"><span class="white">{{$menu.0}}</span></a><span class="right right_r">|</span>
+		   			{{/foreach}}	
+				</td>
+				<td width="6" height="42"><img src='/user{{$STATIC}}images/menu-home-red3.jpg'></td>
+			  </tr>
+		  </table>
+	
+		</td>
+      </tr>
+	</table>
+</div>
+
+
+
+
+
+
+
