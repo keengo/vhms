@@ -52,7 +52,7 @@ class VhostDAO extends DAO{
 		return $this->selectPage(
 		array('name','uid','username','templete','node','doc_root','create_time','expire_time','product_id','status'),
 		null,
-					'uid', 
+		'uid', 
 		true,
 		$page,
 		$page_count,

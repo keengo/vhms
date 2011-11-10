@@ -26,7 +26,8 @@ class VhostproductDAO extends DAO {
 			'ftp'=>'ftp',
 			'log_file'=>'log_file',
 			'access'=>'access',
-			'speed_limit'=>'speed_limit'
+			'speed_limit'=>'speed_limit',
+			'view'=>'view'
 		);
 		$this->MAP_TYPE = array(
 			'id'=>FIELD_TYPE_INT|FIELD_TYPE_AUTO,
@@ -44,11 +45,15 @@ class VhostproductDAO extends DAO {
 			'speed_limit'=>FIELD_TYPE_INT,
 			'access'=>FIELD_TYPE_INT,
 			'log_file'=>FIELD_TYPE_INT,
-			'htaccess'=>FIELD_TYPE_INT
+			'htaccess'=>FIELD_TYPE_INT,
+			'view'=>FIELD_TYPE_INT
 		);
 		$this->_TABLE = DBPRE .'vhost_product';
 	}
-
+	public function updateProductView($id,$view)
+	{
+		return $this->update(array('view'=>$view),$this->getFieldValue2('id', $id));
+	}
 	public function delProduct($id)
 	{
 		return $this->delData($this->getFieldValue2('id',intval($id)));
@@ -95,7 +100,7 @@ class VhostproductDAO extends DAO {
 		$where = $this->MAP_ARR['pause_flag'].'=0';
 		return $this->getData2(array('id','name'),$where);
 	}
-	public function getProducts($flag)
+	public function getProducts($flag,$view=0)
 	{
 		
 		switch($flag){
@@ -103,7 +108,11 @@ class VhostproductDAO extends DAO {
 				$where = $this->MAP_ARR['pause_flag']."!=0";
 				break;
 			case 2:
-				$where = $this->MAP_ARR['pause_flag']."=0";
+				if($view != 0){
+					$where = $this->MAP_ARR['pause_flag']."=0 and ".$this->MAP_ARR['view']."=".$view;
+				}else{
+					$where = $this->MAP_ARR['pause_flag']."=0 and ".$this->MAP_ARR['view']."=0";
+				}
 				break;
 		}
 		//die("where=".$where);

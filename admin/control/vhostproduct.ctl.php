@@ -20,6 +20,20 @@ class VhostproductControl extends Control {
 		apicall('whm','refreshTemplete',array($_REQUEST['name']));
 		$this->showTemplete();
 	}
+	public function ajaxUpdateProductView()
+	{
+		if(daocall('vhostproduct','updateProductView',array(intval($_REQUEST['id']),intval($_REQUEST['view']))))
+		{
+			$ret='0';
+		}else{
+			$ret="1";
+		}
+		header("Content-Type: text/xml; charset=utf-8");
+		$str = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+		$str.="<result ret='".$ret."'>";
+		$str.="</result>";
+		return $str;
+	}
 	public function ajaxListSubTemplete()
 	{
 		$templete = apicall('nodes','listSubTemplete',array($_REQUEST['node'],$_REQUEST['templete']));
