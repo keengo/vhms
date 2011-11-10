@@ -1,4 +1,4 @@
-/* 定义全局变量 */
+/* 瀹氫箟鍏ㄥ眬鍙橀噺 */
 body {
 scrollbar-face-color:#DEF2FC;
 scrollbar-arrow-color:#000000;
@@ -11,7 +11,7 @@ margin: 0px;
 font-size:12px;
 line-height:150%;
 background:#F6F4F5;
-font-family: "宋体";
+font-family: "瀹嬩綋";
 }
 a:link {color: #003366;text-decoration: none;}
 a:visited {color: #003366;text-decoration: none;}
@@ -20,7 +20,7 @@ a:active {color: #2583EA;text-decoration: none;}
 td {
 font-size:12px;
 }
-/* 定义最外层样式 */
+/* 瀹氫箟鏈�灞傛牱寮�*/
 #container {
 height:100%;
 width:100%;
@@ -28,7 +28,7 @@ text-align:center;
 background:#F6F4F5;
 padding-top:10px;
 }
-/* 定义显示所在位置层样式 */
+/* 瀹氫箟鏄剧ず鎵�湪浣嶇疆灞傛牱寮�*/
 .topimg {
 text-align:left;
 background:url(xt.jpg) 10px no-repeat;

@@ -58,7 +58,6 @@ function updateViewResult()
 			//alert(xmlhttp2[id].responseText);	
 		 	var dataArray = xmlhttp2.responseXML.getElementsByTagName('result');
 		 	var ret = dataArray[0].getAttribute('ret');
-		 	xxkf_obj(id).innerHTML = "增加失败，请检查";
 		 	if(ret==1)
 		 	{
 		 		xxkf_obj(id).innerHTML = "增加失败，请检查";
@@ -71,10 +70,9 @@ function updateViewResult()
 }
 </script>
 <div id="container">
-<div class="padd mar_top">
-</div>
+	<!--  <div class="padd mar_top"></div> -->
   <div id="main" class="wid"> 
-  		<div align="left"> 
+  		<div  style="float:left">
 		  <form action='?c={{$smarty.request.c}}&a={{$smarty.request.a}}' method='post' name='product_form'>
 		  [<a href='?c=vhostproduct&a=flush'>更新配置文件</a>]
 		  [<a href="?c=vhostproduct&a=addProductForm" target='main'>增加产品</a>]
@@ -86,8 +84,11 @@ function updateViewResult()
 		  <span id='updateView' color='red'></span>
 		  </form>
   		</div>
-		<div class="topimg pal1" align='right'>共计 {{$sum}} 条记录</div>
+  		
+		<div  align='right'>共计 {{$sum}} 条记录</div>
+		
    		<table cellpadding=0 cellspacing=1 id="table">
+   		
       	<tr id="ttitle">
         <td class='color01 right' bgcolor='#efefef'>操作</td>
         <td class='color01 right' bgcolor='#efefef'>前台显示</td>
@@ -101,9 +102,10 @@ function updateViewResult()
 		<td class='color01 right' bgcolor='#efefef'>绑定子目录</td>	
 		<td class='color01 right' bgcolor='#efefef'>模板</td>		
 		<td class='color01 right' bgcolor='#efefef'>状态</td>    
-      </tr>
-	  {{foreach from=$list item=row}}
-      <tr>
+     	</tr>
+     	
+	  	{{foreach from=$list item=row}}
+     	<tr>
         <td class="right">
         [<a href="javascript:if(confirm('确定删除{{$row.name}}?')){location='?c=vhostproduct&a=del&id={{$row.id}}';}" title="删除">删除</a>]
         [<a href="?c=vhostproduct&a=editProductForm&id={{$row.id}}">更改</a>]
@@ -133,10 +135,10 @@ function updateViewResult()
 		{{if $row.month_flag!=0}}月付 {{/if}}
 		</td>
         </td>
-      </tr>
-	  {{/foreach}}
-    </table>
-    <div align="left"></div>
+      	</tr>
+	  	{{/foreach}}
+    	</table>
+    	<div align="left"></div>
   </div>
 </div>
 </body>
