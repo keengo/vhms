@@ -100,6 +100,30 @@ class VhostproductDAO extends DAO {
 		$where = $this->MAP_ARR['pause_flag'].'=0';
 		return $this->getData2(array('id','name'),$where);
 	}
+	public function selectPageList($page,$page_count,&$count,$flag=null,$view=null)
+	{
+		if($flag != null)
+		{
+			$where = $this->MAP_ARR['pause_flag']."=".$flag;
+		}else{
+			$where=$this->MAP_ARR['pause_flag']."=0";
+		}
+		if($view != null)
+		{
+			$where.= " and ".$this->MAP_ARR['view']."=".$view;
+		}else{
+			$where.= " and ".$this->MAP_ARR['view']."=0";
+		}
+		return $this->selectPage(array('id','name','web_quota','db_quota',
+										'templete','price','pause_flag',
+										'month_flag','node','describe',
+										'subtemplete','ftp','max_connect',
+										'access','htaccess','log_file',
+										'speed_limit','domain','subdir',
+										'subdir_flag','upid','try_flag'),
+										 $where, 'id',false, $page, $page_count, $count);
+		
+	}
 	public function getProducts($flag,$view=0)
 	{
 		

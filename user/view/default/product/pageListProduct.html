@@ -1,0 +1,41 @@
+<div id="container">
+	<!--  <div class="padd mar_top"></div> -->
+  <div id="main" class="wid"> 
+		<!--  <div  align='right'>共计 {{$sum}} 条记录</div>-->
+   		<table cellpadding=0 cellspacing=1 id="table">
+      	<tr id="ttitle">
+        <td class='color01 right' bgcolor='#efefef'>操作</td>
+	   	<td class='color01 right' bgcolor='#efefef' width="60">产品ID</td>
+        <td class='color01 right' bgcolor='#efefef'>产品名称</td>
+        <td class='color01 right' bgcolor='#efefef'>主机</td>
+		<td class='color01 right' bgcolor='#efefef'>空间</td>
+		<td class='color01 right' bgcolor='#efefef'>数据库</td>
+		<td class='color01 right' bgcolor='#efefef' title="最大连接数">连接数</td>
+		<td class='color01 right' bgcolor='#efefef'>绑定域名</td>	
+		<td class='color01 right' bgcolor='#efefef'>绑定子目录</td>	
+		<td class='color01 right' bgcolor='#efefef'>模板</td>
+		<td class='color01 right' bgcolor='#efefef'>价格</td>			
+		<td class='color01 right' bgcolor='#efefef'>状态</td>    
+     	</tr>
+     	
+	  	{{foreach from=$list item=row}}
+     	<tr>
+        <td class="right">[<a href="?c=product&a=sellForm&product=vhost_{{$row.id}}">购买</a>]</td>
+        <td class="right">{{$row.id}}</td>
+		<td class="right">{{$row.name}}</td>
+		<td class="right">{{$row.node}}</td>
+		<td class="right">{{$row.web_quota}}M</td>
+		<td class="right">{{$row.db_quota}}M</td>
+		<td class="right">{{$row.max_connect}}个</td>
+		<td class="right">{{if $row.domain==-1}}不限{{else}}{{$row.domain}}个{{/if}}</td>
+		<td class="right">{{if $row.subdir_flag}}允许{{/if}} {{$row.subdir}}</td>
+		<td class="right">{{$row.templete}}{{if $row.subtemplete}}:{{$row.subtemplete}}{{/if}}</td>
+		<td class="right">{{$row.price/100}}元/年</td>
+		<td class="right">{{if $row.pause_flag!=0}}暂停销售 {{/if}}{{if $row.month_flag!=0}}月付 {{/if}}</td>
+      	</tr>
+	  	{{/foreach}}
+    	</table>
+  </div>
+</div>
+</body>
+</html>
