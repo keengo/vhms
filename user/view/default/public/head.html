@@ -15,19 +15,47 @@ td {
 .fl_le{ float:left}
 .fl_ri{ float:right}
 .foot{background-image:url(/user{{$STATIC}}images/footbg.jpg); background-repeat:repeat-x; width:960px;margin:0 auto; margin-bottom:6px; height:350px;}
-.foot .footmid{ width:900px; float:left;}
+.foot .footmid{ width:950px; float:left;}
 .foot .link .wordlink{float:left;margin-top:30px; width:100%; color:#ccc; height:38px;}
 .foot .link .wordlink span{ color:#ea6210}
 .foot .link .wordlink a{margin-left:5px; margin-right:5px; color:#999999;}
 .foot .link .wordlink span a{margin-left:20px; margin-right:20px; color:#999999; text-decoration:none}
 .foot .link .wordlink span a:hover,.foot .link .wordlink a:hover { color: #FF6600;text-decoration:underline}
+
+.left_box {
+	BORDER-RIGHT: #C2C2C2 1px solid; BORDER-TOP: #C2C2C2 1px solid; BACKGROUND: #fafcff; MARGIN: 0px 0px 6px; BORDER-LEFT: #C2C2C2 1px solid; BORDER-BOTTOM: #C2C2C2 1px solid;
+}
+.Left_main {
+	FLOAT: left; WIDTH: 263px;
+}
+.bgcolor_left{
+background-color:#E0E0E0;
+}
+.bgcolor_left2{
+background-color:#ffffff;
+}
+#table_t {
+width:85%; border:0px; line-height:20px;
+}
+.index_bg{background-image:url(/user{{$STATIC}}images/box_tl3.jpg); background-repeat:repeat-x; width:263px;margin:0 auto; margin-bottom:0px; height:223px;}
+.left_bg_help{background-image:url(/user{{$STATIC}}images/box_tl5.jpg); background-repeat:repeat-x; width:263px;margin:0 auto; margin-bottom:0px; height:160px;}
+.left_bg{background-image:url(/user{{$STATIC}}images/ne_1.jpg); background-repeat:repeat-x; width:74px; margin-top:7px; margin-left:10px; height:26px;}
+.left_help_img{background-image:url(/user{{$STATIC}}images/help.jpg); background-repeat:repeat-x; width:74px; margin-top:7px; margin-left:10px; height:26px;}
+.left_help_service{background-image:url(/user{{$STATIC}}images/help2.jpg); background-repeat:repeat-x; width:74px; margin-top:7px; margin-left:10px; height:26px;}
+.left_top{padding-top:10px;padding-left:33px;}
+.left_help_wid{padding-top:0px;padding-left:5px;}
+.fontcolor{color:#4C4B4B;}
+.height_t{height:7px;}
+.topimg {text-align:left;background:url(/user{{$STATIC}}images/help_1.jpg) 0px no-repeat;line-height:22px;padding-left:30px;}
+.topimg2 {text-align:left;background:url(/user{{$STATIC}}images/customer_head.jpg) 0px no-repeat;line-height:82px;height:82px;width:82px;}
+.left_service_color{color:red;}
 </style>
 <div>
 	<table width="960" border="0" cellpadding="0" cellspacing="0" align="center">
 	<form id="form1" name="form1" method="post" action="?c=session&a=login" >
 	  <tr>
-		<td width="184"><img src='/user{{$STATIC}}/images/logo.jpg' height="80"></td>
-		<td valign="middle" align="center">
+		<td width="184" rowspan="2"><img src='/user{{$STATIC}}/images/logo.jpg' height="80"></td>
+		<td valign="top" align="left">
 			{{if $role.user}}{{$role.user}},您好!  [<a href='?c=user&a=index'>进入会员中心</a>] [<a href='?c=session&a=logout'>退出</a>]{{else}}
       		用户名:
       		<input name="username" type="text" size="12" />
@@ -38,9 +66,12 @@ td {
 			忘记密码 
 			{{/if}}
 		</td>
-		<td><script language="javascript" src="?c=product&a=productList&target=self"></script></td>
+		<td valign="top"><script language="javascript" src="?c=product&a=productList&target=self"></script></td>
 	  </tr>
 	  </form>
+	  <tr>
+	  	<td colspan="2" align="center">ad</td>
+	  </tr>
 	  <tr>
 	  <tr>
 	    <td colspan="3">
@@ -49,7 +80,7 @@ td {
 				<td width="6" height="42"><img src='/user{{$STATIC}}images/menu-home-red1.jpg'></td>
 				<td background='/user{{$STATIC}}images/menu-dxt-red2.jpg' class="right white ">
 					{{foreach from=$menus item=menu}}
-					<a href="{{$menu.1}}"><span class="white">{{$menu.0}}</span></a><span class="right right_r">|</span>
+					<a href="{{$menu.1}}"><span class="white"><b>{{$menu.0}}</b></span></a><span class="right right_r">|</span>
 		   			{{/foreach}}	
 				</td>
 				<td width="6" height="42"><img src='/user{{$STATIC}}images/menu-home-red3.jpg'></td>
