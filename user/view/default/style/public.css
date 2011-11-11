@@ -1,5 +1,5 @@
 
-/*定义全局链接样式*/
+/*瀹氫箟鍏ㄥ眬閾炬帴鏍峰紡*/
 a:link,a:visited {
 	color: #036;
 	text-decoration: none;
@@ -9,13 +9,14 @@ a:hover,a:active {
 	text-decoration: underline;
 }
 
-/*定义body的样式*/
+/*瀹氫箟body鐨勬牱寮�/
 body{
 	color:#036;
 	background-color:#fff;
-	font-family : "Lucida Grande", Verdana, Lucida, Arial, Helvetica, 宋体,sans-serif;
+	font-family : "Lucida Grande", Verdana, Lucida, Arial, Helvetica, 瀹嬩綋,sans-serif;
 	font-size:12px;
 	line-height:150%;
+	/*
 	scrollbar-face-color:#DEF2FC;
 	scrollbar-arrow-color:#000000;
 	scrollbar-highlight-color:#FFFFFF;
@@ -23,6 +24,7 @@ body{
 	scrollbar-shadow-color:#FFFFFF;
 	scrollbar-darkshadow-color:#FFFFFF;
 	scrollbar-track-color:#FFFFFF;
+	*/
 }
 h1{
 	font-size:12px;
