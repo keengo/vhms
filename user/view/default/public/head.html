@@ -111,7 +111,7 @@ img{margin:0;padding:0;border:0;}
 	<form id="form1" name="form1" method="post" action="?c=session&a=login" >
 	  <tr>
 		<td width="184" rowspan="2"><img src='/user{{$STATIC}}/images/logo.jpg' height="80"></td>
-		<td valign="top" align="left">
+		<td valign="top" align="left" class="right">
 			{{if $role.user}}{{$role.user}},您好!  [<a href='?c=user&a=index'>进入会员中心</a>] [<a href='?c=session&a=logout'>退出</a>]{{else}}
       		用户名:
       		<input name="username" type="text" size="12" />
