@@ -9,7 +9,8 @@ a:active {color: #2583EA;text-decoration: none;}
 .right_r{text-align:left;padding-left:40px;}
 .white  {color: #FFFFFF}
 .right_r {text-align:left;padding-right:5px;}
-td {font-family: Arial, Helvetica, sans-serif;font-size: 14px;}
+td {font-family: Arial, Helvetica, sans-serif;font-size: 13px;}
+.td_font {font-family: Arial, Helvetica, sans-serif;font-size: 14px;}
 .fl_le{ float:left}
 .fl_ri{ float:right}
 .foot{background-image:url(/user{{$STATIC}}images/footbg.jpg); background-repeat:repeat-x; width:965px;margin:0 auto; margin-bottom:6px; height:150px;}
@@ -48,6 +49,7 @@ td {font-family: Arial, Helvetica, sans-serif;font-size: 14px;}
 .host_bg {text-align:left;background:url(/user{{$STATIC}}images/r_zj.jpg) 0px no-repeat;line-height:82px;height:257px;width:689px;}
 .color_red{color:#FF0000;}
 .color_orange{color:#D7631A;}
+.right_blue{color:#048ABF;}
 .right_hg{height:30px;}
 .right_hg2{height:23px;}
 .right_hg3{height:36px;}
@@ -139,7 +141,7 @@ img{margin:0;padding:0;border:0;}
 				<td width="6" height="42"><img src='/user{{$STATIC}}images/menu-home-red1.jpg'></td>
 				<td background='/user{{$STATIC}}images/menu-dxt-red2.jpg' class="right white ">
 					{{foreach from=$menus item=menu}}
-					<a href="{{$menu.1}}"><span class="white"><b>{{$menu.0}}</b></span></a><span class="right right_r">|</span>
+					<a href="{{$menu.1}}"><span class="white"><b><span class="td_font">{{$menu.0}}</span></b></span></a><span class="right right_r">|</span>
 		   			{{/foreach}}	
 				</td>
 				<td width="6" height="42"><img src='/user{{$STATIC}}images/menu-home-red3.jpg'></td>
@@ -149,7 +151,7 @@ img{margin:0;padding:0;border:0;}
 		</td>
       </tr>
 	</table>
-</div>
+<div>
 
 
 
