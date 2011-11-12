@@ -111,21 +111,22 @@ img{margin:0;padding:0;border:0;}
 <div>
 	<table width="965" border="0" cellpadding="0" cellspacing="0" align="center">
 	<form id="form1" name="form1" method="post" action="?c=session&a=login" >
-	  <tr>
-		<td width="184" rowspan="2"><img src='/user{{$STATIC}}/images/logo.jpg' height="80"></td>
-		<td valign="top" align="left" class="right">
-			{{if $role.user}}{{$role.user}},您好!  [<a href='?c=user&a=index'>进入会员中心</a>] [<a href='?c=session&a=logout'>退出</a>]{{else}}
-      		用户名:
-      		<input name="username" type="text" size="12" />
-			密码:
-			<input name="passwd" type="password" size="12" />
-			<input type="submit" name="Submit" value="登录" />
-			<a href="?c=public&a=registerForm"><font color='red'>注册</font></a>
-			忘记密码 
-			{{/if}}
-		</td>
-		<td valign="top"><script language="javascript" src="?c=product&a=productList&target=self"></script></td>
-	  </tr>
+		<tr><td colspan="2">
+				{{if $role.user}}{{$role.user}},您好!  [<a href='?c=user&a=index'>进入会员中心</a>] [<a href='?c=session&a=logout'>退出</a>]{{else}}
+				用户名:
+				<input name="username" type="text" size="12" />
+				密码:
+				<input name="passwd" type="password" size="12" />
+				<input type="submit" name="Submit" value="登录" />
+				<a href="?c=public&a=registerForm"><font color='red'>注册</font></a>
+				忘记密码 
+				{{/if}}
+	  		</td>
+			<td align="right"><script language="javascript" src="?c=product&a=productList&target=self"></script></td>
+		 <tr>
+			<td width="184" rowspan="2"><img src='/user{{$STATIC}}/images/logo.jpg' height="80"></td>
+			<td valign="top" align="left" class="right" width="500"></td><td valign="top"></td>
+		 </tr>
 	  </form>
 	  <tr>
 	  	<td colspan="2" align="right"><a href="http://zh.kanglesoft.com"><img src="/user{{$STATIC}}images/ad.gif" border="0"></a></td>
