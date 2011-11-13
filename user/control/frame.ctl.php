@@ -16,6 +16,14 @@ class FrameControl extends Control
 		return $this->display('user/index.html');
 	}
 	public function index(){
+		$request = '';
+		foreach($_REQUEST as $k=>$v){
+			if($k=='a' || $k=='c' || $k=='fa' || $k=='fc'){
+				continue;
+			}
+			$request = '&'.$k.'='.urlencode($v);
+		}
+		$this->assign('request',$request);
 		return $this->display('frame/index.html');
 	}
 	public function top()
