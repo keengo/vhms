@@ -6,6 +6,7 @@ a:visited {color: #003366;text-decoration: none;}
 a:hover {color: #FCFCFD;text-decoration: underline;}
 a:active {color: #2583EA;text-decoration: none;}
 .right {text-align:left;padding-left:10px;}
+.right_h {text-align:left;padding-left:30px;}
 .right_r{text-align:left;padding-left:40px;}
 .white  {color: #FFFFFF}
 .right_r {text-align:left;padding-right:5px;}
@@ -13,15 +14,10 @@ td {font-family: Arial, Helvetica, sans-serif;font-size: 13px;}
 .td_font {font-family: Arial, Helvetica, sans-serif;font-size: 14px;}
 .fl_le{ float:left}
 .fl_ri{ float:right}
-.foot{background-image:url(/user{{$STATIC}}images/footbg.jpg); background-repeat:repeat-x; width:960px;margin:0 auto; margin-bottom:6px; height:150px;}
-.foot .footmid{ width:950px; float:left;}
-.foot .link .wordlink{float:left;margin-top:30px; width:100%; color:#ccc; height:38px;}
-.foot .link .wordlink span{ color:#ea6210}
-.foot .link .wordlink a{margin-left:5px; margin-right:5px; color:#999999;}
-.foot .link .wordlink span a{margin-left:20px; margin-right:20px; color:#999999; text-decoration:none}
-.foot .link .wordlink span a:hover,.foot .link .wordlink a:hover { color: #FF6600;text-decoration:underline}
+
 
 .left_box {BORDER-RIGHT: #C2C2C2 1px solid; BORDER-TOP: #C2C2C2 1px solid; BACKGROUND: #fafcff; MARGIN: 0px 0px 6px; BORDER-LEFT: #C2C2C2 1px solid; BORDER-BOTTOM: #C2C2C2 1px solid;}
+.mar_h{ padding-bottom:10px;}
 .Left_main {FLOAT: left; WIDTH: 263px;}
 .right_main {FLOAT: left; margin-left:5px;}
 .bgcolor_left{background-color:#E0E0E0;}
@@ -31,6 +27,7 @@ td {font-family: Arial, Helvetica, sans-serif;font-size: 13px;}
 #table_rr {width:100%; border:0px; line-height:24px;}
 .index_bg{background-image:url(/user{{$STATIC}}images/box_tl3.jpg); background-repeat:repeat-x; width:263px;margin:0 auto; margin-bottom:0px; height:223px;}
 .left_bg_help{background-image:url(/user{{$STATIC}}images/box_tl5.jpg); background-repeat:repeat-x; width:263px;margin:0 auto; margin-bottom:0px; height:160px;}
+.left_bg_foot{background-image:url(/user{{$STATIC}}images/box_tl5.jpg); background-repeat:repeat-x; width:960px;margin:0 auto; margin-bottom:0px; height:120px;}
 .left_bg{background-image:url(/user{{$STATIC}}images/ne_1.jpg); background-repeat:repeat-x; width:74px; margin-top:7px; margin-left:10px; height:26px;}
 .left_help_img{background-image:url(/user{{$STATIC}}images/help.jpg); background-repeat:repeat-x; width:74px; margin-top:2px; margin-bottom:5px; margin-left:10px; height:26px;}
 .left_help_service{background-image:url(/user{{$STATIC}}images/help2.jpg); background-repeat:repeat-x; width:74px; margin-top:2px;  margin-bottom:5px; margin-left:10px; height:26px;}
@@ -40,8 +37,10 @@ td {font-family: Arial, Helvetica, sans-serif;font-size: 13px;}
 .height_t{height:7px;}
 .topimg {text-align:left;background:url(/user{{$STATIC}}images/help_1.jpg) 0px no-repeat;line-height:22px;padding-left:30px;}
 .topimg2 {text-align:left;background:url(/user{{$STATIC}}images/service_pe.jpg) 0px no-repeat;line-height:82px;height:126px;width:137px;}
+.topimg_h {text-align:left;background:url(/user{{$STATIC}}images/menu-dxt-red_bg.jpg) 0px no-repeat;line-height:30px;height:30px;width:7px;}
 .left_dns {height:118px;width:262px;}
 .left_vip {height:121px;width:262px;}
+.left_vip2 {height:153px;width:262px;}
 .left_beiban {height:93px;width:262px;}
 .left_service_color{color:red;}
 
@@ -76,6 +75,11 @@ a.axx:hover img {filter: alpha(opacity=100); opacity: 1.0; -moz-opacity: 1.0}
 a.bxx {	border-color: #000}
 a.bxx:hover {border-color: #000}
 img{margin:0;padding:0;border:0;}
+#nav li:hover a.mainlevel, #nav li.sfhover a.mainlevel{
+        color: #333399;
+        background-color: #fff;}
+		
+		
 </style>
 <!--幻灯片script代码开始-->
 <script language="javascript">
@@ -116,7 +120,7 @@ img{margin:0;padding:0;border:0;}
 <div><table id="table_r"><tr><td height="3"></td></tr></table></div>
 <div align="center">
 <div class="wid_menu">
-	<table width="965" border="0" cellpadding="0" cellspacing="0" align="center">
+	<table width="963" border="0" cellpadding="0" cellspacing="0" align="center">
 	<form id="form1" name="form1" method="post" action="?c=session&a=login" >
 		<tr><td colspan="2">
 				{{if $role.user}}{{$role.user}},您好!  [<a href='?c=user&a=index'>进入会员中心</a>] [<a href='?c=session&a=logout'>退出</a>]{{else}}
@@ -144,9 +148,10 @@ img{margin:0;padding:0;border:0;}
 			<table width="100%" border="0" cellpadding="0" cellspacing="0">
 			  <tr>
 				<td width="6" height="42"><img src='/user{{$STATIC}}images/menu-home-red1.jpg'></td>
-				<td background='/user{{$STATIC}}images/menu-dxt-red2.jpg' class="right white ">
+				<td background='/user{{$STATIC}}images/menu-dxt-red2.jpg' class="right_h white">
 					{{foreach from=$menus item=menu}}
-					<a href="{{$menu.1}}"><span class="white"><b><span class="td_font">{{$menu.0}}</span></b></span></a><span class="right right_r">|</span>
+					<a href="{{$menu.1}}" class="mainlevel"><b><span class="td_font white">{{$menu.0}}</span></b></a>
+					&nbsp;&nbsp;<span class="right topimg_h">&nbsp;&nbsp;</span>
 		   			{{/foreach}}	
 				</td>
 				<td width="6" height="42"><img src='/user{{$STATIC}}images/menu-home-red3.jpg'></td>
