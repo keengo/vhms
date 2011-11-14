@@ -15,8 +15,6 @@ class PublicControl extends  Control
 	{
 		$id=intval($_REQUEST['id']);
 		$new=apicall('news','getNewsById',array($id));
-//		print_r($newinfo);
-//		die();
 		$this->_tpl->assign('new',$new);
 		return $this->_tpl->fetch('public/viewnews.html');		
 	}
@@ -38,7 +36,7 @@ class PublicControl extends  Control
 		$menus=array(
 		array('首页','/'),
 		array('虚拟主机','?c=public&a=vhost'),
-		array('会员中心','?c=public&a=index2')
+		array('会员中心','?c=user&a=index')
 		);
 		$this->_tpl->assign("menus",$menus);
 		return $this->_tpl->fetch("public/head.html");
@@ -100,12 +98,6 @@ class PublicControl extends  Control
 					needRole('admin');
 					return header("Location:  /admin/index.php?c=user&a=pageUsers");
 				}
-				//				registerRole('user',$username);
-				//				$ucsynlogin = uc_user_synlogin($uid);
-				//				echo $ucsynlogin;//echo 必需，用于ucenter的js返回数据
-				//				$userinfo=daocall('user','getUser',array($username));
-				//				$this->assign('user',$userinfo);
-				//				return $this->display('user/index.html');
 				exit('注册成功，<a href="?c=session&a=loginForm">返回登录</a>');
 				die();
 			}
