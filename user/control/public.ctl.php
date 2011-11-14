@@ -12,6 +12,8 @@ class PublicControl extends  Control
 	}
 	public function index()
 	{
+		$products=apicall('product','getProductList');
+		$this->_tpl->assign('products',$products);
 		return $this->_tpl->fetch('public/index.html');
 	}
 	public function foot()
@@ -137,6 +139,12 @@ class PublicControl extends  Control
 		$str = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
 		$str .="<result ret='".$result."' msg='".$msg."'/>";
 		die($str);
+	}
+	public function ajaxGetProductList()
+	{
+		$products=apicall('product','getProducts');
+		print_r($products);
+		die();
 	}
 	public function checkUser()
 	{

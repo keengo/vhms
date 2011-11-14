@@ -58,6 +58,10 @@ class VhostproductDAO extends DAO {
 	{
 		return $this->delData($this->getFieldValue2('id',intval($id)));
 	}
+	public function getProductList()
+	{
+		return $this->select(null);
+	}
 	public function getProduct($id,$fields=null)
 	{
 		$where = $this->getFieldValue2('id',$id);

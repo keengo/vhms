@@ -42,6 +42,10 @@ class ProductAPI extends API
 		$products = daocall('vhostproduct','getProducts',array(0));
 		return apicall('utils','writeConfig',array($products,'id','vhostproduct'));
 	}
+	public function getProductList()
+	{
+		return daocall('vhostproduct','getProductList',array());
+	}
 	public function getProducts()
 	{
 			$products = array();
