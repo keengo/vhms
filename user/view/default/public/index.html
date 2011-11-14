@@ -48,8 +48,8 @@
 				<div class="left_bg"></div>
 				<div class="left_top">
 					<table cellpadding="0" cellspacing="0" id="table_t">
-					{{for $i=count($news);$i<(count($news))-7;$i--}}
-					    <tr><td class="fontcolor">主机提供免费主机</td><td class="fontcolor">11/10/13</td></tr>
+					{{for $i=count($news);$i>(count($news))-7;$i--}}
+					    <tr><td class="fontcolor"><font color='red'>{{substr($news[$i].title,0,27)}}</font></td><td class="fontcolor"><font color='red'>{{substr($news[$i].add_time,5,5)}}</font></td></tr>
 					 {{/for}}
 				  </table>
 				</div>

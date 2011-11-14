@@ -19,6 +19,8 @@ class PublicControl extends  Control
 	public function index()
 	{
 		$news=daocall('news','getNewsList',array());
+//		print_r($news);
+//		die();
 		$products=apicall('product','getProductList');
 		
 		$this->_tpl->assign('news',$news);
