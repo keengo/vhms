@@ -10,6 +10,12 @@ class PublicControl extends  Control
 	{
 		parent::__destruct();
 	}
+
+	public function index2()
+	{
+		$this->_tpl->fetch('public/index2.html');
+		return;
+	}
 	public function index()
 	{
 		$products=apicall('product','getProductList');
@@ -25,7 +31,7 @@ class PublicControl extends  Control
 		$menus=array(
 		array('首页','/'),
 		array('虚拟主机','?c=public&a=vhost'),
-		array('会员中心','?c=user&a=index')
+		array('会员中心','?c=public&a=index2')
 		);
 		$this->_tpl->assign("menus",$menus);
 		return $this->_tpl->fetch("public/head.html");
@@ -43,7 +49,7 @@ class PublicControl extends  Control
 			exit("用户名不符合标准");
 		}
 		if(UC_START && UC_START=='on'){
-			
+				
 			include_once dirname(__FILE__).'/../../config.inc.php';
 			if(UC_KEY=="" || UC_API=="")
 			{
