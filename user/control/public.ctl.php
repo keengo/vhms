@@ -14,11 +14,11 @@ class PublicControl extends  Control
 	public function viewNewsById()
 	{
 		$id=intval($_REQUEST['id']);
-		$newinfo=apicall('news','getNewsById',array($id));
+		$new=apicall('news','getNewsById',array($id));
 //		print_r($newinfo);
 //		die();
-		$this->_tpl->assign('new',$newsinfo);
-		return $this->_tpl->fetch('public/news.html');		
+		$this->_tpl->assign('new',$new);
+		return $this->_tpl->fetch('public/viewnews.html');		
 	}
 	public function index()
 	{
