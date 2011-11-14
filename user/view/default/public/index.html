@@ -48,13 +48,9 @@
 				<div class="left_bg"></div>
 				<div class="left_top">
 					<table cellpadding="0" cellspacing="0" id="table_t">
+					{{for $i=count($news);$i<(count($news))-7;$i--}}
 					    <tr><td class="fontcolor">主机提供免费主机</td><td class="fontcolor">11/10/13</td></tr>
-						<tr><td class="fontcolor">主机提供免费主机</td><td class="fontcolor">11/10/13</td></tr>
-						<tr><td class="fontcolor">主机提供免费主机</td><td class="fontcolor">11/10/13</td></tr>
-						<tr><td class="fontcolor">主机提供免费主机</td><td class="fontcolor">11/10/13</td></tr>
-						<tr><td class="fontcolor">主机提供免费主机</td><td class="fontcolor">11/10/13</td></tr>
-						<tr><td class="fontcolor">主机提供免费主机</td><td class="fontcolor">11/10/13</td></tr>
-						<tr><td class="fontcolor">主机提供免费主机</td><td class="fontcolor">11/10/13</td></tr>
+					 {{/for}}
 						<tr><td rowspan="2" valign="middle" class="right_hg">
 							<a href="#"><img src="/user{{$STATIC}}images/box_tl4.jpg" border="0" /></a>
 						</td></tr>

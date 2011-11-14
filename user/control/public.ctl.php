@@ -18,7 +18,10 @@ class PublicControl extends  Control
 	}
 	public function index()
 	{
+		$news=daocall('news','getNewsList',array());
 		$products=apicall('product','getProductList');
+		
+		$this->_tpl->assign('news',$news);
 		$this->_tpl->assign('products',$products);
 		return $this->_tpl->fetch('public/index.html');
 	}

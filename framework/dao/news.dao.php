@@ -36,6 +36,10 @@ class NewsDAO extends DAO{
 	{
 		return $this->delData($this->getFieldValue2('id', $id));
 	}
+	public function getNewsList()
+	{
+		return $this->select(null);
+	}
 	public function pageNewsByNumber($number,$page,$page_count,&$count)
 	{		
 		$where=null;
