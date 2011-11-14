@@ -11,16 +11,18 @@ class PublicControl extends  Control
 		parent::__destruct();
 	}
 
-	public function index2()
+	public function viewNewsById()
 	{
-		$this->_tpl->fetch('public/index2.html');
-		return;
+		$id=intval($_REQUEST['id']);
+		$newinfo=apicall('news','getNewsById',array($id));
+//		print_r($newinfo);
+//		die();
+		$this->_tpl->assign('new',$newsinfo);
+		return $this->_tpl->fetch('public/news.html');		
 	}
 	public function index()
 	{
-		$news=daocall('news','getNewsList',array());
-//		print_r($news);
-//		die();
+		$news=apicall('news','getNewsList',array());
 		$products=apicall('product','getProductList');
 		
 		$this->_tpl->assign('news',$news);

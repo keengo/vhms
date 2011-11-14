@@ -30,7 +30,9 @@ if($c=='frame' && $a=='index'){
 	$tpl->assign("fa",$fa);
 }
 $main = dispatch($c,$a);
+
 //echo $main;
+//die();
 //startFramework();
 $tpl->assign("title",getTitle());
 $tpl->assign('main',$main);
