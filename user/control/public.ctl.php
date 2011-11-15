@@ -10,7 +10,12 @@ class PublicControl extends  Control
 	{
 		parent::__destruct();
 	}
-
+	public function host()
+	{
+		$products=apicall('product','getProductList');
+		$this->_tpl->assign('products',$products);
+		return $this->_tpl->fetch('public/host.html');
+	}
 	public function viewNewsById()
 	{
 		$id=intval($_REQUEST['id']);
@@ -35,7 +40,7 @@ class PublicControl extends  Control
 	{
 		$menus=array(
 		array('首页','/'),
-		array('虚拟主机','?c=public&a=vhost'),
+		array('虚拟主机','?c=public&a=host'),
 		array('会员中心','?c=user&a=index')
 		);
 		$this->_tpl->assign("menus",$menus);
