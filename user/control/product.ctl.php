@@ -37,7 +37,7 @@ class ProductControl extends Control {
 		$this->_tpl->assign('page',$page);
 		$this->_tpl->assign('page_count',$page_count);
 		$this->_tpl->assign('list',$list);
-		$this->_tpl->display('product/pageListProduct.html');
+		return $this->_tpl->display('product/pageListProduct.html');
 	}
 	public function sellForm()
 	{
@@ -129,10 +129,6 @@ class ProductControl extends Control {
 			$this->_tpl->assign('msg','升级失败');
 		}
 		return $this->_tpl->fetch('public/msg.html');
-	}
-	public function left()
-	{
-
 	}
 }
 ?>

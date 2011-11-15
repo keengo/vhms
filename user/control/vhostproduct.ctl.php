@@ -19,6 +19,7 @@ class VhostproductControl extends Control {
 			return false;
 		}
 	}
+
 	public function pageVhostByuser()
 	{
 		$name = $_REQUEST['name'];

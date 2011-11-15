@@ -1,6 +1,6 @@
 <?php
 needRole('user');
-class MoneyControl extends Control {	
+class MoneyControl extends Control {
 	public function moneyin()
 	{
 		$page = intval($_REQUEST['page']);
@@ -19,8 +19,8 @@ class MoneyControl extends Control {
 		$this->_tpl->assign('page',$page);
 		$this->_tpl->assign('page_count',$page_count);
 		$this->_tpl->assign('list',$list);
-		$this->_tpl->display('money/moneyin.html');
-		
+		return $this->_tpl->fetch('money/moneyin.html');
+
 	}
 	public function add()
 	{
@@ -48,7 +48,7 @@ class MoneyControl extends Control {
 			case 2:
 				require_once(SYS_ROOT.'/../plugin/chinabank/Send.php');
 				break;
-			default:				
+			default:
 				die("暂时不支持该支付网关");
 		}
 	}
@@ -70,11 +70,11 @@ class MoneyControl extends Control {
 		$this->_tpl->assign('page',$page);
 		$this->_tpl->assign('page_count',$page_count);
 		$this->_tpl->assign('list',$list);
-		$this->_tpl->display('money/moneyout.html');		
+		return $this->_tpl->display('money/moneyout.html');
 	}
 	public function addFrom()
 	{
-		$this->_tpl->display('money/add.html');
+		return $this->_tpl->display('money/add.html');
 	}
-	
+
 }
