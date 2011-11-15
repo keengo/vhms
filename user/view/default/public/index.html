@@ -4,46 +4,6 @@
       <td valign="top" width="262">
 	  <!--左部文件开始-->
 	  	<div class="left_main">
-			<!--幻灯片代码开始-->
-			<div class="left_box bgcolor_left">
-				<table border="0" cellpadding="0" cellspacing="0" width="262">
-					<tr>
-						<td valign="top">
-							<div class="picshow_main" style="z-index:10">
-								<div id="picdiv1">
-								  <a id="url1" href="#">
-									<img id="pic1" class="imgbig" src="/user{{$STATIC}}images/vip.jpg" alt="kangle 虚拟主机管理前台" border="0">
-								  </a>
-								</div>
-								<div id="picdiv2">
-								<a id="url2" href="#">
-									<img id="pic2" class="imgbig" src="/user{{$STATIC}}images/vip2.jpg" alt="kangle 虚拟主机管理前台" border="0"></a>
-								</div>
-								<div id="picdiv3">
-								  <a id="url3" href="#">
-									<img id="pic3" class="imgbig" src="/user{{$STATIC}}images/vip3.jpg" alt="kangle 虚拟主机管理前台" border="0">
-								  </a>  
-								</div>
-								<div id="picdiv4">
-								  <a id="url4" href="#">
-									<img id="pic4" class="imgbig" src="/user{{$STATIC}}images/vip4.jpg" alt="kangle 虚拟主机管理前台" border="0">
-								  </a>  
-								</div>
-
-								<div class="picshow_change">
-								  <a href="javascript:changeimg(1);" id="xxjdjj1"><img src="/user{{$STATIC}}images/index_adb1.gif" border="0"></a>
-								  <a href="javascript:changeimg(2);" id="xxjdjj2"><img src="/user{{$STATIC}}images/index_adb2.gif" border="0"></a>
-								  <a href="javascript:changeimg(3);" id="xxjdjj3"><img src="/user{{$STATIC}}images/index_adb3.gif" border="0"></a>
-								  <a href="javascript:changeimg(4);" id="xxjdjj4"><img src="/user{{$STATIC}}images/index_adb4.gif" border="0"></a>
-								</div>
-							</div>
-							<script>change_img();</script>
-						</td>
-					</tr>
-				</table>
-			</div>
-			<!--幻灯片代码结束-->
-			<div class="height_t"><table id="table_r"><tr><td height="5"></td></tr></table></div>
 			<!--公告代码开始-->
 			<div class="left_box bgcolor_left index_bg">
 				<div class="left_bg"></div>
@@ -130,6 +90,51 @@
 	  </td>
       <td valign="top">
 	 	 <!--右边代码开始-->
+		 
+		 	  	<!--幻灯片开始-->
+			<div class="right_main">
+				<div class="right_top right_wid2">
+					<table border="0" cellpadding="0" cellspacing="0" width="262">
+						<tr>
+							<td valign="top">
+								<div class="picshow_main" style="z-index:10">
+									<div id="picdiv1">
+									  <a id="url1" href="#">
+										<img id="pic1" class="imgbig" src="/user{{$STATIC}}images/vip.jpg" alt="kangle 虚拟主机管理前台" border="0">
+									  </a>
+									</div>
+									<div id="picdiv2">
+									<a id="url2" href="#">
+										<img id="pic2" class="imgbig" src="/user{{$STATIC}}images/vip2.jpg" alt="kangle 虚拟主机管理前台" border="0"></a>
+									</div>
+									<div id="picdiv3">
+									  <a id="url3" href="#">
+										<img id="pic3" class="imgbig" src="/user{{$STATIC}}images/vip3.jpg" alt="kangle 虚拟主机管理前台" border="0">
+									  </a>  
+									</div>
+									<div id="picdiv4">
+									  <a id="url4" href="#">
+										<img id="pic4" class="imgbig" src="/user{{$STATIC}}images/vip4.jpg" alt="kangle 虚拟主机管理前台" border="0">
+									  </a>  
+									</div>
+	
+									<div class="picshow_change">
+									  <a href="javascript:changeimg(1);" id="xxjdjj1"><img src="/user{{$STATIC}}images/index_adb1.gif" border="0"></a>
+									  <a href="javascript:changeimg(2);" id="xxjdjj2"><img src="/user{{$STATIC}}images/index_adb2.gif" border="0"></a>
+									  <a href="javascript:changeimg(3);" id="xxjdjj3"><img src="/user{{$STATIC}}images/index_adb3.gif" border="0"></a>
+									  <a href="javascript:changeimg(4);" id="xxjdjj4"><img src="/user{{$STATIC}}images/index_adb4.gif" border="0"></a>
+									</div>
+								</div>
+								<script>change_img();</script>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="height_t"><table id="table_r"><tr><td height="5"></td></tr></table></div>
+			</div>
+		<!--幻灯片机结束-->	
+		 
+		 
 	  	<!--右部虚拟主机开始-->
 			<div class="right_main">
 				<div class="right_top host_bg">
@@ -175,6 +180,9 @@
 			</div>
 		<!--右部虚拟主机结束-->	
 		
+		
+
+
 		{{if count($products)>3}}
 	  	<!--右部虚拟主机开始-->
 			<div class="right_main">
