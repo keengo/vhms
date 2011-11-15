@@ -19,6 +19,15 @@ class QuestionControl extends Control {
 		}
 		return $this->fetch('msg.html');
 	}
+	public function left()
+	{
+		if($GLOBALS['frame']==1){
+			$this->_tpl->assign('target','main');
+		}else{
+			$this->_tpl->assign('target','_self');
+		}
+		return $this->_tpl->fetch('user/left.html');
+	}
 	public function getQuestion()
 	{
 		$log=daocall('question','getQuestion',array($_REQUEST['id']));
