@@ -1,9 +1,8 @@
 {{include file='common/head.html'}}
-<body>
 <style>
 a:link {color: #003366;text-decoration: none;}
 a:visited {color: #003366;text-decoration: none;}
-a:hover {color: #FCFCFD;text-decoration: underline;}
+a:hover {color: #DB1333;text-decoration: underline;}
 a:active {color: #2583EA;text-decoration: none;}
 .right {text-align:left;padding-left:10px;}
 .right_h {text-align:left;padding-left:30px;}
@@ -72,7 +71,7 @@ td {font-family: Arial, Helvetica, sans-serif;font-size: 13px;}
 .right_hg3{height:36px;}
 .right_wid{width:33%}
 .right_wid2{height:281px;width:689px;}
-.wid_menu{width:970px;}
+.wid_menu{width:960px;}
 .host_wid{width:190px;}
 .host_top{padding-top:10px;}
 
@@ -96,9 +95,8 @@ img{margin:0;padding:0;border:0;}
 #nav li:hover a.mainlevel, #nav li.sfhover a.mainlevel{
         color: #333399;
         background-color: #fff;}
-		
-		
 </style>
+<body>
 <!--幻灯片script代码开始-->
 <script language="javascript">
 	//图片滚动展示 Start
@@ -138,7 +136,7 @@ img{margin:0;padding:0;border:0;}
 <div><table id="table_r"><tr><td height="3"></td></tr></table></div>
 <div align="center">
 <div class="wid_menu">
-	<table width="963" border="0" cellpadding="0" cellspacing="0" align="center">
+	<table width="960" border="0" cellpadding="0" cellspacing="0" align="center">
 	<form id="form1" name="form1" method="post" action="?c=session&a=login&refer=web" >
 		<tr><td colspan="2">
 				{{if $role.user}}{{$role.user}},您好!  [<a href='user/?c=frame&a=index&fc=user&fa=index'>进入会员中心</a>] [<a href='?c=session&a=logout'>退出</a>]{{else}}
@@ -174,19 +172,13 @@ img{margin:0;padding:0;border:0;}
 				</td>
 				<td width="6" height="42"><img src='/user{{$STATIC}}images/menu-home-red3.jpg'></td>
 			  </tr>
-			  <tr>
-			  	<td colspan="3" background="/user{{$STATIC}}images/nav_bg.jpg" class="right_hg right fontcolor">
-			  		当前位置:首页 >> 虚拟主机 >> M2型虚拟主机
-			  	</td>
-			 </tr>
 		  </table>
-	
 		</td>
       </tr>
 	</table>
 <div>
 </div>
-<!--  body开始----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
 
 
 
