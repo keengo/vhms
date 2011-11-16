@@ -16,7 +16,8 @@ if($c==""){
 	$_REQUEST['a']=$a='index';
 }
 $main = dispatch($c,$a);
-//echo $main;
+//echo htmlspecialchars($main);
+//die();
 //startFramework();
 $tpl = TPL::singleton();
 $tpl->assign('main',$main);

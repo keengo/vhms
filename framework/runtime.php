@@ -295,10 +295,10 @@ function getRoles()
 function getRole($role)
 {
 	global $_SESSION;
-	if($_SESSION['janbao_role_ip'][$role] != $_SERVER['REMOTE_ADDR']){
-		unregisterRole($role);
-		return null;
-	}
+//	if($_SESSION['janbao_role_ip'][$role] != $_SERVER['REMOTE_ADDR']){
+//		unregisterRole($role);
+//		return null;
+//	}
 	return $_SESSION['janbao_role'][$role];
 }
 function unregisterRole($role)

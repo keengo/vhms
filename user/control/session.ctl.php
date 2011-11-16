@@ -67,7 +67,12 @@ class SessionControl extends Control {
 			registerRole('user',$userinfo['username']);
 			if($GLOBALS['frame']==1){
 				header("Location: ?c=frame&a=index");
-			}else{
+			}
+			if($_REQUEST['refer']=='web')
+			{
+				header("Location: /");
+			}
+			else{
 				header("Location: ?c=user&a=index");
 			}
 			die();

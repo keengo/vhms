@@ -21,8 +21,8 @@ class FrameControl extends Control
 			if($k=='a' || $k=='c' || $k=='fa' || $k=='fc'){
 				continue;
 			}
-			$request = '&'.$k.'='.urlencode($v);
-		}
+			$request .= '&'.$k.'='.urlencode($v);
+		}		
 		$this->assign('request',$request);
 		return $this->display('frame/index.html');
 	}
