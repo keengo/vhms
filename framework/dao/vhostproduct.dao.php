@@ -104,7 +104,8 @@ class VhostproductDAO extends DAO {
 		$where = $this->MAP_ARR['pause_flag'].'=0';
 		return $this->getData2(array('id','name'),$where);
 	}
-	public function selectPageList($page,$page_count,&$count,$flag=null,$view=null)
+
+	public function pageListProduct($page,$page_count,&$count,$flag=null,$view=null)
 	{
 		if($flag != null)
 		{
@@ -116,7 +117,7 @@ class VhostproductDAO extends DAO {
 		{
 			$where.= " and ".$this->MAP_ARR['view']."=".$view;
 		}else{
-			$where.= " and ".$this->MAP_ARR['view']."=0";
+			$where.= " and ".$this->MAP_ARR['view']."=1";
 		}
 		return $this->selectPage(array('id','name','web_quota','db_quota',
 										'templete','price','pause_flag',
@@ -128,6 +129,7 @@ class VhostproductDAO extends DAO {
 										 $where, 'id',false, $page, $page_count, $count);
 		
 	}
+
 	public function getProducts($flag,$view=0)
 	{
 		

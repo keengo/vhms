@@ -58,6 +58,10 @@ function updateViewResult()
 			//alert(xmlhttp2[id].responseText);	
 		 	var dataArray = xmlhttp2.responseXML.getElementsByTagName('result');
 		 	var ret = dataArray[0].getAttribute('ret');
+<<<<<<< Updated upstream
+=======
+		 	xxkf_obj(id).innerHTML = "增加失败，请检查";
+>>>>>>> Stashed changes
 		 	if(ret==1)
 		 	{
 		 		xxkf_obj(id).innerHTML = "增加失败，请检查";
@@ -70,9 +74,16 @@ function updateViewResult()
 }
 </script>
 <div id="container">
+<<<<<<< Updated upstream
 	<!--  <div class="padd mar_top"></div> -->
   <div id="main" class="wid"> 
   		<div  style="float:left">
+=======
+<div class="padd mar_top">
+</div>
+  <div id="main" class="wid"> 
+  		<div align="left"> 
+>>>>>>> Stashed changes
 		  <form action='?c={{$smarty.request.c}}&a={{$smarty.request.a}}' method='post' name='product_form'>
 		  [<a href='?c=vhostproduct&a=flush'>更新配置文件</a>]
 		  [<a href="?c=vhostproduct&a=addProductForm" target='main'>增加产品</a>]
@@ -81,6 +92,7 @@ function updateViewResult()
 		  <option value='1' {{if $product_flag==1}}selected{{/if}}>暂停产品</option>
 		  <option value='2' {{if $product_flag==2}}selected{{/if}}>可销售产品</option>
 		  </select>
+<<<<<<< Updated upstream
 		  <span id='updateView' color='red'></span>
 		  </form>
   		</div>
@@ -89,6 +101,12 @@ function updateViewResult()
 		
    		<table cellpadding=0 cellspacing=1 id="table">
    		
+=======
+		  <span id='updateView' color='red'></span><div class="topimg pal1">共计 {{$sum}} 条记录</div>
+		  </form>
+  		</div>
+   		<table cellpadding=0 cellspacing=1 id="table">
+>>>>>>> Stashed changes
       	<tr id="ttitle">
         <td class='color01 right' bgcolor='#efefef'>操作</td>
         <td class='color01 right' bgcolor='#efefef'>前台显示</td>
@@ -109,7 +127,11 @@ function updateViewResult()
         <td class="right">
         [<a href="javascript:if(confirm('确定删除{{$row.name}}?')){location='?c=vhostproduct&a=del&id={{$row.id}}';}" title="删除">删除</a>]
         [<a href="?c=vhostproduct&a=editProductForm&id={{$row.id}}">更改</a>]
+<<<<<<< Updated upstream
         <td class="right"><input type='checkbox' id='view{{$row.id}}' onClick="updateView(this.id,{{$row.id}})" name='view' value='{{$row.view}}' {{if $row.view==1}}checked{{/if}}></td>
+=======
+        <td class="right"><input type='checkbox' id='view{{$row.id}}' onclick="updateView(this.id,{{$row.id}})" name='view' value='{{$row.view}}' {{if $row.view==1}}checked{{/if}}></td>
+>>>>>>> Stashed changes
         <td class="right">{{$row.id}}</td>
 		<td class="right">{{$row.name}}</td>
 		<td class="right">
@@ -135,10 +157,17 @@ function updateViewResult()
 		{{if $row.month_flag!=0}}月付 {{/if}}
 		</td>
         </td>
+<<<<<<< Updated upstream
       	</tr>
 	  	{{/foreach}}
     	</table>
     	<div align="left"></div>
+=======
+      </tr>
+	  {{/foreach}}
+    </table>
+    <div align="left"></div>
+>>>>>>> Stashed changes
   </div>
 </div>
 </body>

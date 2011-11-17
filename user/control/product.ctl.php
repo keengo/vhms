@@ -38,7 +38,7 @@ class ProductControl extends Control {
 		}
 		$page_count = 30;
 		$count = 0;
-		$list = daocall('vhostproduct','selectPageList',array($page,$page_count,$count,0,0));
+		$list = daocall('vhostproduct','pageListProduct',array($page,$page_count,$count,0,0));
 		$total_page = ceil($count/$page_count);
 		if($page>=$total_page){
 			$page = $total_page;
