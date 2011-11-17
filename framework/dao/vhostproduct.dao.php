@@ -111,7 +111,7 @@ class VhostproductDAO extends DAO {
 		{
 			$where = $this->MAP_ARR['pause_flag']."=".$flag;
 		}else{
-			$where=$this->MAP_ARR['pause_flag']."=0";
+			$where = $this->MAP_ARR['pause_flag']."=0";
 		}
 		if($view != null)
 		{
