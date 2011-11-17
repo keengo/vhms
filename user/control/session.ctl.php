@@ -30,11 +30,6 @@ class SessionControl extends Control {
 		{
 			exit("用户名不符合标准");
 		}
-		$err='<div align="center"><br />';
-		$err.='<div class="block tb_wid mar_top" align="center"> ';
-		$err.="<p>&nbsp</p><p>&nbsp</p><p>&nbsp</p><p>&nbsp</p><p>&nbsp</p><p>&nbsp</p>";
-		$err.=' <h2><font color=red>登陆失败,<a href="/user/?c=session&a=loginForm">返回</a></font></h2';
-		$err.='</div></div>';
 		if(UC_START=='on'){
 			
 			include dirname(__FILE__).'/../../config.inc.php';
@@ -57,12 +52,12 @@ class SessionControl extends Control {
 				$this->assign('fa','index');
 				return $this->_tpl->fetch('frame/index.html');
 			}else{
-				exit($err);
+				return $this->error();
 			}
 		}else{
 			$userinfo = $this->checkPassword($user, $_REQUEST['passwd']);
 			if(!$userinfo){
-				exit($err);
+				return $this->error();
 			}
 			registerRole('user',$userinfo['username']);
 			if($GLOBALS['frame']==1){
@@ -77,6 +72,10 @@ class SessionControl extends Control {
 			}
 			die();
 		}
+	}
+	public function error()
+	{
+		return $this->_tpl->fetch('public/error.html');
 	}
 	public function logout()
 	{
