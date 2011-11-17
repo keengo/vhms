@@ -142,6 +142,16 @@ class PublicControl extends  Control
 		$this->_tpl->assign('at',$at);
 		return $this->_tpl->fetch('public/register.html');
 	}
+	public function register_n()
+	{
+		if($_REQUEST['at']==1){
+			$at=1;
+		}else{
+			$at=0;
+		}
+		$this->_tpl->assign('at',$at);
+		return $this->_tpl->fetch('public/register_n.html');
+	}
 	public function ajaxCheckUser()
 	{
 		$username = $_REQUEST['username'];
