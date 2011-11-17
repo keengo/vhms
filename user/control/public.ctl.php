@@ -30,8 +30,6 @@ class PublicControl extends  Control
 	public function index()
 	{
 		$products=apicall('product','getProductList');
-		
-		
 		$this->_tpl->assign('products',$products);
 		return $this->_tpl->fetch('public/index.html');
 	}
@@ -43,10 +41,10 @@ class PublicControl extends  Control
 	{
 		$menus=array(
 		array('首页','/'),
-		array('虚拟主机','?c=public&a=host'),
+		array('虚拟主机','?c=host&a=index'),
 		array('会员中心','user/?c=frame&a=index&fc=user&fa=index'),
 		array('联系我们','?c=public&a=contact'),
-		array('帮助','?c=index&a=help')
+		array('帮助','?c=help&a=index')
 		);
 		$this->_tpl->assign("menus",$menus);
 		return $this->_tpl->fetch("public/head.html");
