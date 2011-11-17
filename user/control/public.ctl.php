@@ -16,6 +16,10 @@ class PublicControl extends  Control
 		$this->_tpl->assign('products',$products);
 		return $this->_tpl->fetch('public/host.html');
 	}
+	public function help()
+	{
+		return $this->_tpl->fetch('public/help.html');
+	}
 	public function viewNewsById()
 	{
 		$id=intval($_REQUEST['id']);
@@ -41,7 +45,8 @@ class PublicControl extends  Control
 		$menus=array(
 		array('首页','/'),
 		array('虚拟主机','?c=public&a=host'),
-		array('会员中心','user/?c=frame&a=index&fc=user&fa=index')
+		array('会员中心','user/?c=frame&a=index&fc=user&fa=index'),
+		array('帮助','?c=public&a=help')
 		);
 		$this->_tpl->assign("menus",$menus);
 		return $this->_tpl->fetch("public/head.html");
