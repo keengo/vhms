@@ -44,7 +44,7 @@ class PublicControl extends  Control
 		array('虚拟主机','?c=host&a=index'),
 		array('会员中心','user/?c=frame&a=index&fc=user&fa=index'),
 		array('联系我们','?c=public&a=contact'),
-		array('帮助','?c=help&a=index')
+		array('使用帮助','?c=help&a=index')
 		);
 		$this->_tpl->assign("menus",$menus);
 		return $this->_tpl->fetch("public/head.html");
