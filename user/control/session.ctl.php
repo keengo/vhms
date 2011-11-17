@@ -52,23 +52,28 @@ class SessionControl extends Control {
 				$this->assign('fa','index');
 				return $this->_tpl->fetch('frame/index.html');
 			}else{
-				return $this->error();
+				header('Location: ?c=session&a=error');
+				die();
 			}
 		}else{
 			$userinfo = $this->checkPassword($user, $_REQUEST['passwd']);
 			if(!$userinfo){
 				return $this->error();
+				die();
 			}
 			registerRole('user',$userinfo['username']);
 			if($GLOBALS['frame']==1){
 				header("Location: ?c=frame&a=index");
+				die();
 			}
 			if($_REQUEST['refer']=='web')
 			{
 				header("Location: /");
+				die();
 			}
 			else{
 				header("Location: ?c=user&a=index");
+				die();
 			}
 			die();
 		}
@@ -121,7 +126,7 @@ class SessionControl extends Control {
 	}
 	public function left()
 	{
-		return dispatch('user','left');
+		return dispatch('public','left');
 	}
 	private function checkPassword($username,$passwd)
 	{

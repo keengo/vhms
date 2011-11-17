@@ -20,10 +20,6 @@ class PublicControl extends  Control
 	{
 		return $this->_tpl->fetch('public/contact.html');
 	}
-	public function help()
-	{
-		return $this->_tpl->fetch('public/help.html');
-	}
 	public function viewNewsById()
 	{
 		$id=intval($_REQUEST['id']);
@@ -33,10 +29,9 @@ class PublicControl extends  Control
 	}
 	public function index()
 	{
-		$news=apicall('news','getNewsList',array());
 		$products=apicall('product','getProductList');
 		
-		$this->_tpl->assign('news',$news);
+		
 		$this->_tpl->assign('products',$products);
 		return $this->_tpl->fetch('public/index.html');
 	}
@@ -51,7 +46,7 @@ class PublicControl extends  Control
 		array('虚拟主机','?c=public&a=host'),
 		array('会员中心','user/?c=frame&a=index&fc=user&fa=index'),
 		array('联系我们','?c=public&a=contact'),
-		array('帮助','?c=public&a=help')
+		array('帮助','?c=index&a=help')
 		);
 		$this->_tpl->assign("menus",$menus);
 		return $this->_tpl->fetch("public/head.html");
@@ -194,7 +189,9 @@ class PublicControl extends  Control
 	}
 	public function left()
 	{
-		return "";
+		$news=apicall('news','getNewsList',array());
+		$this->_tpl->assign('news',$news);
+		return $this->fetch('public/left.html');
 	}
 	private function checkRight($username)
 	{
