@@ -85,7 +85,6 @@ class DAO
 			$sql.=' WHERE '.$where;
 		}
 		//$sql.=" LIMIT 1";
-		//echo $sql;
 		return $this->executex($sql);
 	}
 	public function select($fields,$where='',$type='rows')
@@ -178,6 +177,7 @@ class DAO
 			return false;
 		}
 		$sql = $cmd." INTO ".$this->_TABLE." ({$fields}) VALUES ({$values})";
+		echo $sql;
 		return $this->executex($sql);
 	}
 	/**
