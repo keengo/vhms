@@ -21,7 +21,7 @@ $main = dispatch($c,$a);
 //startFramework();
 $tpl = TPL::singleton();
 $tpl->assign('main',$main);
-$tpl->assign('width','960');
+$tpl->assign('width','760');
 $tpl->assign('title',getTitle());
 $tpl->display('noframe.html');
 ?>

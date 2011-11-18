@@ -10,12 +10,6 @@ class PublicControl extends  Control
 	{
 		parent::__destruct();
 	}
-	public function host()
-	{
-		$products=apicall('product','getProductList');
-		$this->_tpl->assign('products',$products);
-		return $this->_tpl->fetch('public/host.html');
-	}
 	public function contact()
 	{
 		return $this->_tpl->fetch('public/contact.html');
