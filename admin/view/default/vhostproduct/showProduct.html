@@ -69,12 +69,10 @@ function updateViewResult()
 	}
 }
 </script>
-<div id="container">
-
+<div style="float:center">
  <div class="padd mar_top"></div>
-  <div id="main" class="wid"> 
-  		<div  style="float:left">
-
+  <div id="main" class="wid" > 
+  		<div  >
 		  <form action='?c={{$smarty.request.c}}&a={{$smarty.request.a}}' method='post' name='product_form'>
 		  [<a href='?c=vhostproduct&a=flush'>更新配置文件</a>]
 		  [<a href="?c=vhostproduct&a=addProductForm" target='main'>增加产品</a>]
@@ -86,62 +84,60 @@ function updateViewResult()
 		  <span id='updateView' color='red'></span><div class="topimg pal1">共计 {{$sum}} 条记录</div>
 		  </form>
   		</div>
+  		
+  		
    		<table cellpadding=0 cellspacing=1 id="table">
-
       	<tr id="ttitle">
-        <td class='color01 right' bgcolor='#efefef'>操作</td>
-        <td class='color01 right' bgcolor='#efefef'>前台显示</td>
-	   	<td class='color01 right' bgcolor='#efefef' width="60">产品ID</td>
-        <td class='color01 right' bgcolor='#efefef'>产品名称</td>
-        <td class='color01 right' bgcolor='#efefef'>主机</td>
-		<td class='color01 right' bgcolor='#efefef'>空间(M)</td>
-		<td class='color01 right' bgcolor='#efefef'>数据库(M)</td>
-		<td class='color01 right' bgcolor='#efefef'>价格(元/年)</td>	
-		<td class='color01 right' bgcolor='#efefef'>绑定域名</td>	
-		<td class='color01 right' bgcolor='#efefef'>绑定子目录</td>	
-		<td class='color01 right' bgcolor='#efefef'>模板</td>		
-		<td class='color01 right' bgcolor='#efefef'>状态</td>    
+	        <td class='color01 right' bgcolor='#efefef'>操作</td>
+	        <td class='color01 right' bgcolor='#efefef'>前台显示</td>
+		   	<td class='color01 right' bgcolor='#efefef' width="60">产品ID</td>
+	        <td class='color01 right' bgcolor='#efefef'>产品名称</td>
+	        <td class='color01 right' bgcolor='#efefef'>主机</td>
+			<td class='color01 right' bgcolor='#efefef'>空间(M)</td>
+			<td class='color01 right' bgcolor='#efefef'>数据库(M)</td>
+			<td class='color01 right' bgcolor='#efefef'>价格(元/年)</td>	
+			<td class='color01 right' bgcolor='#efefef'>绑定域名</td>	
+			<td class='color01 right' bgcolor='#efefef'>绑定子目录</td>	
+			<td class='color01 right' bgcolor='#efefef'>模板</td>		
+			<td class='color01 right' bgcolor='#efefef'>状态</td>    
      	</tr>
-     	
 	  	{{foreach from=$list item=row}}
      	<tr>
-        <td class="right">
-        [<a href="javascript:if(confirm('确定删除{{$row.name}}?')){location='?c=vhostproduct&a=del&id={{$row.id}}';}" title="删除">删除</a>]
-        [<a href="?c=vhostproduct&a=editProductForm&id={{$row.id}}">更改</a>]
-		</td>
-        <td class="right"><input type='checkbox' id='view{{$row.id}}' onclick="updateView(this.id,{{$row.id}})" name='view' value='{{$row.view}}' {{if $row.view==1}}checked{{/if}}></td>
+	        <td class="right">
+	        	[<a href="javascript:if(confirm('确定删除{{$row.name}}?')){location='?c=vhostproduct&a=del&id={{$row.id}}';}" title="删除">删除</a>]
+	       		[<a href="?c=vhostproduct&a=editProductForm&id={{$row.id}}">更改</a>]
+			</td>
+	        <td class="right"><input type='checkbox' id='view{{$row.id}}' onclick="updateView(this.id,{{$row.id}})" name='view' value='{{$row.view}}' {{if $row.view==1}}checked{{/if}}>
+	        </td>
 
-        <td class="right">{{$row.id}}</td>
-		<td class="right">{{$row.name}}</td>
-		<td class="right">
-			<select id='node{{$row.id}}' name='node' onChange="changeNode('{{$row.id}}','{{$row.templete}}')"">
-			{{foreach from=$nodes item=node}}
-			<option value='{{$node}}' {{if $row.node==$node}}selected{{/if}}>
-			{{$node}}
-			</option>
-			{{/foreach}}
-			</select>
-		<div id='busy{{$row.id}}'></div>
-		</td>
-		<td class="right">{{$row.web_quota}}</td>
-		<td class="right">{{$row.db_quota}}</td>
-		<td class="right">{{$row.price/100}}</td>
-		<td class="right">{{$row.domain}}</td>
-		<td class="right">{{if $row.subdir_flag}}允许{{/if}} {{$row.subdir}}</td>
-		<td class="right">{{$row.templete}}
-		{{if $row.subtemplete}}:{{$row.subtemplete}}{{/if}}
-		</td>
-		<td class="right">
-		{{if $row.pause_flag!=0}}暂停销售 {{/if}}
-		{{if $row.month_flag!=0}}月付 {{/if}}
-		</td>
-        </td>
-
+        	<td class="right">{{$row.id}}</td>
+			<td class="right">{{$row.name}}</td>
+			<td class="right">
+				<select id='node{{$row.id}}' name='node' onChange="changeNode('{{$row.id}}','{{$row.templete}}')"">
+				{{foreach from=$nodes item=node}}
+				<option value='{{$node}}' {{if $row.node==$node}}selected{{/if}}>
+				{{$node}}
+				</option>
+				{{/foreach}}
+				</select>
+				<div id='busy{{$row.id}}'></div>
+			</td>
+			<td class="right">{{$row.web_quota}}</td>
+			<td class="right">{{$row.db_quota}}</td>
+			<td class="right">{{$row.price/100}}</td>
+			<td class="right">{{$row.domain}}</td>
+			<td class="right">{{if $row.subdir_flag}}允许{{/if}} {{$row.subdir}}</td>
+			<td class="right">{{$row.templete}}
+				{{if $row.subtemplete}}:{{$row.subtemplete}}{{/if}}
+			</td>
+			<td class="right">
+				{{if $row.pause_flag!=0}}暂停销售 {{/if}}
+				{{if $row.month_flag!=0}}月付 {{/if}}
+			</td>
+	        </td>
       	</tr>
 	  	{{/foreach}}
     	</table>
-    	<div align="left"></div>
-
   </div>
 </div>
 </body>
