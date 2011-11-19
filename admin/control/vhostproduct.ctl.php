@@ -107,7 +107,7 @@ class VhostproductControl extends Control {
 		if(is_array($GLOBALS['node_cfg'])){
 			$this->_tpl->assign('nodes',array_keys($GLOBALS['node_cfg']));
 		}
-		$this->_tpl->display('vhostproduct/showProduct.html');
+		return $this->_tpl->fetch('vhostproduct/showProduct.html');
 	}
 
 	protected function assignHosts()
