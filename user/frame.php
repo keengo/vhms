@@ -3,6 +3,7 @@ session_start();
 header("Content-Type: text/html; charset=utf-8");
 date_default_timezone_set('Asia/Shanghai');
 header("Cache-Control: no-cache, must-revalidate");
+define('TPL_ROOT','/user');
 define('APPLICATON_ROOT', dirname(__FILE__));
 define('SYS_ROOT', dirname(dirname(__FILE__)).'/framework');
 define('DEFAULT_CONTROL', 'public');
