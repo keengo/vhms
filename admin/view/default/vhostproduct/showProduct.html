@@ -107,7 +107,8 @@ function updateViewResult()
 	        	[<a href="javascript:if(confirm('确定删除{{$row.name}}?')){location='?c=vhostproduct&a=del&id={{$row.id}}';}" title="删除">删除</a>]
 	       		[<a href="?c=vhostproduct&a=editProductForm&id={{$row.id}}">更改</a>]
 			</td>
-	        <td class="right"><input type='checkbox' id='view{{$row.id}}' onclick="updateView(this.id,{{$row.id}})" name='view' value='{{$row.view}}' {{if $row.view==1}}checked{{/if}}>
+	        <td class="right">
+	        	<input type='checkbox' id='view{{$row.id}}' onclick="updateView(this.id,{{$row.id}})" name='view' value='{{$row.view}}' {{if $row.view==1}}checked{{/if}}>
 	        </td>
 
         	<td class="right">{{$row.id}}</td>

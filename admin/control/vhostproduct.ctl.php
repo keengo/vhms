@@ -94,7 +94,7 @@ class VhostproductControl extends Control {
 		$list = daocall('vhosttemplete','getData',array());
 		$this->_tpl->assign('sum',count($list));
 		$this->_tpl->assign('list',$list);
-		$this->_tpl->display('vhostproduct/showTemplete.html');
+		return $this->_tpl->display('vhostproduct/showTemplete.html');
 	}
 	public function showProduct()
 	{
@@ -132,7 +132,7 @@ class VhostproductControl extends Control {
 		$this->_tpl->assign('vhostproduct',$vhostproduct);
 		$this->_tpl->assign('action','editProduct');
 	
-		$this->_tpl->display('vhostproduct/addProduct.html');
+		return $this->_tpl->display('vhostproduct/addProduct.html');
 	}
 	public function addProductForm()
 	{
@@ -140,7 +140,7 @@ class VhostproductControl extends Control {
 		if(!$this->assignHosts()){
 			return false;
 		}
-		$this->_tpl->display('vhostproduct/addProduct.html');
+		return $this->_tpl->display('vhostproduct/addProduct.html');
 	}
 	public function addProduct()
 	{
@@ -148,7 +148,7 @@ class VhostproductControl extends Control {
 		$_REQUEST['speed_limit']*=1024;
 		daocall('vhostproduct', 'insertData', array($_REQUEST));
 		apicall('product','flushVhostProduct');
-		$this->showProduct();
+		return $this->showProduct();
 	}
 	public function editProduct()
 	{
@@ -156,18 +156,18 @@ class VhostproductControl extends Control {
 		$_REQUEST['speed_limit'] *= 1024;
 		daocall('vhostproduct', 'updateProduct', array($_REQUEST));
 		apicall('product','flushVhostProduct');
-		$this->showProduct();
+		return $this->showProduct();
 	}
 	public function del()
 	{
 		daocall('vhostproduct','delProduct',$_REQUEST["id"]);
 		apicall('product','flushVhostProduct');
-		$this->showProduct();
+		return $this->showProduct();
 	}
 	public function flush()
 	{
 		apicall('product','flushVhostProduct');
-		$this->showProduct();
+		return $this->showProduct();
 	}
 }
 ?>

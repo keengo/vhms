@@ -128,6 +128,7 @@ CREATE TABLE IF NOT EXISTS `vhost_product` (
   `log_file` tinyint(4) DEFAULT '1',
   `max_connect` int(11) NOT NULL DEFAULT '0',
   `speed_limit` INTEGER DEFAULT '0',
+  `view` INTEGER DEFAULT '0', 
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
