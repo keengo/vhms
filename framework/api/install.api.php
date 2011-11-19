@@ -31,6 +31,7 @@ class InstallAPI extends API
 			if(substr($files[$i],-2)==";\n" || substr($files[$i],-3)==";\r\n"){
 				//echo "sql=".$sql;
 				@$pdo->exec($sql);
+				echo "sql=".$sql;
 				$sql = "";
 			}
 		}

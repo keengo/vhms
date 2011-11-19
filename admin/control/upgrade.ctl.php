@@ -14,6 +14,7 @@ class UpgradeControl extends Control
 		$db = db_connect('default');
 		$sqlfile = dirname(__FILE__).'/upgrade.sql';
 		apicall('install','executeSql',array($db,$sqlfile));
+		apicall('product','flushVhostProduct');
 		//$db->exec("ALTER TABLE `vhost` DROP INDEX `name` , ADD UNIQUE `name` ( `name` ) ");
 		if(!apicall('install','writeVersion')){
 			die("未能写入版本信息");
