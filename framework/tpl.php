@@ -15,13 +15,13 @@ class TPL
 			self::$instance->template_dir = APPLICATON_ROOT . '/view/default';
 			self::$instance->compile_dir = SYS_ROOT.'/templates_c';
 			if(!defined(TPL_ROOT)){
-				define(TPL_ROOT,dirname($_SERVER["REQUEST_URI"]));
+				define(TPL_ROOT,dirname($_SERVER['PHP_SELF']));
 			}
 			self::$instance->assign("STATIC",TPL_ROOT.'/view/default/');
 			//self::$instance->assign("PSTATIC","/");
 		
 			self::$instance->assign('role',getRoles());
-			self::$instance->caching = false;
+			//self::$instance->caching = false;
 			self::$instance->left_delimiter = '{{';
 			self::$instance->right_delimiter = '}}';
         }
