@@ -79,11 +79,11 @@ class MoneyControl extends Control {
 		$this->_tpl->assign('page',$page);
 		$this->_tpl->assign('page_count',$page_count);
 		$this->_tpl->assign('list',$list);
-		return $this->_tpl->display('money/moneyout.html');
+		return $this->_tpl->fetch('money/moneyout.html');
 	}
 	public function addFrom()
 	{
-		return $this->_tpl->display('money/add.html');
+		return $this->_tpl->fetch('money/add.html');
 	}
 
 }
