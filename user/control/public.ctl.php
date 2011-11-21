@@ -36,7 +36,8 @@ class PublicControl extends  Control
 		$menus=array(
 		array('首页','/'),
 		array('虚拟主机','?c=host&a=index'),
-		array('会员中心','user/?c=frame&a=index&fc=user&fa=index'),
+		//array('会员中心','user/?c=frame&a=index&fc=user&fa=index'),
+		array('会员中心','?c=user&a=index'),
 		array('联系我们','?c=public&a=contact'),
 		array('使用帮助','?c=help&a=index')
 		);
