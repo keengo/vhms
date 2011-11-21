@@ -31,6 +31,27 @@ class VhostDAO extends DAO{
 			);
 			$this->_TABLE = DBPRE . 'vhost';
 	}
+	public function pageVhostByExpire_time($page,$page_count,&$count,$day,$status)
+	{
+		$where="";
+		if($day==""){
+			$day=1;
+		}
+		$where.=' expire_time < subdate(curdate(),interval '.$day.' day)';
+		
+		if($status >= 0){
+			$where .= " and ".$this->getFieldValue2('status', $status);
+		}
+		return $this->selectPage(array('name','create_time','expire_time','username','status'), 
+										$where,
+										'expire_time', 
+										false,
+										$page,
+										$page_count,
+										$count
+								);
+	}
+	
 	public function pageVhostByuser($username,$name,$page,$page_count,&$count)
 	{
 		$where = $this->getFieldValue2('username',$username);

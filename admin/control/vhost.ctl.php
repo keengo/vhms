@@ -1,38 +1,36 @@
 <?php
 needRole('admin');
 class VhostControl extends Control {
-	/*
-	public function showVhostold()
+
+	public function pageVhostByExpire_time()
 	{
-		$user = $_REQUEST['user'];
-		$skip_search = false;
-		if($user==""){
-			$user = $_REQUEST['name'];
-			$skip_search = true;
+		$page = intval($_REQUEST['page']);
+		if($page<=0){
+			$page = 1;
 		}
-		$this->_tpl->assign('user',$user);
-		if($user){
-			if($user[0]=='#'){
-				$user = substr($user,1);
-				$call = 'listVhostByUid';
-			}else{
-				$call = 'listVhostByName';
-			}
-			$result = $this->getUser($user,$call);
-			if(!$result && !$skip_search){
-				$result = daocall('vhostinfo','findDomain',array($user));
-				if($result){
-					$user = $result['user'];
-					$result = $this->getUser($user,'listVhostByName');
-				}
-			}
-			if(!$result){
-				$this->_tpl->assign("msg","没有找到该虚拟主机");
-			}
+		$day = trim($_REQUEST['day']);
+		
+		if($_REQUEST['status'] >= 0)
+		{
+			$status = $_REQUEST['status'];
+		}else{
+			$status = "";
 		}
-		$this->_tpl->display('vhostproduct/listVhost.html');
+		$page_count = 10;
+		$count = 0;
+		$list = daocall('vhost','pageVhostByExpire_time',array($page,$page_count,&$count,$day,$status));
+		$total_page = ceil($count/$page_count);
+		if($page>=$total_page){
+			$page = $total_page;
+		}
+		$this->_tpl->assign('status',$status);
+		$this->_tpl->assign('count',$count);
+		$this->_tpl->assign('total_page',$total_page);
+		$this->_tpl->assign('page',$page);
+		$this->_tpl->assign('page_count',$page_count);
+		$this->_tpl->assign('list',$list);
+		$this->_tpl->display('vhost/pagelistexprie.html');
 	}
-	*/
 	public function showVhost()
 	{
 		$user=$_REQUEST['user'];
@@ -139,7 +137,7 @@ class VhostControl extends Control {
 			$this->assign('msg','删除失败');
 			return $this->fetch('msg.html');
 		}
-		$this->assign('msg','删除成功');
+		$this->assign('msg',$name.'删除成功');
 		return $this->fetch('msg.html');
 
 		//		$vhost = $_REQUEST['name'];
@@ -150,7 +148,6 @@ class VhostControl extends Control {
 	public function setStatus()
 	{
 		$vhost = $_REQUEST['name'];
-		//daocall('vhost','updateVhost',array($vhost,$arr));
 		$node = daocall('vhost','getNode',array($vhost));
 		apicall('vhost','changeStatus',array($node,$vhost,$_REQUEST['status']));
 		//apicall('vhost','noticeChange',array($node,$vhost));
@@ -160,19 +157,17 @@ class VhostControl extends Control {
 	{
 		$vhost = $_REQUEST['name'];
 		$attr = daocall('vhost','getVhost',array($vhost,array(
-			'node',
-			'product_id',
-			'name',
-			'doc_root',
-			'uid',
-			'status',
-			'create_time',
-			'expire_time'
+				'node',
+				'product_id',
+				'name',
+				'doc_root',
+				'uid',
+				'status',
+				'create_time',
+				'expire_time'
 			)));
 			$attr['create_time']=strtotime($attr['create_time']);
 			$attr['expire_time']=strtotime($attr['expire_time']);
-//			print_r($attr);
-//			die();
 			if(apicall('vhost','sync',array($attr))){
 				$this->_tpl->assign('msg','重建空间成功');
 			}else{
