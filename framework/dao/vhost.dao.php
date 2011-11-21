@@ -31,6 +31,20 @@ class VhostDAO extends DAO{
 			);
 			$this->_TABLE = DBPRE . 'vhost';
 	}
+	
+	//执行空间删除shell所用
+	public function selectListByExpire_time($day,$status=0)
+	{
+		if($day==""){
+			$day=1;
+		}
+		$where=' expire_time < subdate(curdate(),interval '.$day.' day)';
+		$where .= " and ".$this->getFieldValue2('status', 0);
+		return $this->select(array('name','username'),$where);
+	}
+
+
+	//管理后台显示过期网站
 	public function pageVhostByExpire_time($page,$page_count,&$count,$day,$status)
 	{
 		$where="";
@@ -38,20 +52,20 @@ class VhostDAO extends DAO{
 			$day=1;
 		}
 		$where.=' expire_time < subdate(curdate(),interval '.$day.' day)';
-		
+
 		if($status >= 0){
 			$where .= " and ".$this->getFieldValue2('status', $status);
 		}
-		return $this->selectPage(array('name','create_time','expire_time','username','status'), 
-										$where,
+		return $this->selectPage(array('name','create_time','expire_time','username','status'),
+		$where,
 										'expire_time', 
-										false,
-										$page,
-										$page_count,
-										$count
-								);
+		false,
+		$page,
+		$page_count,
+		$count
+		);
 	}
-	
+
 	public function pageVhostByuser($username,$name,$page,$page_count,&$count)
 	{
 		$where = $this->getFieldValue2('username',$username);
@@ -60,13 +74,13 @@ class VhostDAO extends DAO{
 		}
 		return $this->selectPage(
 		array('name','uid','templete','node','create_time','expire_time','status','product_id','username'),
-					$where,
+		$where,
 					'uid', 
-					true,
-					$page,
-					$page_count,
-					$count
-					);
+		true,
+		$page,
+		$page_count,
+		$count
+		);
 	}
 	public function pageVhost($page,$page_count,&$count)
 	{
@@ -193,8 +207,8 @@ class VhostDAO extends DAO{
 	public function getMyVhost($username,$name,$fields=null)
 	{
 		return $this->getData2(
-				$fields,
-				$this->getFieldValue2('username', $username)." AND ".$this->getFieldValue2('name', $name),
+		$fields,
+		$this->getFieldValue2('username', $username)." AND ".$this->getFieldValue2('name', $name),
 				'row');
 	}
 	public function getVhost($name,$fields=null)
