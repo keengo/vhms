@@ -52,7 +52,7 @@ class VhostproductControl extends Control {
 		$this->_tpl->assign('page',$page);
 		$this->_tpl->assign('page_count',$page_count);
 		$this->_tpl->assign('list',$list);
-		$this->_tpl->display('vhostproduct/listVhost.html');
+		return $this->_tpl->fetch('vhostproduct/listVhost.html');
 	}
 	public function show()
 	{
@@ -147,9 +147,10 @@ class VhostproductControl extends Control {
 				$upproduct[] = $product;
 			}
 		}
-		//print_r($upproduct);
 		if (count($upproduct)<=0) {
-			return "没有其它产品可供升级了";
+			//return "没有其它产品可供升级了";
+			$this->_tpl->assign('msg','没有其它产品可供升级了');
+			return $this->_tpl->fetch('vhostproduct/msg.html');
 		}
 		$this->_tpl->assign('products',$upproduct);
 		return $this->_tpl->fetch('vhostproduct/upgrade.html');

@@ -54,7 +54,7 @@ class QuestionControl extends Control {
 		$this->_tpl->assign('page',$page);
 		$this->_tpl->assign('page_count',$page_count);
 		$this->_tpl->assign('list',$list);
-		$this->_tpl->display('question/pagelist.html');
+		return $this->_tpl->fetch('question/pagelist.html');
 	}
 
 }

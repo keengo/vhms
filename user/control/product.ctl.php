@@ -110,7 +110,7 @@ class ProductControl extends Control {
 			return false;
 		}
 		$this->_tpl->assign('msg','购买成功');
-		return $this->_tpl->display('public/msg.html');
+		return $this->_tpl->fetch('public/msg.html');
 	}
 	public function renew()
 	{
@@ -126,7 +126,7 @@ class ProductControl extends Control {
 		}else{
 			$this->_tpl->assign('msg','续费失败');
 		}
-		return $this->_tpl->display('public/msg.html');
+		return $this->_tpl->fetch('public/msg.html');
 	}
 	public function upgrade()
 	{

@@ -28,31 +28,32 @@ function check_register()
 	reg.submit();
 }
 </script>
-<div align="center">
+<div class="right" align="center">
   <form name='reg' action="?c=product&a=sell&product_id={{$product.id}}&product_type=vhost" method="post">
-<div class="head_block tb_wid">&nbsp;购买虚拟主机产品</div>
-<div class="block tb_wid">
-<table id="table_2" cellpadding="0" cellspacing="1">
+<div class="wid_ri r_mar" ><img src="{{$STATIC}}style/vir_buy.jpg" width="750" height="85"  border="0"/></div>
+<div class="wid_ri r_mar" align="right">
+<table id="table_ri" cellpadding="0" cellspacing="1">
+	 <tr><td colspan="2" class="red"><b>购买虚拟主机产品</b></td></tr>
       <tr>
-        <td class="td_bgc right_2">产品名称:</td>
-        <td class="td_bgc right_2">{{$product.name}}</td>
+        <td>产品名称:</td>
+        <td>{{$product.name}}</td>
         </tr>
       <tr>
-        <td class="td_bgc right_2">FTP用户名:</td>
-        <td class="td_bgc right_2"><input name="name" type="text" id="name">
+        <td>FTP用户名:</td>
+        <td><input name="name" type="text" id="name">
 		    <input type="button" name="Submit" value="检测用户名" onClick="check_user()"></td>
       </tr>
       <tr>
-        <td class="td_bgc right_2">密码:</td>
-        <td class="td_bgc right_2"><input name="passwd" type="password" id="passwd"></td>
+        <td>密码:</td>
+        <td><input name="passwd" type="password" id="passwd"></td>
       </tr>
 	  <tr>
-        <td class="td_bgc right_2">确认密码:</td>
-        <td class="td_bgc right_2"><input name="passwd2" type="password" id="passwd2"></td>
+        <td>确认密码:</td>
+        <td><input name="passwd2" type="password" id="passwd2"></td>
 	  </tr>
 	  <tr  >
-        <td class="td_bgc right_2">购买时间:</td>
-        <td class="td_bgc right_2">
+        <td>购买时间:</td>
+        <td>
         {{if $product.month_flag}}
        	 	<input type=radio name=month value='1' checked>1个月
         {{/if}}
@@ -61,47 +62,47 @@ function check_register()
 			<input type=radio name=month value=36>3年</td>
 	  </tr>
 	  <tr>
-        <td class="td_bgc right_2">空间大小:</td>
-        <td class="td_bgc right_2">{{$product.web_quota}}M</td>
+        <td>空间大小:</td>
+        <td>{{$product.web_quota}}M</td>
 	  </tr>
 	  <tr>
-        <td class="td_bgc right_2">数据库大小:</td>
-        <td class="td_bgc right_2">{{$product.db_quota}}M</td>
+        <td>数据库大小:</td>
+        <td>{{$product.db_quota}}M</td>
 	  </tr>
 	  <tr>
-        <td class="td_bgc right_2">域名绑定个数:</td>
-        <td class="td_bgc right_2">{{if $product.domain==-1}}不限{{else}} {{$product.domain}}个{{/if}}</td>
+        <td>域名绑定个数:</td>
+        <td>{{if $product.domain==-1}}不限{{else}} {{$product.domain}}个{{/if}}</td>
 	  </tr>
 	  <tr>
-        <td class="td_bgc right_2">最大连接数:</td>
-        <td class="td_bgc right_2">{{if $product.max_connect==0}}不限{{else}}{{$product.max_connect}}{{/if}}</td>
+        <td>最大连接数:</td>
+        <td>{{if $product.max_connect==0}}不限{{else}}{{$product.max_connect}}{{/if}}</td>
 	  </tr>
 	  <tr>
-        <td class="td_bgc right_2">允许绑定子目录:</td>
-        <td class="td_bgc right_2">{{if $product.subdir_flag==1}}是{{else}}否{{/if}}</td>
+        <td>允许绑定子目录:</td>
+        <td>{{if $product.subdir_flag==1}}是{{else}}否{{/if}}</td>
 	  </tr>
 	  <tr>
-        <td class="td_bgc right_2">语言引擎:</td>
-        <td class="td_bgc right_2">{{$product.subtemplete}}</td>
+        <td>语言引擎:</td>
+        <td>{{$product.subtemplete}}</td>
 	  </tr>
 	  {{if $product.ftp!=1}}
 	  <tr>
-        <td class="td_bgc right_2">是否开启ftp:</td>
-        <td class="td_bgc right_2"><font color='red''>否</font></td>
+        <td>是否开启ftp:</td>
+        <td><font color='red'>否</font></td>
 	  </tr>
 	  {{/if}}
 	  <tr>
-        <td class="td_bgc right_2">产品说明:</td>
-        <td class="td_bgc right_2">{{$product.describe}}</td>
+        <td>产品说明:</td>
+        <td>{{$product.describe}}</td>
 	  </tr>
 	  
        <tr>
-       <td class="td_bgc right_2">价格:</td>
-       	<td class="td_bgc right_2">{{$product.price/100}}/年</td>
+       <td>价格:</td>
+       	<td>{{$product.price/100}}/年</td>
         </tr>
         
 	    <tr>
-	    <td class="td_bgc td_hg" colspan="2" align="center">
+	    <td class="td_hg" colspan="2" align="center">
 		<input type="button" onClick="check_register()" value="确定"></td>
         </tr>
     </table>

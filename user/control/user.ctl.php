@@ -52,7 +52,28 @@ class UserControl extends Control {
 		needRole('user');
 		return $this->_tpl->fetch('user/changePassword.html');
 	}
-
+	public function changePassword()
+	{
+		needRole('user');
+		if(!$this->checkPassword(getRole('user'), $_REQUEST['oldpasswd'])){
+			$this->_tpl->assign('msg','原密码不对!');
+		}else{
+			daocall('user', 'updatePassword', array(getRole('user'),$_REQUEST['passwd']));
+			$this->_tpl->assign('msg','修改密码成功');
+		}
+		return $this->_tpl->fetch('public/msg.html');
+	}
+	private function checkPassword($username,$passwd)
+	{
+		$user = daocall('user','getUser', array($username));
+		if(!$user){
+			return false;
+		}
+		if(strtolower($user["passwd"])!=strtolower(md5($passwd))){
+			return false;
+		}
+		return $user;
+	}
 	private function pageNewsByNumber()
 	{
 		$page = 1;

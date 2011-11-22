@@ -1,24 +1,23 @@
-{{include file='common/head.html'}}
-<body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
-<div id="container">
-	<div align="center">
-		<div class="mar_top tb_wid4" align="right">
-		<table id="table_2" border="0" cellpadding="0" cellspacing="0">
-			<tr>
-				<td align="left" width="132">
-					[<a href="?c=question&a=addFrom" target="{{$target}}"><span class="font_1">在线提问</span></a>]
-				</td>
-				<td><form action='?c=question&a=pageByUser' method='post'>
-					 <select name='sortname' onChange="submit()">
-					 <option value='2' {{if $sortname==2}}selected{{/if}}>全部</option>
-					 <option value='1' {{if $sortname==1}}selected{{/if}}>未回复</option>
-					 </select>
-					  </form>
-					  </td>
-				<td align="right">
-				{{if $page>1}}
-				<a href='?c=question&a=pageByuser&sortname={{$smarty.request.sortname}}&page=0'>首页</a> 
-				<a href='?c=question&a=pageByuser&sortname={{$smarty.request.sortname}}&page={{$page-1}}'>上一页</a> 
+<div class="right" align="center">
+<div class="wid_ri r_mar" ><img src="{{$STATIC}}style/use_cio.jpg" width="750" height="85"  border="0"/></div>
+<div class="wid_ri r_mar" align="right">
+	<div align="right">
+	<table id="table_2" border="0" cellpadding="0" cellspacing="0">
+	<form action='?c=question&a=pageByUser' method='post'>
+		<tr>
+			<td align="left" class="right">
+				[<a href="?c=question&a=addFrom" target="{{$target}}"><span class="font_1">在线提问</span></a>]
+			</td>
+			<td>
+				 <select name='sortname' onChange="submit()">
+				 <option value='2' {{if $sortname==2}}selected{{/if}}>全部</option>
+				 <option value='1' {{if $sortname==1}}selected{{/if}}>未回复</option>
+				 </select>
+			</td>
+			<td align="right">
+			{{if $page>1}}
+			<a href='?c=question&a=pageByuser&sortname={{$smarty.request.sortname}}&page=0'>首页</a> 
+			<a href='?c=question&a=pageByuser&sortname={{$smarty.request.sortname}}&page={{$page-1}}'>上一页</a> 
 				{{else}}
 				首页 上一页 
 				{{/if}}
@@ -29,31 +28,29 @@
 				{{/if}} 
 				{{$page}}/{{$total_page}}&nbsp;
 				共计{{$count}}记录
-				</td>
-			</tr>
-		</table>
-		</div>
-		<div class="block tb_wid4">
-			<table id="table" border="0" cellpadding="0" cellspacing="1">
-				<tr id="ttitle">
-					<td class="right_2">操作</td>
-					<td class="right_2">标题</td>
-					<td class="right_2">提问时间</td>	
-					<td class="right_2">回复时间</td>
-					<td class="right_2">状态</td>
-					</tr>
-					{{foreach from=$list item=row}}
-				<tr>
-					<td class="right_2">[<a href='?c=question&a=getQuestion&id={{$row.id}}'>详细</a>]</td>
-					<td class="right_2">{{substr($row.title,0,30)}}</td>
-					<td class="right_2">{{$row.add_time}}</td>
-					<td class="right_2">{{$row.reply_time}}</td>
-					<td class="right_2">{{if $row.status==1}}已回复{{else}} <font color=red>未回复</font>{{/if}}</td>
-					</tr>
-					{{/foreach}}
-		  </table>
-		</div>
-	
+			</td>
+		</tr>
+		</form>
+	</table>
 	</div>
+	<table id="table_ri" cellpadding="0" cellspacing="1">
+			<tr>
+				<td>操作</td>
+				<td>标题</td>
+				<td>提问时间</td>	
+				<td>回复时间</td>
+				<td>状态</td>
+				</tr>
+				{{foreach from=$list item=row}}
+			<tr>
+				<td>[<a href='?c=question&a=getQuestion&id={{$row.id}}'>详细</a>]</td>
+				<td>{{substr($row.title,0,30)}}</td>
+				<td>{{$row.add_time}}</td>
+				<td>{{$row.reply_time}}</td>
+				<td>{{if $row.status==1}}已回复{{else}} <font color=red>未回复</font>{{/if}}</td>
+				</tr>
+				{{/foreach}}
+	  </table>
+
 </div>
-</body>
+

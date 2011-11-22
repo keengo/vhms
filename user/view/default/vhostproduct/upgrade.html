@@ -15,41 +15,41 @@ function changeProduct()
 	$('price').innerHTML = product[i][2]/100 + '元/年';
 }
 </script>
-<div align="center">
-  <form name='upgrade' action="?c=product&a=upgrade&name={{$name}}&product_type=vhost" method="post">
-<div class="head_block tb_wid">&nbsp;升级虚拟主机 {{$name}}</div>
-<div class="block tb_wid">
-<table id="table_2" cellpadding="0" cellspacing="1">
-      <tr>
-        <td class="td_bgc right_2">升级到产品</td>
-        <td class="td_bgc right_2">
-        <select name='product_id' onChange='changeProduct()'>
-        {{foreach from=$products item=product}}
-        <option value='{{$product.id}}'>{{$product.name}}</option>
-        {{/foreach}}
-        </select>
+<div class="right" align="center">
+<form name='upgrade' action="?c=product&a=upgrade&name={{$name}}&product_type=vhost" method="post">
+<div class="wid_ri r_mar" ><img src="{{$STATIC}}style/use_cio.jpg" width="750" height="85"  border="0"/></div>
+<div class="wid_ri r_mar" align="right">
+	<table id="table_ri" cellpadding="0" cellspacing="1">
+	  <tr>
+		<td>升级到产品</td>
+		<td>
+		<select name='product_id' onChange='changeProduct()'>
+		{{foreach from=$products item=product}}
+		<option value='{{$product.id}}'>{{$product.name}}</option>
+		{{/foreach}}
+		</select>
 		</td>
-        </tr>
+		</tr>
 	  <tr>
-        <td class="td_bgc right_2">空间大小:</td>
-        <td class="td_bgc right_2"><div id='web_quota'></div></td>
+		<td>空间大小:</td>
+		<td><div id='web_quota'></div></td>
 	  </tr>
 	  <tr>
-        <td class="td_bgc right_2">数据库大小:</td>
-        <td class="td_bgc right_2"><div id='db_quota'></div></td>
+		<td>数据库大小:</td>
+		<td><div id='db_quota'></div></td>
 	  </tr>
 	  <tr>
-        <td class="td_bgc right_2">价格</td>
-        <td class="td_bgc right_2"><div id='price'></div></td>
-        </tr>
-	    <tr>
-	    <td class="td_bgc td_hg" colspan="2" align="center">
+		<td>价格</td>
+		<td><div id='price'></div></td>
+		</tr>
+		<tr>
+		<td class="td_hg" colspan="2" align="center">
 		<input type="submit" value="确定"></td>
-        </tr>
-    </table>
-	</div>
-    </form>
-  </div>
-  <script language='javascript'>
-  changeProduct();
-  </script>
+		</tr>
+	</table>
+</div>
+</form>
+</div>
+<script language='javascript'>
+changeProduct();
+</script>
