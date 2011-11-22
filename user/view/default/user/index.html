@@ -1,27 +1,28 @@
-<div align="center">
-<div class="head_block tb_wid">&nbsp;帐户信息</div>
-<div class="block tb_wid">
-<table id="table_2" cellpadding="0" cellspacing="1">
+<div class="right" align="center">
+<div class="wid_ri r_mar" ><img src="{{$STATIC}}style/use_cio.jpg" width="750" height="85"  border="0"/></div>
+<div class="wid_ri r_mar" align="right">
+<table id="table_ri" cellpadding="0" cellspacing="1">
+	 <tr><td colspan="2">帐户信息</td></tr>
       <tr>
-        <td class="td_bgc right_2">用户名：</td>
-        <td class="td_bgc tb_wid2 right_2">{{$user.username}}</td>
-        </tr>
+        <td>用户名：</td>
+        <td class="tb_wid2">{{$user.username}}</td>
+      </tr>
       <tr>
-        <td class="td_bgc right_2">姓名：</td>
-        <td class="td_bgc right_2">{{$user.name}}</td>
+        <td>姓名：</td>
+        <td>{{$user.name}}</td>
       </tr>
        <tr>
-        <td class="td_bgc right_2">登陆IP：</td>
-        <td class="td_bgc right_2">{{$login_ip}}</td>
+        <td>登陆IP：</td>
+        <td>{{$login_ip}}</td>
       </tr>
 	  <tr>
-        <td class="td_bgc right_2">电子邮件</td>
-        <td class="td_bgc right_2">{{$user.email}}</td>
+        <td>电子邮件</td>
+        <td>{{$user.email}}</td>
 	  </tr>
 	  <tr>
-        <td class="td_bgc right_2">账户余额(元)</td>
- 			<td class="td_bgc right_2"> {{$user.money/100}} &nbsp;[<a href="?c=money&a=addFrom" target="{{$target}}">在线充值</a>]</td>
-        </tr>
+        <td>账户余额(元)</td>
+ 			<td> {{$user.money/100}} &nbsp;[<a href="?c=money&a=addFrom" target="{{$target}}">在线充值</a>]</td>
+      </tr>
     </table>
-    </div>
+  </div>
 </div>

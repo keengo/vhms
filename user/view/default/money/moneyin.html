@@ -1,42 +1,36 @@
-{{include file='common/head.html'}}
-<body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
-<div id="container">
-	<div align="center">
-		<div class="mar_top tb_wid2" align="right">
-			{{if $page>1}}
-			<a href='?c=money&a=moneyin&page=0'>首页</a> 
-			<a href='?c=money&a=moneyin&page={{$page-1}}'>上一页</a> 
-			{{else}}
-			首页 上一页 
-			{{/if}}
-			{{if $page!=$total_page}} 
-			<a href='?c=money&a=moneyin&page={{$page+1}}'>下一页</a>
-			<a href='?c=money&a=moneyin&page={{$total_page}}'>尾页</a>
-			{{else}}下一页 尾页
-			{{/if}} 
-			{{$page}}/{{$total_page}}&nbsp;
-			共计{{$count}}记录
-		</div>
-		<div class="block tb_wid2">
-			<table id="table" border="0" cellpadding="0" cellspacing="1">
-				<tr id="ttitle">
-					
-					<td class="td_bgc right_2 tb_wid3" width="130">充值金额</td>
-					<td class="td_bgc right_2 tb_wid3" width="130">充值时间</td>
-					<td class="td_bgc right_2 tb_wid3" width="130">支付方式</td>	
-				</tr>
-					{{foreach from=$list item=row}}
-				<tr>
-					
-					<td class="td_bgc right_2">{{$row.money/100}}元</td>
-					<td class="td_bgc right_2">{{$row.start_time}}</td>
-					<td class="td_bgc right_2">{{if $row.gw==1}}支付宝{{else}}网银在线{{/if}}</td>
-					</tr>
-					{{/foreach}}
-		  </table>
-		</div>
-	
+<div class="right" align="center">
+<div class="wid_ri r_mar" ><img src="{{$STATIC}}style/use_cio.jpg" width="750" height="85"  border="0"/></div>
+<div class="wid_ri r_mar" align="right">
+	<div class="r_mar_top" align="right">
+		{{if $page>1}}
+		<a href='?c=money&a=moneyin&page=0'>首页</a> 
+		<a href='?c=money&a=moneyin&page={{$page-1}}'>上一页</a> 
+		{{else}}
+		首页 上一页 
+		{{/if}}
+		{{if $page!=$total_page}} 
+		<a href='?c=money&a=moneyin&page={{$page+1}}'>下一页</a>
+		<a href='?c=money&a=moneyin&page={{$total_page}}'>尾页</a>
+		{{else}}下一页 尾页
+		{{/if}} 
+		{{$page}}/{{$total_page}}&nbsp;
+		共计{{$count}}记录
+	</div>
+	<table id="table_ri" cellpadding="0" cellspacing="1">
+		<tr>
+			<td>充值金额</td>
+			<td>充值时间</td>
+			<td>支付方式</td>	
+		</tr>
+			{{foreach from=$list item=row}}
+		<tr>
+			<td>{{$row.money/100}}元</td>
+			<td>{{$row.start_time}}</td>
+			<td>{{if $row.gw==1}}支付宝{{else}}网银在线{{/if}}</td>
+			</tr>
+			{{/foreach}}
+	  </table>
 	</div>
 </div>
-</body>
-</html>
+
+

@@ -47,6 +47,11 @@ class UserControl extends Control {
 		$this->_tpl->assign('user',$user);
 		return $this->_tpl->fetch('user/changeForm.html');
 	}
+	public function changePasswordForm()
+	{
+		needRole('user');
+		return $this->_tpl->fetch('user/changePassword.html');
+	}
 
 	private function pageNewsByNumber()
 	{
