@@ -1,4 +1,3 @@
-{{include file='common/head.html'}}
 <SCRIPT>
 function ValidateForm() 
 {
@@ -12,23 +11,32 @@ function ValidateForm()
 	}
 }
 </SCRIPT>
-<link rel="stylesheet" rev="stylesheet" href="{{$STATIC}}style/login.css" type="text/css" media="all" />
-<div id="header"></div>
+<div class="right" align="center">
 
-<div id="login">
-	<div id="logo">用户控制面板</div>
-
-	<div id="warning"></div>
-	<div id="login_top"></div>
-	<div id="login_main">
+	<div class="wid_ri r_mar" align="center">
+		<div id="header"></div>
+		<div id="login">
+		<table width="50%" border="0" cellpadding="0" cellspacing="0">
 		<form action="?c=session&a=login" method=post name="form1" onSubmit='return ValidateForm()'>
-		<div class="input_title">用户名</div>
-		<div class="input_box" style="margin-bottom:10px;"><input type="text" name="username" /></div>
-		<div class="input_title">密码</div>
-		<div class="input_box">		
-		<input type="password" name="passwd" /></div>
-		<div class="login_button"><input type="submit" value="登 录" /></div>
-		</form>
+		  <tr>
+			<td colspan="2">用户控制面板</td>
+		  </tr>
+		  <tr>
+			<td>用户名：</td>
+			<td><input type="text" name="username" /></td>
+		  </tr>
+		  <tr>
+			<td>密码:</td>
+			<td><input type="password" name="passwd" /></td>
+		  </tr>
+		  <tr>
+			<td colspan="2"><input type="submit" value="登 录" /></td>
+		  </tr>
+		  </form>
+		</table>
+		
+
+		</div>
 	</div>
 </div>
 

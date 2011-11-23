@@ -15,12 +15,12 @@ class SessionControl extends Control {
 			header("Location: ?c=frame&a=index");
 			die();
 		}
-		if($GLOBALS['frame']==1){
+		//if($GLOBALS['frame']==1){
 			return $this->_tpl->fetch('session/login.html');
-		}else{
-			header("Location: ?c=public&a=index");
-			die();
-		}
+		//}else{
+		//	header("Location: ?c=public&a=index");
+		//	die();
+		//}
 	}
 	public function login()
 	{

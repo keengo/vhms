@@ -1,0 +1,63 @@
+<div class="right" align="center">
+  <table width="690" border="0" cellpadding="0" cellspacing="0" align="center">
+  	  <tr>
+		<td colspan="2" background="{{$STATIC}}images/nav_bg.jpg" class="right_hg right fontcolor">
+			当前位置 : <a href="/">首页</a> >> <a href="?c=public&a=host">虚拟主机</a>
+		</td>
+	 </tr>
+</table>
+<div class="wid_ri r_mar" align="center">
+<table id="table_shell" cellpadding="0" cellspacing="1">
+	 <tr><td colspan="2" class="red"><b>{{$product.name}}产品详请</b></td></tr>
+      <tr>
+        <td>产品名称:</td>
+        <td class="tb_wid2">{{$product.name}}</td>
+      </tr>
+	  <tr>
+        <td>空间大小:</td>
+        <td>{{$product.web_quota}}M</td>
+	  </tr>
+	  <tr>
+        <td>数据库大小:</td>
+        <td>{{$product.db_quota}}M</td>
+	  </tr>
+	  <tr>
+        <td>域名绑定个数:</td>
+        <td>{{if $product.domain==-1}}不限{{else}} {{$product.domain}}个{{/if}}</td>
+	  </tr>
+	  <tr>
+        <td>最大连接数:</td>
+        <td>{{if $product.max_connect==0}}不限{{else}}{{$product.max_connect}}{{/if}}</td>
+	  </tr>
+	  <tr>
+        <td>允许绑定子目录:</td>
+        <td>{{if $product.subdir_flag==1}}是{{else}}否{{/if}}</td>
+	  </tr>
+	  <tr>
+        <td>语言引擎:</td>
+        <td>{{$product.subtemplete}}</td>
+	  </tr>
+	  {{if $product.ftp!=1}}
+	  <tr>
+        <td>是否开启ftp:</td>
+        <td><font color='red'>否</font></td>
+	  </tr>
+	  {{/if}}
+	  <tr>
+        <td>产品说明:</td>
+        <td>{{$product.describe}}</td>
+	  </tr>
+	  
+       <tr>
+       <td>价格:</td>
+       	<td>{{$product.price/100}}/年</td>
+        </tr>
+        
+	    <tr>
+	    <td class="td_hg" colspan="2" align="center">
+		<input type="button" onClick="check_register()" value="确定"></td>
+        </tr>
+    </table>
+	</div>
+    </form>
+  </div>

@@ -60,6 +60,16 @@ line-height:30px;
 background-color:#f5f5f5;
 padding-left:10px;
 }
+#table_shell {
+background-color:#C2C2C2;
+width:600px;
+border:0px;
+line-height:30px;
+}
+#table_shell td{
+background-color:#f5f5f5;
+padding-left:10px;
+}
 .bg_tab{
 background:url({{$STATIC}}style/bg_tr.jpg);
 }
