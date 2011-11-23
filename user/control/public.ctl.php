@@ -10,9 +10,11 @@ class PublicControl extends  Control
 	{
 		parent::__destruct();
 	}
+
 	public function contact()
 	{
 		return $this->_tpl->fetch('public/contact.html');
+
 	}
 	public function viewNewsById()
 	{
@@ -40,6 +42,7 @@ class PublicControl extends  Control
 		array('会员中心','?c=user&a=index'),
 		array('联系我们','?c=public&a=contact'),
 		array('使用帮助','?c=help&a=index')
+
 		);
 		$this->_tpl->assign("menus",$menus);
 		return $this->_tpl->fetch("public/head.html");
