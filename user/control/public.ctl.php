@@ -53,7 +53,7 @@ class PublicControl extends  Control
 		if($page<=0){
 			$page = 1;
 		}
-		$page_count = 5;
+		$page_count = 12;
 		$count = 0;
 		$list = daocall('news','pageNews',array($page,$page_count,&$count));
 		$total_page = ceil($count/$page_count);

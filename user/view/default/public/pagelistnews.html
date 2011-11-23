@@ -19,13 +19,11 @@
 	<table id="table_ri" cellpadding="0" cellspacing="1">
 		<tr>
 			<td>公告标题</td>
-			<td>公告内容</td>
 			<td>发布时间</td>	
 		</tr>
 			{{foreach from=$list item=row}}
 		<tr>
-			<td>{{$row.title}}元</td>
-			<td>{{$row.body}}</td>
+			<td><a href="?c=public&a=viewNewsById&id={{$row.id}}">{{$row.title}}</a></td>
 			<td>{{$row.add_time}}</td>
 			</tr>
 			{{/foreach}}
