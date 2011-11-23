@@ -358,7 +358,11 @@ function needRole($role)
 		die('<html><body><script language="javascript">window.top.location.href="?c=session&a=loginForm";</script></body></html>');
 	}
 }
-
+function myerror($errno, $errstr, $errfile, $errline)
+{
+	$GLOBALS["last_error"] = $errstr;
+}
+set_error_handler(myerror);
 /**
  * 获得微妙数
  */

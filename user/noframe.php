@@ -16,11 +16,12 @@ if($c==""){
 	$_REQUEST['c']=$c='public';
 	$_REQUEST['a']=$a='index';
 }
-$main = dispatch($c,$a);
-//echo htmlspecialchars($main);
-//die();
-//startFramework();
 $tpl = TPL::singleton();
+$main = dispatch($c,$a);
+if ($main===false) {
+	$tpl->assign('msg',$GLOBALS["last_error"]);
+	$main = $tpl->fetch('public/msg.html');
+}
 $tpl->assign('main',$main);
 $tpl->assign('width','760');
 $tpl->assign('title',getTitle());

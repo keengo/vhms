@@ -1,6 +1,6 @@
 <?php
 class ProductControl extends Control {
-
+	
 	public function __construct()
 	{
 		parent::__construct();
