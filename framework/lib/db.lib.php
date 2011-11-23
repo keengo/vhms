@@ -55,7 +55,7 @@ function db_query(PDO $db,$sql, $ret_type = 'result')
 	}	
 	if(!$result && $db->errorCode()!='00000')
 	{
-		trigger_error('在MYSQL服务器端执行SQL语句失败.<br />SQL: ' . $sql . '<br />原因: '. $db->errorCode() . '<br />');
+		//trigger_error('在MYSQL服务器端执行SQL语句失败.<br />SQL: ' . $sql . '<br />原因: '. $db->errorCode() . '<br />');
 		return false;
 	}
 	switch($ret_type)
