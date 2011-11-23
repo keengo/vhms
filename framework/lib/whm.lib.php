@@ -95,7 +95,7 @@ class WhmClient
 		if($msg === FALSE){
 			$this->err_msg = "cann't connect to host";
 			return false;
-		}		
+		}
 		try{
 			$xml = new SimpleXMLElement($msg);
 			//print_r($xml);

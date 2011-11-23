@@ -40,7 +40,7 @@ class VhostDAO extends DAO{
 		}
 		$where=' expire_time < subdate(curdate(),interval '.$day.' day)';
 		$where .= " and ".$this->getFieldValue2('status', 0);
-		return $this->select(array('name','username'),$where);
+		return $this->select(array('name','username','node','product_id'),$where);
 	}
 
 
