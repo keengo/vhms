@@ -70,6 +70,16 @@ line-height:30px;
 background-color:#f5f5f5;
 padding-left:10px;
 }
+#table_login {
+background-color:#C2C2C2;
+width:400px;
+border:0px;
+line-height:35px;
+}
+#table_login td{
+background-color:#f5f5f5;
+padding-left:10px;
+}
 .bg_tab{
 background:url({{$STATIC}}style/bg_tr.jpg);
 }
@@ -116,6 +126,9 @@ margin-bottom:7px;
 }
 .r_mar{
 margin-top:6px;
+}
+.r_mar_log{
+margin-top:35px;
 }
 .padd{
 padding-left:7%;
