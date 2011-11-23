@@ -1,6 +1,13 @@
 <?php
-define('SYS_ROOT', '../framework');
-include(dirname(__FILE__).'/../framework/runtime.php');
+if($_SERVER["argv"]== null || $_REQUEST!=null ){
+	die("crontab cann't run in web model.please run in cli.");
+}
+date_default_timezone_set('Asia/Shanghai');
+header("Cache-Control: no-cache, must-revalidate");
+
+define('APPLICATON_ROOT', dirname(__FILE__));
+define('SYS_ROOT', dirname(dirname(__FILE__)).'/framework');
+include(SYS_ROOT.'/runtime.php');
 
 $day = 1; //查询过期天数
 $del_day = 30;//过期多少天删除空间
