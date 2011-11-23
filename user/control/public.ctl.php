@@ -47,6 +47,26 @@ class PublicControl extends  Control
 		$this->_tpl->assign("menus",$menus);
 		return $this->_tpl->fetch("public/head.html");
 	}
+	public function pageListNews()
+	{
+		$page = intval($_REQUEST['page']);
+		if($page<=0){
+			$page = 1;
+		}
+		$page_count = 5;
+		$count = 0;
+		$list = daocall('news','pageNews',array($page,$page_count,&$count));
+		$total_page = ceil($count/$page_count);
+		if($page>=$total_page){
+			$page = $total_page;
+		}
+		$this->_tpl->assign('count',$count);
+		$this->_tpl->assign('total_page',$total_page);
+		$this->_tpl->assign('page',$page);
+		$this->_tpl->assign('page_count',$page_count);
+		$this->_tpl->assign('list',$list);
+		return $this->_tpl->fetch('public/pagelistnews.html');
+	}
 	public function readNews()
 	{
 		$new=daocall('news','getNews',array($_REQUEST['id']));
