@@ -1,5 +1,5 @@
 <div class="right" align="center">
-  <table width="690" border="0" cellpadding="0" cellspacing="0" align="center">
+  <table width="750" border="0" cellpadding="0" cellspacing="0" align="center">
   	  <tr>
 		<td colspan="2" background="{{$STATIC}}images/nav_bg.jpg" class="right_hg right fontcolor">
 			当前位置 : <a href="/">首页</a> >> 产品详请
@@ -31,13 +31,13 @@
 	  </tr>
 	  <tr>
         <td>允许绑定子目录:</td>
-        <td>{{if $product.subdir_flag==1}}是{{else}}否{{/if}}</td>
+        <td>{{if $product_info.subdir_flag==1}}是{{else}}否{{/if}}</td>
 	  </tr>
 	  <tr>
         <td>语言引擎:</td>
         <td>{{$product_info.subtemplete}}</td>
 	  </tr>
-	  {{if $product.ftp!=1}}
+	  {{if $product_info.ftp!=1}}
 	  <tr>
         <td>是否开启ftp:</td>
         <td><font color='red'>否</font></td>
@@ -45,17 +45,17 @@
 	  {{/if}}
 	  <tr>
         <td>产品说明:</td>
-        <td>{{$product.describe}}</td>
+        <td>{{$product_info.describe}}</td>
 	  </tr>
 	  
        <tr>
        <td>价格:</td>
-       	<td>{{$product.price/100}}/年</td>
+       	<td>{{$product_info.price/100}}元/年</td>
         </tr>
         
 	    <tr>
 	    <td class="td_hg" colspan="2" align="center">
-		<input type="button" onClick="check_register()" value="确定"></td>
+		<a href="?c=product&a=sellForm&product=vhost_{{$product_info.id}}"><img src="{{$STATIC}}images/r_btn01.jpg" border="0"/></a></td>
         </tr>
     </table>
 	</div>

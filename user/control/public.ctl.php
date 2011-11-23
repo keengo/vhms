@@ -29,13 +29,6 @@ class PublicControl extends  Control
 		$this->_tpl->assign('products',$products);
 		return $this->_tpl->fetch('public/index.html');
 	}
-	public function showProductFrom()
-	{
-		$product_id = $_REQUEST['product_id'];
-		$product_info = daocall('vhostproduct','getProduct',array($product_id));
-		$this->_tpl->assign('product_info',$product_info);
-		return $this->_tpl->fetch('public/showProductFrom.html');
-	}
 	public function foot()
 	{
 		return $this->_tpl->fetch('public/foot.html');
