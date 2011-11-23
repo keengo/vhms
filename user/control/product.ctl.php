@@ -52,7 +52,8 @@ class ProductControl extends Control {
 	public function sellForm()
 	{
 		if(getRole('user')==""){
-			return "您还没有登录，请先登录";
+			header("Location: ?c=session&a=loginForm");
+			die();
 		}
 		$product = explode('_',$_REQUEST['product']);
 		switch($product[0]){
