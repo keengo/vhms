@@ -1,6 +1,6 @@
 <?php
-define('SYS_ROOT', './../framework');
-include(SYS_ROOT.'/runtime.php');
+define('SYS_ROOT', '../framework');
+include(dirname(__FILE__).'/../framework/runtime.php');
 
 $day = 1; //查询过期天数
 $del_day = 30;//过期多少天删除空间
@@ -9,16 +9,16 @@ $dal_mysql = 1;//是否删除数据库
 $vhosts = daocall('vhost','selectListByExpire_time',array($day)); //获取过期空间
 if(!is_file('crontab.log')) {
 	@touch('crontab.log');
+	echo "touch file success";
 }
 $fp=fopen('crontab.log', 'a');
 if (is_array($vhosts)) {
 	foreach ($vhosts as $vhost) {
 		$arr['status'] = 1;
-		echo "up=".$vhost['name']."\r\n";
-		echo "up=".$vhost['node']."\r\n";
 		$return = apicall('vhost','changeStatus',array($vhost['node'],$vhost['name'],1));
 		$stopstr =$vhost['name']." web stop result=".$return."\r\n";
 		echo $stopstr;
+		echo "</br>";
 		writelog($fp,$stopstr);
 	}
 }
@@ -27,11 +27,10 @@ if (is_array($vhosts)) {
 $del_vhosts = daocall('vhost','selectListByExpire_time',array($del_day,-1));
 if (is_array($del_vhosts)) {
 	foreach ($del_vhosts as $del_vhost) {
-		echo "del=".$del_vhost['name']."\r\n";
-		echo "del=".$del_vhost['node']."\r\n";
 		$result = apicall('vhost','del',array($del_vhost['node'],$del_vhost['name']));
-		$stopstr = $vhost['name']." web stop result=".$result."\r\n";
+		$stopstr = $del_vhost['name']." web del result=".$result."\r\n";
 		echo $stopstr;
+		echo "</br>";
 		writelog($fp,$stopstr);
 	}
 }
