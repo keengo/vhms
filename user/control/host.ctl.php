@@ -9,6 +9,8 @@ class HostControl extends Control
 	}
 	public function left()
 	{
+		$products = daocall('vhostproduct','getProductList',array());
+		$this->_tpl->assign('products',$products);
 		return $this->_tpl->fetch('host/left.html');
 	}
 	
