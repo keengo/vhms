@@ -113,7 +113,7 @@ function changeNode()
 	<tr>
 		<td class="td_bgc right_2">空间大小(M)：</td>
 		<td class="td_bgc right_2"><input name="web_quota" type="text"
-			id='tb_wid3' value="{{$vhostproduct.web_quota}}" size="16"></td>
+			id='tb_wid3' value="{{$vhostproduct.w-eb_quota}}" size="16"></td>
 	</tr>
 	<tr>
 		<td class="td_bgc right_2">数据库大小(M)：</td>
@@ -125,6 +125,23 @@ function changeNode()
 		<td class="td_bgc right_2"><input name="price" type="text" id='tb_wid3'
 			value="{{$vhostproduct.price/100}}"></td>
 	</tr>
+	
+
+	<tr>
+		<td class="td_bgc right_2">代理价格</td>
+		<td class="td_bgc right_2">
+		<table>
+		<tr>
+		{{for $i=0;$i< count($agent_ids);$i++}}
+		<td class="td_bgc right_2">{{$agent_ids[$i].name}}<input name="price{{$agent_ids[$i].id}}" type="text" id='tb_wid3' value="" style="width:30px" /></td>
+		{{/for}}
+		<tr>
+		</table>
+		</td>
+	</tr>
+	
+	
+	
 	<tr>
 		<td class="td_bgc right_2">域名绑定个数(-1表示无限)</td>
 		<td class="td_bgc right_2"><input name="domain" type="text" id='tb_wid3'

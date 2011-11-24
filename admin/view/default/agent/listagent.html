@@ -1,0 +1,37 @@
+{{include file='common/head.html'}}
+<body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
+<div id="container">
+	<div align="center">
+	 	
+		<div class="mar_top tb_wid5" align="right">
+		<div align="left"><a href="?c=agent&a=addAgentFrom">增加代理级别</a>
+		</div>
+				<div class="block tb_wid5">
+				<table id="table" border="0" cellpadding="0" cellspacing="1">
+				
+						<tr id="ttitle">
+						<td class="td_bgc right_2">操作</td>
+						<td class="td_bgc right_2">代理id号</td>
+						<td class="td_bgc right_2">代理名称</td>
+						</tr>
+						
+						{{for $i=0;$i< count($agents);$i++}}
+						<tr>
+						<td class="td_bgc right_2">
+							[<a href='javascript:if(confirm("真的要删除?")){ window.location="?c=agent&a=delAgent&id={{$agents[$i].id}}";}'>删除</a>]
+							[<a href="?c=agent&a=addAgentFrom&id={{$agents[$i].id}}">修改</a>]
+						</td>
+						<td class="td_bgc right_2">{{$agents[$i].id}}</td>
+						<td class="td_bgc right_2">{{$agents[$i].name}}</td>
+						{{/for}}
+						</tr>
+						
+			  	</table>
+				</div>
+				
+		</div>
+		</div>
+		</div>
+</body>
+
+</html>

@@ -136,6 +136,8 @@ class VhostproductControl extends Control {
 	}
 	public function addProductForm()
 	{
+		$agent_ids = daocall('agent','selectList',array());
+		$this->_tpl->assign('agent_ids',$agent_ids);
 		$this->_tpl->assign("action","addProduct");
 		if(!$this->assignHosts()){
 			return false;

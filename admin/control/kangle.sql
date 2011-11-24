@@ -70,6 +70,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `money` int(11) NOT NULL DEFAULT '0',
   `id` varchar(255) DEFAULT NULL,
   `regtime` datetime NOT NULL,
+  `agent_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`username`),
   KEY `uid` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;

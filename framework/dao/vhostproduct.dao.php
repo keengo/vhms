@@ -129,10 +129,13 @@ class VhostproductDAO extends DAO {
 										 $where, 'id',false, $page, $page_count, $count);
 		
 	}
-
-	public function getProducts($flag,$view=0)
+	//代理设置新增时所用。
+	public function selectProduct()
 	{
-		
+		return $this->select(array('id','name'));
+	}
+	public function getProducts($flag=0,$view=0)
+	{
 		switch($flag){
 			case 1:
 				$where = $this->MAP_ARR['pause_flag']."!=0";
