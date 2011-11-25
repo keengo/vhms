@@ -23,14 +23,18 @@ class AgentpriceDAO extends DAO
 		return $this->select(null);
 	} 
 	
+	/**
+	 * @deprecated 暂未用
+	 * 
+	 */
 	//产品更新所用。
 	public function updateAgentprice($arr)
 	{
-		$attr['price'] = $arr['price'];
+		
 		$where = $this->getFieldValue2('agent_id', $arr['agent_id']);
 		$where.=" and ".$this->getFieldValue2('product_type', $arr['product_type']);
 		$where.=" and ".$this->getFieldValue2('product_id', $arr['product_id']);
-		return $this->update($attr, $where);
+		return $this->update($arr, $where);
 	}
 	
 	//删除产品时所用，同步删除代理价格设置。
