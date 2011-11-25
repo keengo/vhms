@@ -26,7 +26,7 @@ abstract class Product
 		return $price;
 	}
 	/*
-	 * 看月份是否为整年
+	 * 判断月份是否为整年
 	 */
 	public function isYears($month)
 	{
@@ -63,8 +63,6 @@ abstract class Product
 		
 		//处理代理价格，如果有代理，按代理价格扣费，否则按正常价格
 		$userinfo = daocall('user','getUser',array($username));
-		print_r($userinfo);
-		echo "<br>";
 		if($userinfo['agent_id'] > 0)
 		{
 			//旧产品代理价格
