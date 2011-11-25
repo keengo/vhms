@@ -60,7 +60,23 @@ abstract class Product
 			trigger_error('月份错误');
 			return false;
 		}
-		$price = $this->caculatePrice($info['price'],$month);
+		
+		//处理代理价格，如果有代理，按代理价格扣费，否则按正常价格
+		$userinfo = daocall('user','getUser',array($username));
+		print_r($userinfo);
+		echo "<br>";
+		if($userinfo['agent_id'] > 0)
+		{
+			//旧产品代理价格
+			$arr['agent_id'] = $userinfo['agent_id'];
+			$arr['product_type'] = 0;
+			$arr['product_id'] = $suser['product_id'];
+			$agentinfo = daocall('agentprice','getAgentprice',array($arr));
+			$price = $this->caculatePrice($agentinfo[0]['price'],$month);
+		}else{
+			$price = $this->caculatePrice($info['price'],$month);
+		}
+		
 		if($price<0){
 			trigger_error('价格错误');
 			return false;
@@ -78,7 +94,8 @@ abstract class Product
 			return false;
 		}
 		//echo "haha";
-		if($price>0 && !apicall('money','decMoney', array($username,$price))){
+		$mem = $susername." 续费 ".$month." 个月";
+		if($price>0 && !apicall('money','decMoney', array($username,$price,$mem))){
 			$default_db->rollBack();
 			trigger_error('余额不足,所需金额:'.($price/100));
 			return false;
@@ -94,6 +111,13 @@ abstract class Product
 		}
 		return false;
 	}
+	/**
+	 * 产品升级扣费
+	 * Enter description here ...
+	 * @param $username
+	 * @param $susername
+	 * @param $new_product_id
+	 */
 	public function upgrade($username,$susername,$new_product_id)
 	{
 		//产品升级操作
@@ -109,7 +133,7 @@ abstract class Product
 			return false;
 		}
 		$ninfo = $this->getInfo($new_product_id);
-		
+
 		//计算差价
 		//处理代理，如果有代理，按代理的价格来扣费，否则按正常价格
 		$userinfo = daocall('user','getUser',array($username));
@@ -120,19 +144,19 @@ abstract class Product
 			$arr['product_type'] = 0;
 			$arr['product_id'] = $suser['product_id'];
 			$agentinfo=daocall('agentprice','getAgentprice',array($arr));
-			
+				
 			//新产品代理价格
 			$attr['agent_id'] = $userinfo['agent_id'];
 			$attr['product_type'] = 0;
 			$attr['product_id'] = $new_product_id;
 			$newagentinfo = daocall('agentprice','getAgentprice',array($attr));
 			$diff_price = $newagentinfo[0]['price'] - $agentinfo[0]['price'];
-			
+				
 		}else{
 			$diff_price = $ninfo['price'] - $info['price'];
 		}
-		
-		
+
+
 		if ($diff_price<0) {
 			trigger_error('升级产品价格错误,请联系管理员');
 		}
@@ -140,7 +164,7 @@ abstract class Product
 		$month = ($expire_time - time())/(30*24*3600);
 		//die("expire_time=".$suser['expire_time']." ".$expire_time." month=".$month);
 
-		
+
 
 		$price = $this->caculatePrice($diff_price,$month);
 		if($price<0){
@@ -161,7 +185,8 @@ abstract class Product
 			return false;
 		}
 		//echo "haha";
-		if($price>0 && !apicall('money','decMoney', array($username,$price))){
+		$mem =$susername."从".$info['name']." 升级至 ".$ninfo['name'];
+		if($price>0 && !apicall('money','decMoney', array($username,$price,$mem))){
 			$default_db->rollBack();
 			trigger_error('余额不足,所需金额:'.($price/100));
 			return false;
@@ -235,7 +260,8 @@ abstract class Product
 		if(!$default_db->beginTransaction()){
 			return false;
 		}
-		if($price>0 && !apicall('money','decMoney', array($username,$price))){
+		$mem = "购买 ".$suser['name']." ".$month." 个月";
+		if($price>0 && !apicall('money','decMoney', array($username,$price,$mem))){
 			$default_db->rollBack();
 			trigger_error('余额不足,所需金额:'.($price/100));
 			return false;

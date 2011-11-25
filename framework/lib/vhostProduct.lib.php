@@ -34,20 +34,18 @@ class VhostProduct extends Product
 		$params['node'] = $product_info['node'];
 		$params['init'] = '1';
 		$params['templete'] = $product_info['templete'];
-		$uid = daocall('vhost', 'insertVhost',
-		array($susername,
-		$params['name'],
-		$params['passwd'],
-		$params['doc_root'],
-		$params['gid'],
-		$product_info['templete'],
-		$product_info['subtemplete'],
-		0,
-		$params['node'],
-		$product_info['id'],
-		$params['month']
-		)
-		);
+		$uid = daocall('vhost', 'insertVhost',array($susername,
+												$params['name'],
+												$params['passwd'],
+												$params['doc_root'],
+												$params['gid'],
+												$product_info['templete'],
+												$product_info['subtemplete'],
+												0,
+												$params['node'],
+												$product_info['id'],
+												$params['month']
+						));
 		if($uid && $uid < 2000){
 			daocall('vhost','updateMinUid',array(&$uid));
 			if($uid<2000){
