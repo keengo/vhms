@@ -21,6 +21,12 @@ class UserControl extends Control {
 		session_start();
 		
 		$user = daocall('user','getUser',array(getRole('user')));
+		$agents = daocall('agent','selectList',array());
+		foreach($agents as $agent){
+			if($agent['id'] == $user['agent_id']) {
+				$user['agent_name'] =$agent['name'];
+			}
+		}
 		$login_ip=$_SERVER['REMOTE_ADDR'];
 		$this->_tpl->assign('login_ip',$login_ip);
 		$this->_tpl->assign('user',$user);
