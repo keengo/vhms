@@ -143,8 +143,17 @@ class DAO
 	{
 		$fields_str = "";
 		foreach($arr as $field => $value) {
+			if(!array_key_exists($field,$this->MAP_ARR)){
+				 continue;
+			}
+			if($this->MAP_TYPE!=null && ($this->MAP_TYPE[$field] & FIELD_TYPE_AUTO)){
+				continue;
+			}
 			if($fields_str!=""){
 				$fields_str.=',';
+			}
+			if($this->MAP_TYPE!=null && ($this->MAP_TYPE[$field] & FIELD_TYPE_AUTO)){
+				continue;
 			}
 	 		$fields_str .= $this->getFieldValue2($field,$value);
 	 	}

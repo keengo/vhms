@@ -39,11 +39,11 @@
       <tr>
         <td class="td_bgc right_2">代理身份：</td>
         <td class="td_bgc right_2">
-			<form action='?c=vhost&a=setStatus&name={{$row.name}}' method='post' name='status_{{$row.uid}}form'>
-			<select name='status' onChange="javascript:status_{{$row.uid}}form.submit()">
-				<option value="apple">{{$row.agent_id}}
-				<option value="orange">{{$row.agent_id}}
-				<option value="mango">{{$row.agent_id}}
+			<form action='?c=user&a=changUserAgent&username={{$row.username}}' method='post' name='agentform'>
+			<select name='agent_id' onChange="javascript:agentform.submit()">
+				{{for $i=0;$i< count($agents);$i++}}
+				<option value="{{$agents[$i].id}}" {{if $row.agent_id==$agents[$i].id}}selected{{/if}}>{{$agents[$i].name}}</option>
+				{{/for}}
 			 </select>
 			</form>
 		</td>

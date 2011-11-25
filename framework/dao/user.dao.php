@@ -87,6 +87,17 @@ class UserDAO extends DAO{
 		$arr['id'] = $id;
 		return $this->update($arr,$this->getFieldValue2('username', $username));
 	}
+	
+	/**
+	 * 更改user信息 最新函数，其他弃用
+	 * Enter description here ...
+	 * @param unknown_type $username
+	 * @param unknown_type $arr
+	 */
+	public function changUser($username,$arr)
+	{
+		return $this->update($arr, $this->getFieldValue2('username', $username));
+	}
 	public function updateMoney($username,$money)
 	{
 		$arr['money']=$money;

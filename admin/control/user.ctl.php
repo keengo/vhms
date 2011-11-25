@@ -33,7 +33,16 @@ class UserControl extends Control {
 		$this->_tpl->display('user/userslist.html');	
 		
 	}
-	
+	public function changUserAgent()
+	{
+		$username = $_REQUEST['username'];
+		if(daocall('user','changUser',array($username,$_REQUEST))) {
+			header("Location: ?c=user&a=listUser&username=".$username);
+		}else{
+			$this->_tpl->assign('msg',"更改失败");
+			return $this->_tpl->fetch('msg.html');
+		}
+	}
 	public function editForm()
 	{
 		$user = daocall('user', 'getUser', array($_REQUEST['username']));
@@ -123,11 +132,11 @@ class UserControl extends Control {
 				$this->_tpl->assign("msg","没有找到用户:".$username);
 			}
 		}
-		//if($list){
+		$agents = daocall('agent','selectList',array());
+		$this->_tpl->assign('agents',$agents);
 		$this->_tpl->assign('sum',count($list));
 		$this->_tpl->assign('list',$list);
 		$this->_tpl->display('user/userlist.html');
-		//}
 
 	}
 	public function impLogin()
