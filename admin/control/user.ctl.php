@@ -25,6 +25,15 @@ class UserControl extends Control {
 		if($page>=$total_page){
 			$page = $total_page;
 		}
+		$agents = daocall('agent','selectList',array());
+		foreach($agents as $agent) {
+			for($i=0;$i<count($list);$i++) {
+				if($agent['id'] == $list[$i]['agent_id']) {
+					$list[$i]['agent_name'] = $agent['name'];
+				}
+			}
+		}
+		
 		$this->_tpl->assign('count',$count);
 		$this->_tpl->assign('total_page',$total_page);
 		$this->_tpl->assign('page',$page);
