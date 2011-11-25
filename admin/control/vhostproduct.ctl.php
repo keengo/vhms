@@ -124,7 +124,6 @@ class VhostproductControl extends Control {
 	{
 		$agent_ids = daocall('agent','selectList',array());
 		
-		//foreach($agent_ids as $agent) {
 		for($i=0;$i<count($agent_ids);$i++){
 			$attr['agent_id'] = $agent_ids[$i]['id'];
 			$attr['product_type'] = 0;
@@ -132,7 +131,6 @@ class VhostproductControl extends Control {
 			$agentprice = daocall('agentprice','getAgentprice',array($attr));
 			$agent_ids[$i]['price'] = $agentprice[0]['price'];
 		}
-		//print_r($agent_ids);
 		$vhostproduct = daocall('vhostproduct','getProduct',array($_REQUEST['id']));
 		if(!$vhostproduct){
 			return trigger_error('不能找到该产品');
@@ -184,12 +182,31 @@ class VhostproductControl extends Control {
 		$_REQUEST['price'] *= 100;
 		$_REQUEST['speed_limit'] *= 1024;
 		daocall('vhostproduct', 'updateProduct', array($_REQUEST));
+		
+		$agent_id = daocall('agent','selectList',array());
+		foreach ($agent_id as $agent)
+		{
+			if($_REQUEST['agentprice_'.$agent['id']])
+			{
+				$arr['agent_id'] = $agent['id'];
+				$arr['product_type'] = 0;//虚拟主机为0,域名为1
+				$arr['product_id'] = $_REQUEST['id'];
+				$arr['price'] = ($_REQUEST['agentprice_'.$agent['id']])*100;
+				daocall('agentprice','updateAgentprice',array($arr));
+			}
+		}
+		
 		apicall('product','flushVhostProduct');
 		return $this->showProduct();
 	}
 	public function del()
 	{
 		daocall('vhostproduct','delProduct',$_REQUEST["id"]);
+		
+		$arr['product_id'] = $_REQUEST['id'];
+		$arr['product_type'] = 0;
+		daocall('agentprice','delAgentprice',array($arr));
+		
 		apicall('product','flushVhostProduct');
 		return $this->showProduct();
 	}

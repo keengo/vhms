@@ -22,15 +22,32 @@ class AgentpriceDAO extends DAO
 	{
 		return $this->select(null);
 	} 
+	
+	//产品更新所用。
+	public function updateAgentprice($arr)
+	{
+		$attr['price'] = $arr['price'];
+		$where = $this->getFieldValue2('agent_id', $arr['agent_id']);
+		$where.=" and ".$this->getFieldValue2('product_type', $arr['product_type']);
+		$where.=" and ".$this->getFieldValue2('product_id', $arr['product_id']);
+		return $this->update($attr, $where);
+	}
+	
+	//删除产品时所用，同步删除代理价格设置。
+	public function delAgentprice($arr)
+	{
+		$where=$this->getFieldValue2('product_id', $arr['product_id']);
+		$where.=" and ".$this->getFieldValue2('product_type', $arr['product_type']);
+		return $this->delData($where);
+	}
+	
+	//产品修改时所用，调用product_id显示代理价格
 	public function getAgentprice($arr)
 	{
-		return $this->select(null,
-						$this->getFieldValue2('agent_id', $arr['agent_id'])
-						." and ".
-						$this->getFieldValue2('product_type', $arr['product_type'])
-						." and ".
-						$this->getFieldValue2('product_id', $arr['product_id'])
-						);
+		$where = $this->getFieldValue2('agent_id', $arr['agent_id']);
+		$where.=" and ".$this->getFieldValue2('product_type', $arr['product_type']);
+		$where.=" and ".$this->getFieldValue2('product_id', $arr['product_id']);
+		return $this->select(null,$where);
 	}
 	public function addAgentprice($attr)
 	{
