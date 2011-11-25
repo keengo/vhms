@@ -50,6 +50,19 @@ class VhostproductDAO extends DAO {
 		);
 		$this->_TABLE = DBPRE .'vhost_product';
 	}
+	public function addProduct($arr)
+	{
+		$result = $this->insert($arr);
+		if($result){
+			try{
+				$id = $this->db->lastInsertId();
+			}catch(PDOException $e){
+				//todo alter use select to select id;
+			}
+			return $id;
+		}
+		return false;
+	}
 	public function updateProductView($id,$view)
 	{
 		return $this->update(array('view'=>$view),$this->getFieldValue2('id', $id));

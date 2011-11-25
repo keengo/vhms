@@ -77,10 +77,8 @@ function list_templete_result() {
 }
 function changeNode()
 {
-	//alert('haha');
 	xxkf_obj('templete').innerHTML="<img src='{{$PSTATIC}}/style/busy.gif'/>";
 	var url = '?c={{$smarty.request.c}}&a=ajaxListTemplete&node='+nodeform.node.value;
-	//alert(url);
 	ajax_open_url(url,list_templete_result);
 }
 </script>
@@ -130,13 +128,13 @@ function changeNode()
 	<tr>
 		<td class="td_bgc right_2">代理价格</td>
 		<td class="td_bgc right_2">
-		<table>
-		<tr>
+
 		{{for $i=0;$i< count($agent_ids);$i++}}
-		<td class="td_bgc right_2">{{$agent_ids[$i].name}}<input name="price{{$agent_ids[$i].id}}" type="text" id='tb_wid3' value="" style="width:30px" /></td>
+		
+		{{$agent_ids[$i].name}}:
+		<input name="agentprice_{{$agent_ids[$i].id}}" type="text" id='tb_wid3' value="{{$agent_ids[$i].price/100}}" style="width:45px" />
+		
 		{{/for}}
-		<tr>
-		</table>
 		</td>
 	</tr>
 	

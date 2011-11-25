@@ -1,7 +1,7 @@
 <?php
 needRole('admin');
 class VhostproductControl extends Control {
-	
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -13,7 +13,7 @@ class VhostproductControl extends Control {
 	public function refreshAllTemplete()
 	{
 		$list = daocall('nodes','getData',null);
-		
+
 	}
 	public function refreshTemplete()
 	{
@@ -44,7 +44,7 @@ class VhostproductControl extends Control {
 			$str.="<subtemplete>".$templete[$i]."</subtemplete>";
 		}
 		$str.="</result>";
-		return $str;		
+		return $str;
 	}
 	public function ajaxListTemplete()
 	{
@@ -56,7 +56,7 @@ class VhostproductControl extends Control {
 			$str.="<templete>".$templete[$i]."</templete>";
 		}
 		$str.="</result>";
-		return $str;		
+		return $str;
 	}
 	public function ajaxChangeNode()
 	{
@@ -71,7 +71,7 @@ class VhostproductControl extends Control {
 			if($templetes[$i] == $templete){
 				$finded = true;
 				break;
-			}	
+			}
 		}
 		if(!$finded){
 			$str .="<result code='2'/>";
@@ -86,8 +86,8 @@ class VhostproductControl extends Control {
 		}
 		daocall('product','flushVhostProduct');
 		return $str;
-		
-		
+
+
 	}
 	public function showTemplete()
 	{
@@ -122,6 +122,17 @@ class VhostproductControl extends Control {
 	}
 	public function editProductForm()
 	{
+		$agent_ids = daocall('agent','selectList',array());
+		
+		//foreach($agent_ids as $agent) {
+		for($i=0;$i<count($agent_ids);$i++){
+			$attr['agent_id'] = $agent_ids[$i]['id'];
+			$attr['product_type'] = 0;
+			$attr['product_id'] = $_REQUEST['id'];
+			$agentprice = daocall('agentprice','getAgentprice',array($attr));
+			$agent_ids[$i]['price'] = $agentprice[0]['price'];
+		}
+		//print_r($agent_ids);
 		$vhostproduct = daocall('vhostproduct','getProduct',array($_REQUEST['id']));
 		if(!$vhostproduct){
 			return trigger_error('不能找到该产品');
@@ -129,9 +140,10 @@ class VhostproductControl extends Control {
 		if(!$this->assignHosts()){
 			return false;
 		}
+		$this->_tpl->assign('agent_ids',$agent_ids);
 		$this->_tpl->assign('vhostproduct',$vhostproduct);
 		$this->_tpl->assign('action','editProduct');
-	
+
 		return $this->_tpl->display('vhostproduct/addProduct.html');
 	}
 	public function addProductForm()
@@ -146,9 +158,24 @@ class VhostproductControl extends Control {
 	}
 	public function addProduct()
 	{
+
 		$_REQUEST['price'] *= 100;
 		$_REQUEST['speed_limit']*=1024;
-		daocall('vhostproduct', 'insertData', array($_REQUEST));
+		
+		$product_id = daocall('vhostproduct', 'addProduct', array($_REQUEST));
+
+		$agent_id = daocall('agent','selectList',array());
+		foreach ($agent_id as $agent)
+		{
+			if($_REQUEST['agentprice_'.$agent['id']])
+			{
+				$arr['agent_id'] = $agent['id'];
+				$arr['product_type'] = 0;//虚拟主机为0,域名为1
+				$arr['product_id'] = $product_id;
+				$arr['price'] = ($_REQUEST['agentprice_'.$agent['id']])*100;
+				daocall('agentprice','addAgentprice',array($arr));
+			}
+		}
 		apicall('product','flushVhostProduct');
 		return $this->showProduct();
 	}
