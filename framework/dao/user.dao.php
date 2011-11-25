@@ -16,11 +16,13 @@ class UserDAO extends DAO{
 			"regtime" => 'regtime',
 			"name" => 'name',
 			"money" => 'money',
-			"id"=>'id'
+			"id"=>'id',
+			'agent_id'=>'agent_id'
 			);
 			$this->MAP_TYPE = array(
 				'uid'=>FIELD_TYPE_INT,
 				'money'=>FIELD_TYPE_INT,
+				'agent_id'=>FIELD_TYPE_INT,
 				'passwd'=>FIELD_TYPE_MD5,
 				'regtime'=>FIELD_TYPE_DATETIME
 			);
@@ -37,7 +39,7 @@ class UserDAO extends DAO{
 	public function pageUsers($page,$page_count,&$count)
 	{
 		return $this->selectPage(
-		array('username','email','name','money','id','regtime'),null,'regtime',true,$page,$page_count,$count);
+		array('username','email','name','money','id','regtime','agent_id'),null,'regtime',true,$page,$page_count,$count);
 	}
 
 	/**

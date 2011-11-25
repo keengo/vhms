@@ -37,6 +37,18 @@
         <td class="td_bgc right_2"><a href="?c=user&a=editForm&username={{$row.username}}">{{$row.username}}</a></td>
       </tr>
       <tr>
+        <td class="td_bgc right_2">代理身份：</td>
+        <td class="td_bgc right_2">
+			<form action='?c=vhost&a=setStatus&name={{$row.name}}' method='post' name='status_{{$row.uid}}form'>
+			<select name='status' onChange="javascript:status_{{$row.uid}}form.submit()">
+				<option value="apple">{{$row.agent_id}}
+				<option value="orange">{{$row.agent_id}}
+				<option value="mango">{{$row.agent_id}}
+			 </select>
+			</form>
+		</td>
+      </tr>
+      <tr>
         <td class="td_bgc right_2">真实姓名：</td>
         <td class="td_bgc right_2">{{$row.name}}</td>
       </tr>
