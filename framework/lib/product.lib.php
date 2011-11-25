@@ -109,14 +109,39 @@ abstract class Product
 			return false;
 		}
 		$ninfo = $this->getInfo($new_product_id);
+		
 		//计算差价
-		$diff_price = $ninfo['price'] - $info['price'];
+		//处理代理，如果有代理，按代理的价格来扣费，否则按正常价格
+		$userinfo = daocall('user','getUser',array($username));
+		if($userinfo['agent_id'] > 0)
+		{
+			//旧产品代理价格
+			$arr['agent_id'] = $userinfo['agent_id'];
+			$arr['product_type'] = 0;
+			$arr['product_id'] = $suser['product_id'];
+			$agentinfo=daocall('agentprice','getAgentprice',array($arr));
+			
+			//新产品代理价格
+			$attr['agent_id'] = $userinfo['agent_id'];
+			$attr['product_type'] = 0;
+			$attr['product_id'] = $new_product_id;
+			$newagentinfo = daocall('agentprice','getAgentprice',array($attr));
+			$diff_price = $newagentinfo[0]['price'] - $agentinfo[0]['price'];
+			
+		}else{
+			$diff_price = $ninfo['price'] - $info['price'];
+		}
+		
+		
 		if ($diff_price<0) {
 			trigger_error('升级产品价格错误,请联系管理员');
 		}
 		$expire_time = strtotime($suser['expire_time']);
 		$month = ($expire_time - time())/(30*24*3600);
 		//die("expire_time=".$suser['expire_time']." ".$expire_time." month=".$month);
+
+		
+
 		$price = $this->caculatePrice($diff_price,$month);
 		if($price<0){
 			trigger_error('价格错误');
@@ -182,7 +207,21 @@ abstract class Product
 			trigger_error('月份错误');
 			return false;
 		}
-		$price = $this->caculatePrice($info['price'],$month);
+
+		//处理代理，如果有代理，按代理的价格来扣费，否则按正常价格
+		$userinfo = daocall('user','getUser',array($username));
+		if($userinfo['agent_id'] > 0)
+		{
+			$arr['agent_id'] = $userinfo['agent_id'];
+			$arr['product_type'] = 0;
+			$arr['product_id'] = $product_id;
+			$agentinfo=daocall('agentprice','getAgentprice',array($arr));
+			$price = $this->caculatePrice($agentinfo[0]['price'],$month);
+		}else{
+			$price = $this->caculatePrice($info['price'],$month);
+		}
+
+
 		if($price<0){
 			trigger_error('价格错误');
 			return false;

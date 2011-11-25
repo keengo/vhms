@@ -46,6 +46,14 @@ class AgentpriceDAO extends DAO
 	}
 	
 	//产品修改时所用，调用product_id显示代理价格
+	/**
+	 * 取得代理价格
+	 * agent_id代理ID
+	 * product_type产品分类，0虚拟主机，其他未定
+	 * product_id产品ID
+	 * Enter description here ...
+	 * @param unknown_type $arr
+	 */
 	public function getAgentprice($arr)
 	{
 		$where = $this->getFieldValue2('agent_id', $arr['agent_id']);
