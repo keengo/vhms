@@ -1,4 +1,16 @@
 <?php
+@touch('money.log');
+function writeLog($str)
+{
+	$fp=fopen('money.log','a+');
+	$str2=date("Y-m-d H:i:s",time())." ".$str;
+	if(getRole('admin')) {
+		$str2.=" admin is ".getRole('admin')."\r\n";
+	}else{
+		$str2.="\r\n";
+	}
+	@fwrite($fp,$str2);
+}
 class MoneyAPI extends API
 {
 	public function decMoney($user,$money,$mem=null)
@@ -8,6 +20,8 @@ class MoneyAPI extends API
 			return false;
 		}
 		daocall('moneyout','add',array($user,$money,$mem));
+		$str=$user." delmoney ".$money;
+		writeLog($str);
 		return daocall('user', 'decMoney', array($user,$money));
 	}
 	public function addMoney($user,$money)
@@ -16,6 +30,8 @@ class MoneyAPI extends API
 		if($money<=0){
 			return false;
 		}
+		$str=$user." addmoney ".$money;
+		writeLog($str);
 		return daocall('user', 'addMoney', array($user,$money));
 	}
 	public function payReturn($id,$money=null)
@@ -41,5 +57,7 @@ class MoneyAPI extends API
 		}
 		return $default_db->commit();			//提交
 	}
+	
 }
+fclose($fp);
 ?>
