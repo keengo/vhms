@@ -1,6 +1,6 @@
 <?php
 class ProductControl extends Control {
-	
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -56,11 +56,23 @@ class ProductControl extends Control {
 			die();
 		}
 		$product = explode('_',$_REQUEST['product']);
+		$username = getRole('user');
+
 		switch($product[0]){
 			case 'vhost':
 				$product_info = daocall('vhostproduct','getProduct',array($product[1]));
 				if(!$product_info || intval($product_info['pause_flag'])!=0){
 					return trigger_error('虚拟主机产品ID错误');
+				}
+				$userinfo = daocall('user','getUser',array($username));
+				if($userinfo['agent_id'] >0 ) {
+					$arr['agent_id'] = $userinfo['agent_id'];
+					$arr['product_type'] = 0;
+					$arr['product_id'] = $product[1];
+					$agentinfo = daocall('agentprice','getAgentprice',array($arr));
+					if ($agentinfo && $agentinfo[0]['price'] >0) {
+						$product_info['price'] = $agentinfo[0]['price'];
+					}
 				}
 				$this->_tpl->assign('product',$product_info);
 				return $this->_tpl->fetch('vhostproduct/sell.html');
