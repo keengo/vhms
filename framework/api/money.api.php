@@ -1,4 +1,5 @@
 <?php
+/*
 @touch('money.log');
 function writeLog($str)
 {
@@ -11,6 +12,7 @@ function writeLog($str)
 	}
 	@fwrite($fp,$str2);
 }
+*/
 class MoneyAPI extends API
 {
 	public function decMoney($user,$money,$mem=null)
@@ -20,8 +22,6 @@ class MoneyAPI extends API
 			return false;
 		}
 		daocall('moneyout','add',array($user,$money,$mem));
-		$str=$user." delmoney ".$money;
-		writeLog($str);
 		return daocall('user', 'decMoney', array($user,$money));
 	}
 	public function addMoney($user,$money)
@@ -30,8 +30,6 @@ class MoneyAPI extends API
 		if($money<=0){
 			return false;
 		}
-		$str=$user." addmoney ".$money;
-		writeLog($str);
 		return daocall('user', 'addMoney', array($user,$money));
 	}
 	public function payReturn($id,$money=null)
@@ -59,5 +57,5 @@ class MoneyAPI extends API
 	}
 	
 }
-fclose($fp);
+
 ?>
