@@ -8,6 +8,8 @@
  */
 abstract class Product
 {
+	
+	
 	/**
 	 * 计算金额
 	 * @param $price 每年的价格
@@ -156,12 +158,14 @@ abstract class Product
 			$attr['product_id'] = $new_product_id;
 			$newagentinfo = daocall('agentprice','getAgentprice',array($attr));
 			//如果新产品不是代理.
-			if($newagentinfo[0]['price'] <= 0 && $agentinfo[0]['price'] >0) {
-				$diff_price = $ninfo['price'] - $agentinfo[0]['price'];
-				//如果旧产品不是代理
-			}elseif($agentinfo[0]['price'] <= 0 && $newagentinfo[0]['price'] >0) {
+			if ($newagentinfo[0]['price'] <= 0 || $agentinfo[0]['price'] <=0) {
+				trigger_error('代理价格未设置，请联系管理员');
+				return false;
+			}elseif (!$agentinfo && $newagentinfo[0]['price'] > 0) {
 				$diff_price = $newagentinfo[0]['price'] - $info['price'];
-			}else{
+			}elseif (!$newagentinfo && $agentinfo[0]['price'] >0) {
+				$diff_price = $ninfo['price'] - $agentinfo[0]['price'];
+			}else { 
 				$diff_price = $newagentinfo[0]['price'] - $agentinfo[0]['price'];
 			}
 
