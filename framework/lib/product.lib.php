@@ -60,7 +60,8 @@ abstract class Product
 			trigger_error('月份错误');
 			return false;
 		}
-
+		$mem = $susername." 续费 ".$month." 个月";//扣费备注
+		
 		//处理代理价格，如果有代理，按代理价格扣费，否则按正常价格
 		$userinfo = daocall('user','getUser',array($username));
 		if($userinfo['agent_id'] > 0)
@@ -77,6 +78,7 @@ abstract class Product
 				return false;
 			}else{
 				$price = $this->caculatePrice($agentinfo[0]['price'],$month);
+				$mem.="(agent)";
 			}
 		}else{
 			$price = $this->caculatePrice($info['price'],$month);
@@ -99,10 +101,7 @@ abstract class Product
 			return false;
 		}
 		//echo "haha";
-		$mem = $susername." 续费 ".$month." 个月";
-		if($userinfo['agent_id'] > 0) {
-			$mem.="(agent)";
-		}
+		
 		if($price>0 && !apicall('money','decMoney', array($username,$price,$mem))){
 			$default_db->rollBack();
 			trigger_error('余额不足,所需金额:'.($price/100));
@@ -142,6 +141,7 @@ abstract class Product
 		}
 		$ninfo = $this->getInfo($new_product_id);
 
+		$mem =$susername."从".$info['name']." 升级至 ".$ninfo['name'];//扣费备注
 		//计算差价
 		//处理代理，如果有代理，按代理的价格来扣费，否则按正常价格
 		$userinfo = daocall('user','getUser',array($username));
@@ -164,10 +164,13 @@ abstract class Product
 				return false;
 			}elseif (!$agentinfo && $newagentinfo[0]['price'] > 0) {
 				$diff_price = $newagentinfo[0]['price'] - $info['price'];
+				$mem.="(0-1)";
 			}elseif (!$newagentinfo && $agentinfo[0]['price'] >0) {
 				$diff_price = $ninfo['price'] - $agentinfo[0]['price'];
+				$mem.="(1-0)";
 			}else { 
 				$diff_price = $newagentinfo[0]['price'] - $agentinfo[0]['price'];
+				$mem.="(1-1)";
 			}
 
 		}else{
@@ -202,10 +205,7 @@ abstract class Product
 			return false;
 		}
 		//echo "haha";
-		$mem =$susername."从".$info['name']." 升级至 ".$ninfo['name'];
-		if($userinfo['agent_id'] > 0) {
-			$mem.="(agent)";
-		}
+		
 		if($price>0 && !apicall('money','decMoney', array($username,$price,$mem))){
 			$default_db->rollBack();
 			trigger_error('余额不足,所需金额:'.($price/100));
