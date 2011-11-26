@@ -8,8 +8,6 @@
  */
 abstract class Product
 {
-	
-	
 	/**
 	 * 计算金额
 	 * @param $price 每年的价格
@@ -72,9 +70,12 @@ abstract class Product
 			$arr['product_type'] = 0;
 			$arr['product_id'] = $suser['product_id'];
 			$agentinfo = daocall('agentprice','getAgentprice',array($arr));
-			if ($agentinfo[0]['price'] <= 0) {
+			if (!$agentinfo) {
 				$price = $this->caculatePrice($info['price'],$month);
-			}else {
+			}elseif ($agentinfo[0]['price'] <= 0 ) {
+				trigger_error('代理价格未设置，请联系管理员');
+				return false;
+			}else{
 				$price = $this->caculatePrice($agentinfo[0]['price'],$month);
 			}
 		}else{
@@ -261,11 +262,15 @@ abstract class Product
 			$arr['product_id'] = $product_id;
 			$agentinfo=daocall('agentprice','getAgentprice',array($arr));
 			$price = intval($agentinfo[0]['price']);
-			if ($price<=0 && $price!=$info['price']) {
+			if (!$agentinfo) {
+				$price = $this->caculatePrice($info['price'],$month);
+			}
+			elseif ($price<=0 && $price!=$info['price']) {
 				trigger_error('代理价格没有设置，请联系管理员');
 				return false;
+			}else {
+				$price = $this->caculatePrice($price,$month);
 			}
-			$price = $this->caculatePrice($price,$month);
 		}else{
 			$price = $this->caculatePrice($info['price'],$month);
 		}
