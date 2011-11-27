@@ -74,6 +74,7 @@ class ProductControl extends Control {
 						$product_info['price'] = $agentinfo[0]['price'];
 					}
 				}
+				
 				$this->_tpl->assign('product',$product_info);
 				return $this->_tpl->fetch('vhostproduct/sell.html');
 				break;

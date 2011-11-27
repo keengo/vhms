@@ -25,6 +25,28 @@ abstract class Product
 		}
 		return $price;
 	}
+	/**
+	 *
+	 * 得到代理价格,
+	 * @return false 失败
+	 * @param int $agent_id
+	 * @param int $prouct_type
+	 * @param int $product_id
+	 * @param int $price 最终用户价
+	 */
+	private function getAgentPrice($agent_id,$product_type,$product_id,$price)
+	{
+		$arr['agent_id'] = $agent_id;
+		$arr['product_type'] = $product_type;
+		$arr['product_id'] = $product_id;
+		$agentinfo=daocall('agentprice','getAgentprice',array($arr));
+		$agent_price = intval($agentinfo[0]['price']);
+		if ($agent_price<=0 && $agent_price!=$price) {
+			trigger_error('代理价格没有设置，请联系管理员');
+			return false;
+		}
+		return $agent_price;
+	}
 	/*
 	 * 判断月份是否为整年
 	 */
@@ -61,26 +83,17 @@ abstract class Product
 			return false;
 		}
 		$mem = $susername." 续费 ".$month." 个月";//扣费备注
-		
+
 		//处理代理价格，如果有代理，按代理价格扣费，否则按正常价格
 		$userinfo = daocall('user','getUser',array($username));
-		if($userinfo['agent_id'] > 0)
-		{
-			//旧产品代理价格
-			$arr['agent_id'] = $userinfo['agent_id'];
-			$arr['product_type'] = 0;
-			$arr['product_id'] = $suser['product_id'];
-			$agentinfo = daocall('agentprice','getAgentprice',array($arr));
-			if (!$agentinfo) {
-				$price = $this->caculatePrice($info['price'],$month);
-			}elseif ($agentinfo[0]['price'] <= 0 ) {
-				trigger_error('代理价格未设置，请联系管理员');
+		if ($userinfo['agent_id'] > 0) {
+			$price = $this->getAgentPrice($userinfo['agent_id'],0,$suser['product_id'],$info['price']);
+			if ($price===false) {
 				return false;
-			}else{
-				$price = $this->caculatePrice($agentinfo[0]['price'],$month);
-				$mem.="(agent)";
 			}
-		}else{
+			$price = $this->caculatePrice($price,$month);
+			$mem.="(agent)";
+		} else {
 			$price = $this->caculatePrice($info['price'],$month);
 		}
 
@@ -101,7 +114,7 @@ abstract class Product
 			return false;
 		}
 		//echo "haha";
-		
+
 		if($price>0 && !apicall('money','decMoney', array($username,$price,$mem))){
 			$default_db->rollBack();
 			trigger_error('余额不足,所需金额:'.($price/100));
@@ -140,40 +153,22 @@ abstract class Product
 			return false;
 		}
 		$ninfo = $this->getInfo($new_product_id);
-
 		$mem =$susername."从".$info['name']." 升级至 ".$ninfo['name'];//扣费备注
 		//计算差价
 		//处理代理，如果有代理，按代理的价格来扣费，否则按正常价格
 		$userinfo = daocall('user','getUser',array($username));
-		if($userinfo['agent_id'] > 0)
-		{
-			//旧产品代理价格
-			$arr['agent_id'] = $userinfo['agent_id'];
-			$arr['product_type'] = 0;
-			$arr['product_id'] = $suser['product_id'];
-			$agentinfo=daocall('agentprice','getAgentprice',array($arr));
-
-			//新产品代理价格
-			$attr['agent_id'] = $userinfo['agent_id'];
-			$attr['product_type'] = 0;
-			$attr['product_id'] = $new_product_id;
-			$newagentinfo = daocall('agentprice','getAgentprice',array($attr));
-			//如果新产品不是代理.
-			if ($newagentinfo[0]['price'] <= 0 || $agentinfo[0]['price'] <=0) {
-				trigger_error('代理价格未设置，请联系管理员');
+		if ($userinfo['agent_id'] > 0) {
+			$old_agent_price = $this->getAgentPrice($userinfo['agent_id'],0,$suser['product_id'],$info['price']);
+			if ($old_agent_price===false) {
 				return false;
-			}elseif (!$agentinfo && $newagentinfo[0]['price'] > 0) {
-				$diff_price = $newagentinfo[0]['price'] - $info['price'];
-				$mem.="(0-1)";
-			}elseif (!$newagentinfo && $agentinfo[0]['price'] >0) {
-				$diff_price = $ninfo['price'] - $agentinfo[0]['price'];
-				$mem.="(1-0)";
-			}else { 
-				$diff_price = $newagentinfo[0]['price'] - $agentinfo[0]['price'];
-				$mem.="(1-1)";
 			}
-
-		}else{
+			$new_agent_price = $this->getAgentPrice($userinfo['agent_id'],0,$new_product_id,$ninfo['price']);
+			if ($new_agent_price===false) {
+				return false;
+			}
+			$diff_price = $new_agent_price - $old_agent_price;
+			$mem.="(agent)";
+		} else {
 			$diff_price = $ninfo['price'] - $info['price'];
 		}
 
@@ -205,7 +200,7 @@ abstract class Product
 			return false;
 		}
 		//echo "haha";
-		
+
 		if($price>0 && !apicall('money','decMoney', array($username,$price,$mem))){
 			$default_db->rollBack();
 			trigger_error('余额不足,所需金额:'.($price/100));
@@ -255,22 +250,13 @@ abstract class Product
 
 		//处理代理，如果有代理，按代理的价格来扣费，否则按正常价格
 		$userinfo = daocall('user','getUser',array($username));
-		if($userinfo['agent_id'] > 0)
-		{
-			$arr['agent_id'] = $userinfo['agent_id'];
-			$arr['product_type'] = 0;
-			$arr['product_id'] = $product_id;
-			$agentinfo=daocall('agentprice','getAgentprice',array($arr));
-			$price = intval($agentinfo[0]['price']);
-			if (!$agentinfo) {
-				$price = $this->caculatePrice($info['price'],$month);
-			}
-			elseif ($price<=0 && $price!=$info['price']) {
-				trigger_error('代理价格没有设置，请联系管理员');
+		if ($userinfo['agent_id'] > 0) {
+			$price = $this->getAgentPrice($userinfo['agent_id'],0,$product_id,$info['price']);
+			if ($price===false) {
 				return false;
-			}else {
-				$price = $this->caculatePrice($price,$month);
 			}
+			$price = $this->caculatePrice($price,$month);
+			$mem.="(agent)";
 		}else{
 			$price = $this->caculatePrice($info['price'],$month);
 		}
@@ -290,9 +276,6 @@ abstract class Product
 			return false;
 		}
 		$mem = "购买 ".$suser['name']." ".$month." 个月";
-		if($userinfo['agent_id'] > 0) {
-			$mem.="(agent)";
-		}
 		if($price>0 && !apicall('money','decMoney', array($username,$price,$mem))){
 			$default_db->rollBack();
 			trigger_error('余额不足,所需金额:'.($price/100));

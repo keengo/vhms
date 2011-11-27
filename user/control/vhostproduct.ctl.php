@@ -128,8 +128,9 @@ class VhostproductControl extends Control {
 		$product_id = $vhost_info['product_id'];
 		@load_conf('pub:vhostproduct');
 		$upproduct = array();
-		//echo "product_id=".$product_id;
-		//print_r($GLOBALS['vhostproduct_cfg'][$product_id]);
+		
+		//取得用户信息，代理ID
+		$userinfo = daocall('user','getUser',array(getRole('user')));
 		if ($GLOBALS['vhostproduct_cfg'][$product_id]['upid']>0) {
 			foreach($GLOBALS['vhostproduct_cfg'] AS $product){
 				if ($product_id == $product['id']) {
@@ -143,6 +144,15 @@ class VhostproductControl extends Control {
 				if ($GLOBALS['vhostproduct_cfg'][$product_id]['price'] > $product['price']) {
 					//价格只能向上升级
 					continue;
+				}			
+				if($userinfo['agent_id'] >0 ) {
+					$arr['agent_id'] = $userinfo['agent_id'];
+					$arr['product_type'] = 0;
+					$arr['product_id'] = $product['id'];
+					$agentinfo = daocall('agentprice','getAgentprice',array($arr));
+					if ($agentinfo && $agentinfo[0]['price'] >0) {
+						$product['price'] = $agentinfo[0]['price'];
+					}
 				}
 				$upproduct[] = $product;
 			}
@@ -152,6 +162,7 @@ class VhostproductControl extends Control {
 			$this->_tpl->assign('msg','没有其它产品可供升级了');
 			return $this->_tpl->fetch('vhostproduct/msg.html');
 		}
+
 		$this->_tpl->assign('products',$upproduct);
 		return $this->_tpl->fetch('vhostproduct/upgrade.html');
 	}
@@ -167,6 +178,16 @@ class VhostproductControl extends Control {
 		$product = apicall('product','newProduct',array('vhost'));
 		$product_info = $product->getInfo($vhost_info['product_id']);
 		if($product_info){
+			$userinfo = daocall('user','getUser',array(getRole('user')));
+			if($userinfo['agent_id'] >0 ) {
+				$arr['agent_id'] = $userinfo['agent_id'];
+				$arr['product_type'] = 0;
+				$arr['product_id'] = $vhost_info['product_id'];
+				$agentinfo = daocall('agentprice','getAgentprice',array($arr));
+				if ($agentinfo && $agentinfo[0]['price'] >0) {
+					$product_info['price'] = $agentinfo[0]['price'];
+				}
+			}
 			$this->_tpl->assign("product",$product_info);
 		}
 

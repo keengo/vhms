@@ -41,6 +41,7 @@
         <td class="td_bgc right_2">
 			<form action='?c=user&a=changUserAgent&username={{$row.username}}' method='post' name='agentform'>
 			<select name='agent_id' onChange="javascript:agentform.submit()">
+				<option value="0" >无</option>
 				{{for $i=0;$i< count($agents);$i++}}
 				<option value="{{$agents[$i].id}}" {{if $row.agent_id==$agents[$i].id}}selected{{/if}}>{{$agents[$i].name}}</option>
 				{{/for}}
