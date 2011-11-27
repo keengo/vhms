@@ -65,17 +65,10 @@ class SessionControl extends Control {
 			if($GLOBALS['frame']==1){
 				header("Location: ?c=frame&a=index");
 				die();
-			}
-			if($_REQUEST['refer']=='web')
-			{
-				header("Location: /");
-				die();
-			}
-			else{
+			}else{
 				header("Location: ?c=user&a=index");
 				die();
 			}
-			die();
 		}
 	}
 	public function error()

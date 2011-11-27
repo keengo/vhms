@@ -9,7 +9,7 @@ class AgentControl extends Control
 			$this->_tpl->assign('agent',$agent);
 			$this->_tpl->assign('edit',1);
 		}
-		return $this->_tpl->display('agent/addFrom.html');
+		return $this->_tpl->display('agent/addfrom.html');
 	}
 	public function addAgent()
 	{
