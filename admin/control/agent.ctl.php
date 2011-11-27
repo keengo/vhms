@@ -30,6 +30,8 @@ class AgentControl extends Control
 			$this->_tpl->assign('msg',"删除失败");
 			return $this->_tpl->fetch('msg.html');
 		}
+		daocall('user','updateUserAgent_idByAent_id',array($_REQUEST['id']));
+		daocall('agentprice','delAgentpriceByAgent_id',array($_REQUEST['id']));
 		return $this->listAgent();
 	}
 	public function listAgent()

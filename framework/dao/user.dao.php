@@ -29,6 +29,12 @@ class UserDAO extends DAO{
 
 			$this->_TABLE = DBPRE . 'users';
 	}
+	//用于当前代理ID被删除时，用户的代理身份也要更新
+	public function updateUserAgent_idByAent_id($agent_id)
+	{
+		$arr['agent_id'] = 0;
+		return $this->update($arr,$this->getFieldValue2('agent_id', $agent_id));
+	}
 	public function updateUserUid($username,$uid){
 		$arr['uid']=$uid;
 		return $this->update($arr, $this->getFieldValue2('username', $username));

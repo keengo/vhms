@@ -36,6 +36,11 @@ class AgentpriceDAO extends DAO
 		$where.=" and ".$this->getFieldValue2('product_id', $arr['product_id']);
 		return $this->update($arr, $where);
 	}
+	//用于代理ID删除时所用。
+	public function delAgentpriceByAgent_id($agent_id)
+	{
+		return $this->delData($this->getFieldValue2('agent_id',$agent_id));
+	}
 	
 	//删除产品时所用，同步删除代理价格设置。
 	public function delAgentprice($arr)
