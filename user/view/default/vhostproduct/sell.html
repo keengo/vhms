@@ -82,7 +82,19 @@ function check_register()
 	  </tr>
 	  <tr>
         <td>语言引擎:</td>
-        <td>{{$product.subtemplete}}</td>
+        <td>
+        {{if $product.cs==0}}
+        	{{$product.subtemplete}}
+        {{else}}
+        	<select name='subtemplete'>
+		    {{foreach from=$subtempletes item=subtemplete}}
+			    <option value='{{$subtemplete}}' {{if $subtemplete==$product.subtemplete}}selected{{/if}}>
+			    {{$subtemplete}}
+			    </option>
+		    {{/foreach}}
+		    </select>
+        {{/if}}
+        </td>
 	  </tr>
 	  {{if $product.ftp!=1}}
 	  <tr>

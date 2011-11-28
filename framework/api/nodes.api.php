@@ -34,10 +34,13 @@ class NodesAPI extends API
 	public function listSubTemplete($node,$templete)
 	{
 		$whm = $this->makeWhm($node);
-		if(!$whm){
+		if(!is_object($whm)){
 			return false;
 		}
 		$call = new WhmCall("list_tvh");
+		if(!is_object($call)){
+			return false;
+		}
 		$call->addParam('name', $templete);
 		$result = $whm->call($call,5);
 		if(!$result){

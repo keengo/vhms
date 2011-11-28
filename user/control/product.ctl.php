@@ -74,7 +74,9 @@ class ProductControl extends Control {
 						$product_info['price'] = $agentinfo[0]['price'];
 					}
 				}
-				
+				load_lib('pub:whm');
+				$subtempletes = apicall('nodes','listSubTemplete',array($product_info['node'],$product_info['templete']));
+				$this->_tpl->assign('subtempletes',$subtempletes);
 				$this->_tpl->assign('product',$product_info);
 				return $this->_tpl->fetch('vhostproduct/sell.html');
 				break;
