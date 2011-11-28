@@ -27,7 +27,9 @@ class VhostproductDAO extends DAO {
 			'log_file'=>'log_file',
 			'access'=>'access',
 			'speed_limit'=>'speed_limit',
-			'view'=>'view'
+			'view'=>'view',
+			'cs'=>'cs',
+			'envs'=>'envs'
 		);
 		$this->MAP_TYPE = array(
 			'id'=>FIELD_TYPE_INT|FIELD_TYPE_AUTO,
@@ -46,7 +48,8 @@ class VhostproductDAO extends DAO {
 			'access'=>FIELD_TYPE_INT,
 			'log_file'=>FIELD_TYPE_INT,
 			'htaccess'=>FIELD_TYPE_INT,
-			'view'=>FIELD_TYPE_INT
+			'view'=>FIELD_TYPE_INT,
+			'cs'=>FIELD_TYPE_INT
 		);
 		$this->_TABLE = DBPRE .'vhost_product';
 	}
@@ -107,7 +110,9 @@ class VhostproductDAO extends DAO {
 			'access',
 			'htaccess',
 			'log_file',
-			'speed_limit'
+			'speed_limit',
+			'envs',
+			'cs'
 		), $arr);
 		$sql = "UPDATE ".$this->_TABLE." SET ".$fields." WHERE ".$this->getFieldValue2('id',$arr['id']);
 		return $this->executex($sql);

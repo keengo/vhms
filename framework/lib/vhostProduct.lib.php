@@ -134,6 +134,8 @@ class VhostProduct extends Product
 			$whmCall->addParam('access', $product_info['access']);
 			$whmCall->addParam('max_connect', $product_info['max_connect']);
 			$whmCall->addParam('speed_limit', $product_info['speed_limit']);
+			$whmCall->addParam('cs', $product_info['cs']);
+			$whmCall->addParam('envs', $product_info['envs']);
 			if($params['passwd']){
 				$whmCall->addParam('passwd', $params['passwd']);
 			}

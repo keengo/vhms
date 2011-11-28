@@ -27,3 +27,5 @@ CREATE TABLE IF NOT EXISTS `agent_price` (
   `price` int(11) NOT NULL,
   PRIMARY KEY (`agent_id`,`product_type`,`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+alter table vhost_product add column cs tinyint(4) DEFAULT '0';
+alter table vhost_product add column envs TEXT;

@@ -155,6 +155,8 @@ function changeNode()
 		<td class="td_bgc right_2"><input name="subdir" type="text" id='tb_wid3'
 			value="{{$vhostproduct.subdir}}" size="16"></td>
 	</tr>
+
+
 	<tr>
 		<td class="td_bgc right_2">模板</td>
 		<td class="td_bgc right_2">
@@ -164,6 +166,14 @@ function changeNode()
 			</td><td>
 		<div id='subtemplete'></div>
 		</td></tr></table>
+		</td>
+	</tr>
+	<tr>
+		<td class="td_bgc right_2">多引擎切换:</td>
+		<td class="td_bgc right_2">
+			<input type='radio' name="cs" value="0" {{if $vhostprodcuct.cs==0}}checked{{/if}} size="16">不能切换
+			<input type='radio' name="cs" value="1" {{if $vhostprodcuct.cs==1}}checked{{/if}} size="16">随时切换
+			<input type='radio' name="cs" value="2" {{if !$vhostproduct || $vhostprodcuct.cs==2}}checked{{/if}} size="16">购买时切换
 		</td>
 	</tr>
 	<tr>
@@ -177,6 +187,11 @@ function changeNode()
 		<td class="td_bgc right_2"><input name="speed_limit" type="text"
 			size='5' value="{{if $vhostproduct}}{{$vhostproduct.speed_limit/1024}}{{else}}0{{/if}}">&nbspK/每秒
 		</td>
+	</tr>
+	<tr>
+		<td class="td_bgc right_2">管理变量:</td>
+		<td class="td_bgc right_2"><input name="envs" type="text" id='tb_wid3'
+			value="{{$vhostproduct.envs}}" size="32"></td>
 	</tr>
 	<tr>
 		<td class="td_bgc right_2">其它选项</td>
