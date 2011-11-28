@@ -61,6 +61,22 @@ function check_register()
 			<input type=radio name=month value=36>3年</td>
 	  </tr>
 	  <tr>
+        <td>语言引擎:</td>
+        <td>
+        {{if $product.cs==0}}
+        	{{$product.subtemplete}}
+        {{else}}
+        	<select name='subtemplete'>
+		    {{foreach from=$subtempletes item=subtemplete}}
+			    <option value='{{$subtemplete}}' {{if $subtemplete==$product.subtemplete}}selected{{/if}}>
+			    {{$subtemplete}}
+			    </option>
+		    {{/foreach}}
+		    </select>
+        {{/if}}
+        </td>
+	  </tr>
+	  <tr>
         <td>空间大小:</td>
         <td>{{$product.web_quota}}M</td>
 	  </tr>
@@ -80,22 +96,7 @@ function check_register()
         <td>允许绑定子目录:</td>
         <td>{{if $product.subdir_flag==1}}是{{else}}否{{/if}}</td>
 	  </tr>
-	  <tr>
-        <td>语言引擎:</td>
-        <td>
-        {{if $product.cs==0}}
-        	{{$product.subtemplete}}
-        {{else}}
-        	<select name='subtemplete'>
-		    {{foreach from=$subtempletes item=subtemplete}}
-			    <option value='{{$subtemplete}}' {{if $subtemplete==$product.subtemplete}}selected{{/if}}>
-			    {{$subtemplete}}
-			    </option>
-		    {{/foreach}}
-		    </select>
-        {{/if}}
-        </td>
-	  </tr>
+	  
 	  {{if $product.ftp!=1}}
 	  <tr>
         <td>是否开启ftp:</td>
