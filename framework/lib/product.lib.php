@@ -230,12 +230,8 @@ abstract class Product
 			return false;
 		}
 		$month = $suser['month'];
-		$info = $this->getInfo($product_id);
 		
-		//更改模板
-		if($suser['subtemplete']) {
-			$info['subtemplete'] = $suser['subtemplete'];
-		}
+		$info = $this->getInfo($product_id);
 		
 		if(!$info){
 			trigger_error('产品错误');
@@ -252,6 +248,13 @@ abstract class Product
 		if($month<=0){
 			trigger_error('月份错误');
 			return false;
+		}
+		
+		//更改模板
+		if($suser['subtemplete']) {
+			
+			$info['subtemplete'] = $suser['subtemplete'];
+			
 		}
 
 		//处理代理，如果有代理，按代理的价格来扣费，否则按正常价格
