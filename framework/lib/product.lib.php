@@ -231,6 +231,12 @@ abstract class Product
 		}
 		$month = $suser['month'];
 		$info = $this->getInfo($product_id);
+		
+		//更改模板
+		if($suser['subtemplete']) {
+			$info['subtemplete'] = $suser['subtemplete'];
+		}
+		
 		if(!$info){
 			trigger_error('产品错误');
 			return false;
