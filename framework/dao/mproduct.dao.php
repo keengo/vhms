@@ -43,7 +43,16 @@ class MproductDAO extends DAO
 	{
 		return $this->delData($this->getFieldValue2('id', $id));
 	}
-	public function pageList($page,$page_count,&$count,$selectwhere=null)
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param unknown_type $page
+	 * @param unknown_type $page_count
+	 * @param unknown_type $count
+	 * @param 排序字段 $order
+	 * @param unknown_type $selectwhere
+	 */
+	public function pageList($page,$page_count,&$count,$order,$selectwhere=null)
 	{
 		$where = "";
 		if($selectwhere['group_id']) {
@@ -52,12 +61,13 @@ class MproductDAO extends DAO
 		if($selectwhere['pause_flag']) {
 			$where .= $this->getFieldValue2('pause_flag', $selectwhere['pause_flag']);
 		}
-		return $this->selectPage(array('id','name','group_id',
-								'upid','describe','price',
-								'month_flag','pause_flag'),
-				 				$where, 'id', true,
-				 				 $page, $page_count, $count
-				 				 );
+		if($order){
+			$order_field = $order;
+		}else{
+			$order_field = 'id';
+		}
+		return $this->selectPage(array('id','name','group_id','upid','describe','price','month_flag','pause_flag'),
+				 				$where, $order_field, true, $page, $page_count, $count );
 	}
 	
 }

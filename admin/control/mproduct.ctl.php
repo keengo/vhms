@@ -34,12 +34,13 @@ class MproductControl extends Control
 		}
 		$page_count = 20;
 		$count = 0;
-		$list = daocall('mproduct','pageList',array($page,$page_count,&$count));
-		print_r($list);
+		$order = $_REQUEST['order'] or 'id';//排序字段
+		$list = daocall('mproduct','pageList',array($page,$page_count,&$count,$order));
 		$total_page = ceil($count/$page_count);
 		if($page>=$total_page){
 			$page = $total_page;
 		}
+		$this->_tpl->assign('order',$order);
 		$this->_tpl->assign('count',$count);
 		$this->_tpl->assign('total_page',$total_page);
 		$this->_tpl->assign('page',$page);
