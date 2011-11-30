@@ -4,7 +4,14 @@ class MproductControl extends Control
 {
 	public function addMproductFrom()
 	{
-		$this->_tpl->assign('action','addMproduct');
+		if($_REQUEST['id']) {
+			echo $_REQUEST['id'];
+			$id = intval($_REQUEST['id']);
+			$mproduct = daocall('mproduct','getMproductById',array($id));
+			print_r($mproduct);
+			$this->_tpl->assign('edit','1');
+			$this->_tpl->assign('mproduct',$mproduct);
+		}
 		return $this->_tpl->display('mproduct/addfrom.html');
 	}
 	public function addMproduct()
@@ -25,6 +32,14 @@ class MproductControl extends Control
 			return $this->_tpl->fetch('msg.html');
 		}
 		return $this->pageListMproduct();
+	}
+	public function editMproductFrom()
+	{
+		$id = intval($_REQUEST['id']);
+		$mproduct = daocall('mproduct','getMproductById',array($id));
+		$this->_tpl->assign('action','editMproduct');
+		$this->_tpl->assign('mproduct',$mproduct);
+		return $this->_tpl->display('mproduct/addfrom.html');
 	}
 	public function pageListMproduct()
 	{
@@ -48,21 +63,21 @@ class MproductControl extends Control
 		$this->_tpl->assign('list',$list);
 		$this->_tpl->display('mproduct/pagelistmproduct.html');
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

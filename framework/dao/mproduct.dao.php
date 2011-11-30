@@ -31,6 +31,10 @@ class MproductDAO extends DAO
 		);
 		$this->_TABLE = 'mproduct';
 	}
+	public function getMproductById($id)
+	{
+		return $this->select(null,$this->getFieldValue2('id', $id));
+	}
 	public function add($arr)
 	{
 		$arr['price']*=100;
