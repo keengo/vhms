@@ -1,0 +1,53 @@
+{{include file='common/head.html'}}
+<body leftmargin="0" topmargin="0" bgcolor="#ffffff" text="#000000">
+<div align="center">
+	<form name='nodeform' action="?c=mproduct&a={{$action}}&id={{$mproduct.id}}" method="post">
+		<div class="head_block tb_wid2">&nbsp;{{if $action=='editMproduct'}}修改产品{{else}}增加产品{{/if}}</div>
+		<div class="block tb_wid2">
+			<table id="table_2" cellpadding="0" cellspacing="1">
+				<tr>
+					<td class="td_bgc right_2">产品名称：</td>
+					<td class="td_bgc right_2 tb_wid2"><input name='name' type='text' id='tb_wid3' value="{{$mproduct.name}}" size="16">
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="td_bgc right_2">产品类型：</td>
+					<td class="td_bgc right_2"><input name="group_id" type="text" id='tb_wid3' value="{{$mproduct.group_id}}">
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="td_bgc right_2">产品组：</td>
+					<td class="td_bgc right_2 tb_wid2">
+						<input name='upid' type='text' value="{{intval($mproduct.upid)}}" size="3">(可升级到相同产品组的其它产品，设置为0不可升级)
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="td_bgc right_2">价格(元/年)</td>
+					<td class="td_bgc right_2"><input name="price" type="text" id='tb_wid3'	value="{{$mproduct.price/100}}"></td>
+				</tr>
+				
+				<tr>
+					<td class="td_bgc right_2">产品说明(支持html):</td>
+					<td class="td_bgc right_2"><textarea name='describe' rows='6' cols='40'>{{$mproduct.describe}}</textarea></td>
+				</tr>
+				
+				<tr>
+					<td class="td_bgc right_2">状态</td>
+					<td class="td_bgc right_2">
+						<input type="checkbox" name="pause_flag" value="1" {{if $mproduct.pause_flag!=0}}checked{{/if}}>暂停销售
+						<input type="checkbox" name="month_flag" value="1" {{if $mproduct.month_flag!=0}}checked{{/if}}>月付
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="td_bgc td_hg" colspan="2" align="center"><input type="submit" value="确认提交"></td>
+				</tr>
+	
+			</table>
+		</div>
+	</form>
+</div>
+{{include file='common/foot.html'}}	

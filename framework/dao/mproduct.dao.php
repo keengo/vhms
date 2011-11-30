@@ -16,9 +16,9 @@ class MproductDAO extends DAO
 			'describe' => 'describe',
 			//价格
 			'price' => 'price',
-			//支持月付
+			//支持月付,1支持,0不支持
 			'month_flag' => 'month_flag',
-			//是否暂停销售
+			//是否暂停销售,1暂停,
 			'pause_flag' =>'pause_flag'
 		);
 		$this->MAP_TYPE = array(
@@ -33,6 +33,7 @@ class MproductDAO extends DAO
 	}
 	public function add($arr)
 	{
+		$arr['price']*=100;
 		if($arr['id']){
 			return $this->update($arr, $this->getFieldValue2('id', $arr['id']));
 		}
@@ -42,7 +43,7 @@ class MproductDAO extends DAO
 	{
 		return $this->delData($this->getFieldValue2('id', $id));
 	}
-	public function pageList($page,$page_count,&$count,$selectwhere)
+	public function pageList($page,$page_count,&$count,$selectwhere=null)
 	{
 		$where = "";
 		if($selectwhere['group_id']) {
