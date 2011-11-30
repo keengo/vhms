@@ -84,8 +84,6 @@ function updateViewResult()
 		  <span id='updateView' color='red'></span><div class="topimg pal1">共计 {{$sum}} 条记录</div>
 		  </form>
   		</div>
-  		
-  		
    		<table cellpadding=0 cellspacing=1 id="table">
       	<tr id="ttitle">
 	        <td class='color01 right' bgcolor='#efefef'>操作</td>
@@ -108,7 +106,7 @@ function updateViewResult()
 	       		[<a href="?c=vhostproduct&a=editProductForm&id={{$row.id}}">更改</a>]
 			</td>
 	        <td class="right">
-	        	<input type='checkbox' id='view{{$row.id}}' onclick="updateView(this.id,{{$row.id}})" name='view' value='{{$row.view}}' {{if $row.view==1}}checked{{/if}}>
+	        	<input type='checkbox' id='view{{$row.id}}' onClick="updateView(this.id,{{$row.id}})" name='view' value='{{$row.view}}' {{if $row.view==1}}checked{{/if}}>
 	        </td>
 
         	<td class="right">{{$row.id}}</td>
