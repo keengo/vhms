@@ -28,6 +28,7 @@ class MproductgroupDAO extends DAO
 	}
 	public function getMproductgroup($id=null)
 	{
+		$where = "";
 		if($id != null) {
 			$where = $this->getFieldValue2('id', $id);
 		}

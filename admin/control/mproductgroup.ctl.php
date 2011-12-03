@@ -1,7 +1,8 @@
 <?php
+needRole('admin');
 class MproductgroupControl extends Control
 {
-	public function addMproductgroupfrom()
+	public function addMproductgroupFrom()
 	{
 		if($_REQUEST['id']) {
 			$mproductgroup = daocall('mproductgroup','getMproductgroup',array(intval($_REQUEST['id'])));
