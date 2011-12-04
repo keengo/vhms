@@ -9,6 +9,8 @@ class MproductControl extends Control
 			$this->_tpl->assign('edit','1');
 			$this->_tpl->assign('mproduct',$mproduct);
 		}
+		$mproductgroup = daocall('mproductgroup','getMproductgroup',array());
+		$this->_tpl->assign('mproductgroup',$mproductgroup);
 		return $this->_tpl->display('mproduct/addfrom.html');
 	}
 	public function addMproduct()
