@@ -32,6 +32,7 @@
 				<tr id="ttitle">
 					<td class="td_bgc right_2">操作</td>
 					<td class="td_bgc right_2">用户名</td>
+					<td class="td_bgc right_2">产品名称</td>
 					<td class="td_bgc right_2">uid</td>
 					<td class="td_bgc right_2">所属用户</td>
 					<td class="td_bgc right_2">模板</td>
@@ -48,6 +49,7 @@
 						[<a href="?c=vhost&a=resync&name={{$row.name}}">重建</a>]
 					</td>
 					<td class="td_bgc right_2">{{$row.name}}</td>
+					<td class="td_bgc right_2">{{$row.product_name}}</td>
 					<td class="td_bgc right_2">{{$row.uid}}</td>
 					<td class="td_bgc right_2"><a href='?c=user&a=listUser&username={{$row.username}}'>{{$row.username}}</a></td>
 					<td class="td_bgc right_2">{{$row.templete}}</td>
