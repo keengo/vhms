@@ -31,9 +31,13 @@ class MproductDAO extends DAO
 		);
 		$this->_TABLE = 'mproduct';
 	}
-	public function getMproductById($id)
+	public function getMproductById($id=null)
 	{
-		return $this->select(null,$this->getFieldValue2('id', $id));
+		$where = "";
+		if($id != null) {
+			$where = $this->getFieldValue2('id', $id);
+		}
+		return $this->select(null,$where);
 	}
 	public function add($arr)
 	{
@@ -70,8 +74,22 @@ class MproductDAO extends DAO
 		}else{
 			$order_field = 'id';
 		}
-		return $this->selectPage(array('id','name','group_id','upid','describe','price','month_flag','pause_flag'),
-				 				$where, $order_field, true, $page, $page_count, $count );
+		return $this->selectPage(array('id',
+									'name',
+									'group_id',
+									'upid',
+									'describe',
+									'price',
+									'month_flag',
+									'pause_flag'
+									),
+				 					$where,
+				 					$order_field, 
+				 					true, 
+				 					$page, 
+				 					$page_count, 
+				 					$count 
+				 				);
 	}
 	
 }

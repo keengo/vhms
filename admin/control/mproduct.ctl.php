@@ -5,13 +5,12 @@ class MproductControl extends Control
 	public function addMproductFrom()
 	{
 		if($_REQUEST['id']) {
-			echo $_REQUEST['id'];
-			$id = intval($_REQUEST['id']);
-			$mproduct = daocall('mproduct','getMproductById',array($id));
-			print_r($mproduct);
+			$mproduct = daocall('mproduct','getMproductById',array(intval($_REQUEST['id'])));
 			$this->_tpl->assign('edit','1');
 			$this->_tpl->assign('mproduct',$mproduct);
 		}
+		$mproductgroup = daocall('mproductgroup','getMproductgroup',array());
+		$this->_tpl->assign('mproductgroup',$mproductgroup);
 		return $this->_tpl->display('mproduct/addfrom.html');
 	}
 	public function addMproduct()

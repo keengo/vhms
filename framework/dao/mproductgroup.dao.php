@@ -17,8 +17,8 @@ class MproductgroupDAO extends DAO
 	
 	public function add($arr)
 	{
-		if ($_REQUEST['id']) {
-			return $this->update($arr, $this->getFieldValue2('id', $id));
+		if ($arr['id']) {
+			return $this->update($arr, $this->getFieldValue2('id', $arr['id']));
 		}
 		return $this->insert($arr);
 	}
@@ -26,9 +26,31 @@ class MproductgroupDAO extends DAO
 	{
 		return $this->delData($this->getFieldValue2('id', $id));
 	}
-	public function getMproductgroup($id)
+	public function getMproductgroup($id=null)
 	{
-		return $this->select(null,$this->getFieldValue2('id', $id));
+		$where = "";
+		if($id != null) {
+			$where = $this->getFieldValue2('id', $id);
+		}
+		return $this->select(null,$where);
+	}
+	public function pageList($page,$page_count,&$count,$order)
+	{
+		$where="";
+		if($order) {
+			$order_field = $order;
+		}else{
+			$order_field='id';
+		}
+		
+		return $this->selectPage(array('id','name','describe'),
+									 $where,
+									 $order_field,
+									 true,
+									 $page,
+									 $page_count,
+									 $count
+								);
 	}
 		
 		
