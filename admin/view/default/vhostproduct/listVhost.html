@@ -59,15 +59,14 @@
 					<td class="td_bgc right_2">{{$row.create_time}}</td>
 					<td class="td_bgc right_2">{{$row.expire_time}}</td>
 					<td class="td_bgc right_2">
-						
-							<select name='status' onChange="javascript:status_{{$row.uid}}form.submit()">
-							{{for $i=0; $i<2; $i++}}
-							<option value='{{$i}}' {{if $i==$row.status}} selected {{/if}}>
-							{{if $i==0}}正常{{else}}暂停{{/if}}
-							</option>
-							{{/for}}
-							</select>
-							</td>
+						<select name='status' onChange="javascript:status_{{$row.uid}}form.submit()">
+						{{for $i=0; $i<2; $i++}}
+						<option value='{{$i}}' {{if $i==$row.status}} selected {{/if}}>
+						{{if $i==0}}正常{{else}}暂停{{/if}}
+						</option>
+						{{/for}}
+						</select>
+						</td>
 					</tr>
 					</form>
 					{{/foreach}}
