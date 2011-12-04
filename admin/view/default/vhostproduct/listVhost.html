@@ -32,6 +32,7 @@
 				<tr id="ttitle">
 					<td class="td_bgc right_2">操作</td>
 					<td class="td_bgc right_2">用户名</td>
+					<td class="td_bgc right_2">产品名称</td>
 					<td class="td_bgc right_2">uid</td>
 					<td class="td_bgc right_2">所属用户</td>
 					<td class="td_bgc right_2">模板</td>
@@ -42,12 +43,14 @@
 					<td class="td_bgc right_2">空间状态</td>					
 					</tr>
 					{{foreach from=$list item=row}}
+					<form action='?c=vhost&a=setStatus&name={{$row.name}}' method='post' name='status_{{$row.uid}}form'>
 				<tr>
 					<td class="td_bgc right_2">
 						[<a href='javascript:if(confirm("真的要删除空间吗,此操作将导致数据无法恢复,如果你只是想关闭空间，可以把该空间的状态改为暂停")){ window.location="?c=vhost&a=del&name={{$row.name}}";}'>删除</a>]
 						[<a href="?c=vhost&a=resync&name={{$row.name}}">重建</a>]
 					</td>
 					<td class="td_bgc right_2">{{$row.name}}</td>
+					<td class="td_bgc right_2">{{$row.product_name}}</td>
 					<td class="td_bgc right_2">{{$row.uid}}</td>
 					<td class="td_bgc right_2"><a href='?c=user&a=listUser&username={{$row.username}}'>{{$row.username}}</a></td>
 					<td class="td_bgc right_2">{{$row.templete}}</td>
@@ -56,16 +59,16 @@
 					<td class="td_bgc right_2">{{$row.create_time}}</td>
 					<td class="td_bgc right_2">{{$row.expire_time}}</td>
 					<td class="td_bgc right_2">
-						<form action='?c=vhost&a=setStatus&name={{$row.name}}' method='post' name='status_{{$row.uid}}form'>
-							<select name='status' onChange="javascript:status_{{$row.uid}}form.submit()">
-							{{for $i=0; $i<2; $i++}}
-							<option value='{{$i}}' {{if $i==$row.status}} selected {{/if}}>
-							{{if $i==0}}正常{{else}}暂停{{/if}}
-							</option>
-							{{/for}}
-							</select>
-							</form></td>
+						<select name='status' onChange="javascript:status_{{$row.uid}}form.submit()">
+						{{for $i=0; $i<2; $i++}}
+						<option value='{{$i}}' {{if $i==$row.status}} selected {{/if}}>
+						{{if $i==0}}正常{{else}}暂停{{/if}}
+						</option>
+						{{/for}}
+						</select>
+						</td>
 					</tr>
+					</form>
 					{{/foreach}}
 		  </table>
 		</div>

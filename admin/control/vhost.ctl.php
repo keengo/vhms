@@ -110,12 +110,14 @@ class VhostControl extends Control {
 		$page_count = 25;
 		$count = 0;
 		$list = daocall('vhost','pageVhost',array($page,$page_count,&$count));
-		foreach($list AS $row){
 
-		}
 		$total_page = ceil($count/$page_count);
 		if($page>=$total_page){
 			$page = $total_page;
+		}
+		@load_conf('pub:vhostproduct');
+		for($i=0;$i<count($list);$i++){
+			$list[$i]['product_name'] = $GLOBALS['vhostproduct_cfg'][$list[$i]['product_id']]['name'];
 		}
 		$this->_tpl->assign('count',$count);
 		$this->_tpl->assign('total_page',$total_page);
