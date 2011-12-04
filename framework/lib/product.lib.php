@@ -174,6 +174,7 @@ abstract class Product
 
 		if ($diff_price<0) {
 			trigger_error('升级产品价格错误,请联系管理员');
+			return false;
 		}
 		$expire_time = strtotime($suser['expire_time']);
 		$month = ($expire_time - time())/(30*24*3600);

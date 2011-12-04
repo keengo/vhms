@@ -152,7 +152,7 @@ class ProductControl extends Control {
 		if($product->upgrade($user,$_REQUEST['name'],$_REQUEST['product_id'])){
 			$this->_tpl->assign('msg','升级成功');
 		} else {
-			$this->_tpl->assign('msg','升级失败');
+			$this->_tpl->assign('msg','升级失败.'.$GLOBALS["last_error"]);
 		}
 		return $this->_tpl->fetch('public/msg.html');
 	}
