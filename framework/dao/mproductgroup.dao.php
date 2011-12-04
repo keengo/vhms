@@ -17,8 +17,8 @@ class MproductgroupDAO extends DAO
 	
 	public function add($arr)
 	{
-		if ($_REQUEST['id']) {
-			return $this->update($arr, $this->getFieldValue2('id', $id));
+		if ($arr['id']) {
+			return $this->update($arr, $this->getFieldValue2('id', $arr['id']));
 		}
 		return $this->insert($arr);
 	}
