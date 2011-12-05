@@ -3,7 +3,11 @@ class MysqlDbProduct extends DbProduct
 {
 	public function add($uid,$passwd)
 	{
+		global $db_cfg;
 		$user = DbProduct::getUser($uid);
+		if($user=="mysql" || $user=="root" || $user==$db_cfg['default']['dbname']){
+			return false;
+		}
 		$sqls = array(
 			"CREATE USER '".$user."'@'%' IDENTIFIED BY '".$passwd."'",
 			"CREATE DATABASE IF NOT EXISTS `".$user."`",
