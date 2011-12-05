@@ -114,9 +114,9 @@ class ProductControl extends Control {
 		if (strcasecmp($_REQUEST['product_type'],'vhost')==0) {
 			global $db_cfg;
 			$name = trim($_REQUEST['name']);
-			if(strcasecmp($name,'root')==0 || strcasecmp($name,$db_cfg['default']['dbname'])==0){
+			if(strcasecmp($name,'root')==0 || strcasecmp($name,$db_cfg['default']['dbname'])==0 ||strcasecmp($name,'mysql')==0){
 				$this->_tpl->assign('msg','注册失败：保留账号');
-				return $this->_tpl->display('public/msg.html');
+				return $this->_tpl->fetch('public/msg.html');
 			}
 		}
 		$product = apicall('product', 'newProduct',array($_REQUEST['product_type']));
