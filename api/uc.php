@@ -31,7 +31,7 @@ include(SYS_ROOT.'/runtime.php');
 if(UC_START!="on"){
 	return false;
 }
-//note ��ͨ�� http ֪ͨ��ʽ
+
 if(!defined('IN_UC')) {
 	error_reporting(0);
 	set_magic_quotes_runtime(0);
@@ -76,7 +76,6 @@ if(!defined('IN_UC')) {
 		exit(API_RETURN_FAILED);
 	}
 
-	//note include ֪ͨ��ʽ
 } else {
 
 	require_once DISCUZ_ROOT.'./config.inc.php';
@@ -178,7 +177,6 @@ class uc_note {
 
 		unregisterRole('user');
 
-		//note ͬ���ǳ� API �ӿ�
 		header('P3P: CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"');
 		_setcookie('Example_auth', '', -86400 * 365);
 	}
@@ -231,7 +229,6 @@ class uc_note {
 		}
 		$UC_API = $post['UC_API'];
 
-		//note д app �����ļ�
 		$cachefile = $this->appdir.'./uc_client/data/cache/apps.php';
 		$fp = fopen($cachefile, 'w');
 		$s = "<?php\r\n";
@@ -239,7 +236,6 @@ class uc_note {
 		fwrite($fp, $s);
 		fclose($fp);
 
-		//note д�����ļ�
 		if(is_writeable($this->appdir.'./config.inc.php')) {
 			$configfile = trim(file_get_contents($this->appdir.'./config.inc.php'));
 			$configfile = substr($configfile, -2) == '?>' ? substr($configfile, 0, -2) : $configfile;
@@ -290,7 +286,7 @@ class uc_note {
 		if(!API_GETCREDITSETTINGS) {
 			return API_RETURN_FORBIDDEN;
 		}
-		$credits = array('1' => array('���', ''));
+		$credits = array('1' => array('money', ''));
 		return $this->_serialize($credits);
 	}
 
@@ -302,7 +298,6 @@ class uc_note {
 	}
 }
 
-//note ʹ�øú���ǰ��Ҫ require_once $this->appdir.'./config.inc.php';
 function _setcookie($var, $value, $life = 0, $prefix = 1) {
 	global $cookiepre, $cookiedomain, $cookiepath, $timestamp, $_SERVER;
 	setcookie(($prefix ? $cookiepre : '').$var, $value,
