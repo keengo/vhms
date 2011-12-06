@@ -286,7 +286,7 @@ class uc_note {
 		if(!API_GETCREDITSETTINGS) {
 			return API_RETURN_FORBIDDEN;
 		}
-		$credits = array('1' => array('money', ''));
+		$credits = array('1' => array('vhmsmoney', ''));
 		return $this->_serialize($credits);
 	}
 
