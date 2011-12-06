@@ -126,7 +126,7 @@ class PublicControl extends  Control
 					needRole('admin');
 					return header("Location:  /admin/index.php?c=user&a=pageUsers");
 				}
-				exit('注册成功，<a href="?c=session&a=loginForm">返回登录</a>');
+				exit('注册成功，<a href="/">返回登录</a>');
 				die();
 			}
 		}

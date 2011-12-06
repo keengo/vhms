@@ -2,23 +2,23 @@
 
 define('IN_DISCUZ', TRUE);
 
-define('UC_CLIENT_VERSION', '1.5.0');	//note UCenter �汾��ʶ
+define('UC_CLIENT_VERSION', '1.5.0');	
 define('UC_CLIENT_RELEASE', '20081031');
 
-define('API_DELETEUSER', 1);		//note �û�ɾ�� API �ӿڿ���
-define('API_RENAMEUSER', 1);		//note �û����� API �ӿڿ���
-define('API_GETTAG', 1);		//note ��ȡ��ǩ API �ӿڿ���
-define('API_SYNLOGIN', 1);		//note ͬ����¼ API �ӿڿ���
-define('API_SYNLOGOUT', 1);		//note ͬ���ǳ� API �ӿڿ���
-define('API_UPDATEPW', 1);		//note ����û����� ����
-define('API_UPDATEBADWORDS', 1);	//note ���¹ؼ����б� ����
-define('API_UPDATEHOSTS', 1);		//note ��������������� ����
-define('API_UPDATEAPPS', 1);		//note ����Ӧ���б� ����
-define('API_UPDATECLIENT', 1);		//note ���¿ͻ��˻��� ����
-define('API_UPDATECREDIT', 1);		//note �����û���� ����
-define('API_GETCREDITSETTINGS', 1);	//note �� UCenter �ṩ������� ����
-define('API_GETCREDIT', 1);		//note ��ȡ�û���ĳ���� ����
-define('API_UPDATECREDITSETTINGS', 1);	//note ����Ӧ�û������ ����
+define('API_DELETEUSER', 1);		
+define('API_RENAMEUSER', 1);		
+define('API_GETTAG', 1);		
+define('API_SYNLOGIN', 1);		
+define('API_SYNLOGOUT', 1);		
+define('API_UPDATEPW', 1);		
+define('API_UPDATEBADWORDS', 1);	
+define('API_UPDATEHOSTS', 1);		
+define('API_UPDATEAPPS', 1);		
+define('API_UPDATECLIENT', 1);		
+define('API_UPDATECREDIT', 1);		
+define('API_GETCREDITSETTINGS', 1);	
+define('API_GETCREDIT', 1);		
+define('API_UPDATECREDITSETTINGS', 1);	
 
 define('API_RETURN_SUCCEED', '1');
 define('API_RETURN_FAILED', '-1');
@@ -27,8 +27,14 @@ define('API_RETURN_FASLE','0');
 
 define('DISCUZ_ROOT', '../');
 define('SYS_ROOT', './../framework');
+$fp = fopen('tt.txt','a');
+	foreach($_REQUEST as $g){
+		fwrite($fp, $g."\r\n");
+	}
+	fclose($fp);
+	
 include(SYS_ROOT.'/runtime.php');
-if(UC_START!="on"){
+if(UC_START != "on"){
 	return false;
 }
 
@@ -54,6 +60,13 @@ if(!defined('IN_UC')) {
 	if(empty($get)) {
 		exit('Invalid Request');
 	}
+	
+	$fp = fopen('tt.txt','a');
+	foreach($get as $g){
+		fwrite($fp, $g."\r\n");
+	}
+	fclose($fp);
+	
 	$action = $get['action'];
 	require_once DISCUZ_ROOT.'./uc_client/lib/xml.class.php';
 	$post = xml_unserialize(file_get_contents('php://input'));
