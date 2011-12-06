@@ -21,7 +21,7 @@ class TPL
 			self::$instance->assign("STATIC",TPL_ROOT.'/view/default/');
 			//self::$instance->assign("PSTATIC","/");
 		
-			self::$instance->assign('role',getRoles());
+			//self::$instance->assign('role',getRoles());
 			//self::$instance->caching = false;
 			self::$instance->left_delimiter = '{{';
 			self::$instance->right_delimiter = '}}';

@@ -53,6 +53,7 @@ class PublicControl extends  Control
 			$menus[]=array('论坛','/bbs/');
 		}
 		$this->_tpl->assign("menus",$menus);
+		$this->_tpl->assign('role',getRoles());
 		return $this->_tpl->fetch("public/head.html");
 	}
 	public function pageListNews()

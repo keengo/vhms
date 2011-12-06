@@ -48,9 +48,7 @@ class SessionControl extends Control {
 				registerRole('user',$user);
 				$ucsynlogin = uc_user_synlogin($uid);
 				$this->assign('ucsynclogin',$ucsynlogin);
-				$this->assign('fc','user');
-				$this->assign('fa','index');
-				return $this->_tpl->fetch('frame/index.html');
+				return dispatch('user','index');
 			}else{
 				header('Location: ?c=session&a=error');
 				die();
