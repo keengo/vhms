@@ -35,14 +35,17 @@ class PublicControl extends  Control
 	}
 	public function head()
 	{
+		
 		$menus=array(
 		array('首页','/'),
 		array('虚拟主机','?c=host&a=index'),
 		array('会员中心','?c=user&a=index'),
 		array('联系我们','?c=public&a=contact'),
 		array('使用帮助','?c=help&a=index')
-
 		);
+		if(UC_START=='on') {
+			$menus[]=array('论坛','/bbs/');
+		}
 		$this->_tpl->assign("menus",$menus);
 		return $this->_tpl->fetch("public/head.html");
 	}
