@@ -125,6 +125,7 @@ class ProductControl extends Control {
 			return false;
 		}
 		$user = getRole('user');
+		print_r($_REQUEST);
 		if(!$product->sell($user,intval($_REQUEST['product_id']),$_REQUEST)){
 			return false;
 		}

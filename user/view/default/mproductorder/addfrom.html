@@ -24,48 +24,50 @@
 				</tr>
 				
 				<tr>
-					<td class="td_bgc right_2">我的订单说明：</td>
-					<td class="td_bgc right_2"><input name='client_msg' type='text'  value="{{$mproductorder[0].client_msg}}" size="71">
+					<td class="td_bgc right_2">我的要求说明：</td>
+					<td class="td_bgc right_2"><input name='client_msg' type='text'  value="{{$mproductorder[0].client_msg}}" size="40">
 					</td>
 				</tr>
 				
+				{{if $mproductorder[0].admin_msg}}
 				<tr>
 					<td class="td_bgc right_2">管理员回复：</td>
-					<td class="td_bgc right_2"><input name='admin_msg' type='text'  value="{{$mproductorder[0].admin_msg}}" size="71">
+					<td class="td_bgc right_2">{{$mproductorder[0].admin_msg}}
 					</td>
 				</tr>
-				
+				{{/if}}
 				
 				<tr>
 					<td class="td_bgc right_2">最终价格：</td>
-					<td class="td_bgc right_2"><input name='last_price' type='text'  value="{{$mproductorder[0].last_price}}" size="71">
+					<td class="td_bgc right_2"><input name='last_price' type='text'  value="{{$mproductorder[0].last_price}}" size="40">
 					</td>
 				</tr>
 				
 				<tr>
 					<td class="td_bgc right_2">最终月份：</td>
-					<td class="td_bgc right_2"><input name='last_month' type='text'  value="{{$mproductorder[0].last_month}}" size="71">
+					<td class="td_bgc right_2"><input name='last_month' type='text'  value="{{$mproductorder[0].last_month}}" size="40">
 					</td>
 				</tr>
 				
+				{{if $mproductorder[0].create_time}}
 				<tr>
 					<td class="td_bgc right_2">订单提交时间：</td>
-					<td class="td_bgc right_2"><input name='create_time' type='text'  value="{{$mproductorder[0].create_time}}" size="71">
-					</td>
+					<td class="td_bgc right_2">{{$mproductorder[0].create_time}}</td>
 				</tr>
+				{{/if}}
 				
+				{{if $mproductorder[0].expire_time}}
 				<tr>
 					<td class="td_bgc right_2">订单过期时间：</td>
-					<td class="td_bgc right_2"><input name='expire_time' type='text'  value="{{$mproductorder[0].expire_time}}" size="71">
-					</td>
+					<td class="td_bgc right_2">{{$mproductorder[0].expire_time}}</td>
 				</tr>
-				
+				{{/if}}
+				{{if $mproductorder[0].status}}
 				<tr>
 					<td class="td_bgc right_2">订单状态：</td>
-					<td class="td_bgc right_2"><input name='status' type='text'  value="{{$mproductorder[0].status}}" size="71">
-					</td>
+					<td class="td_bgc right_2">{{$mproductorder[0].status}}</td>
 				</tr>
-				
+				{{/if}}
 				
 				<tr>
 					<td class="td_bgc td_hg" colspan="2" align="center"><input type="submit" value="确认提交"></td>

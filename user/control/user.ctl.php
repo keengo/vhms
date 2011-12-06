@@ -58,6 +58,9 @@ class UserControl extends Control {
 		needRole('user');
 		return $this->_tpl->fetch('user/changePassword.html');
 	}
+	/**
+	 * 更败密码
+	 */
 	public function changePassword()
 	{
 		needRole('user');
@@ -69,6 +72,9 @@ class UserControl extends Control {
 		}
 		return $this->_tpl->fetch('public/msg.html');
 	}
+	/**
+	 * 非自动化产品业务创建页面
+	 */
 	public function addMproductorderFrom()
 	{
 		if($_REQUEST['id']) {
@@ -77,10 +83,17 @@ class UserControl extends Control {
 			$this->_tpl->assign('mproductorder',$mproductorder);
 			$this->_tpl->assign('edit',1);
 		}
-		$mproductgroup = daocall('mproductgroup','getMproductgroup',array());
-		$this->_tpl->assign('mproductgroup',$mproductgroup);
+		$mproduct = daocall('mproduct','getMproductById',array());
+		$this->_tpl->assign('mproduct',$mproduct);
+		
+//		$mproductgroup = daocall('mproductgroup','getMproductgroup',array());
+//		$this->_tpl->assign('mproductgroup',$mproductgroup);
+//		
 		return $this->_tpl->fetch('mproductorder/addfrom.html');
 	}
+	/**
+	 * 非自动化产品业务创建函数
+	 */
 	public function addMproductorder()
 	{
 		$result = daocall('mproductorder','add',array($_REQUEST));
@@ -90,6 +103,9 @@ class UserControl extends Control {
 		}
 		return header('Location: /');
 	}
+	/**
+	 * 非自动化产品业务列表
+	 */
 	public function pageListMyMproductorder()
 	{
 		$page = intval($_REQUEST['page']);
@@ -112,7 +128,11 @@ class UserControl extends Control {
 		$this->_tpl->assign('list',$list);
 		return $this->_tpl->fetch('mproductorder/pagelistmproductorder.html');
 	}
-	
+	/**
+	 * 验证登陆的账号和密码,name,passwd
+	 * @param  $username
+	 * @param  $passwd
+	 */
 	private function checkPassword($username,$passwd)
 	{
 		$user = daocall('user','getUser', array($username));
@@ -124,6 +144,9 @@ class UserControl extends Control {
 		}
 		return $user;
 	}
+	/**
+	 * 公告列表
+	 */
 	private function pageNewsByNumber()
 	{
 		$page = 1;
