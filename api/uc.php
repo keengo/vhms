@@ -27,11 +27,12 @@ define('API_RETURN_FASLE','0');
 
 define('DISCUZ_ROOT', '../');
 define('SYS_ROOT', './../framework');
-$fp = fopen('tt.txt','a');
-	foreach($_REQUEST as $g){
-		fwrite($fp, $g."\r\n");
-	}
-	fclose($fp);
+
+//$fp = fopen('tt.txt','a');
+//foreach($_REQUEST as $g){
+//	fwrite($fp, $g."\r\n");
+//}
+//fclose($fp);
 	
 include(SYS_ROOT.'/runtime.php');
 if(UC_START != "on"){
@@ -61,12 +62,12 @@ if(!defined('IN_UC')) {
 		exit('Invalid Request');
 	}
 	
-	$fp = fopen('tt.txt','a');
-	foreach($get as $g){
-		fwrite($fp, $g."\r\n");
-	}
-	fclose($fp);
-	
+//	$fp = fopen('tt.txt','a');
+//	foreach($get as $g){
+//		fwrite($fp, $g."\r\n");
+//	}
+//	fclose($fp);
+//	
 	$action = $get['action'];
 	require_once DISCUZ_ROOT.'./uc_client/lib/xml.class.php';
 	$post = xml_unserialize(file_get_contents('php://input'));

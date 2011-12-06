@@ -122,6 +122,7 @@ class PublicControl extends  Control
 				$sql="INSERT INTO ".UC_DBNAME.".".$tablepre."common_member (`uid`,`email`,`username`,`password`)";
 				$sql.=" VALUES ('$uid','$email','$username','$password')";
 				@$db->query($sql);
+				//at 管理员还是user
 				if($_REQUEST['at']==1){
 					needRole('admin');
 					return header("Location:  /admin/index.php?c=user&a=pageUsers");
