@@ -1,0 +1,36 @@
+{{include file='common/head.html'}}
+<div id="container">
+<div class="head_block tb_wid2">&nbsp;首页设置</div>
+  <div class="block tb_wid2">
+    <table cellpadding=0 cellspacing=1 id="table_2">
+ 	 <form  action="?c=setting&a=webSetup" method='post'>
+      <tr>
+        <td class='color01 right' bgcolor='#efefef'>网站名称</td>
+        <td class="td_bgc right_2"><input name='web_name' id="money" size="50" value='{{$setting.web_name.value}}'/></td>
+      </tr>
+      <tr>
+        <td width="99" bgcolor='#efefef' class='color01 right'>首页logo设置地址</td>
+        <td width="168" class="td_bgc right_2"><input name='logo' id="money" size="50"  value='{{$setting.logo.value}}'/></td> 
+      </tr>
+      <tr>
+        <td class='color01 right' bgcolor='#efefef'>联系方式</td>
+        <td class="td_bgc right_2">
+        <textarea name='contact'  rows='5' cols='50'>{{$setting.contact.value}}</textarea>
+        </td>
+      </tr>
+
+      <tr>
+        <td class='color01 right' bgcolor='#efefef'>统计代码</td>
+        <td class="td_bgc right_2">
+        <textarea name='stat_code'  rows='5' cols='50'>{{$setting.stat_code.value}}</textarea></td>
+      </tr>
+	   <tr>
+        <td colspan="2" bgcolor='#efefef' class='color01 center td_hg' align="center"><input type="submit" value="确认" /></td>
+       </tr>
+	</form>
+    </table>
+	<div>
+	</div>
+  </div>
+</div>
+{{include file='common/foot.html'}}

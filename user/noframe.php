@@ -17,6 +17,9 @@ if($c==""){
 	$_REQUEST['a']=$a='index';
 }
 $tpl = TPL::singleton();
+//读配置文件
+@load_conf('pub:setting');
+$tpl->assign('setting',$GLOBALS['setting_cfg']);
 $main = dispatch($c,$a);
 if ($main===false) {
 	$tpl->assign('msg',$GLOBALS["last_error"]);

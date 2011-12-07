@@ -185,6 +185,7 @@ class DAO
 			return false;
 		}
 		$sql = $cmd." INTO ".$this->_TABLE." ({$fields}) VALUES ({$values})";
+		//echo $sql;
 		return $this->executex($sql);
 	}
 	/**
