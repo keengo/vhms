@@ -16,7 +16,7 @@ class SessionControl extends Control {
 			die();
 		}
 		//if($GLOBALS['frame']==1){
-			return $this->_tpl->fetch('session/login.html');
+		return $this->_tpl->fetch('session/login.html');
 		//}else{
 		//	header("Location: ?c=public&a=index");
 		//	die();
@@ -31,30 +31,40 @@ class SessionControl extends Control {
 			exit("用户名不符合标准");
 		}
 		if(UC_START=='on'){
-			
+				
 			include dirname(__FILE__).'/../../config.inc.php';
-			
+				
 			if(UC_KEY=="" || UC_API=="")
 			{
 				exit("登陆失败，请检查uc配置文件config.inc.php");
 			}
-			
+				
 			include dirname(__FILE__).'/../../include/db_mysql.class.php';
 			include dirname(__FILE__).'/../../uc_client/client.php';
-			
+				
 			list($uid, $username, $password, $email) = uc_user_login($user, $_REQUEST['passwd']);
 			if($uid > 0)
 			{
 				registerRole('user',$user);
 				$ucsynlogin = uc_user_synlogin($uid);
-				
 				$this->assign('ucsynclogin',$ucsynlogin);
-				//return dispatch('user','index');
-				return $this->_tpl->fetch('user/index.html');;
+				
+				$user = daocall('user','getUser',array(getRole('user')));
+				$agents = daocall('agent','selectList',array());
+				foreach($agents as $agent){
+					if($agent['id'] == $user['agent_id']) {
+						$user['agent_name'] =$agent['name'];
+					}
+				}
+				$login_ip=$_SERVER['REMOTE_ADDR'];
+				$this->_tpl->assign('login_ip',$login_ip);
+				$this->_tpl->assign('user',$user);
+				
+				return $this->_tpl->fetch('user/index.html');
 			}else{
 				header('Location: ?c=session&a=error');
 				die();
-			}   
+			}
 		}else{
 			$userinfo = $this->checkPassword($user, $_REQUEST['passwd']);
 			if(!$userinfo){
@@ -91,9 +101,9 @@ class SessionControl extends Control {
 
 			$user=getRole('user');
 			$userinfo=daocall('user','getUser',array($user));
-
+			
 			unregisterRole('user');
-			$ucsynlogout=uc_user_synlogout($userinfo['id']);
+			$ucsynlogout=uc_user_synlogout($userinfo['uid']);
 			echo $ucsynlogout;
 
 			return $this->loginForm();
