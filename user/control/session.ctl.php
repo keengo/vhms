@@ -47,12 +47,14 @@ class SessionControl extends Control {
 			{
 				registerRole('user',$user);
 				$ucsynlogin = uc_user_synlogin($uid);
+				
 				$this->assign('ucsynclogin',$ucsynlogin);
-				return dispatch('user','index');
+				//return dispatch('user','index');
+				return $this->_tpl->fetch('user/index.html');;
 			}else{
 				header('Location: ?c=session&a=error');
 				die();
-			}
+			}   
 		}else{
 			$userinfo = $this->checkPassword($user, $_REQUEST['passwd']);
 			if(!$userinfo){
