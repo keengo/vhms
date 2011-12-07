@@ -180,7 +180,7 @@ img{margin:0;padding:0;border:0;}
 	  		</td>
 			<td align="right"><script language="javascript" src="?c=product&a=productList&target=self"></script></td>
 		 <tr>
-			<td width="184" rowspan="2"><img src='{{$STATIC}}/images/logo.jpg' height="80"></td>
+			<td width="184" rowspan="2"><img src='{{if $setting.logo.value}}{{$setting.logo.value}}{{else}}{{$STATIC}}/images/logo.jpg{{/if}}' height="80"></td>
 			<td valign="top" align="left" class="right" width="500"></td><td valign="top"></td>
 		 </tr>
 	  </form>

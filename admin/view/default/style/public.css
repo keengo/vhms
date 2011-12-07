@@ -14,7 +14,7 @@ a:hover,a:active {
 	text-decoration: underline;
 }
 
-/*定义body的样式*/
+/*定义body的样式
 body{
 	color:#036;
 	background-color:#fff;
@@ -29,6 +29,7 @@ body{
 	scrollbar-darkshadow-color:#FFFFFF;
 	scrollbar-track-color:#FFFFFF;
 }
+*/
 h1{
 	font-size:12px;
 	color:#036;

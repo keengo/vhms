@@ -37,8 +37,6 @@ function SwitchMenu(obj,sty)
 */
 </script>
 <div id="masterdiv">
-<div align="center"><a href="http://www.kanglesoft.com" target="_blank"><img src='{{$STATIC}}/style/kanglevhms.gif' border="0"/></a></div>
-	
 	<h1 id="m2" onClick="SwitchMenu('sub2','m2')" class="menu"><ol id="p2">{{$lang.account_manage}}</ol></h1>
 		<ul class="submenu" id="sub2" >
 			<li><a href="?c=index&a=main" target='main'>{{$lang.myinfo}}</a></li>	
@@ -94,8 +92,10 @@ function SwitchMenu(obj,sty)
 			<!--  <li><a href='?c=front&a=pageListIndex' target='main'>前台设置列表</a></li>-->
 			<li><a href='?c=agent&a=listagent' target='main'>代理级别设置</a></li>
 			<!--  <li><a href='?c=agentprice&a=pageListAgentprice' target='main'>代理设置2</a></li>-->
+			<li><a href='?c=setting&a=setupMain' target='main'>首页设置</a></li>
 	 	</ul>
 </div>
+<div><br></div>
 </td></tr>
 </table>
 </body>

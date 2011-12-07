@@ -17,6 +17,12 @@ class SettingControl extends Control
 		$this->assign('sub',$sub);
 		return $this->fetch('setting/show.html');
 	}
+	public function setupMain()
+	{	
+		@load_conf('pub:setting');
+		$this->assign('setting',$GLOBALS['setting_cfg']);
+		return $this->fetch('setting/setup.html');
+	}
 	public function set()
 	{
 		@load_conf('pub:settingrule');
@@ -41,6 +47,15 @@ class SettingControl extends Control
 		apicall('utils','writeConfig',array($list,'name','setting'));
 		return $this->index();
 	}
-    								
+	public function webSetup()
+	{
+		daocall('setting','add',array('web_name',$_REQUEST['web_name']));
+		daocall('setting','add',array('logo',$_REQUEST['logo']));
+		daocall('setting','add',array('contact',$_REQUEST['contact']));
+		daocall('setting','add',array('stat_code',$_REQUEST['stat_code']));
+		$list = daocall('setting','getAll');
+		apicall('utils','writeConfig',array($list,'name','setting'));
+		return $this->setupMain();
+	}
 }
 ?>
