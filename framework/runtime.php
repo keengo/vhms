@@ -46,6 +46,7 @@ function __load_core($file, $dir = "", $return = false)
 	}
 
 	$file = $dir . $file . '.php';
+	
 	if(substr($file, 0, 1) == '/') $file = substr($file , 1);
 
 	switch($tag)
@@ -66,7 +67,6 @@ function __load_core($file, $dir = "", $return = false)
 	}
 
 	$__core_env['last_load_file'] = $file;
-
 	if(file_exists($file))
 	{
 		if($return)
@@ -74,9 +74,10 @@ function __load_core($file, $dir = "", $return = false)
 			return $file;
 		}
 		else
-		{
+		{		
 			//echo 'file='.$file;
 			include_once($file);
+			//echo "file=".$file."<br>";
 			//print_r($lang);
 			return true;
 		}

@@ -28,11 +28,6 @@ define('API_RETURN_FASLE','0');
 define('DISCUZ_ROOT', '../');
 define('SYS_ROOT', './../framework');
 
-//$fp = fopen('tt.txt','a');
-//foreach($_REQUEST as $g){
-//	fwrite($fp, $g."\r\n");
-//}
-//fclose($fp);
 	
 include(SYS_ROOT.'/runtime.php');
 if(UC_START != "on"){

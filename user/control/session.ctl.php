@@ -10,21 +10,16 @@ class SessionControl extends Control {
 		parent::__destruct();
 	}
 	public function loginForm(){
-		global $_SESSION;
-		if(getRole('user')){
-			header("Location: ?c=frame&a=index");
-			die();
-		}
-		//if($GLOBALS['frame']==1){
-		return $this->_tpl->fetch('session/login.html');
-		//}else{
-		//	header("Location: ?c=public&a=index");
+		//if(getRole('user')){
+		//	header("Location: ?c=frame&a=index");
 		//	die();
 		//}
+		//if($GLOBALS['frame']==1){
+		return $this->_tpl->fetch('session/login.html');
+	
 	}
 	public function login()
-	{
-		session_start();
+	{		
 		$user=trim($_REQUEST['username']);
 		if(!$this->checkRight($user))
 		{
@@ -46,21 +41,14 @@ class SessionControl extends Control {
 			if($uid > 0)
 			{
 				registerRole('user',$user);
-				$ucsynlogin = uc_user_synlogin($uid);
-				$this->assign('ucsynclogin',$ucsynlogin);
-				
-				$user = daocall('user','getUser',array(getRole('user')));
-				$agents = daocall('agent','selectList',array());
-				foreach($agents as $agent){
-					if($agent['id'] == $user['agent_id']) {
-						$user['agent_name'] =$agent['name'];
-					}
-				}
-				$login_ip=$_SERVER['REMOTE_ADDR'];
-				$this->_tpl->assign('login_ip',$login_ip);
-				$this->_tpl->assign('user',$user);
-				
-				return $this->_tpl->fetch('user/index.html');
+				$_SESSION["uc_uid"]=$uid;
+				header("Location: ?c=user&a=index&uc=1");
+				die();
+			
+				//$ucsynlogin = uc_user_synlogin($uid);
+				//$this->assign('ucsynclogin',$ucsynlogin);				
+				//return dispatch('user','index');
+				//return $this->_tpl->fetch('user/index.html');
 			}else{
 				header('Location: ?c=session&a=error');
 				die();
@@ -87,10 +75,9 @@ class SessionControl extends Control {
 	}
 	public function logout()
 	{
-		session_start();
-
+		//退出uc_uid	
+		//unset($_SESSION["uc_uid"]);
 		if(UC_START && UC_START=='on'){
-
 			include dirname(__FILE__).'/../../config.inc.php';
 			if(UC_KEY=="" || UC_API=="")
 			{

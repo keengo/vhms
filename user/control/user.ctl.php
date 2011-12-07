@@ -18,8 +18,20 @@ class UserControl extends Control {
 		exit;
 	}
 	public function index(){
-		session_start();
-		
+		if($_REQUEST['uc']==1){
+			include dirname(__FILE__).'/../../config.inc.php';				
+			if(UC_KEY=="" || UC_API=="")
+			{
+				exit("登陆失败，请检查uc配置文件config.inc.php");
+			}				
+			include dirname(__FILE__).'/../../include/db_mysql.class.php';
+			include dirname(__FILE__).'/../../uc_client/client.php';
+			if (isset($_SESSION['uc_uid'])) {
+				$ucsynlogin = uc_user_synlogin($_SESSION['uc_uid']);
+				$this->assign('ucsynclogin',$ucsynlogin);
+				unset($_SESSION['uc_uid']);
+			}	
+		}
 		$user = daocall('user','getUser',array(getRole('user')));
 		$agents = daocall('agent','selectList',array());
 		foreach($agents as $agent){
@@ -30,7 +42,7 @@ class UserControl extends Control {
 		$login_ip=$_SERVER['REMOTE_ADDR'];
 		$this->_tpl->assign('login_ip',$login_ip);
 		$this->_tpl->assign('user',$user);
-		$this->pageNewsByNumber();
+		//$this->pageNewsByNumber();
 		return $this->_tpl->fetch('user/index.html');
 	}
 	public function left()

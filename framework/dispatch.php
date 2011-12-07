@@ -107,11 +107,13 @@ function __dispatch_exit($msg)
 }
 function dispatch($control,$action)
 {
+	
 	global $__core_env;
 	if($__core_env[$control.':'.$action]==1){
 		__dispatch_exit("control=".$control." action=".$action." 被重复执行");
 		return "";
 	}
+
 	$__core_env[$control.':'.$action]=1;
 	$pos = strrpos($control, '/');
 	if(false === $pos){
@@ -119,7 +121,9 @@ function dispatch($control,$action)
 	}else{
 		$control_name =	substr($control, $pos + 1, 100);
 	}
+
 	load_ctl($control);
+	
 	$control_name[0] = strtoupper($control_name[0]);
 	$class = $control_name . 'Control';
 	if(!class_exists($class))
@@ -131,8 +135,7 @@ function dispatch($control,$action)
 		__dispatch_exit($class . ' 控制器的 ' . $action . ' 该事件被禁止访问');
 	}
 	$inst = new $class;
-	if($inst && method_exists($inst, $action))
-	{
+	if($inst && method_exists($inst, $action)){
 		$result = $inst->$action();
 	}else{
 		__dispatch_exit($class . ' 控制器的 ' . $action . ' 事件不存在');
