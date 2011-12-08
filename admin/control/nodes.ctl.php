@@ -59,6 +59,7 @@ class NodesControl extends Control {
 		$arr['host'] = $_REQUEST['host'];
 		$arr['port'] = $_REQUEST['port'];
 		$arr['user'] = $_REQUEST['user'];
+		$arr['nickname'] = $_REQUEST['nickname'];
 		if($_REQUEST['passwd']!=""){
 			$arr['passwd'] = $_REQUEST['passwd'];				
 		}
@@ -81,14 +82,9 @@ class NodesControl extends Control {
 		$data = array(
 			'name'=>$_REQUEST['name'],
 			'host'=> $_REQUEST['host'],
+			'nickname'=> $_REQUEST['nickname'],
 			'port'=>intval($_REQUEST['port']),
-			'user'=>$_REQUEST['user'],
 			'passwd'=>$_REQUEST['passwd'],
-			'db_type'=>'mysql',
-			'db_user'=>$_REQUEST['db_user'],
-			'db_passwd'=>$_REQUEST['db_passwd'],
-			'win'=>(strcasecmp($os, 'windows')==0?1:0),
-			'dev'=>$_REQUEST['dev']
 		);
 		$ret = daocall("nodes","insertNode",array($data));
 		if($ret !== false ){

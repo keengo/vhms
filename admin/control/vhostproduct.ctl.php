@@ -105,7 +105,8 @@ class VhostproductControl extends Control {
 		$this->_tpl->assign('product_flag',$product_flag);
 		@load_conf('pub:node');
 		if(is_array($GLOBALS['node_cfg'])){
-			$this->_tpl->assign('nodes',array_keys($GLOBALS['node_cfg']));
+			//$this->_tpl->assign('nodes',array_keys($GLOBALS['node_cfg']));
+			$this->_tpl->assign('nodes',$GLOBALS['node_cfg']);
 		}
 		return $this->_tpl->fetch('vhostproduct/showProduct.html');
 	}

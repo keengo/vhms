@@ -17,6 +17,7 @@ class NodesDAO extends DAO {
 			"passwd"=>'passwd',
 			"db_type"=>'db_type',
 			"state"=>'state',
+			'nickname'=>'nickname'
 		);
 		$this->MAP_TYPE = array(
 			'port'=>FIELD_TYPE_INT,
