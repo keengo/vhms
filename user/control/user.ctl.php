@@ -123,15 +123,16 @@ class UserControl extends Control {
 		$arr['username'] = getRole('user');
 		if($_REQUEST['id']) {
 			$mproductorder = daocall('mproductorder','getMproductorder',array(intval($_REQUEST['id'])));
-			if($mproductorder[0]['status'] != 0) {
-				return false;
+			if($mproductorder[0]['status']!=0) {
+				$this->_tpl->assign('msg',"订单已完成");
+				return $this->_tpl->fetch('msg.html');
 			}
 		}
 		
 		$result = daocall('mproductorder','add',array($arr));
 		if (!$result) {
 			$this->_tpl->assign('msg','申请订单失败，请联系管理员');
-			return $this->_tpl->assign('msg.html');
+			return $this->_tpl->fetch('msg.html');
 		}
 		return $this->pageListMyMproductorder();
 	}
