@@ -27,7 +27,7 @@ class SessionControl extends Control {
 		}
 		if(UC_START=='on'){
 				
-			include dirname(__FILE__).'/../../config.inc.php';
+			@include dirname(__FILE__).'/../../config.inc.php';
 				
 			if(UC_KEY=="" || UC_API=="")
 			{
@@ -78,7 +78,7 @@ class SessionControl extends Control {
 		//退出uc_uid	
 		//unset($_SESSION["uc_uid"]);
 		if(UC_START && UC_START=='on'){
-			include dirname(__FILE__).'/../../config.inc.php';
+			@include dirname(__FILE__).'/../../config.inc.php';
 			if(UC_KEY=="" || UC_API=="")
 			{
 				return  "登陆失败，请检查uc配置文件.";

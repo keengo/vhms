@@ -39,7 +39,7 @@ if(!defined('IN_UC')) {
 	set_magic_quotes_runtime(0);
 
 	defined('MAGIC_QUOTES_GPC') || define('MAGIC_QUOTES_GPC', get_magic_quotes_gpc());
-	require_once DISCUZ_ROOT.'./config.inc.php';
+	@require_once DISCUZ_ROOT.'./config.inc.php';
 
 	$_DCACHE = $get = $post = array();
 
@@ -87,7 +87,7 @@ if(!defined('IN_UC')) {
 
 } else {
 
-	require_once DISCUZ_ROOT.'./config.inc.php';
+	@require_once DISCUZ_ROOT.'./config.inc.php';
 	require_once DISCUZ_ROOT.'./include/db_mysql.class.php';
 	$GLOBALS['db'] = new dbstuff;
 	$dbhost=UC_DBHOST;

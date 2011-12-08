@@ -90,7 +90,7 @@ class PublicControl extends  Control
 		}
 		if(UC_START && UC_START=='on'){
 				
-			include_once dirname(__FILE__).'/../../config.inc.php';
+			@include_once dirname(__FILE__).'/../../config.inc.php';
 			if(UC_KEY=="" || UC_API=="")
 			{
 				return "注册失败，请检查ucenter配置文件.";

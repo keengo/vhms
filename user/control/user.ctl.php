@@ -19,7 +19,7 @@ class UserControl extends Control {
 	}
 	public function index(){
 		if($_REQUEST['uc']==1){
-			include dirname(__FILE__).'/../../config.inc.php';				
+			@include dirname(__FILE__).'/../../config.inc.php';				
 			if(UC_KEY=="" || UC_API=="")
 			{
 				exit("登陆失败，请检查uc配置文件config.inc.php");
