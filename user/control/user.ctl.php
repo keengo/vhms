@@ -92,15 +92,26 @@ class UserControl extends Control {
 		if($_REQUEST['id']) {
 			
 			$mproductorder = daocall('mproductorder','getMproductorder',array(intval($_REQUEST['id'])));
+			
+			$mproduct = daocall('mproduct','getMproductById',array($mproductorder[0]['product_id ']));
+			$mproductorder[0]['product_name'] = $mproduct[0]['name'];
+			
 			$this->_tpl->assign('mproductorder',$mproductorder);
 			$this->_tpl->assign('edit',1);
+			$this->_tpl->assign('id',$_REQUEST['id']);
 		}
 		$mproduct = daocall('mproduct','getMproductById',array());
 		$this->_tpl->assign('mproduct',$mproduct);
+		$months = array(
+					array('1','一个月'),
+					array('3','三个月'),
+					array('6','六个月'),
+					array('12','一年'),
+					array('24','二年'),
+					array('48','四年')
+					);
+		$this->_tpl->assign('months',$months);
 		
-//		$mproductgroup = daocall('mproductgroup','getMproductgroup',array());
-//		$this->_tpl->assign('mproductgroup',$mproductgroup);
-//		
 		return $this->_tpl->fetch('mproductorder/addfrom.html');
 	}
 	/**
@@ -108,12 +119,21 @@ class UserControl extends Control {
 	 */
 	public function addMproductorder()
 	{
-		$result = daocall('mproductorder','add',array($_REQUEST));
+		$arr = $_REQUEST;
+		$arr['username'] = getRole('user');
+		if($_REQUEST['id']) {
+			$mproductorder = daocall('mproductorder','getMproductorder',array(intval($_REQUEST['id'])));
+			if($mproductorder[0]['status'] != 0) {
+				return false;
+			}
+		}
+		
+		$result = daocall('mproductorder','add',array($arr));
 		if (!$result) {
 			$this->_tpl->assign('msg','申请订单失败，请联系管理员');
 			return $this->_tpl->assign('msg.html');
 		}
-		return header('Location: /');
+		return $this->pageListMyMproductorder();
 	}
 	/**
 	 * 非自动化产品业务列表
@@ -126,8 +146,26 @@ class UserControl extends Control {
 		}
 		$page_count = 20;
 		$count = 0;
-		$order = $_REQUEST['order'] or 'id';//排序字段
-		$list = daocall('mproductorder','pageList',array($page,$page_count,&$count,$order,getRole('user')));
+		
+		//排序字段
+		$order = $_REQUEST['order'] or 'id';
+		
+		//查询条件，传入数组
+		$where['username'] = getRole('user'); 
+		
+		$mproducts = daocall('mproduct','getMproductById',array());
+		
+		$list = daocall('mproductorder','pageList',array($page,$page_count,&$count,$order,$where));
+		if(is_array($mproducts)) {
+				for($i=0;$i<count($list);$i++ ) {
+					foreach($mproducts as $mproduct){
+					if($list[$i]['product_id'] == $mproduct['id']){
+						$list[$i]['product_name'] = $mproduct['name'];
+					}
+				
+				}	
+			}
+		}
 		$total_page = ceil($count/$page_count);
 		if($page>=$total_page){
 			$page = $total_page;

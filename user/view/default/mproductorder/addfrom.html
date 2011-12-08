@@ -1,17 +1,11 @@
 {{include file='common/head.html'}}
 <body leftmargin="0" topmargin="0" bgcolor="#ffffff" text="#000000">
 <div align="center">
-	<form name='nodeform' action="?c=mproductorder&a=addMproductorder&id={{$mproductorder[0].id}}" method="post">
+	<form name='nodeform' action="?c=user&a=addMproductorder&id={{$id}}" method="post">
 		<div class="head_block tb_wid2">&nbsp;{{if $edit}}修改订单{{else}}增加订单{{/if}}</div>
 		<div class="block tb_wid2">
 			<table id="table_2" cellpadding="0" cellspacing="1">
-				{{if $edit}}
-				<tr>
-					<td class="td_bgc right_2">产品组id：</td>
-					<td class="td_bgc right_2 tb_wid2">{{$mproductorder[0].id}}</td>
-				</tr>
-				{{/if}}
-				
+				{{if !$edit}}
 				<tr>
 					<td class="td_bgc right_2">产品选择：</td>
 					<td class="td_bgc right_2">
@@ -22,10 +16,19 @@
 						</select>
 					</td>
 				</tr>
+				{{else}}
+				<tr>
+					<td class="td_bgc right_2">产品名称：</td>
+					<td class="td_bgc right_2">{{$mproductorder[0].product_name}}
+					</td>
+				</tr>
+				{{/if}}
+				
 				
 				<tr>
-					<td class="td_bgc right_2">我的要求说明：</td>
-					<td class="td_bgc right_2"><input name='client_msg' type='text'  value="{{$mproductorder[0].client_msg}}" size="40">
+					<td class="td_bgc right_2">我的补充说明：</td>
+					<td class="td_bgc right_2">
+						<textarea name='client_msg' cols='40' rows='5'></textarea>
 					</td>
 				</tr>
 				
@@ -38,16 +41,22 @@
 				{{/if}}
 				
 				<tr>
-					<td class="td_bgc right_2">最终价格：</td>
-					<td class="td_bgc right_2"><input name='last_price' type='text'  value="{{$mproductorder[0].last_price}}" size="40">
+					<td class="td_bgc right_2">购买时间：</td>
+					<td class="td_bgc right_2">
+						<select name='last_month'>
+						{{for $i=0;$i< count($months);$i++}}
+						<option value="{{$months[$i][0]}}" {{if $mproductorder[0].last_month==$months[$i][0]}}selected{{/if}}>{{$months[$i][1]}}</option>
+						{{/for}}
+						</select>
 					</td>
 				</tr>
 				
+				
 				<tr>
-					<td class="td_bgc right_2">最终月份：</td>
-					<td class="td_bgc right_2"><input name='last_month' type='text'  value="{{$mproductorder[0].last_month}}" size="40">
-					</td>
+					<td class="td_bgc right_2">所需金额：</td>
+					<td class="td_bgc right_2">{{$last_price}}</td>
 				</tr>
+				
 				
 				{{if $mproductorder[0].create_time}}
 				<tr>
