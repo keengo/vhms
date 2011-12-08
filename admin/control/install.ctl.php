@@ -88,8 +88,15 @@ class InstallControl extends Control
 		$str.="define('UC_START','".$ucswitch."');//uc应用开关\r\n";
 		$str.="define('DZ_APPNAME','".$dzappname."');//dz论坛uc应用名称\r\n";
 		$str.="?>";
-		
-		@touch(dirname(dirname(dirname(__FILE__)))."config.inc.php");
+		$uc_config_file = dirname(dirname(dirname(__FILE__)))."/config.inc.php";
+		$fp2 = @fopen($uc_config_file, 'wt');
+		if($fp2){
+			$str2 = "<?php\r\n";
+			$str2 .= "//ucenter app config file\r\n";
+			$str2 .= "?>"; 
+			fwrite($fp2, $str2);
+			fclose($fp2);
+		}
 		
 		$config_file = dirname(dirname(dirname(__FILE__)))."/config.php";
 		$fp = @fopen($config_file,"wt");
