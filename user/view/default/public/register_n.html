@@ -12,7 +12,7 @@
 			<td width="690" height="479" background="{{$STATIC}}/images/Cloud_host_info_bg.jpg" valign="top">
 			<!--注册代码开始-->
 				<table cellspacing="10" width="80%">
-					<form  name='reg' action="/user/?c=public&a=register&external=1" method='post'>
+					<form  name='reg' action="?c=public&a=register&external=1" method='post'>
 					 <tr><td align="left" colspan="2"><img src="{{$STATIC}}/images/reg3.jpg" /></td></tr>
 					  <tr>
 						<td class="td_bgc right_reg" width="30%">用户：</td>
@@ -64,7 +64,7 @@ function show(url)
 }
 function check_user()
 {
-	show('/user/?c=public&a=checkUser&username='+document.reg.username.value);
+	show('?c=public&a=checkUser&username='+document.reg.username.value);
 }
 function check_register()
 {
