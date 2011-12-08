@@ -41,7 +41,8 @@ if(!defined('IN_UC')) {
 	defined('MAGIC_QUOTES_GPC') || define('MAGIC_QUOTES_GPC', get_magic_quotes_gpc());
 	@require_once DISCUZ_ROOT.'./config.inc.php';
 	
-	$tablepre = substr(UC_DBTABLEPRE,0,-8); 
+	$uctable = explode('.', UC_DBTABLEPRE);
+	$tablepre = substr($uctable[1],0,-8);
 	
 	$_DCACHE = $get = $post = array();
 
@@ -84,7 +85,10 @@ if(!defined('IN_UC')) {
 } else {
 
 	@require_once DISCUZ_ROOT.'./config.inc.php';
-	$tablepre = substr(UC_DBTABLEPRE,0,-8);
+	
+	$uctable = explode('.', UC_DBTABLEPRE);
+	$tablepre = substr($uctable[1],0,-8);
+	
 	require_once DISCUZ_ROOT.'./include/db_mysql.class.php';
 	$GLOBALS['db'] = new dbstuff;
 	$dbhost=UC_DBHOST;
