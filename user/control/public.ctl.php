@@ -82,6 +82,10 @@ class PublicControl extends  Control
 		$this->assign('new',$new);
 		return $this->fetch('public/news.html');
 	}
+	public function registerPact()
+	{	
+		return $this->fetch('public/pact.html');
+	}
 	public function register()
 	{
 		$username = trim($_POST['username']);
