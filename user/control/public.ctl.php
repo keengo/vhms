@@ -95,7 +95,8 @@ class PublicControl extends  Control
 		if(UC_START && UC_START=='on'){
 				
 			@include_once dirname(__FILE__).'/../../config.inc.php';
-			$tablepre = substr(UC_DBTABLEPRE,0,-8);
+			$uctable = explode('.', UC_DBTABLEPRE);
+			$tablepre = substr($uctable[1],0,-8);
 			
 			if(UC_KEY=="" || UC_API=="")
 			{
@@ -131,7 +132,7 @@ class PublicControl extends  Control
 				include_once  dirname(__FILE__).'/../../include/db_mysql.class.php';
 				$db=new dbstuff();
 				$conn=$db->connect(UC_DBHOST, UC_DBUSER, UC_DBPW);
-				$password=null;
+				$password=md5($_REQUEST['passwd']);
 				$sql="INSERT INTO ".UC_DBNAME.".".$tablepre."common_member (`uid`,`email`,`username`,`password`)";
 				$sql.=" VALUES ('$uid','$email','$username','$password')";
 				@$db->query($sql);
