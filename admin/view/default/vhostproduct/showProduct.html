@@ -114,8 +114,8 @@ function updateViewResult()
 			<td class="right">
 				<select id='node{{$row.id}}' name='node' onChange="changeNode('{{$row.id}}','{{$row.templete}}')"">
 				{{foreach from=$nodes item=node}}
-				<option value='{{$node}}' {{if $row.node==$node}}selected{{/if}}>
-				{{$node}}
+				<option value='{{$node.name}}' {{if $row.node==$node.name}}selected{{/if}} title='{{$node.nickname}}'>
+				{{$node.name}}
 				</option>
 				{{/foreach}}
 				</select>

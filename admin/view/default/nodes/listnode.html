@@ -75,6 +75,7 @@ function checkAllNode()
       <tr id="ttitle">
         <td bgcolor='#efefef' class='color01 right'>操作</td>       
         <td bgcolor='#efefef' class='color01 right'>名称</td>
+        <td bgcolor='#efefef' class='color01 right'>备注</td>
         <td bgcolor='#efefef' class='color01 right'>主机状态</td>
 		<td bgcolor='#efefef' class='color01 right'>主机</td>
 		<td  bgcolor='#efefef' class='color01 right'>管理端口</td>
@@ -85,8 +86,10 @@ function checkAllNode()
           [<a href="javascript:if(confirm('确定删除{{$row.name}}?')){location='?c=nodes&a=del&name={{$row.name}}';}" title="删除主机">删除</a>]        
           [<a href="?c=nodes&a=editForm&name={{$row.name}}" title="更改信息">修改</a>]
          </td>
+         
          <td class="right"><a href='http://{{$row.host}}:{{$row.port}}/admin/' target=_blank'>{{$row.name}}</a>       
         </td>
+        <td class="right">{{$row.nickname}}</td>
         <td class="right"> <div id='{{$row.name}}'><a href="javascript:checkNode('{{$row.name}}')">查询</a></div></td>
  		<td class="right">{{$row.host}}</td>
 		<td class="right">{{$row.port}}</td>
