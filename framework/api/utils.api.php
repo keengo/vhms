@@ -6,7 +6,7 @@ class UtilsAPI extends API
 		$dir = dirname(dirname(__FILE__))."/configs/";
 		@mkdir($dir);
 		$file = $dir.$cfg_name.".cfg.php";
-		$fp = fopen($file,"wt");
+		$fp = fopen($file,"wb");
 		if(!$fp){
 			return trigger_error("cann't open ".$file." to write!Please check right");
 		}
@@ -31,7 +31,7 @@ class UtilsAPI extends API
 			if($item!=""){
 				$item.=",";
 			}
-			$item.="'".$key."'=>'".addslashes($value)."'";
+			$item.="'".$key."'=>\"".addcslashes($value,'\\"$')."\"";
 		}
 		$str.=$item.");\r\n";
 		fwrite($fp,$str);
