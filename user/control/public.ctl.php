@@ -110,24 +110,24 @@ class PublicControl extends  Control
 			$uid = uc_user_register($username, $passwd, $email);
 			if($uid <= 0) {
 				if($uid==-6){
-					exit('注册失败,email已注册');
+					$this->_tpl->assign('msg','注册失败,email已注册');
 				}
 				elseif($uid==-5){
-					exit('注册失败,Email 不允许注册');
+					$this->_tpl->assign('msg','注册失败,Email 不允许注册');
 				}
 				elseif($uid==-4){
-					exit('注册失败,Email 格式有误');
+					$this->_tpl->assign('msg','注册失败,Email 格式有误');
 				}
 				elseif($uid==-3){
-					exit('注册失败,用户名已经存在');
+					$this->_tpl->assign('msg','注册失败,用户名已经存在');
 				}
 				elseif($uid==-2){
-					exit('注册失败,包含不允许注册的词语');
+					$this->_tpl->assign('msg','注册失败,包含不允许注册的词语');
 				}
 				elseif($uid==-1){
-					exit('注册失败,用户名不合法');
+					$this->_tpl->assign('msg','注册失败,用户名不合法');
 				}
-				exit('注册失败');
+				return $this->fetch('msg.html');
 			} else {
 				include_once  dirname(__FILE__).'/../../include/db_mysql.class.php';
 				$db=new dbstuff();
@@ -141,8 +141,8 @@ class PublicControl extends  Control
 					needRole('admin');
 					return header("Location:  /admin/index.php?c=user&a=pageUsers");
 				}
-				exit('注册成功，<a href="/">返回登录</a>');
-				die();
+				$this->_tpl->assign('msg','注册成功');
+				return $this->_tpl->fetch('msg.html');
 			}
 		}
 		$result = daocall('user','newUser',array($username,trim($_REQUEST['passwd']),$_REQUEST['email'],$_REQUEST['name'],$_REQUEST['ids']));
@@ -162,11 +162,7 @@ class PublicControl extends  Control
 	}
 	public function registerForm()
 	{
-		if($_REQUEST['at']==1){
-			$at=1;
-		}else{
-			$at=0;
-		}
+		$at = $_REQUEST['at'] or 0;
 		$this->_tpl->assign('at',$at);
 		return $this->_tpl->fetch('public/register.html');
 	}
