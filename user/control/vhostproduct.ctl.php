@@ -30,6 +30,11 @@ class VhostproductControl extends Control {
 				$search_key = $domain['user'];
 			}
 		}*/
+		if($GLOBALS['frame']==1){
+			$this->_tpl->assign('target','_self');
+		}else{
+			$this->_tpl->assign('target','_blank');
+		}
 		$page = intval($_REQUEST['page']);
 		if($page<=0){
 			$page = 1;
