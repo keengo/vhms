@@ -208,8 +208,7 @@ class VhostproductControl extends Control {
 	}
 	public function del()
 	{
-		daocall('vhostproduct','delProduct',$_REQUEST["id"]);
-		
+		daocall('vhostproduct','delProduct',array($_REQUEST["id"]));		
 		$arr['product_id'] = $_REQUEST['id'];
 		$arr['product_type'] = 0;
 		daocall('agentprice','delAgentprice',array($arr));
