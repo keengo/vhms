@@ -55,6 +55,7 @@ class SettingControl extends Control
 		daocall('setting','add',array('stat_code',$_REQUEST['stat_code']));
 		daocall('setting','add',array('banner',$_REQUEST['banner']));
 		daocall('setting','add',array('links',$_REQUEST['links']));
+		daocall('setting','add',array('vhost_name',$_REQUEST['vhost_name']));
 		$list = daocall('setting','getAll');
 		apicall('utils','writeConfig',array($list,'name','setting'));
 		return $this->setupMain();

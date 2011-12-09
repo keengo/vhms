@@ -36,9 +36,13 @@ class PublicControl extends  Control
 	public function head()
 	{
 		
+		$vhost_name = $GLOBALS['setting_cfg']['vhost_name']['value'];
+		if($vhost_name==""){
+			$vhost_name="虚拟主机";
+		}
 		$menus=array(
-		array('首页','/'),
-		array('虚拟主机','?c=host&a=index')
+			array('首页','/'),
+			array($vhost_name,'?c=host&a=index')
 		);
 //		$mproduct_group = daocall('mproductgroup','getMproductgroup',array());
 //		if(is_array($mproduct_group)){

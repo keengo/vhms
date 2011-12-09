@@ -24,12 +24,12 @@ class VhostproductControl extends Control {
 	{
 		$name = $_REQUEST['name'];
 		$search_key = $name;
-		if(strchr($name,'.')){
+		/*if(strchr($name,'.')){
 			$domain = daocall('vhostinfo','findDomain',array($name));
 			if($domain){
 				$search_key = $domain['user'];
 			}
-		}
+		}*/
 		$page = intval($_REQUEST['page']);
 		if($page<=0){
 			$page = 1;
