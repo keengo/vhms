@@ -5,7 +5,6 @@ class MproductorderControl extends Control
 	public function addMproductorderFrom()
 	{
 		if($_REQUEST['id']) {
-			
 			$mproductorder = daocall('mproductorder','getMproductorder',array(intval($_REQUEST['id'])));
 			$this->_tpl->assign('mproductorder',$mproductorder);
 			$this->_tpl->assign('edit',1);
@@ -14,12 +13,19 @@ class MproductorderControl extends Control
 	}
 	public function addMproductorder()
 	{
-		$result = daocall('mproductorder','add',array($_REQUEST));
+		$arr=$_REQUEST;
+		if($arr['month'] < 0) {
+			exit('失败，月份错误');
+		}
+		//传入状态1表示已开通。
+		$arr['status'] = 1;
+		$result = daocall('mproductorder','add',array($arr));
 		if(!$result) {
-			$this->_tpl->assign('msg','增加失败');
+			$this->_tpl->assign('msg','订单'.$arr['id'].'开通失败');
 			return $this->_tpl->fetch('msg.html');
 		}
-		return $this->pageListMproductorder();
+		$this->_tpl->assign('msg','订单'.$arr['id'].'开通成功');
+		return $this->_tpl->fetch('msg.html');
 	}
 	public function delMproductorder()
 	{
@@ -39,7 +45,20 @@ class MproductorderControl extends Control
 		$page_count = 20;
 		$count = 0;
 		$order = $_REQUEST['order'] or 'id';//排序字段
+		
 		$list = daocall('mproductorder','pageList',array($page,$page_count,&$count,$order));
+		//获取产品信息
+		$mproducts = daocall('mproduct','getMproductById',array());
+		//将product_id替换为product_name显示
+		if(is_array($list) && is_array($mproducts)) {
+			for($i=0;$i<count($list);$i++) {
+				foreach($mproducts as $mproduct) {
+					if($list[$i]['product_id'] == $mproduct['id']) {
+						$list[$i]['product_name'] = $mproduct['name'];
+					}
+				}
+			}
+		}
 		$total_page = ceil($count/$page_count);
 		if($page>=$total_page){
 			$page = $total_page;

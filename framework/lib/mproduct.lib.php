@@ -57,9 +57,6 @@ class MProduct extends Product
 	 */
 	protected  function create($susername,&$params=array(),$product_info=array())
 	{
-//		echo "<br>";
-//		print_r($params);
-//		echo "<br>";
 		$arr['username'] = $susername;
 		$arr['product_id'] = $params['product_id'];
 		$arr['client_msg'] = $params['client_msg'];

@@ -38,9 +38,9 @@
 					</td>
 					<td class="right_2">{{$row.id}}</td>
 					<td class="right_2">{{$row.username}}</td>
-					<td class="right_2">{{$row.product_id}}</td>
+					<td class="right_2">{{$row.product_name}}</td>
 					<td class="right_2">{{$row.create_time}}</td>
-					<td class="right_2">{{$row.status}}</td>
+					<td class="right_2">{{if $row.status==0}}<a href="?c=mproductorder&a=addMproductorderFrom&id={{$row.id}}">等待管理员开通</a>{{else}}已开通{{/if}}</td>
 					</tr>
 					{{/foreach}}
 					

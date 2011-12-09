@@ -14,46 +14,47 @@
 				
 				
 				<tr>
-					<td class="td_bgc right_2">我的补充说明：</td>
+					<td class="td_bgc right_2">附注：</td>
 					<td class="td_bgc right_2">{{$mproductorder.client_msg}}
 					</td>
 				</tr>
 				
 				{{if $mproductorder.admin_msg}}
 				<tr>
-					<td class="td_bgc right_2">管理员回复：</td>
+					<td class="td_bgc right_2">信息：</td>
 					<td class="td_bgc right_2">{{$mproductorder.admin_msg}}</td>
 				</tr>
 				{{/if}}
 				
+			<!-- 
 				<tr>
 					<td class="td_bgc right_2">购买时间：</td>
-					<td class="td_bgc right_2">{{$mproductorder.last_month}}个月</td>
+					<td class="td_bgc right_2">{{$mproductorder.month}}个月</td>
 				</tr>
 				
 				
 				<tr>
 					<td class="td_bgc right_2">金额：</td>
-					<td class="td_bgc right_2">{{$mproductorder.last_price}}元</td>
+					<td class="td_bgc right_2">{{$mproductorder.price}}元</td>
 				</tr>
-				
+			 -->	
 				
 				{{if $mproductorder.create_time}}
 				<tr>
-					<td class="td_bgc right_2">订单提交时间：</td>
+					<td class="td_bgc right_2">提交时间：</td>
 					<td class="td_bgc right_2">{{$mproductorder.create_time}}</td>
 				</tr>
 				{{/if}}
 				
 				{{if $mproductorder.expire_time}}
 				<tr>
-					<td class="td_bgc right_2">订单过期时间：</td>
+					<td class="td_bgc right_2">过期时间：</td>
 					<td class="td_bgc right_2">{{$mproductorder.expire_time}}</td>
 				</tr>
 				{{/if}}
 				{{if $mproductorder.status}}
 				<tr>
-					<td class="td_bgc right_2">订单状态：</td>
+					<td class="td_bgc right_2">状态：</td>
 					<td class="td_bgc right_2">{{$mproductorder.status}}</td>
 				</tr>
 				{{/if}}

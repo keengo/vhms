@@ -14,61 +14,50 @@
 				
 				<tr>
 					<td class="td_bgc right_2">用户名：</td>
-					<td class="td_bgc right_2"><input name='username' type='text'  value="{{$mproductorder.username}}" size="71">
+					<td class="td_bgc right_2">{{$mproductorder.username}}</td>
+				</tr>
+				
+				<tr>
+					<td class="td_bgc right_2">附注：</td>
+					<td class="td_bgc right_2">{{$mproductorder.client_msg}}</td>
+				</tr>
+				
+				<tr>
+					<td class="td_bgc right_2">回复：</td>
+					<td class="td_bgc right_2">
+					<textarea name='admin_msg' cols='70' rows='5'>{{$mproductorder.admin_msg}}</textarea>
 					</td>
 				</tr>
 				
 				<tr>
-					<td class="td_bgc right_2">产品组名称：</td>
-					<td class="td_bgc right_2"><input name='product_id' type='text'  value="{{$mproductorder.product_id}}" size="71">
-					</td>
-				</tr>
-				
-				<tr>
-					<td class="td_bgc right_2">客户订单信息：</td>
-					<td class="td_bgc right_2"><input name='client_msg' type='text'  value="{{$mproductorder.client_msg}}" size="71">
-					</td>
-				</tr>
-				
-				<tr>
-					<td class="td_bgc right_2">管理员回复：</td>
-					<td class="td_bgc right_2"><input name='admin_msg' type='text'  value="{{$mproductorder.admin_msg}}" size="71">
-					</td>
-				</tr>
-				
-				<tr>
-					<td class="td_bgc right_2">管理员备注：</td>
+					<td class="td_bgc right_2">备注：</td>
 					<td class="td_bgc right_2"><input name='admin_mem' type='text'  value="{{$mproductorder.admin_mem}}" size="71">
 					</td>
 				</tr>
 				
 				<tr>
-					<td class="td_bgc right_2">最终价格：</td>
-					<td class="td_bgc right_2"><input name='last_price' type='text'  value="{{$mproductorder.last_price}}" size="71">
-					</td>
+					<td class="td_bgc right_2">金额：(元)</td>
+					<td class="td_bgc right_2">{{$mproductorder.price}}</td>
 				</tr>
 				
 				<tr>
-					<td class="td_bgc right_2">最终月份：</td>
-					<td class="td_bgc right_2"><input name='last_month' type='text'  value="{{$mproductorder.last_month}}" size="71">
-					</td>
+					<td class="td_bgc right_2">购买时限：</td>
+					<td class="td_bgc right_2">{{$mproductorder.month}}个月</td>
 				</tr>
 				
 				<tr>
-					<td class="td_bgc right_2">订单提交时间：</td>
+					<td class="td_bgc right_2">申请时间：</td>
 					<td class="td_bgc right_2">{{$mproductorder.create_time}}</td>
 				</tr>
 				
 				<tr>
-					<td class="td_bgc right_2">订单过期时间：</td>
-					<td class="td_bgc right_2"><input name='expire_time' type='text'  value="{{$mproductorder.expire_time}}" size="71">
-					</td>
+					<td class="td_bgc right_2">过期时间：</td>
+					<td class="td_bgc right_2">{{$mproductorder.expire_time}}</td>
 				</tr>
 				
 				<tr>
-					<td class="td_bgc right_2">订单状态：</td>
-					<td class="td_bgc right_2"><input name='status' type='text'  value="{{$mproductorder.status}}" size="71">
-					</td>
+					<td class="td_bgc right_2">状态：</td>
+					<td class="td_bgc right_2">{{$mproductorder.status}}</td>
 				</tr>
 				
 				

@@ -24,9 +24,9 @@
 					<tr id="ttitle">
 					<td class="right_2">操作</td>	
 					<td class="right_2"><a href='?c=user&a=pageListMyMproductorder&order=id'>订单ID</a></td>
-					<td class="right_2"><a href='?c=user&a=pageListMyMproductorder&order=month'>购买期限</a></td>
 					<td class="right_2"><a href='?c=user&a=pageListMyMproductorder&order=product_id'>产品名称</a></td>
 					<td class="right_2"><a href='?c=user&a=pageListMyMproductorder&order=create_time'>提交时间</a></td>
+					<td class="right_2"><a href='?c=user&a=pageListMyMproductorder&order=expire_time'>过期时间</a></td>
 					<td class="right_2"><a href='?c=user&a=pageListMyMproductorder&order=status'>状态</a></td>
 					</tr>
 					
@@ -36,9 +36,9 @@
 						[<a href="?c=user&a=showMproductorder&id={{$row.id}}" >查看详情</a>]
 					</td>
 					<td class="right_2">{{$row.id}}</td>
-					<td class="right_2">{{$row.month}}个月</td>
 					<td class="right_2">{{$row.product_name}}</td>
 					<td class="right_2">{{$row.create_time}}</td>
+					<td class="right_2">{{$row.expire_time}}</td>
 					<td class="right_2">{{if $row.status==0}}申请中{{else}}订单已完成{{/if}}</td>
 					</tr>
 					{{/foreach}}

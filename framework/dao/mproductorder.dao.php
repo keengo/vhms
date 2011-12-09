@@ -34,6 +34,7 @@ class MproductorderDAO extends DAO
 	 */
 	public function add($attr)
 	{
+		print_r($attr);
 		$arr['username'] = $attr['username'];
 		
 		$arr['client_msg'] = $attr['client_msg'];
@@ -51,7 +52,7 @@ class MproductorderDAO extends DAO
 		$arr['price'] = $attr['price'];
 		$arr['month'] = $attr['month'];
 		$arr['create_time'] = 'NOW()';
-		$arr['expire_time'] = time()+$attr['last_month']*2592000;
+		$arr['expire_time'] = 'ADDDATE(NOW(),INTERVAL '.$attr['month'].' MONTH)';
 		$arr['status'] = $attr['status'] or 0;
 		if($attr['id']) {
 			return $this->update($arr, $this->getFieldValue2('id', $attr['id']));
