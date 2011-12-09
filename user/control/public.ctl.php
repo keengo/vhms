@@ -40,12 +40,12 @@ class PublicControl extends  Control
 		array('首页','/'),
 		array('虚拟主机','?c=host&a=index')
 		);
-//		$mproduct_group = daocall('mproductgroup','getMproductgroup',array());
-//		if(is_array($mproduct_group)){
-//			foreach($mproduct_group as $mproduct) {
-//				$menus[]=array($mproduct['name'],'?c=mproduct&a=index');
-//			}
-//		}
+		$mproduct_group = daocall('mproductgroup','getMproductgroup',array());
+		if(is_array($mproduct_group)){
+			foreach($mproduct_group as $mproduct) {
+				$menus[]=array($mproduct['name'],'?c=mproduct&a=index');
+			}
+		}
 		$menus[]=array('会员中心','?c=user&a=index');
 		$menus[]=array('联系我们','?c=public&a=contact');
 		$menus[]=array('使用帮助','?c=help&a=index');

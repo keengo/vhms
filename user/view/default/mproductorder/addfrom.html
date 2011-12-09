@@ -1,28 +1,18 @@
 {{include file='common/head.html'}}
 <body leftmargin="0" topmargin="0" bgcolor="#ffffff" text="#000000">
+
+
 <div align="center">
-	<form name='nodeform' action="?c=user&a=addMproductorder&id={{$id}}" method="post">
-		<div class="head_block tb_wid2">&nbsp;{{if $edit}}修改订单{{else}}增加订单{{/if}}</div>
+	<form name='nodeform' action="?c=user&a=addMproductorder&product_id={{$id}}" method="post">
+		<div class="head_block tb_wid2">&nbsp;申请订单</div>
 		<div class="block tb_wid2">
 			<table id="table_2" cellpadding="0" cellspacing="1">
-				{{if !$edit}}
-				<tr>
-					<td class="td_bgc right_2">产品选择：</td>
-					<td class="td_bgc right_2">
-						<select name='product_id'>
-							{{for $i=0;$i< count($mproduct);$i++}}
-							<option value="{{$mproduct[$i].id}}">{{$mproduct[$i].name}}</option>
-							{{/for}}
-						</select>
-					</td>
-				</tr>
-				{{else}}
+			
 				<tr>
 					<td class="td_bgc right_2">产品名称：</td>
-					<td class="td_bgc right_2">{{$mproductorder[0].product_name}}
+					<td class="td_bgc right_2">{{$product_name}}
 					</td>
 				</tr>
-				{{/if}}
 				
 				
 				<tr>
@@ -32,51 +22,17 @@
 					</td>
 				</tr>
 				
-				{{if $mproductorder[0].admin_msg}}
-				<tr>
-					<td class="td_bgc right_2">管理员回复：</td>
-					<td class="td_bgc right_2">{{$mproductorder[0].admin_msg}}
-					</td>
-				</tr>
-				{{/if}}
 				
 				<tr>
-					<td class="td_bgc right_2">购买时间：</td>
+					<td class="td_bgc right_2">购买时限：</td>
 					<td class="td_bgc right_2">
-						<select name='last_month'>
 						{{for $i=0;$i< count($months);$i++}}
-						<option value="{{$months[$i][0]}}" {{if $mproductorder[0].last_month==$months[$i][0]}}selected{{/if}}>{{$months[$i][1]}}</option>
+						<input type='radio' name="last_month" value="{{$months[$i][0]}}" {{if $months[$i][0]==12}}checked{{/if}} >{{$months[$i][1]}}&nbsp;{{substr($months[$i][2],0,6)}}元
+						<input type='hidden' name='last_price' value="{{$months[$i][2]}}">
 						{{/for}}
-						</select>
 					</td>
 				</tr>
 				
-				
-				<tr>
-					<td class="td_bgc right_2">所需金额：</td>
-					<td class="td_bgc right_2">{{$last_price}}</td>
-				</tr>
-				
-				
-				{{if $mproductorder[0].create_time}}
-				<tr>
-					<td class="td_bgc right_2">订单提交时间：</td>
-					<td class="td_bgc right_2">{{$mproductorder[0].create_time}}</td>
-				</tr>
-				{{/if}}
-				
-				{{if $mproductorder[0].expire_time}}
-				<tr>
-					<td class="td_bgc right_2">订单过期时间：</td>
-					<td class="td_bgc right_2">{{$mproductorder[0].expire_time}}</td>
-				</tr>
-				{{/if}}
-				{{if $mproductorder[0].status}}
-				<tr>
-					<td class="td_bgc right_2">订单状态：</td>
-					<td class="td_bgc right_2">{{$mproductorder[0].status}}</td>
-				</tr>
-				{{/if}}
 				
 				<tr>
 					<td class="td_bgc td_hg" colspan="2" align="center"><input type="submit" value="确认提交"></td>
