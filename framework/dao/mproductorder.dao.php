@@ -70,10 +70,12 @@ class MproductorderDAO extends DAO
 	public function getMproductorder($id=null)
 	{
 		$where ="";
+		$type='rows';
 		if($id != null) {
 			$where = $this->getFieldValue2('id', $id);
+			$type='row';
 		}
-		return $this->select(null,$where);
+		return $this->select(null,$where,$type);
 	}
 	public function pageList($page,$page_count,&$count,$order,$selectwhere=null)
 	{

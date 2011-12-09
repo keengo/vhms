@@ -8,53 +8,53 @@
 			
 				<tr>
 					<td class="td_bgc right_2">产品名称：</td>
-					<td class="td_bgc right_2">{{$mproductorder[0].product_name}}
+					<td class="td_bgc right_2">{{$mproductorder.product_name}}
 					</td>
 				</tr>
 				
 				
 				<tr>
 					<td class="td_bgc right_2">我的补充说明：</td>
-					<td class="td_bgc right_2">{{$mproductorder[0].client_msg}}
+					<td class="td_bgc right_2">{{$mproductorder.client_msg}}
 					</td>
 				</tr>
 				
-				{{if $mproductorder[0].admin_msg}}
+				{{if $mproductorder.admin_msg}}
 				<tr>
 					<td class="td_bgc right_2">管理员回复：</td>
-					<td class="td_bgc right_2">{{$mproductorder[0].admin_msg}}</td>
+					<td class="td_bgc right_2">{{$mproductorder.admin_msg}}</td>
 				</tr>
 				{{/if}}
 				
 				<tr>
 					<td class="td_bgc right_2">购买时间：</td>
-					<td class="td_bgc right_2">{{$mproductorder[0].last_month}}个月</td>
+					<td class="td_bgc right_2">{{$mproductorder.last_month}}个月</td>
 				</tr>
 				
 				
 				<tr>
 					<td class="td_bgc right_2">金额：</td>
-					<td class="td_bgc right_2">{{$mproductorder[0].last_price}}元</td>
+					<td class="td_bgc right_2">{{$mproductorder.last_price}}元</td>
 				</tr>
 				
 				
-				{{if $mproductorder[0].create_time}}
+				{{if $mproductorder.create_time}}
 				<tr>
 					<td class="td_bgc right_2">订单提交时间：</td>
-					<td class="td_bgc right_2">{{$mproductorder[0].create_time}}</td>
+					<td class="td_bgc right_2">{{$mproductorder.create_time}}</td>
 				</tr>
 				{{/if}}
 				
-				{{if $mproductorder[0].expire_time}}
+				{{if $mproductorder.expire_time}}
 				<tr>
 					<td class="td_bgc right_2">订单过期时间：</td>
-					<td class="td_bgc right_2">{{$mproductorder[0].expire_time}}</td>
+					<td class="td_bgc right_2">{{$mproductorder.expire_time}}</td>
 				</tr>
 				{{/if}}
-				{{if $mproductorder[0].status}}
+				{{if $mproductorder.status}}
 				<tr>
 					<td class="td_bgc right_2">订单状态：</td>
-					<td class="td_bgc right_2">{{$mproductorder[0].status}}</td>
+					<td class="td_bgc right_2">{{$mproductorder.status}}</td>
 				</tr>
 				{{/if}}
 				

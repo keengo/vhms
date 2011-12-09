@@ -34,10 +34,12 @@ class MproductDAO extends DAO
 	public function getMproductById($id=null)
 	{
 		$where = "";
+		$type = 'rows';
 		if($id != null) {
 			$where = $this->getFieldValue2('id', $id);
+			$type = 'row';
 		}
-		return $this->select(null,$where);
+		return $this->select(null,$where,$type);
 	}
 	public function add($arr)
 	{

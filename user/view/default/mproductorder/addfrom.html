@@ -18,7 +18,7 @@
 				<tr>
 					<td class="td_bgc right_2">我的补充说明：</td>
 					<td class="td_bgc right_2">
-						<textarea name='client_msg' cols='40' rows='5'>{{$mproductorder[0].client_msg}}</textarea>
+						<textarea name='client_msg' cols='40' rows='5'>{{$mproductorder.client_msg}}</textarea>
 					</td>
 				</tr>
 				
@@ -27,8 +27,7 @@
 					<td class="td_bgc right_2">购买时限：</td>
 					<td class="td_bgc right_2">
 						{{for $i=0;$i< count($months);$i++}}
-						<input type='radio' name="last_month" value="{{$months[$i][0]}}" {{if $months[$i][0]==12}}checked{{/if}} >{{$months[$i][1]}}&nbsp;{{substr($months[$i][2],0,6)}}元
-						<input type='hidden' name='last_price' value="{{$months[$i][2]}}">
+						<input type='radio' name="last_month" value="{{$months[$i][0]}}"  >{{$months[$i][1]}}&nbsp;{{substr($months[$i][2],0,6)}}元
 						{{/for}}
 					</td>
 				</tr>

@@ -99,9 +99,9 @@ class UserControl extends Control {
 		}
 		$mproductorder = daocall('mproductorder','getMproductorder',array($id));
 			
-		$mproduct = daocall('mproduct','getMproductById',array($mproductorder[0]['product_id ']));
-		$mproductorder[0]['product_name'] = $mproduct[0]['name'];
-			
+		$mproduct = daocall('mproduct','getMproductById',array($mproductorder['product_id']));
+		$mproductorder['product_name'] = $mproduct['name'];
+		
 		$this->_tpl->assign('mproductorder',$mproductorder);
 		return $this->_tpl->fetch('mproductorder/showmproductorder.html');
 
@@ -117,7 +117,7 @@ class UserControl extends Control {
 		$mproduct_id = $_REQUEST['mproduct_id'];
 		//获取产品信息,得到价格
 		$mproduct = daocall('mproduct','getMproductById',array($mproduct_id));
-		$month_price = $mproduct[0]['price']/12/100;
+		$month_price = $mproduct['price']/12/100;
 		$months = array(
 						array('1','一个月'),
 						array('12','一年'),
@@ -128,7 +128,7 @@ class UserControl extends Control {
 		$months[1][2] = $month_price*$months[1][0];
 		$months[2][2] = $month_price*$months[2][0];
 	
-		$this->_tpl->assign('product_name',$mproduct[0]['name']);
+		$this->_tpl->assign('product_name',$mproduct['name']);
 		$this->_tpl->assign('id',$mproduct_id);
 		$this->_tpl->assign('months',$months);
 		return $this->_tpl->fetch('mproductorder/addfrom.html');
@@ -142,12 +142,12 @@ class UserControl extends Control {
 		$arr['username'] = getRole('user');
 		if($_REQUEST['product_id']) {
 			$mproductorder = daocall('mproductorder','getMproductorder',array(intval($_REQUEST['product_id'])));
-			if($mproductorder[0]['status']!=0) {
+			if($mproductorder['status']!=0) {
 				$this->_tpl->assign('msg',"订单已完成");
 				return $this->_tpl->fetch('msg.html');
 			}
 		}
-		print_r($_REQUEST);
+		
 		$result = daocall('mproductorder','add',array($arr));
 		if (!$result) {
 			$this->_tpl->assign('msg','申请订单失败，请联系管理员');
