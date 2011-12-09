@@ -15,7 +15,11 @@ class ProductAPI extends API
 	}
 	protected function getVhostProducts(&$products)
 	{
-		$products[]=array('name'=>'--虚拟主机产品--','type'=>'','id'=>0);
+		$vhost_name = $GLOBALS['setting_cfg']['vhost_name']['value'];
+		if(!$vhost_name){
+			$vhost_name = "虚拟主机";
+		}
+		$products[]=array('name'=>'--'.$vhost_name.'--','type'=>'','id'=>0);
 		$data = daocall('vhostproduct', 'getSellProducts', null);
 		for($i=0;$i<count($data);$i++){
 			$products[] = array('name'=>$data[$i]['name'],'type'=>'vhost','id'=>$data[$i]['id']);

@@ -30,6 +30,8 @@ if($c=='frame' && $a=='index'){
 	$tpl->assign("fc",$fc);
 	$tpl->assign("fa",$fa);
 }
+@load_conf('pub:setting');
+$tpl->assign('setting',$GLOBALS['setting_cfg']);
 $main = dispatch($c,$a);
 //startFramework();
 $tpl->assign("title",getTitle());
