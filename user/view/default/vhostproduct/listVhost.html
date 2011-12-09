@@ -4,7 +4,7 @@
 		<table cellpadding="0" cellspacing="0" class="wid_rr">
 			<form name='form1' action='?c=vhostproduct&a=pageVhostByuser' method='post'>
 			<tr><td>
-				用户名或域名:<input type='text' name='name' value='{{$name}}'><input type='submit' value='搜索'>
+				用户名:<input type='text' name='name' value='{{$name}}'><input type='submit' value='搜索'>
 			</td><td align='right'>
 				{{if $page>1}}
 				<a href='?c=vhostproduct&a=pageVhostByuser&page=0'>首页</a> 
@@ -26,27 +26,28 @@
 	<table id="table_ri" cellpadding="0" cellspacing="1">
 				<tr>
 					<td>操作</td>
-					<td>空间名</td>
-					<td>uid</td>
+					<td>用户名</td>
 					<td>产品</td>
 					<td>服务器</td>
 					<td>注册时间</td>
 					<td>过期时间</td>
-					<td>空间状态</td>
+					<td>状态</td>
 					</tr>
 					{{foreach from=$list item=row}}
 				<tr>
 				   <td class="right"> 
 					[<a href="?c=vhostproduct&a=upgradeForm&name={{$row.name}}" >升级</a>]
 					[<a href="?c=vhostproduct&a=renewForm&name={{$row.name}}" >续费</a>]
-					[<a href="?c=vhostproduct&a=impLogin&name={{$row.name}}" target="_blank" >控制面板</a>]</td>
+					<!-- [<a href="?c=vhostproduct&a=impLogin&name={{$row.name}}" target="_blank" >控制面板</a>]
+					-->
+					</td> 
 					<td><a href='?c=vhostproduct&a=impLogin&name={{$row.name}}' target="_blank">{{$row.name}}</a></td>
-					<td>{{$row.uid}}</td>
+					
 					<td>{{$row.product_name}}</td>
 					<td>{{$row.node}}</td>
 					<td>{{$row.create_time}}</td>
 					<td>{{$row.expire_time}}</td>
-					<td title='{{$row.status}}'>{{if $row.status==0}}正常{{else}}<font color='red'>非正常</font>{{/if}}</td>
+					<td title='{{$row.status}}'>{{if $row.status==0}}正常{{else}}<font color='red'>暂停</font>{{/if}}</td>
 					</tr>
 					{{/foreach}}
 		  </table>

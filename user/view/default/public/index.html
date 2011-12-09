@@ -4,7 +4,7 @@
 		 	  	<!--幻灯片开始-->
 			<div class="right_main">
 				<div class="left_box right_top right_wid2">
-					<table border="0" cellpadding="0" cellspacing="0" width="260">
+					<table border="0" cellpadding="0" cellspacing="0">
 						<tr>
 							<td valign="top">
 								<div class="picshow_main" style="z-index:10">
@@ -51,12 +51,7 @@
 			<div class="left_box Left_main_vh2 right_main">
 			<table id="table_rr" cellpadding="0" cellspacing="0">
 				<tr>
-					<td colspan="2" align="center" class="right_hg3 color_orange right_hg3" background="{{$STATIC}}images/r_zj_228.jpg">
-						<b>双线主机</b>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2" align="center" class="right_hg3 color_orange right_hg3"  background="{{$STATIC}}images/r_zj_229.jpg">
+					<td colspan="2" align="center" class="right_hg3 color_orange right_hg3"  background="{{$STATIC}}images/r_zj_228.jpg">
 						<b>{{if $products[$i].name}}{{$products[$i].name}}{{else}}暂无{{/if}}</b>
 					</td>
 			  </tr>
@@ -70,7 +65,7 @@
 			  <tr>
 				<td class="right_h">价格：<span class="color_red"><b>{{$products[$i].price/100}}</b></span>元/年</td>
 			  </tr>
-			  <tr><td class="right_r" colspan="2">
+			  <tr><td class="right_r right_hg3" colspan="2">
 				<a href="?c=product&a=sellForm&product=vhost_{{$products[$i].id}}">
 				<img src="{{$STATIC}}images/r_btn01.jpg" border="0"/></a>&nbsp;&nbsp;
 				<a href="?c=host&a=showProductFrom&product_id={{$products[$i].id}}"><img src="{{$STATIC}}images/r_btn02.jpg" border="0"/></a></td>

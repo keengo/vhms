@@ -109,6 +109,27 @@ function changeNode()
 			value="{{intval($vhostproduct.upid)}}" size="3">(可升级到相同产品组的其它产品，设置为0不可升级)</td>
 	</tr>
 	<tr>
+		<td class="td_bgc right_2">类型：</td>
+		<td class="td_bgc right_2 tb_wid2">
+		<script language='javascript'>
+			function change_cdn(val)
+			{
+				if(val==0){
+					$('cdn').style.display='';
+				} else {
+					$('cdn').style.display='none';
+				}
+			}
+			
+		</script>
+		<input name='cdn' type='radio'	value="0" {{if !$vhostproduct || $vhostproduct.cdn==0}} checked {{/if}} onClick="change_cdn(0)">虚拟主机
+		<input name='cdn' type='radio'	value="1" {{if $vhostproduct.cdn==1}} checked {{/if}} onClick="change_cdn(1)">cdn
+	</td>
+	</tr>
+	<tr><td colspan='2'>
+	<div id='cdn' style='display:{{if $vhostproduct.cdn==1}}none{{/if}}'>
+	<table width=100% border=0>	
+	<tr>
 		<td class="td_bgc right_2">空间大小(M)：</td>
 		<td class="td_bgc right_2"><input name="web_quota" type="text"
 			id='tb_wid3' value="{{$vhostproduct.web_quota}}" size="16"></td>
@@ -118,34 +139,7 @@ function changeNode()
 		<td class="td_bgc right_2"><input name="db_quota" type="text"
 			id='tb_wid3' value="{{$vhostproduct.db_quota}}"></td>
 	</tr>
-	<tr>
-		<td class="td_bgc right_2">价格(元/年)</td>
-		<td class="td_bgc right_2"><input name="price" type="text" id='tb_wid3'
-			value="{{$vhostproduct.price/100}}"></td>
-	</tr>
-	
-
-	<tr>
-		<td class="td_bgc right_2">代理价格</td>
-		<td class="td_bgc right_2">
-
-		{{for $i=0;$i< count($agent_ids);$i++}}
-		
-		{{$agent_ids[$i].name}}:
-		<input name="agentprice_{{$agent_ids[$i].id}}" type="text" id='tb_wid3' value="{{$agent_ids[$i].price/100}}" style="width:45px" />
-		
-		{{/for}}
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td class="td_bgc right_2">域名绑定个数(-1表示无限)</td>
-		<td class="td_bgc right_2"><input name="domain" type="text" id='tb_wid3'
-			value="{{if $vhostproduct}}{{$vhostproduct.domain}}{{else}}-1{{/if}}"></td>
-	</tr>
-	<tr>
+		<tr>
 		<td class="td_bgc right_2">绑定子目录</td>
 		<td class="td_bgc right_2"><input type='checkbox' name='subdir_flag' value='1' {{if $vhostproduct.subdir_flag}}checked{{/if}}>允许绑定子目录
 		</td>
@@ -155,8 +149,6 @@ function changeNode()
 		<td class="td_bgc right_2"><input name="subdir" type="text" id='tb_wid3'
 			value="{{$vhostproduct.subdir}}" size="16"></td>
 	</tr>
-
-
 	<tr>
 		<td class="td_bgc right_2">模板</td>
 		<td class="td_bgc right_2">
@@ -176,6 +168,40 @@ function changeNode()
 			<input type='radio' name="cs" value="2" {{if !$vhostproduct || $vhostproduct.cs==2}}checked{{/if}} size="16">购买时切换
 		</td>
 	</tr>
+	</table>
+	</div>
+	</td></tr>
+	<tr>
+		<td class="td_bgc right_2">价格(元/年)</td>
+		<td class="td_bgc right_2"><input name="price" type="text" id='tb_wid3'
+			value="{{$vhostproduct.price/100}}"></td>
+	</tr>
+	
+	{{if count($agent_ids)>0}}
+	<tr>
+		<td class="td_bgc right_2">代理价格</td>
+		<td class="td_bgc right_2">
+
+		{{for $i=0;$i< count($agent_ids);$i++}}
+		
+		{{$agent_ids[$i].name}}:
+		<input name="agentprice_{{$agent_ids[$i].id}}" type="text" id='tb_wid3' value="{{$agent_ids[$i].price/100}}" style="width:45px" />
+		
+		{{/for}}
+		</td>
+	</tr>
+	{{/if}}
+	
+	
+	<tr>
+		<td class="td_bgc right_2">域名绑定个数(-1表示无限)</td>
+		<td class="td_bgc right_2"><input name="domain" type="text" id='tb_wid3'
+			value="{{if $vhostproduct}}{{$vhostproduct.domain}}{{else}}-1{{/if}}"></td>
+	</tr>
+
+
+
+	
 	<tr>
 		<td class="td_bgc right_2">最大连接数(0无限)</td>
 		<td class="td_bgc right_2"><input name="max_connect" type="text"

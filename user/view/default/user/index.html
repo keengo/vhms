@@ -29,12 +29,12 @@
 	        <td>电子邮件</td>
 	        <td>{{$user.email}}</td>
 		  	</tr>
-		  
+		  {{if $user.agent_id>0}}
 		  	<tr>
 	        <td>您的代理级别</td>
-	        <td>{{if $user.agent_id>0}}{{$user.agent_name}}{{else}}无{{/if}}</td>
+	        <td>{{$user.agent_name}}</td>
 		 	</tr>
-		  
+		 {{/if}}
 		  	<tr>
 	        <td>账户余额(元)</td>
 	 		<td> {{$user.money/100}} &nbsp;[<a href="?c=money&a=addFrom" target="{{$target}}">在线充值</a>]</td>
