@@ -239,9 +239,11 @@ abstract class Product
 			return false;
 		}
 		$month = $suser['month'];
+		//print_r($suser);
+		echo "<br>";
+	
 		
 		$info = $this->getInfo($product_id);
-		
 		if(!$info){
 			trigger_error('产品错误');
 			return false;

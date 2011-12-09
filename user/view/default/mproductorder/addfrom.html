@@ -27,7 +27,7 @@
 					<td class="td_bgc right_2">购买时限：</td>
 					<td class="td_bgc right_2">
 						{{for $i=0;$i< count($months);$i++}}
-						<input type='radio' name="last_month" value="{{$months[$i][0]}}"  >{{$months[$i][1]}}&nbsp;{{substr($months[$i][2],0,6)}}元
+						<input type='radio' name="month" value="{{$months[$i][0]}}"  >{{$months[$i][1]}}&nbsp;{{substr($months[$i][2],0,6)}}元
 						{{/for}}
 					</td>
 				</tr>

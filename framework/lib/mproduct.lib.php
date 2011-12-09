@@ -16,7 +16,7 @@ class MProduct extends Product
 	 * 条件 product_id
 	 * @param unknown_type $product_id
 	 */
-	public function getInfo($product_id)
+	public function getInfo($product_id,$susername=null)
 	{
 		return daocall('mproduct','getMproductById',array($product_id));
 	}
@@ -24,14 +24,29 @@ class MProduct extends Product
 	
 	public function sync($username,$product_id,$arr)
 	{
-		$arr['username'] = $username;
-		$return = daocall('mproductorder','add',array($arr));
-		if ($return) {
-			
-		}
+		return true;
+	}
+	protected function resync($username,$suser,$oproduct,$nproduct=null)
+	{
+		return true;
+	}
+	protected function addMonth($susername, $month)
+	{
+		return true;
+	}
+	protected function changeProduct($susername, $product)
+	{
+		return true;
+	}
+	public function getSuser($susername)
+	{
+		return true;
 	}
 	
-	
+	public function checkParam($username,$suser)
+	{
+		return true;
+	}
 	/**
 	 * 插入订单数据库
 	 * 1.username
@@ -40,8 +55,11 @@ class MProduct extends Product
 	 * Enter description here ...
 	 * @param $username
 	 */
-	public  function create($susername,&$params=array(),$product_info=array())
+	protected  function create($susername,&$params=array(),$product_info=array())
 	{
+//		echo "<br>";
+//		print_r($params);
+//		echo "<br>";
 		$arr['username'] = $susername;
 		$arr['product_id'] = $params['product_id'];
 		$arr['client_msg'] = $params['client_msg'];
@@ -57,24 +75,12 @@ class MProduct extends Product
 		if($params['status']) {
 			$arr['status'] = $params['status'];
 		}
-		if($params['last_month']) {
-			$arr['last_month'] = $params['last_month'];
-			$arr['last_price'] = $params['month']*$month_price;
+		if($params['month']) {
+			$arr['month'] = $params['month'];
+			$arr['price'] = $params['month']*$month_price;
 		}
 		return daocall('mproductorder','add',array($arr));
 	}
-	/**
-	 * 执行一些后续操作。
-	 * 写购买记录
-	 * @see framework/lib/Product::sync()
-	 */
-	public function sync($user,$params,$product_info)
-	{
-		
-	}
-
-
-
 
 
 }

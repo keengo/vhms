@@ -11,8 +11,8 @@ class MproductorderDAO extends DAO
 			'client_msg' => 'client_msg',
 			'admin_msg' => 'admin_msg',
 			'admin_mem' => 'admin_mem',
-			'last_price' => 'last_price',
-			'last_month' => 'last_month',
+			'price' => 'price',
+			'month' => 'month',
 			'create_time' => 'create_time',
 			'expire_time' => 'expire_time',
 			'status' => 'status'
@@ -20,8 +20,8 @@ class MproductorderDAO extends DAO
 		$this->MAP_TYPE = array(
 			'id' => FIELD_TYPE_INT|FIELD_TYPE_AUTO,
 			'product_id' =>FIELD_TYPE_INT,
-			'last_price' =>FIELD_TYPE_INT,
-			'last_month' =>FIELD_TYPE_INT,
+			'price' =>FIELD_TYPE_INT,
+			'month' =>FIELD_TYPE_INT,
 			'status' =>FIELD_TYPE_INT,
 			'create_time' =>FIELD_TYPE_DATETIME,
 			'expire_time' =>FIELD_TYPE_DATETIME
@@ -48,8 +48,8 @@ class MproductorderDAO extends DAO
 			$arr['admin_mem'] = $attr['admin_mem'];
 		}
 		
-		$arr['last_price'] = $attr['last_price'];
-		$arr['last_month'] = $attr['last_month'];
+		$arr['price'] = $attr['price'];
+		$arr['month'] = $attr['month'];
 		$arr['create_time'] = 'NOW()';
 		$arr['expire_time'] = time()+$attr['last_month']*2592000;
 		$arr['status'] = $attr['status'] or 0;
@@ -95,8 +95,8 @@ class MproductorderDAO extends DAO
 									'client_msg',
 									'admin_msg',
 									'admin_mem',
-									'last_price',
-									'last_month',
+									'price',
+									'month',
 									'create_time',
 									'expire_time',
 									'status' 

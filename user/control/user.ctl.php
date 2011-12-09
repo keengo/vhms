@@ -147,13 +147,24 @@ class UserControl extends Control {
 				return $this->_tpl->fetch('msg.html');
 			}
 		}
+		//获取产品名称
+		$product_info = daocall('mproduct','getMproductById',array($_REQUEST['product_id']));
+		//
+		$product = apicall('product', 'newProduct',array('m'));
 		
-		$result = daocall('mproductorder','add',array($arr));
-		if (!$result) {
-			$this->_tpl->assign('msg','申请订单失败，请联系管理员');
-			return $this->_tpl->fetch('msg.html');
+		if(!is_object($product)){
+			trigger_error('没有该产品类型:m');
+			return false;
 		}
-		return $this->pageListMyMproductorder();
+		$user = getRole('user');
+		//传产品名称，用于写消费记录的购买名称识别
+		$arr['name'] = $product_info['name'];
+		
+		if(!$product->sell($user,intval($_REQUEST['product_id']),$arr)){
+			return false;
+		}
+		$this->_tpl->assign('msg','购买成功,请注意看相订单详情里的管理员回复信息');
+		return $this->_tpl->fetch('public/msg.html');
 	}
 	/**
 	 * 非自动化产品业务列表
@@ -190,6 +201,7 @@ class UserControl extends Control {
 		if($page>=$total_page){
 			$page = $total_page;
 		}
+	
 		$this->_tpl->assign('order',$order);
 		$this->_tpl->assign('count',$count);
 		$this->_tpl->assign('total_page',$total_page);
