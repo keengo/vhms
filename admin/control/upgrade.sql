@@ -30,3 +30,5 @@ CREATE TABLE IF NOT EXISTS `agent_price` (
 alter table vhost_product add column cs tinyint(4) DEFAULT '0';
 alter table vhost_product add column envs TEXT;
 alter table vhost_product add column cdn tinyint(4) DEFAULT '0';
+ALTER TABLE `nodes` ADD `nickname` VARCHAR( 255 ) NOT NULL ;
+

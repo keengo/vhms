@@ -160,7 +160,10 @@ class VhostproductControl extends Control {
 
 		$_REQUEST['price'] *= 100;
 		$_REQUEST['speed_limit']*=1024;
-		
+		if($_REQUEST['cdn']=='1'){
+			$_REQUEST['subdir_flag']=1;
+			$_REQUEST['templete']='html';
+		}
 		$product_id = daocall('vhostproduct', 'addProduct', array($_REQUEST));
 
 		$agent_id = daocall('agent','selectList',array());
@@ -182,6 +185,10 @@ class VhostproductControl extends Control {
 	{
 		$_REQUEST['price'] *= 100;
 		$_REQUEST['speed_limit'] *= 1024;
+		if($_REQUEST['cdn']=='1'){
+			$_REQUEST['subdir_flag']=1;
+			$_REQUEST['templete']='html';
+		}
 		daocall('vhostproduct', 'updateProduct', array($_REQUEST));
 		
 		$agent_id = daocall('agent','selectList',array());
@@ -195,8 +202,7 @@ class VhostproductControl extends Control {
 				$arr['price'] = ($_REQUEST['agentprice_'.$agent['id']])*100;
 				daocall('agentprice','addAgentprice',array($arr));
 			}
-		}
-		
+		}		
 		apicall('product','flushVhostProduct');
 		return $this->showProduct();
 	}

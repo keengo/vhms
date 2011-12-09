@@ -114,7 +114,8 @@ class VhostproductDAO extends DAO {
 			'log_file',
 			'speed_limit',
 			'envs',
-			'cs'
+			'cs',
+			'cdn'
 		), $arr);
 		$sql = "UPDATE ".$this->_TABLE." SET ".$fields." WHERE ".$this->getFieldValue2('id',$arr['id']);
 		return $this->executex($sql);
