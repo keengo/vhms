@@ -102,7 +102,7 @@ class MproductorderDAO extends DAO
 			$where.=$this->getFieldValue2('username', $selectwhere['username']);
 		}
 		if($selectwhere['refer']){
-			$where.=$this->getFieldValue2('group_id', $selectwhere['refer']);
+			$where.=' and'.$this->getFieldValue2('group_id', $selectwhere['refer']);
 		}
 		if($order) {
 			$order_field = $order;
