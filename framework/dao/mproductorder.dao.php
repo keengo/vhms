@@ -8,6 +8,7 @@ class MproductorderDAO extends DAO
 			'id' => 'id',
 			'username' => 'username',
 			'product_id' => 'product_id',
+			'group_id' => 'group_id',
 			'client_msg' => 'client_msg',
 			'admin_msg' => 'admin_msg',
 			'admin_mem' => 'admin_mem',
@@ -20,6 +21,7 @@ class MproductorderDAO extends DAO
 		$this->MAP_TYPE = array(
 			'id' => FIELD_TYPE_INT|FIELD_TYPE_AUTO,
 			'product_id' =>FIELD_TYPE_INT,
+			'group_id' =>FIELD_TYPE_INT,
 			'price' =>FIELD_TYPE_INT,
 			'month' =>FIELD_TYPE_INT,
 			'status' =>FIELD_TYPE_INT,
@@ -45,6 +47,9 @@ class MproductorderDAO extends DAO
 	{
 		
 		$arr['username'] = $attr['username'];
+		if($attr['group_id']){
+			$arr['group_id'] = $attr['group_id'];
+		}
 		if($attr['client_msg']) {
 			$arr['client_msg'] = $attr['client_msg'];
 		}
@@ -96,6 +101,9 @@ class MproductorderDAO extends DAO
 		if($selectwhere['username'] !=null) {
 			$where.=$this->getFieldValue2('username', $selectwhere['username']);
 		}
+		if($selectwhere['refer']){
+			$where.=$this->getFieldValue2('group_id', $selectwhere['refer']);
+		}
 		if($order) {
 			$order_field = $order;
 		}else{
@@ -105,6 +113,7 @@ class MproductorderDAO extends DAO
 		return $this->selectPage(array('id',
 									'username',
 									'product_id',
+									'group_id',
 									'client_msg',
 									'admin_msg',
 									'admin_mem',
@@ -123,13 +132,5 @@ class MproductorderDAO extends DAO
 								);
 	}
 
-
-
-
-
-
-
 }
-
-
 ?>

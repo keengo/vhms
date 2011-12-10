@@ -164,7 +164,10 @@ class MproductorderControl extends Control
 
 		//查询条件，传入数组
 		$where['username'] = getRole('user');
-
+		
+		if($_REQUEST['refer']) {
+			$where['refer'] = intval($_REQUEST['refer']);
+		}
 		$mproducts = daocall('mproduct','getMproductById',array());
 
 		$list = daocall('mproductorder','pageList',array($page,$page_count,&$count,$order,$where));

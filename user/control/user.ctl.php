@@ -52,6 +52,14 @@ class UserControl extends Control {
 		}else{
 			$this->_tpl->assign('target','_self');
 		}
+		$mproductgroups = daocall('mproductgroup','getMproductgroup',array());
+		if(is_array($mproductgroups)){
+			foreach($mproductgroups as $mproductgroup) {
+				$group[] = array($mproductgroup['name'],'?c=mproductorder&a=pageListMyMproductorder&refer='.$mproductgroup['id']); 
+				
+			}
+			$this->_tpl->assign('group',$group);
+		}
 		return $this->_tpl->fetch('user/left.html');
 	}
 	public function change()
