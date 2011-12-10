@@ -47,7 +47,7 @@ class PublicControl extends  Control
 		$mproduct_group = daocall('mproductgroup','getMproductgroup',array());
 		if(is_array($mproduct_group)){
 			foreach($mproduct_group as $mproduct) {
-				$menus[]=array($mproduct['name'],'?c=mproduct&a=index');
+				$menus[]=array($mproduct['name'],'?c=mproduct&a=index&refer='.$mproduct['id']);
 			}
 		}
 		$menus[]=array('会员中心','?c=user&a=index');

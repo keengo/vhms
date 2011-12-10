@@ -31,6 +31,10 @@ class MproductDAO extends DAO
 		);
 		$this->_TABLE = 'mproduct';
 	}
+	public function getMproductByGroupid($groupid)
+	{
+		return $this->select(null,$this->getFieldValue2('group_id', $groupid),'rows');
+	}
 	public function getMproductById($id=null)
 	{
 		$where = "";

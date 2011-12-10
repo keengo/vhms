@@ -4,13 +4,17 @@ class MproductControl extends Control
 	
 	public function left()
 	{
-		$mproducts = daocall('mproduct','getMproductById',array());
+		$refer = intval($_REQUEST['refer']) or null;
+		$mproducts = daocall('mproduct','getMproductByGroupid',array($refer));
 		$this->_tpl->assign('mproducts',$mproducts);
 		return $this->_tpl->fetch('mproduct/left.html');
 	}
 	public function index()
 	{
-		
+		$refer = $_REQUEST['refer'];
+		$mproduct = daocall('mproduct','getMproductById',array($refer));
+		$this->_tpl->assign('mproduct',$mproduct);
+		return $this->_tpl->fetch('mproduct/index.html');
 	}
 	public function showMproductFrom()
 	{
@@ -19,6 +23,5 @@ class MproductControl extends Control
 		$this->_tpl->assign('mproductinfo',$mproductinfo);
 		return $this->_tpl->fetch('mproduct/showmproduct.html');
 	}
-	
 
 }

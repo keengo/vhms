@@ -161,7 +161,6 @@ class DAO
 		if($where!=""){
 			$sql.=" WHERE ".$where;
 		}
-		echo $sql;
 		return $this->executex($sql);
 	}
 	public function insert($arr,$cmd='INSERT')

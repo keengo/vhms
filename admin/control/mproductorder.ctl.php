@@ -19,7 +19,6 @@ class MproductorderControl extends Control
 		}
 		//传入状态1表示已开通。
 		$arr['status'] = 1;
-		print_r($arr);
 		$result = daocall('mproductorder','add',array($arr));
 		if(!$result) {
 			$this->_tpl->assign('msg','订单'.$arr['id'].'开通失败');
