@@ -51,7 +51,17 @@ class MproductDAO extends DAO
 		if($arr['id']){
 			return $this->update($arr, $this->getFieldValue2('id', $arr['id']));
 		}
-		return $this->insert($arr);
+		$result = $this->insert($arr);
+		if($result){
+			try{
+				$id = $this->db->lastInsertId();
+			}catch(PDOException $e){
+				//print_r($e);
+				//todo alter use select to select id;
+			}
+			return $id;
+		}
+		return false;
 	}
 	public function del($id)
 	{

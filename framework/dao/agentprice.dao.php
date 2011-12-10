@@ -69,7 +69,7 @@ class AgentpriceDAO extends DAO
 	public function addAgentprice($attr)
 	{
 		$arr['agent_id'] = $attr['agent_id'];
-		$arr['product_type'] = $attr['ptoduct_type'];
+		$arr['product_type'] = $attr['product_type'];
 		$arr['product_id'] = $attr['product_id'];
 		$arr['price'] = $attr['price'];
 		return $this->insert($arr,'REPLACE');

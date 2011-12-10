@@ -172,7 +172,7 @@ class VhostproductControl extends Control {
 			if($_REQUEST['agentprice_'.$agent['id']])
 			{
 				$arr['agent_id'] = $agent['id'];
-				$arr['product_type'] = 0;//虚拟主机为0,域名为1
+				$arr['product_type'] = 0;//虚拟主机为0
 				$arr['product_id'] = $product_id;
 				$arr['price'] = ($_REQUEST['agentprice_'.$agent['id']])*100;
 				daocall('agentprice','addAgentprice',array($arr));

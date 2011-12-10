@@ -37,6 +37,22 @@
 					</td>
 				</tr>
 				
+				{{if count($agent_ids)>0}}
+				<tr>
+					<td class="td_bgc right_2">代理价格</td>
+					<td class="td_bgc right_2">
+					{{for $i=0;$i< count($agent_ids);$i++}}
+					
+					{{$agent_ids[$i].name}}:
+						<input name="agentprice_{{$agent_ids[$i].id}}" type="text" id='tb_wid3' value="{{$agent_ids[$i].price/100}}" style="width:45px" />
+					
+					{{/for}}
+					</td>
+				</tr>
+				{{/if}}
+	
+				
+				
 				<tr>
 					<td class="td_bgc right_2">产品详情(支持html):</td>
 					<td class="td_bgc right_2"><textarea name='describe' rows='25' cols='70'>{{$mproduct.describe}}</textarea></td>

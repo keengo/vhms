@@ -15,7 +15,7 @@ class MproductorderControl extends Control
 		$mproductorder['product_name'] = $mproduct['name'];
 
 		$months = $this->getMonthsPrice($mproductorder['product_id']);
-		print_r($months);
+		
 		$this->_tpl->assign('months',$months);
 		$this->_tpl->assign('id',$id);
 		$this->_tpl->assign('mproductorder',$mproductorder);
@@ -109,7 +109,7 @@ class MproductorderControl extends Control
 		$mproduct = daocall('mproduct','getMproductById',array($mproduct_id));
 
 		$months = $this->getMonthsPrice($mproduct_id);
-		print_r($months);
+		
 		$this->_tpl->assign('product_name',$mproduct['name']);
 		$this->_tpl->assign('id',$mproduct_id);
 		$this->_tpl->assign('months',$months);

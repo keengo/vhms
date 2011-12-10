@@ -9,17 +9,36 @@ class MproductControl extends Control
 			$this->_tpl->assign('edit','1');
 			$this->_tpl->assign('mproduct',$mproduct);
 		}
+		//传入代理,页面显示价格设置
+		$agent_ids = daocall('agent','selectList',array());
+		$this->_tpl->assign('agent_ids',$agent_ids);
+		$this->_tpl->assign("action","addProduct");
+		
 		$mproductgroup = daocall('mproductgroup','getMproductgroup',array());
 		$this->_tpl->assign('mproductgroup',$mproductgroup);
 		return $this->_tpl->display('mproduct/addfrom.html');
 	}
 	public function addMproduct()
 	{
-		$result = daocall('mproduct','add',array($_REQUEST));
-		if (!$result) {
+		$result_id = daocall('mproduct','add',array($_REQUEST));
+		if (!$result_id) {
 			$this->_tpl->assign('msg','增加失败');
 			return $this->_tpl->fetch('msg.html');
 		}
+		
+		$agent_id = daocall('agent','selectList',array());
+		foreach ($agent_id as $agent)
+		{
+			if($_REQUEST['agentprice_'.$agent['id']])
+			{
+				$arr['agent_id'] = $agent['id'];
+				$arr['product_type'] = 1;//虚拟主机为0,非自动化为1
+				$arr['product_id'] = $result_id;
+				$arr['price'] = ($_REQUEST['agentprice_'.$agent['id']])*100;
+				daocall('agentprice','addAgentprice',array($arr));
+			}
+		}
+		
 		return $this->pageListMproduct();
 	}
 	public function delMproduct()
@@ -50,6 +69,17 @@ class MproductControl extends Control
 		$count = 0;
 		$order = $_REQUEST['order'] or 'id';//排序字段
 		$list = daocall('mproduct','pageList',array($page,$page_count,&$count,$order));
+		$mproduct_group = daocall('mproductgroup','getMproductgroup',array());
+		if(is_array($list)) {
+			for($i=0;$i<count($list);$i++) {
+				foreach($mproduct_group as $mproduct) {
+					if($list[$i]['group_id'] == $mproduct['id']) {
+						$list[$i]['group_name'] = $mproduct['name'];
+					}
+				}
+			}
+		}
+			
 		$total_page = ceil($count/$page_count);
 		if($page>=$total_page){
 			$page = $total_page;
