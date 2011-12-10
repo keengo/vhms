@@ -78,7 +78,8 @@ class VhostproductDAO extends DAO {
 	}
 	public function getProductList($flag=0,$view=1)
 	{
-		return $this->select(null,$this->getFieldValue2('pause_flag', $flag)." and ".$this->getFieldValue2('view', $view));
+		return $this->getProducts(2,1);
+		//return $this->select(null,$this->getFieldValue2('pause_flag', $flag)." and ".$this->getFieldValue2('view', $view));
 	}
 	public function getProduct($id,$fields=null)
 	{
@@ -115,14 +116,15 @@ class VhostproductDAO extends DAO {
 			'speed_limit',
 			'envs',
 			'cs',
-			'cdn'
+			'cdn',
+			'view'
 		), $arr);
 		$sql = "UPDATE ".$this->_TABLE." SET ".$fields." WHERE ".$this->getFieldValue2('id',$arr['id']);
 		return $this->executex($sql);
 	}
 	public function getSellProducts()
 	{
-		$where = $this->MAP_ARR['pause_flag'].'=0';
+		$where = $this->MAP_ARR['pause_flag'].'=0 order by `view`';
 		return $this->getData2(array('id','name'),$where);
 	}
 
@@ -138,7 +140,7 @@ class VhostproductDAO extends DAO {
 		{
 			$where.= " and ".$this->MAP_ARR['view']."=".$view;
 		}else{
-			$where.= " and ".$this->MAP_ARR['view']."=1";
+			$where.= " and ".$this->MAP_ARR['view'].">0";
 		}
 		return $this->selectPage(array('id','name','web_quota','db_quota',
 										'templete','price','pause_flag',
@@ -147,7 +149,7 @@ class VhostproductDAO extends DAO {
 										'access','htaccess','log_file',
 										'speed_limit','domain','subdir',
 										'subdir_flag','upid','try_flag'),
-										 $where, 'id',false, $page, $page_count, $count);
+										 $where, 'view',false, $page, $page_count, $count);
 		
 	}
 	//代理设置新增时所用。
@@ -158,14 +160,17 @@ class VhostproductDAO extends DAO {
 	public function getProducts($flag=0,$view=0)
 	{
 		switch($flag){
+			case 0:
+				$where = "1=1 order by `view`";
+				break;
 			case 1:
-				$where = $this->MAP_ARR['pause_flag']."!=0";
+				$where = $this->MAP_ARR['pause_flag']."!=0 order by `view`";
 				break;
 			case 2:
 				if($view != 0){
-					$where = $this->MAP_ARR['pause_flag']."=0 and ".$this->MAP_ARR['view']."=".$view;
+					$where = $this->MAP_ARR['pause_flag']."=0 and ".$this->MAP_ARR['view'].">0 order by `view`";
 				}else{
-					$where = $this->MAP_ARR['pause_flag']."=0 and ".$this->MAP_ARR['view']."=0";
+					$where = $this->MAP_ARR['pause_flag']."=0 and ".$this->MAP_ARR['view']."=0 order by `view`";
 				}
 				break;
 		}

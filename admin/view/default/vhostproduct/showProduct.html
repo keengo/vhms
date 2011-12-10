@@ -87,7 +87,7 @@ function updateViewResult()
    		<table cellpadding=0 cellspacing=1 id="table">
       	<tr id="ttitle">
 	        <td class='color01 right' bgcolor='#efefef'>操作</td>
-	        <td class='color01 right' bgcolor='#efefef'>前台显示</td>
+	        <td class='color01 right' bgcolor='#efefef'>显示顺序</td>
 		   	<td class='color01 right' bgcolor='#efefef' width="60">产品ID</td>
 	        <td class='color01 right' bgcolor='#efefef'>产品</td>
 	        <td class='color01 right' bgcolor='#efefef'>主机</td>
@@ -106,7 +106,8 @@ function updateViewResult()
 	       		[<a href="?c=vhostproduct&a=editProductForm&id={{$row.id}}">更改</a>]
 			</td>
 	        <td class="right">
-	        	<input type='checkbox' id='view{{$row.id}}' onClick="updateView(this.id,{{$row.id}})" name='view' value='{{$row.view}}' {{if $row.view==1}}checked{{/if}}>
+	        	<input type='checkbox' id='view{{$row.id}}' onClick="updateView(this.id,{{$row.id}})" name='view' value='{{$row.view}}' {{if $row.view}}checked{{/if}}>
+	      {{$row.view}}
 	        </td>
 
         	<td class="right">{{$row.id}}</td>

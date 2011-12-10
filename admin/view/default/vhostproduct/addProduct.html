@@ -104,6 +104,11 @@ function changeNode()
 			value="{{$vhostproduct.name}}" size="16"></td>
 	</tr>
 	<tr>
+		<td class="td_bgc right_2">显示顺序：</td>
+		<td class="td_bgc right_2 tb_wid2"><input name='view' type='text' id='tb_wid3'
+			value="{{$vhostproduct.view}}" size="16"></td>
+	</tr>
+	<tr>
 		<td class="td_bgc right_2">产品组：</td>
 		<td class="td_bgc right_2 tb_wid2"><input name='upid' type='text'
 			value="{{intval($vhostproduct.upid)}}" size="3">(可升级到相同产品组的其它产品，设置为0不可升级)</td>
