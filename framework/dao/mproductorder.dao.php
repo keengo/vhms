@@ -28,6 +28,15 @@ class MproductorderDAO extends DAO
 			);
 		$this->_TABLE = 'mproduct_order';
 	}
+	public function addMonth($id,$month)
+	{
+		$arr = array('expire_time' => 'ADDDATE('.$this->MAP_ARR['expire_time'].',INTERVAL '.$month.' MONTH)');
+		return $this->update($arr, $this->getFieldValue2('id', $id));
+	}
+	public function updateMproductorder($id,$arr)
+	{
+		return $this->update($arr, $this->getFieldValue2('id', $id));
+	}
 	/**
 	 * 插入和更新  条件$arr['id']
 	 * @param  $arr

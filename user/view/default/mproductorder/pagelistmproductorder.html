@@ -40,7 +40,7 @@ function setbgcolor(id,color){
 					<tr id='tr{{$tr}}' style='background-color: #ffffff' onMouseOver="setbgcolor('{{$tr}}','#8B8878')" onMouseOut="setbgcolor('{{$tr}}','#ffffff')">
 					<td class="right_2">
 						[<a href="?c=mproductorder&a=showMproductorder&id={{$row.id}}" >详情</a>]
-						[<a href="?c=mproductorder&a=mproductRenew&id={{$row.id}}" >续费</a>]
+						[<a href="?c=mproductorder&a=renewMproductorderFrom&id={{$row.id}}" >续费</a>]
 					</td>
 					<td class="right_2">{{$row.id}}</td>
 					<td class="right_2">{{$row.product_name}}</td>

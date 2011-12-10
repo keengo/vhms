@@ -87,7 +87,7 @@ abstract class Product
 		//处理代理价格，如果有代理，按代理价格扣费，否则按正常价格
 		$userinfo = daocall('user','getUser',array($username));
 		if ($userinfo['agent_id'] > 0) {
-			$price = $this->getAgentPrice($userinfo['agent_id'],0,$suser['product_id'],$info['price']);
+			$price = $this->getAgentPrice($userinfo['agent_id'],intval($info['product_type']),$suser['product_id'],$info['price']);
 			if ($price===false) {
 				return false;
 			}

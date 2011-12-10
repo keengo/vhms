@@ -6,8 +6,76 @@ class MproductorderControl extends Control
 	{
 		return dispatch('user', 'left');
 	}
+	public function renewMproductorderFrom()
+	{
+		$id = intval($_REQUEST['id']);
+		$mproductorder = daocall('mproductorder','getMproductorder',array($id));
+		
+		$mproduct = daocall('mproduct','getMproductById',array($mproductorder['product_id']));
+		$mproductorder['product_name'] = $mproduct['name'];
+		
+		$months = $this->getMonthsPrice($mproductorder['product_id']);
+		
+		$this->_tpl->assign('months',$months);
+		$this->_tpl->assign('id',$id);
+		$this->_tpl->assign('mproductorder',$mproductorder);
+		return $this->_tpl->fetch('mproductorder/renew.html');
+	}
+	//获取产品的价格
+	private function getMonthsPrice($product_id)
+	{
+		$mproduct = daocall('mproduct','getMproductById',array($product_id));
+		$month_price = $mproduct['price']/12/100;
+		$months ="";
+		if($mproduct['month_flag'] ==1) {
+			$months[0]=array('1','一个月');
+		}
+		$months[1]=array('12','一年');
+		$months[2]=array('24','二年');
+		$months[3]=array('36','三年');
+		//数组内填入价格，用于在显示页面
+		$months[0][2] = $month_price*$months[0][0];
+		$months[1][2] = $month_price*$months[1][0];
+		$months[2][2] = $month_price*$months[2][0];
+		$months[3][2] = $month_price*$months[3][0];
+		return $months;
+	}
 	/**
-	 * 查看订单信息
+	 * 续费
+	 * Enter description here ...
+	 */
+	public function renewMproductorder()
+	{
+		$user = getRole('user') or false;
+		
+		$mproductorder_id = intval($_REQUEST['id']);
+		//获取订单信息。得到产品ID
+		$mproductorder = daocall('mproductorder','getMproductorder',array($mproductorder_id));
+		
+		//用产品ID得到产品名称
+		$mproduct = daocall('mproduct','getMproductById',array($mproductorder['product_id']));
+		
+		$arr=$_REQUEST;
+		//传入产品名称，用于写消费记录
+		$arr['name'] = $mproduct['name'];
+		
+		$product = apicall('product', 'newProduct',array('m'));
+		
+		if(!is_object($product)){
+			trigger_error('没有该产品类型:m');
+			return false;
+		}
+		
+		if(!$product->renew($user,$arr['id'],intval($_REQUEST['month']))) {
+			$this->_tpl->assign('msg',' 续费失败,请联系管理员');
+		}else{
+			$this->_tpl->assign('msg',' 续费成功');
+		}
+		return $this->_tpl->fetch('msg.html');
+			
+	}
+	/**
+	 * 显示单个订单信息
 	 * where id
 	 */
 	public function showMproductorder()
@@ -37,16 +105,8 @@ class MproductorderControl extends Control
 		$mproduct_id = $_REQUEST['mproduct_id'];
 		//获取产品信息,得到价格
 		$mproduct = daocall('mproduct','getMproductById',array($mproduct_id));
-		$month_price = $mproduct['price']/12/100;
-		$months = array(
-						array('1','一个月'),
-						array('12','一年'),
-						array('24','二年'),
-						
-		);
-		$months[0][2] = $month_price*$months[0][0];
-		$months[1][2] = $month_price*$months[1][0];
-		$months[2][2] = $month_price*$months[2][0];
+		
+		$months = $this->getMonthsPrice($mproduct_id);
 	
 		$this->_tpl->assign('product_name',$mproduct['name']);
 		$this->_tpl->assign('id',$mproduct_id);
