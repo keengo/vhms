@@ -148,7 +148,7 @@ class VhostproductDAO extends DAO {
 										'subtemplete','ftp','max_connect',
 										'access','htaccess','log_file',
 										'speed_limit','domain','subdir',
-										'subdir_flag','upid','try_flag'),
+										'subdir_flag','upid','try_flag','describe'),
 										 $where, 'view',false, $page, $page_count, $count);
 		
 	}

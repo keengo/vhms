@@ -73,7 +73,9 @@ class MProduct extends Product
 		$arr['client_msg'] = $params['client_msg'];
 		//一个月的价格
 		$month_price = $product_info['price']/12/100;
-		
+		if($params['group_id']) {
+			$arr['group_id'] = $params['group_id'];
+		}
 		if($params['admin_msg']) {
 			$arr['admin_msg'] = $params['admin_msg'];
 		}

@@ -10,12 +10,12 @@ class MproductorderControl extends Control
 	{
 		$id = intval($_REQUEST['id']);
 		$mproductorder = daocall('mproductorder','getMproductorder',array($id));
-		
+
 		$mproduct = daocall('mproduct','getMproductById',array($mproductorder['product_id']));
 		$mproductorder['product_name'] = $mproduct['name'];
-		
+
 		$months = $this->getMonthsPrice($mproductorder['product_id']);
-		
+
 		$this->_tpl->assign('months',$months);
 		$this->_tpl->assign('id',$id);
 		$this->_tpl->assign('mproductorder',$mproductorder);
@@ -27,17 +27,19 @@ class MproductorderControl extends Control
 		$mproduct = daocall('mproduct','getMproductById',array($product_id));
 		$month_price = $mproduct['price']/12/100;
 		$months ="";
-		if($mproduct['month_flag'] ==1) {
-			$months[0]=array('1','一个月');
-		}
 		$months[1]=array('12','一年');
 		$months[2]=array('24','二年');
 		$months[3]=array('36','三年');
+		if($mproduct['month_flag'] ==1) {
+			$months[0]=array('1','一个月');
+		}
 		//数组内填入价格，用于在显示页面
-		$months[0][2] = $month_price*$months[0][0];
-		$months[1][2] = $month_price*$months[1][0];
-		$months[2][2] = $month_price*$months[2][0];
-		$months[3][2] = $month_price*$months[3][0];
+		$months[1][2] = $month_price*$months[0][0];
+		$months[2][2] = $month_price*$months[1][0];
+		$months[3][2] = $month_price*$months[2][0];
+		if($months[0]){
+			$months[0][2] = $month_price*$months[3][0];
+		}
 		return $months;
 	}
 	/**
@@ -47,25 +49,25 @@ class MproductorderControl extends Control
 	public function renewMproductorder()
 	{
 		$user = getRole('user') or false;
-		
+
 		$mproductorder_id = intval($_REQUEST['id']);
 		//获取订单信息。得到产品ID
 		$mproductorder = daocall('mproductorder','getMproductorder',array($mproductorder_id));
-		
+
 		//用产品ID得到产品名称
 		$mproduct = daocall('mproduct','getMproductById',array($mproductorder['product_id']));
-		
+
 		$arr=$_REQUEST;
 		//传入产品名称，用于写消费记录
 		$arr['name'] = $mproduct['name'];
-		
+
 		$product = apicall('product', 'newProduct',array('m'));
-		
+
 		if(!is_object($product)){
 			trigger_error('没有该产品类型:m');
 			return false;
 		}
-		
+
 		if(!$product->renew($user,$arr['id'],intval($_REQUEST['month']))) {
 			$this->_tpl->assign('msg',' 续费失败,请联系管理员');
 		}else{
@@ -89,7 +91,7 @@ class MproductorderControl extends Control
 			
 		$mproduct = daocall('mproduct','getMproductById',array($mproductorder['product_id']));
 		$mproductorder['product_name'] = $mproduct['name'];
-		
+
 		$this->_tpl->assign('mproductorder',$mproductorder);
 		return $this->_tpl->fetch('mproductorder/showmproductorder.html');
 
@@ -100,14 +102,14 @@ class MproductorderControl extends Control
 	 */
 	public function addMproductorderFrom()
 	{
-		
+
 		//得到产品ID
 		$mproduct_id = $_REQUEST['mproduct_id'];
 		//获取产品信息,得到价格
 		$mproduct = daocall('mproduct','getMproductById',array($mproduct_id));
-		
+
 		$months = $this->getMonthsPrice($mproduct_id);
-	
+		print_r($months);
 		$this->_tpl->assign('product_name',$mproduct['name']);
 		$this->_tpl->assign('id',$mproduct_id);
 		$this->_tpl->assign('months',$months);
@@ -118,7 +120,7 @@ class MproductorderControl extends Control
 	 */
 	public function addMproductorder()
 	{
-	
+
 		$arr = $_REQUEST;
 		$arr['username'] = getRole('user');
 		if($_REQUEST['product_id']) {
@@ -132,7 +134,7 @@ class MproductorderControl extends Control
 		$product_info = daocall('mproduct','getMproductById',array($_REQUEST['product_id']));
 		//
 		$product = apicall('product', 'newProduct',array('m'));
-		
+
 		if(!is_object($product)){
 			trigger_error('没有该产品类型:m');
 			return false;
@@ -140,7 +142,8 @@ class MproductorderControl extends Control
 		$user = getRole('user');
 		//传产品名称，用于写消费记录的购买名称识别
 		$arr['name'] = $product_info['name'];
-		
+		$arr['group_id'] = $product_info['group_id'];
+		print_r($arr);
 		if(!$product->sell($user,intval($_REQUEST['product_id']),$arr)){
 			return false;
 		}
@@ -164,7 +167,7 @@ class MproductorderControl extends Control
 
 		//查询条件，传入数组
 		$where['username'] = getRole('user');
-		
+
 		if($_REQUEST['refer']) {
 			$where['refer'] = intval($_REQUEST['refer']);
 		}
@@ -185,7 +188,7 @@ class MproductorderControl extends Control
 		if($page>=$total_page){
 			$page = $total_page;
 		}
-	
+
 		$this->_tpl->assign('order',$order);
 		$this->_tpl->assign('count',$count);
 		$this->_tpl->assign('total_page',$total_page);
@@ -194,6 +197,6 @@ class MproductorderControl extends Control
 		$this->_tpl->assign('list',$list);
 		return $this->_tpl->fetch('mproductorder/pagelistmproductorder.html');
 	}
-	
-	
+
+
 }
