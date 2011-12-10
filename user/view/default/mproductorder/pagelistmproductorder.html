@@ -1,17 +1,22 @@
 <body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
+<script language='javascript'>
+function setbgcolor(id,color){
+	document.getElementById(id).style.backgroundColor = color;	
+}
+</script>
 <div id="container">
 	<div align="center">
 	
 		<div class="mar_top tb_wid5" align="right">
 			{{if $page>1}}
-			<a href='?c=user&a=pageListMyMproductorder&order={{$order}}&&page=0'>首页</a> 
-			<a href='?c=user&a=pageListMyMproductorder&order={{$order}}&page={{$page-1}}'>上一页</a> 
+			<a href='?c=mproductorder&a=pageListMyMproductorder&order={{$order}}&&page=0'>首页</a> 
+			<a href='?c=mproductorder&a=pageListMyMproductorder&order={{$order}}&page={{$page-1}}'>上一页</a> 
 			{{else}}
 			首页 上一页 
 			{{/if}}
 			{{if $page!=$total_page}} 
-			<a href='?c=user&a=pageListMyMproductorder&order={{$order}}&page={{$page+1}}'>下一页</a>
-			<a href='?c=user&a=pageListMyMproductorder&order={{$order}}&page={{$total_page}}'>尾页</a>
+			<a href='?c=mproductorder&a=pageListMyMproductorder&order={{$order}}&page={{$page+1}}'>下一页</a>
+			<a href='?c=mproductorder&a=pageListMyMproductorder&order={{$order}}&page={{$total_page}}'>尾页</a>
 			{{else}}下一页 尾页
 			{{/if}} 
 			{{$page}}/{{$total_page}}&nbsp;
@@ -23,23 +28,25 @@
 			
 					<tr id="ttitle">
 					<td class="right_2">操作</td>	
-					<td class="right_2"><a href='?c=user&a=pageListMyMproductorder&order=id'>订单ID</a></td>
-					<td class="right_2"><a href='?c=user&a=pageListMyMproductorder&order=product_id'>产品名称</a></td>
-					<td class="right_2"><a href='?c=user&a=pageListMyMproductorder&order=create_time'>提交时间</a></td>
-					<td class="right_2"><a href='?c=user&a=pageListMyMproductorder&order=expire_time'>过期时间</a></td>
-					<td class="right_2"><a href='?c=user&a=pageListMyMproductorder&order=status'>状态</a></td>
+					<td class="right_2"><a href='?c=mproductorder&a=pageListMyMproductorder&order=id'>订单ID</a></td>
+					<td class="right_2"><a href='?c=mproductorder&a=pageListMyMproductorder&order=product_id'>产品名称</a></td>
+					<td class="right_2"><a href='?c=mproductorder&a=pageListMyMproductorder&order=create_time'>提交时间</a></td>
+					<td class="right_2"><a href='?c=mproductorder&a=pageListMyMproductorder&order=expire_time'>过期时间</a></td>
+					<td class="right_2"><a href='?c=mproductorder&a=pageListMyMproductorder&order=status'>状态</a></td>
 					</tr>
 					
 					{{foreach from=$list item=row}}
-					<tr>
+					{{$tr=$tr+1}}
+					<tr id='tr{{$tr}}' style='background-color: #ffffff' onMouseOver="setbgcolor('{{$tr}}','#8B8878')" onMouseOut="setbgcolor('{{$tr}}','#ffffff')">
 					<td class="right_2">
-						[<a href="?c=user&a=showMproductorder&id={{$row.id}}" >查看详情</a>]
+						[<a href="?c=mproductorder&a=showMproductorder&id={{$row.id}}" >详情</a>]
+						[<a href="?c=mproductorder&a=renewMproductorderFrom&id={{$row.id}}" >续费</a>]
 					</td>
 					<td class="right_2">{{$row.id}}</td>
 					<td class="right_2">{{$row.product_name}}</td>
 					<td class="right_2">{{$row.create_time}}</td>
 					<td class="right_2">{{$row.expire_time}}</td>
-					<td class="right_2">{{if $row.status==0}}申请中{{else}}订单已完成{{/if}}</td>
+					<td class="right_2">{{if $row.status==0}}申请中{{else}}<font color='red'>订单已完成</font>{{/if}}</td>
 					</tr>
 					{{/foreach}}
 					
@@ -48,14 +55,14 @@
 		
 		<div class="mar_top tb_wid5" align="right">
 			{{if $page>1}}
-			<a href='?c=user&a=pageListMyMproductorder&order={{$order}}&&page=0'>首页</a> 
-			<a href='?c=user&a=pageListMyMproductorder&order={{$order}}&page={{$page-1}}'>上一页</a> 
+			<a href='?c=mproductorder&a=pageListMyMproductorder&order={{$order}}&&page=0'>首页</a> 
+			<a href='?c=mproductorder&a=pageListMyMproductorder&order={{$order}}&page={{$page-1}}'>上一页</a> 
 			{{else}}
 			首页 上一页 
 			{{/if}}
 			{{if $page!=$total_page}} 
-			<a href='?c=user&a=pageListMyMproductorder&order={{$order}}&page={{$page+1}}'>下一页</a>
-			<a href='?c=user&a=pageListMyMproductorder&order={{$order}}&page={{$total_page}}'>尾页</a>
+			<a href='?c=mproductorder&a=pageListMyMproductorder&order={{$order}}&page={{$page+1}}'>下一页</a>
+			<a href='?c=mproductorder&a=pageListMyMproductorder&order={{$order}}&page={{$total_page}}'>尾页</a>
 			{{else}}下一页 尾页
 			{{/if}} 
 			{{$page}}/{{$total_page}}&nbsp;

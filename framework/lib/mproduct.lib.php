@@ -18,7 +18,9 @@ class MProduct extends Product
 	 */
 	public function getInfo($product_id,$susername=null)
 	{
-		return daocall('mproduct','getMproductById',array($product_id));
+		$mproduct=daocall('mproduct','getMproductById',array($product_id));
+		$mproduct['product_type'] = 1;
+		return $mproduct;
 	}
 	
 	
@@ -30,21 +32,30 @@ class MProduct extends Product
 	{
 		return true;
 	}
-	protected function addMonth($susername, $month)
+	/**
+	 * 增加时间
+	 * where $id
+	 * $month
+	 * @see framework/lib/Product::addMonth()
+	 */
+	protected function addMonth($id, $month)
 	{
-		return true;
+		
+		return daocall('mproductorder','addMonth',array($id,$month));
 	}
 	protected function changeProduct($susername, $product)
 	{
+		//非自动化业务
 		return true;
 	}
-	public function getSuser($susername)
+	public function getSuser($id)
 	{
-		return true;
+		return daocall('mproductorder','getMproductorder',array($id));
 	}
 	
 	public function checkParam($username,$suser)
 	{
+		//非自动化业务，没有用户名
 		return true;
 	}
 	/**

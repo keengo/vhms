@@ -37,7 +37,11 @@
 			<ul class="submenu" id="sub6" >
 				
 				<li><a href="?c=vhostproduct&a=pageVhostByuser" target="{{$target}}">{{if $setting.vhost_name.value}}{{$setting.vhost_name.value}}{{else}}虚拟主机{{/if}}</a></li>
-			   	<li><a href="?c=user&a=pageListMyMproductorder" target="{{$target}}">非自动化产品</a></li>
+			   	{{if $group}}
+			   		{{for $i=0;$i< count($group);$i++}}
+			   	<li><a href="{{$group[$i][1]}}" target="{{$target}}">{{$group[$i][0]}}</a></li>
+			   		{{/for}}
+			   	{{/if}}
 				<li><a href="?c=question&a=pageByuser" target="{{$target}}">我的提问</a></li>
 			 </ul>
 			 </div>
