@@ -15,7 +15,7 @@ class MproductorderControl extends Control
 		$mproductorder['product_name'] = $mproduct['name'];
 
 		$months = $this->getMonthsPrice($mproductorder['product_id']);
-
+		print_r($months);
 		$this->_tpl->assign('months',$months);
 		$this->_tpl->assign('id',$id);
 		$this->_tpl->assign('mproductorder',$mproductorder);
@@ -34,11 +34,11 @@ class MproductorderControl extends Control
 			$months[0]=array('1','一个月');
 		}
 		//数组内填入价格，用于在显示页面
-		$months[1][2] = $month_price*$months[0][0];
-		$months[2][2] = $month_price*$months[1][0];
-		$months[3][2] = $month_price*$months[2][0];
+		$months[1][2] = $month_price*$months[1][0];
+		$months[2][2] = $month_price*$months[2][0];
+		$months[3][2] = $month_price*$months[3][0];
 		if($months[0]){
-			$months[0][2] = $month_price*$months[3][0];
+			$months[0][2] = $month_price*$months[0][0];
 		}
 		return $months;
 	}
