@@ -34,11 +34,11 @@ class MproductorderDAO extends DAO
 	 */
 	public function add($attr)
 	{
-		print_r($attr);
+		
 		$arr['username'] = $attr['username'];
-		
-		$arr['client_msg'] = $attr['client_msg'];
-		
+		if($attr['client_msg']) {
+			$arr['client_msg'] = $attr['client_msg'];
+		}
 		if($attr['product_id']) {
 			$arr['product_id'] = $attr['product_id'];
 		}
@@ -48,15 +48,18 @@ class MproductorderDAO extends DAO
 		if($attr['admin_mem']) {
 			$arr['admin_mem'] = $attr['admin_mem'];
 		}
-		
-		$arr['price'] = $attr['price'];
-		$arr['month'] = $attr['month'];
-		$arr['create_time'] = 'NOW()';
-		$arr['expire_time'] = 'ADDDATE(NOW(),INTERVAL '.$attr['month'].' MONTH)';
+		if($attr['price']) {
+			$arr['price'] = $attr['price'];
+		}
+		if($attr['month']) {
+			$arr['month'] = $attr['month'];
+		}
 		$arr['status'] = $attr['status'] or 0;
 		if($attr['id']) {
 			return $this->update($arr, $this->getFieldValue2('id', $attr['id']));
 		}
+		$arr['create_time'] = 'NOW()';
+		$arr['expire_time'] = 'ADDDATE(NOW(),INTERVAL '.$attr['month'].' MONTH)';
 		return $this->insert($arr);
 	}
 	public function del($id)
