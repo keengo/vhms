@@ -26,7 +26,8 @@ class QuestionControl extends Control {
 		}else{
 			$this->_tpl->assign('target','_self');
 		}
-		return $this->_tpl->fetch('user/left.html');
+		return dispatch('user', 'left');
+		//return $this->_tpl->fetch('user/left.html');
 	}
 	public function getQuestion()
 	{
