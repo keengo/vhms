@@ -12,8 +12,8 @@ class MproductControl extends Control
 	public function index()
 	{
 		$refer = $_REQUEST['refer'];
-		$mproduct = daocall('mproduct','getMproductById',array($refer));
-		$this->_tpl->assign('mproduct',$mproduct);
+		$mproducts = daocall('mproduct','getMproductByGroupid',array($refer));
+		$this->_tpl->assign('mproducts',$mproducts);
 		return $this->_tpl->fetch('mproduct/index.html');
 	}
 	public function showMproductFrom()

@@ -92,13 +92,17 @@ class VhostProduct extends Product
 		
 		if($GLOBALS['node_db']=='sqlite'){
 				
-//			if($params['resync'] == '1'){
-//				$whmCall = new WhmCall('del_vh');
-//				$whmCall->addParam('name',$param);
-//				$whm->call($whmCall,10);
-//			}
-//			print_r($whmCall);
-//			die();
+			//			if($params['resync'] == '1'){
+			//				$whmCall = new WhmCall('del_vh');
+			//				$whmCall->addParam('name',$param);
+			//				$whm->call($whmCall,10);
+			//			}
+			//			print_r($whmCall);
+			//			die();
+			//			echo "sync...params=";
+			//			print_r($params);
+			//			echo "<br><br><br><br>";
+			
 			$whmCall = new WhmCall('add_vh');
 			$whmCall->addParam('doc_root',$params['doc_root']);
 				

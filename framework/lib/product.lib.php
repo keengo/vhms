@@ -240,8 +240,6 @@ abstract class Product
 		}
 		$month = $suser['month'];
 		//print_r($suser);
-		echo "<br>";
-	
 		
 		$info = $this->getInfo($product_id);
 		if(!$info){
