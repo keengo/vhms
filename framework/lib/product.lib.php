@@ -265,7 +265,7 @@ abstract class Product
 			$info['subtemplete'] = $suser['subtemplete'];
 			
 		}
-
+		$mem = "购买 ".$suser['name']." ".$month." 个月";
 		//处理代理，如果有代理，按代理的价格来扣费，否则按正常价格
 		$userinfo = daocall('user','getUser',array($username));
 		if ($userinfo['agent_id'] > 0) {
@@ -293,7 +293,7 @@ abstract class Product
 		if(!$default_db->beginTransaction()){
 			return false;
 		}
-		$mem = "购买 ".$suser['name']." ".$month." 个月";
+		
 		if($price>0 && !apicall('money','decMoney', array($username,$price,$mem))){
 			$default_db->rollBack();
 			trigger_error('余额不足,所需金额:'.($price/100));
