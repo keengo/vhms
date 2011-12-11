@@ -7,6 +7,11 @@ class MproductorderControl extends Control
 	{
 		return dispatch('user', 'left');
 	}
+	/**
+	 * 续费
+	 * 需要将产品价格传递到html页面，价格设置函数
+	 * $this->getMonthsPrice($mproductorder['product_id']);
+	 */
 	public function renewMproductorderFrom()
 	{
 		$id = intval($_REQUEST['id']);
@@ -22,7 +27,13 @@ class MproductorderControl extends Control
 		$this->_tpl->assign('mproductorder',$mproductorder);
 		return $this->_tpl->fetch('mproductorder/renew.html');
 	}
-	//获取产品的价格
+	/**
+	 * 产品每个购买时间的价格设置函数
+	 * 条件，product_id
+	 * 返回数组
+	 * @param  $product_id
+	 * @return multitype:string
+	 */
 	private function getMonthsPrice($product_id)
 	{
 		$mproduct = daocall('mproduct','getMproductById',array($product_id));
@@ -100,6 +111,8 @@ class MproductorderControl extends Control
 
 	/**
 	 * 非自动化产品业务申请页面
+	 * 需要将价格传到申请页面，价格设置函数
+	 * $this->getMonthsPrice($mproduct_id);
 	 */
 	public function addMproductorderFrom()
 	{
@@ -118,6 +131,8 @@ class MproductorderControl extends Control
 	}
 	/**
 	 * 非自动化产品业务创建函数
+	 * 过滤用户提交的html代码
+	 * apicall('utils','klencode',array($_REQUEST['client_msg']));
 	 */
 	public function addMproductorder()
 	{
@@ -153,6 +168,8 @@ class MproductorderControl extends Control
 	}
 	/**
 	 * 非自动化产品业务列表
+	 * 查询条件，gorup_id<refer>,username
+	 * order排序
 	 */
 	public function pageListMyMproductorder()
 	{
@@ -160,7 +177,7 @@ class MproductorderControl extends Control
 		if($page<=0){
 			$page = 1;
 		}
-		$page_count = 2;
+		$page_count = 20;
 		$count = 0;
 
 		//排序字段
