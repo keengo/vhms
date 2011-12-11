@@ -159,7 +159,7 @@ class MproductorderControl extends Control
 		if($page<=0){
 			$page = 1;
 		}
-		$page_count = 20;
+		$page_count = 2;
 		$count = 0;
 
 		//排序字段
@@ -170,6 +170,7 @@ class MproductorderControl extends Control
 
 		if($_REQUEST['refer']) {
 			$where['refer'] = intval($_REQUEST['refer']);
+			$this->_tpl->assign('refer',$_REQUEST['refer']);
 		}
 		$mproducts = daocall('mproduct','getMproductById',array());
 
@@ -188,7 +189,7 @@ class MproductorderControl extends Control
 		if($page>=$total_page){
 			$page = $total_page;
 		}
-
+		
 		$this->_tpl->assign('order',$order);
 		$this->_tpl->assign('count',$count);
 		$this->_tpl->assign('total_page',$total_page);
