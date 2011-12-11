@@ -75,6 +75,7 @@ class MproductControl extends Control
 		}
 		$page_count = 20;
 		$count = 0;
+		
 		$order = $_REQUEST['order'] or 'id';//排序字段
 		$list = daocall('mproduct','pageList',array($page,$page_count,&$count,$order));
 		$mproduct_group = daocall('mproductgroup','getMproductgroup',array());

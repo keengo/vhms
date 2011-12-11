@@ -95,7 +95,7 @@ class MproductorderDAO extends DAO
 		}
 		return $this->select(null,$where,$type);
 	}
-	public function pageList($page,$page_count,&$count,$order,$selectwhere=null)
+	public function pageList($page,$page_count,&$count,$order,$selectwhere=array())
 	{
 		$where="";
 		if($selectwhere['username'] !=null) {

@@ -45,8 +45,11 @@ class MproductorderControl extends Control
 		$page_count = 20;
 		$count = 0;
 		$order = $_REQUEST['order'] or 'id';//排序字段
-		
-		$list = daocall('mproductorder','pageList',array($page,$page_count,&$count,$order));
+		$where = "";
+		if($_REQUEST['username']) {
+			$where['username'] = $_REQUEST['username'];
+		}
+		$list = daocall('mproductorder','pageList',array($page,$page_count,&$count,$order,$where));
 		//获取产品信息
 		$mproducts = daocall('mproduct','getMproductById',array());
 		//将product_id替换为product_name显示
