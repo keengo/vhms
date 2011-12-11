@@ -4,13 +4,20 @@ class MproductControl extends Control
 {
 	public function addMproductFrom()
 	{
+		$agent_ids = daocall('agent','selectList',array());
 		if($_REQUEST['id']) {
 			$mproduct = daocall('mproduct','getMproductById',array(intval($_REQUEST['id'])));
+			for($i=0;$i<count($agent_ids);$i++){
+				$attr['agent_id'] = $agent_ids[$i]['id'];
+				$attr['product_type'] = 1;
+				$attr['product_id'] = $_REQUEST['id'];
+				$agentprice = daocall('agentprice','getAgentprice',array($attr));
+				$agent_ids[$i]['price'] = $agentprice[0]['price'];
+			}
 			$this->_tpl->assign('edit','1');
 			$this->_tpl->assign('mproduct',$mproduct);
 		}
 		//传入代理,页面显示价格设置
-		$agent_ids = daocall('agent','selectList',array());
 		$this->_tpl->assign('agent_ids',$agent_ids);
 		$this->_tpl->assign("action","addProduct");
 		
@@ -92,21 +99,5 @@ class MproductControl extends Control
 		$this->_tpl->assign('list',$list);
 		$this->_tpl->display('mproduct/pagelistmproduct.html');
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

@@ -31,15 +31,15 @@
 				</tr>
 				
 				<tr>
-					<td class="td_bgc right_2">价格</td>
+					<td class="td_bgc right_2">价格(元/年)</td>
 					<td class="td_bgc right_2"><input name="price" type="text" id='tb_wid3'	value="{{$mproduct.price/100}}">
-											<font color='red'>(元/年)</font>
+											
 					</td>
 				</tr>
 				
 				{{if count($agent_ids)>0}}
 				<tr>
-					<td class="td_bgc right_2">代理价格</td>
+					<td class="td_bgc right_2">代理价格(元/年)</td>
 					<td class="td_bgc right_2">
 					{{for $i=0;$i< count($agent_ids);$i++}}
 					
