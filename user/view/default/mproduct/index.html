@@ -4,14 +4,14 @@
 				{{for $i=0;$i< count($mproducts);$i++}}
 				<table style="width:750px;background-color:white;border-collapse:collapse; border:2px solid #B3B3B3">
 					<tr >
-						<td style="width:15%;padding:5px;background-color:#C4C4C4;">
+						<td style="width:15%;padding:5px;background-color:#EEEEE0;">
 							<a href='?c=mproduct&a=showMproductFrom&id={{$mproducts[$i].id}}'>{{$mproducts[$i].name}}</a>
 							<br><br>
 							{{$mproducts[$i].price}}&nbsp;元/年
 							<br><br>
 							<a href='?c=mproduct&a=showMproductFrom&id={{$mproducts[$i].id}}'>点击购买</a>
 						</td>
-						<td style="width:85%;padding:15px;">{{$mproducts[$i].describe}}</td>
+						<td style="width:85%;padding:15px;background-color:#F5F5F5;">{{$mproducts[$i].describe}}</td>
 			  		</tr>
 			  			</table>
 			  			<br>
