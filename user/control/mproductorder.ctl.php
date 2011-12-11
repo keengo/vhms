@@ -143,8 +143,8 @@ class MproductorderControl extends Control
 		$user = getRole('user');
 		//传产品名称，用于写消费记录的购买名称识别
 		$arr['name'] = $product_info['name'];
+		$arr['client_msg'] = apicall('utils','klencode',array($_REQUEST['client_msg']));
 		$arr['group_id'] = $product_info['group_id'];
-		print_r($arr);
 		if(!$product->sell($user,intval($_REQUEST['product_id']),$arr)){
 			return false;
 		}
