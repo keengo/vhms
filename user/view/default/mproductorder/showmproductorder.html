@@ -1,43 +1,27 @@
 {{include file='common/head.html'}}
-<body leftmargin="0" topmargin="0" bgcolor="#ffffff" text="#000000">
 <div align="center">
-	
-		<div class="head_block tb_wid2">&nbsp;查看订单信息</div>
-		<div class="block tb_wid2">
-			<table id="table_2" cellpadding="0" cellspacing="1">
+		<div class="wid_ri r_mar">&nbsp;<h2>查看订单信息</h2></div>
+		<div class="wid_ri r_mar" >
+			<table id="table_ri" cellpadding="0" cellspacing="1">
 			
 				<tr>
-					<td class="td_bgc right_2">产品名称：</td>
-					<td class="td_bgc right_2">{{$mproductorder.product_name}}
+					<td >产品名称：</td>
+					<td >{{$mproductorder.product_name}}
 					</td>
 				</tr>
 				
-				
 				<tr>
-					<td class="td_bgc right_2">附注：</td>
-					<td class="td_bgc right_2">{{$mproductorder.client_msg}}
+					<td >我的附注：</td>
+					<td >{{$mproductorder.client_msg}}
 					</td>
 				</tr>
 				
 				{{if $mproductorder.admin_msg}}
 				<tr>
-					<td class="td_bgc right_2">信息：</td>
+					<td class="td_bgc right_2">管理信息：</td>
 					<td class="td_bgc right_2">{{$mproductorder.admin_msg}}</td>
 				</tr>
 				{{/if}}
-				
-			<!-- 
-				<tr>
-					<td class="td_bgc right_2">购买时间：</td>
-					<td class="td_bgc right_2">{{$mproductorder.month}}个月</td>
-				</tr>
-				
-				
-				<tr>
-					<td class="td_bgc right_2">金额：</td>
-					<td class="td_bgc right_2">{{$mproductorder.price}}元</td>
-				</tr>
-			 -->	
 				
 				{{if $mproductorder.create_time}}
 				<tr>
@@ -52,16 +36,19 @@
 					<td class="td_bgc right_2">{{$mproductorder.expire_time}}</td>
 				</tr>
 				{{/if}}
-				{{if $mproductorder.status}}
+			
 				<tr>
-					<td class="td_bgc right_2">状态：</td>
-					<td class="td_bgc right_2">{{$mproductorder.status}}</td>
+					<td class="td_bgc right_2">订单状态：</td>
+					<td class="td_bgc right_2">{{if $mproductorder.status==0}}申请中{{else}}已拔付{{/if}}</td>
 				</tr>
-				{{/if}}
+				
 				
 				<tr>
-					<td class="td_bgc td_hg" colspan="2" align="center"><a href="?c=mproductorder&a=pageListMyMproductorder"><h2>返回</h2></a></td>
+					<td  colspan="2" align="center">
+					<h2><a href="?c=mproductorder&a=pageListMyMproductorder">返回</a></h2>
+					</td>
 				</tr>
+				
 	
 			</table>
 		</div>
