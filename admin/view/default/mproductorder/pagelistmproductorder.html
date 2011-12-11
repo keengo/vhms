@@ -33,14 +33,14 @@
 					{{foreach from=$list item=row}}
 					<tr>
 					<td class="right_2">
-						[<a href="javascript:if(confirm('确定?')){location='?c=mproductorder&a=delMproductorder&id={{$row.id}}';}" >删除</a>]
+					<!--  	[<a href="javascript:if(confirm('确定?')){location='?c=mproductorder&a=delMproductorder&id={{$row.id}}';}" >删除</a>]-->
 						[<a href="?c=mproductorder&a=addMproductorderFrom&id={{$row.id}}" >更改</a>]
 					</td>
 					<td class="right_2">{{$row.id}}</td>
 					<td class="right_2">{{$row.username}}</td>
 					<td class="right_2">{{$row.product_name}}</td>
 					<td class="right_2">{{$row.create_time}}</td>
-					<td class="right_2">{{if $row.status==0}}<a href="?c=mproductorder&a=addMproductorderFrom&id={{$row.id}}">等待管理员开通</a>{{else}}已开通{{/if}}</td>
+					<td class="right_2">{{if $row.status==0}}<a href="?c=mproductorder&a=addMproductorderFrom&id={{$row.id}}">等待交付</a>{{else}}已交付{{/if}}</td>
 					</tr>
 					{{/foreach}}
 					

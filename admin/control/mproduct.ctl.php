@@ -7,6 +7,7 @@ class MproductControl extends Control
 		$agent_ids = daocall('agent','selectList',array());
 		if($_REQUEST['id']) {
 			$mproduct = daocall('mproduct','getMproductById',array(intval($_REQUEST['id'])));
+			//传入代理价格
 			for($i=0;$i<count($agent_ids);$i++){
 				$attr['agent_id'] = $agent_ids[$i]['id'];
 				$attr['product_type'] = 1;
@@ -32,7 +33,7 @@ class MproductControl extends Control
 			$this->_tpl->assign('msg','增加失败');
 			return $this->_tpl->fetch('msg.html');
 		}
-		
+		//代理价格
 		$agent_id = daocall('agent','selectList',array());
 		foreach ($agent_id as $agent)
 		{
