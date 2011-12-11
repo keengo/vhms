@@ -32,3 +32,39 @@ alter table vhost_product add column envs TEXT;
 alter table vhost_product add column cdn tinyint(4) DEFAULT '0';
 ALTER TABLE `nodes` ADD `nickname` VARCHAR( 255 ) NOT NULL ;
 
+CREATE TABLE IF NOT EXISTS `mproduct` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(32) character set utf8 NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `upid` int(11) NOT NULL,
+  `describe` text character set utf8 NOT NULL,
+  `price` int(11) NOT NULL,
+  `month_flag` tinyint(4) NOT NULL,
+  `pause_flag` tinyint(4) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8  AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `mproduct_group` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(32) NOT NULL,
+  `describe` text NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `mproduct_order` (
+  `id` int(11) NOT NULL auto_increment,
+  `username` varchar(32) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `client_msg` text NOT NULL,
+  `admin_msg` text NOT NULL,
+  `admin_mem` text NOT NULL,
+  `price` int(11) NOT NULL,
+  `month` int(11) NOT NULL,
+  `create_time` datetime NOT NULL,
+  `expire_time` datetime NOT NULL,
+  `status` tinyint(4) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
