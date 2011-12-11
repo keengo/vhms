@@ -1,4 +1,5 @@
 <?php
+needRole('user');
 class MproductorderControl extends Control
 {
 	//非自动化业务

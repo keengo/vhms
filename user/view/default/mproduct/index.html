@@ -2,11 +2,17 @@
 		<div >
 			{{if is_array($mproducts)}}
 				{{for $i=0;$i< count($mproducts);$i++}}
-				<table style="width:750px;height:50px; background-color:white;border-collapse:collapse; border:2px">
+				<table style="width:750px;background-color:white;border-collapse:collapse; border:2px solid #B3B3B3">
 					<tr >
-						<td style="width:15%;padding:5px;"><a href='?c=mproduct&a=showMproductFrom&id={{$mproducts[$i].id}}'>{{$mproducts[$i].name}}</a><br><br>{{$mproducts[$i].price}}&nbsp;元/年<br><br>点击购买</td>
+						<td style="width:15%;padding:5px;background-color:#C4C4C4;">
+							<a href='?c=mproduct&a=showMproductFrom&id={{$mproducts[$i].id}}'>{{$mproducts[$i].name}}</a>
+							<br><br>
+							{{$mproducts[$i].price}}&nbsp;元/年
+							<br><br>
+							<a href='?c=mproduct&a=showMproductFrom&id={{$mproducts[$i].id}}'>点击购买</a>
+						</td>
 						<td style="width:85%;padding:15px;">{{$mproducts[$i].describe}}</td>
-			  		<tr>
+			  		</tr>
 			  			</table>
 			  			<br>
 			  	{{/for}}
