@@ -225,8 +225,8 @@ CREATE TABLE IF NOT EXISTS `mproduct` (
   `upid` int(11) NULL,
   `describe` text character set utf8 NULL,
   `price` int(11) NOT NULL,
-  `month_flag` tinyint(4) NULL,
-  `pause_flag` tinyint(4) NULL,
+  `month_flag` tinyint(4) NULL default '0',
+  `pause_flag` tinyint(4) NULL default '0',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8  AUTO_INCREMENT=1 ;
 
@@ -249,7 +249,7 @@ CREATE TABLE IF NOT EXISTS `mproduct_order` (
   `month` int(11)  NULL,
   `create_time` datetime  NULL,
   `expire_time` datetime  NULL,
-  `status` tinyint(4)  NULL,
+  `status` tinyint(4)  NOT NULL default '0',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
