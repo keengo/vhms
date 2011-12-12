@@ -52,6 +52,7 @@ CREATE TABLE IF NOT EXISTS `nodes` (
   `type` int(11) null,
   `win` tinyint(4) null,
   `dev` varchar(255) null,
+  `nickname` varchar(255) null,
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
