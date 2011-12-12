@@ -120,9 +120,9 @@ function changeNode()
 			function change_cdn(val)
 			{
 				if(val==0){
-					$('cdn').style.display='';
+					$('cdnpanel').style.display='';
 				} else {
-					$('cdn').style.display='none';
+					$('cdnpanel').style.display='none';
 				}
 			}
 			
@@ -132,7 +132,7 @@ function changeNode()
 	</td>
 	</tr>
 	<tr><td colspan='2'>
-	<div id='cdn' style='display:{{if $vhostproduct.cdn==1}}none{{/if}}'>
+	<div id='cdnpanel' style='display:{{if $vhostproduct.cdn==1}}none{{/if}}'>
 	<table width=100% border=0>	
 	<tr>
 		<td class="td_bgc right_2">空间大小(M)：</td>
