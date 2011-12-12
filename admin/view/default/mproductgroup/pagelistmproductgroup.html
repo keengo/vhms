@@ -3,29 +3,35 @@
 <div id="container">
 	<div align="center">
 		<div class="mar_top tb_wid5" align="right">
-		<a href="?c=mproductgroup&a=addMproductgroupFrom" target='main'>增加业务</a>
-			{{if $page>1}}
-			<a href='?c=mproductgroup&a=pageListMproductgroup&order={{$order}}&&page=0'>首页</a> 
-			<a href='?c=mproductgroup&a=pageListMproductgroup&order={{$order}}&page={{$page-1}}'>上一页</a> 
-			{{else}}
-			首页 上一页 
-			{{/if}}
-			{{if $page!=$total_page}} 
-			<a href='?c=mproductgroup&a=pageListMproductgroup&order={{$order}}&page={{$page+1}}'>下一页</a>
-			<a href='?c=mproductgroup&a=pageListMproductgroup&order={{$order}}&page={{$total_page}}'>尾页</a>
-			{{else}}下一页 尾页
-			{{/if}} 
-			{{$page}}/{{$total_page}}&nbsp;
-			共计{{$count}}记录
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		  <tr>
+			<td class="right" align="left"><a href="?c=mproductgroup&a=addMproductgroupFrom" target='main'><b>增加业务</b></a></td>
+			<td align="right">
+				{{if $page>1}}
+				<a href='?c=mproductgroup&a=pageListMproductgroup&order={{$order}}&&page=0'>首页</a> 
+				<a href='?c=mproductgroup&a=pageListMproductgroup&order={{$order}}&page={{$page-1}}'>上一页</a> 
+				{{else}}
+				首页 上一页 
+				{{/if}}
+				{{if $page!=$total_page}} 
+				<a href='?c=mproductgroup&a=pageListMproductgroup&order={{$order}}&page={{$page+1}}'>下一页</a>
+				<a href='?c=mproductgroup&a=pageListMproductgroup&order={{$order}}&page={{$total_page}}'>尾页</a>
+				{{else}}下一页 尾页
+				{{/if}} 
+				{{$page}}/{{$total_page}}&nbsp;
+				共计{{$count}}记录
+			</td>
+		  </tr>
+		</table>
 		</div>
 		<div class="block tb_wid5">
 				<table id="table" border="0" cellpadding="0" cellspacing="1">
 			
 					<tr id="ttitle">
 					<td class="right_2">操作</td>	
-					<td class="right_2"><a href='?c=mproductgroup&a=pageListMproductgroup&order=id'>业务ID</a></td>
-					<td class="right_2"><a href='?c=mproductgroup&a=pageListMproductgroup&order=name'>业务名称</a></td>
-					<td class="right_2">业务详情</td>
+					<td class="right_2"><a href='?c=mproductgroup&a=pageListMproductgroup&order=id'><span class="color_white">业务ID</span></a></td>
+					<td class="right_2"><a href='?c=mproductgroup&a=pageListMproductgroup&order=name'><span class="color_white">业务名称</span></a></td>
+					<td class="right_2"><span class="color_white">业务详情</span></td>
 					</tr>
 					{{foreach from=$list item=row}}
 					
