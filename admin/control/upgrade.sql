@@ -66,7 +66,3 @@ CREATE TABLE IF NOT EXISTS `mproduct_order` (
   `status` tinyint(4)  NOT NULL default '0',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
-
-
-
