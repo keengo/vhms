@@ -1,7 +1,5 @@
 {{include file='common/head.html'}}
 <body leftmargin="0" topmargin="0" bgcolor="#ffffff" text="#000000">
-
-
 <div align="center">
 	<form name='nodeform' action="?c=mproductorder&a=addMproductorder&product_id={{$id}}" method="post">
 		<div class="wid_ri r_mar" align="center"><h3>订单申请</h3></div>
@@ -14,14 +12,12 @@
 					</td>
 				</tr>
 				
-				
 				<tr>
 					<td class="td_bgc right_2">我的补充说明：</td>
 					<td class="td_bgc right_2">
 						<textarea name='client_msg' cols='40' rows='13'>{{$mproductorder.client_msg}}</textarea>
 					</td>
 				</tr>
-				
 				
 				<tr>
 					<td class="td_bgc right_2">购买时限：</td>
@@ -34,7 +30,6 @@
 						{{/for}}
 					</td>
 				</tr>
-				
 				
 				<tr>
 					<td class="td_bgc td_hg" colspan="2" align="center"><input type="submit" value="确认提交"></td>

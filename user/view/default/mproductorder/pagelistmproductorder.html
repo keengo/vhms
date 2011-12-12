@@ -1,9 +1,3 @@
-
-<script language='javascript'>
-function setbgcolor(id,color){
-	document.getElementById(id).style.backgroundColor = color;	
-}
-</script>
 <div class="right" align="center">
 	<div class="wid_ri r_mar" align="right">
 		<div class="r_mar_top" align="right">
@@ -35,8 +29,7 @@ function setbgcolor(id,color){
 					</tr>
 					
 					{{foreach from=$list item=row}}
-					{{$tr=$tr+1}}
-					<tr id='tr{{$tr}}' style='background-color: #ffffff' onMouseOver="setbgcolor('{{$tr}}','#8B8878')" onMouseOut="setbgcolor('{{$tr}}','#ffffff')">
+					<tr >
 					<td >
 						[<a href="?c=mproductorder&a=showMproductorder&id={{$row.id}}" >详情</a>]
 						[<a href="?c=mproductorder&a=renewMproductorderFrom&id={{$row.id}}" >续费</a>]
