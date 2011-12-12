@@ -33,6 +33,8 @@ class IndexControl extends Control
 	}
 	public function main()
 	{
+		$role['admin'] = getRole('admin');
+		$this->assign('role',$role);
 		$this->display('main.html');
 	}
 }
