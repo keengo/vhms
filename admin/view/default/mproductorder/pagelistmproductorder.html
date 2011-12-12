@@ -2,16 +2,16 @@
 <body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
 <div id="container">
 	<div align="center">
-		<table>
-		<tr>
-		<div class="mar_top tb_wid5" align="left">
+
+		<div class="mar_top tb_wid5" align="right">
+		<div align="left">
 		<form name='orderform' action="?c=mproductorder&a=pageListMproductorder" method="post">
-			用户名搜索:<input name='username' type='text'><input type='submit' value="提交">
+			<span class="topimg STYLE1">用户名搜索:</span><input name='username' type='text'>&nbsp;<input type='submit' value="提交">
 		</form>
 		
 		</div>
 		
-		<div class="mar_top tb_wid5" align="right">
+
 			{{if $page>1}}
 			<a href='?c=mproductorder&a=pageListMproductorder&order={{$order}}&&page=0'>首页</a> 
 			<a href='?c=mproductorder&a=pageListMproductorder&order={{$order}}&page={{$page-1}}'>上一页</a> 
@@ -26,8 +26,7 @@
 			{{$page}}/{{$total_page}}&nbsp;
 			共计{{$count}}记录
 		</div>
-		</tr>
-		</table>
+
 		<div class="block tb_wid5">
 				<table id="table" border="0" cellpadding="0" cellspacing="1">
 			
