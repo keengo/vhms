@@ -30,7 +30,8 @@ class VhostproductDAO extends DAO {
 			'view'=>'view',
 			'cs'=>'cs',
 			'cdn'=>'cdn',
-			'envs'=>'envs'
+			'envs'=>'envs',
+			'flow'=>'flow'
 		);
 		$this->MAP_TYPE = array(
 			'id'=>FIELD_TYPE_INT|FIELD_TYPE_AUTO,
@@ -51,6 +52,7 @@ class VhostproductDAO extends DAO {
 			'htaccess'=>FIELD_TYPE_INT,
 			'view'=>FIELD_TYPE_INT,
 			'cdn'=>FIELD_TYPE_INT,
+			'flow'=>FIELD_TYPE_INT,
 			'cs'=>FIELD_TYPE_INT
 		);
 		$this->_TABLE = DBPRE .'vhost_product';

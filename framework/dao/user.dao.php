@@ -17,12 +17,14 @@ class UserDAO extends DAO{
 			"name" => 'name',
 			"money" => 'money',
 			"id"=>'id',
-			'agent_id'=>'agent_id'
+			'agent_id'=>'agent_id',
+			'flow'=>'flow'
 			);
 			$this->MAP_TYPE = array(
 				'uid'=>FIELD_TYPE_INT,
 				'money'=>FIELD_TYPE_INT,
 				'agent_id'=>FIELD_TYPE_INT,
+				'flow'=>FIELD_TYPE_INT,
 				'passwd'=>FIELD_TYPE_MD5,
 				'regtime'=>FIELD_TYPE_DATETIME
 			);
