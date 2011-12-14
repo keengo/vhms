@@ -19,7 +19,9 @@ class MproductDAO extends DAO
 			//支持月付,1支持,0不支持
 			'month_flag' => 'month_flag',
 			//是否暂停销售,1暂停,
-			'pause_flag' =>'pause_flag'
+			'pause_flag' => 'pause_flag',
+			//前台价格显示方式，0为默认按年显示
+			'show_price' => 'show_price'
 		);
 		$this->MAP_TYPE = array(
 			'id' => FIELD_TYPE_INT|FIELD_TYPE_AUTO,
@@ -27,7 +29,8 @@ class MproductDAO extends DAO
 			'upid' => FIELD_TYPE_INT,
 			'price' => FIELD_TYPE_INT,
 			'month_flag' => FIELD_TYPE_INT,
-			'pause_flag' => FIELD_TYPE_INT
+			'pause_flag' => FIELD_TYPE_INT,
+			'show_price' => FIELD_TYPE_INT
 		);
 		$this->_TABLE = 'mproduct';
 	}
@@ -97,7 +100,8 @@ class MproductDAO extends DAO
 									'describe',
 									'price',
 									'month_flag',
-									'pause_flag'
+									'pause_flag',
+									'show_price'
 									),
 				 					$where,
 				 					$order_field, 

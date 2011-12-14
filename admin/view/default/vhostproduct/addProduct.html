@@ -178,8 +178,10 @@ function changeNode()
 	</td></tr>
 	<tr>
 		<td class="td_bgc right_2">价格(元/年)</td>
-		<td class="td_bgc right_2"><input name="price" type="text" id='tb_wid3'
-			value="{{$vhostproduct.price/100}}"></td>
+		<td class="td_bgc right_2">
+		<input name="price" type="text" id='tb_wid3' value="{{$vhostproduct.price/100}}">
+		<input type="checkbox" name="show_price" value="1" {{if $vhostproduct.show_price!=0}}checked{{/if}}>前台按月显示
+		</td>
 	</tr>
 	
 	{{if count($agent_ids)>0}}
