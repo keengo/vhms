@@ -30,6 +30,7 @@
 					<td>用户名</td>
 					<td>产品</td>
 					<td>服务器</td>
+					<td>流量(M)</td>
 					<td>注册时间</td>
 					<td>过期时间</td>
 					<td>状态</td>
@@ -44,10 +45,11 @@
 					</td> 
 					<td><a href='?c=vhostproduct&a=impLogin&name={{$row.name}}' target="{{$target}}">{{$row.name}}</a></td>
 					
-					<td>{{$row.product_name}}</td>
+					<td><a href='?c=host&a=showProductFrom&product_id={{$row.product_id}}'>{{$row.product_name}}</a></td>
 					<td>{{$row.node}}</td>
-					<td>{{$row.create_time}}</td>
-					<td>{{$row.expire_time}}</td>
+					<td>{{$row.flow}}</td>
+					<td>{{substr($row.create_time,0,10)}}</td>
+					<td>{{substr($row.expire_time,0,10)}}</td>
 					<td title='{{$row.status}}'>{{if $row.status==0}}正常{{else}}<font color='red'>暂停</font>{{/if}}</td>
 					</tr>
 					{{/foreach}}

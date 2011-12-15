@@ -8,6 +8,7 @@ define('FIELD_TYPE_STRING',0);
 define('FIELD_TYPE_INT',1);
 define('FIELD_TYPE_MD5',2);
 define('FIELD_TYPE_DATETIME',4);
+define('FIELD_TYPE_BIGINT',8);
 define('FIELD_TYPE_AUTO',1<<28);
 class DAO
 {
@@ -242,7 +243,12 @@ class DAO
 			if($fieldstr!=""){
 				$fieldstr.=',';
 			}
-			$fieldstr .= "`".$this->MAP_ARR[$field]."` AS `".$field."`";
+			if ($this->MAP_TYPE[$field] & FIELD_TYPE_BIGINT) {
+				$f = '`'.$this->MAP_ARR[$field].'`/1048576';
+			} else {
+				$f = '`'.$this->MAP_ARR[$field].'`';
+			}
+			$fieldstr .= $f.' AS `'.$field.'`';
 		}
 		return $fieldstr;
 	}

@@ -28,7 +28,8 @@ class VhostDAO extends DAO{
 			'status'=>FIELD_TYPE_INT,
 			'product_id'=>FIELD_TYPE_INT,
 			'create_time'=>FIELD_TYPE_DATETIME,
-			'expire_time'=>FIELD_TYPE_DATETIME
+			'expire_time'=>FIELD_TYPE_DATETIME,
+			'flow'=>FIELD_TYPE_BIGINT,
 			);
 			$this->_TABLE = DBPRE . 'vhost';
 	}
@@ -80,9 +81,9 @@ class VhostDAO extends DAO{
 			$where.=" AND ".$this->getFieldValue2('name', $name);
 		}
 		return $this->selectPage(
-		array('name','uid','templete','node','create_time','expire_time','status','product_id','username'),
+		array('name','uid','templete','node','create_time','expire_time','status','product_id','username','flow'),
 		$where,
-					'uid', 
+		'uid', 
 		true,
 		$page,
 		$page_count,
