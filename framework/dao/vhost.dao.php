@@ -93,7 +93,7 @@ class VhostDAO extends DAO{
 	public function pageVhost($page,$page_count,&$count)
 	{
 		return $this->selectPage(
-		array('name','uid','username','templete','node','doc_root','create_time','expire_time','product_id','status'),
+		array('name','uid','username','templete','node','doc_root','create_time','expire_time','product_id','status','flow'),
 		null,
 		'uid', 
 		true,

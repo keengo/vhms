@@ -8,6 +8,8 @@ define('FIELD_TYPE_STRING',0);
 define('FIELD_TYPE_INT',1);
 define('FIELD_TYPE_MD5',2);
 define('FIELD_TYPE_DATETIME',4);
+//BIGINT查询的时候会除1048576,插入和更新时当字符串处理。
+//利用mysql去处理太大数字，php会有溢出。
 define('FIELD_TYPE_BIGINT',8);
 define('FIELD_TYPE_AUTO',1<<28);
 class DAO
