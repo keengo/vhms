@@ -69,3 +69,6 @@ CREATE TABLE IF NOT EXISTS `mproduct_order` (
 ALTER TABLE `vhost` ADD `flow` BIGINT NOT NULL ;
 ALTER TABLE `users` ADD `flow` BIGINT NOT NULL ;
 ALTER TABLE `vhost_product` ADD `flow` BIGINT NOT NULL ;
+ALTER TABLE `mproduct` ADD `show_price` tinyint(4) NOT NULL default '0';
+ALTER TABLE `vhost_product` ADD `show_price` tinyint(4) NOT NULL default '0';
+
