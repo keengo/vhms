@@ -3,6 +3,10 @@ class VhostproductDAO extends DAO {
 //	private $_TABLE	= 'vhost_product';
 	public function __construct()
 	{	
+		//show_price前台金额显示方式，0为默认按年显示
+		//view更改为前台显示顺序
+		//speed_limit带宽限制
+		//cdn是否为cdn，或虚拟主机
 		parent::__construct();
 		$this->MAP_ARR 	= array(		
 			"id" => 'id',
@@ -31,6 +35,7 @@ class VhostproductDAO extends DAO {
 			'cs'=>'cs',
 			'cdn'=>'cdn',
 			'envs'=>'envs',
+			'show_price'=>'show_price',
 			'flow'=>'flow'
 		);
 		$this->MAP_TYPE = array(
@@ -52,8 +57,9 @@ class VhostproductDAO extends DAO {
 			'htaccess'=>FIELD_TYPE_INT,
 			'view'=>FIELD_TYPE_INT,
 			'cdn'=>FIELD_TYPE_INT,
-			'flow'=>FIELD_TYPE_INT,
-			'cs'=>FIELD_TYPE_INT
+			'cs'=>FIELD_TYPE_INT,
+			'show_price'=>FIELD_TYPE_INT,
+			'flow'=>FIELD_TYPE_INT
 		);
 		$this->_TABLE = DBPRE .'vhost_product';
 	}
@@ -119,7 +125,8 @@ class VhostproductDAO extends DAO {
 			'envs',
 			'cs',
 			'cdn',
-			'view'
+			'view',
+			'show_price'
 		), $arr);
 		$sql = "UPDATE ".$this->_TABLE." SET ".$fields." WHERE ".$this->getFieldValue2('id',$arr['id']);
 		return $this->executex($sql);
@@ -150,7 +157,8 @@ class VhostproductDAO extends DAO {
 										'subtemplete','ftp','max_connect',
 										'access','htaccess','log_file',
 										'speed_limit','domain','subdir',
-										'subdir_flag','upid','try_flag','describe'),
+										'subdir_flag','upid','try_flag',
+										'describe','show_price'),
 										 $where, 'view',false, $page, $page_count, $count);
 		
 	}

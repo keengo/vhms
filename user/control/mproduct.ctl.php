@@ -12,7 +12,9 @@ class MproductControl extends Control
 	public function index()
 	{
 		$refer = intval($_REQUEST['refer']);
+		$mproductgroup = daocall('mproductgroup','getMproductgroup',array($refer));
 		$mproducts = daocall('mproduct','getMproductByGroupid',array($refer));
+		$this->_tpl->assign('mproductgroup',$mproductgroup);
 		$this->_tpl->assign('mproducts',$mproducts);
 		return $this->_tpl->fetch('mproduct/index.html');
 	}

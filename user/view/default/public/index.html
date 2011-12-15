@@ -72,7 +72,7 @@
 			  <tr><td class="right_h">支持：html,{{$products[$i].templete}}</td></tr>
 			  <tr><td class="right_h">子目录绑定： {{if $products[$i].subdir}}支持{{else}}无{{/if}}</td></tr>
 			  <tr>
-				<td class="right_h">价格：<span class="color_red"><b>{{$products[$i].price/100}}</b></span>元/年</td>
+				<td class="right_h">价格：<span class="color_red"><b>{{if $products[$i].show_price==1}}{{substr($products[$i].price/100/12,0,6)}}元/月{{else}}{{$products[$i].price/100}}元/年{{/if}}</b></span></td>
 			  </tr>
 			  <tr><td class="right_r right_hg3" colspan="2">
 				<a href="?c=product&a=sellForm&product=vhost_{{$products[$i].id}}">
