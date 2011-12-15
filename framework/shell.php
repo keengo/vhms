@@ -3,7 +3,7 @@
 @set_time_limit(0);
 function Usage()
 {
-	die("Usage: ".$_SERVER['argv'][0]." <sync|sync_flow>\n");
+	die("Usage: ".$_SERVER['argv'][0]." <sync|sync_flow|sync_expire>\n");
 }
 $dir = dirname(__FILE__);
 define('SYS_ROOT',$dir);

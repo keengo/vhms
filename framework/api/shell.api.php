@@ -24,11 +24,11 @@ class ShellAPI extends API
 		//echo $t;
 		foreach ($nodes as $node) {
 			$this->sync_host_flow($node['name'],$t);
-		}	
+		}
 	}
 	public function sync_host_flow($node,$t)
 	{
-		echo "sync ".$node." flow...\n";		
+		echo "sync ".$node." flow...\n";
 		$month = substr($t,0,6);
 		$day = substr($t,0,8);
 		$hour = $t;
@@ -50,6 +50,43 @@ class ShellAPI extends API
 			echo $name." flow=".$flow."\n";
 			apicall('vhost','addFlow',array($name,$month,$day,$hour,$flow));
 		}
+	}
+	public function sync_expire()
+	{
+		$day = 1; //查询过期天数
+		$del_day = 30;//过期多少天删除空间
+
+		$vhosts = daocall('vhost','selectListByExpire_time',array($day)); //获取过期空间		
+		if (is_array($vhosts)) {
+			foreach ($vhosts as $vhost) {
+				$arr['status'] = 1;
+				$return = apicall('vhost','changeStatus',array($vhost['node'],$vhost['name'],1));
+				$stopstr =$vhost['name']." web stop result=".$return."\r\n";
+				echo $stopstr;
+				echo "</br>";
+				//writelog($fp,$stopstr);
+			}
+		}
+
+		//查询过期达到指定天数的网站，并删除
+		$del_vhosts = daocall('vhost','selectListByExpire_time',array($del_day,-1));
+		if (is_array($del_vhosts)) {
+			foreach ($del_vhosts as $del_vhost) {
+				$result = apicall('vhost','del',array($del_vhost['node'],$del_vhost['name']));
+				$stopstr = $del_vhost['name']." web del result=".$result."\r\n";
+				echo $stopstr;
+				echo "</br>";
+				//writelog($fp,$stopstr);
+			}
+		}
+	}
+	//获取数据库的使用量;
+	private function getDbUsed($nodename,$name)
+	{
+		$whm = apicall('nodes','makeWhm',array($nodename));
+		$whmCall = new WhmCall('getDbUsed');
+		$whmCall->addParam('name', $name);
+		return $whm->call($whmCall,10);
 	}
 }
 ?>
