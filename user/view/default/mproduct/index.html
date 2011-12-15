@@ -1,6 +1,13 @@
+	<table width='100%' border='0'>
+	<tr>
+	<td>
 	{{if $mproductgroup}}
 		{{$mproductgroup.describe}}
 	{{/if}}
+	</td>
+	</tr>
+	<tr>
+	<td>
 	{{if is_array($mproducts)}}
 		{{for $i=0;$i < count($mproducts);$i++}}
 			<div class="left_box Left_main_vh2 right_main">
@@ -18,12 +25,19 @@
 					<tr>
 					<td>
 					{{$mproducts[$i].price/100}}&nbsp;元/年
-					<a href='?c=mproduct&a=showMproductFrom&id={{$mproducts[$i].id}}'>点击购买</a>
+					
 					</td>
+					</tr>
+					<tr>
+						<td>
+							<a href='?c=mproduct&a=showMproductFrom&id={{$mproducts[$i].id}}'>点击购买</a>
+						</td>
 					</tr>
 				</table>
 			</div>
 		{{/for}}
 	{{/if}}
-		
+	</td>
+	</tr>
+	</table>
 
