@@ -99,6 +99,23 @@ class VhostAPI extends API
 		}
 		return false;
 	}
+	
+	/**
+	 * 
+	 * 增加虚拟主机流量
+	 * @param $name  虚拟主机用户名
+	 * @param $month YYYYMM
+	 * @param $day   YYYYMMDD
+	 * @param $hour  YYYYMMDDHH
+	 * @param $flow  流量
+	 */
+	public function addFlow($name,$month,$day,$hour,$flow)
+	{
+		daocall('vhost','addFlow',array($name,$flow));
+		daocall('flowhour','add',array($name,$hour,$flow));
+		daocall('flowday','add',array($name,$day,$flow));
+		daocall('flowmonth','add',array($name,$month,$flow));
+	}
 	/**
 	 * 
 	 * 更改虚拟主机的ftp密码，

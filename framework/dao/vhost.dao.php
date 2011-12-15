@@ -28,12 +28,15 @@ class VhostDAO extends DAO{
 			'status'=>FIELD_TYPE_INT,
 			'product_id'=>FIELD_TYPE_INT,
 			'create_time'=>FIELD_TYPE_DATETIME,
-			'expire_time'=>FIELD_TYPE_DATETIME,
-			'flow'=>FIELD_TYPE_INT		
+			'expire_time'=>FIELD_TYPE_DATETIME
 			);
 			$this->_TABLE = DBPRE . 'vhost';
 	}
-
+	public function addFlow($name,$flow)
+	{
+		$sql = "UPDATE ".$this->_TABLE." SET flow = flow + '".addslashes($flow)."' WHERE ".$this->getFieldValue2('name',$name);
+		return $this->executex($sql,'result');
+	}
 	//执行空间删除shell所用
 	public function selectListByExpire_time($day,$status=0)
 	{

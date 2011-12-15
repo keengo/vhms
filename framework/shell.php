@@ -8,6 +8,7 @@ function Usage()
 $dir = dirname(__FILE__);
 define('SYS_ROOT',$dir);
 define('APPLICATON_ROOT','');
+date_default_timezone_set('Asia/Shanghai');
 include(SYS_ROOT . '/runtime.php');
 if($_SERVER["argv"]== null || $_REQUEST!=null ){
 	die("crontab cann't run in web model.please run in cli.");
