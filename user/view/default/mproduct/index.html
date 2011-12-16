@@ -1,13 +1,10 @@
-	<table width='100%' border='0'>
-	<tr>
-	<td>
-	{{if $mproductgroup}}
-		{{$mproductgroup.describe}}
-	{{/if}}
-	</td>
-	</tr>
-	<tr>
-	<td>
+<table width='100%' border='0'>
+	<tr><td>
+		{{if $mproductgroup}}
+			{{$mproductgroup.describe}}
+		{{/if}}
+	</td></tr>
+	<tr><td>
 	{{if is_array($mproducts)}}
 		{{for $i=0;$i < count($mproducts);$i++}}
 			{{if $i/3==0}}
@@ -15,32 +12,19 @@
 			{{/if}}
 			<div class="left_box Left_main_vh2 right_main">
 				<table >
-					<tr>
-					<td>
-						<a href='?c=mproduct&a=showMproductFrom&id={{$mproducts[$i].id}}'>{{$mproducts[$i].name}}</a>
-					</td>
-					</tr>
-					
-					<tr>
-					<td >{{$mproducts[$i].describe}}</td>
-					</tr>
-					
-					<tr>
-					<td>
-					{{if $mproducts[$i].show_price==1}}{{substr($mproducts[$i].price/100/12,0,5)}}元/月{{else}}{{$mproducts[$i].price/100}}元/年{{/if}}
-					
-					</td>
-					</tr>
-					<tr>
-						<td>
+					<tr><td><a href='?c=mproduct&a=showMproductFrom&id={{$mproducts[$i].id}}'>{{$mproducts[$i].name}}</a></td></tr>
+					<tr><td >{{$mproducts[$i].describe}}</td></tr>
+					<tr><td>
+						{{if $mproducts[$i].show_price==1}}{{substr($mproducts[$i].price/100/12,0,5)}}元/月{{else}}{{$mproducts[$i].price/100}}元/年{{/if}}
+					</td></tr>
+					<tr><td>
 							<a href='?c=mproductorder&a=addMproductorderFrom&mproduct_id={{$mproducts[$i].id}}'>点击购买</a>
-						</td>
-					</tr>
+					</td></tr>
 				</table>
 			</div>
 		{{/for}}
 	{{/if}}
 	</td>
 	</tr>
-	</table>
+</table>
 
