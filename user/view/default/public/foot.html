@@ -7,10 +7,9 @@
 					<td class="fontcolor" colspan="3">
 						<table border="0" cellspacing="7" width="100%">
 							 <tr>
-								<td bgcolor="#FFFFFF" class="right" valign="middle" height="40"><span>友情合作：</span>
-									<span class="right"><a href="http://www.kanglesoft.com/" title="http://www.kanglesoft.com" target="_blank">kangle</a></span>
-									<span class="right"><a href="http://www.kanglesoft.com/" title="http://www.kanglesoft.com" target="_blank">easypanel</a></span>
-									<span class="right"><a href="http://www.kanglesoft.com/" title="http://www.kanglesoft.com" target="_blank">vhms</a></span>
+								<td bgcolor="#FFFFFF" class="right" valign="middle" height="40">
+								<span>友情合作：</span>{{$setting.footer.value}}
+
 								</td>
 							 </tr>
 						</table>
@@ -18,9 +17,8 @@
 				</tr>
 				<tr>
 					<td colspan="3" align="center">
-						<table><tr><td align="center">
-								  | 关于我们 | 广告服务| 付款方式 | 友情连接| 
-								  <div align="center">Powered by <a href='http://www.kanglesoft.com/'>kangle vhms</a> {{$setting.stat_code.value}}</div>
+						<table width="100%"><tr><td align="center">
+						  {{$setting.stat_code.value}}
 						</td></tr></table>
 					</td>
 				</tr>
@@ -28,7 +26,6 @@
 		 </div>
 	 </div>
 </div>
-
 </body>
 </html>
 
