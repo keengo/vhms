@@ -2,21 +2,21 @@
 -- version 3.3.9
 -- http://www.phpmyadmin.net
 --
--- Ö÷»ú: localhost
--- Éú³ÉÈÕÆÚ: 2011 Äê 12 ÔÂ 07 ÈÕ 20:42
--- ·þÎñÆ÷°æ±¾: 5.0.77
--- PHP °æ±¾: 5.3.3
+-- ï¿½ï¿½ï¿½ï¿½: localhost
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: 2011 ï¿½ï¿½ 12 ï¿½ï¿½ 07 ï¿½ï¿½ 20:42
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ±¾: 5.0.77
+-- PHP ï¿½æ±¾: 5.3.3
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 --
--- Êý¾Ý¿â: `kangle`
+-- ï¿½ï¿½Ý¿ï¿½: `kangle`
 --
 
 -- --------------------------------------------------------
 
 --
--- ±íµÄ½á¹¹ `admin_users`
+-- ï¿½ï¿½Ä½á¹¹ `admin_users`
 --
 
 CREATE TABLE IF NOT EXISTS `admin_users` (
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `admin_users` (
 -- --------------------------------------------------------
 
 --
--- ±íµÄ½á¹¹ `agent`
+-- ï¿½ï¿½Ä½á¹¹ `agent`
 --
 
 CREATE TABLE IF NOT EXISTS `agent` (
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `agent` (
 -- --------------------------------------------------------
 
 --
--- ±íµÄ½á¹¹ `agent_price`
+-- ï¿½ï¿½Ä½á¹¹ `agent_price`
 --
 
 CREATE TABLE IF NOT EXISTS `agent_price` (
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `agent_price` (
 -- --------------------------------------------------------
 
 --
--- ±íµÄ½á¹¹ `flow_day`
+-- ï¿½ï¿½Ä½á¹¹ `flow_day`
 --
 
 CREATE TABLE IF NOT EXISTS `flow_day` (
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `flow_day` (
 -- --------------------------------------------------------
 
 --
--- ±íµÄ½á¹¹ `flow_hour`
+-- ï¿½ï¿½Ä½á¹¹ `flow_hour`
 --
 
 CREATE TABLE IF NOT EXISTS `flow_hour` (
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `flow_hour` (
 -- --------------------------------------------------------
 
 --
--- ±íµÄ½á¹¹ `flow_month`
+-- ï¿½ï¿½Ä½á¹¹ `flow_month`
 --
 
 CREATE TABLE IF NOT EXISTS `flow_month` (
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `flow_month` (
 -- --------------------------------------------------------
 
 --
--- ±íµÄ½á¹¹ `links`
+-- ï¿½ï¿½Ä½á¹¹ `links`
 --
 
 CREATE TABLE IF NOT EXISTS `links` (
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `links` (
 -- --------------------------------------------------------
 
 --
--- ±íµÄ½á¹¹ `money_in`
+-- ï¿½ï¿½Ä½á¹¹ `money_in`
 --
 
 CREATE TABLE IF NOT EXISTS `money_in` (
@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `money_in` (
 -- --------------------------------------------------------
 
 --
--- ±íµÄ½á¹¹ `money_out`
+-- ï¿½ï¿½Ä½á¹¹ `money_out`
 --
 
 CREATE TABLE IF NOT EXISTS `money_out` (
@@ -144,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `money_out` (
 -- --------------------------------------------------------
 
 --
--- ±íµÄ½á¹¹ `mproduct`
+-- ï¿½ï¿½Ä½á¹¹ `mproduct`
 --
 
 CREATE TABLE IF NOT EXISTS `mproduct` (
@@ -158,12 +158,12 @@ CREATE TABLE IF NOT EXISTS `mproduct` (
   `pause_flag` tinyint(4) NOT NULL,
   `show_price` tinyint(4) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='·Ç×Ô¶¯²úÆ·';
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½Æ·';
 
 -- --------------------------------------------------------
 
 --
--- ±íµÄ½á¹¹ `mproduct_group`
+-- ï¿½ï¿½Ä½á¹¹ `mproduct_group`
 --
 
 CREATE TABLE IF NOT EXISTS `mproduct_group` (
@@ -176,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `mproduct_group` (
 -- --------------------------------------------------------
 
 --
--- ±íµÄ½á¹¹ `mproduct_order`
+-- ï¿½ï¿½Ä½á¹¹ `mproduct_order`
 --
 
 CREATE TABLE IF NOT EXISTS `mproduct_order` (
@@ -198,7 +198,7 @@ CREATE TABLE IF NOT EXISTS `mproduct_order` (
 -- --------------------------------------------------------
 
 --
--- ±íµÄ½á¹¹ `news`
+-- ï¿½ï¿½Ä½á¹¹ `news`
 --
 
 CREATE TABLE IF NOT EXISTS `news` (
@@ -212,7 +212,7 @@ CREATE TABLE IF NOT EXISTS `news` (
 -- --------------------------------------------------------
 
 --
--- ±íµÄ½á¹¹ `nodes`
+-- ï¿½ï¿½Ä½á¹¹ `nodes`
 --
 
 CREATE TABLE IF NOT EXISTS `nodes` (
@@ -235,7 +235,7 @@ CREATE TABLE IF NOT EXISTS `nodes` (
 -- --------------------------------------------------------
 
 --
--- ±íµÄ½á¹¹ `question`
+-- ï¿½ï¿½Ä½á¹¹ `question`
 --
 
 CREATE TABLE IF NOT EXISTS `question` (
@@ -256,19 +256,19 @@ CREATE TABLE IF NOT EXISTS `question` (
 -- --------------------------------------------------------
 
 --
--- ±íµÄ½á¹¹ `setting`
+-- ï¿½ï¿½Ä½á¹¹ `setting`
 --
 
 CREATE TABLE IF NOT EXISTS `setting` (
   `name` varchar(255) NOT NULL,
-  `value` varchar(255) default NULL,
+  `value` text,
   PRIMARY KEY  (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- ±íµÄ½á¹¹ `users`
+-- ï¿½ï¿½Ä½á¹¹ `users`
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
@@ -289,7 +289,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- --------------------------------------------------------
 
 --
--- ±íµÄ½á¹¹ `vhost`
+-- ï¿½ï¿½Ä½á¹¹ `vhost`
 --
 
 CREATE TABLE IF NOT EXISTS `vhost` (
@@ -315,7 +315,7 @@ CREATE TABLE IF NOT EXISTS `vhost` (
 -- --------------------------------------------------------
 
 --
--- ±íµÄ½á¹¹ `vhost_product`
+-- ï¿½ï¿½Ä½á¹¹ `vhost_product`
 --
 
 CREATE TABLE IF NOT EXISTS `vhost_product` (
@@ -353,7 +353,7 @@ CREATE TABLE IF NOT EXISTS `vhost_product` (
 -- --------------------------------------------------------
 
 --
--- ±íµÄ½á¹¹ `vhost_webapp`
+-- ï¿½ï¿½Ä½á¹¹ `vhost_webapp`
 --
 
 CREATE TABLE IF NOT EXISTS `vhost_webapp` (

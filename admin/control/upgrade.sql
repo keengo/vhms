@@ -71,4 +71,5 @@ ALTER TABLE `users` ADD `flow` BIGINT NOT NULL ;
 ALTER TABLE `vhost_product` ADD `flow` BIGINT NOT NULL ;
 ALTER TABLE `mproduct` ADD `show_price` tinyint(4) NOT NULL default '0';
 ALTER TABLE `vhost_product` ADD `show_price` tinyint(4) NOT NULL default '0';
+ALTER TABLE `setting` CHANGE `value` `value` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ;
 
