@@ -48,11 +48,18 @@ class MproductDAO extends DAO
 		}
 		return $this->select(null,$where,$type);
 	}
-	public function add($arr)
+	public function add($attr)
 	{
-		$arr['price']*=100;
-		if($arr['id']){
-			return $this->update($arr, $this->getFieldValue2('id', $arr['id']));
+		$arr['price'] = $attr['price']*100;
+		$arr['name'] = $attr['name'];
+		$arr['group_id'] = $attr['group_id'];
+		$arr['upid'] = $attr['upid'];
+		$arr['describe'] = $attr['describe'];
+		$arr['pause_flag'] = $attr['pause_flag'];
+		$arr['month_flag'] = $attr['month_flag'];
+		$arr['show_price'] = $attr['show_price'];
+		if($attr['id']){
+			return $this->update($arr, $this->getFieldValue2('id', $attr['id']));
 		}
 		$result = $this->insert($arr);
 		if($result){
