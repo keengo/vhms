@@ -42,7 +42,6 @@ function db_connect($host)
  **/
 function db_query(PDO $db,$sql, $ret_type = 'result')
 {
-	
 	/*$s = db_parsesql($sql);
 	if(!$s){
 		return false;
