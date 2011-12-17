@@ -70,6 +70,17 @@ ALTER TABLE `vhost` ADD `flow` BIGINT NOT NULL ;
 ALTER TABLE `users` ADD `flow` BIGINT NOT NULL ;
 ALTER TABLE `vhost_product` ADD `flow` BIGINT NOT NULL ;
 ALTER TABLE `mproduct` ADD `show_price` tinyint(4) NOT NULL default '0';
-ALTER TABLE `vhost_product` ADD `show_price` tinyint(4) NOT NULL default '0';
+ALTER TABLE `vhost_product` ADD `show_price` tinyint(4) NOT NULL DEFAULT '0';
 ALTER TABLE `setting` CHANGE `value` `value` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ;
+ALTER TABLE  `users` CHANGE  `flow`  `flow` BIGINT( 20 ) NOT NULL DEFAULT  '0';
+ALTER TABLE  `users` CHANGE  `uid`  `uid` INT( 11 ) NOT NULL DEFAULT  '0';
+ALTER TABLE  `vhost` CHANGE  `flow`  `flow` BIGINT( 20 ) NOT NULL DEFAULT  '0';
+ALTER TABLE  `vhost_product` CHANGE  `flow`  `flow` BIGINT( 20 ) NOT NULL DEFAULT  '0',CHANGE  `show_price`  `show_price` TINYINT( 4 ) NOT NULL DEFAULT  '0';
+ALTER TABLE  `mproduct` CHANGE  `group_id`  `group_id` INT( 11 ) NOT NULL DEFAULT  '0',
+CHANGE  `upid`  `upid` INT( 11 ) NOT NULL DEFAULT  '0',
+CHANGE  `price`  `price` INT( 11 ) NOT NULL DEFAULT  '0',
+CHANGE  `month_flag`  `month_flag` TINYINT( 4 ) NOT NULL DEFAULT  '0',
+CHANGE  `pause_flag`  `pause_flag` TINYINT( 4 ) NOT NULL DEFAULT  '0',
+CHANGE  `show_price`  `show_price` TINYINT( 4 ) NOT NULL DEFAULT  '0';
+ALTER TABLE  `mproduct` CHANGE  `describe`  `describe` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL;
 
