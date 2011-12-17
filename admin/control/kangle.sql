@@ -2,21 +2,21 @@
 -- version 3.3.9
 -- http://www.phpmyadmin.net
 --
--- ����: localhost
--- �������: 2011 �� 12 �� 07 �� 20:42
--- �������汾: 5.0.77
--- PHP �汾: 5.3.3
+-- 主机: localhost
+-- 生成日期: 2011 年 12 月 09 日 22:08
+-- 服务器版本: 5.0.77
+-- PHP 版本: 5.3.3
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 --
--- ��ݿ�: `kangle`
+-- 数据库: `kangle`
 --
 
 -- --------------------------------------------------------
 
 --
--- ��Ľṹ `admin_users`
+-- 表的结构 `admin_users`
 --
 
 CREATE TABLE IF NOT EXISTS `admin_users` (
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `admin_users` (
 -- --------------------------------------------------------
 
 --
--- ��Ľṹ `agent`
+-- 表的结构 `agent`
 --
 
 CREATE TABLE IF NOT EXISTS `agent` (
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `agent` (
 -- --------------------------------------------------------
 
 --
--- ��Ľṹ `agent_price`
+-- 表的结构 `agent_price`
 --
 
 CREATE TABLE IF NOT EXISTS `agent_price` (
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `agent_price` (
 -- --------------------------------------------------------
 
 --
--- ��Ľṹ `flow_day`
+-- 表的结构 `flow_day`
 --
 
 CREATE TABLE IF NOT EXISTS `flow_day` (
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `flow_day` (
 -- --------------------------------------------------------
 
 --
--- ��Ľṹ `flow_hour`
+-- 表的结构 `flow_hour`
 --
 
 CREATE TABLE IF NOT EXISTS `flow_hour` (
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `flow_hour` (
 -- --------------------------------------------------------
 
 --
--- ��Ľṹ `flow_month`
+-- 表的结构 `flow_month`
 --
 
 CREATE TABLE IF NOT EXISTS `flow_month` (
@@ -92,24 +92,9 @@ CREATE TABLE IF NOT EXISTS `flow_month` (
   PRIMARY KEY  (`name`,`t`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
 --
--- ��Ľṹ `links`
---
-
-CREATE TABLE IF NOT EXISTS `links` (
-  `id` int(255) NOT NULL auto_increment,
-  `order` int(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `url` varchar(255) default NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- ��Ľṹ `money_in`
+-- 表的结构 `money_in`
 --
 
 CREATE TABLE IF NOT EXISTS `money_in` (
@@ -128,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `money_in` (
 -- --------------------------------------------------------
 
 --
--- ��Ľṹ `money_out`
+-- 表的结构 `money_out`
 --
 
 CREATE TABLE IF NOT EXISTS `money_out` (
@@ -144,26 +129,26 @@ CREATE TABLE IF NOT EXISTS `money_out` (
 -- --------------------------------------------------------
 
 --
--- ��Ľṹ `mproduct`
+-- 表的结构 `mproduct`
 --
 
 CREATE TABLE IF NOT EXISTS `mproduct` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(32) NOT NULL,
-  `group_id` int(11) NOT NULL,
-  `upid` int(11) NOT NULL,
-  `describe` text NOT NULL,
-  `price` int(11) NOT NULL,
-  `month_flag` tinyint(4) NOT NULL,
-  `pause_flag` tinyint(4) NOT NULL,
-  `show_price` tinyint(4) NOT NULL,
+  `group_id` int(11) NOT NULL default '0',
+  `upid` int(11) NOT NULL default '0',
+  `describe` text,
+  `price` int(11) NOT NULL default '0',
+  `month_flag` tinyint(4) NOT NULL default '0',
+  `pause_flag` tinyint(4) NOT NULL default '0',
+  `show_price` tinyint(4) NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='���Զ���Ʒ';
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='非自动产品';
 
 -- --------------------------------------------------------
 
 --
--- ��Ľṹ `mproduct_group`
+-- 表的结构 `mproduct_group`
 --
 
 CREATE TABLE IF NOT EXISTS `mproduct_group` (
@@ -176,7 +161,7 @@ CREATE TABLE IF NOT EXISTS `mproduct_group` (
 -- --------------------------------------------------------
 
 --
--- ��Ľṹ `mproduct_order`
+-- 表的结构 `mproduct_order`
 --
 
 CREATE TABLE IF NOT EXISTS `mproduct_order` (
@@ -198,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `mproduct_order` (
 -- --------------------------------------------------------
 
 --
--- ��Ľṹ `news`
+-- 表的结构 `news`
 --
 
 CREATE TABLE IF NOT EXISTS `news` (
@@ -212,7 +197,7 @@ CREATE TABLE IF NOT EXISTS `news` (
 -- --------------------------------------------------------
 
 --
--- ��Ľṹ `nodes`
+-- 表的结构 `nodes`
 --
 
 CREATE TABLE IF NOT EXISTS `nodes` (
@@ -235,7 +220,7 @@ CREATE TABLE IF NOT EXISTS `nodes` (
 -- --------------------------------------------------------
 
 --
--- ��Ľṹ `question`
+-- 表的结构 `question`
 --
 
 CREATE TABLE IF NOT EXISTS `question` (
@@ -256,7 +241,7 @@ CREATE TABLE IF NOT EXISTS `question` (
 -- --------------------------------------------------------
 
 --
--- ��Ľṹ `setting`
+-- 表的结构 `setting`
 --
 
 CREATE TABLE IF NOT EXISTS `setting` (
@@ -268,11 +253,11 @@ CREATE TABLE IF NOT EXISTS `setting` (
 -- --------------------------------------------------------
 
 --
--- ��Ľṹ `users`
+-- 表的结构 `users`
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `uid` tinyint(11) NOT NULL default '0',
+  `uid` int(11) NOT NULL default '0',
   `username` varchar(32) NOT NULL,
   `passwd` varchar(255) NOT NULL,
   `email` varchar(255) default NULL,
@@ -289,7 +274,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- --------------------------------------------------------
 
 --
--- ��Ľṹ `vhost`
+-- 表的结构 `vhost`
 --
 
 CREATE TABLE IF NOT EXISTS `vhost` (
@@ -306,7 +291,7 @@ CREATE TABLE IF NOT EXISTS `vhost` (
   `node` varchar(32) NOT NULL,
   `product_id` int(11) NOT NULL,
   `username` varchar(32) NOT NULL,
-  `flow` bigint(20) NOT NULL,
+  `flow` bigint(20) NOT NULL default '0',
   PRIMARY KEY  (`uid`),
   UNIQUE KEY `name` (`name`),
   KEY `username` (`username`)
@@ -315,7 +300,7 @@ CREATE TABLE IF NOT EXISTS `vhost` (
 -- --------------------------------------------------------
 
 --
--- ��Ľṹ `vhost_product`
+-- 表的结构 `vhost_product`
 --
 
 CREATE TABLE IF NOT EXISTS `vhost_product` (
@@ -345,15 +330,15 @@ CREATE TABLE IF NOT EXISTS `vhost_product` (
   `cs` tinyint(4) default '0',
   `envs` text,
   `cdn` tinyint(4) default '0',
-  `flow` bigint(20) NOT NULL,
-  `show_price` tinyint(4) NOT NULL,
+  `flow` bigint(20) NOT NULL default '0',
+  `show_price` tinyint(4) NOT NULL default '0',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- ��Ľṹ `vhost_webapp`
+-- 表的结构 `vhost_webapp`
 --
 
 CREATE TABLE IF NOT EXISTS `vhost_webapp` (
@@ -370,4 +355,3 @@ CREATE TABLE IF NOT EXISTS `vhost_webapp` (
   PRIMARY KEY  (`id`),
   KEY `user` (`user`,`appid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
