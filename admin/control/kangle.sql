@@ -266,7 +266,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `id` varchar(255) default NULL,
   `regtime` datetime NOT NULL,
   `agent_id` int(11) NOT NULL default '0',
-  `flow` bigint(20) NOT NULL,
+  `flow` bigint(20) NOT NULL default '0',
   PRIMARY KEY  (`username`),
   KEY `uid` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
