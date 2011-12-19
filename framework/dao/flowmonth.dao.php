@@ -29,5 +29,12 @@ class FlowmonthDAO extends DAO
 		}
 		return $result;
 	}
+	public function get($name,$t)
+	{
+		$where = $this->getFieldValue2('name', $name);
+		$where .= ' and '.$this->getFieldValue2('t', $t);
+		return $this->select('flow',$where,'row');
+	}
+
 }
 ?>
