@@ -114,7 +114,7 @@ function changeNode()
 			value="{{intval($vhostproduct.upid)}}" size="3">(可升级到相同产品组的其它产品，设置为0不可升级)</td>
 	</tr>
 	<tr>
-		<td class="td_bgc right_2">类型：</td>
+		<td class="td_bgc right_2">产品类型：</td>
 		<td class="td_bgc right_2 tb_wid2">
 		<script language='javascript'>
 			function change_cdn(val)
@@ -128,7 +128,7 @@ function changeNode()
 			
 		</script>
 		<input name='cdn' type='radio'	value="0" {{if !$vhostproduct || $vhostproduct.cdn==0}} checked {{/if}} onClick="change_cdn(0)">虚拟主机
-		<input name='cdn' type='radio'	value="1" {{if $vhostproduct.cdn==1}} checked {{/if}} onClick="change_cdn(1)">cdn
+		<input name='cdn' type='radio'	value="1" {{if $vhostproduct.cdn==1}} checked {{/if}} onClick="change_cdn(1)">cdn(收费版才有此功能)
 	</td>
 	</tr>
 	<tr><td colspan='2'>
