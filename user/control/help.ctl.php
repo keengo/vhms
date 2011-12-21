@@ -8,6 +8,7 @@ class HelpControl extends Control
 	}
 	public function index()
 	{
+
 		return $this->_tpl->fetch('help/index.html');
 	}
 	
