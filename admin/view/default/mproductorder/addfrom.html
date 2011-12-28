@@ -1,72 +1,61 @@
 {{include file='common/head.html'}}
 <body leftmargin="0" topmargin="0" bgcolor="#ffffff" text="#000000">
 <div align="center">
-	<form name='nodeform' action="?c=mproductorder&a=addMproductorder&id={{$mproductorder.id}}&username={{$mproductorder.username}}" method="post">
-		<div class="head_block tb_wid2" >&nbsp;订单更改</div>
-		<div class="block tb_wid2">
-			<table id="table_2" cellpadding="0" cellspacing="1">
-		
-				<tr>
-					<td class="td_bgc right_2">订单ID：</td>
-					<td class="td_bgc right_2 tb_wid2">{{$mproductorder.id}}</td>
-				</tr>
-			
-				
-				<tr>
-					<td class="td_bgc right_2">用户名：</td>
-					<td class="td_bgc right_2">{{$mproductorder.username}}</td>
-				</tr>
-				
-				<tr>
-					<td class="td_bgc right_2">客户附注：</td>
-					<td class="td_bgc right_2">{{$mproductorder.client_msg}}</td>
-				</tr>
-				
-				<tr>
-					<td class="td_bgc right_2">回复：</td>
-					<td class="td_bgc right_2">
-					<textarea name='admin_msg' cols='70' rows='5'>{{$mproductorder.admin_msg}}</textarea>
-					</td>
-				</tr>
-				
-				<tr>
-					<td class="td_bgc right_2">备注：</td>
-					<td class="td_bgc right_2"><input name='admin_mem' type='text'  value="{{$mproductorder.admin_mem}}" size="71">
-					</td>
-				</tr>
-				
-				<tr>
-					<td class="td_bgc right_2">金额：(元)</td>
-					<td class="td_bgc right_2">{{$mproductorder.price}}</td>
-				</tr>
-				
-				<tr>
-					<td class="td_bgc right_2">购买时限：</td>
-					<td class="td_bgc right_2">{{$mproductorder.month}}个月</td>
-				</tr>
-				
-				<tr>
-					<td class="td_bgc right_2">申请时间：</td>
-					<td class="td_bgc right_2">{{$mproductorder.create_time}}</td>
-				</tr>
-				
-				<tr>
-					<td class="td_bgc right_2">过期时间：</td>
-					<td class="td_bgc right_2">{{$mproductorder.expire_time}}</td>
-				</tr>
-				
-				<tr>
-					<td class="td_bgc right_2">状态：</td>
-					<td class="td_bgc right_2">{{if $mproductorder.status==0}}等待交付{{else}}已交付{{/if}}</td>
-				</tr>
-				
-				
-				<tr>
-					<td class="td_bgc td_hg" colspan="2" align="center"><input type="submit" value="确认提交"></td>
-				</tr>
-	
-			</table>
-		</div>
-	</form>
+	<div class="wid_main mar_main" align="left">
+		<div class="block_top" align="left">当前位置：非自动化产品 --> 订单列表 --> 订单更改</div>
+		<table class="table_main2 mar_main" cellpadding="0" cellspacing="1">
+			<form name='nodeform' action="?c=mproductorder&a=addMproductorder&id={{$mproductorder.id}}&username={{$mproductorder.username}}" method="post">
+			<tr>
+				<td colspan="2" class="bg_main"><b>订单更改</b></td>
+			</tr>
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td class="wid_general">订单ID：</td>
+				<td>{{$mproductorder.id}}</td>
+			</tr>
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>用户名：</td>
+				<td>{{$mproductorder.username}}</td>
+			</tr>
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>客户附注：</td>
+				<td>{{$mproductorder.client_msg}}</td>
+			</tr>
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>回复：</td>
+				<td>
+				<textarea name='admin_msg' cols='70' rows='5'>{{$mproductorder.admin_msg}}</textarea>
+				</td>
+			</tr>
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>备注：</td>
+				<td><input name='admin_mem' type='text'  value="{{$mproductorder.admin_mem}}" size="71">
+				</td>
+			</tr>
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>金额：(元)</td>
+				<td>{{$mproductorder.price}}</td>
+			</tr>
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>购买时限：</td>
+				<td>{{$mproductorder.month}}个月</td>
+			</tr>
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>申请时间：</td>
+				<td>{{$mproductorder.create_time}}</td>
+			</tr>
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>过期时间：</td>
+				<td>{{$mproductorder.expire_time}}</td>
+			</tr>
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>状态：</td>
+				<td>{{if $mproductorder.status==0}}等待交付{{else}}已交付{{/if}}</td>
+			</tr>
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>&nbsp;</td><td><input type="submit" value="确认提交"></td>
+			</tr>
+			</form>
+		</table>
+	</div>
 </div>
 {{include file='common/foot.html'}}	

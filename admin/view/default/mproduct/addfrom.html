@@ -1,78 +1,68 @@
 {{include file='common/head.html'}}
 <body leftmargin="0" topmargin="0" bgcolor="#ffffff" text="#000000">
 <div align="center">
-	<form name='nodeform' action="?c=mproduct&a=addMproduct&id={{$mproduct.id}}" method="post">
-		<div class="head_block tb_wid2">&nbsp;{{if $edit}}修改产品{{else}}增加产品{{/if}}</div>
-		<div class="block tb_wid2">
-			<table id="table_2" cellpadding="0" cellspacing="1">
-				<tr>
-					<td class="td_bgc right_2">产品名称：</td>
-					<td class="td_bgc right_2 tb_wid2"><input name='name' type='text' id='tb_wid3' value="{{$mproduct.name}}" size="16">
-					</td>
-				</tr>
-				
-				<tr>
-					<td class="td_bgc right_2">业务类型：</td>
-					<td class="td_bgc right_2">
-						<select name='group_id'>
-						{{for $i=0;$i< count($mproductgroup);$i++}}
-							<option value="{{$mproductgroup[$i].id}}">{{$mproductgroup[$i].name}}</option>
-						{{/for}}
-						</select>
-						&nbsp;<a href="?c=mproductgroup&a=addMproductgroupFrom">增加业务</a>
-					</td>
-				</tr>
-				
-				<tr>
-					<td class="td_bgc right_2">产品组：</td>
-					<td class="td_bgc right_2 tb_wid2">
-						<input name='upid' type='text' value="{{intval($mproduct.upid)}}" size="3">(可升级到相同产品组的其它产品，设置为0不可升级)
-					</td>
-				</tr>
-				
-				<tr>
-					<td class="td_bgc right_2">价格(元/年)</td>
-					<td class="td_bgc right_2">
-					<input name="price" type="text" id='tb_wid3' value="{{$mproduct.price/100}}">
-					<input name="show_price" type="checkbox" value="1" {{if $mproduct.show_price==1}}checked{{/if}}>前台按月显示
-					</td>
-				</tr>
-				
-				{{if count($agent_ids)>0}}
-				<tr>
-					<td class="td_bgc right_2">代理价格(元/年)</td>
-					<td class="td_bgc right_2">
-					{{for $i=0;$i< count($agent_ids);$i++}}
-					
-					{{$agent_ids[$i].name}}:
-						<input name="agentprice_{{$agent_ids[$i].id}}" type="text" id='tb_wid3' value="{{$agent_ids[$i].price/100}}" style="width:45px" />
-					
+	<div class="wid_main mar_main" align="left">
+		<div class="block_top" align="left">当前位置：非自动化产品 --> {{if $edit}}修改产品{{else}}增加产品{{/if}}</div>
+		<table class="table_main2 mar_main" cellpadding="0" cellspacing="1">
+			<form name='nodeform' action="?c=mproduct&a=addMproduct&id={{$mproduct.id}}" method="post">
+			<tr>
+				<td colspan="2" class="bg_main">{{if $edit}}修改产品{{else}}增加产品{{/if}}</td>
+			</tr>
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td class="wid_general">产品名称：</td>
+				<td><input name='name' type='text' id='tb_wid3' value="{{$mproduct.name}}" size="16">
+				</td>
+			</tr>
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>业务类型：</td>
+				<td>
+					<select name='group_id'>
+					{{for $i=0;$i< count($mproductgroup);$i++}}
+						<option value="{{$mproductgroup[$i].id}}">{{$mproductgroup[$i].name}}</option>
 					{{/for}}
-					</td>
-				</tr>
-				{{/if}}
-	
-				
-				
-				<tr>
-					<td class="td_bgc right_2">产品详情(支持html):</td>
-					<td class="td_bgc right_2"><textarea name='describe' rows='25' cols='70'>{{$mproduct.describe}}</textarea></td>
-				</tr>
-				
-				<tr>
-					<td class="td_bgc right_2">状态</td>
-					<td class="td_bgc right_2">
-						<input type="checkbox" name="pause_flag" value="1" {{if $mproduct.pause_flag!=0}}checked{{/if}}>暂停销售
-						<input type="checkbox" name="month_flag" value="1" {{if $mproduct.month_flag!=0}}checked{{/if}}>月付
-					</td>
-				</tr>
-				
-				<tr>
-					<td class="td_bgc td_hg" colspan="2" align="center"><input type="submit" value="确认提交"></td>
-				</tr>
-	
-			</table>
-		</div>
-	</form>
+					</select>
+					&nbsp;<a href="?c=mproductgroup&a=addMproductgroupFrom">增加业务</a>
+				</td>
+			</tr>
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>产品组：</td>
+				<td>
+					<input name='upid' type='text' value="{{intval($mproduct.upid)}}" size="3">(可升级到相同产品组的其它产品，设置为0不可升级)
+				</td>
+			</tr>
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>价格(元/年)</td>
+				<td>
+				<input name="price" type="text" id='tb_wid3' value="{{$mproduct.price/100}}">
+				<input name="show_price" type="checkbox" value="1" {{if $mproduct.show_price==1}}checked{{/if}}>前台按月显示
+				</td>
+			</tr>
+			{{if count($agent_ids)>0}}
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>代理价格(元/年)</td>
+				<td>
+				{{for $i=0;$i< count($agent_ids);$i++}}
+				{{$agent_ids[$i].name}}:
+					<input name="agentprice_{{$agent_ids[$i].id}}" type="text" id='tb_wid3' value="{{$agent_ids[$i].price/100}}" style="width:45px" />
+				{{/for}}
+				</td>
+			</tr>
+			{{/if}}
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>产品详情(支持html):</td>
+				<td><textarea name='describe' rows='25' cols='70'>{{$mproduct.describe}}</textarea></td>
+			</tr>
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>状态</td>
+				<td>
+					<input type="checkbox" name="pause_flag" value="1" {{if $mproduct.pause_flag!=0}}checked{{/if}}>暂停销售
+					<input type="checkbox" name="month_flag" value="1" {{if $mproduct.month_flag!=0}}checked{{/if}}>月付
+				</td>
+			</tr>
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>&nbsp;</td><td ><input type="submit" value="确认提交"></td>
+			</tr>
+			</form>
+		</table>
 </div>
 {{include file='common/foot.html'}}	

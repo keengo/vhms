@@ -2,32 +2,31 @@
 <body leftmargin="0" topmargin="0" bgcolor="#ffffff" text="#000000">
 <div align="center">
 	<form name='nodeform' action="?c=mproductgroup&a=addMproductgroup&id={{$mproductgroup.id}}" method="post">
-		<div class="head_block tb_wid2">&nbsp;{{if $edit}}修改业务{{else}}增加业务{{/if}}</div>
-		<div class="block tb_wid2">
-			<table id="table_2" cellpadding="0" cellspacing="1">
+	<div class="wid_main mar_main" align="left">
+		<div class="block_top" align="left">当前位置：非自动化产品 --> 增加产品--> {{if $edit}}修改业务{{else}}增加业务{{/if}}</div>
+		<table class="table_main2 mar_main" cellpadding="0" cellspacing="1">
+			<tr>
+				<td colspan="2" class="bg_main">{{if $edit}}修改业务{{else}}增加业务{{/if}}</td>
+			</tr>
 				{{if $edit}}
-				<tr>
-					<td class="td_bgc right_2">业务id：</td>
-					<td class="td_bgc right_2 tb_wid2">{{$mproductgroup.id}}</td>
-				</tr>
-				{{/if}}
-				<tr>
-					<td class="td_bgc right_2">业务名称：</td>
-					<td class="td_bgc right_2"><input name='name' type='text'  value="{{$mproductgroup.name}}" size="71">
-					</td>
-				</tr>
-				
-				<tr>
-					<td class="td_bgc right_2">业务详情：</td>
-					<td class="td_bgc right_2"><textarea name="describe"  cols='70' rows='20'>{{$mproductgroup.describe}} </textarea>
-					</td>
-				</tr>
-				
-				<tr>
-					<td class="td_bgc td_hg" colspan="2" align="center"><input type="submit" value="确认提交"></td>
-				</tr>
-	
-			</table>
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>业务id：</td>
+				<td>{{$mproductgroup.id}}</td>
+			</tr>
+			{{/if}}
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>业务名称：</td>
+				<td><input name='name' type='text'  value="{{$mproductgroup.name}}" size="71"></td>
+			</tr>
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>业务详情：</td>
+				<td><textarea name="describe"  cols='70' rows='20'>{{$mproductgroup.describe}} </textarea></td>
+			</tr>
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>&nbsp;</td><td><input type="submit" value="确认提交"></td>
+			</tr>
+
+		</table>
 		</div>
 	</form>
 </div>

@@ -1,27 +1,28 @@
 {{include file='common/head.html'}}
 <body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
-<div id="container">
-<div class="padd2 mar_top">
-<div class="topimg">共计 {{$sum}} 条记录&nbsp;<a href="?c=adminuser&a=add" target='main'><b>[增加管理员]</b></a></div>
-</div>
 <div align="center">
-  <div class="tb_wid">
-    <table cellpadding=0 cellspacing=1 id="table">
-      <tr id="ttitle">
-        <td class='color01 right' bgcolor='#efefef'>用户名</td>
-        <td class='color01 right' bgcolor='#efefef'>操作</td>
-      </tr>
-	  {{foreach from=$list item=row}}
-      <tr>
-        <td class="right_2">{{$row.username}}</td>
-        <td  class="right_2">
-		[<a href="javascript:if(confirm('确定删除{{$row.username}}?')){location='?c=adminuser&a=del&username={{$row.username}}';}" title="删除用户">删除用户</a>]
-		</td>
-      </tr>
-	  {{/foreach}}
-    </table>
-  </div>
-</div>
+  	<div class="wid_main mar_main" align="left">
+		<div class="block_top" align="left">当前位置：帐号管理 --> 管理员</div>
+		<table class="table_main mar_main" cellpadding="0" cellspacing="1">
+			<tr>
+				<td colspan="2" class="bg_main"><a href="?c=adminuser&a=add" target='main'><b>[增加管理员]</b></a></td>
+			</tr>
+			<tr class="bg_yellow">
+				<td>用户名</td><td>操作</td>
+			</tr>
+			{{foreach from=$list item=row}}
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>{{$row.username}}</td>
+				<td>
+				[<a href="javascript:if(confirm('确定删除{{$row.username}}?')){location='?c=adminuser&a=del&username={{$row.username}}';}" title="删除用户">删除用户</a>]
+				</td>
+			</tr>
+			{{/foreach}}
+			<tr>
+				<td colspan="2" class="bg_yellow" align="right">共计 {{$sum}} 条记录&nbsp;</td>
+			</tr>
+		</table>
+  	</div>
 </div>
 </body>
 </html>

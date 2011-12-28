@@ -1,21 +1,45 @@
 {{include file='common/head.html'}}
-
 <body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
-<div id="container">
-	<div align="center">
-		<div class="mar_top tb_wid5" align="right">
-			<table cellpadding="0" cellspacing="0" id="table_2">
-				<form action='?c=question&a=pageQuestion' method='post'>
-				<tr><td align="left">
-					 <select name='sortname' onChange="submit()">
+<div align="center">
+	<div class="wid_main mar_main" align="left">
+		<div class="block_top" align="left">当前位置：信息管理 --> 用户提问</div>
+		<table class="table_main2 mar_main" cellpadding="0" cellspacing="1">
+			<form action='?c=question&a=pageQuestion' method='post'>
+			<tr>
+				<td colspan="8" class="bg_main hg_main">
+					<b>用户提问</b>
+					<select name='sortname' onChange="submit()">
 					 <option value='2' {{if $sortname==2}}selected{{/if}}>全部</option>
 					 <option value='1' {{if $sortname==1}}selected{{/if}}>未回复</option>
 					 </select>
-					
-					  </td>
-					  <td align="right">
+				</td>
+			</tr>
+			</form>
+			<tr class="bg_yellow">
+				<td>操作</td>		
+				<td>序号</td>
+				<td>用户名</td>
+				<td>标题</td>
+				<td>提问时间</td>
+				<td>回复时间</td>
+				<td>管理员</td>
+				<td>状态</td>
+			</tr>
+				{{foreach from=$list item=row}}
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>[<a href='?c=question&a=getQuestion&id={{$row.id}}'>回复</a>]</td>
+				<td>{{$row.id}}</td>
+				<td><a href='?c=user&a=listuser&username={{$row.username}}'>{{$row.username}}</a></td>
+				<td title="{{$row.body}}"><a href='?c=question&a=getQuestion&id={{$row.id}}'>{{substr($row.title,0,30)}}</a></td>
+				<td>{{$row.add_time}}</td>
+				<td>{{$row.reply_time}}</td>
+				<td>{{$row.admin}}</td>
+				<td>{{if $row.status==1}}已回复{{else}} <font color=red>未回复</font>{{/if}}</td>
+			</tr>
+				{{/foreach}}
+			<tr>
+				<td colspan="8" class="bg_yellow" align="right">
 					{{if $page>1}}
-				
 					<a href='?c=question&a=pageQuestion&sortname={{$smarty.request.sortname}}&page=0'>首页</a> 
 					<a href='?c=question&a=pageQuestion&sortname={{$smarty.request.sortname}}&page={{$page-1}}'>上一页</a> 
 					{{else}}
@@ -27,41 +51,10 @@
 					{{else}}下一页 尾页
 					{{/if}} 
 					{{$page}}/{{$total_page}}&nbsp;
-					共计{{$count}}记录
-				</td></tr>
-				 </form>
-			</table>
-		</div>
-		<div class="block tb_wid5">
-			<table id="table" border="0" cellpadding="0" cellspacing="1">
-				<tr id="ttitle">
-					<td class="right_2">操作</td>		
-					<td class="right_2">序号</td>
-					<td class="right_2">用户名</td>
-					<td class="right_2">标题</td>
-					<td class="right_2">提问时间</td>
-					<td class="right_2">回复时间</td>
-					<td class="right_2">管理员</td>
-					<td class="right_2">状态</td>
-					
-					</tr>
-					{{foreach from=$list item=row}}
-					
-				<tr >
-					<td class="right_2">[<a href='?c=question&a=getQuestion&id={{$row.id}}'>回复</a>]</td>
-					<td class="right_2">{{$row.id}}</td>
-					<td class="right_2"><a href='?c=user&a=listuser&username={{$row.username}}'>{{$row.username}}</a></td>
-					<td class="right_2" title="{{$row.body}}"><a href='?c=question&a=getQuestion&id={{$row.id}}'>{{substr($row.title,0,30)}}</a></td>
-					<td class="right_2">{{$row.add_time}}</td>
-					<td class="right_2">{{$row.reply_time}}</td>
-					<td class="right_2">{{$row.admin}}</td>
-					<td class="right_2">{{if $row.status==1}}已回复{{else}} <font color=red>未回复</font>{{/if}}</td>
-					
-					</tr>
-					{{/foreach}}
-		  </table>
-		</div>
-	
+					共计{{$count}}记录&nbsp;
+				</td>
+			</tr>
+	  </table>
 	</div>
 </div>
 </body>

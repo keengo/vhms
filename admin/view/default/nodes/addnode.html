@@ -2,45 +2,45 @@
 <body leftmargin="0" topmargin="0" bgcolor="#ffffff" text="#000000">
 <div align="center">
   <form name='nodeform' action="?c=nodes&a={{$action}}&oldname={{$node.name}}" method="post">
-<div class="head_block tb_wid">&nbsp;增加主机</div>
-<div class="block tb_wid">
-<table id="table_2" cellpadding="0" cellspacing="1">
-      <tr>
-        <td class="td_bgc right_2">名字：</td>
-        <td class="td_bgc right_2">
-           <input type='text' name='name' id='tb_wid3' value="{{$node.name}}" onBlur="checkName();"
-        {{if $action=="edit"}}
-        	readonly
-        {{/if}}
-        />
-       <font color=red>*必填.服务器名字.不可以为中文</font></td>
-        </tr>
-       <tr>
-        <td class="td_bgc right_2">备注：</td>
-        <td class="td_bgc right_2"><input name="nickname" type="text"  size='32' value="{{$node.nickname}}">
-        </tr>
-      <tr>
-        <td class="td_bgc right_2">easypanel主机IP：</td>
-        <td class="td_bgc right_2"><input name="host" type="text" id='tb_wid3' value="{{$node.host}}">
-		      <font color=red>*必填</font></td>
-        </tr>
-      <tr>
-        <td class="td_bgc right_2">easypanel端口：</td>
-        <td class="td_bgc right_2"><input name="port" id='tb_wid3' value="{{$node.port}}" type="text">
-			   <font color=red>*必填(默认:3312)</font></td>
-        </tr>	
-	  <tr>
-        <td class="td_bgc right_2">安全码：</td>
-        <td class="td_bgc right_2"><input name="passwd" type="text" id='tb_wid3' value="" autoComplete='off'>
-            <font color=red>仅修改时才写.</font></td>
-        </tr>
-	    <tr>
-	    <td class="td_bgc td_hg" colspan="2" align="center">
-		<input type="submit" value="确认提交"></td>
-        </tr>
-    </table>
-</div>
+	<div class="wid_main mar_main" align="left">
+		<div class="block_top" align="left">当前位置：主机管理 --> 增加主机</div>
+		<table class="table_main2 mar_main" cellpadding="0" cellspacing="1">
+			<tr>
+				<td colspan="2" class="bg_main"><b>增加主机</b></td>
+			</tr>
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td class="wid_general">名字：</td>
+				<td>
+					<input type='text' name='name' id='tb_wid3' value="{{$node.name}}" onBlur="checkName();"
+					{{if $action=="edit"}}
+					readonly
+					{{/if}}
+					/>
+					<span class="red right">*必填.服务器名字.不可以为中文</span>
+				</td>
+			</tr>
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>备注：</td>
+				<td><input name="nickname" type="text"  size='32' value="{{$node.nickname}}">
+			</tr>
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>easypanel主机IP：</td>
+				<td><input name="host" type="text" id='tb_wid3' value="{{$node.host}}"><span class="red right">*必填</span></td>
+			</tr>
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>easypanel端口：</td>
+				<td><input name="port" id='tb_wid3' value="{{$node.port}}" type="text"><span class="red right">*必填(默认:3312)</span></td>
+			</tr>	
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>安全码：</td>
+				<td><input name="passwd" type="text" id='tb_wid3' value="" autoComplete='off'><span class="red right">仅修改时才写</span></td>
+			</tr>
+			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>&nbsp;</td><td align="left"><input type="submit" value="确认提交"></td>
+			</tr>
+		</table>
+	</div>
   </form>
-  </div>
+ </div>
 </body>
 {{include file='common/foot.html'}}

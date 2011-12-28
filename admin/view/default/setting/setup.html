@@ -1,52 +1,50 @@
 {{include file='common/head.html'}}
-<div id="container">
-<div class="head_block tb_wid2">&nbsp;首页设置</div>
-  <div class="block tb_wid2">
-    <table cellpadding=0 cellspacing=1 id="table_2">
- 	 <form  action="?c=setting&a=webSetup" method='post'>
-      <tr>
-        <td class='color01 right' bgcolor='#efefef'>网站名称</td>
-        <td class="td_bgc right_2"><input name='web_name' id="money" size="50" value='{{$setting.web_name.value}}'/></td>
-      </tr>
-      <tr>
-        <td width="110" bgcolor='#efefef' class='color01 right'>首页logo图片地址</td>
-        <td width="168" class="td_bgc right_2"><input name='logo' id="money" size="50"  value='{{$setting.logo.value}}'/></td> 
-      </tr>
-	  <tr>
-        <td bgcolor='#efefef' class='color01 right'>顶部banner图片地址</td>
-        <td class="td_bgc right_2"><input name='banner' id="money" size="50"  value='{{$setting.banner.value}}'/></td> 
-      </tr>
-	  <tr>
-        <td bgcolor='#efefef' class='color01 right'>顶部banner链接设置</td>
-        <td class="td_bgc right_2"><input name='links' id="money" size="50"  value='{{$setting.links.value}}'/></td> 
-      </tr>
-      <tr>
-        <td class='color01 right' bgcolor='#efefef'>联系方式（支持html）</td>
-        <td class="td_bgc right_2">
-        <textarea name='contact'  rows='5' cols='50'>{{$setting.contact.value}}</textarea>
-        </td>
-      </tr>
-      <tr>
-        <td class='color01 right' bgcolor='#efefef'>foot定制（支持html）</td>
-        <td class="td_bgc right_2">
-        <textarea name='footer'  rows='5' cols='50'>{{$setting.footer.value}}</textarea></td>
-      </tr>
-      <tr>
-        <td class='color01 right' bgcolor='#efefef'>统计代码（支持html）</td>
-        <td class="td_bgc right_2">
-        <textarea name='stat_code'  rows='5' cols='50'>{{$setting.stat_code.value}}</textarea></td>
-      </tr>
-      <tr>
-        <td bgcolor='#efefef' class='color01 right'>虚拟主机名字定义</td>
-        <td class="td_bgc right_2"><input name='vhost_name' size="50"  value='{{$setting.vhost_name.value}}'/></td> 
-      </tr>
-	   <tr>
-        <td colspan="2" bgcolor='#efefef' class='color01 center td_hg' align="center"><input type="submit" value="确认" /></td>
-       </tr>
-	</form>
-    </table>
-	<div>
+<div align="center">
+	<div class="wid_main mar_main" align="left">
+		<div class="block_top" align="left">当前位置：系统设置 --> 首页设置</div>
+		<table class="table_main2 mar_main" cellpadding="0" cellspacing="1">
+		 	<form  action="?c=setting&a=webSetup" method='post'>
+		 	<tr>
+				<td colspan="2" class="bg_main"><b>首页设置</b></td>
+			</tr>
+		  <tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<td>网站名称</td>
+			<td><input name='web_name' id="money" size="50" value='{{$setting.web_name.value}}'/></td>
+		  </tr>
+		  <tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<td>首页logo图片地址</td>
+			<td><input name='logo' id="money" size="50"  value='{{$setting.logo.value}}'/></td> 
+		  </tr>
+		  <tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<td>顶部banner图片地址</td>
+			<td><input name='banner' id="money" size="50"  value='{{$setting.banner.value}}'/></td> 
+		  </tr>
+		  <tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<td>顶部banner链接设置</td>
+			<td><input name='links' id="money" size="50"  value='{{$setting.links.value}}'/></td> 
+		  </tr>
+		  <tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<td>联系方式（支持html）</td>
+			<td><textarea name='contact'  rows='5' cols='50'>{{$setting.contact.value}}</textarea></td>
+		  </tr>
+		  <tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<td>foot定制（支持html）</td>
+			<td><textarea name='footer'  rows='5' cols='50'>{{$setting.footer.value}}</textarea></td>
+		  </tr>
+		  <tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<td>统计代码（支持html）</td>
+			<td><textarea name='stat_code'  rows='5' cols='50'>{{$setting.stat_code.value}}</textarea></td>
+		  </tr>
+		  <tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<td>虚拟主机名字定义</td>
+			<td><input name='vhost_name' size="50"  value='{{$setting.vhost_name.value}}'/></td> 
+		  </tr>
+		   <tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+				<td>&nbsp;</td><td><input type="submit" value="确认" /></td>
+		  </tr>
+		</form>
+		</table>
+		<div>
 	</div>
-  </div>
 </div>
 {{include file='common/foot.html'}}
