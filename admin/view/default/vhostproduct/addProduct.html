@@ -13,7 +13,7 @@ function list_subtemplete_result() {
 		  var i=0;
 		  var insertData = '';
 		  if(dataArrayLen>0){
-		   	insertData = "默认引擎:<select name='subtemplete'>";
+		   	insertData = "引擎选择:<select name='subtemplete'>";
 		  	for(i=0;i<dataArrayLen;i++){			 
 				if(dataArray[i].firstChild==null){
 					continue;
@@ -51,7 +51,7 @@ function list_templete_result() {
 	      var dataArrayLen = dataArray.length;
 	      var templeteMatched = false;
 		  var i=0;
-		  var insertData = "<select name='templete' onChange='changeTemplete(this.value)'>";
+		  var insertData = "模板选择:<select name='templete' onChange='changeTemplete(this.value)'>";
 		  for(i=0;i<dataArrayLen;i++){			 
 			  var templete = dataArray[i].firstChild.data;
 			  insertData += "<option value='" + templete + "' ";
