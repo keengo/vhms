@@ -1,8 +1,8 @@
 <?php
 $GLOBALS['lock_file'] = dirname(__FILE__).'/install.lock';
-if(file_exists($GLOBALS['lock_file'])){
-	die("已经安装过了，如果要重新安装，请删除文件:".$GLOBALS['lock_file']);
-}
+//if(file_exists($GLOBALS['lock_file'])){
+//	die("已经安装过了，如果要重新安装，请删除文件:".$GLOBALS['lock_file']);
+//}
 class InstallControl extends Control
 {
 	public function step1()
@@ -46,18 +46,28 @@ class InstallControl extends Control
 		$passwd = $_REQUEST['db_passwd'];
 		$ucswitch=$_REQUEST['uc_switch'];
 		$dzappname=$_REQUEST['dz_appname'];
+		/*创建数据库*/
 		$dbconnect=mysql_connect($host,$user,$passwd);
-		if(!$dbconnect){
-			exit('数据库连接失败，请检查');
-		}
 		@mysql_query("CREATE DATABASE ".$dbname);
-		mysql_close($dbconnect);
+		@mysql_close($dbconnect);
 		
-		$GLOBALS['default_db'] = $this->check_connect($host,"3306",$dbname,$user,$passwd);
-		if(!$GLOBALS['default_db']){
+		/* 数据库innodb环境检查*/
+		$pdo = $GLOBALS['default_db'] = $this->check_connect($host,"3306",$dbname,$user,$passwd);
+		if(!$pdo){
 			$this->_tpl->assign("msg","数据库连接出错");
 			$this->_tpl->assign("request",$_REQUEST);
 			return $this->_tpl->fetch('install/step1.html');
+		}
+		$result = $pdo->query('SHOW VARIABLES LIKE "have_%"');
+		$have = $result->fetchAll(PDO::FETCH_ASSOC);
+		if(is_array($have)) {
+			foreach($have as $h){
+				if($h['Variable_name'] == 'have_innodb'){
+					if(strcasecmp($h['Value'],'no')==0){
+						die("数据库不支持innodb数据库引擎,请升级mysql数据库");
+					}
+				}
+			}
 		}
 		
 		$this->create_sql($GLOBALS['default_db']);
