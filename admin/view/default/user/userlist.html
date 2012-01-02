@@ -63,7 +63,7 @@
 			</tr>
 			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
 				<td>余额</td>
-				<td><a href="?c=user&a=editMoneyForm&username={{$row.username}}">{{$row.money/100}}元</a></td>
+				<td><a href="?c=user&a=editMoneyForm&username={{$row.username}}">{{$row.money/100}}元</a> <span class="red">( 注：充值点左边 )</span></td>
 			</tr>
 		</table>
 		{{/foreach}}
