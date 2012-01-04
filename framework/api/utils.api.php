@@ -1,6 +1,12 @@
 <?php
 class UtilsAPI extends API
 {
+	/**
+	 * 写入配置文件
+	 * @param  $nodes
+	 * @param  $keyname
+	 * @param  $cfg_name
+	 */
 	public function writeConfig($nodes,$keyname,$cfg_name)
 	{
 		$dir = dirname(dirname(__FILE__))."/configs/";
@@ -36,7 +42,9 @@ class UtilsAPI extends API
 		$str.=$item.");\r\n";
 		fwrite($fp,$str);
 	}
-	//输入时去除html标签
+	/**
+	 * 输入时，去除html标签
+	 */
 	function klencode($str,$html=false)
 	{
 		if(!$html){
@@ -48,7 +56,11 @@ class UtilsAPI extends API
 		$str=str_replace("  "," &nbsp;",$str);
 		return $str;
 	}
-	//显示时去除html标签
+	/**
+	 * 显示前，去除html标签
+	 * @param $msg
+	 * @param $html
+	 */
 	function kldecode($msg,$html=false)
 	{
 		$msg=str_replace("<br />",chr(10),$msg);
