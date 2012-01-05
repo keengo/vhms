@@ -5,6 +5,35 @@ class VhostAPI extends API
 	{
 		//load_lib('pub:whm');
 	}
+	/**
+	 * 保留账号设置
+	 * 防止数据库账号冲掉，设置root,mysql
+	 * 防止和节点网站账号冲掉，设定www，和$db_cfg['default']['dbname'],kangle
+	 * @param  $vhost_name
+	 */
+	public function check_vhost($vhost_name)
+	{
+		global $db_cfg;
+		
+		$arr[] = $db_cfg['default']['dbname'];
+		$arr[] = 'mysql';
+		$arr[] = 'root';
+		$arr[] = 'kangle';
+		$arr[] = 'www';
+		
+		foreach ($arr as $a) {
+			if($a == $vhost_name) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * 通知kangle重新加载虚拟主机
+	 * @param  $node
+	 * @param  $name
+	 */
 	public function noticeChange($node,$name)
 	{
 		$whm = apicall('nodes','makeWhm',array($node));
@@ -56,6 +85,13 @@ class VhostAPI extends API
 	{
 		return '/home/ftp/';
 	}
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param unknown_type $node
+	 * @param unknown_type $name
+	 * @param unknown_type $subtemplete
+	 */
 	public function changeSubtemplete($node,$name,$subtemplete)
 	{
 		if($node==null){
@@ -76,6 +112,13 @@ class VhostAPI extends API
 		}
 		return false;		
 	}
+	
+	/**
+	 * 修改虚拟主机状态，并且通知该节点kangle重新加载该虚拟主机，达到生效的目的
+	 * @param  $node
+	 * @param  $name
+	 * @param  $status
+	 */
 	public function changeStatus($node,$name,$status)
 	{
 		$attr = array('status'=>$status);

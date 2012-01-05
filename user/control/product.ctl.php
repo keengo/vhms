@@ -119,7 +119,8 @@ class ProductControl extends Control {
 		if (strcasecmp($_REQUEST['product_type'],'vhost')==0) {
 			global $db_cfg;
 			$name = trim($_REQUEST['name']);
-			if(strcasecmp($name,'root')==0 || strcasecmp($name,$db_cfg['default']['dbname'])==0 ||strcasecmp($name,'mysql')==0 || strcasecmp($name,'www')==0 || strcasecmp($name,'kangle')==0){
+			if(false===apicall('vhost','check_vhost',array($name))){
+			//if(strcasecmp($name,'root')==0 || strcasecmp($name,$db_cfg['default']['dbname'])==0 ||strcasecmp($name,'mysql')==0 || strcasecmp($name,'www')==0 || strcasecmp($name,'kangle')==0){
 				$this->_tpl->assign('msg','注册失败：保留账号,请选择其他账户名');
 				return $this->_tpl->fetch('public/msg.html');
 			}
