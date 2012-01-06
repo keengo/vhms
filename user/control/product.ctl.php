@@ -85,8 +85,13 @@ class ProductControl extends Control {
 				return trigger_error('产品类型错误');
 		}
 	}
+	/**
+	 * 验证账号是否可以注册
+	 * 查询数据库，和查询是否为保留账号apicall('vhost','check_vhost',array($name)
+	 */
 	public function check()
 	{
+		needRole('user');
 		$product_type = $_REQUEST['product_type'];
 		$name = $_REQUEST['name'];
 		if($name=="")
@@ -101,7 +106,8 @@ class ProductControl extends Control {
 			case 'vhost':
 				$result = daocall('vhost', 'check',array($name));
 		}
-		if($result){
+		/* 存在账号或者是保留账号,则返回1 */
+		if($result || false===apicall('vhost','check_vhost',array($name))){
 			$this->_tpl->assign('result',1);
 		}else{
 			$this->_tpl->assign('result',0);
@@ -120,7 +126,6 @@ class ProductControl extends Control {
 			global $db_cfg;
 			$name = trim($_REQUEST['name']);
 			if(false===apicall('vhost','check_vhost',array($name))){
-			//if(strcasecmp($name,'root')==0 || strcasecmp($name,$db_cfg['default']['dbname'])==0 ||strcasecmp($name,'mysql')==0 || strcasecmp($name,'www')==0 || strcasecmp($name,'kangle')==0){
 				$this->_tpl->assign('msg','注册失败：保留账号,请选择其他账户名');
 				return $this->_tpl->fetch('public/msg.html');
 			}

@@ -52,13 +52,13 @@ function check_register()
 	  </tr>
 	  <tr>
         <td>购买时间:</td>
-        <td>
+        <td id="months">
         {{if $product.month_flag}}
-       	 	<input type=radio name=month value='1' checked>1个月
+       	 	<input type='radio' name='month' value='1' checked>1个月
         {{/if}}
-            <input type=radio name=month value=12 {{if !$product.month_flag}}checked{{/if}}>1年
-			<input type=radio name=month value=24>2年
-			<input type=radio name=month value=36>3年</td>
+            <input type='radio' name='month' value='12' {{if !$product.month_flag}}checked{{/if}}>1年
+			<input type='radio' name='month' value='24' >2年
+			<input type='radio' name='month' value='36'>3年</td>
 	  </tr>
 	  {{if $product.cdn==0}}
 	  <tr>
@@ -110,13 +110,13 @@ function check_register()
 	  {{/if}}
 	  -->
 	  <tr>
-        <td>说明:</td>
+        <td>产品说明:</td>
         <td>{{$product.describe}}</td>
 	  </tr>
 	  
        <tr>
-       <td>价格:</td>
-       	<td>{{if $product.show_price==1}}{{substr($product.price/100/12,0,6)}}元/月{{else}}{{$product.price/100}}元/年{{/if}}</td>
+       <td id="show_name">产品价格(元):</td>
+       	<td id="show_price">{{if $product.show_price==1}}{{substr($product.price/100/12,0,6)}}元/月{{else}}{{$product.price/100}}元/年{{/if}}</td>
         </tr>
         
 	    <tr>
@@ -127,3 +127,12 @@ function check_register()
 	</div>
     </form>
   </div>
+<script language="javascript">
+		jQuery(":radio").click(function(){
+			var m=jQuery(this).val();
+			var p=m*({{$product.price}}/12/100);
+			jQuery("#show_price").html(p+"元"),
+			jQuery("#show_name").html("所需金额")
+		});
+
+ </script>
