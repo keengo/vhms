@@ -52,7 +52,7 @@ function list_templete_result() {
 	      var templeteMatched = false;
 		  var i=0;
 		  var insertData = "模板选择:<select name='templete' onChange='changeTemplete(this.value)'>";
-		  for(i=0;i<dataArrayLen;i++){			 
+		  for(i=dataArrayLen-1;i>=0;i--){			 
 			  var templete = dataArray[i].firstChild.data;
 			  insertData += "<option value='" + templete + "' ";
 			  if(templete == '{{$vhostproduct.templete}}'){
@@ -85,13 +85,17 @@ function changeNode()
 <div align="center">
 	<div class="wid_main mar_main" align="left">
 		<div class="block_top" align="left">当前位置：虚拟主机/cdn --> {{if $action=='editProduct'}}修改产品{{else}}增加产品{{/if}}</div>
-		<table class="table_main2 mar_main" cellpadding="0" cellspacing="1">
 		<form name='nodeform' action="?c=vhostproduct&a={{$action}}&id={{$vhostproduct.id}}" method="post">
+		
+		<table class="table_main2 mar_main" cellpadding="0" cellspacing="1">
+		
 			<tr>
 				<td colspan="2" class="bg_main hg_main"><b>{{if $action=='editProduct'}}修改产品{{else}}增加产品{{/if}}</b></td>
 			</tr>
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
-				<td class="wid_general">主机</td>
+			
+			<tr class="main_bgcolor" >
+				<td class="wid_general">选择主机</td>
+				
 				<td><select name='node' onChange='changeNode()'>
 					{{foreach from=$nodes item=node}}
 					<option value='{{$node.name}}'
@@ -99,26 +103,31 @@ function changeNode()
 					{{/foreach}}
 					</select>
 				</td>
+				
 			</tr>
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			
+			<tr class="main_bgcolor">
 				<td>产品名称：</td>
 				<td><input name='name' type='text' id='tb_wid3'
 					value="{{$vhostproduct.name}}" size="16">
 				</td>
 			</tr>
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			
+			<tr class="main_bgcolor" >
 				<td>显示顺序：</td>
 				<td><input name='view' type='text' id='tb_wid3'
 					value="{{$vhostproduct.view}}" size="16">
 				</td>
 			</tr>
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			
+			<tr class="main_bgcolor" >
 				<td>产品组：</td>
 				<td><input name='upid' type='text'
 					value="{{intval($vhostproduct.upid)}}" size="3">(可升级到相同产品组的其它产品，设置为0不可升级)
 				</td>
 			</tr>
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			
+			<tr class="main_bgcolor" >
 				<td>产品类型：</td>
 				<td>
 					<script language='javascript'>
@@ -136,39 +145,40 @@ function changeNode()
 					<input name='cdn' type='radio'	value="1" {{if $vhostproduct.cdn==1}} checked {{/if}} onClick="change_cdn(1)">cdn(收费版才有此功能)
 				</td>
 			</tr>
+			
 			<tr>
 				<td colspan='2' style="padding-left:0px;">
 					<div id='cdnpanel' style='display:{{if $vhostproduct.cdn==1}}none{{/if}}'>
 						<table class="table_main2" cellpadding="0" cellspacing="1">
-							<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+							<tr class="main_bgcolor">
 								<td class="wid_general">空间大小(M)：</td>
 								<td><input name="web_quota" type="text"
 									id='tb_wid3' value="{{$vhostproduct.web_quota}}" size="16"></td>
 							</tr>
-							<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+							<tr class="main_bgcolor">
 								<td>数据库大小(M)：</td>
 								<td><input name="db_quota" type="text"
 									id='tb_wid3' value="{{$vhostproduct.db_quota}}"></td>
 							</tr>
-							<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+							<tr class="main_bgcolor">
 								<td>绑定子目录</td>
 								<td>
 									<input type='checkbox' name='subdir_flag' value='1' {{if $vhostproduct.subdir_flag}}checked{{/if}}>允许绑定子目录
 								</td>
 							</tr>
-							<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+							<tr class="main_bgcolor" >
 								<td>默认绑定子目录:</td>
 								<td><input name="subdir" type="text" id='tb_wid3'
-									value="{{$vhostproduct.subdir}}" size="16"></td>
+									value="{{if $vhostproduct.subdir}}{{$vhostproduct.subdir}}{{else}}wwwroot{{/if}}" size="16"></td>
 							</tr>
-							<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+							<tr class="main_bgcolor" >
 								<td>模板</td>
-								<td>
+								<td id='templete2'>
 									<div id='templete'><input name="templete" type="text" value="{{$vhostproduct.templete}}"></div>
 									<div id='subtemplete'></div>
 								</td>
 							</tr>
-							<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+							<tr class="main_bgcolor">
 								<td>多引擎切换:</td>
 								<td>
 									<input type='radio' name="cs" value="0" {{if $vhostproduct.cs==0}}checked{{/if}} size="16">不能切换
@@ -180,15 +190,17 @@ function changeNode()
 					</div>
 				</td>
 			</tr>
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			
+			<tr class="main_bgcolor" >
 				<td>价格(元/年)</td>
 				<td>
 				<input name="price" type="text" id='tb_wid3' value="{{$vhostproduct.price/100}}">
 				<input type="checkbox" name="show_price" value="1" {{if $vhostproduct.show_price!=0}}checked{{/if}}>前台按月显示
 				</td>
 			</tr>
+			
 			{{if count($agent_ids)>0}}
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<tr class="main_bgcolor" >
 				<td>代理价格</td>
 				<td>
 					{{for $i=0;$i< count($agent_ids);$i++}}
@@ -198,35 +210,40 @@ function changeNode()
 				</td>
 			</tr>
 			{{/if}}
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			
+			<tr class="main_bgcolor" >
 				<td>域名绑定个数(-1表示无限)</td>
 				<td>
 					<input name="domain" type="text" id='tb_wid3'
 					value="{{if $vhostproduct}}{{$vhostproduct.domain}}{{else}}-1{{/if}}">
 				</td>
 			</tr>
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			
+			<tr class="main_bgcolor" >
 				<td>最大连接数(0无限)</td>
 				<td>
 					<input name="max_connect" type="text"
 					size='5' value="{{if $vhostproduct}}{{$vhostproduct.max_connect}}{{else}}0{{/if}}">
 				</td>
 			</tr>
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			
+			<tr class="main_bgcolor" >
 				<td>带宽限制(0无限)</td>
 				<td>
 					<input name="speed_limit" type="text"
 					size='5' value="{{if $vhostproduct}}{{$vhostproduct.speed_limit/1024}}{{else}}0{{/if}}">&nbspK/每秒
 				</td>
 			</tr>
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			
+			<tr class="main_bgcolor" >
 				<td>管理变量:</td>
 				<td>
 					<input name="envs" type="text" id='tb_wid3'
 					value="{{$vhostproduct.envs}}" size="40">
 				</td>
 			</tr>
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			
+			<tr class="main_bgcolor">
 				<td>其它选项</td>
 				<td>
 					<input type='checkbox' name='htaccess' value='1' {{if $vhostproduct.htaccess || !$vhostproduct}}checked{{/if}}>.htaccess支持
@@ -235,23 +252,30 @@ function changeNode()
 					<input type='checkbox' name='access' value='1' {{if $vhostproduct.access || !$vhostproduct}}checked{{/if}}>自定义控制
 				</td>
 			</tr>
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			
+			<tr class="main_bgcolor" >
 				<td>产品说明(支持html):</td>
 				<td><textarea name='describe' rows='6' cols='40'>{{$vhostproduct.describe}}</textarea></td>
 			</tr>
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			
+			<tr class="main_bgcolor" >
 				<td>状态</td>
 				<td>
 					<input type="checkbox" name="pause_flag" value="1" {{if $vhostproduct.pause_flag!=0}}checked{{/if}}>暂停销售
 					<input type="checkbox" name="month_flag" value="1" {{if $vhostproduct.month_flag!=0}}checked{{/if}}>月付
 				</td>
 			</tr>
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			
+			<tr class="main_bgcolor" >
 				<td>&nbsp;</td><td><input type="submit" value="确认提交"></td>
 			</tr>
-			</form>
+			
+			
+			
 		</table>
+		</form>
 	</div>
+	
 </div>
 <script language='javascript'>
 changeNode();
