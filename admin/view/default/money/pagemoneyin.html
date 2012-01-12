@@ -3,11 +3,11 @@
 <div align="center">
 	<div class="wid_main mar_main" align="left">
 		<div class="block_top" align="left">当前位置：财务管理 --> 充值记录</div>
-		<table class="table_main2 mar_main" cellpadding="0" cellspacing="1">
+		<table class="table_main2" cellpadding="0" cellspacing="1">
 			<tr>
 				<td colspan="8" class="bg_main"><b>充值记录</b></td>
 			</tr>
-			<tr class="bg_yellow">
+			<tr id="bg_yellow">
 				<td>操作</td>	
 				<td>编号</td>
 				<td>会员账号</td>
@@ -18,7 +18,7 @@
 				<td>支付方式</td>	
 				</tr>
 				{{foreach from=$list item=row}}
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<tr>
 				<td>{{if $row.status==0}}
 					[<a href="javascript:if(confirm('确定编号{{$row.id}}，用户名{{$row.username}}的充值金额{{$row.money/100}}元')){location='?c=money&a=manPayReturn&id={{$row.id}}';}" title="确认">确认</a>]{{/if}}
 				</td>
@@ -32,7 +32,7 @@
 			</tr>
 			{{/foreach}}
 			<tr>
-				<td colspan="8" class="bg_yellow" align="right">
+				<td colspan="8" id="bg_yellow" align="right">
 					{{if $page>1}}
 					<a href='?c=money&a=pageMoneyin&page=0'>首页</a> 
 					<a href='?c=money&a=pageMoneyin&page={{$page-1}}'>上一页</a> 

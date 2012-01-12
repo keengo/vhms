@@ -3,17 +3,17 @@
 <div align="center">
 	<div class="wid_main mar_main" align="left">
 		<div class="block_top" align="left">当前位置：系统设置 --> 首页设置</div>
-		<table class="table_main2 mar_main" cellpadding="0" cellspacing="1">
+		<table class="table_main2" cellpadding="0" cellspacing="1">
 			<tr>
 				<td colspan="3" class="bg_main"><a href="?c=agent&a=addAgentFrom"><b>[增加代理级别]</b></a></td>
 			</tr>
-			<tr class="bg_yellow">
+			<tr id="bg_yellow">
 				<td>操作</td>
 				<td>代理id号</td>
 				<td>代理名称</td>
 			</tr>
 				{{for $i=0;$i< count($agents);$i++}}
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<tr>
 				<td>
 					[<a href='javascript:if(confirm("真的要删除?")){ window.location="?c=agent&a=delAgent&id={{$agents[$i].id}}";}'>删除</a>]
 					[<a href="?c=agent&a=addAgentFrom&id={{$agents[$i].id}}">修改</a>]

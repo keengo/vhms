@@ -3,18 +3,19 @@
 <div align="center">
 	<div class="wid_main mar_main" align="left">
 		<div class="block_top" align="left">当前位置：非自动化产品 --> 订单列表</div>
-		<table class="table_main2 mar_main" cellpadding="0" cellspacing="1">
+		<table class="table_main2" cellpadding="0" cellspacing="1">
 			<tr>
 				<form name='orderform' action="?c=mproductorder&a=pageListMproductorder" method="post">
-				<td colspan="6" class="bg_yellow  hg_main">
-					<span class="topimg STYLE1">用户名搜索:</span><input name='username' type='text'>&nbsp;<input type='submit' value="提交">
+				<td colspan="6" id="bg_yellow" class="hg_main">
+					<span class="topimg STYLE1">用户名搜索:</span>
+					<input name='username' type='text'>&nbsp;<input type='submit' value="提交">
 				</td>
 				</form>
 			</tr>
 			<tr>
 				<td colspan="6" class="bg_main"><b>订单列表</b></td>
 			</tr>
-			<tr class="bg_yellow">
+			<tr id="bg_yellow">
 				<td>操作</td>	
 				<td><a href='?c=mproductorder&a=pageListMproductorder&order=id'>订单ID</a></td>
 				<td><a href='?c=mproductorder&a=pageListMproductorder&order=username'>用户名</a></td>
@@ -23,7 +24,7 @@
 				<td><a href='?c=mproductorder&a=pageListMproductorder&order=status'>状态</a></td>
 			</tr>
 			{{foreach from=$list item=row}}
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<tr>
 				<td>
 				<!--  	[<a href="javascript:if(confirm('确定?')){location='?c=mproductorder&a=delMproductorder&id={{$row.id}}';}" >删除</a>]-->
 					[<a href="?c=mproductorder&a=addMproductorderFrom&id={{$row.id}}" >更改</a>]
@@ -36,7 +37,7 @@
 			</tr>
 				{{/foreach}}
 			<tr>
-				<td colspan="6" class="bg_yellow" align="right">
+				<td colspan="6" id="bg_yellow" align="right">
 					{{if $page>1}}
 					<a href='?c=mproductorder&a=pageListMproductorder&order={{$order}}&&page=0'>首页</a> 
 					<a href='?c=mproductorder&a=pageListMproductorder&order={{$order}}&page={{$page-1}}'>上一页</a> 

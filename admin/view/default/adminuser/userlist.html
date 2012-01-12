@@ -7,7 +7,7 @@
 			<tr>
 				<td colspan="2" class="bg_main"><a href="?c=adminuser&a=add" target='main'><b>[增加管理员]</b></a></td>
 			</tr>
-			<tr class="bg_yellow">
+			<tr id="bg_yellow">
 				<td>用户名</td><td>操作</td>
 			</tr>
 			{{foreach from=$list item=row}}
@@ -19,7 +19,7 @@
 			</tr>
 			{{/foreach}}
 			<tr>
-				<td colspan="2" class="bg_yellow" align="right">共计 {{$sum}} 条记录&nbsp;</td>
+				<td colspan="2" id="bg_yellow" align="right">共计 {{$sum}} 条记录&nbsp;</td>
 			</tr>
 		</table>
   	</div>

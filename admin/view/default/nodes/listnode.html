@@ -64,7 +64,7 @@ function checkAllNode()
 		{{if $msg}}
 			<div class="block mar_top" align="center"><font color='red'>{{$msg}}</font></div>
 		{{/if}}
-		<table class="table_main2 mar_main" cellpadding="0" cellspacing="1">
+		<table class="table_main2" cellpadding="0" cellspacing="1">
 		  <tr>
 			<td colspan="6" class="bg_main">
 				[<a href='?c=nodes&a=flush'><b>更新配置文件</b></a>]
@@ -72,7 +72,7 @@ function checkAllNode()
 				[<a href="?c=nodes&a=addNode" target='main'><b>增加主机</b></a>]
 			</td>
 		  </tr>
-		  <tr class="bg_yellow">
+		  <tr id="bg_yellow">
 			<td>操作</td>
 			<td>名称</td>
 			<td>备注</td>
@@ -81,7 +81,7 @@ function checkAllNode()
 			<td>管理端口</td>
 		  </tr>
 		  {{foreach from=$list item=row}}
-		  <tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+		  <tr>
 			<td>
 			  [<a href="javascript:if(confirm('确定删除{{$row.name}}?')){location='?c=nodes&a=del&name={{$row.name}}';}" title="删除主机">删除</a>]        
 			  [<a href="?c=nodes&a=editForm&name={{$row.name}}" title="更改信息">修改</a>]
@@ -95,7 +95,7 @@ function checkAllNode()
 		  </tr>
 		  {{/foreach}}
 		  <tr>
-			<td colspan="6" class="bg_yellow" align="right">共计 {{$sum}} 条记录&nbsp;</td>
+			<td colspan="6" id="bg_yellow" align="right">共计 {{$sum}} 条记录&nbsp;</td>
 		  </tr>
 		</table>
 	</div>

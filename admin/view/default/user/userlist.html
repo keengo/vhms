@@ -28,12 +28,12 @@
 					<b><a href="?c=user&a=impLogin&username={{$row.username}}" target="_blank">[模拟登录]</a></b>
 				</td>
 			</tr>
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<tr>
 				<td class="wid_general">用户名：</td>
 				<td><a href="?c=user&a=editForm&username={{$row.username}}">{{$row.username}}</a></td>
 			</tr>
 			<form action='?c=user&a=changUserAgent&username={{$row.username}}' method='post' name='agentform'>
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<tr>
 				<td>代理身份：</td>
 				<td>
 					<select name='agent_id' onChange="javascript:agentform.submit()">
@@ -45,23 +45,23 @@
 				</td>
 			</tr>
 			</form>
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<tr>
 				<td>真实姓名：</td>
 				<td>{{$row.name}}</td>
 			</tr>
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<tr>
 				<td>身份号码</td>
 				<td>{{$row.id}}</td>
 			</tr>
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<tr>
 				<td>电子邮件</td>
 				<td>{{$row.email}}</td>
 			</tr>
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<tr>
 				<td>注册时间</td>
 				<td>{{$row.regtime}}</td>
 			</tr>
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<tr>
 				<td>余额</td>
 				<td><a href="?c=user&a=editMoneyForm&username={{$row.username}}">{{$row.money/100}}元</a> <span class="red">( 注：充值点左边 )</span></td>
 			</tr>

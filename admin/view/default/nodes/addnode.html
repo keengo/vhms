@@ -4,11 +4,11 @@
   <form name='nodeform' action="?c=nodes&a={{$action}}&oldname={{$node.name}}" method="post">
 	<div class="wid_main mar_main" align="left">
 		<div class="block_top" align="left">当前位置：主机管理 --> 增加主机</div>
-		<table class="table_main2 mar_main" cellpadding="0" cellspacing="1">
+		<table class="table_main2" cellpadding="0" cellspacing="1">
 			<tr>
 				<td colspan="2" class="bg_main"><b>增加主机</b></td>
 			</tr>
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<tr>
 				<td class="wid_general">名字：</td>
 				<td>
 					<input type='text' name='name' id='tb_wid3' value="{{$node.name}}" onBlur="checkName();"
@@ -19,23 +19,23 @@
 					<span class="red right">*必填.服务器名字.不可以为中文</span>
 				</td>
 			</tr>
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<tr>
 				<td>备注：</td>
 				<td><input name="nickname" type="text"  size='32' value="{{$node.nickname}}">
 			</tr>
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<tr>
 				<td>easypanel主机IP：</td>
 				<td><input name="host" type="text" id='tb_wid3' value="{{$node.host}}"><span class="red right">*必填</span></td>
 			</tr>
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<tr>
 				<td>easypanel端口：</td>
 				<td><input name="port" id='tb_wid3' value="{{$node.port}}" type="text"><span class="red right">*必填(默认:3312)</span></td>
 			</tr>	
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<tr>
 				<td>安全码：</td>
 				<td><input name="passwd" type="text" id='tb_wid3' value="" autoComplete='off'><span class="red right">仅修改时才写</span></td>
 			</tr>
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<tr>
 				<td>&nbsp;</td><td align="left"><input type="submit" value="确认提交"></td>
 			</tr>
 		</table>

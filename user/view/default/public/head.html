@@ -1,4 +1,5 @@
 {{include file='common/head.html'}}
+<link rel="stylesheet" rev="stylesheet" href="{{$STATIC}}images/css.css" type="text/css"/>
 <body>
 <!--幻灯片script代码开始-->
 <script language="javascript">
@@ -39,9 +40,10 @@
 <div><table id="table_r"><tr><td height="3"></td></tr></table></div>
 <div align="center">
 <div class="wid_menu">
-	<table width="960" border="0" cellpadding="0" cellspacing="0" align="center">
-	<form id="form1" name="form1" method="post" action="?c=session&a=login&refer=web" >
-		<tr><td colspan="2">
+	<table class="table" cellpadding="0" cellspacing="0">
+		<form id="form1" name="form1" method="post" action="?c=session&a=login&refer=web" >
+		<tr>
+			<td colspan="2">
 				{{if $role.user}}{{$role.user}},您好!  [<a href='?c=user&a=index'>进入会员中心</a>] [<a href='?c=session&a=logout'>退出</a>]{{else}}
 				用户名:
 				<input name="username" type="text" size="12" />
@@ -53,8 +55,9 @@
 				{{/if}}
 	  		</td>
 			<td align="right"><script language="javascript" src="?c=product&a=productList&target=self"></script></td>
+		</tr>
 		 <tr>
-			<td width="184" rowspan="2"><img src='{{if $setting.logo.value}}{{$setting.logo.value}}{{else}}{{$STATIC}}/images/logo.jpg{{/if}}' height="80"></td>
+			<td rowspan="2"><img src='{{if $setting.logo.value}}{{$setting.logo.value}}{{else}}{{$STATIC}}/images/logo.jpg{{/if}}' height="80"></td>
 			<td valign="top" align="left" class="right" width="500"></td><td valign="top"></td>
 		 </tr>
 	  </form>
@@ -69,14 +72,32 @@
 	    <td colspan="3">
 			<table width="100%" border="0" cellpadding="0" cellspacing="0">
 			  <tr>
-				<td width="6" height="42"><img src='{{$STATIC}}images/menu-home-red1.jpg'></td>
-				<td background='{{$STATIC}}images/menu-dxt-red2.jpg' class="right_h white">
+				<td height="42" background='{{$STATIC}}images/menu-dxt-red2.jpg' class="right_h white">
 					{{foreach from=$menus item=menu}}
 					<a href="{{$menu.1}}" class="mainlevel"><b><span class="td_font white">{{$menu.0}}</span></b></a>
 					&nbsp;&nbsp;<span class="right topimg_h">&nbsp;&nbsp;</span>
 		   			{{/foreach}}	
 				</td>
-				<td width="6" height="42"><img src='{{$STATIC}}images/menu-home-red3.jpg'></td>
+			  </tr>
+		  </table>
+		</td>
+      </tr>
+	  
+	  
+	  <tr>
+	    <td colspan="3">
+			<table class="ml" width="100%" border="0" cellpadding="0" cellspacing="0" background='{{$STATIC}}images/menu-dxt-red2.jpg'>
+			  <tr>
+			  <td class="onmouse" id="lnkhome" classoff="overmouse" classon="onmouse" align="center" width="84">
+		 		 <div class="menu_top"><a class="mainmenu"  href="#">首 页</a></div></td>
+				     <td class="overmouse" id="lnkdomain" classoff="overmouse" classon="onmouse" align="center" width="84">
+		  <div class="menu_top"><a class="mainmenu"  href="#">域名注册</a></div></td>
+				<td height="42" class="right_h white">
+					{{foreach from=$menus item=menu}}
+					<a href="{{$menu.1}}" class="mainlevel"><b><span class="td_font white">{{$menu.0}}</span></b></a>
+					&nbsp;&nbsp;<span class="right topimg_h">&nbsp;&nbsp;</span>
+		   			{{/foreach}}	
+				</td>
 			  </tr>
 		  </table>
 		</td>
@@ -84,8 +105,31 @@
 	</table>
 <div>
 </div>
+<!--菜单script代码开始-->
 
-<!--body开始 --------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<script  src='user/view/default/images/tabtable.js' type="text/javascript"></script>
+<script language="javascript">
+var TabTable1;
+function init1(){
+	var handles = 'lnkhome,lnkdomain,lnkhost,lnkhosthy,lnkcdnhost,lnkemail,youhui,lnkidc,lnkvps,help,autoweb,promote,daili';
+	var tables = 'lnkhome-info,lnkdomain-info,lnkhost-info,lnkhosthy-info,lnkcdnhost-info,lnkemail-info,youhui-info,lnkidc-info,lnkvps-info,help-info,autoweb-info,promote-info,daili-info';
+	TabTable1 = new TabTable(handles,tables,'onmouseover');
+	var url = location.toString().toLowerCase();
+	if(url.indexOf("/host_overseas.php") > -1) TabTable1.showTable('lnkhosthy','lnkhosthy-info');
+	else if(url.indexOf("/cdnhost") > -1) TabTable1.showTable('lnkcdnhost','lnkcdnhost-info');
+	else if(url.indexOf("/host") > -1) TabTable1.showTable('lnkhost','lnkhost-info');
+	else if(url.indexOf("/domain") > -1) TabTable1.showTable('lnkdomain','lnkdomain-info');
+	else if(url.indexOf("/chinesedomain") > -1) TabTable1.showTable('lnkdomain','lnkdomain-info');
+	else if(url.indexOf("/email") > -1) TabTable1.showTable('lnkemail','lnkemail-info');
+	else if(url.indexOf("/vps") > -1) TabTable1.showTable('lnkvps','lnkvps-info');
+	else if(url.indexOf("/autoweb") > -1) TabTable1.showTable('autoweb','autoweb-info');
+	else if(url.indexOf("/sms") > -1) TabTable1.showTable('help','help-info');
+	else if(url.indexOf("/promote") > -1) TabTable1.showTable('promote','promote-info');
+	else if(url.indexOf("/daili") > -1) TabTable1.showTable('daili','daili-info');
+	else TabTable1.showTable('lnkhome','lnkhome-info');
+}
+</script>
+<!--菜单script代码结束-->
 
 
 

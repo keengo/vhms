@@ -3,10 +3,10 @@
 <div align="center">
 	<div class="wid_main mar_main" align="left">
 		<div class="block_top" align="left">当前位置：虚拟主机/cdn --> 过期列表</div>
-		<table class="table_main2 mar_main" cellpadding="0" cellspacing="1">
+		<table class="table_main2" cellpadding="0" cellspacing="1">
 			<form name="form1" method="post" action="?c=vhost&a=pageVhostByExpire_time">
 			<tr>
-				<td colspan="11" class="bg_yellow hg_main">
+				<td colspan="11" id="bg_yellow" class="hg_main">
 					<span class="topimg STYLE1">查询过期天数:</span>
 					<input name="day" type="text" id="day" value="1" size="8">
 					<select name="status">
@@ -20,7 +20,7 @@
 			<tr>
 				<td colspan="11" class="bg_main"><b>过期列表</b></td>
 			</tr>
-			<tr class="bg_yellow">
+			<tr id="bg_yellow">
 				<td>操作</td>
 				<td>网站名</td>
 				<td>所属用户</td>
@@ -29,7 +29,7 @@
 				<td>空间状态</td>					
 			</tr>
 			{{foreach from=$list item=row}}
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<tr>
 				<td>[<a href="?c=vhost&a=resync&name={{$row.name}}">重建</a>]</td>
 				<td>{{$row.name}}</td>
 				<td><a href='?c=user&a=listUser&username={{$row.username}}'>{{$row.username}}</a></td>
@@ -49,7 +49,7 @@
 			</tr>
 			{{/foreach}}
 			<tr>
-				<td colspan="6" class="bg_yellow" align="right">
+				<td colspan="6" id="bg_yellow" align="right">
 					{{if $page>1}}
 					<a href='?c=vhost&a=pageVhostByExpire_time&page=0&status={{$status}}'>首页</a> 
 					<a href='?c=vhost&a=pageVhostByExpire_time&page={{$page-1}}&status={{$status}}'>上一页</a> 

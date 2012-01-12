@@ -7,13 +7,13 @@
 			<font color='red'>{{$msg}}</font>
 		</div>
 		{{/if}}
-		<table class="table_main2 mar_main" cellpadding="0" cellspacing="1">
+		<table class="table_main2" cellpadding="0" cellspacing="1">
 			<tr>
 				<td colspan="2" class="bg_main hg_main"><b>网上支付设置</b></td>
 			</tr>
 			<form action='?c=setting&a=set&sub={{$sub}}' method='post'>
 			{{foreach item=e from=$env}}				
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">	
+			<tr>	
 				<td class="wid_general">{{$lang[$e.name]}}</td>
 				<td>
 					<input type='hidden' name='name[]' value='{{$e.name}}'/>
@@ -30,7 +30,7 @@
 				</td>
 			</tr>
 			{{/foreach}}
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<tr>
 				<td>&nbsp;</td><td><input type='submit' value='设置'></td>
 			</tr>
 			</form>	

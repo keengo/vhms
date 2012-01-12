@@ -3,11 +3,11 @@
 <div align="center">
   	<div class="wid_main mar_main" align="left">
 		<div class="block_top" align="left">当前位置：用户管理 --> 用户列表</div>
-		<table class="table_main2 mar_main" cellpadding="0" cellspacing="1">
+		<table class="table_main2" cellpadding="0" cellspacing="1">
 			<tr>
 				<td colspan="7" class="bg_main"><b>用户列表</b></td>
 			</tr>
-			<tr class="bg_yellow">
+			<tr id="bg_yellow">
 				<td>用户名</td>
 				<td>代理级别</td>
 				<td>身份证</td>
@@ -17,7 +17,7 @@
 				<td>注册时间</td>
 				</tr>
 				{{foreach from=$list item=row}}
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<tr>
 				<td><a href='?c=user&a=listUser&username={{$row.username}}'>{{$row.username}}</a></td>
 				<td>{{$row.agent_name}}</td>
 				<td>{{$row.id}}</td>
@@ -28,7 +28,7 @@
 			</tr>
 				{{/foreach}}
 			<tr>
-				<td colspan="7" class="bg_yellow" align="right">
+				<td colspan="7" id="bg_yellow" align="right">
 					{{if $page>1}}
 					<a href='?c=user&a=pageUsers&page=0'>首页</a> 
 					<a href='?c=user&a=pageUsers&page={{$page-1}}'>上一页</a> 

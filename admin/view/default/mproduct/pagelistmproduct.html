@@ -3,11 +3,11 @@
 <div align="center">
 	<div class="wid_main mar_main" align="left">
 		<div class="block_top" align="left">当前位置：非自动化产品 --> 产品列表</div>
-		<table class="table_main2 mar_main" cellpadding="0" cellspacing="1">
+		<table class="table_main2" cellpadding="0" cellspacing="1">
 			<tr>
 				<td colspan="7" class="bg_main"><a href="?c=mproduct&a=addMproductFrom" target='main'><b>[增加产品]</b></a></td>
 			</tr>
-			<tr class="bg_yellow">
+			<tr id="bg_yellow">
 				<td>操作</td>	
 				<td><a href="?c=mproduct&a=pageListMproduct&order=id">产品ID</a></td>
 				<td><a href="?c=mproduct&a=pageListMproduct&order=name">产品名称</a></td>
@@ -17,7 +17,7 @@
 				<td><a href="?c=mproduct&a=pageListMproduct&order=group_id">状态</a></td>	
 			</tr>
 			{{foreach from=$list item=row}}
-			<tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+			<tr>
 				<td>
 					[<a href="javascript:if(confirm('确定?')){location='?c=mproduct&a=delMproduct&id={{$row.id}}';}" >删除</a>]
 					[<a href="?c=mproduct&a=addMproductFrom&id={{$row.id}}" >更改</a>]
@@ -34,7 +34,7 @@
 			</tr>
 			{{/foreach}}
 			<tr>
-				<td colspan="7" class="bg_yellow" align="right">
+				<td colspan="7" id="bg_yellow" align="right">
 					{{if $page>1}}
 					<a href='?c=mproduct&a=pageListMproduct&order={{$order}}&&page=0'>首页</a> 
 					<a href='?c=mproduct&a=pageListMproduct&order={{$order}}&page={{$page-1}}'>上一页</a> 

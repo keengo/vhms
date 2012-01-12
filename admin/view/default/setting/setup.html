@@ -2,44 +2,44 @@
 <div align="center">
 	<div class="wid_main mar_main" align="left">
 		<div class="block_top" align="left">当前位置：系统设置 --> 首页设置</div>
-		<table class="table_main2 mar_main" cellpadding="0" cellspacing="1">
+		<table class="table_main2" cellpadding="0" cellspacing="1">
 		 	<form  action="?c=setting&a=webSetup" method='post'>
 		 	<tr>
 				<td colspan="2" class="bg_main"><b>首页设置</b></td>
 			</tr>
-		  <tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+		  <tr>
 			<td>网站名称</td>
 			<td><input name='web_name' id="money" size="50" value='{{$setting.web_name.value}}'/></td>
 		  </tr>
-		  <tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+		  <tr>
 			<td>首页logo图片地址</td>
 			<td><input name='logo' id="money" size="50"  value='{{$setting.logo.value}}'/></td> 
 		  </tr>
-		  <tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+		  <tr>
 			<td>顶部banner图片地址</td>
 			<td><input name='banner' id="money" size="50"  value='{{$setting.banner.value}}'/></td> 
 		  </tr>
-		  <tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+		  <tr>
 			<td>顶部banner链接设置</td>
 			<td><input name='links' id="money" size="50"  value='{{$setting.links.value}}'/></td> 
 		  </tr>
-		  <tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+		  <tr>
 			<td>联系方式（支持html）</td>
 			<td><textarea name='contact'  rows='5' cols='50'>{{$setting.contact.value}}</textarea></td>
 		  </tr>
-		  <tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+		  <tr>
 			<td>foot定制（支持html）</td>
 			<td><textarea name='footer'  rows='5' cols='50'>{{$setting.footer.value}}</textarea></td>
 		  </tr>
-		  <tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+		  <tr>
 			<td>统计代码（支持html）</td>
 			<td><textarea name='stat_code'  rows='5' cols='50'>{{$setting.stat_code.value}}</textarea></td>
 		  </tr>
-		  <tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+		  <tr>
 			<td>虚拟主机名字定义</td>
 			<td><input name='vhost_name' size="50"  value='{{$setting.vhost_name.value}}'/></td> 
 		  </tr>
-		   <tr class="main_bgcolor" onMouseMove="tr_onMouseOver(this)" onMouseOut="tr_onMouseOut(this)">
+		   <tr>
 				<td>&nbsp;</td><td><input type="submit" value="确认" /></td>
 		  </tr>
 		</form>

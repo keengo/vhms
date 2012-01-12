@@ -20,7 +20,10 @@ td {font-family: Arial, Helvetica, sans-serif;font-size: 13px;}
 .td_font {font-family: Arial, Helvetica, sans-serif;font-size: 14px;}
 .fl_le{ float:left}
 .fl_ri{ float:right}
-
+.table{
+width:960px;
+border:0px;
+}
 
 .left_box {BORDER-RIGHT: #C2C2C2 1px solid; BORDER-TOP: #C2C2C2 1px solid; BACKGROUND: #fafcff; MARGIN: 0px 0px 6px; BORDER-LEFT: #C2C2C2 1px solid; BORDER-BOTTOM: #C2C2C2 1px solid;}
 .left_box_host {BORDER-RIGHT: #C2C2C2 1px solid; BORDER-TOP: #FFFFFF 1px solid; BACKGROUND: #fafcff; MARGIN: 0px 0px 6px; BORDER-LEFT: #C2C2C2 1px solid; BORDER-BOTTOM: #C2C2C2 1px solid;}
