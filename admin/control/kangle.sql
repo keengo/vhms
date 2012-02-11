@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 3.3.9
 -- http://www.phpmyadmin.net
 --
@@ -169,9 +169,9 @@ CREATE TABLE IF NOT EXISTS `mproduct_order` (
   `username` varchar(32) NOT NULL,
   `product_id` int(11) NOT NULL,
   `group_id` int(11) NOT NULL,
-  `client_msg` text NOT NULL,
-  `admin_msg` text NOT NULL,
-  `admin_mem` text NOT NULL,
+  `client_msg` text ,
+  `admin_msg` text ,
+  `admin_mem` text ,
   `price` int(11) NOT NULL,
   `month` int(11) NOT NULL,
   `create_time` datetime NOT NULL,

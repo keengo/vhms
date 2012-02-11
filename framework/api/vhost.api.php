@@ -11,7 +11,7 @@ class VhostAPI extends API
 	 * 防止和节点网站账号冲掉，设定www，和$db_cfg['default']['dbname'],kangle
 	 * @param  $vhost_name
 	 */
-	public function check_vhost($vhost_name)
+	public function check_vhost($vhostname)
 	{
 		global $db_cfg;
 		
@@ -20,11 +20,8 @@ class VhostAPI extends API
 		$arr[] = 'root';
 		$arr[] = 'kangle';
 		$arr[] = 'www';
-		
-		foreach ($arr as $a) {
-			if($a == $vhost_name) {
-				return false;
-			}
+		if(in_array($vhostname, $arr)){
+			return false;
 		}
 		return true;
 	}
