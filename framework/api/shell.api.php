@@ -20,8 +20,6 @@ class ShellAPI extends API
 	{
 		$t = date('YmdH',time(NULL));
 		$nodes = daocall('nodes','getAllNodes');
-		//print_r($nodes);
-		//echo $t;
 		foreach ($nodes as $node) {
 			$this->sync_host_flow($node['name'],$t);
 		}
@@ -51,6 +49,7 @@ class ShellAPI extends API
 			apicall('vhost','addFlow',array($name,$month,$day,$hour,$flow));
 		}
 	}
+	/*暂停，删除过期空间*/
 	public function sync_expire()
 	{
 		$day = 1; //查询过期天数
