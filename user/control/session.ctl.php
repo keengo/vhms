@@ -57,7 +57,6 @@ class SessionControl extends Control {
 			$userinfo = $this->checkPassword($user, $_REQUEST['passwd']);
 			if(!$userinfo){
 				return $this->error();
-				die();
 			}
 			registerRole('user',$userinfo['username']);
 			if($GLOBALS['frame']==1){

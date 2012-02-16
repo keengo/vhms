@@ -34,6 +34,9 @@ class VhostAPI extends API
 	public function noticeChange($node,$name)
 	{
 		$whm = apicall('nodes','makeWhm',array($node));
+		if (!$whm) {
+			return false;
+		}
 		$whmCall = new WhmCall('reload_vh');
 		$whmCall->addParam('name', $name);
 		if(!$whm->call($whmCall)){
@@ -44,6 +47,9 @@ class VhostAPI extends API
 	public function getQuota($name,$uid,$node,$product_id)
 	{
 		$whm = apicall('nodes','makeWhm',array($node));
+		if (!$whm) {
+			return false;
+		}
 		$whmCall = new WhmCall('get_quota',5);
 		$whmCall->addParam('vh', $name);
 		$result = $whm->call($whmCall,5);
@@ -125,6 +131,9 @@ class VhostAPI extends API
 			}
 		}
 		$whm = apicall('nodes','makeWhm',array($node));
+		if (!$whm) {
+				return false;
+		}
 		$whmCall = new WhmCall('update_vh');
 		$whmCall->addParam('name', $name);
 		$whmCall->addParam('status', $status);
@@ -180,6 +189,9 @@ class VhostAPI extends API
 		$node = $this->getNode($user);
 		if($GLOBALS['node_db']=='sqlite'){
 			$whm = apicall('nodes','makeWhm',array($node));
+			if (!$whm) {
+				return false;
+			}
 			$whmCall = new WhmCall('del_vh_info');
 			$whmCall->addParam('vhost',$user);
 			$whmCall->addParam('name',$name);
@@ -204,6 +216,9 @@ class VhostAPI extends API
 		$node = $this->getNode($user);
 		if($GLOBALS['node_db']=='sqlite'){
 			$whm = apicall('nodes','makeWhm',array($node));
+			if (!$whm) {
+				return false;
+			}
 			$whmCall = new WhmCall('add_vh_info');
 			$whmCall->addParam('vhost',$user);
 			$whmCall->addParam('name',$name);
@@ -225,8 +240,12 @@ class VhostAPI extends API
 	private function sqliteUpdateVirtualHost($node,$name,$attr)
 	{
 		$whm = apicall('nodes','makeWhm',array($node));
+		if (!$whm) {
+			return false;
+		}
 		$whmCall = new WhmCall('update_vh');
 		$whmCall->addParam('name',$name);
+		
 		$key = array_keys($attr);
 		for($i=0;$i<count($key);$i++){
 			$whmCall->addParam($key[$i],$attr[$key[$i]]);
@@ -248,6 +267,9 @@ class VhostAPI extends API
 	public function del($node,$name)
 	{
 		$whm = apicall('nodes','makeWhm',array($node));
+		if (!$whm) {
+			return false;
+		}
 		$whmCall = new WhmCall('del_vh');
 		$whmCall->addParam('destroy',1);  
 		$whmCall->addParam('name',$name);

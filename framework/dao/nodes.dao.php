@@ -1,16 +1,10 @@
 <?php
-
-/**
- * �û���Ϣ��ϢDAO��������
- */
-class NodesDAO extends DAO {
-
-	
-
+class NodesDAO extends DAO 
+{
 	public function __construct()
-	{	//���ػ�db�ļ�
+	{	
 		parent::__construct();
-		$this->MAP_ARR 	= array(		//�û���Ϣ��Ϣ�ֶζ��ձ�
+		$this->MAP_ARR 	= array(	
 			"name" => 'name',
 			"host" => 'host',
 			"port"=> 'port',
@@ -22,9 +16,7 @@ class NodesDAO extends DAO {
 		);
 		$this->_TABLE = DBPRE . 'nodes';
 	}
-	/**
-	 * ��ѯ�û���Ϣ��Ϣ
-	 */
+	
 	public function getNode($name)
 	{
 		$tbl = $this->_TABLE;
@@ -41,9 +33,7 @@ class NodesDAO extends DAO {
 		}
 		return $value;
 	}
-	/**
-	 * �����û���Ϣ��Ϣ
-	 */
+	
 	public function insertNode($arr)
 	{
 		return $this->insertData($arr);		
