@@ -1,29 +1,26 @@
 <?php
 $_CACHE['apps'] = array (
-  2 => 
+  1 => 
   array (
-    'appid' => '2',
+    'appid' => '1',
     'type' => 'DISCUZX',
-    'name' => 'dz',
-    'url' => 'http://127.0.0.98',
-    'ip' => '127.0.0.98',
+    'name' => 'Discuz! Board',
+    'url' => 'http://127.0.0.8/bbs',
+    'ip' => '127.0.0.1',
     'viewprourl' => '',
     'apifilename' => 'uc.php',
     'charset' => '',
     'synlogin' => '1',
-    'extra' => 
-    array (
-      'apppath' => '',
-    ),
+    'extra' => '',
     'recvnote' => '1',
   ),
-  3 => 
+  2 => 
   array (
-    'appid' => '3',
+    'appid' => '2',
     'type' => 'OTHER',
     'name' => 'vhms',
-    'url' => 'http://192.168.1.9',
-    'ip' => '192.168.1.9',
+    'url' => 'http://127.0.0.43',
+    'ip' => '',
     'viewprourl' => '',
     'apifilename' => 'uc.php',
     'charset' => '',
@@ -35,5 +32,5 @@ $_CACHE['apps'] = array (
     ),
     'recvnote' => '1',
   ),
-  'UC_API' => 'http://127.0.0.98/uc_server',
+  'UC_API' => 'http://127.0.0.8/bbs/uc_server',
 );

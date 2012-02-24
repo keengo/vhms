@@ -21,12 +21,7 @@ class SessionControl extends Control {
 	public function login()
 	{		
 		$user=trim($_REQUEST['username']);
-		if(!$this->checkRight($user))
-		{
-			exit("用户名不符合标准");
-		}
 		if(UC_START=='on'){
-				
 			@include dirname(__FILE__).'/../../config.inc.php';
 				
 			if(UC_KEY=="" || UC_API=="")
@@ -54,6 +49,10 @@ class SessionControl extends Control {
 				die();
 			}
 		}else{
+			if(!$this->checkRight($user))
+			{
+				exit("用户名不符合标准");
+			}
 			$userinfo = $this->checkPassword($user, $_REQUEST['passwd']);
 			if(!$userinfo){
 				return $this->error();
