@@ -59,16 +59,16 @@ class ShellAPI extends API
 		if ($vhosts) {
 			foreach ($vhosts as $vhost) {
 				if(!$nodes = daocall('nodes','getNode',array($vhost['node']))){
-					echo "sync_expire ",$vhost['name']." failed<-------00------->\r\n";
+					echo "sync_expire ",$vhost['name']." failed<-------not node------->\r\n";
 					continue;
 				}
 				try{
 					if(!$return = apicall('vhost','changeStatus',array($vhost['node'],$vhost['name'],1))){
-						echo "sync_expire ",$vhost['name']." failed<-------11------->\r\n";
+						echo "sync_expire ",$vhost['name']." failed<-------sync failed------->\r\n";
 						continue;
 					}
 				}catch(Exception $e){
-					print_r($e);
+					//print_r($e);
 				}
 				echo "sync_expire ",$vhost['name']." success\r\n";
 			}
@@ -80,14 +80,14 @@ class ShellAPI extends API
 		if (count($del_vhosts) >0) {
 			foreach ($del_vhosts as $del_vhost) {
 				if(!$nodes = daocall('nodes','getNode',array($del_vhost['node']))) {
-					echo "del vhost ",$del_vhost['name']." failed<-------00------->\r\n";
+					echo "del  ",$del_vhost['name']." failed<-------not node------->\r\n";
 					continue;
 				}
 				if(!$result = apicall('vhost','del',array($del_vhost['node'],$del_vhost['name']))){
-					echo "del vhost ",$del_vhost['name']." failed<-------11------->\r\n";
+					echo "del  ",$del_vhost['name']." failed<-------sync failed------->\r\n";
 					continue;
 				}
-				echo "del vhost ",$del_vhost['name']." success\r\n";
+				echo "del  ",$del_vhost['name']." success\r\n";
 			}
 		}
 	}
