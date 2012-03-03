@@ -4,15 +4,32 @@
 	<div class="wid_main mar_main" align="left">
 		<div class="block_top" align="left">当前位置：虚拟主机/cdn --> 站点列表</div>
 		<table class="table_main2" cellpadding="0" cellspacing="1">
-			<form name="form1" method="post" action="?c=vhost&a=showVhost">
-			<tr>
-				<td colspan="11" id="bg_yellow" class="hg_main">
-					<span class="topimg STYLE1">输入用户名或#uid:</span>
-					<input name="user" type="text" id="user" value="{{$user}}" size="25">
-					<input type="submit" name="Submit" value="搜索">
-				</td>
-			</tr>
-			</form>
+			<tr><td colspan="11" class="hg_main">
+				<table width="100%" cellpadding="0" cellspacing="0">
+					<form name="form1" method="post" action="?c=vhost&a=showVhost">
+					<tr id="bg_yellow"><td align="left">
+						<span class="topimg STYLE1">输入用户名或#uid:</span>
+						<input name="user" type="text" id="user" value="{{$user}}" size="25">
+						<input type="submit" name="Submit" value="搜索">
+					</td>
+					<td align="right">
+						{{if $page>1}}
+						<a href='?c=vhost&a=pageVhost&page=0'>首页</a> 
+						<a href='?c=vhost&a=pageVhost&page={{$page-1}}'>上一页</a> 
+						{{else}}
+						首页 上一页 
+						{{/if}}
+						{{if $page!=$total_page}} 
+						<a href='?c=vhost&a=pageVhost&page={{$page+1}}'>下一页</a>
+						<a href='?c=vhost&a=pageVhost&page={{$total_page}}'>尾页</a>
+						{{else}}下一页 尾页
+						{{/if}} 
+						{{$page}}/{{$total_page}}&nbsp;
+						共计{{$count}}记录&nbsp;
+					</td></tr>
+					</form>
+				</table>
+			</td></tr>
 			<tr>
 				<td colspan="11" class="bg_main"><b>站点列表</b></td>
 			</tr>

@@ -2,16 +2,21 @@
 <body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0' onLoad="javascript:form1.username.focus();">
 <div align="center">
   	<div class="wid_main mar_main" align="left">
+	<form name="form1" method="post" action="?c={{$smarty.request.c}}&a=listUser">
 		<div class="block_top" align="left">当前位置：用户管理 --> 用户查询</div>
-		<form name="form1" method="post" action="?c={{$smarty.request.c}}&a=listUser">
-			<div class="search mar_main">
-				<p align="center">
-					 <span class="topimg STYLE1">用户名:</span>
-					<input name="username" type="text" id="username" value="{{$username}}" size="35">
-					<input type="submit" name="Submit" value="搜索">
-				</p>
+		
+			<div id="xsnazzy">
+				<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b><b class="xb4"></b></b>
+					<div class="xboxcontent" align="center">
+						<p align="center">
+							 <span class="topimg STYLE1">用户名:</span>
+							<input name="username" type="text" id="username" value="{{$username}}" size="35">
+							<input type="submit" name="Submit" value="搜索">
+						</p>
+					</div>
+				<b class="xbottom"><b class="xb4"></b><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
 			</div>
-		 </form>
+			</form>		
 		{{if $msg}}
 			<div class="block mar_top red" align="center">{{$msg}}</div>
 		{{/if}}

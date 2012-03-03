@@ -379,7 +379,7 @@ background-color:#f5f5f5;
 background-image:url(table_box.gif);
 }
 #bg_yellow{
-background-color:#FFFEE9;
+background-color:#F3F3F3;
 }
 .bg_yellow{
 background-color:#FFFEE9;
@@ -429,3 +429,30 @@ height:30px;
 .wid_tpl{
 width:100px;
 }
+/*退出登陆css*/
+.menu_top { background:url(top_menu.jpg) no-repeat; width:200px; height:28px; float:right;}
+ .menu_top ul { margin:8px 0 0 35px; list-style:none;}
+ .menu_top li { display:inline;}
+ .menu_top a { float:left; text-decoration:none; padding-left:2px;}
+ .menu_top a:hover {text-decoration:none;}
+ .menu_top a span { display:block; padding-right:10px; color:#FFF; }
+ .menu_top a:hover span { color:#004c7e; }
+
+/*圆角css*/
+#xsnazzy h1, #xsnazzy h2, #xsnazzy p {margin:0 10px; letter-spacing:1px;}
+#xsnazzy h1 {font-size:2.5em; color:#fff;}
+#xsnazzy h2 {font-size:2em;color:#06a; border:0;}
+#xsnazzy p {padding-bottom:0.5em;}
+#xsnazzy h2 {padding-top:0.5em;}
+#xsnazzy {background: transparent; margin:1em;}
+
+.xtop, .xbottom {display:block; background:transparent; font-size:1px;}
+.xb1, .xb2, .xb3, .xb4 {display:block; overflow:hidden;}
+.xb1, .xb2, .xb3 {height:1px;}
+.xb2, .xb3, .xb4 {background:#fff; border-left:1px solid #969696; border-right:1px solid #969696;}
+.xb1 {margin:0 5px; background:#969696;}
+.xb2 {margin:0 3px; border-width:0 2px;}
+.xb3 {margin:0 2px;}
+.xb4 {height:2px; margin:0 1px;}
+
+.xboxcontent {display:block; background:#fff; border:0 solid #969696; border-width:0 1px;}
