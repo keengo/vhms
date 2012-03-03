@@ -62,7 +62,13 @@ function checkAllNode()
 	<div class="wid_main mar_main" align="left">
 		<div class="block_top" align="left">当前位置：主机管理 --> 主机列表</div>
 		{{if $msg}}
-			<div class="block mar_top" align="center"><font color='red'>{{$msg}}</font></div>
+			<div id="xsnazzy">
+				<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b><b class="xb4"></b></b>
+					<div class="xboxcontent" align="center">
+						<font color='red'>{{$msg}}</font>
+					</div>
+				<b class="xbottom"><b class="xb4"></b><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
+			</div>
 		{{/if}}
 		<table class="table_main2" cellpadding="0" cellspacing="1">
 		  <tr>
