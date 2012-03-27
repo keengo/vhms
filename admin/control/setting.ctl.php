@@ -6,6 +6,17 @@ class SettingControl extends Control
 	{
 		return $this->fetch('setting/setFrom.html');
 	}
+	/**
+	 * 其他设置
+	 * Enter description here ...
+	 */
+	public function setOther()
+	{
+		daocall('setting','add',array('set_renew',$_REQUEST['set_renew']));
+		$setting = daocall('setting','getAll2',array());
+		$this->assign('setting',$setting);
+		return $this->fetch('setting/setother.html');
+	}
 	public function index()
 	{
 		@load_conf('pub:settingrule');

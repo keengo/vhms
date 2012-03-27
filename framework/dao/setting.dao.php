@@ -26,9 +26,28 @@ class SettingDAO extends DAO
 		}
 		return $ret['value'];
 	}
+	/**
+	 * return array(array());
+	 */
 	public function getAll()
 	{
 		return $this->getData();
+	}
+	/**
+	 * return array
+	 * 
+	 */
+	public function getAll2()
+	{
+ 		$list = $this->select(null);
+		if(!$list){
+			return null;
+		}
+		$arr = array();
+		foreach($list as $item){
+			$arr[$item['name']] = $item['value'];
+		}
+		return $arr;
 	}
 }
 ?>
