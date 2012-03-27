@@ -151,7 +151,7 @@ class VhostproductControl extends Control {
 		$this->_tpl->assign('agent_ids',$agent_ids);
 		$this->_tpl->assign("action","addProduct");
 		if(!$this->assignHosts()){
-			return false;
+			die("请先增加主机");
 		}
 		return $this->_tpl->display('vhostproduct/addProduct.html');
 	}

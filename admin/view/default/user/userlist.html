@@ -68,7 +68,7 @@
 			</tr>
 			<tr>
 				<td>余额</td>
-				<td><a href="?c=user&a=editMoneyForm&username={{$row.username}}">{{$row.money/100}}元</a> <span class="red">( 注：充值点左边 )</span></td>
+				<td>{{$row.money/100}}元&nbsp;&nbsp;<a href="?c=user&a=editMoneyForm&username={{$row.username}}"><span class="red">充值</span></a> </td>
 			</tr>
 		</table>
 		{{/foreach}}
