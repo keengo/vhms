@@ -80,11 +80,15 @@ class UserControl extends Control {
 	}
 	public function editMoney()
 	{
-		$money = 100*intval($_REQUEST['money']);
+		$money = 100 * intval($_REQUEST['money']);
+		
 		if($money>0){
 			daocall('user','addMoney', array($_REQUEST['username'],abs($money)));
+			/*100管理员操作*/
+			$id = daocall('moneyin','add',array($_REQUEST['username'],$money,100));
 		}else{
 			daocall('user','decMoney', array($_REQUEST['username'],abs($money)));
+			$id = daocall('moneyin','add',array($_REQUEST['username'],$_REQUEST['money']*100,100));
 		}
 		$this->listUser();
 	}

@@ -19,8 +19,11 @@
 				</tr>
 				{{foreach from=$list item=row}}
 			<tr>
-				<td>{{if $row.status==0}}
+				<td>
+				{{if $row.gw !=100}}
+				{{if $row.status==0}}
 					[<a href="javascript:if(confirm('确定编号{{$row.id}}，用户名{{$row.username}}的充值金额{{$row.money/100}}元')){location='?c=money&a=manPayReturn&id={{$row.id}}';}" title="确认">确认</a>]{{/if}}
+				{{/if}}
 				</td>
 				<td>{{$row.id}}</td>
 				<td>{{$row.username}}</td>
@@ -28,7 +31,7 @@
 				<td>{{$row.start_time}}</td>
 				<td>{{$row.end_time}}</td>
 				<td>{{if $row.status==1}}成功{{else}} <font color=red>失败</font>{{/if}}</td>
-				<td>{{if $row.gw==1}}支付宝{{else}}网银在线{{/if}}</td>
+				<td>{{if $row.gw==1}}支付宝{{elseif $row.gw==100}}管理员{{else}}网银在线{{/if}}</td>
 			</tr>
 			{{/foreach}}
 			<tr>
