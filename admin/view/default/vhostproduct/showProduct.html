@@ -92,8 +92,8 @@ function updateViewResult()
 					<td>产品ID</td>
 					<td>产品</td>
 					<td>主机</td>
-					<td>空间(M)</td>
-					<td>数据库(M)</td>
+					<td>空间/数据库(M)</td>
+					<td>数据库类型</td>
 					<td>价格(元/年)</td>	
 					<td>绑定域名</td>	
 					<td>绑定子目录</td>	
@@ -122,8 +122,8 @@ function updateViewResult()
 						</select>
 						<div id='busy{{$row.id}}'></div>
 				</td>
-				<td>{{if $row.cdn}}cdn{{else}}{{$row.web_quota}}{{/if}}</td>
-				<td>{{if $row.cdn}}-{{else}}{{$row.db_quota}}{{/if}}</td>
+				<td>{{if $row.cdn}}cdn/-{{else}}{{$row.web_quota}}&nbsp;/&nbsp;{{$row.db_quota}}{{/if}}</td>
+				<td>{{$row.db_type}}</td>
 				<td>{{$row.price/100}}</td>
 				<td>{{$row.domain}}</td>
 				<td>{{if $row.cdn}}-{{else}}{{if $row.subdir_flag}}允许{{/if}} {{$row.subdir}}{{/if}}</td>
