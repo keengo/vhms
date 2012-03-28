@@ -142,6 +142,14 @@ function changeNode()
 								<td><input name="db_quota" type="text" id='tb_wid3' value="{{$vhostproduct.db_quota}}"></td>
 							</tr>
 							
+								<tr>
+								<td>数据库类型(M)：</td>
+								<td>
+								<input name="db_type" type="radio" value="mysql" {{if $vhostproduct.db_type!='sqlsrv'}}checked{{/if}}>mysql
+								<input name="db_type" type="radio" onclick="alert('请确认该节点已安装sql server服务');" value="sqlsrv"{{if $vhostproduct.db_type=='sqlsrv'}}checked{{/if}}>sql server
+								</td>
+							</tr>
+							
 							<tr>
 								<td>绑定子目录</td>
 								<td><input type='checkbox' name='subdir_flag' value='1' {{if $vhostproduct.subdir_flag}}checked{{/if}}>允许绑定子目录</td>

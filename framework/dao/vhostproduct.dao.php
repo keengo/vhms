@@ -36,7 +36,8 @@ class VhostproductDAO extends DAO {
 			'cdn'=>'cdn',
 			'envs'=>'envs',
 			'show_price'=>'show_price',
-			'flow'=>'flow'
+			'flow'=>'flow',
+			'db_type'=>'db_type'
 		);
 		$this->MAP_TYPE = array(
 			'id'=>FIELD_TYPE_INT|FIELD_TYPE_AUTO,
@@ -126,7 +127,8 @@ class VhostproductDAO extends DAO {
 			'cs',
 			'cdn',
 			'view',
-			'show_price'
+			'show_price',
+			'db_type'
 		), $arr);
 		$sql = "UPDATE ".$this->_TABLE." SET ".$fields." WHERE ".$this->getFieldValue2('id',$arr['id']);
 		return $this->executex($sql);
@@ -158,7 +160,7 @@ class VhostproductDAO extends DAO {
 										'access','htaccess','log_file',
 										'speed_limit','domain','subdir',
 										'subdir_flag','upid','try_flag',
-										'describe','show_price'),
+										'describe','show_price','db_type'),
 										 $where, 'view',false, $page, $page_count, $count);
 		
 	}
