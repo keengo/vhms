@@ -6,6 +6,12 @@ class SettingControl extends Control
 	{
 		return $this->fetch('setting/setFrom.html');
 	}
+	public function setOtherFrom()
+	{
+		$setting = daocall('setting','getAll2',array());
+		$this->assign('setting',$setting);
+		return $this->fetch('setting/setother.html');
+	}
 	/**
 	 * 其他设置
 	 * Enter description here ...
@@ -13,9 +19,8 @@ class SettingControl extends Control
 	public function setOther()
 	{
 		daocall('setting','add',array('set_renew',$_REQUEST['set_renew']));
-		$setting = daocall('setting','getAll2',array());
-		$this->assign('setting',$setting);
-		return $this->fetch('setting/setother.html');
+		daocall('setting','add',array('expire_save_day',$_REQUEST['expire_save_day']));
+		return $this->setOtherFrom();
 	}
 	public function index()
 	{

@@ -53,7 +53,8 @@ class ShellAPI extends API
 	public function sync_expire()
 	{
 		$day = 1; //查询过期天数
-		$del_day = 30;//过期多少天删除空间
+		$expire_save_day = daocall('setting','get',array('expire_save_day'));
+		$del_day = $expire_save_day ? $expire_save_day : 30;//过期多少天删除空间
 
 		$vhosts = daocall('vhost','selectListByExpire_time',array($day)); //获取过期空间	
 		if ($vhosts) {
