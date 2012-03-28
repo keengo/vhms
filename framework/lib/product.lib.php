@@ -89,6 +89,7 @@ abstract class Product
 		if ($userinfo['agent_id'] > 0) {
 			$price = $this->getAgentPrice($userinfo['agent_id'],intval($info['product_type']),$suser['product_id'],$info['price']);
 			if ($price===false) {
+				echo "该产品代理价格未设置，请联系管理员";
 				return false;
 			}
 			$price = $this->caculatePrice($price,$month);
@@ -175,6 +176,7 @@ abstract class Product
 									$new_product_id,$ninfo['price']
 									);
 			if ($new_agent_price===false) {
+				echo "该产品代理价格未设置，请联系管理员";
 				return false;
 			}
 			$diff_price = $new_agent_price - $old_agent_price;
