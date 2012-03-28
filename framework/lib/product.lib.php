@@ -146,6 +146,7 @@ abstract class Product
 	{
 		//产品升级操作
 		global $default_db;
+		
 		$suser = $this->getSuser($susername);
 		if(!$suser || $suser['username']!=$username){
 			trigger_error('不是你的产品哦');
@@ -156,8 +157,10 @@ abstract class Product
 			trigger_error('产品错误');
 			return false;
 		}
+		
 		$ninfo = $this->getInfo($new_product_id);
 		$mem =$susername."从".$info['name']." 升级至 ".$ninfo['name'];//扣费备注
+		
 		//计算差价
 		//处理代理，如果有代理，按代理的价格来扣费，否则按正常价格
 		$userinfo = daocall('user','getUser',array($username));
@@ -192,20 +195,18 @@ abstract class Product
 		$expire_time = strtotime($suser['expire_time']);
 		$month = ($expire_time - time())/(30*24*3600);
 		//die("expire_time=".$suser['expire_time']." ".$expire_time." month=".$month);
-
-
-
 		$price = $this->caculatePrice($diff_price,$month);
+		
 		if($price<0){
 			trigger_error('价格错误');
 			return false;
 		}
-		//echo "price=".$price;
 		daocall('product','open_db');
 		if($default_db==null){
 			trigger_error('没有连接数据库');
 			return false;
 		}
+		
 		/*
 		 * 开始事务
 		 */
@@ -213,7 +214,6 @@ abstract class Product
 			trigger_error('开始事务失败');
 			return false;
 		}
-		//echo "haha";
 
 		if($price>0 && !apicall('money','decMoney', array($username,$price,$mem))){
 			$default_db->rollBack();
@@ -240,13 +240,14 @@ abstract class Product
 	public function sell($username,$product_id,$suser)
 	{
 		global $default_db;
+		
 		if(!$this->checkParam($username, $suser)){
 			return false;
 		}
-		$month = $suser['month'];
-		//print_r($suser);
 		
+		$month = $suser['month'];
 		$info = $this->getInfo($product_id);
+		
 		if(!$info){
 			trigger_error('产品错误');
 			return false;
@@ -266,11 +267,11 @@ abstract class Product
 		
 		//更改模板
 		if($suser['subtemplete']) {
-			
 			$info['subtemplete'] = $suser['subtemplete'];
-			
 		}
+		
 		$mem = "购买 ".$suser['name']." ".$month." 个月";
+		
 		//处理代理，如果有代理，按代理的价格来扣费，否则按正常价格
 		$userinfo = daocall('user','getUser',array($username));
 		if ($userinfo['agent_id'] > 0) {
@@ -285,7 +286,6 @@ abstract class Product
 			$price = $this->caculatePrice($info['price'],$month);
 		}
 
-
 		if($price<0){
 			trigger_error('价格错误');
 			return false;
@@ -293,6 +293,7 @@ abstract class Product
 		if($default_db==null){
 			return false;
 		}
+		
 		/*
 		 * 开始事务
 		 */
