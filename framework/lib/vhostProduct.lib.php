@@ -45,7 +45,7 @@ class VhostProduct extends Product
 												$params['node'],
 												$product_info['id'],
 												$params['month']
-						));
+		));
 		if($uid && $uid < 2000){
 			daocall('vhost','updateMinUid',array(&$uid));
 			if($uid<2000){
@@ -89,7 +89,6 @@ class VhostProduct extends Product
 	{
 		$param = $params['name'];
 		$whm = apicall('nodes','makeWhm',array($params['node']));
-		
 		if($GLOBALS['node_db']=='sqlite'){
 				
 			//			if($params['resync'] == '1'){
@@ -97,12 +96,6 @@ class VhostProduct extends Product
 			//				$whmCall->addParam('name',$param);
 			//				$whm->call($whmCall,10);
 			//			}
-			//			print_r($whmCall);
-			//			die();
-			//			echo "sync...params=";
-			//			print_r($params);
-			//			echo "<br><br><br><br>";
-			
 			$whmCall = new WhmCall('add_vh');
 			$whmCall->addParam('doc_root',$params['doc_root']);
 				
@@ -187,10 +180,17 @@ class VhostProduct extends Product
 	}
 	protected function resync($username,$suser,$oproduct,$nproduct=null)
 	{
+		//续费,
 		if($nproduct==null){
-			//续费
+			/*如果开了续费开通空间，操作，则执行*/
+			$set_renew = daocall('setting','get',array('set_renew'));
+			if ($set_renew == 1) {
+				$node = daocall('vhost','getNode',array($username));
+				apicall('vhost','changeStatus',array($node,$username,0));
+			}
 			return true;
 		}
+		/*重建或创建空间*/
 		$suser['resync'] = '1';
 		$suser['init'] = '1';
 		//$suser['md5passwd'] = $suser['passwd'];

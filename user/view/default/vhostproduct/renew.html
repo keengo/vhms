@@ -36,7 +36,8 @@ function check_user()
 		</tr>	 
 		<tr>
 			<td class="td_bgc right_2">价格</td>
-			<td class="td_bgc right_2">{{$product.price/100}}元/年</td>
+			
+			<td class="td_bgc right_2">{{if $product.show_price==1}}{{substr($product.price/100/12,0,6)}}元/月{{else}}{{$product.price/100}}元/年{{/if}}</td>
 		</tr>
 		<tr>
 			<td class="td_bgc td_hg" colspan="2" align="center">

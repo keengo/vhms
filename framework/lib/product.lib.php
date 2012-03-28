@@ -125,6 +125,9 @@ abstract class Product
 			trigger_error('续费产品出错');
 			return false;
 		}
+		if (daocall('setting','get',array('set_renew'))==1) {
+			$suser['status'] = 0;
+		}
 		if($default_db->commit()){
 			$this->resync($username,$suser,$info);
 			return true;
