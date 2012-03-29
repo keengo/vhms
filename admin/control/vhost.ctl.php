@@ -9,12 +9,10 @@ class VhostControl extends Control {
 			$page = 1;
 		}
 		$day = trim($_REQUEST['day']);
-		
-		if($_REQUEST['status'] >= 0)
-		{
+		if($_REQUEST['status'] == '0' || $_REQUEST['status'] == '1'){
 			$status = $_REQUEST['status'];
 		}else{
-			$status = "";
+			$status = '-1';
 		}
 		$page_count = 10;
 		$count = 0;

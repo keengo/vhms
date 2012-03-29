@@ -61,7 +61,6 @@ class VhostDAO extends DAO{
 			$day=1;
 		}
 		$where.=' expire_time < subdate(curdate(),interval '.$day.' day)';
-
 		if($status >= 0){
 			$where .= " and ".$this->getFieldValue2('status', $status);
 		}
