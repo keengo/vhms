@@ -8,7 +8,7 @@
 			<tr>
 				<td colspan="11" id="bg_yellow" class="hg_main">
 					<span class="topimg STYLE1">查询过期天数:</span>
-					<input name="day" type="text" id="day" value="1" size="8">
+					<input name="day" type="text" id="day" value="{{if $day}}{{$day}}{{else}}1{{/if}}" size="8">
 					<select name="status">
 						<option value='0' {{if $status==0}}selected{{/if}}>正常使用</option>
 						<option value='1' {{if $status==1}}selected{{/if}}>已暂停使用</option>

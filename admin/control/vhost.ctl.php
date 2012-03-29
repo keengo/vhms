@@ -21,6 +21,7 @@ class VhostControl extends Control {
 		if($page>=$total_page){
 			$page = $total_page;
 		}
+		$this->_tpl->assign('day',$day);
 		$this->_tpl->assign('status',$status);
 		$this->_tpl->assign('count',$count);
 		$this->_tpl->assign('total_page',$total_page);
