@@ -44,7 +44,8 @@ class VhostProduct extends Product
 												0,
 												$params['node'],
 												$product_info['id'],
-												$params['month']
+												$params['month'],
+												$params['db_type']
 		));
 		if($uid && $uid < 2000){
 			daocall('vhost','updateMinUid',array(&$uid));
@@ -134,6 +135,7 @@ class VhostProduct extends Product
 			$whmCall->addParam('cs', $product_info['cs']);
 			$whmCall->addParam('envs', $product_info['envs']);
 			$whmCall->addParam('cdn',$product_info['cdn']);
+			$whmCall->addParam('db_type', $product_info['db_type']);
 			if($params['passwd']){
 				$whmCall->addParam('passwd', $params['passwd']);
 			}

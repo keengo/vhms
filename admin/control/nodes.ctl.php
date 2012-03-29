@@ -72,7 +72,9 @@ class NodesControl extends Control {
 		$this->flush();
 		//header("Location: ?c=nodes&a=listNode");
 	}
-	public function check(){
+	public function check()
+	{
+		
 	}
 	public function insert(){
 //		$os = $this->getOs();
@@ -94,12 +96,7 @@ class NodesControl extends Control {
 	}
 	public function init()
 	{
-		if(apicall('nodes','init',array(
-		$_REQUEST['name'],
-		$_REQUEST['config_flag'],
-		$_REQUEST['init_flag'],
-		$_REQUEST['reboot_flag']
-		))){
+		if(apicall('nodes','init',array($_REQUEST['name'],$_REQUEST['config_flag'],$_REQUEST['init_flag'],$_REQUEST['reboot_flag']))){
 			$this->_tpl->assign('msg','初始化成功');
 		}else{
 			$this->_tpl->assign('msg','初始化失败');

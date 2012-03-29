@@ -20,7 +20,8 @@ class VhostDAO extends DAO{
 			'node'=>'node',
 			'product_id'=>'product_id',
 			'username'=>'username',
-			'flow'=>'flow'
+			'flow'=>'flow',
+			'db_type'
 			);
 			$this->MAP_TYPE = array(
 			'passwd'=>FIELD_TYPE_MD5,
@@ -48,7 +49,7 @@ class VhostDAO extends DAO{
 		if ($status>=0) {
 			$where .= " and ".$this->getFieldValue2('status', $status);
 		}
-		return $this->select(array('name','username','node','product_id'),$where);
+		return $this->select(array('name','username','node','product_id','db_type'),$where);
 	}
 
 
@@ -64,7 +65,7 @@ class VhostDAO extends DAO{
 		if($status >= 0){
 			$where .= " and ".$this->getFieldValue2('status', $status);
 		}
-		return $this->selectPage(array('name','create_time','expire_time','username','status'),
+		return $this->selectPage(array('name','create_time','expire_time','username','status','db_type'),
 		$where,
 		'expire_time', 
 		false,
@@ -81,7 +82,7 @@ class VhostDAO extends DAO{
 			$where.=" AND ".$this->getFieldValue2('name', $name);
 		}
 		return $this->selectPage(
-		array('name','uid','templete','node','create_time','expire_time','status','product_id','username','flow'),
+		array('name','uid','templete','node','create_time','expire_time','status','product_id','username','flow','db_type'),
 		$where,
 		'uid', 
 		true,
@@ -93,7 +94,7 @@ class VhostDAO extends DAO{
 	public function pageVhost($page,$page_count,&$count)
 	{
 		return $this->selectPage(
-		array('name','uid','username','templete','node','doc_root','create_time','expire_time','product_id','status','flow'),
+		array('name','uid','username','templete','node','doc_root','create_time','expire_time','product_id','status','flow','db_type'),
 		null,
 		'uid', 
 		true,
@@ -131,7 +132,7 @@ class VhostDAO extends DAO{
 	/**
 	 * 插入用户信息信息
 	 */
-	public function insertVhost($username,$name,$passwd,$doc_root,$group,$templete,$subtemplete,$status,$node,$product_id,$month)
+	public function insertVhost($username,$name,$passwd,$doc_root,$group,$templete,$subtemplete,$status,$node,$product_id,$month,$db_type)
 	{
 		$arr=array();
 		$arr['username']=$username;
@@ -146,6 +147,7 @@ class VhostDAO extends DAO{
 		$arr['product_id'] = $product_id;
 		$arr['create_time'] = 'NOW()';
 		$arr['expire_time'] = 'ADDDATE(NOW(),INTERVAL '.$month.' MONTH)';
+		$arr['db_type'] = $db_type;
 		$result = $this->insertData($arr);
 
 		if($result){
@@ -203,7 +205,7 @@ class VhostDAO extends DAO{
 		if($username){
 			$where = $this->getFieldValue2('username', $username);
 		}
-		return $this->getData2(array('name','uid','create_time','expire_time','status','node','product_id'),$where,$result);
+		return $this->getData2(array('name','uid','create_time','expire_time','status','node','product_id','db_type'),$where,$result);
 	}
 	public function listMyVhost($username,$result='rows')
 	{

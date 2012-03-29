@@ -292,6 +292,7 @@ CREATE TABLE IF NOT EXISTS `vhost` (
   `product_id` int(11) NOT NULL,
   `username` varchar(32) NOT NULL,
   `flow` bigint(20) NOT NULL default '0',
+  `db_type` varchar(255) NOT NULL default 'mysql',
   PRIMARY KEY  (`uid`),
   UNIQUE KEY `name` (`name`),
   KEY `username` (`username`)
@@ -332,6 +333,7 @@ CREATE TABLE IF NOT EXISTS `vhost_product` (
   `cdn` tinyint(4) default '0',
   `flow` bigint(20) NOT NULL default '0',
   `show_price` tinyint(4) NOT NULL default '0',
+  `db_type` varchar(255) NOT NULL default 'mysql',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 

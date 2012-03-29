@@ -83,4 +83,6 @@ CHANGE  `month_flag`  `month_flag` TINYINT( 4 ) NOT NULL DEFAULT  '0',
 CHANGE  `pause_flag`  `pause_flag` TINYINT( 4 ) NOT NULL DEFAULT  '0',
 CHANGE  `show_price`  `show_price` TINYINT( 4 ) NOT NULL DEFAULT  '0';
 ALTER TABLE  `mproduct` CHANGE  `describe`  `describe` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL;
+ALTER TABLE `vhost` ADD `db_type` VARCHAR( 255 ) NOT NULL default 'mysql';
+ALTER TABLE `vhost_product` ADD `db_type` VARCHAR( 255 ) NOT NULL default 'mysql';
 
