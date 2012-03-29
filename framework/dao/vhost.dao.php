@@ -49,7 +49,7 @@ class VhostDAO extends DAO{
 		if ($status>=0) {
 			$where .= " and ".$this->getFieldValue2('status', $status);
 		}
-		return $this->select(array('name','username','node','product_id','db_type'),$where);
+		return $this->select(array('name','username','node','product_id'),$where);
 	}
 
 
@@ -65,7 +65,7 @@ class VhostDAO extends DAO{
 		if($status >= 0){
 			$where .= " and ".$this->getFieldValue2('status', $status);
 		}
-		return $this->selectPage(array('name','create_time','expire_time','username','status','db_type'),
+		return $this->selectPage(array('name','create_time','expire_time','username','status'),
 		$where,
 		'expire_time', 
 		false,
@@ -82,7 +82,7 @@ class VhostDAO extends DAO{
 			$where.=" AND ".$this->getFieldValue2('name', $name);
 		}
 		return $this->selectPage(
-		array('name','uid','templete','node','create_time','expire_time','status','product_id','username','flow','db_type'),
+		array('name','uid','templete','node','create_time','expire_time','status','product_id','username','flow'),
 		$where,
 		'uid', 
 		true,
@@ -94,7 +94,7 @@ class VhostDAO extends DAO{
 	public function pageVhost($page,$page_count,&$count)
 	{
 		return $this->selectPage(
-		array('name','uid','username','templete','node','doc_root','create_time','expire_time','product_id','status','flow','db_type'),
+		array('name','uid','username','templete','node','doc_root','create_time','expire_time','product_id','status','flow'),
 		null,
 		'uid', 
 		true,
@@ -205,7 +205,7 @@ class VhostDAO extends DAO{
 		if($username){
 			$where = $this->getFieldValue2('username', $username);
 		}
-		return $this->getData2(array('name','uid','create_time','expire_time','status','node','product_id','db_type'),$where,$result);
+		return $this->getData2(array('name','uid','create_time','expire_time','status','node','product_id'),$where,$result);
 	}
 	public function listMyVhost($username,$result='rows')
 	{
