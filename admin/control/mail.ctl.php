@@ -40,10 +40,10 @@ class MailControl extends control
 		if ($_REQUEST['mail_from']) {
 			daocall('setting','add',array('mail_from',$_REQUEST['mail_from']));
 		}
-		if($_REQUEST['mail_fromname']) {
+		if ($_REQUEST['mail_fromname']) {
 			daocall('setting','add',array('mail_fromname',$_REQUEST['mail_fromname']));
 		}
-		if($_REQUEST['mail_smtp']) {
+		if ($_REQUEST['mail_smtp']) {
 			daocall('setting','add',array('mail_smtp',$_REQUEST['mail_smtp']));
 		}
 		if ($_REQUEST['templete']) {
