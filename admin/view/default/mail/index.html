@@ -1,0 +1,72 @@
+{{include file='common/head.html'}}
+<body leftmargin="0" topmargin="0" bgcolor="#ffffff" text="#000000">
+<script language='javascript'>
+
+</script>
+<div align="center">
+	<div class="wid_main mar_main" align="left">
+		<div class="block_top" align="left">当前位置：邮件群发--> 邮件群发设置</div>
+		<form name='nodeform' action="?c=mail&a=setMail" method="post">
+		<table class="table_main2" cellpadding="0" cellspacing="1">
+			
+			<tr><td colspan="2" class="bg_main">邮件设置</td></tr>
+			
+			<tr><td class="wid_general">邮件主机：</td>
+				<td><input name='mail_host' type='text'  value="{{$setting.mail_host}}" size="32"></td></tr>
+			
+			<tr><td class="wid_general">验证账号：</td>
+				<td><input name='mail_username' type='text'  value="{{$setting.mail_username}}" size="32"></td></tr>
+			
+			<tr><td class="wid_general">验证密码：</td>
+				<td><input name='mail_passwd' type='text'  value="{{$setting.mail_passwd}}" size="32"></td></tr>
+			
+			<tr><td class="wid_general">发送者邮箱：</td>
+				<td><input name='mail_from' type='text'  value="{{$setting.mail_from}}" size="32"></td></tr>
+			
+			<tr><td class="wid_general">发送者姓名：</td>
+				<td><input name='mail_fromname' type='text'  value="{{$setting.mail_fromname}}" size="32"></td></tr>
+			
+			<tr><td class="wid_general">发送方式：</td>
+				<td><input name='mail_smtp' type='radio'  value="1" {{if $setting.mail_smtp==1}}checked{{/if}}>使用SMTP发送
+				<input name='mail_smtp' type='radio'  value="0" {{if $setting.mail_smtp!=1}}checked{{/if}}>通过 PHP 函数的 sendmail 发送
+				</td></tr>
+			
+			<tr><td>&nbsp;</td><td ><input type="submit" value="确认提交"></td></tr>
+
+		</table>
+		</form>
+		</div>
+	
+	<div class="wid_main mar_main" align="left">
+	<form name='nodeform' action="?c=mail&a=setMail" method="post">
+	<table class="table_main2" cellpadding="0" cellspacing="1">
+		<tr><td colspan="2" class="bg_main">添加邮件模板</td></tr>
+		<tr><td class="wid_general">模板类型</td>
+			<td><select name="templete" id='templete'>
+			<option value="expire">过期</option>
+			<option value="advert">广告</option></select></td></tr>
+			
+		<tr><td class="wid_general">邮件标题：</td>
+			<td><input name='subject' type='text' id='subject' value="" size="45"></td></tr>
+			
+		<tr><td class="wid_general">邮件内容：</td>
+			<td><textarea name='body' id='body' rows='10' cols='60'></textarea></td></tr>
+			
+		<tr><td>&nbsp;</td>
+			<td ><input type="submit" value="确认提交"></td></tr>
+	</table>
+	</form>
+	</div> 	
+</div>
+<script language='javascript'>
+var temp = $("#templete").val();
+if (temp=='expire') {
+	$("#subject").val({{$setting.expire_subject}});
+	$("#body").val({{$setting.expire_body}});
+}
+if (temp=='advert') {
+	$("#subject").val({{$setting.advert_subject}});
+	$("#body").val({{$setting.advert_body}});
+}
+</script>
+{{include file='common/foot.html'}}	

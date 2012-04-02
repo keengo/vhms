@@ -59,6 +59,7 @@ class DAO
  		global $db_db;
  		$this->connect();
 	 	$row = db_query($this->db,$sql,$type);
+	 	echo $sql;
 		return $row;
 	}
 	/**

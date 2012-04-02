@@ -31,6 +31,16 @@ class UserDAO extends DAO{
 
 			$this->_TABLE = DBPRE . 'users';
 	}
+	/*用于邮件群发时，获取所有邮件distinct防重复*/
+	public function getAllMail($where)
+	{
+		$sql = 'select distinct email as email from '.$this->_TABLE;
+		if ($where) {
+			$sql .= ' where '.$where;
+		}
+		return $this->executex($sql,'rows');
+		
+	}
 	//用于当前代理ID被删除时，用户的代理身份也要更新
 	public function updateUserAgent_idByAent_id($agent_id)
 	{

@@ -42,16 +42,22 @@ class VhostDAO extends DAO{
 	//执行空间删除shell所用
 	public function selectListByExpire_time($day,$status=0)
 	{
-		if($day==""){
+		if ($day=="") {
 			$day=1;
 		}
-		$where=' expire_time < subdate(curdate(),interval '.$day.' day)';
+		/*传入day=-7，查询还有七天过期的用户*/
+		if (substr($day,0,1)=='-') {
+			$day = substr($day,1);
+			$where=' expire_time < ADDDATE(curdate(),interval '.$day.' day)';
+		}else{
+			$where=' expire_time < subdate(curdate(),interval '.$day.' day)';
+		}
 		if ($status>=0) {
 			$where .= " and ".$this->getFieldValue2('status', $status);
 		}
-		return $this->select(array('name','username','node','product_id'),$where);
+		return $this->select(array('name','username','node','product_id','expire_time'),$where);
 	}
-
+	
 
 	//管理后台显示过期网站
 	public function pageVhostByExpire_time($page,$page_count,&$count,$day,$status)

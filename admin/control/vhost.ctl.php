@@ -93,10 +93,7 @@ class VhostControl extends Control {
 			$this->_tpl->assign('row',$list);
 			$list = daocall('vhostinfo','getDomain',array($list['name']));
 			$this->_tpl->assign('list',$list);
-				print_r($list);
-		die();
 			return true;
-		
 		}
 		return false;
 	}
