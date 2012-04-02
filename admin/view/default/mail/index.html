@@ -14,6 +14,12 @@
 			<tr><td class="wid_general">邮件主机：</td>
 				<td><input name='mail_host' type='text'  value="{{$setting.mail_host}}" size="32"></td></tr>
 			
+			<tr><td class="wid_general">邮件主机端口：</td>
+				<td><input name='mail_port' type='text'  value="{{if $setting.mail_port}}{{$setting.mail_port}}{{else}}25{{/if}}" size="32"></td></tr>
+			
+			<tr><td class="wid_general">邮件验证方式：</td>
+				<td><input name='mail_secure' type='text'  value="{{if $setting.mail_secure}}{{$setting.mail_secure}}{{else}}ssl{{/if}}" size="32"></td></tr>
+			
 			<tr><td class="wid_general">验证账号：</td>
 				<td><input name='mail_username' type='text'  value="{{$setting.mail_username}}" size="32"></td></tr>
 			

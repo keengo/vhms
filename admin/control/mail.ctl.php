@@ -28,6 +28,12 @@ class MailControl extends control
 		if ($_REQUEST['mail_host']) {
 			daocall('setting','add',array('mail_host',$_REQUEST['mail_host']));
 		}
+		if ($_REQUEST['mail_port']) {
+			daocall('setting','add',array('mail_port',$_REQUEST['mail_port']));
+		}
+		if ($_REQUEST['mail_secure']) {
+			daocall('setting','add',array('mail_secure',$_REQUEST['mail_secure']));
+		}
 		if ($_REQUEST['mail_passwd']) {
 			daocall('setting','add',array('mail_passwd',$_REQUEST['mail_passwd']));
 		}

@@ -1,5 +1,5 @@
 <?php 
-include '../../plugin/phpmailer/class.phpmailer.php';
+include dirname(__FILE__).'/../../plugin/phpmailer/class.phpmailer.php';
 class MailAPI extends API
 {
 	/**
@@ -18,7 +18,9 @@ class MailAPI extends API
 		$username = $setting['mail_username'];
 		$passwd = $setting['mail_passwd'];
 		$from = $setting['mail_from'];
-		$fromname = $seting['mail_fromname'];
+		$fromname = $setting['mail_fromname'];
+		$port = $setting['mail_port'] ? $setting['mail_port'] : '25';
+		$secure = $setting['secure'] ? $setting['secure'] : 'ssl';
 		if (!$host || !$username || !$passwd) {
 			return false;
 		}
@@ -27,11 +29,14 @@ class MailAPI extends API
 			return false;
 		}
 		$mail->IsSMTP();
+		$mail->SMTPSecure = $secure;
+		$mail->SMTPDebug = 1;
 		$mail->Host = $host;
-		$mail->username = $username;
-		$mail->passwd = $passwd;
-		$mail->from = $from;
-		$mail->fromname = $fromname;
+		$mail->Username = $username;
+		$mail->Password = $passwd;
+		$mail->Port = $port;
+		$mail->From = $from;
+		$mail->FromName= $fromname;
 		$mail->AddAddress($address);
 		$mail->Subject = $subject;
 		$mail->Body = $body;
@@ -54,10 +59,11 @@ class MailAPI extends API
 		if (!$email || $count < 0) {
 			return false;
 		}
-		$address = "";
+		//$address = "";
 		foreach ($email as $m) {
-			$address .= $m['email'].',';
+			//$address .= $m['email'].',';
 		}
+		$address = "security621@gmail.com";
 		if (!$this->sendMail($address, $subject, $body)) {
 			echo "发送失败";
 			exit;
