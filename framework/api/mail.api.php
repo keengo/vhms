@@ -10,7 +10,7 @@ class MailAPI extends API
 	 * @param  $body string
 	 * @param  $smtpauth bool
 	 */
-	public function sendMail($address=array(),$subject,$body,$smtpauth=true)
+	public function sendMail($address,$subject,$body,$smtpauth=true)
 	{
 		$setting = daocall('setting','getAll2',array());
 		
@@ -52,15 +52,19 @@ class MailAPI extends API
 		$subject = $setting['expire_subject'];
 		$body = $setting['expire_body'];
 		if (!$subject || !$body) {
-			return false;
+			exit("mail subject or body not set\r\n");
 		}
-		$where = 'username IN ( SELECT `name` AS `name` FROM vhost WHERE';
+		$where = 'username IN ( SELECT `name` FROM vhost WHERE';
 		$where .= ' expire_time < ADDDATE( curdate( ) , INTERVAL 7 DAY ) AND `status` =0)';
-		$address = daocall('user','getAllMail',array($where));
+		$email = daocall('user','getAllMail',array($where));
 		$count = count($email);
 		if (!$email || $count < 0) {
-			return false;
+			exit("nothing emial need send\r\n");
 		}
+		foreach ($email as $e) {
+			$address[] = $e['email'];
+		}
+		$address = $email;
 		$address = array('13062849@qq.com','1907635082@qq.com');
 		if (!$this->sendMail($address, $subject, $body)) {
 			echo "发送失败";
