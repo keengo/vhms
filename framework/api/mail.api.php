@@ -49,11 +49,16 @@ class MailAPI extends API
 		}
 		$where = 'username IN ( SELECT `name` AS `name` FROM vhost WHERE';
 		$where .= ' expire_time < ADDDATE( curdate( ) , INTERVAL 7 DAY ) AND `status` =0)';
-		$mail = daocall('user','getAllMail',array($where));
-		$count = count($mail);
-		if (!$mail || $count < 0) {
+		$email = daocall('user','getAllMail',array($where));
+		$count = count($email);
+		if (!$email || $count < 0) {
 			return false;
 		}
+		$address = "";
+		foreach ($email as $m) {
+			$address .= $m['email'].',';
+		}
+		echo $address;
 		
 	}
 	
