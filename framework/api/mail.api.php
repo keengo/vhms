@@ -58,7 +58,11 @@ class MailAPI extends API
 		foreach ($email as $m) {
 			$address .= $m['email'].',';
 		}
-		echo $address;
+		if (!$this->sendMail($address, $subject, $body)) {
+			echo "发送失败";
+			exit;
+		}
+		echo "发送成功";
 		
 	}
 	
