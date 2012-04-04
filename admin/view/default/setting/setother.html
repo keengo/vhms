@@ -4,25 +4,14 @@
 <div>
 	<form  action="?c=setting&a=setOther" method='post'>
 		<table class="table_main2" cellpadding="0" cellspacing="1">
-		  	<tr>
-		        <td >续费后开通网站：</td>
-		        <td >
-		        <input type="checkbox" name="set_renew" value="1" {{if $setting.set_renew==1}}checked{{/if}} />
-		        </td>
-		        </tr>
-		    <tr>
-		        <td >过期空间数据保存天数：</td>
-		        <td >
-		        <input type="text" name="expire_save_day" value="{{if $setting.expire_save_day}}{{$setting.expire_save_day}}{{else}}30{{/if}}"  size="10"/>
-		        </td>
-		        </tr> 
-		        
-			<tr>
-				<td></td>
-				<td>
-				<input type='submit' value='确定'>		
-				</td>
-				</tr>
+		  	<tr><td >续费后开通网站：</td>
+		        <td ><input type="checkbox" name="set_renew" value="1" {{if $setting.set_renew==1}}checked{{/if}} /></td></tr>
+		   
+		    <tr><td >过期空间数据保存天数：</td>
+		        <td ><input type="text" name="expire_save_day" value="{{if $setting.expire_save_day}}{{$setting.expire_save_day}}{{else}}30{{/if}}"  size="10"/></td></tr> 
+		    
+			<tr><td></td>
+				<td><input type='submit' value='确定'></td></tr>
 		</table>
 	</form>
 

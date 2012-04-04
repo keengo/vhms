@@ -12,6 +12,9 @@
 			
 			<tr><td colspan="2" class="bg_main">邮件设置</td></tr>
 			
+			<tr><td>是否开启邮件群发：</td>
+		        <td><input type="checkbox" name="set_mail" value="1" {{if $setting.set_mail==1}}checked{{/if}} /></td></tr>
+		     
 			<tr><td class="wid_general">邮件主机：</td>
 				<td><input name='mail_host' type='text'  value="{{$setting.mail_host}}" size="32"></td></tr>
 			

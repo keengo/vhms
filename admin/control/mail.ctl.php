@@ -49,6 +49,7 @@ class MailControl extends control
 	}
 	public function setMail()
 	{
+		daocall('setting','add',array('set_mail',$_REQUEST['set_mail']));
 		if ($_REQUEST['mail_username']) {
 			daocall('setting','add',array('mail_username',$_REQUEST['mail_username']));
 		}

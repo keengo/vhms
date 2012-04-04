@@ -23,6 +23,10 @@ class ShellAPI extends API
 		foreach ($nodes as $node) {
 			$this->sync_host_flow($node['name'],$t);
 		}
+		$setting = daocall('setting','getAll2',array());
+		if ($setting['set_mail'] == 1) {
+			$this->sendMail();
+		}
 	}
 	public function sendMail()
 	{
