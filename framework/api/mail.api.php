@@ -12,6 +12,7 @@ class MailAPI extends API
 	 */
 	public function sendMail($address,$subject,$body,$smtpauth=true)
 	{
+		return true;
 		$mail = $this->getMail();
 		if ($mail === false) {
 			return false;

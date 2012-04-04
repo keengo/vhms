@@ -4,9 +4,14 @@ class MailControl extends control
 {
 	public function send()
 	{
-		$subject = $_REQUEST['subject'];
-		$body = $_REQUEST['body'];
-		$address = daocall('user','getAllMail',array());
+		$subject = $_REQUEST['mail_subject'];
+		$body = $_REQUEST['mail_body'];
+		if ($_REQUEST['address']) {
+			$address = explode(',', $_REQUEST['address']);
+			
+		}else{
+			$address = daocall('user','getAllMail',array());
+		}
 		if (count($address) < 0 ) {
 			echo "nothing address need Send<br>";
 			return false;
@@ -15,6 +20,10 @@ class MailControl extends control
 			exit("发送失败");
 		}
 		die("发送成功");
+	}
+	public function sendMailFrom()
+	{
+		return $this->_tpl->fetch('mail/send.html');
 	}
 	public function getTemplete()
 	{
