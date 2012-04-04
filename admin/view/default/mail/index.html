@@ -34,37 +34,38 @@
 			
 			<tr><td class="wid_general">发送方式：</td>
 				<td><input name='mail_smtp' type='radio'  value="1" {{if $setting.mail_smtp==1}}checked{{/if}}>使用SMTP发送
-				<input name='mail_smtp' type='radio'  value="0" {{if $setting.mail_smtp!=1}}checked{{/if}}>通过 PHP 函数的 sendmail 发送
-				</td></tr>
+					<input name='mail_smtp' type='radio'  value="0" {{if $setting.mail_smtp!=1}}checked{{/if}}>通过 PHP 函数的 sendmail 发送</td></tr>
 			
 			<tr><td>&nbsp;</td><td ><input type="submit" value="确认提交"></td></tr>
 
 		</table>
 		</form>
-		</div>
 	
-	<div class="wid_main mar_main" align="left">
-	<form name='nodeform' action="?c=mail&a=setMail" method="post">
-	<table class="table_main2" cellpadding="0" cellspacing="1">
-		<tr><td colspan="2" class="bg_main">添加邮件模板</td></tr>
-		<tr><td class="wid_general">模板类型</td>
-			<td><select name="templete" id='templete'>
-			<option value="expire">过期</option>
-			<option value="advert">广告</option></select></td></tr>
-			
-		<tr><td class="wid_general">邮件标题：</td>
-			<td><input name='subject' type='text' id='subject' value="" size="45"></td></tr>
-			
-		<tr><td class="wid_general">邮件内容：</td>
-			<td><textarea name='body' id='body' rows='10' cols='60'></textarea></td></tr>
-			
-		<tr><td>&nbsp;</td>
-			<td ><input type="submit" value="确认提交"></td></tr>
-	</table>
-	</form>
+		<form name='nodeform' action="?c=mail&a=setMail" method="post">
+		<table class="table_main2" cellpadding="0" cellspacing="1">
+			<tr><td colspan="2" class="bg_main">添加过期邮件模板</td></tr>
+						
+			<tr><td class="wid_general">邮件标题：</td>
+				<td><input name='mail_subject' type='text' value="{{$mail_subject}}" size="70"></td></tr>
+				
+			<tr><td class="wid_general">邮件内容：</td>
+				<td><textarea name='mail_body' id='mail_body' rows='10' cols='88'>{{$mail_body}}</textarea></td></tr>
+				
+			<tr><td>&nbsp;</td>
+				<td ><input type="submit" value="确认提交"></td></tr>
+				
+		</table>
+		</form>
 	</div> 	
 </div>
 <script language='javascript'>
+function get_templete(val)
+{
+	var url="?c=mail&a=getTemplete&templete="+val;
+	$.get(url,function(data){alert(data)});
+}
+/*
+ 
 var temp = $("#templete").val();
 if (temp=='expire') {
 	$("#subject").val({{$setting.expire_subject}});
@@ -74,5 +75,7 @@ if (temp=='advert') {
 	$("#subject").val({{$setting.advert_subject}});
 	$("#body").val({{$setting.advert_body}});
 }
+* 
+*/
 </script>
 {{include file='common/foot.html'}}	
