@@ -5,12 +5,12 @@ function send()
 {
 	var subject = $("#subject").val();
 	var body = $("#body").val();
-	var url = "?c=mail&a=send&mail_subject=" + subject + "&mail_body="+body;
+	var url = "?c=mail&a=send";
 	var address = $("#address").val();
 	if (address !="" && address != null) {
-		$.post(url,{address:address},function(msg){alert(msg)});
+		$.post(url,{address:address,mail_body:body,mail_subject:subject},function(msg){alert(msg)});
 	}else{
-		$.get(url,function(msg){alert(msg)});
+		$.post(url,{mail_body:body,mail_subject:subject},function(msg){alert(msg)});
 	}
 }
 </script>

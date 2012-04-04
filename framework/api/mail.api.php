@@ -15,7 +15,7 @@ class MailAPI extends API
 		$mail = $this->getMail();
 		if ($mail === false) {
 			return false;
-		} 
+		}
 		foreach ($address as $a) {
 			$mail->AddAddress($a);
 		}

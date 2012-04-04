@@ -12,7 +12,7 @@ class MailControl extends control
 		}else{
 			$mails = daocall('user','getAllMail',array());
 			foreach ($mails as $a ) {
-				$address[]=$a['email'];
+				$address[]=trim($a['email'],',');
 			}
 		}
 		if (count($address) < 0 ) {
