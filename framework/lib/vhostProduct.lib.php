@@ -45,7 +45,11 @@ class VhostProduct extends Product
 												$params['node'],
 												$product_info['id'],
 												$params['month'],
-												$params['db_type']
+												$params['db_type'],
+												$params['max_subdir'],
+												$params['max_worker'],
+												$params['max_queue'],
+												$params['log_handle']
 		));
 		if($uid && $uid < 2000){
 			daocall('vhost','updateMinUid',array(&$uid));
