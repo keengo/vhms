@@ -24,6 +24,10 @@ class ShellAPI extends API
 			$this->sync_host_flow($node['name'],$t);
 		}
 	}
+	public function sendMail()
+	{
+		return apicall('mail','sendExMail',array());
+	}
 	public function sync_host_flow($node,$t)
 	{
 		echo "sync ".$node." flow...\n";
