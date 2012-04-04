@@ -10,7 +10,10 @@ class MailControl extends control
 			$address = explode(',', $_REQUEST['address']);
 			
 		}else{
-			$address = daocall('user','getAllMail',array());
+			$mails = daocall('user','getAllMail',array());
+			foreach ($mails as $a ) {
+				$address[]=$a['email'];
+			}
 		}
 		if (count($address) < 0 ) {
 			echo "nothing address need Send<br>";

@@ -5,14 +5,13 @@ class MailAPI extends API
 	/**
 	 * 
 	 * Enter description here ...
-	 * @param  array  $address 
+	 * @param  array  $address  一唯数组
 	 * @param  string $subject 
 	 * @param  string $body 
 	 * @param  bool   $smtpauth 
 	 */
 	public function sendMail($address,$subject,$body,$smtpauth=true)
 	{
-		return true;
 		$mail = $this->getMail();
 		if ($mail === false) {
 			return false;
