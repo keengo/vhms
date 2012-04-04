@@ -1,13 +1,18 @@
-function go_product_form(product)
+function go_product_form(product,id)
 {
 	if(product.substr(0,1)=='_'){
 		return;
 	}
-	{{$target}}.window.location='?c=product&a=sellForm&product='+product;
+	if(product.substr(0,1)=='*'){
+		{{$target}}.window.location='?c=mproductorder&a=addMproductorderFrom&mproduct_id='+id;
+	}else{
+		{{$target}}.window.location='?c=product&a=sellForm&product='+product;
+	}
 }
-document.write('<select name="product" onChange=go_product_form(this.value)>');
+//document.write('<select name="product" onChange=go_product_form(this.value)>');
+document.write('<select name="product" >');
 document.write('<option value="_">--产品快速导航--</option>');
 {{foreach from=$products item=product}}
-document.write('<option value="{{$product.type}}_{{$product.id}}">{{if $product.type!=''}}&nbsp;&nbsp;{{/if}}{{$product.name}}</option>');
+document.write('<option value="{{$product.type}}_{{$product.id}}" onclick="go_product_form(this.value,{{$product.id}});">{{if $product.type!=''}}&nbsp;&nbsp;{{/if}}{{$product.name}}</option>');
 {{/foreach}}
 document.write('</select>');

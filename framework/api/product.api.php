@@ -23,6 +23,12 @@ class ProductAPI extends API
 		$data = daocall('vhostproduct', 'getSellProducts', null);
 		for($i=0;$i<count($data);$i++){
 			$products[] = array('name'=>$data[$i]['name'],'type'=>'vhost','id'=>$data[$i]['id']);
+		}
+		$mproduct_name = "非自动化产品";
+		$products[] = array('name'=>'--'.$mproduct_name.'--','type'=>'','id'=>0);
+		$mproducts = daocall('mproduct','getMproductById',array());
+		for($i=0;$i<count($mproducts);$i++){
+			$products[] = array('name'=>$mproducts[$i]['name'],'type'=>'*mproduct','id'=>$mproducts[$i]['id']);
 		}		
 	}
 	/**
