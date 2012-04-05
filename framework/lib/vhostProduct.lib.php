@@ -140,6 +140,11 @@ class VhostProduct extends Product
 			$whmCall->addParam('envs', $product_info['envs']);
 			$whmCall->addParam('cdn',$product_info['cdn']);
 			$whmCall->addParam('db_type', $product_info['db_type']);
+			$whmCall->addParam('max_subdir', $product_info['max_subdir']);
+			$whmCall->addParam('max_worker', $product_info['max_worker']);
+			$whmCall->addParam('max_queue', $product_info['max_queue']);
+			$whmCall->addParam('log_handle', $product_info['log_handle']);
+			
 			if($params['passwd']){
 				$whmCall->addParam('passwd', $params['passwd']);
 			}
