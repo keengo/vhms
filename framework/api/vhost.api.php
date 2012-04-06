@@ -241,12 +241,12 @@ class VhostAPI extends API
 	{
 		$whm = apicall('nodes','makeWhm',array($node));
 		if (!$whm) {
-			echo "该产品所在节点已不存在<br>";
+			//echo "该产品所在节点已不存在<br>";
 			return false;
 		}
 		$whmCall = new WhmCall('update_vh');
 		if (!$whmCall) {
-			echo "该产品所在节点已不存在<br>";
+			//echo "该产品所在节点已不存在<br>";
 			return false;
 		}
 		$whmCall->addParam('name',$name);

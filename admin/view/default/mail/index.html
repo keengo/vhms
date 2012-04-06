@@ -1,6 +1,15 @@
 {{include file='common/head.html'}}
 <body leftmargin="0" topmargin="0" bgcolor="#ffffff" text="#000000">
-<script language='javascript'></script>
+<script language='javascript'>
+function check_smtp(val)
+{
+	if(val=='0'){
+		$("#smtp22").css('display','none');
+	}else{
+		$("#smtp22").css('display','');
+	}
+}
+</script>
 <div align="center">
 	<div class="wid_main mar_main" align="left">
 		<div class="block_top" align="left">当前位置：邮件群发--> 邮件群发设置</div>
@@ -12,35 +21,40 @@
 			<tr><td>开启邮件群发：</td>
 		        <td><input type="checkbox" name="set_mail" value="1" {{if $setting.set_mail==1}}checked{{/if}} /></td></tr>
 			
+			<tr><td>发送方式：</td>
+				<td><input name='mail_smtp' type='radio' onclick="check_smtp(this.value);" value="1" {{if $setting.mail_smtp==1}}checked{{/if}}>使用SMTP发送
+					<input name='mail_smtp' type='radio' onclick="check_smtp(this.value);" value="0" {{if $setting.mail_smtp!=1}}checked{{/if}}>通过 PHP 函数的 sendmail 发送</td></tr>
+			
+			<tbody id="smtp22" style="display:{{if $setting.mail_smtp!=1}}none{{/if}}">	
+					
 			<tr><td>邮件主机：</td>
-				<td><input name='mail_host' type='text'  value="{{$setting.mail_host}}" size="32"></td></tr>
+				<td><input name='mail_host' type='text' value="{{$setting.mail_host}}" size="32"></td></tr>
 			
 			<tr><td>邮件主机端口：</td>
-				<td><input name='mail_port' type='text'  value="{{if $setting.mail_port}}{{$setting.mail_port}}{{else}}25{{/if}}" size="32"></td></tr>
+				<td><input name='mail_port' type='text' value="{{if $setting.mail_port}}{{$setting.mail_port}}{{else}}25{{/if}}" size="32"></td></tr>
 			
 			<tr><td>邮件验证方式：</td>
-				<td><input name='mail_secure' type='text'  value="{{if $setting.mail_secure}}{{$setting.mail_secure}}{{else}}ssl{{/if}}" size="32"></td></tr>
+				<td><input name='mail_secure' type='text' value="{{if $setting.mail_secure}}{{$setting.mail_secure}}{{else}}ssl{{/if}}" size="32"></td></tr>
 			
 			<tr><td>验证账号：</td>
-				<td><input name='mail_username' type='text'  value="{{$setting.mail_username}}" size="32"></td></tr>
+				<td><input name='mail_username' type='text' value="{{$setting.mail_username}}" size="32"></td></tr>
 			
 			<tr><td>验证密码：</td>
-				<td><input name='mail_passwd' type='text'  value="{{$setting.mail_passwd}}" size="32"></td></tr>
+				<td><input name='mail_passwd' type='text' value="{{$setting.mail_passwd}}" size="32"></td></tr>
 			
 			<tr><td>发送者邮箱：</td>
-				<td><input name='mail_from' type='text'  value="{{$setting.mail_from}}" size="32"></td></tr>
+				<td><input name='mail_from' type='text' value="{{$setting.mail_from}}" size="32"></td></tr>
 			
 			<tr><td>发送者名称：</td>
-				<td><input name='mail_fromname' type='text'  value="{{$setting.mail_fromname}}" size="32"></td></tr>
+				<td><input name='mail_fromname' type='text' value="{{$setting.mail_fromname}}" size="32"></td></tr>
+			</tbody>
 			
-			<tr><td>发送方式：</td>
-				<td><input name='mail_smtp' type='radio'  value="1" {{if $setting.mail_smtp==1}}checked{{/if}}>使用SMTP发送
-					<input name='mail_smtp' type='radio'  value="0" {{if $setting.mail_smtp!=1}}checked{{/if}}>通过 PHP 函数的 sendmail 发送</td></tr>
-			
-			<tr><td>&nbsp;</td><td><input type="submit" value="确认提交"><a href="?c=mail&a=sendMailFrom"><input type="button" value="发送邮件"></a> </td></tr>
+			<tr><td>&nbsp;</td>
+				<td><input type="submit" value="确认提交"><a href="?c=mail&a=sendMailFrom"><input type="button" value="发送邮件"></a> </td></tr>
 			
 		</table>
 		</form>
+		
 		<form name='nodeform' action="?c=mail&a=setMail" method="post">
 		<table class="table_main2" cellpadding="0" cellspacing="1">
 			<tr><td colspan="2" class="bg_main">添加过期邮件模板</td></tr>
@@ -56,6 +70,7 @@
 
 		</table>
 		</form>
+		
 	</div> 	
 </div>
 <script language='javascript'>

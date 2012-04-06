@@ -52,6 +52,7 @@ class MailControl extends control
 	public function setMail()
 	{
 		daocall('setting','add',array('set_mail',$_REQUEST['set_mail']));
+		daocall('setting','add',array('mail_smtp',$_REQUEST['mail_smtp']));
 		if ($_REQUEST['mail_username']) {
 			daocall('setting','add',array('mail_username',$_REQUEST['mail_username']));
 		}
@@ -73,9 +74,6 @@ class MailControl extends control
 		if ($_REQUEST['mail_fromname']) {
 			daocall('setting','add',array('mail_fromname',$_REQUEST['mail_fromname']));
 		}
-		if ($_REQUEST['mail_smtp']) {
-			daocall('setting','add',array('mail_smtp',$_REQUEST['mail_smtp']));
-		}
 		if ($_REQUEST['mail_subject']) {
 			daocall('setting','add',array('mail_subject',$_REQUEST['mail_subject']));
 			daocall('setting','add',array('mail_body',$_REQUEST['mail_body']));
@@ -84,7 +82,7 @@ class MailControl extends control
 	}
 	public function test()
 	{
-		apicall('mail','sendExMail',array());
+		//apicall('mail','sendExMail',array());
 	}
 	
 }
