@@ -4,9 +4,9 @@
 function check_smtp(val)
 {
 	if(val=='0'){
-		$("#smtp22").css('display','none');
+		$("#smtp").css('display','none');
 	}else{
-		$("#smtp22").css('display','');
+		$("#smtp").css('display','');
 	}
 }
 </script>
@@ -25,7 +25,7 @@ function check_smtp(val)
 				<td><input name='mail_smtp' type='radio' onclick="check_smtp(this.value);" value="1" {{if $setting.mail_smtp==1}}checked{{/if}}>使用SMTP发送
 					<input name='mail_smtp' type='radio' onclick="check_smtp(this.value);" value="0" {{if $setting.mail_smtp!=1}}checked{{/if}}>通过 PHP 函数的 sendmail 发送</td></tr>
 			
-			<tbody id="smtp22" style="display:{{if $setting.mail_smtp!=1}}none{{/if}}">	
+			<tbody id="smtp" style="display:{{if $setting.mail_smtp!=1}}none{{/if}}">	
 					
 			<tr><td>邮件主机：</td>
 				<td><input name='mail_host' type='text' value="{{$setting.mail_host}}" size="32"></td></tr>

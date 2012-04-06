@@ -27,29 +27,33 @@ class MailAPI extends API
 	private function getMail()
 	{
 		$setting = daocall('setting','getAll2',array());
-		$host = $setting['mail_host'];
-		$username = $setting['mail_username'];
-		$passwd = $setting['mail_passwd'];
-		$from = $setting['mail_from'];
-		$fromname = $setting['mail_fromname'];
-		$port = $setting['mail_port'] ? $setting['mail_port'] : '25';
-		$secure = $setting['secure'] ? $setting['secure'] : 'ssl';
-		if (!$host || !$username || !$passwd) {
-			return false;
-		}
+		$mail_smtp = $setting['mail_smtp'];
 		$mail = new PHPMailer();
 		if (!$mail) {
 			return false;
 		}
-		$mail->IsSMTP();
-		$mail->SMTPSecure = $secure;
-		$mail->SMTPDebug = 1;
-		$mail->Host = $host;
-		$mail->Username = $username;
-		$mail->Password = $passwd;
-		$mail->Port = $port;
-		$mail->From = $from;
-		$mail->FromName= $fromname;
+		if ($mail_smtp == 1) {
+			$host = $setting['mail_host'];
+			$username = $setting['mail_username'];
+			$passwd = $setting['mail_passwd'];
+			$from = $setting['mail_from'];
+			$fromname = $setting['mail_fromname'];
+			$port = $setting['mail_port'] ? $setting['mail_port'] : '25';
+			$secure = $setting['secure'] ? $setting['secure'] : 'ssl';
+			
+			if (!$host || !$username || !$passwd) {
+				return false;
+			}
+			$mail->IsSMTP();
+			$mail->SMTPSecure = $secure;
+			$mail->SMTPDebug = 1;
+			$mail->Host = $host;
+			$mail->Username = $username;
+			$mail->Password = $passwd;
+			$mail->Port = $port;
+			$mail->From = $from;
+			$mail->FromName= $fromname;
+		}
 		return $mail;
 		
 	}
