@@ -3,7 +3,7 @@ class VhostAPI extends API
 {
 	function __construct()
 	{
-		//load_lib('pub:whm');
+		load_lib('pub:whm');
 	}
 	/**
 	 * 保留账号设置
@@ -241,9 +241,14 @@ class VhostAPI extends API
 	{
 		$whm = apicall('nodes','makeWhm',array($node));
 		if (!$whm) {
+			echo "该产品所在节点已不存在<br>";
 			return false;
 		}
 		$whmCall = new WhmCall('update_vh');
+		if (!$whmCall) {
+			echo "该产品所在节点已不存在<br>";
+			return false;
+		}
 		$whmCall->addParam('name',$name);
 		
 		$key = array_keys($attr);

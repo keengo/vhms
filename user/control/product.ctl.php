@@ -122,6 +122,7 @@ class ProductControl extends Control {
 	public function sell()
 	{
 		needRole('user');
+		
 		if (strcasecmp($_REQUEST['product_type'],'vhost')==0) {
 			global $db_cfg;
 			$name = trim($_REQUEST['name']);
@@ -130,6 +131,11 @@ class ProductControl extends Control {
 				return $this->_tpl->fetch('public/msg.html');
 			}
 		}
+//		if(preg_match('/([\x81-\xfe][\x40-\xfe]){0,2}/',$name))
+// 		{	
+// 			$this->_tpl->assign('msg','注册失败：不支持中文账号');
+//			return $this->_tpl->fetch('public/msg.html');
+// 		}
 		$product = apicall('product', 'newProduct',array($_REQUEST['product_type']));
 		if(!is_object($product)){
 			trigger_error('没有该产品类型:'.$_REQUEST['product_type']);

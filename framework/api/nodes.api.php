@@ -81,7 +81,7 @@ class NodesAPI extends API
 	public function makeWhm($node)
 	{
 		$node_cfg = $GLOBALS['node_cfg'][$node];
-		if(!is_array($node_cfg)){
+		if(!$node_cfg || !is_array($node_cfg)){
 			return trigger_error('没有节点'.$node.'的配置文件，请更新配置文件');
 		}
 		return $this->makeWhm2($node_cfg['host'],$node_cfg['port'],$node_cfg['passwd']);

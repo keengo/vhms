@@ -6,6 +6,9 @@ class MailControl extends control
 	{
 		$subject = $_REQUEST['mail_subject'];
 		$body = $_REQUEST['mail_body'];
+		if (!$subject) {
+			die("邮件标题未设置");
+		}
 		if ($_REQUEST['address']) {
 			$address = explode(',', $_REQUEST['address']);
 			
@@ -16,11 +19,10 @@ class MailControl extends control
 			}
 		}
 		if (count($address) < 0 ) {
-			echo "nothing address need Send<br>";
-			return false;
+			die("nothing address need Send");
 		}
 		if (!apicall('mail','sendMail',array($address,$subject,$body))) {
-			exit("发送失败");
+			die("发送失败");
 		}
 		die("发送成功");
 	}

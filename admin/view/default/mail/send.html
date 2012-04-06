@@ -3,14 +3,24 @@
 <script language='javascript'>
 function send()
 {
+	$("#con").css("display","block");
+	$("#con").html('正在发送中......');
 	var subject = $("#subject").val();
 	var body = $("#body").val();
 	var url = "?c=mail&a=send";
 	var address = $("#address").val();
 	if (address !="" && address != null) {
-		$.post(url,{address:address,mail_body:body,mail_subject:subject},function(msg){alert(msg)});
+		$.post(url,{address:address,mail_body:body,mail_subject:subject},function(msg){
+			alert(msg);
+			$("#con").css("display","none");
+			$("#con").html("");
+			});
 	}else{
-		$.post(url,{mail_body:body,mail_subject:subject},function(msg){alert(msg)});
+		$.post(url,{mail_body:body,mail_subject:subject},function(msg){
+			alert(msg);
+			$("#con").css("display","none");
+			$("#con").html("");
+			});
 	}
 }
 </script>
@@ -18,16 +28,16 @@ function send()
 	<div class="wid_main mar_main" align="left">
 		<div class="block_top" align="left">当前位置：邮件群发--> 群发邮件</div>
 		<table class="table_main2" cellpadding="0" cellspacing="1">
-			<tr><td colspan="2" class="bg_main"><b>群发邮件</b>&nbsp;<font color='red'>(注：多个邮箱用逗号分割,留空为所有注册账户)</font></td></tr>
-			
-			<tr><td class="wid_general">邮箱：</td>
-				<td><textarea name='mail_address' id='address' rows='1' cols='88' ></textarea></td></tr>
+			<tr><td colspan="2" class="bg_main"><b>群发邮件</b></td></tr>
+
+			<tr><td>发送邮箱：</td>
+				<td><textarea name='mail_address' id='address' rows='1' cols='60' ></textarea><font color='red'>(注：多个邮箱用逗号分割,留空为所有注册账户)</font></td></tr>
 						
-			<tr><td class="wid_general">邮件标题：</td>
-				<td><input name='mail_subject' id='subject' type='text' value="" size="70"></td></tr>
+			<tr><td>邮件标题：</td>
+				<td><input name='mail_subject' id='subject' type='text' value="" size="48"></td></tr>
 				
-			<tr><td class="wid_general">邮件内容：</td>
-				<td><textarea name='mail_body'  id='body' rows='10' cols='88'></textarea></td></tr>
+			<tr><td>邮件内容：</td>
+				<td><textarea name='mail_body'  id='body' rows='10' cols='60'></textarea></td></tr>
 				
 			<tr><td>&nbsp;</td>
 				<td ><input type='button' onClick="send();" value="发送"></td></tr>
