@@ -16,7 +16,7 @@ function check_smtp(val)
 		<form name='nodeform' action="?c=mail&a=setMail" method="post">
 		<table class="table_main2" cellpadding="0" cellspacing="1">
 			
-			<tr><td colspan="2" class="bg_main"><a href="#"><b>邮件设置</b></a>&nbsp;&nbsp;<a href="?c=mail&a=sendMailFrom"><b>群发邮件</b></a></td></tr>
+			<tr><td colspan="2" class="bg_main">邮件设置&nbsp;&nbsp;<a href="?c=mail&a=sendMailFrom"><b>群发邮件</b></a></td></tr>
 			
 			<tr><td>开启邮件群发：</td>
 		        <td><input type="checkbox" name="set_mail" value="1" {{if $setting.set_mail==1}}checked{{/if}} /></td></tr>
@@ -50,7 +50,7 @@ function check_smtp(val)
 			</tbody>
 			
 			<tr><td>&nbsp;</td>
-				<td><input type="submit" value="确认提交"><a href="?c=mail&a=sendMailFrom"><input type="button" value="发送邮件"></a> </td></tr>
+				<td><input type="submit" value="确认提交"></td></tr>
 			
 		</table>
 		</form>
