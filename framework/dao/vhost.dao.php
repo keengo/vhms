@@ -21,7 +21,7 @@ class VhostDAO extends DAO{
 			'product_id'=>'product_id',
 			'username'=>'username',
 			'flow'=>'flow',
-			'db_type'
+			'db_type'=>'db_type'
 			);
 			$this->MAP_TYPE = array(
 			'passwd'=>FIELD_TYPE_MD5,
