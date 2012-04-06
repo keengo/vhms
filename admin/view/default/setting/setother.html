@@ -1,6 +1,16 @@
 {{include file='common/head.html'}}
 <body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
+<script language='javascript'>
+function getcron()
+{
+	var url="?c=setting&a=getCronStr";
+	$.get(url,function(msg){
+		$("#cron").html(msg);
+	});
+}
 
+
+</script>
 <div>
 	<form  action="?c=setting&a=setOther" method='post'>
 		<table class="table_main2" cellpadding="0" cellspacing="1">
@@ -8,11 +18,14 @@
 		        <td ><input type="checkbox" name="set_renew" value="1" {{if $setting.set_renew==1}}checked{{/if}} /></td></tr>
 		   
 		    <tr><td >过期空间数据保存天数：</td>
-		        <td ><input type="text" name="expire_save_day" value="{{if $setting.expire_save_day}}{{$setting.expire_save_day}}{{else}}30{{/if}}"  size="10"/></td></tr> 
+		        <td ><input type="text" name="expire_save_day" value="{{if $setting.expire_save_day}}{{$setting.expire_save_day}}{{else}}30{{/if}}"  size="10"/>天,0为不删除</td></tr> 
 		    
+		    <tr><td >获取计伐任务脚本：</td>
+		        <td ><input type='button' onclick="getcron();" value='获取'></tr>
+		   
 			<tr><td></td>
-				<td><input type='submit' value='确定'></td></tr>
+				<td><input type='submit' value='确定'>&nbsp;&nbsp;</td></tr>
 		</table>
 	</form>
-
+<div id="cron"></div>
 </div>

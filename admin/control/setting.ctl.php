@@ -12,6 +12,18 @@ class SettingControl extends Control
 		$this->assign('setting',$setting);
 		return $this->fetch('setting/setother.html');
 	}
+	public function getCronStr()
+	{
+		$cron_str = "<font color='red'>请在计伐任务中配置<br>";
+		$cron_str .= 'php路径/php';
+		if (strncasecmp(PHP_OS, 'WIN',3)==0) {
+			$cron_str .='.exe';
+		}
+		$cron_str .=' -f "';
+		$cron_str .= dirname(__FILE__)."/../../framework/shell.php\" cron";
+		$cron_str .="</font>";
+		die($cron_str);
+	}
 	/**
 	 * 其他设置
 	 * Enter description here ...
