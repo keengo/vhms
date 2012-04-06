@@ -20,7 +20,7 @@ class SettingControl extends Control
 			$cron_str .='.exe';
 		}
 		$cron_str .=' -f "';
-		$cron_str .= dirname(__FILE__)."/../../framework/shell.php\" cron";
+		$cron_str .= dirname(dirname(dirname(__FILE__)))."/framework/shell.php\" cron";
 		$cron_str .="</font>";
 		die($cron_str);
 	}
