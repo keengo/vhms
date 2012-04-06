@@ -102,10 +102,10 @@ function change_cdn(val)
 					{{/foreach}}</select></td></tr>
 			
 			<tr><td>产品名称：</td>
-				<td><input name='name' type='text' id='tb_wid3' value="{{$vhostproduct.name}}" size="16"></td></tr>
+				<td><input name='name' type='text' class="wid_130" value="{{$vhostproduct.name}}"></td></tr>
 			
 			<tr><td>显示顺序：</td>
-				<td><input name='view' type='text' id='tb_wid3'	value="{{$vhostproduct.view}}" size="16"></td></tr>
+				<td><input name='view' type='text' class="wid_130" value="{{$vhostproduct.view}}"></td></tr>
 			
 			<tr><td>产品组：</td>
 				<td><input name='upid' type='text' value="{{intval($vhostproduct.upid)}}" size="3">(可升级到相同产品组的其它产品，设置为0不可升级)</td></tr>
@@ -118,10 +118,10 @@ function change_cdn(val)
 					<div id='cdnpanel' style='display:{{if $vhostproduct.cdn==1}}none{{/if}}'>
 						<table class="table_main3" cellpadding="0" cellspacing="1">
 							<tr><td class="wid_general">空间大小：</td>
-								<td><input name="web_quota" type="text" id='tb_wid3' value="{{$vhostproduct.web_quota}}" size="16">&nbsp;M</td></tr>
+								<td><input name="web_quota" type="text" value="{{$vhostproduct.web_quota}}" class="wid_130">&nbsp;M</td></tr>
 							
 							<tr><td>数据库大小：</td>
-								<td><input name="db_quota" type="text" id='tb_wid3' value="{{$vhostproduct.db_quota}}">&nbsp;M</td></tr>
+								<td><input name="db_quota" type="text" class="wid_130" value="{{$vhostproduct.db_quota}}">&nbsp;M</td></tr>
 							
 							<tr><td>数据库类型：</td>
 								<td><input name="db_type" type="radio" value="mysql" {{if $vhostproduct.db_type!='sqlsrv'}}checked{{/if}}>mysql
@@ -131,10 +131,10 @@ function change_cdn(val)
 								<td><input type='checkbox' name='subdir_flag' value='1' {{if $vhostproduct.subdir_flag}}checked{{/if}}>允许绑定子目录</td></tr>
 							
 							<tr><td>子目录个数</td>
-								<td><input type='text' name='max_subdir' size="17" value='{{if $vhostproduct.max_subdir}}{{$vhostproduct.max_subdir}}{{else}}0{{/if}}'>&nbsp;0表示不限制</td></tr>
+								<td><input type='text' name='max_subdir' class="wid_130" value='{{if $vhostproduct.max_subdir}}{{$vhostproduct.max_subdir}}{{else}}0{{/if}}'>&nbsp;0表示不限制</td></tr>
 							
 							<tr><td>默认绑定子目录:</td>
-								<td><input name="subdir" type="text" id='tb_wid3' value="{{if $vhostproduct.subdir}}{{$vhostproduct.subdir}}{{else}}wwwroot{{/if}}" size="16"></td></tr>
+								<td><input name="subdir" type="text" value="{{if $vhostproduct.subdir}}{{$vhostproduct.subdir}}{{else}}wwwroot{{/if}}" class="wid_130"></td></tr>
 							
 							<tr><td>模板</td>
 								<td id='templete2'>
@@ -142,35 +142,35 @@ function change_cdn(val)
 									<div id='subtemplete'></div></td></tr>
 							
 							<tr><td>多引擎切换:</td>
-								<td><input type='radio' name="cs" value="0" {{if $vhostproduct.cs==0}}checked{{/if}} size="16">不能切换
-									<input type='radio' name="cs" value="1" {{if $vhostproduct.cs==1}}checked{{/if}} size="16">随时切换
-									<input type='radio' name="cs" value="2" {{if !$vhostproduct || $vhostproduct.cs==2}}checked{{/if}} size="16">购买时切换</td></tr>
+								<td><input type='radio' name="cs" value="0" {{if $vhostproduct.cs==0}}checked{{/if}}>不能切换
+									<input type='radio' name="cs" value="1" {{if $vhostproduct.cs==1}}checked{{/if}}>随时切换
+									<input type='radio' name="cs" value="2" {{if !$vhostproduct || $vhostproduct.cs==2}}checked{{/if}}>购买时切换</td></tr>
 					  	</table>
 					</div>
 				</td>
 			</tr>
 			
 			<tr><td>价格</td>
-				<td><input name="price" type="text" id='tb_wid3' value="{{$vhostproduct.price/100}}">(元/年)
+				<td><input name="price" type="text" class="wid_130" value="{{$vhostproduct.price/100}}">(元/年)
 					<input type="checkbox" name="show_price" value="1" {{if $vhostproduct.show_price!=0}}checked{{/if}}>前台按月显示</td></tr>
 			{{if count($agent_ids)>0}}
 			<tr><td>代理价格</td>
 				<td>{{for $i=0;$i< count($agent_ids);$i++}}
-						{{$agent_ids[$i].name}}:<input name="agentprice_{{$agent_ids[$i].id}}" type="text" id='tb_wid3' value="{{$agent_ids[$i].price/100}}" style="width:45px" />
+						{{$agent_ids[$i].name}}:<input name="agentprice_{{$agent_ids[$i].id}}" type="text" value="{{$agent_ids[$i].price/100}}" style="width:45px" />
 					{{/for}}</td></tr>
 			{{/if}}
 			
 			<tr><td>域名绑定个数</td>
-				<td><input name="domain" type="text" id='tb_wid3' value="{{if $vhostproduct}}{{$vhostproduct.domain}}{{else}}-1{{/if}}">(-1表示无限)</td></tr>
+				<td><input name="domain" type="text" class="wid_130" value="{{if $vhostproduct}}{{$vhostproduct.domain}}{{else}}-1{{/if}}">(-1表示无限)</td></tr>
 			
 			<tr><td>最大连接数</td>
-				<td><input name="max_connect" type="text" size='12' value="{{if $vhostproduct}}{{$vhostproduct.max_connect}}{{else}}0{{/if}}">(0无限)</td></tr>
+				<td><input name="max_connect" type="text" class="wid_130" value="{{if $vhostproduct}}{{$vhostproduct.max_connect}}{{else}}0{{/if}}">(0无限)</td></tr>
 			
 			<tr><td>带宽限制</td>
-				<td><input name="speed_limit" type="text" size='12' value="{{if $vhostproduct}}{{$vhostproduct.speed_limit/1024}}{{else}}0{{/if}}">&nbspK/每秒,(0无限)</td></tr>
+				<td><input name="speed_limit" type="text" class="wid_130" value="{{if $vhostproduct}}{{$vhostproduct.speed_limit/1024}}{{else}}0{{/if}}">&nbspK/每秒,(0无限)</td></tr>
 			
 			<tr><td>管理变量:</td>
-				<td><input name="envs" type="text" id='tb_wid3'	value="{{$vhostproduct.envs}}" size="40"></td></tr>
+				<td><input name="envs" type="text" class="wid_130"	value="{{$vhostproduct.envs}}"></td></tr>
 			
 			<tr><td>其它选项</td>
 				<td><input type='checkbox' name='htaccess' value='1' {{if $vhostproduct.htaccess || !$vhostproduct}}checked{{/if}}>.htaccess支持
