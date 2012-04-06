@@ -240,8 +240,8 @@ class VhostAPI extends API
 	private function sqliteUpdateVirtualHost($node,$name,$attr)
 	{
 		$whm = apicall('nodes','makeWhm',array($node));
-		if (!$whm) {
-			//echo "该产品所在节点已不存在<br>";
+		if (!is_object($whm)) {
+			echo "<font color='red'>该产品所在节点已不存在</font><br>";
 			return false;
 		}
 		$whmCall = new WhmCall('update_vh');

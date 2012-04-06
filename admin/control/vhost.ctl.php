@@ -28,7 +28,7 @@ class VhostControl extends Control {
 		$this->_tpl->assign('page',$page);
 		$this->_tpl->assign('page_count',$page_count);
 		$this->_tpl->assign('list',$list);
-		$this->_tpl->display('vhost/pagelistexprie.html');
+		return $this->_tpl->fetch('vhost/pagelistexprie.html');
 	}
 	public function showVhost()
 	{
