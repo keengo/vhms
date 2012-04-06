@@ -15,10 +15,12 @@ function send()
 }
 </script>
 <div align="center">
+	<div class="wid_main mar_main" align="left">
+		<div class="block_top" align="left">当前位置：邮件群发--> 群发邮件</div>
 		<table class="table_main2" cellpadding="0" cellspacing="1">
-			<tr><td colspan="2" class="bg_main">群发邮件</td></tr>
+			<tr><td colspan="2" class="bg_main"><b>群发邮件</b>&nbsp;<font color='red'>(注：多个邮箱用逗号分割,留空为所有注册账户)</font></td></tr>
 			
-			<tr><td class="wid_general">邮箱：<font color='red'>*逗号分割,留空为所有注册账户</font></td>
+			<tr><td class="wid_general">邮箱：</td>
 				<td><textarea name='mail_address' id='address' rows='1' cols='88' ></textarea></td></tr>
 						
 			<tr><td class="wid_general">邮件标题：</td>
@@ -28,8 +30,9 @@ function send()
 				<td><textarea name='mail_body'  id='body' rows='10' cols='88'></textarea></td></tr>
 				
 			<tr><td>&nbsp;</td>
-				<td ><input type='button' onclick="send();" value="发送"></td></tr>
+				<td ><input type='button' onClick="send();" value="发送"></td></tr>
 				
 		</table>
+	</div>
 </div> 	
 	
