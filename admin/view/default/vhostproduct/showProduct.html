@@ -125,7 +125,7 @@ function updateViewResult()
 				<td>{{if $row.cdn}}cdn/-{{else}}{{$row.web_quota}}&nbsp;/&nbsp;{{$row.db_quota}}{{/if}}</td>
 				<td>{{$row.db_type}}</td>
 				<td>{{$row.price/100}}</td>
-				<td>{{$row.domain}}</td>
+				<td>{{if $row.domain=='-1'}}不限{{else}}{{$row.domain}}{{/if}}</td>
 				<td>{{if $row.cdn}}-{{else}}{{if $row.subdir_flag}}允许{{/if}} {{$row.subdir}}{{/if}}</td>
 				<td>{{$row.templete}}
 					{{if $row.subtemplete}}:{{$row.subtemplete}}{{/if}}
