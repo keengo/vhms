@@ -1,6 +1,14 @@
 <?php
 class ShellAPI extends API
 {
+	public function cron()
+	{
+		$this->sync_expire();
+		$setting = daocall('setting','getAll2',array());
+		if ($setting['set_mail'] == 1) {
+			$this->sendMail();
+		}
+	}
 	public function sync($host)
 	{
 		if($host==null){
@@ -23,11 +31,9 @@ class ShellAPI extends API
 		foreach ($nodes as $node) {
 			$this->sync_host_flow($node['name'],$t);
 		}
-		$setting = daocall('setting','getAll2',array());
-		if ($setting['set_mail'] == 1) {
-			$this->sendMail();
-		}
+		
 	}
+	
 	public function sendMail()
 	{
 		return apicall('mail','sendExMail',array());
