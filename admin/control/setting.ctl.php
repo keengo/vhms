@@ -14,7 +14,7 @@ class SettingControl extends Control
 	}
 	public function getCronStr()
 	{
-		$cron_str = "<font color='red'>请在计伐任务中配置<br>";
+		$cron_str = "<font color='red'>请在计划任务中配置<br>";
 		$cron_str .= 'php路径/php';
 		if (strncasecmp(PHP_OS, 'WIN',3)==0) {
 			$cron_str .='.exe';
