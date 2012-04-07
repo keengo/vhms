@@ -28,17 +28,20 @@ class MailAPI extends API
 	{
 		$setting = daocall('setting','getAll2',array());
 		$mail_smtp = $setting['mail_smtp'];
+		$from = $setting['mail_from'];
+		$fromname = $setting['mail_fromname'];
 		$mail = new PHPMailer();
 		if (!$mail) {
 			return false;
 		}
 		$mail->CharSet = "utf-8";
+		$mail->From = $from;
+		$mail->FromName= $fromname;
 		if ($mail_smtp == 1) {
 			$host = $setting['mail_host'];
 			$username = $setting['mail_username'];
 			$passwd = $setting['mail_passwd'];
-			$from = $setting['mail_from'];
-			$fromname = $setting['mail_fromname'];
+			
 			$port = $setting['mail_port'] ? $setting['mail_port'] : '25';
 			$secure = $setting['secure'] ? $setting['secure'] : 'ssl';
 			
@@ -52,8 +55,6 @@ class MailAPI extends API
 			$mail->Username = $username;
 			$mail->Password = $passwd;
 			$mail->Port = $port;
-			$mail->From = $from;
-			$mail->FromName= $fromname;
 		}
 		return $mail;
 		
