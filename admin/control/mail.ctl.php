@@ -30,15 +30,7 @@ class MailControl extends control
 	{
 		return $this->_tpl->fetch('mail/send.html');
 	}
-	public function getTemplete()
-	{
-		$templete = $_REQUEST['templete'];
-		$setting = daocall('setting','getAll2',array());
-		$resutl['subject'] = $setting[$templete."_subject"];
-		$resutl['body'] = $setting[$templete."_body"];
-		return json_decode($resutl);
-		
-	}
+
 	public function mailFrom()
 	{
 		$setting = daocall('setting','getAll2',array());
@@ -86,10 +78,5 @@ class MailControl extends control
 		}
 		return $this->mailFrom();
 	}
-	public function test()
-	{
-		//apicall('mail','sendExMail',array());
-	}
-	
 }
 ?>
