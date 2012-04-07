@@ -32,6 +32,7 @@ class MailAPI extends API
 		if (!$mail) {
 			return false;
 		}
+		$mail->CharSet = "utf-8";
 		if ($mail_smtp == 1) {
 			$host = $setting['mail_host'];
 			$username = $setting['mail_username'];
