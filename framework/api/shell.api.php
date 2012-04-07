@@ -6,7 +6,7 @@ class ShellAPI extends API
 		$this->sync_expire();
 		$setting = daocall('setting','getAll2',array());
 		if ($setting['set_mail'] == 1) {
-			$this->sendMail();
+			$this->sendExMail();
 		}
 	}
 	public function sync($host)
@@ -38,7 +38,7 @@ class ShellAPI extends API
 		return apicall('mail','sendAdMail',array());
 	}
 	
-	public function sendMail()
+	public function sendExMail()
 	{
 		return apicall('mail','sendExMail',array());
 	}
@@ -72,18 +72,18 @@ class ShellAPI extends API
 	{
 		$day = 1; //查询过期天数
 		$expire_save_day = daocall('setting','get',array('expire_save_day'));
-		$del_day = $expire_save_day;//过期多少天删除空间
+		$del_day = intval($expire_save_day);//过期多少天删除空间
 
 		$vhosts = daocall('vhost','selectListByExpire_time',array($day)); //获取过期空间	
 		if ($vhosts) {
 			foreach ($vhosts as $vhost) {
 				if(!$nodes = daocall('nodes','getNode',array($vhost['node']))){
-					echo "sync_expire ",$vhost['name']." failed<-------not node------->\r\n";
+					echo "sync_expire ",$vhost['name']." failed       <-------not node------->\r\n";
 					continue;
 				}
 				try{
 					if(!$return = apicall('vhost','changeStatus',array($vhost['node'],$vhost['name'],1))){
-						echo "sync_expire ",$vhost['name']." failed<-------sync failed------->\r\n";
+						echo "sync_expire ",$vhost['name']." failed   <-------sync failed------->\r\n";
 						continue;
 					}
 				}catch(Exception $e){
@@ -92,18 +92,17 @@ class ShellAPI extends API
 				echo "sync_expire ",$vhost['name']." success\r\n";
 			}
 		}
-		if($del_day && $del_day > 1) {
+		if($del_day && $del_day >= 1) {
 			//查询过期达到指定天数的网站，并删除
 			$del_vhosts = daocall('vhost','selectListByExpire_time',array($del_day,-1));
-			
 			if (count($del_vhosts) >0) {
 				foreach ($del_vhosts as $del_vhost) {
 					if(!$nodes = daocall('nodes','getNode',array($del_vhost['node']))) {
-						echo "del  ",$del_vhost['name']." failed<-------not node------->\r\n";
+						echo "del  ",$del_vhost['name']." failed    <-------not node------->\r\n";
 						continue;
 					}
 					if(!$result = apicall('vhost','del',array($del_vhost['node'],$del_vhost['name']))){
-						echo "del  ",$del_vhost['name']." failed<-------sync failed------->\r\n";
+						echo "del  ",$del_vhost['name']." failed    <-------sync failed------->\r\n";
 						continue;
 					}
 					echo "del  ",$del_vhost['name']." success\r\n";

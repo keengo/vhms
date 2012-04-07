@@ -46,12 +46,14 @@ class VhostDAO extends DAO{
 			$day=1;
 		}
 		/*传入day=-7，查询还有七天过期的用户*/
-		if (substr($day,0,1)=='-') {
-			$day = substr($day,1);
-			$where=' expire_time < ADDDATE(curdate(),interval '.$day.' day)';
-		}else{
-			$where=' expire_time < subdate(curdate(),interval '.$day.' day)';
-		}
+		//if (substr($day,0,1)=='-') {
+//		if (intval($day) < 1) {
+//			$day = substr($day,1);
+//			$where=' expire_time < ADDDATE(curdate(),interval '.$day.' day)';
+//		}else{
+//			$where=' expire_time < subdate(curdate(),interval '.$day.' day)';
+//		}
+		$where=' expire_time < subdate(curdate(),interval '.$day.' day)';
 		if ($status>=0) {
 			$where .= " and ".$this->getFieldValue2('status', $status);
 		}
