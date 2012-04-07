@@ -1,5 +1,6 @@
 {{include file='common/head.html'}}
 <body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
+<!--
 <script language='javascript'>
 function getcron()
 {
@@ -8,24 +9,23 @@ function getcron()
 		$("#cron").html(msg);
 	});
 }
-
-
 </script>
+-->
 <div align="center">
 	<div class="wid_main mar_main" align="left">
 		<div class="block_top" align="left">当前位置：系统设置--> 其他功能设置</div>
 		<form  action="?c=setting&a=setOther" method='post'>
 		<table class="table_main2" cellpadding="0" cellspacing="1">
-			<tr><td colspan="2" class="bg_main"><b>其他功能设置</b></td></tr>
+			<tr><td colspan="2" class="bg_main"><b>计划任务设置</b></td></tr>
+			
+			<tr>{{$cron_str}}</tr>
+			
 		  	<tr><td class="wid_general">续费后开通网站：</td>
 		        <td ><input type="checkbox" name="set_renew" value="1" {{if $setting.set_renew==1}}checked{{/if}} /></td></tr>
 		   
 		    <tr><td >过期空间数据保存天数：</td>
 		        <td ><input type="text" name="expire_save_day" value="{{if $setting.expire_save_day}}{{$setting.expire_save_day}}{{else}}30{{/if}}"  size="10"/>&nbsp;天,0为不删除</td></tr> 
 		    
-		    <tr><td >获取计划任务脚本：</td>
-		        <td ><input type='button' onClick="getcron();" value='获取'></tr>
-		   
 			<tr><td></td>
 				<td><input type='submit' value='确定'>&nbsp;&nbsp;</td></tr>
 		</table>

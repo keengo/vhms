@@ -8,21 +8,19 @@ class SettingControl extends Control
 	}
 	public function setOtherFrom()
 	{
-		$setting = daocall('setting','getAll2',array());
-		$this->assign('setting',$setting);
-		return $this->fetch('setting/setother.html');
-	}
-	public function getCronStr()
-	{
-		$cron_str = "<font color='red'>请在计划任务中配置<br>";
-		$cron_str .= 'php路径/php';
+		$cron_str = "<font color='red'>请在计划任务中配置,每日运行一次<br>";
+		$cron_str .= 'php';
 		if (strncasecmp(PHP_OS, 'WIN',3)==0) {
 			$cron_str .='.exe';
 		}
 		$cron_str .=' -f "';
 		$cron_str .= dirname(dirname(dirname(__FILE__)))."/framework/shell.php\" cron";
 		$cron_str .="</font>";
-		die($cron_str);
+		
+		$setting = daocall('setting','getAll2',array());
+		$this->assign('cron_str',$cron_str);
+		$this->assign('setting',$setting);
+		return $this->fetch('setting/setother.html');
 	}
 	/**
 	 * 其他设置
