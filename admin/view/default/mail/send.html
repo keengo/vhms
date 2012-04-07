@@ -30,7 +30,7 @@ function send()
 		<table class="table_main2" cellpadding="0" cellspacing="1">
 			<tr><td colspan="2" class="bg_main"><b>群发邮件</b></td></tr>
 
-			<tr><td>发送邮箱：</td>
+			<tr><td class="wid_general">发送邮箱：</td>
 				<td><textarea name='mail_address' id='address' rows='1' cols='60' ></textarea><font color='red'>(注：多个邮箱用逗号分割,留空为所有注册账户)</font></td></tr>
 						
 			<tr><td>邮件标题：</td>
@@ -38,7 +38,6 @@ function send()
 				
 			<tr><td>邮件内容：</td>
 				<td><textarea name='mail_body'  id='body' rows='10' cols='60'></textarea></td></tr>
-				
 			<tr><td>&nbsp;</td>
 				<td ><input type='button' onClick="send();" value="发送"></td></tr>
 				
