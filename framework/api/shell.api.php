@@ -33,6 +33,10 @@ class ShellAPI extends API
 		}
 		
 	}
+	public function sendAdMail()
+	{
+		return apicall('mail','sendAdMail',array());
+	}
 	
 	public function sendMail()
 	{

@@ -6,6 +6,8 @@ class MailControl extends control
 	{
 		$subject = $_REQUEST['mail_subject'];
 		$body = $_REQUEST['mail_body'];
+		daocall('setting','add',array('mail_ad_subject',$subject));
+		daocall('setting','add',array('mail_ad_body',$body));
 		if (!$subject) {
 			die("邮件标题未设置");
 		}

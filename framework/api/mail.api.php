@@ -2,6 +2,26 @@
 include dirname(__FILE__).'/../../plugin/phpmailer/class.phpmailer.php';
 class MailAPI extends API
 {
+	public function sendAdMail()
+	{
+		$mail = $this->getMail();
+		if ($mail === false) {
+			return false;
+		}
+		$mails = daocall('user','getAllMail',array());
+		foreach ($mails as $a ) {
+			$address[]=trim($a['email'],',');
+		}
+		$setting = daocall('setting','getAll2',array());
+		$subject = $setting['mail_ad_subject'];
+		$body = $setting['mail_ad_body'];
+		if($this->sendMail($address, $subject, $body))
+		{
+			echo "sendmail is success\r\n";
+		}else{
+			echo "sendmail is failed\r\n";
+		}
+	}
 	/**
 	 * 
 	 * Enter description here ...
@@ -32,6 +52,7 @@ class MailAPI extends API
 		$fromname = $setting['mail_fromname'];
 		$mail = new PHPMailer();
 		if (!$mail) {
+			echo "mail is not ok";
 			return false;
 		}
 		$mail->CharSet = "utf-8";
@@ -46,6 +67,7 @@ class MailAPI extends API
 			$secure = $setting['secure'] ? $setting['secure'] : 'ssl';
 			
 			if (!$host || !$username || !$passwd) {
+				echo "mail host or username or passwd net set\r\n";
 				return false;
 			}
 			$mail->IsSMTP();
@@ -95,10 +117,10 @@ class MailAPI extends API
 			$mail->Body = $body2;
 			$mail->SMTPAuth = true;
 			if (!$mail->Send()) {
-				echo $userinfo['email']." 发送失败<br>\r\n";
+				echo $userinfo['email']." sendmail failed<br>\r\n";
 				continue;
 			}
-			echo $userinfo['email']."发送成功<br>\r\n";
+			echo $userinfo['email']." sendmail success<br>\r\n";
 		}
 		
 	}
