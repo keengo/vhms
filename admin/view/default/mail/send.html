@@ -4,7 +4,7 @@
 function send()
 {
 	$("#con").css("display","block");
-	$("#con").html('正在发送中......');
+	$("#con").html('<font color="red">正在发送中......</font>');
 	var subject = $("#subject").val();
 	var body = $("#body").val();
 	var url = "?c=mail&a=send";
@@ -27,6 +27,7 @@ function send()
 <div align="center">
 	<div class="wid_main mar_main" align="left">
 		<div class="block_top" align="left">当前位置：邮件群发--> 群发邮件</div>
+		<div id='con' style="display:none"></div>
 		<table class="table_main2" cellpadding="0" cellspacing="1">
 			<tr><td colspan="2" class="bg_main"><b>群发邮件</b></td></tr>
 
