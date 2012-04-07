@@ -42,35 +42,24 @@ function check_smtp(val)
 			<tr><td>验证密码：</td>
 				<td><input name='mail_passwd' type='text' value="{{$setting.mail_passwd}}" size="32"></td></tr>
 			
-			<tr><td>发送者邮箱：</td>
+			<tr><td>发送者邮箱:</td>
 				<td><input name='mail_from' type='text' value="{{$setting.mail_from}}" size="32"></td></tr>
 			
 			<tr><td>发送者名称：</td>
 				<td><input name='mail_fromname' type='text' value="{{$setting.mail_fromname}}" size="32"></td></tr>
 			</tbody>
 			
+			<tr><td>过期通知邮件标题：</td>
+				<td><input name='mail_subject' type='text' value="{{$mail_subject}}" size="70"></td></tr>
+			
+			<tr><td>过期通知邮件内容：</td>
+				<td><textarea name='mail_body' id='mail_body' rows='10' cols='88'>{{$mail_body}}</textarea></td></tr>
+			
 			<tr><td>&nbsp;</td>
 				<td><input type="submit" value="确认提交"></td></tr>
 			
 		</table>
 		</form>
-		
-		<form name='nodeform' action="?c=mail&a=setMail" method="post">
-		<table class="table_main2" cellpadding="0" cellspacing="1">
-			<tr><td colspan="2" class="bg_main">添加过期邮件模板</td></tr>
-			
-			<tr><td>邮件标题：</td>
-				<td><input name='mail_subject' type='text' value="{{$mail_subject}}" size="70"></td></tr>
-			
-			<tr><td>邮件内容：</td>
-				<td><textarea name='mail_body' id='mail_body' rows='10' cols='88'>{{$mail_body}}</textarea></td></tr>
-			
-			<tr><td>&nbsp;</td>
-				<td ><input type="submit" value="确认提交"></td></tr>
-
-		</table>
-		</form>
-		
 	</div> 	
 </div>
 <script language='javascript'>

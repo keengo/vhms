@@ -41,11 +41,17 @@ class MailControl extends control
 	}
 	public function mailFrom()
 	{
-		$mail_body = "尊敬的{{user}}客户: 您在本网购买的{{vhost}}产品还有七天到期，为了不影响您的产品使用，请及时续费.";
-		$mail_subject = "尊敬的{{user}}客户: 您在本网购买的{{vhost}}产品还有七天到期";
+		$setting = daocall('setting','getAll2',array());
+		if($setting['mail_body']){
+			$mail_body = $setting['mail_body'];
+			$mail_subject = $setting['mail_subject'];
+		}else{
+			$mail_body = "尊敬的{{user}}客户: 您在本网购买的{{vhost}}产品还有七天到期，为了不影响您的产品使用，请及时续费.";
+			$mail_subject = "尊敬的{{user}}客户: 您在本网购买的{{vhost}}产品还有七天到期";
+		}
 		$this->_tpl->assign('mail_body',$mail_body);
 		$this->_tpl->assign('mail_subject',$mail_subject);
-		$setting = daocall('setting','getAll2',array());
+		
 		$this->_tpl->assign('setting',$setting);
 		return $this->_tpl->fetch('mail/index.html');
 	}
