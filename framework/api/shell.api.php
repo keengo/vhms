@@ -3,7 +3,15 @@ class ShellAPI extends API
 {
 	public function cron()
 	{
-		$this->sync_expire();
+		$this->sync_expire2();
+		$setting = daocall('setting','getAll2',array());
+		if ($setting['set_mail'] == 1) {
+			$this->sendExMail();
+		}
+	}
+	public function sync_expire()
+	{
+		$this->sync_expire2();
 		$setting = daocall('setting','getAll2',array());
 		if ($setting['set_mail'] == 1) {
 			$this->sendExMail();
@@ -68,7 +76,7 @@ class ShellAPI extends API
 		}
 	}
 	/*暂停，删除过期空间*/
-	public function sync_expire()
+	public function sync_expire2()
 	{
 		$day = 1; //查询过期天数
 		$expire_save_day = daocall('setting','get',array('expire_save_day'));
