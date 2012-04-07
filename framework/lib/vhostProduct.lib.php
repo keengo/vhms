@@ -94,6 +94,10 @@ class VhostProduct extends Product
 	{
 		$param = $params['name'];
 		$whm = apicall('nodes','makeWhm',array($params['node']));
+		if (!is_object($whm)) {
+			echo "该空间所在节点不存在";
+			return false;
+		}
 		if($GLOBALS['node_db']=='sqlite'){
 				
 			//			if($params['resync'] == '1'){
