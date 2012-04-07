@@ -8,7 +8,7 @@ class SettingControl extends Control
 	}
 	public function setOtherFrom()
 	{
-		$cron_str = "<font color='red'>请在计划任务中配置,每日运行一次<br>";
+		$cron_str = "<font color='red'>请在计划任务中配置,每日运行一次,本计划任务自动执行:停止过期空间，提前7天发送过期空间通知邮件<br>";
 		$cron_str .= 'php';
 		if (strncasecmp(PHP_OS, 'WIN',3)==0) {
 			$cron_str .='.exe';
