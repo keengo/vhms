@@ -46,13 +46,15 @@ class MailAPI extends API
 	}
 	private function getMail()
 	{
+		if(!class_exists('PDO')){
+			die("can't find PDO extend\r\n");
+		}
 		$setting = daocall('setting','getAll2',array());
 		$mail_smtp = $setting['mail_smtp'];
 		$from = $setting['mail_from'];
 		$fromname = $setting['mail_fromname'];
 		$mail = new PHPMailer();
 		if (!$mail) {
-			echo "mail is not ok";
 			return false;
 		}
 		$mail->CharSet = "utf-8";
