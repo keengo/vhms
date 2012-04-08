@@ -85,10 +85,10 @@ CHANGE  `show_price`  `show_price` TINYINT( 4 ) NOT NULL DEFAULT  '0';
 ALTER TABLE  `mproduct` CHANGE  `describe`  `describe` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL;
 ALTER TABLE `vhost` ADD `db_type` VARCHAR( 255 ) NOT NULL default 'mysql';
 ALTER TABLE `vhost_product` ADD `db_type` VARCHAR( 255 ) NOT NULL default 'mysql';
-ALTER TABLE `vhost_product` ADD `max_subdir` bigint(20) NOT NULL default '0';
-ALTER TABLE `vhost_product` ADD `max_worker` bigint(20) NOT NULL default '0';
-ALTER TABLE `vhost_product` ADD `max_queue`  bigint(20) NOT NULL default '0';
-ALTER TABLE `vhost_product` ADD `log_handle` bigint(20) NOT NULL default '0';
+ALTER TABLE `vhost_product` ADD `max_subdir` int(11) NOT NULL default '0';
+ALTER TABLE `vhost_product` ADD `max_worker` int(11) NOT NULL default '0';
+ALTER TABLE `vhost_product` ADD `max_queue`  int(11) NOT NULL default '0';
+ALTER TABLE `vhost_product` ADD `log_handle` tinyint(4) NOT NULL default '0';
 
 
 

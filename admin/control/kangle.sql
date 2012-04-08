@@ -334,10 +334,10 @@ CREATE TABLE IF NOT EXISTS `vhost_product` (
   `flow` bigint(20) NOT NULL default '0',
   `show_price` tinyint(4) NOT NULL default '0',
   `db_type` varchar(255) NOT NULL default 'mysql',
-  `max_subdir` bigint(20) NOT NULL default '0',
-  `max_worker` bigint(20) NOT NULL default '0',
-  `max_queue` bigint(20) NOT NULL default '0',
-  `log_handle` bigint(20) NOT NULL default '0',
+  `max_subdir` int(11) NOT NULL default '0',
+  `max_worker` int(11) NOT NULL default '0',
+  `max_queue` int(11) NOT NULL default '0',
+  `log_handle` tinyint(4) NOT NULL default '0',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
