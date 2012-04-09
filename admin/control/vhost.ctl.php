@@ -14,7 +14,7 @@ class VhostControl extends Control {
 		}else{
 			$status = '-1';
 		}
-		$page_count = 10;
+		$page_count = 25;
 		$count = 0;
 		$list = daocall('vhost','pageVhostByExpire_time',array($page,$page_count,&$count,$day,$status));
 		$total_page = ceil($count/$page_count);
