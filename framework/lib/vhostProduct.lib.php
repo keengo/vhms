@@ -200,8 +200,8 @@ class VhostProduct extends Product
 			/*如果开了续费开通空间，操作，则执行*/
 			$set_renew = daocall('setting','get',array('set_renew'));
 			if ($set_renew == 1) {
-				$node = daocall('vhost','getNode',array($username));
-				apicall('vhost','changeStatus',array($node,$username,0));
+				$node = daocall('vhost','getNode',array($suser['name']));
+				apicall('vhost','changeStatus',array($node,$suser['name'],0));
 			}
 			return true;
 		}
