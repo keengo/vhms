@@ -85,10 +85,6 @@ class MailAPI extends API
 	}
 	public function sendExMail()
 	{
-		$mail = $this->getMail();
-		if ($mail === false) {
-			return false;
-		}
 		$day = '-7';
 		//get expire vhosts
 		$exvhs = daocall('vhost','selectListByExpire_time',array($day));
@@ -107,10 +103,14 @@ class MailAPI extends API
 //		$where .= ' expire_time < ADDDATE( curdate( ) , INTERVAL 7 DAY ) AND `status` =0)';
 //		$email = daocall('user','getAllMail',array($where));
 		foreach ($exvhs as $vh) {
+			$mail = $this->getMail();
+			if ($mail === false) {
+				return false;
+			}
 			$subject2 = $this->MyReplace($subject, $vh['username'], $vh['name']);
 			$body2 = $this->MyReplace($body, $vh['username'], $vh['name']);
 			$userinfo = daocall('user','getUser',array($vh['username']));
-			if($userinfo['email']=="") {
+			if ($userinfo['email'] == "") {
 				echo $vh['username']." email is empty\r\n<br>";
 				continue;
 			}

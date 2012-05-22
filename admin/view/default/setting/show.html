@@ -1,22 +1,16 @@
 {{include file='common/head.html'}}
 <div align="center">
 	<div class="wid_main mar_main" align="left">
-		<div class="block_top" align="left">当前位置：系统设置 --> 网上支付设置 </div>
-		{{if $msg}}
-		<div class="block mar_main" align="center"> 
-			<font color='red'>{{$msg}}</font>
-		</div>
-		{{/if}}
+	<div class="block_top" align="left">当前位置：系统设置 --> 网上支付设置 </div>
+	
+		{{if $msg}}<div class="block mar_main" align="center"><font color='red'>{{$msg}}</font></div>{{/if}}
+		
+		<form action='?c=setting&a=set&sub={{$sub}}' method='post'>
 		<table class="table_main2" cellpadding="0" cellspacing="1">
-			<tr>
-				<td colspan="2" class="bg_main hg_main"><b>网上支付设置</b></td>
-			</tr>
-			<form action='?c=setting&a=set&sub={{$sub}}' method='post'>
+			<tr><td colspan="2" class="bg_main hg_main"><b>支付宝设置</b></td></tr>
 			{{foreach item=e from=$env}}				
-			<tr>	
-				<td class="wid_general">{{$lang[$e.name]}}</td>
-				<td>
-					<input type='hidden' name='name[]' value='{{$e.name}}'/>
+			<tr><td class="wid_general">{{$lang[$e.name]}}</td>
+				<td><input type='hidden' name='name[]' value='{{$e.name}}'/>
 					{{if $e.value.0=='TEXT'}}	
 					<input type='text' name='{{$e.name}}' {{if $e.value.2}}size='{{$e.value.2}}'{{/if}} value='{{if !$e.password}}{{$val[$e.name].value}}{{/if}}'>		
 					{{else if $e.value.0=='RADIO'}}
@@ -27,14 +21,35 @@
 					{{else if $e.value.0=='CHECKBOX'}}
 					CHECKBOX
 					{{/if}}
-				</td>
-			</tr>
+				</td></tr>
 			{{/foreach}}
-			<tr>
-				<td>&nbsp;</td><td><input type='submit' value='设置'></td>
-			</tr>
-			</form>	
+			<tr><td>&nbsp;</td><td><input type='submit' value='设置'></td></tr>
 		</table>
+		</form>
+		
+		<form action='?c=setting&a=set&sub={{$sub}}' method='post'>
+		<table class="table_main2" cellpadding="0" cellspacing="1">
+			<tr><td colspan="2" class="bg_main hg_main"><b>支付宝设置</b></td></tr>
+			{{foreach item=e from=$env}}				
+			<tr><td class="wid_general">{{$lang[$e.name]}}</td>
+				<td><input type='hidden' name='name[]' value='{{$e.name}}'/>
+					{{if $e.value.0=='TEXT'}}	
+					<input type='text' name='{{$e.name}}' {{if $e.value.2}}size='{{$e.value.2}}'{{/if}} value='{{if !$e.password}}{{$val[$e.name].value}}{{/if}}'>		
+					{{else if $e.value.0=='RADIO'}}
+					{{foreach item=v from=$e.value.1}}
+					<input type='radio' name='{{$e.name}}' {{if $val[$e.name].value==$v.1}}checked{{/if}} value='{{$v.1}}'>
+					{{$lang[$v.0]}}
+					{{/foreach}}					
+					{{else if $e.value.0=='CHECKBOX'}}
+					CHECKBOX
+					{{/if}}
+				</td></tr>
+			{{/foreach}}
+			<tr><td>&nbsp;</td><td><input type='submit' value='设置'></td></tr>
+		</table>
+		</form>
+		
+		
 	</div>
 </div>
 {{include file='common/foot.html'}}
