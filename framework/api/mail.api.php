@@ -60,6 +60,7 @@ class MailAPI extends API
 		$mail->CharSet = "utf-8";
 		$mail->From = $from;
 		$mail->FromName= $fromname;
+		$mail->ContentType = 'text/html';
 		if ($mail_smtp == 1) {
 			$host = $setting['mail_host'];
 			$username = $setting['mail_username'];
