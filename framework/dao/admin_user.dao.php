@@ -8,14 +8,14 @@ class AdminUserDAO extends DAO{
 	{	//加载基本db文件
 		parent::__construct();
 		$this->MAP_ARR 	= array(		//用户信息信息字段对照表
-			"username" => 'username',
-			"passwd" => 'passwd',
-			"last_login" => 'last_login',
-			"last_ip" => 'last_ip'
+			"username" 		=> 'username',
+			"passwd" 		=> 'passwd',
+			"last_login" 	=> 'last_login',
+			"last_ip" 		=> 'last_ip'
 		);
 		$this->MAP_TYPE = array(
-		'passwd'=>FIELD_TYPE_MD5,
-		'last_login'=>FIELD_TYPE_DATETIME
+			'passwd'		=>FIELD_TYPE_MD5,
+			'last_login'	=>FIELD_TYPE_DATETIME
 		);
 		$this->_TABLE = DBPRE . 'admin_users';
 	}

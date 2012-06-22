@@ -5,14 +5,14 @@ class NodesDAO extends DAO
 	{	
 		parent::__construct();
 		$this->MAP_ARR 	= array(	
-			"name" => 'name',
-			"host" => 'host',
-			"port"=> 'port',
-			"passwd"=>'passwd',
-			'nickname'=>'nickname'
+			"name" 		=> 'name',
+			"host" 		=> 'host',
+			"port"		=> 'port',
+			"passwd"	=> 'passwd',
+			'nickname'	=> 'nickname'
 		);
 		$this->MAP_TYPE = array(
-			'port'=>FIELD_TYPE_INT
+			'port'		=>FIELD_TYPE_INT
 		);
 		$this->_TABLE = DBPRE . 'nodes';
 	}

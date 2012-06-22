@@ -5,35 +5,35 @@ class VhostwebappDAO extends DAO
 	{
 		parent::__construct();
 		$this->MAP_ARR 	= array(
-			"id" => 'id',
-			"user" => 'user',
-			"appid"=> 'appid',
-			"domain"=>'domain',
-			"dir"=>'dir',
-			'phy_dir'=>'phy_dir',
-			"status"=>'status',
-			'install_time'=>'install_time',
-			'appname'=>'appname',
-			'appver'=>'appver'
+			"id" 			=> 'id',
+			"user" 			=> 'user',
+			"appid"			=> 'appid',
+			"domain"		=> 'domain',
+			"dir"			=> 'dir',
+			'phy_dir'		=> 'phy_dir',
+			"status"		=> 'status',
+			'install_time'	=> 'install_time',
+			'appname'		=> 'appname',
+			'appver'		=> 'appver'
 		);
 		$this->MAP_TYPE = array(
-			'id'=>FIELD_TYPE_AUTO,
-			'step'=>FIELD_TYPE_INT,
-			'install_time'=>FIELD_TYPE_DATETIME
+			'id'			=>FIELD_TYPE_AUTO,
+			'step'			=>FIELD_TYPE_INT,
+			'install_time'	=>FIELD_TYPE_DATETIME
 			);
 		$this->_TABLE = DBPRE . 'vhost_webapp';
 	}
 	public function add($user,$appid,$appname,$appver,$domain,$dir,$phy_dir)
 	{
-		$arr['user'] = $user;
-		$arr['appid'] = $appid;
-		$arr['domain'] = $domain;
-		$arr['dir'] = $dir;
-		$arr['phy_dir'] = $phy_dir;
-		$arr['install_time'] = 'NOW()';
-		$arr['appname'] = $appname;
-		$arr['appver'] = $appver;
-		$arr['status'] = 0;
+		$arr['user'] 		= $user;
+		$arr['appid'] 		= $appid;
+		$arr['domain'] 		= $domain;
+		$arr['dir'] 		= $dir;
+		$arr['phy_dir'] 	= $phy_dir;
+		$arr['install_time']= 'NOW()';
+		$arr['appname'] 	= $appname;
+		$arr['appver'] 		= $appver;
+		$arr['status'] 		= 0;
 		$result = $this->insertData($arr);
 		if($result){
 			try{

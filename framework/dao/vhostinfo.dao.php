@@ -5,13 +5,13 @@ class VhostinfoDAO extends DAO
 	{
 		parent::__construct();
 		$this->MAP_ARR 	= array(
-			"vhost" => 'vhost',
-			'type'=> 'type',
-			"name" => 'name',
-			"value"=> 'value'
+			"vhost" 	=> 'vhost',
+			'type'		=> 'type',
+			"name" 		=> 'name',
+			"value"		=> 'value'
 			);
 			$this->MAP_TYPE = array(
-			'type'=>FIELD_TYPE_INT
+			'type'		=>FIELD_TYPE_INT
 			);
 			$this->_TABLE = DBPRE . 'vhost_info';
 	}

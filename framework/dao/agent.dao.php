@@ -5,8 +5,8 @@ class AgentDAO extends DAO
 	{	//加载基本db文件
 		parent::__construct();
 		$this->MAP_ARR 	= array(		//用户信息信息字段对照表
-			"id" => 'id',
-			"name" => 'name'
+			"id" 	=> 'id',
+			"name" 	=> 'name'
 			);
 		$this->MAP_TYPE = array(
 			'id'=>FIELD_TYPE_INT|FIELD_TYPE_AUTO

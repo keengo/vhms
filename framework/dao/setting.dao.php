@@ -5,7 +5,7 @@ class SettingDAO extends DAO
 	{	
 		parent::__construct();
 		$this->MAP_ARR 	= array(
-			"name" => 'name',
+			"name" 	=> 'name',
 			"value" => 'value'
 		);
 		$this->MAP_TYPE = array(
