@@ -4,22 +4,22 @@ class NewsDAO extends DAO{
 	{	
 		parent::__construct();
 		$this->MAP_ARR 	= array(
-			"id"=>'id',
-			"title" => 'title',
-			"body" => 'body',
-			"add_time" => 'add_time'			
+			"id"		=> 'id',
+			"title" 	=> 'title',
+			"body" 		=> 'body',
+			"add_time" 	=> 'add_time'			
 		);
 		$this->MAP_TYPE = array(
-			'id'=>FIELD_TYPE_AUTO,
-			'add_time'=>FIELD_TYPE_DATETIME
+			'id'		=>FIELD_TYPE_AUTO,
+			'add_time'	=>FIELD_TYPE_DATETIME
 		);
 		$this->_TABLE = DBPRE . 'news';
 	}
 	public function addNews($title,$body)
 	{
-		$arr['title']=$title;
-		$arr['body']=$body;
-		$arr['add_time']='NOW()';
+		$arr['title']	= $title;
+		$arr['body']	= $body;
+		$arr['add_time']= 'NOW()';
 		return $this->insert($arr);
 	}
 	public function getNews($id)

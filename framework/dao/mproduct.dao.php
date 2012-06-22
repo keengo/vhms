@@ -1,5 +1,5 @@
 <?php
-class MproductDAO extends DAO
+class MProductDAO extends DAO
 {
 	public function __construct()
 	{
