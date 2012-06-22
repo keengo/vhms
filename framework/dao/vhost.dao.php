@@ -8,29 +8,29 @@ class VhostDAO extends DAO{
 	{	//加载基本db文件
 		parent::__construct();
 		$this->MAP_ARR 	= array(		//用户信息信息字段对照表
-			"name" => 'name',
-			'passwd'=>'passwd',
-			'doc_root'=>'doc_root',
-			'uid'=>'uid',
-		 	'templete'=>'templete',
-			'subtemplete'=>'subtemplete',
-			'create_time'=>'create_time',
-			'expire_time'=>'expire_time',
-			'status'=>'status',
-			'node'=>'node',
-			'product_id'=>'product_id',
-			'username'=>'username',
-			'flow'=>'flow',
-			'db_type'=>'db_type'
+			"name" 			=> 'name',
+			'passwd'		=> 'passwd',
+			'doc_root'		=> 'doc_root',
+			'uid'			=> 'uid',
+		 	'templete'		=> 'templete',
+			'subtemplete'	=> 'subtemplete',
+			'create_time'	=> 'create_time',
+			'expire_time'	=> 'expire_time',
+			'status'		=> 'status',
+			'node'			=> 'node',
+			'product_id'	=> 'product_id',
+			'username'		=> 'username',
+			'flow'			=> 'flow',
+			'db_type'		=> 'db_type'
 			);
 			$this->MAP_TYPE = array(
-			'passwd'=>FIELD_TYPE_MD5,
-			'uid'=>FIELD_TYPE_INT,
-			'status'=>FIELD_TYPE_INT,
-			'product_id'=>FIELD_TYPE_INT,
-			'create_time'=>FIELD_TYPE_DATETIME,
-			'expire_time'=>FIELD_TYPE_DATETIME,
-			'flow'=>FIELD_TYPE_BIGINT,
+			'passwd'		=>FIELD_TYPE_MD5,
+			'uid'			=>FIELD_TYPE_INT,
+			'status'		=>FIELD_TYPE_INT,
+			'product_id'	=>FIELD_TYPE_INT,
+			'create_time'	=>FIELD_TYPE_DATETIME,
+			'expire_time'	=>FIELD_TYPE_DATETIME,
+			'flow'			=>FIELD_TYPE_BIGINT,
 			);
 			$this->_TABLE = DBPRE . 'vhost';
 	}
@@ -142,19 +142,19 @@ class VhostDAO extends DAO{
 	public function insertVhost($username,$name,$passwd,$doc_root,$group,$templete,$subtemplete,$status,$node,$product_id,$month,$db_type)
 	{
 		$arr=array();
-		$arr['username']=$username;
-		$arr['name'] = $name;
-		$arr['passwd'] = $passwd;
-		$arr['doc_root'] = $doc_root;
-		$arr['gid'] = $group;
-		$arr['templete'] = $templete;
+		$arr['username']	=$username;
+		$arr['name'] 		= $name;
+		$arr['passwd'] 		= $passwd;
+		$arr['doc_root'] 	= $doc_root;
+		$arr['gid'] 		= $group;
+		$arr['templete']	= $templete;
 		$arr['subtemplete'] = $subtemplete;
-		$arr['status'] = $status;
-		$arr['node'] = $node;
-		$arr['product_id'] = $product_id;
+		$arr['status'] 		= $status;
+		$arr['node'] 		= $node;
+		$arr['product_id'] 	= $product_id;
 		$arr['create_time'] = 'NOW()';
 		$arr['expire_time'] = 'ADDDATE(NOW(),INTERVAL '.$month.' MONTH)';
-		$arr['db_type'] = $db_type;
+		$arr['db_type'] 	= $db_type;
 		$result = $this->insertData($arr);
 
 		if($result){
