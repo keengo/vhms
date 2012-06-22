@@ -9,27 +9,27 @@ class UserDAO extends DAO{
 	{	//加载基本db文件
 		parent::__construct();
 		$this->MAP_ARR 	= array(		//用户信息信息字段对照表
-			"uid"=>'uid',
-			"username" => 'username',
-			"passwd" => 'passwd',
-			"email" => 'email',
-			"regtime" => 'regtime',
-			"name" => 'name',
-			"money" => 'money',
-			"id"=>'id',
-			'agent_id'=>'agent_id',
-			'flow'=>'flow'
+			"uid"		=> 'uid',
+			"username" 	=> 'username',
+			"passwd" 	=> 'passwd',
+			"email" 	=> 'email',
+			"regtime" 	=> 'regtime',
+			"name" 		=> 'name',
+			"money" 	=> 'money',
+			"id"		=> 'id',
+			'agent_id'	=> 'agent_id',
+			'flow'		=> 'flow'
 			);
-			$this->MAP_TYPE = array(
-				'uid'=>FIELD_TYPE_INT,
-				'money'=>FIELD_TYPE_INT,
-				'agent_id'=>FIELD_TYPE_INT,
-				'flow'=>FIELD_TYPE_INT,
-				'passwd'=>FIELD_TYPE_MD5,
-				'regtime'=>FIELD_TYPE_DATETIME
-			);
+		$this->MAP_TYPE = array(
+			'uid'		=>FIELD_TYPE_INT,
+			'money'		=>FIELD_TYPE_INT,
+			'agent_id'	=>FIELD_TYPE_INT,
+			'flow'		=>FIELD_TYPE_INT,
+			'passwd'	=>FIELD_TYPE_MD5,
+			'regtime'	=>FIELD_TYPE_DATETIME
+		);
 
-			$this->_TABLE = DBPRE . 'users';
+		$this->_TABLE = DBPRE . 'users';
 	}
 	/*用于邮件群发时，获取所有邮件distinct防重复*/
 	public function getAllMail($where)
@@ -80,13 +80,13 @@ class UserDAO extends DAO{
 	 */
 	public function newUser($username,$passwd,$email,$name,$id,$uid=0)
 	{
-		$arr['username'] = $username;
-		$arr['passwd'] = $passwd;
-		$arr['email']= $email;
-		$arr['name'] = $name;
-		$arr['id'] = $id;
-		$arr['uid']=$uid;
-		$arr['regtime'] = 'NOW()';
+		$arr['username'] 	= $username;
+		$arr['passwd'] 		= $passwd;
+		$arr['email']		= $email;
+		$arr['name'] 		= $name;
+		$arr['id'] 			= $id;
+		$arr['uid']			= $uid;
+		$arr['regtime'] 	= 'NOW()';
 		return $this->insert($arr);
 	}
 	public function updatePassword($username,$passwd)
@@ -100,9 +100,9 @@ class UserDAO extends DAO{
 	 */
 	public function updateUser($username,$name,$email,$id)
 	{
-		$arr['email']= $email;
-		$arr['name'] = $name;
-		$arr['id'] = $id;
+		$arr['email']	= $email;
+		$arr['name'] 	= $name;
+		$arr['id'] 		= $id;
 		return $this->update($arr,$this->getFieldValue2('username', $username));
 	}
 	

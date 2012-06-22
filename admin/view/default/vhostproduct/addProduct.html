@@ -167,7 +167,11 @@ function change_cdn(val)
 				<td><input name="max_connect" type="text" class="wid_130" value="{{if $vhostproduct}}{{$vhostproduct.max_connect}}{{else}}0{{/if}}">(0无限)</td></tr>
 			
 			<tr><td>带宽限制</td>
-				<td><input name="speed_limit" type="text" class="wid_130" value="{{if $vhostproduct}}{{$vhostproduct.speed_limit/1024}}{{else}}0{{/if}}">&nbspK/每秒,(0无限)</td></tr>
+				<td><input name="speed_limit" type="text" class="wid_130" value="{{if $vhostproduct}}{{$vhostproduct.speed_limit/1024}}{{else}}0{{/if}}">&nbsp;K/每秒,(0无限)</td></tr>
+			
+			<tr><td>流量限制</td>
+				<td><input name="flow" type="text" class="wid_130" value="{{if $vhostproduct}}{{($vhostproduct.flow)/1024/1024/1024}}{{else}}0{{/if}}">&nbsp;G/月,(0无限)</td></tr>
+			
 			
 			<tr><td>管理变量:</td>
 				<td><input name="envs" type="text" class="wid_130"	value="{{$vhostproduct.envs}}"></td></tr>

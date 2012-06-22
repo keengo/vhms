@@ -157,12 +157,13 @@ class VhostproductControl extends Control {
 	}
 	public function addProduct()
 	{
-		$_REQUEST['price'] *= 100;
-		$_REQUEST['speed_limit'] *= 1024;
-		$_REQUEST['db_type'] = $_REQUEST['db_type'] ? $_REQUEST['db_type'] : 'mysql';
-		if($_REQUEST['cdn']=='1'){
-			$_REQUEST['subdir_flag'] = 1;
-			$_REQUEST['templete']='html';
+		$_REQUEST['price'] 			*= 100;
+		$_REQUEST['speed_limit'] 	*= 1024;
+		$_REQUEST['db_type'] 		= $_REQUEST['db_type'] ? $_REQUEST['db_type'] : 'mysql';
+		$_REQUEST['flow']			= intval($_REQUEST['flow']) * 1024 * 1024 * 1024;
+		if ($_REQUEST['cdn'] == '1') {
+			$_REQUEST['subdir_flag'] 	= 1;
+			$_REQUEST['templete']		='html';
 		}
 		$product_id = daocall('vhostproduct', 'addProduct', array($_REQUEST));
 
@@ -183,8 +184,9 @@ class VhostproductControl extends Control {
 	}
 	public function editProduct()
 	{
-		$_REQUEST['price'] *= 100;
-		$_REQUEST['speed_limit'] *= 1024;
+		$_REQUEST['price'] 			*= 100;
+		$_REQUEST['speed_limit'] 	*= 1024;
+		$_REQUEST['flow']			= intval($_REQUEST['flow']) * 1024 * 1024 * 1024;
 		if($_REQUEST['cdn']=='1'){
 			$_REQUEST['subdir_flag']=1;
 			$_REQUEST['templete']='html';
