@@ -5,16 +5,16 @@ class AgentpriceDAO extends DAO
 	{	//加载基本db文件
 		parent::__construct();
 		$this->MAP_ARR 	= array(		//用户信息信息字段对照表
-			"agent_id" => 'agent_id',
-			"product_type" => 'product_type',
-			"product_id" =>'product_id',
-			"price" =>'price'
+			"agent_id" 		=> 'agent_id',
+			"product_type" 	=> 'product_type',
+			"product_id" 	=>'product_id',
+			"price" 		=>'price'
 			);
 		$this->MAP_TYPE = array(
-			'agent_id'=>FIELD_TYPE_INT,
-			'product_type'=>FIELD_TYPE_INT,
-			'product_id'=>FIELD_TYPE_INT,
-			'price'=>FIELD_TYPE_INT
+			'agent_id'		=>FIELD_TYPE_INT,
+			'product_type'	=>FIELD_TYPE_INT,
+			'product_id'	=>FIELD_TYPE_INT,
+			'price'			=>FIELD_TYPE_INT
 			);
 			$this->_TABLE = DBPRE . 'agent_price';
 	}

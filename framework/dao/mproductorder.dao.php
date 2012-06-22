@@ -5,28 +5,28 @@ class MproductorderDAO extends DAO
 	{
 		parent::__construct();
 		$this->MAP_ARR = array(
-			'id' => 'id',
-			'username' => 'username',
-			'product_id' => 'product_id',
-			'group_id' => 'group_id',
-			'client_msg' => 'client_msg',
-			'admin_msg' => 'admin_msg',
-			'admin_mem' => 'admin_mem',
-			'price' => 'price',
-			'month' => 'month',
-			'create_time' => 'create_time',
-			'expire_time' => 'expire_time',
-			'status' => 'status'
+			'id' 			=> 'id',
+			'username' 		=> 'username',
+			'product_id' 	=> 'product_id',
+			'group_id' 		=> 'group_id',
+			'client_msg' 	=> 'client_msg',
+			'admin_msg' 	=> 'admin_msg',
+			'admin_mem' 	=> 'admin_mem',
+			'price' 		=> 'price',
+			'month' 		=> 'month',
+			'create_time' 	=> 'create_time',
+			'expire_time'	=> 'expire_time',
+			'status' 		=> 'status'
 			);
 		$this->MAP_TYPE = array(
-			'id' => FIELD_TYPE_INT|FIELD_TYPE_AUTO,
-			'product_id' =>FIELD_TYPE_INT,
-			'group_id' =>FIELD_TYPE_INT,
-			'price' =>FIELD_TYPE_INT,
-			'month' =>FIELD_TYPE_INT,
-			'status' =>FIELD_TYPE_INT,
-			'create_time' =>FIELD_TYPE_DATETIME,
-			'expire_time' =>FIELD_TYPE_DATETIME
+			'id' 			=>FIELD_TYPE_INT|FIELD_TYPE_AUTO,
+			'product_id' 	=>FIELD_TYPE_INT,
+			'group_id' 		=>FIELD_TYPE_INT,
+			'price' 		=>FIELD_TYPE_INT,
+			'month' 		=>FIELD_TYPE_INT,
+			'status' 		=>FIELD_TYPE_INT,
+			'create_time' 	=>FIELD_TYPE_DATETIME,
+			'expire_time' 	=>FIELD_TYPE_DATETIME
 			);
 		$this->_TABLE = 'mproduct_order';
 	}

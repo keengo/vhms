@@ -5,32 +5,24 @@ class MproductDAO extends DAO
 	{
 		parent::__construct();
 		$this->MAP_ARR = array(
-			'id' => 'id',
-			//产品名称
-			'name' => 'name',
-			//产品类型ID
-			'group_id' => 'group_id',
-			//产品组ID，升级使用，同组产品可升级
-			'upid' => 'upid',
-			//产品介绍
-			'describe' => 'describe',
-			//价格
-			'price' => 'price',
-			//支持月付,1支持,0不支持
-			'month_flag' => 'month_flag',
-			//是否暂停销售,1暂停,
-			'pause_flag' => 'pause_flag',
-			//前台价格显示方式，0为默认按年显示
-			'show_price' => 'show_price'
+			'id' 			=> 'id',
+			'name' 			=> 'name',//产品名称
+			'group_id' 		=> 'group_id',//产品类型ID
+			'upid' 			=> 'upid',//产品组ID，升级使用，同组产品可升级
+			'describe' 		=> 'describe',//产品介绍
+			'price' 		=> 'price',//价格
+			'month_flag' 	=> 'month_flag',//支持月付,1支持,0不支持
+			'pause_flag' 	=> 'pause_flag',//是否暂停销售,1暂停,
+			'show_price' 	=> 'show_price'//前台价格显示方式，0为默认按年显示
 		);
 		$this->MAP_TYPE = array(
-			'id' => FIELD_TYPE_INT|FIELD_TYPE_AUTO,
-			'group_id' => FIELD_TYPE_INT,
-			'upid' => FIELD_TYPE_INT,
-			'price' => FIELD_TYPE_INT,
-			'month_flag' => FIELD_TYPE_INT,
-			'pause_flag' => FIELD_TYPE_INT,
-			'show_price' => FIELD_TYPE_INT
+			'id' 			=> FIELD_TYPE_INT|FIELD_TYPE_AUTO,
+			'group_id' 		=> FIELD_TYPE_INT,
+			'upid' 			=> FIELD_TYPE_INT,
+			'price' 		=> FIELD_TYPE_INT,
+			'month_flag' 	=> FIELD_TYPE_INT,
+			'pause_flag' 	=> FIELD_TYPE_INT,
+			'show_price' 	=> FIELD_TYPE_INT
 		);
 		$this->_TABLE = 'mproduct';
 	}
@@ -50,14 +42,14 @@ class MproductDAO extends DAO
 	}
 	public function add($attr)
 	{
-		$arr['price'] = $attr['price']*100;
-		$arr['name'] = $attr['name'];
-		$arr['group_id'] = $attr['group_id'];
-		$arr['upid'] = $attr['upid'];
-		$arr['describe'] = $attr['describe'];
-		$arr['pause_flag'] = $attr['pause_flag'];
-		$arr['month_flag'] = $attr['month_flag'];
-		$arr['show_price'] = $attr['show_price'];
+		$arr['price'] 		= $attr['price']*100;
+		$arr['name'] 		= $attr['name'];
+		$arr['group_id'] 	= $attr['group_id'];
+		$arr['upid'] 		= $attr['upid'];
+		$arr['describe'] 	= $attr['describe'];
+		$arr['pause_flag'] 	= $attr['pause_flag'];
+		$arr['month_flag'] 	= $attr['month_flag'];
+		$arr['show_price'] 	= $attr['show_price'];
 		if($attr['id']){
 			return $this->update($arr, $this->getFieldValue2('id', $attr['id']));
 		}

@@ -4,22 +4,22 @@ class MoneyinDAO extends DAO{
 	{	//加载基本db文件
 		parent::__construct();
 		$this->MAP_ARR 	= array(		//用户信息信息字段对照表
-			"id"=>'id',
-			"username" => 'username',
-			"money" => 'money',
-			"start_time" => 'start_time',
-			"end_time" => 'end_time',
-			"gw" => 'gw',
-			"status"=>'status',
-			"gwid"=>'gwid'
+			"id"			=> 'id',
+			"username" 		=> 'username',
+			"money" 		=> 'money',
+			"start_time" 	=> 'start_time',
+			"end_time" 		=> 'end_time',
+			"gw" 			=> 'gw',
+			"status"		=> 'status',
+			"gwid"			=> 'gwid'
 		);
 		$this->MAP_TYPE = array(
-			'id'=>FIELD_TYPE_AUTO,
-			'money'=>FIELD_TYPE_INT,
-			'gw'=>FIELD_TYPE_INT,
-			'status'=>FIELD_TYPE_INT,
-			'start_time'=>FIELD_TYPE_DATETIME,
-			'end_time'=>FIELD_TYPE_DATETIME
+			'id'			=>FIELD_TYPE_AUTO,
+			'money'			=>FIELD_TYPE_INT,
+			'gw'			=>FIELD_TYPE_INT,
+			'status'		=>FIELD_TYPE_INT,
+			'start_time'	=>FIELD_TYPE_DATETIME,
+			'end_time'		=>FIELD_TYPE_DATETIME
 		);
 		$this->_TABLE = DBPRE . 'money_in';
 	}

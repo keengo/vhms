@@ -5,9 +5,9 @@ class MproductgroupDAO extends DAO
 	{
 		parent::__construct();
 		$this->MAP_ARR = array(
-			'id' => 'id',
-			'name' => 'name',
-			'describe' => 'describe'
+			'id' 		=> 'id',
+			'name' 		=> 'name',
+			'describe' 	=> 'describe'
 		);
 		$this->MAP_TYPE = array(
 			'id' => FIELD_TYPE_INT|FIELD_TYPE_AUTO
