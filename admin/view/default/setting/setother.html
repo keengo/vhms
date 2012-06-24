@@ -24,7 +24,11 @@ function getcron()
 		        <td ><input type="checkbox" name="set_renew" value="1" {{if $setting.set_renew==1}}checked{{/if}} /></td></tr>
 		   
 		    <tr><td >过期空间数据保存天数：</td>
-		        <td ><input type="text" name="expire_save_day" value="{{if $setting.expire_save_day}}{{$setting.expire_save_day}}{{else}}0{{/if}}"  size="10"/>&nbsp;天,0为不删除</td></tr> 
+		        <td ><input name="expire_save_day" value="{{if $setting.expire_save_day}}{{$setting.expire_save_day}}{{else}}0{{/if}}"  size="10"/>&nbsp;天,0为不删除</td></tr> 
+		    
+		    <tr><td >注册用户预存金额：</td>
+		        <td ><input name="reg_user_price" value="{{if $setting.reg_user_price}}{{$setting.reg_user_price/100}}{{else}}0{{/if}}"  size="10"/>&nbsp;元</td></tr> 
+		    
 		    
 			<tr><td></td>
 				<td><input type='submit' value='确定'>&nbsp;&nbsp;</td></tr>

@@ -170,7 +170,7 @@ function change_cdn(val)
 				<td><input name="speed_limit" type="text" class="wid_130" value="{{if $vhostproduct}}{{$vhostproduct.speed_limit/1024}}{{else}}0{{/if}}">&nbsp;K/每秒,(0无限)</td></tr>
 			
 			<tr><td>流量限制</td>
-				<td><input name="flow" type="text" class="wid_130" value="{{if $vhostproduct}}{{($vhostproduct.flow)/1024/1024/1024}}{{else}}0{{/if}}">&nbsp;G/月,(0无限)</td></tr>
+				<td><input name="flow" type="text" class="wid_130" value="{{if $vhostproduct}}{{($vhostproduct.flow)/1024/1024/1024}}{{else}}0{{/if}}">&nbsp;G/月,(0无限)(需kangle web server商业版支持)</td></tr>
 			
 			
 			<tr><td>管理变量:</td>

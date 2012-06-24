@@ -165,19 +165,11 @@ abstract class Product
 		//处理代理，如果有代理，按代理的价格来扣费，否则按正常价格
 		$userinfo = daocall('user','getUser',array($username));
 		if ($userinfo['agent_id'] > 0) {
-			$old_agent_price = $this->getAgentPrice(
-									$userinfo['agent_id'],
-									intval($info['product_type']),
-									$suser['product_id'],$info['price']
-									);
+			$old_agent_price = $this->getAgentPrice($userinfo['agent_id'],intval($info['product_type']),$suser['product_id'],$info['price']);
 			if ($old_agent_price===false) {
 				return false;
 			}
-			$new_agent_price = $this->getAgentPrice(
-									$userinfo['agent_id'],
-									intval($info['product_type']),
-									$new_product_id,$ninfo['price']
-									);
+			$new_agent_price = $this->getAgentPrice($userinfo['agent_id'],intval($info['product_type']),$new_product_id,$ninfo['price']);
 			if ($new_agent_price===false) {
 				echo "该产品代理价格未设置，请联系管理员";
 				return false;

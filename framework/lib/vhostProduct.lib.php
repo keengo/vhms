@@ -108,26 +108,25 @@ class VhostProduct extends Product
 			$whmCall = new WhmCall('add_vh');
 			$whmCall->addParam('doc_root',$params['doc_root']);
 				
-			if($GLOBALS['node_cfg'][$params['node']]['win']==1){
+			if ($GLOBALS['node_cfg'][$params['node']]['win'] == 1) {
 				$whmCall->addParam('user','a'.$params['uid']);
-			}else{
+			} else {
 				$whmCall->addParam('user',$params['uid']);
 			}
-			if($product_info['db_quota']>0){
+			if ($product_info['db_quota'] > 0) {
 				$whmCall->addParam('db_quota', $product_info['db_quota']);
 			}
 			//$whmCall->addParam('group', $params['gid']);
 			$whmCall->addParam('templete',$product_info['templete']);
 			//$whmCall->addParam('product_id', $params['product_id']);
 			$whmCall->addParam('uid', $params['uid']);
-			if($params['create_time']){
+			if ($params['create_time']) {
 				$whmCall->addParam('create_time', $params['create_time']);
 			}
-			if($params['expire_time']){
+			if ($params['expire_time']) {
 				$whmCall->addParam('expire_time', $params['expire_time']);
 			}
-			if($params['month'])
-			{
+			if ($params['month']) {
 				$whmCall->addParam('expire_time', $params['month']*2592000+time());
 			}
 			$whmCall->addParam('subtemplete',$product_info['subtemplete']);
@@ -148,11 +147,11 @@ class VhostProduct extends Product
 			$whmCall->addParam('max_worker', $product_info['max_worker']);
 			$whmCall->addParam('max_queue', $product_info['max_queue']);
 			$whmCall->addParam('log_handle', $product_info['log_handle']);
-			
-			if($params['passwd']){
+			$whmCall->addParam('flow', $product_info['flow']);
+			if ($params['passwd']) {
 				$whmCall->addParam('passwd', $params['passwd']);
 			}
-			if($params['status']){
+			if ($params['status']) {
 				$whmCall->addParam('status',$params['status']);
 			}
 			

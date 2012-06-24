@@ -149,7 +149,8 @@ class PublicControl extends  Control
 				return $this->_tpl->fetch('msg.html');
 			}
 		}
-		$result = daocall('user','newUser',array($username,trim($_REQUEST['passwd']),$_REQUEST['email'],$_REQUEST['name'],$_REQUEST['ids']));
+		$money = daocall('setting','get',array('reg_user_price'));
+		$result = daocall('user','newUser',array($username,trim($_REQUEST['passwd']),$_REQUEST['email'],$_REQUEST['name'],$_REQUEST['ids'],0,$money));
 		if($result){
 			registerRole('user',$username);
 			$external = $_REQUEST['external'];

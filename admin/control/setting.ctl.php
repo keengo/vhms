@@ -29,6 +29,7 @@ class SettingControl extends Control
 	public function setOther()
 	{
 		daocall('setting','add',array('set_renew',$_REQUEST['set_renew']));
+		daocall('setting','add',array('reg_user_price',$_REQUEST['reg_user_price'] * 100));
 		daocall('setting','add',array('expire_save_day',$_REQUEST['expire_save_day']));
 		return $this->setOtherFrom();
 	}

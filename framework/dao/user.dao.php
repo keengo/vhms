@@ -16,9 +16,9 @@ class UserDAO extends DAO{
 			"regtime" 	=> 'regtime',
 			"name" 		=> 'name',
 			"money" 	=> 'money',
-			"id"		=> 'id',
-			'agent_id'	=> 'agent_id',
-			'flow'		=> 'flow'
+			"id"		=> 'id',//身份证
+			'agent_id'	=> 'agent_id',//代理
+			'flow'		=> 'flow'//流量
 			);
 		$this->MAP_TYPE = array(
 			'uid'		=>FIELD_TYPE_INT,
@@ -78,7 +78,7 @@ class UserDAO extends DAO{
 	/**
 	 * 插入用户信息信息
 	 */
-	public function newUser($username,$passwd,$email,$name,$id,$uid=0)
+	public function newUser($username,$passwd,$email,$name,$id,$uid=0,$money=0)
 	{
 		$arr['username'] 	= $username;
 		$arr['passwd'] 		= $passwd;
@@ -86,6 +86,7 @@ class UserDAO extends DAO{
 		$arr['name'] 		= $name;
 		$arr['id'] 			= $id;
 		$arr['uid']			= $uid;
+		$arr['money']		= intval($money);
 		$arr['regtime'] 	= 'NOW()';
 		return $this->insert($arr);
 	}

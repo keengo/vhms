@@ -17,6 +17,15 @@ class UserControl extends Control {
 		else echo 0;
 		exit;
 	}
+	public function getUserPrice()
+	{
+		$user = getRole('user');
+		if (!$user) {
+			die("error");
+		}
+		$user_info = daocall('user','getUser',array($user));
+		die($user_info['money']);
+	}
 	public function index(){
 		if($_REQUEST['uc']==1){
 			@include dirname(__FILE__).'/../../config.inc.php';

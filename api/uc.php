@@ -168,8 +168,9 @@ class uc_note {
 		}
 		
 		registerRole('user',$username);
+		$money = daocall('setting','get',array('reg_user_price'));
 		if(!daocall('user','getUser',array($username))){
-			daocall('user','newUser',array($username,$get['password'],null,$username,0,$uid));
+			daocall('user','newUser',array($username,$get['password'],null,$username,0,$uid,$money));
 		}
 		//		else{
 		//			daocall('user','updateUserUid',array($username,$uid));
