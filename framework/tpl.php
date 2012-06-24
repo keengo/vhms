@@ -12,7 +12,11 @@ class TPL
 		if (!isset(self::$instance)) {
             self::$instance = new Smarty();
 			self::$instance->use_sub_dirs = true;
-			self::$instance->template_dir = APPLICATON_ROOT . '/view/default';
+			$view_dir = daocall('setting','get',array('view_dir'));
+			if (!$view_dir) {
+				$view_dir = 'default';
+			}
+			self::$instance->template_dir = APPLICATON_ROOT . '/view/'.$view_dir;;
 			self::$instance->compile_dir = SYS_ROOT.'/templates_c';
 			if(!defined(TPL_ROOT)){
 				//define(TPL_ROOT,dirname($_SERVER["REQUEST_URI"]));

@@ -1,6 +1,35 @@
 <?php
 class UtilsAPI extends API
 {
+	
+	public function delTempleteFile($temp_dir)
+	{
+		if (!$temp_dir) {
+			$temp_dir = dirname(__FILE__).'/../templates_c/';
+		}
+		$op = opendir($temp_dir);
+		if (!$op) {
+			return false;
+		}
+		while (($file = readdir($op)) !== false) {
+			if ($file != '.' && $file != '..') {
+				@rmdir($temp_dir.$file);
+				if (is_dir($temp_dir.$file)) {
+					@unlink($temp_dir.$file);
+					if (substr($file,-1) != '/' || substr($file,-1) != '\\') {
+						$dir_r = '/';
+					}else{
+						$dir_r = "";
+					}
+					$this->delTempleteFile($temp_dir.$file.$dir_r);
+				}else{
+					@unlink($temp_dir.$file);
+				}
+			}
+			
+		}
+		@rmdir($temp_dir.$file);
+	}
 	/**
 	 * 写入配置文件
 	 * @param  $nodes

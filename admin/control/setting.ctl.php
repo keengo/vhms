@@ -18,6 +18,24 @@ class SettingControl extends Control
 		$cron_str .="</font>";
 		
 		$setting = daocall('setting','getAll2',array());
+		
+		$viewdir = dirname(__FILE__).'/../view/';
+		$op = opendir($viewdir);
+		while (($dir = readdir($op)) !== false) {
+			if ($dir == '.' || $dir =='..') {
+				continue;
+			}
+			if (is_dir($viewdir.$dir) && file_exists(dirname(__FILE__).'/../../user/view/'.$dir)) {
+				$view_dir[] = $dir;
+			}
+		}
+		$view_dir_count = count($view_dir);
+		if ($view_dir_count < 0 ) {
+			$view_dir[] = 'default';
+		}
+		$this->_tpl->assign('view_dir_count',$view_dir_count);
+		$this->_tpl->assign('view_dir',$view_dir);
+		
 		$this->assign('cron_str',$cron_str);
 		$this->assign('setting',$setting);
 		return $this->fetch('setting/setother.html');
@@ -29,8 +47,11 @@ class SettingControl extends Control
 	public function setOther()
 	{
 		daocall('setting','add',array('set_renew',$_REQUEST['set_renew']));
+		daocall('setting','add',array('view_dir',$_REQUEST['view_dir']));
+		
 		daocall('setting','add',array('reg_user_price',$_REQUEST['reg_user_price'] * 100));
 		daocall('setting','add',array('expire_save_day',$_REQUEST['expire_save_day']));
+		apicall('utils','delTempleteFile',array('D:\project\janbao\framework\templates_c/'));
 		return $this->setOtherFrom();
 	}
 	public function index()
