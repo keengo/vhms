@@ -48,10 +48,9 @@ class SettingControl extends Control
 	{
 		daocall('setting','add',array('set_renew',$_REQUEST['set_renew']));
 		daocall('setting','add',array('view_dir',$_REQUEST['view_dir']));
-		
 		daocall('setting','add',array('reg_user_price',$_REQUEST['reg_user_price'] * 100));
 		daocall('setting','add',array('expire_save_day',$_REQUEST['expire_save_day']));
-		apicall('utils','delTempleteFile',array('D:\project\janbao\framework\templates_c/'));
+		apicall('utils','delTempleteFile',array());
 		return $this->setOtherFrom();
 	}
 	public function index()

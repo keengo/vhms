@@ -16,6 +16,44 @@ class PublicControl extends  Control
 		return $this->_tpl->fetch('public/contact.html');
 
 	}
+	public function findPasswdFrom()
+	{
+		return $this->_tpl->fetch('public/findpasswdfrom.html');
+	}
+	public function findPasswd()
+	{
+		$username = trim($_REQUEST['username']);
+		$email = trim($_REQUEST['email']);
+		if ($username == "" || $email == "") {
+			die("用户名和邮箱不能为空");
+		}
+		$mail_result = apicall('user','findPasswd',array($username,$email));
+		switch ($mail_result) {
+			case '0':
+				$msg = '已发送新密码到注册邮箱，请查收.';
+				return $this->displayMsg($msg);
+			case '1':
+				$msg = '邮件发送失败，请联系管理员';
+				return $this->displayMsg($msg);
+			case '2':
+				$msg = "没有该账户,请重新输入";
+				return $this->displayMsg($msg);
+			case '3':
+				$msg = '注册邮箱为空,请联系管理员';
+				return $this->displayMsg($msg);
+			case '4':
+				$msg = "注册邮箱填写有误，请重新输入";
+				return $this->displayMsg($msg);
+			default:
+				die("错误");
+		}
+		
+	}
+	private function displayMsg($msg)
+	{
+		$this->_tpl->assign('msg',$msg);
+		return $this->_tpl->fetch('msg.html');
+	}
 	public function viewNewsById()
 	{
 		$id=intval($_REQUEST['id']);
