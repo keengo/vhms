@@ -56,14 +56,14 @@ class PublicControl extends  Control
 	}
 	public function viewNewsById()
 	{
-		$id=intval($_REQUEST['id']);
-		$new=apicall('news','getNewsById',array($id));
+		$id = intval($_REQUEST['id']);
+		$new = apicall('news','getNewsById',array($id));
 		$this->_tpl->assign('new',$new);
 		return $this->_tpl->fetch('public/viewnews.html');		
 	}
 	public function index()
 	{
-		$products=apicall('product','getProductList');
+		$products = apicall('product','getProductList');
 		$this->_tpl->assign('products',$products);
 		return $this->_tpl->fetch('public/index.html');
 	}
@@ -75,24 +75,24 @@ class PublicControl extends  Control
 	{
 		
 		$vhost_name = $GLOBALS['setting_cfg']['vhost_name']['value'];
-		if($vhost_name==""){
-			$vhost_name="虚拟主机";
+		if($vhost_name == ""){
+			$vhost_name = "虚拟主机";
 		}
-		$menus=array(
+		$menus = array(
 			array('首页','/'),
 			array($vhost_name,'?c=host&a=index')
 		);
 		$mproduct_group = daocall('mproductgroup','getMproductgroup',array());
-		if(is_array($mproduct_group)){
+		if (is_array($mproduct_group)) {
 			foreach($mproduct_group as $mproduct) {
-				$menus[]=array($mproduct['name'],'?c=mproduct&a=index&refer='.$mproduct['id']);
+				$menus[] = array($mproduct['name'],'?c=mproduct&a=index&refer='.$mproduct['id']);
 			}
 		}
-		$menus[]=array('会员中心','?c=user&a=index');
-		$menus[]=array('联系我们','?c=public&a=contact');
-		$menus[]=array('使用帮助','?c=help&a=index');
-		if(UC_START=='on') {
-			$menus[]=array('论坛','/bbs/');
+		$menus[] = array('会员中心','?c=user&a=index');
+		$menus[] = array('联系我们','?c=public&a=contact');
+		$menus[] = array('使用帮助','?c=help&a=index');
+		if(UC_START == 'on') {
+			$menus[] = array('论坛','/bbs/');
 		}
 		$this->_tpl->assign("menus",$menus);
 		$this->_tpl->assign('role',getRoles());
@@ -120,7 +120,7 @@ class PublicControl extends  Control
 	}
 	public function readNews()
 	{
-		$new=daocall('news','getNews',array($_REQUEST['id']));
+		$new = daocall('news','getNews',array($_REQUEST['id']));
 		$this->assign('new',$new);
 		return $this->fetch('public/news.html');
 	}
