@@ -30,7 +30,6 @@ class SessionControl extends Control {
 	} 
 	public function login()
 	{
-		global $_REQUEST;
 		$user = $this->checkPassword($_REQUEST['username'],$_REQUEST['passwd']);
 		if(!$user){
 			return $this->_tpl->display('login_error.html');
@@ -39,7 +38,7 @@ class SessionControl extends Control {
 		registerRole('admin',$user['username']);
 		$_SESSION['admin_last_login'] = $user['last_login'];
 		$_SESSION['admin_last_ip'] = $user['last_ip'];
-		
+	
 		$log = array('operate_object'=>'username='.$_REQUEST['username'],'mem'=>'ip='.$_SERVER["REMOTE_ADDR"],'admin'=>getRole('admin'),'operate'=>$_REQUEST['c']."&a=".$_REQUEST['a']);
 		apicall('operatelog','operatelogAdd',array($log));
 		header("Location: index.php");
