@@ -1,0 +1,31 @@
+{{include file='common/head.html'}}
+<body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
+
+<div align="center">
+	<div class="wid_main mar_main" align="left">
+		<div class="block_top" align="left">当前位置：系统设置--> 其他功能设置</div>
+		<form  action="?c=function&a=set" method='post'>
+		<table class="table_main2" cellpadding="0" cellspacing="1">
+			<tr><td colspan="2" class="bg_main"><b>计划任务设置</b></td></tr>
+			<tr><td >注册用户预存金额：</td>
+		        <td ><input name="reg_user_price" value="{{if $setting.reg_user_price}}{{$setting.reg_user_price/100}}{{else}}0{{/if}}"  size="10"/>&nbsp;元</td></tr> 
+		    
+		    <tr><td>模板目录:</td>
+				<td><select name='view_dir'>
+						{{for $i=0;$i<$view_dir_count;$i++}}
+						<option value="{{$view_dir[$i]}}" {{if $setting.view_dir==$view_dir[$i]}}selected{{/if}}/>{{$view_dir[$i]}}</option>
+						{{/for}}
+					</select>  &nbsp;用于切换admin和user目录下view目录的模板</td></tr>
+			
+			<tr><td >关闭注册：</td>
+		        <td ><input name="reg_off" type=checkbox value="1" {{if $setting.reg_off==1}}checked{{/if}} /></td></tr> 
+		    
+		    <tr><td >关闭密码找回：</td>
+		        <td ><input name="findpasswd_off" type=checkbox value="1" {{if $setting.findpasswd_off==1}}checked{{/if}}></td></tr> 
+			
+		    <tr><td></td>
+				<td><input type='submit' value='确定'>&nbsp;&nbsp;</td></tr>
+		</table>
+		</form>
+	</div>
+</div>
