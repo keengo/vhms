@@ -23,16 +23,12 @@ class OperatelogControl extends control
 		if ($page >= $total_pag) {
 			$page = $total_page;
 		}
+		$this->_tpl->assign('order',$order);
 		$this->_tpl->assign('count',$count);
 		$this->_tpl->assign('total_page',$total_page);
 		$this->_tpl->assign('page',$page);
 		$this->_tpl->assign('page_count',$page_count);
 		$this->_tpl->assign('list',$list);
-		return $this->_tpl->display('operatelog/list.html');
-		
+		return $this->_tpl->display('operatelog/pagelist.html');
 	}
-	
-	
 }
-
-
