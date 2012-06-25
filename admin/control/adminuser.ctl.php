@@ -35,11 +35,16 @@ class AdminUserControl extends Control {
 		if(!$uid){
 			die('增加管理员失败');
 		}
+		$log = array('admin'=>getRole('admin'),'operate'=>$_REQUEST['a'],'operate_object'=>'username='.$_REQUEST['username']);
+		apicall('operatelog','operatelogAdd',array($log));
 		header("Location: ?c=adminuser&a=listUser");
+		die();
 	}
 	public function del(){
 		$ret = daocall('admin_user','delUser',array($_REQUEST['username']));
 		if($ret){
+			$log = array('admin'=>getRole('admin'),'operate'=>$_REQUEST['a'],'operate_object'=>'username='.$_REQUEST['username']);
+			apicall('operatelog','operatelogAdd',array($log));
 		}
 		header("Location: ?c=adminuser&a=listUser");		
 	}

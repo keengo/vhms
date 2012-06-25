@@ -45,6 +45,8 @@ class UserControl extends Control {
 	public function changUserAgent()
 	{
 		$username = $_REQUEST['username'];
+		$log = array('operate_object'=>'username='.$_REQUEST['username'],'admin'=>getRole('admin'),'operate'=>$_REQUEST['a']);
+		apicall('operatelog','operatelogAdd',array($log));
 		if(daocall('user','changUser',array($username,$_REQUEST))) {
 			header("Location: ?c=user&a=listUser&username=".$username);
 		}else{
@@ -90,6 +92,9 @@ class UserControl extends Control {
 			daocall('user','decMoney', array($_REQUEST['username'],abs($money)));
 			$id = daocall('moneyin','add',array($_REQUEST['username'],$_REQUEST['money']*100,100));
 		}
+		$log = array('operate_object'=>'username='.$_REQUEST['username'],'mem'=>'meony='.$money, 'admin'=>getRole('admin'),'operate'=>$_REQUEST['a']);
+		apicall('operatelog','operatelogAdd',array($log));
+		
 		$this->listUser();
 	}
 	public function check(){
@@ -133,6 +138,9 @@ class UserControl extends Control {
 		}else{
 			$msg = "重设密码出错";
 		}
+		$log = array('operate_object'=>'username='.$_REQUEST['username'], 'admin'=>getRole('admin'),'operate'=>$_REQUEST['a']);
+		apicall('operatelog','operatelogAdd',array($log));
+		
 		$this->_tpl->assign('msg',$msg);
 		return $this->listUser();		
 	}

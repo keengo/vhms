@@ -125,9 +125,8 @@ class VhostControl extends Control {
 	}
 	public function del()
 	{
-		$name=$_REQUEST['name'];
-		if(!$name)
-		{
+		$name = $_REQUEST['name'];
+		if (!$name) {
 			return false;
 		}
 		$nameinfo=daocall('vhost','getVhost',array($name));
@@ -135,6 +134,9 @@ class VhostControl extends Control {
 			$this->assign('msg','删除失败');
 			return $this->fetch('msg.html');
 		}
+		$log = array('operate_object'=>'name='.$_REQUEST['name'], 'admin'=>getRole('admin'),'operate'=>$_REQUEST['a']);
+		apicall('operatelog','operatelogAdd',array($log));
+		
 		$this->assign('msg',$name.'删除成功');
 		return $this->fetch('msg.html');
 
@@ -149,6 +151,8 @@ class VhostControl extends Control {
 		$node = daocall('vhost','getNode',array($vhost));
 		apicall('vhost','changeStatus',array($node,$vhost,$_REQUEST['status']));
 		//apicall('vhost','noticeChange',array($node,$vhost));
+		$log = array('operate_object'=>'name='.$_REQUEST['name'],'mem'=>'status='.$_REQUEST['status'], 'admin'=>getRole('admin'),'operate'=>$_REQUEST['a']);
+		apicall('operatelog','operatelogAdd',array($log));
 		return $this->pageVhost();
 	}
 	public function resync()
@@ -166,6 +170,8 @@ class VhostControl extends Control {
 			)));
 			$attr['create_time']=strtotime($attr['create_time']);
 			$attr['expire_time']=strtotime($attr['expire_time']);
+			$log = array('operate_object'=>'name='.$_REQUEST['name'],'admin'=>getRole('admin'),'operate'=>$_REQUEST['a']);
+			apicall('operatelog','operatelogAdd',array($log));
 			if(apicall('vhost','sync',array($attr))){
 				$this->_tpl->assign('msg','重建空间成功');
 			}else{
@@ -183,6 +189,8 @@ class VhostControl extends Control {
 		}else{
 			$msg = "重设密码出错";
 		}
+		$log = array('operate_object'=>'name='.$_REQUEST['name'],'mem'=>'passwd='.$passwd, 'admin'=>getRole('admin'),'operate'=>$_REQUEST['a']);
+		apicall('operatelog','operatelogAdd',array($log));
 		$this->_tpl->assign('msg',$msg);
 		return $this->showVhost();
 	}
