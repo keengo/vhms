@@ -18,6 +18,8 @@ class MproductgroupControl extends Control
 			$this->_tpl->assign('msg','增加失败');
 			return $this->_tpl->fetch('msg.html');
 		}
+		$log = array('operate_object'=>'name='.$_REQUEST['name'], 'admin'=>getRole('admin'),'operate'=>$_REQUEST['a']);
+		apicall('operatelog','operatelogAdd',array($log));
 		return $this->pageListMproductgroup();
 	}
 	public function delMproductgroup()
@@ -27,6 +29,8 @@ class MproductgroupControl extends Control
 			$this->_tpl->assign('msg','删除失败');
 			return $this->_tpl->fetch('msg.html');
 		}
+		$log = array('operate_object'=>'name='.$_REQUEST['name'], 'admin'=>getRole('admin'),'operate'=>$_REQUEST['a']);
+		apicall('operatelog','operatelogAdd',array($log));
 		return $this->pageListMproductgroup();
 	}
 	public function pageListMproductgroup()

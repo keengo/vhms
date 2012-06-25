@@ -14,14 +14,15 @@ class AgentControl extends Control
 	public function addAgent()
 	{
 		$arr['name'] = $_REQUEST['name'];
-		if($_REQUEST['id'])
-		{
+		if ($_REQUEST['id']) {
 			$arr['id'] = $_REQUEST['id'];
 		}
-		if(!daocall('agent','add',array($arr))){
+		if (!daocall('agent','add',array($arr))) {
 			$this->_tpl->assign('msg',"增加失败");
 			return $this->_tpl->fetch('msg.html');
 		}
+		$log = array('operate_object'=>'name='.$_REQUEST['name'], 'admin'=>getRole('admin'),'operate'=>$_REQUEST['a']);
+		apicall('operatelog','operatelogAdd',array($log));
 		return $this->listAgent();
 	}
 	public function delAgent()
@@ -30,6 +31,8 @@ class AgentControl extends Control
 			$this->_tpl->assign('msg',"删除失败");
 			return $this->_tpl->fetch('msg.html');
 		}
+		$log = array('operate_object'=>'id='.$_REQUEST['id'], 'admin'=>getRole('admin'),'operate'=>$_REQUEST['a']);
+		apicall('operatelog','operatelogAdd',array($log));
 		daocall('user','updateUserAgent_idByAent_id',array($_REQUEST['id']));
 		daocall('agentprice','delAgentpriceByAgent_id',array($_REQUEST['id']));
 		return $this->listAgent();

@@ -63,12 +63,16 @@ class NodesControl extends Control {
 		if($_REQUEST['passwd']!=""){
 			$arr['passwd'] = $_REQUEST['passwd'];				
 		}
+		$log = array('operate_object'=>'name='.$_REQUEST['name'], 'admin'=>getRole('admin'),'operate'=>$_REQUEST['c']."&a=".$_REQUEST['a']);
+		apicall('operatelog','operatelogAdd',array($log));
 		daocall('nodes','updateNode', array($_REQUEST["name"],$arr));
 		$this->flush();
 	}
 	public function del()
 	{
 		daocall("nodes","del",array($_REQUEST["name"]));
+		$log = array('operate_object'=>'name='.$_REQUEST['name'], 'admin'=>getRole('admin'),'operate'=>$_REQUEST['a']);
+		apicall('operatelog','operatelogAdd',array($log));
 		$this->flush();
 		//header("Location: ?c=nodes&a=listNode");
 	}
@@ -92,6 +96,8 @@ class NodesControl extends Control {
 		if($ret !== false ){
 			//	header("Location: ?c=nodes&a=listNode");
 		}
+		$log = array('operate_object'=>'name='.$_REQUEST['name'], 'admin'=>getRole('admin'),'operate'=>$_REQUEST['a']);
+		apicall('operatelog','operatelogAdd',array($log));
 		$this->flush();
 	}
 	public function init()

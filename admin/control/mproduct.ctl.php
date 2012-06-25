@@ -35,10 +35,8 @@ class MproductControl extends Control
 		}
 		//代理价格
 		$agent_id = daocall('agent','selectList',array());
-		foreach ($agent_id as $agent)
-		{
-			if($_REQUEST['agentprice_'.$agent['id']])
-			{
+		foreach ($agent_id as $agent) {
+			if ($_REQUEST['agentprice_'.$agent['id']]) {
 				$arr['agent_id'] = $agent['id'];
 				$arr['product_type'] = 1;//虚拟主机为0,非自动化为1
 				$arr['product_id'] = $result_id;
@@ -46,7 +44,8 @@ class MproductControl extends Control
 				daocall('agentprice','addAgentprice',array($arr));
 			}
 		}
-		
+		$log = array('operate_object'=>'name='.$_REQUEST['name'], 'admin'=>getRole('admin'),'operate'=>$_REQUEST['a']);
+		apicall('operatelog','operatelogAdd',array($log));
 		return $this->pageListMproduct();
 	}
 	public function delMproduct()
@@ -57,6 +56,8 @@ class MproductControl extends Control
 			$this->_tpl->assign('msg','增加失败');
 			return $this->_tpl->fetch('msg.html');
 		}
+		$log = array('operate_object'=>'id='.$_REQUEST['id'], 'admin'=>getRole('admin'),'operate'=>$_REQUEST['a']);
+		apicall('operatelog','operatelogAdd',array($log));
 		return $this->pageListMproduct();
 	}
 	public function editMproductFrom()

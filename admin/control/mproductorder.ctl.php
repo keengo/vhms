@@ -24,6 +24,8 @@ class MproductorderControl extends Control
 			$this->_tpl->assign('msg','订单'.$arr['id'].'开通失败');
 			return $this->_tpl->fetch('msg.html');
 		}
+		$log = array('operate_object'=>'id='.$_REQUEST['id'], 'admin'=>getRole('admin'),'operate'=>$_REQUEST['a']);
+		apicall('operatelog','operatelogAdd',array($log));
 		$this->_tpl->assign('msg','订单'.$arr['id'].'开通成功');
 		return $this->_tpl->fetch('msg.html');
 	}
@@ -34,6 +36,8 @@ class MproductorderControl extends Control
 			$this->_tpl->assign('msg','删除失败');
 			return $this->_tpl->fetch('msg.html');
 		}
+		$log = array('operate_object'=>'id='.$_REQUEST['id'], 'admin'=>getRole('admin'),'operate'=>$_REQUEST['a']);
+		apicall('operatelog','operatelogAdd',array($log));
 		return $this->pageListMproductorder();
 	}
 	public function pageListMproductorder()

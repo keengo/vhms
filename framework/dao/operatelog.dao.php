@@ -28,5 +28,31 @@ class OperatelogDAO extends DAO
 	{
 		return $this->update($arr, $this->getFieldValue2('id', $id));
 	}
-	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param  $page
+	 * @param  $page_count
+	 * @param  $count
+	 * @param  $select_where array
+	 */
+	public function operatelogPageList($page,$page_count,&$count,$order,$select_where=null)
+	{
+		$where = '';
+		if ($select_where != null) {
+			if ($select_where['id']) {
+				$where = $this->getFieldValue2('id', $select_where['id']);
+			}
+			if ($select_where['admin']) {
+				$where = $this->getFieldValue2('admin', $select_where['admin']);
+			}
+		}
+		if (!$order) {
+			$order = 'id';
+		}
+		return $this->selectPage(null, $where, $order, false, $page, $page_count, $count);
+		
+		
+		
+	}
 }

@@ -51,10 +51,16 @@ class MoneyControl extends Control {
 		$this->_tpl->assign('list',$list);
 		$this->_tpl->display('money/pagemoneyin.html');
 	}
+	/**
+	 * 用户充值成功，但没有到账，管理员手动给用户确认到账
+	 * Enter description here ...
+	 */
 	public function manPayReturn()
 	{
 		if(apicall('money','payReturn',array($_REQUEST['id']))){
 			$this->_tpl->assign('msg','充值成功');
+			$log = array('operate_object'=>'id='.$_REQUEST['id'],'admin'=>getRole('admin'),'operate'=>$_REQUEST['a']);
+			apicall('operatelog','operatelogAdd',array($log));
 		} else {
 			$this->_tpl->assign('msg','充值失败');
 		}

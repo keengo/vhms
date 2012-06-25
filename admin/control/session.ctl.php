@@ -39,6 +39,9 @@ class SessionControl extends Control {
 		registerRole('admin',$user['username']);
 		$_SESSION['admin_last_login'] = $user['last_login'];
 		$_SESSION['admin_last_ip'] = $user['last_ip'];
+		
+		$log = array('operate_object'=>'username='.$_REQUEST['username'],'mem'=>'ip='.$_SERVER["REMOTE_ADDR"],'admin'=>getRole('admin'),'operate'=>$_REQUEST['c']."&a=".$_REQUEST['a']);
+		apicall('operatelog','operatelogAdd',array($log));
 		header("Location: index.php");
 	}
 	public function logout()
