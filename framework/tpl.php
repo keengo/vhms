@@ -12,7 +12,10 @@ class TPL
 		if (!isset(self::$instance)) {
             self::$instance = new Smarty();
 			self::$instance->use_sub_dirs = true;
-			$view_dir = daocall('setting','get',array('view_dir'));
+			//防止没有第一次使用的时候，无法连接数据库
+			if (file_exists('../config.php')) {
+				$view_dir = daocall('setting','get',array('view_dir'));
+			}
 			if (!$view_dir) {
 				$view_dir = 'default';
 			}
