@@ -18,12 +18,16 @@ class PublicControl extends  Control
 	}
 	public function findPasswdFrom()
 	{
+		if (daocall('setting','get',array('findpasswd_off')) == 1) {
+			$this->assign('msg','密码找回功能暂时关闭，请联系管理员!');
+			return $this->fetch('msg.html');
+		}
 		return $this->_tpl->fetch('public/findpasswdfrom.html');
 	}
 	public function findPasswd()
 	{
-		$username = trim($_REQUEST['username']);
-		$email = trim($_REQUEST['email']);
+		$username = trim($_POST['username']);
+		$email = trim($_POST['email']);
 		if ($username == "" || $email == "") {
 			die("用户名和邮箱不能为空");
 		}
@@ -211,6 +215,10 @@ class PublicControl extends  Control
 	}
 	public function register_n()
 	{
+		if (daocall('setting','get',array('reg_off')) == 1) {
+			$this->assign('msg','注册暂时关闭，请联系管理员!');
+			return $this->fetch('msg.html');
+		}
 		return $this->_tpl->fetch('public/register_n.html');
 	}
 	public function ajaxCheckUser()
