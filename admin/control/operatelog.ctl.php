@@ -20,7 +20,7 @@ class OperatelogControl extends control
 		}
 		$list 		= daocall('operatelog','operatelogPageList',array($page,$page_count,&$count,$order,$select_where));
 		$total_page = ceil($count/$page_count);
-		if ($page >= $total_pag) {
+		if ($page >= $total_page) {
 			$page = $total_page;
 		}
 		$this->_tpl->assign('order',$order);

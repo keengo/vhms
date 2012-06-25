@@ -11,8 +11,8 @@
 				</td>
 				</form></tr>
 			<tr><td colspan="6" id="bg_yellow" align="right">
-					{{if $page > 1}}
-					<a href='?c=operatelog&a=operatelogPageList&order={{$order}}&&page=0'>首页</a> 
+					{{if $page>1}}
+					<a href='?c=operatelog&a=operatelogPageList&order={{$order}}&page=0'>首页</a> 
 					<a href='?c=operatelog&a=operatelogPageList&order={{$order}}&page={{$page-1}}'>上一页</a> 
 					{{else}}
 					首页 上一页 
@@ -45,13 +45,13 @@
 			{{/foreach}}
 			
 			<tr><td colspan="6" id="bg_yellow" align="right">
-					{{if $page > 1}}
-					<a href='?c=operatelog&a=operatelogPageList&order={{$order}}&&page=0'>首页</a> 
+					{{if $page>1}}
+					<a href='?c=operatelog&a=operatelogPageList&order={{$order}}&page=0'>首页</a> 
 					<a href='?c=operatelog&a=operatelogPageList&order={{$order}}&page={{$page-1}}'>上一页</a> 
 					{{else}}
 					首页 上一页 
 					{{/if}}
-					{{if $page != $total_page}} 
+					{{if $page!=$total_page}} 
 					<a href='?c=operatelog&a=operatelogPageList&order={{$order}}&page={{$page+1}}'>下一页</a>
 					<a href='?c=operatelog&a=operatelogPageList&order={{$order}}&page={{$total_page}}'>尾页</a>
 					{{else}}下一页 尾页
