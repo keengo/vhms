@@ -89,6 +89,14 @@ ALTER TABLE `vhost_product` ADD `max_subdir` int(11) NOT NULL default '0';
 ALTER TABLE `vhost_product` ADD `max_worker` int(11) NOT NULL default '0';
 ALTER TABLE `vhost_product` ADD `max_queue`  int(11) NOT NULL default '0';
 ALTER TABLE `vhost_product` ADD `log_handle` tinyint(4) NOT NULL default '0';
-
-
+CREATE TABLE IF NOT EXISTS `operate_log` (
+  `admin` varchar(255) NOT NULL,
+  `operate` varchar(255) NOT NULL,
+  `operate_object` varchar(255) NOT NULL,
+  `operate_time` datetime NOT NULL,
+  `mem` varchar(255) DEFAULT NULL,
+  `mem2` text,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0;
 

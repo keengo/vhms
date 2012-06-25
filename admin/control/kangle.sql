@@ -361,3 +361,20 @@ CREATE TABLE IF NOT EXISTS `vhost_webapp` (
   PRIMARY KEY  (`id`),
   KEY `user` (`user`,`appid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `operate_log`
+--
+
+CREATE TABLE IF NOT EXISTS `operate_log` (
+  `admin` varchar(255) NOT NULL,
+  `operate` varchar(255) NOT NULL,
+  `operate_object` varchar(255) NOT NULL,
+  `operate_time` datetime NOT NULL,
+  `mem` varchar(255) DEFAULT NULL,
+  `mem2` text,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0;
