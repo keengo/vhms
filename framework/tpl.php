@@ -17,7 +17,7 @@ class TPL
 				$view_dir = 'default';
 			}
 			self::$instance->template_dir = APPLICATON_ROOT . '/view/'.$view_dir;;
-			self::$instance->compile_dir = SYS_ROOT.'/templates_c';
+			self::$instance->compile_dir = SYS_ROOT.'/templates_c/'.$view_dir;
 			if(!defined(TPL_ROOT)){
 				//define(TPL_ROOT,dirname($_SERVER["REQUEST_URI"]));
 				define(TPL_ROOT,dirname($_SERVER['PHP_SELF']));

@@ -16,17 +16,21 @@ class FunctionControl extends Control
 		daocall('setting','add',array('reg_off',$_REQUEST['reg_off']));
 		daocall('setting','add',array('findpasswd_off',$_REQUEST['findpasswd_off']));
 		if ($_REQUEST['view_dir'] != $this->setting['view_dir']) {
-			apicall('utils','delTempleteFile',array());
 			$log = array('operate_object'=>'view_dir='.$_REQUEST['view_dir'], 'admin'=>getRole('admin'),'operate'=>$_REQUEST['c']."&a=".$_REQUEST['a']);
 			apicall('operatelog','operatelogAdd',array($log));
 		}
-		$log = array('operate_object'=>'reg_user_price='.$_REQUEST['reg_user_price'], 'admin'=>getRole('admin'),'operate'=>$_REQUEST['c']."&a=".$_REQUEST['a']);
-		apicall('operatelog','operatelogAdd',array($log));
-		$log = array('operate_object'=>'reg_off='.$_REQUEST['reg_off'], 'admin'=>getRole('admin'),'operate'=>$_REQUEST['c']."&a=".$_REQUEST['a']);
-		apicall('operatelog','operatelogAdd',array($log));
-		$log = array('operate_object'=>'findpasswd_off='.$_REQUEST['findpasswd_off'], 'admin'=>getRole('admin'),'operate'=>$_REQUEST['c']."&a=".$_REQUEST['a']);
-		apicall('operatelog','operatelogAdd',array($log));
-		
+		if (($_REQUEST['reg_user_price'] * 100) != $this->setting['reg_user_price']) {
+			$log = array('operate_object'=>'reg_user_price='.$_REQUEST['reg_user_price'], 'admin'=>getRole('admin'),'operate'=>$_REQUEST['c']."&a=".$_REQUEST['a']);
+			apicall('operatelog','operatelogAdd',array($log));
+		}
+		if ($_REQUEST['reg_off'] != $this->setting['reg_off']) {
+			$log = array('operate_object'=>'reg_off='.$_REQUEST['reg_off'], 'admin'=>getRole('admin'),'operate'=>$_REQUEST['c']."&a=".$_REQUEST['a']);
+			apicall('operatelog','operatelogAdd',array($log));
+		}
+		if ($_REQUEST['findpasswd_off'] != $this->setting['findpasswd_off']) {
+			$log = array('operate_object'=>'findpasswd_off='.$_REQUEST['findpasswd_off'], 'admin'=>getRole('admin'),'operate'=>$_REQUEST['c']."&a=".$_REQUEST['a']);
+			apicall('operatelog','operatelogAdd',array($log));
+		}
 		return header('Location: ?c=function&a=setFrom');
 
 	}
