@@ -134,7 +134,7 @@ class VhostControl extends Control {
 			$this->assign('msg','删除失败');
 			return $this->fetch('msg.html');
 		}
-		$log = array('operate_object'=>'name='.$_REQUEST['name'], 'admin'=>getRole('admin'),'operate'=>$_REQUEST['a']);
+		$log = array('operate_object'=>'name='.$_REQUEST['name'], 'admin'=>getRole('admin'),'operate'=>$_REQUEST['c']."&a=".$_REQUEST['a']);
 		apicall('operatelog','operatelogAdd',array($log));
 		
 		$this->assign('msg',$name.'删除成功');

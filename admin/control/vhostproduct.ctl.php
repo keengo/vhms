@@ -203,7 +203,7 @@ class VhostproductControl extends Control {
 				daocall('agentprice','addAgentprice',array($arr));
 			}
 		}
-		$log = array('admin'=>getRole('admin'),'operate'=>$_REQUEST['a'],'operate_object'=>'name='.$_REQUEST['name']);
+		$log = array('admin'=>getRole('admin'),'operate'=>$_REQUEST['a'],'operate_object'=>'id='.$_REQUEST['id']);
 		apicall('operatelog','operatelogAdd',array($log));
 		
 		apicall('product','flushVhostProduct');
@@ -216,7 +216,8 @@ class VhostproductControl extends Control {
 		$arr['product_type'] 	= 0;
 		daocall('agentprice','delAgentprice',array($arr));
 		//日志记录
-		$log = array('admin'=>getRole('admin'),'operate'=>$_REQUEST['a'],'operate_object'=>'name='.$_REQUEST['name']);
+		$log = array('admin'=>getRole('admin'),'operate'=>$_REQUEST['c']."&a=".$_REQUEST['a'],'operate_object'=>'id
+		='.$_REQUEST['id']);
 		apicall('operatelog','operatelogAdd',array($log));
 		apicall('product','flushVhostProduct');
 		return $this->showProduct();
