@@ -51,6 +51,6 @@ class OperatelogDAO extends DAO
 			$order = 'id';
 		}
 		$fields = array('id','admin','operate','operate_object','operate_time','mem');
-		return $this->selectPage($fields, $where, $order, false, $page, $page_count, $count);
+		return $this->selectPage($fields, $where, $order, true, $page, $page_count, $count);
 	}
 }
