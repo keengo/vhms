@@ -1,47 +1,41 @@
-<SCRIPT>
-function ValidateForm() 
+<SCRIPT language='javascript'>
+function check_submit() 
 {
-	if ( document.form1.username.value=="" || document.form1.passwd.value=="") 
+	var username = $("#username").val();
+	var passwd = $("#passwd").val();
+	if (username == "" || passwd == "")
 	{
-		alert("please enter ur name and passwd and checkcode!");
-		return false;
+		alert("账号密码不能为空");
+		return
 	}
-	else { 
-		return true;
-	}
+	document.getElementById('from').submit();
 }
 </SCRIPT>
-<div class="right" align="center">
-	<div class="wid_ri r_mar_log" align="center">
+<style type='text/css'>
+.login {
+	padding-top:30px;
+	font-size:20;
+	padding-bottom:0px;
+}
+.loginusername{
+	padding-top:30px;
+	font-size:20;
+}
+.loginusername input{
+	height:30px;
+	width:200px;
+	font-size:20;
+}
 
-				<form action="?c=session&a=login" method=post name="form1" onSubmit='return ValidateForm()'>
-				<table border="0" cellpadding="0" cellspacing="1" bgcolor="#E8E6E6">
-				  <tr>
-					<td colspan="2" align="left"><img src="{{$STATIC}}style/agent_log.jpg" /></td>
-				  </tr>
-				  	<tr>
-					<td colspan="2" class="td_hg" align="center">&nbsp;</td>
-				  </tr>
-				  <tr>
-					<td colspan="2" class="td_hg" align="center">用户名:&nbsp;<input type="text" name="username" /></td>
-				  </tr>
-				  <tr>
-					<td colspan="2" height="10" align="center"></td>
-				  </tr>
-				  <tr>
-					<td colspan="2" class="td_hg" align="center">密&nbsp;&nbsp;码:&nbsp<input type="password" name="passwd"/></td>
-				  </tr>
-				  <tr>
-					<td colspan="2" class="td_hg" align="center"><input type="submit" value="登 录" /></td>
-				  </tr>
-				  	<tr>
-					<td colspan="2" class="td_hg" align="center">&nbsp;</td>
-				  </tr>
-				</table>
-	  </form>
+</style>
+<div class='login' align="center">
+	<form action="?c=session&a=login" method=post name="form1" id='from'>
+	<div class="loginusername"><img src="{{$STATIC}}style/agent_log.jpg" /></div>
+	<div class="loginusername">账号:&nbsp;<input type="text" id='username' name="username" /></div>
+	<div class="loginusername">密码:&nbsp;<input type="password" id='passwd' name="passwd"/></div>
+	<div class="loginusername"><input type="button" onclick='check_submit();' value="登 录" /></div>
+  	</form>
 
-
-	</div>
 </div>
 
 											
