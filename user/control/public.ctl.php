@@ -19,7 +19,7 @@ class PublicControl extends  Control
 	public function findPasswdFrom()
 	{
 		if (daocall('setting','get',array('findpasswd_off')) == 1) {
-			$this->assign('msg','密码找回功能暂时关闭，请联系管理员!');
+			$this->assign('msg','<script language="javascript">alert("密码找回功能暂时关闭，请联系管理员!");</script>');
 			return $this->fetch('msg.html');
 		}
 		return $this->_tpl->fetch('public/findpasswdfrom.html');
@@ -216,7 +216,7 @@ class PublicControl extends  Control
 	public function register_n()
 	{
 		if (daocall('setting','get',array('reg_off')) == 1) {
-			$this->assign('msg','注册暂时关闭，请联系管理员!');
+			$this->assign('msg','<script language="javascript">alert("注册暂时关闭，请联系管理员!")</script>');
 			return $this->fetch('msg.html');
 		}
 		return $this->_tpl->fetch('public/register_n.html');
@@ -224,20 +224,16 @@ class PublicControl extends  Control
 	public function ajaxCheckUser()
 	{
 		$username = $_REQUEST['username'];
-		$result = false;
 		if(!$this->checkRight($username)){
 			$msg = "用户名不符合标准";
 		}else{
 			if(!daocall('user','checkUser',array($username))){
-				$result = true;
+				$msg = "可以使用";
 			}else{
 				$msg = "该用户已经被注册了";
 			}
 		}
-		header("Content-Type: text/xml; charset=utf-8");
-		$str = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
-		$str .="<result ret='".$result."' msg='".$msg."'/>";
-		die($str);
+		die($msg);
 	}
 	public function ajaxGetProductList()
 	{
@@ -245,6 +241,10 @@ class PublicControl extends  Control
 		print_r($products);
 		die();
 	}
+	/**
+	 * @deprecated
+	 * Enter description here ...
+	 */
 	public function checkUser()
 	{
 		$username = $_REQUEST['username'];

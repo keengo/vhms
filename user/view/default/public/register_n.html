@@ -1,3 +1,14 @@
+<script language='javascript'>
+function check_user()
+{
+	var url = '?c=public&a=ajaxCheckUser&username='+document.reg.username.value;
+	$.get(url,function(msg){
+		alert(msg);
+		
+	});
+}
+
+</script>
 <div class="height_t"><table id="table_r"><tr><td height="5"></td></tr></table></div>
 <div align="center" class="right">
 	<table width="690" border="0" cellpadding="0" cellspacing="0" >
@@ -61,10 +72,6 @@
 function show(url) 
 { 
 	window.open(url,'','height=100,width=250,resize=no,scrollbars=no,toolsbar=no,top=200,left=200');
-}
-function check_user()
-{
-	show('?c=public&a=checkUser&username='+document.reg.username.value);
 }
 function check_register()
 {
