@@ -1,6 +1,7 @@
 {{include file='common/head.html'}}
 <body leftmargin="0" topmargin="0" bgcolor="#ffffff" text="#000000">
 <script language='javascript' src='{{$PSTATIC}}/style/common.js'></script>
+<script language='javascript' src='/style/jq.js'></script>
 <script language='javascript'>
 function list_subtemplete_result() { 
 	var recv_msg=false;
@@ -86,7 +87,26 @@ function change_cdn(val)
 	if(val==0){$('cdnpanel').style.display='';}
 	 else {	$('cdnpanel').style.display='none';}
 }
+function add_group()
+{
+	var group_name = prompt("请输入新组名称");
+	var url = '?c=productgroup&a=productgroupAdd&group_name=' + group_name;
+	jQuery.get(url,function(msg){
+		if (msg =='成功'){
+			window.location.reload();
+		}else{
+			alert(msg);
+		}	
+	});
+}
+
+
 </script>
+<div style='display:none' class='product_group'>
+	<form name='group_from' method='post' action='?c=productgroup&a=productgroupAdd'>
+		请输入新组名称:<input name='group_name' >
+	</form>
+</div>
 <div align="center">
 	<div class="wid_main mar_main" align="left">
 		<div class="block_top" align="left">当前位置：虚拟主机/cdn --> {{if $action=='editProduct'}}修改产品{{else}}增加产品{{/if}}</div>
@@ -108,7 +128,11 @@ function change_cdn(val)
 				<td><input name='view' type='text' class="wid_130" value="{{$vhostproduct.view}}"></td></tr>
 			
 			<tr><td>产品组：</td>
-				<td><input name='upid' type='text' value="{{intval($vhostproduct.upid)}}" size="3">(可升级到相同产品组的其它产品，设置为0不可升级)</td></tr>
+				<td><select name='upid'>
+					{{for $i=0;$i< count($product_groups);$i++}}
+					<option value='{{$product_groups[$i].group_id}}' {{if $vhostproduct.upid==$product_groups[$i].group_id}} selected{{/if}}>{{$product_groups[$i].group_name}}</option>
+					{{/for}}
+					</select> <a href="#" onclick='add_group();'>添加产品分组</a>(可升级到相同产品组的其它产品，设置为0不可升级)</td></tr>
 			
 			<tr><td>产品类型：</td>
 				<td><input name='cdn' type='radio'	value="0" {{if !$vhostproduct || $vhostproduct.cdn==0}} checked {{/if}} onClick="change_cdn(0)">虚拟主机

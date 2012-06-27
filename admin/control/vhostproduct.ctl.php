@@ -149,8 +149,10 @@ class VhostproductControl extends Control {
 	{
 		$agent_ids = daocall('agent','selectList',array());
 		$this->_tpl->assign('agent_ids',$agent_ids);
+		$product_groups = daocall('productgroup','productgroupGetAll',array());
+		$this->_tpl->assign('product_groups',$product_groups);
 		$this->_tpl->assign("action","addProduct");
-		if(!$this->assignHosts()){
+		if (!$this->assignHosts()) {
 			die("请先增加主机");
 		}
 		return $this->_tpl->display('vhostproduct/addProduct.html');
