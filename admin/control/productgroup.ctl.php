@@ -51,15 +51,15 @@ class ProductgroupControl extends control
 	public function productgroupPageList()
 	{
 		$page = intval($_REQUEST['page']);
-		if ($page <= 0) {
-			$page = 1;
+		if ($page 	<= 0) {
+			$page 	= 1;
 		}
 		$page_count = 20;
-		$count = 0;
-		$list = daocall('productgroup','productgroupPageList',array($page,$page_count,&$count));
+		$count 		= 0;
+		$list 		= daocall('productgroup','productgroupPageList',array($page,$page_count,&$count));
 		$total_page = ceil($count/$page_count);
-		if ($page >= $total_page) {
-			$page = $total_page;
+		if ($page 	>= $total_page) {
+			$page 	= $total_page;
 		}
 		$this->_tpl->assign('count',$count);
 		$this->_tpl->assign('total_page',$total_page);
