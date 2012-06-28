@@ -1,0 +1,44 @@
+{{include file='common/head.html'}}
+<body bgcolor='#ffffff' text='#000000' leftmargin='0' topmargin='0'>
+<div align="center">
+	<div class="wid_main mar_main" align="left">
+		<div class="block_top" align="left">当前位置：虚拟主机 --> 产品分类列表</div>
+		<table class="table_main2" cellpadding="0" cellspacing="1">
+			<tr>
+				<td colspan="6" class="bg_main"><b>产品分类<a href='?c=productgroup&a=productgroupFrom'>&nbsp;&nbsp;<big>添加产品分类</big></b></a></td>
+			</tr>
+			<tr id="bg_yellow">
+				<td>操作</td>
+				<td>序号</td>
+				<td>分类名称</td>
+				<td>所属系统</td>
+			</tr>
+				{{foreach from=$list item=row}}
+			<tr>
+				<td><a href='?c=productgroup&a=productgroupDel&group_id={{$row.group_id}}'>删除</a>&nbsp;<a href='?c=productgroup&a=productgroupFrom&group_id={{$row.group_id}}&edit=1'>修改</a></td>
+				<td>{{$row.group_id}}</td>
+				<td>{{$row.group_name}}</td>
+				<td>{{$row.os}}</td>
+			</tr>
+				{{/foreach}}
+			<tr>
+				<td colspan="6" id="bg_yellow" align="right">
+					{{if $page>1}}
+					<a href='?c=productgroup&a=productgroupPageList&page=0'>首页</a> 
+					<a href='?c=productgroup&a=productgroupPageList&page={{$page-1}}'>上一页</a> 
+					{{else}}
+					首页 上一页 
+					{{/if}}
+					{{if $page!=$total_page}} 
+					<a href='?c=productgroup&a=productgroupPageList&page={{$page+1}}'>下一页</a>
+					<a href='?c=productgroup&a=productgroupPageList&page={{$total_page}}'>尾页</a>
+					{{else}}下一页 尾页
+					{{/if}} 
+					{{$page}}/{{$total_page}}&nbsp;
+					共计{{$count}}记录
+				</td>
+			</tr>
+	  </table>
+	</div>
+</div>
+</body>

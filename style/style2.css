@@ -175,6 +175,15 @@ margin-bottom:60px;
 .color_white{
 color:#FFFFFF;
 }
+.product_group {
+position: absolute;
+background-color: #FFF8DC;
+height: 100px;
+width: 340px;
+text-align:center;
+align:center;
+	
+}
 
 
 

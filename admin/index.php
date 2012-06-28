@@ -13,5 +13,6 @@ include(SYS_ROOT . '/runtime.php');
 $tpl = TPL::singleton();
 $tpl->assign('title',getTitle());
 //@load_conf('pub:test');
+
 startFramework();
 ?>
