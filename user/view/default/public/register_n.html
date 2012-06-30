@@ -9,66 +9,55 @@ function check_user()
 }
 
 </script>
-<div class="height_t"><table id="table_r"><tr><td height="5"></td></tr></table></div>
-<div align="center" class="right">
-	<table width="690" border="0" cellpadding="0" cellspacing="0" >
-		<tr>
-			<td colspan="2" background="{{$STATIC}}images/nav_bg.jpg" class="right_hg right fontcolor">
-				当前位置 : <a href="/">首页</a> >> <a href="?c=public&a=register_n">用户注册</a>
-			</td>
-	 	</tr>
-	 	<tr><td colspan="2" height="5"></td></tr>
-		<tr>
-		<!--右边代码开始-->
-			<td width="690" height="479" background="{{$STATIC}}/images/Cloud_host_info_bg.jpg" valign="top">
-			<!--注册代码开始-->
-				<table cellspacing="10" width="80%">
-					<form  name='reg' action="?c=public&a=register&external=1" method='post'>
-					 <tr><td align="left" colspan="2"><img src="{{$STATIC}}/images/reg3.jpg" /></td></tr>
-					  <tr>
-						<td class="td_bgc right_reg" width="30%">用户：</td>
-						<td class="td_bgc right_2">
-						 <input name='username' id="wid2" value="" size="24"/>&nbsp;*
-						   <input type="button" name="Submit" id="wid3" value="检测用户名" onClick="check_user()"></td>
-					  </tr>
-					  <tr>
-						<td class="td_bgc right_reg">密码：</td>
-						<td class="td_bgc right_2"><input name='passwd' type='password' id="wid2" size="24"/>&nbsp;*</td>
-					  </tr>
-					  <tr>
-						<td class="td_bgc right_reg">确认密码：</td>
-						<td class="td_bgc right_2"><input name='passwd2' type='password' id="wid2" size="24"/>&nbsp;*</td>
-					  </tr>
-					  <tr>
-						<td class="td_bgc right_reg">电子邮件:</td>
-						<td class="td_bgc right_2"><input name='email' id="wid2" size="24"/>&nbsp;*</td>
-					  </tr>
-					  <tr>
-						<td class="td_bgc right_reg">真实姓名:</td>
-						<td class="td_bgc right_2"><input name='name' id="wid2" size="24"/></td>
-					  </tr>
-					 <tr>
-						<td class="td_bgc right_reg">身份证:</td>
-						<td class="td_bgc right_2"><input name='ids' id="wid2" size="24"/></td>
-					  </tr>
-					 <tr>
-						 <td class="td_bgc td_hg" colspan="2" align="center" height="30"><input name="agree" type="checkbox" value="1">
-						  我已阅读并同意<a href='?c=public&a=registerPact' target="_blank">注册协议</a></td>
-					  </tr>
-					<tr>
-						<td class="td_bgc" colspan="2" align="center" height="35">
-						 <input type="button" onClick="check_register()" value="注册">
-						</td>
-					</tr>
-					</form>
-				</table>
-			  <!--注册代码开始-->
-			</td>
-		</tr>
-		<!--右边代码结束-->
-  </table>
+<style type='text/css'>
+.public_reg {
+	padding-top:20px;
+}
+.public_reg_img {
+	padding-top:20px;
+}
+.public_reg_info {
+	padding-left:120px;
+	padding-top:20px;
+}
+.public_reg_info div {
+	padding-top:20px;
+	font-size:20;
+}
+.public_reg_info input {
+	height:30px;
+	font-size:20;
+}
+.reg_submit {
+	padding-left:280px;
+}
+.reg_left {
+	float:left;
+	text-align:left;
+	width:120px;
+}
+.reg_center {
+}
+</style>
+
+<div class='public_reg'>
+	<div class='public_reg_fir'>当前位置 : <a href="/">首页</a> >> <a href="?c=public&a=register_n">用户注册</a></div>
+	<div class='public_reg_img'><img src='{{$STATIC}}/images/reg3.jpg'></div>
+	<form  name='reg' action="?c=public&a=register&external=1" method='post'>
+	<div class='public_reg_info'>
+		<div class='reg_left'>用户:</div> 		<div class='reg_center'><input name='username' size="24"/>&nbsp;*<input type="button" name="Submit" value="检测用户名" onClick="check_user()"></div>
+		<div class='reg_left'>密码：</div> 		<div class='reg_center'><input name='passwd' type='password' size="24"/>&nbsp;*</div>
+		<div class='reg_left'>确认密码:</div>		<div class='reg_center'><input name='passwd2' type='password' size="24"/>&nbsp;*</div>
+		<div class='reg_left'>电子邮箱:</div>		<div class='reg_center'><input name='email' size="24"/>&nbsp;*</div>
+		<div class='reg_left'>真实姓名:</div>		<div class='reg_center'><input name='name' size="24"/>&nbsp;*</div>
+		<div class='reg_left'>身份证号码:</div>	<div class='reg_center'><input name='ids' size="24"/>&nbsp;*</div>
+		<div class='reg_left'>注册协议:</div>		<div class='reg_center'><input name="agree" type="checkbox" value="1">我已阅读并同意<a href='?c=public&a=registerPact' target="_blank">注册协议</a> </div>
+		<div class='reg_left'>&nbsp;</div>		<div class='reg_submit'><input type="button" onClick="check_register()" value="注册"></div>
+	</div>
+	</form>
 </div>
-            <script language="javascript">
+
+<script language="javascript">
 function show(url) 
 { 
 	window.open(url,'','height=100,width=250,resize=no,scrollbars=no,toolsbar=no,top=200,left=200');
