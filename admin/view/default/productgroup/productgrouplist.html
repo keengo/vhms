@@ -11,14 +11,12 @@
 				<td>操作</td>
 				<td>序号</td>
 				<td>分类名称</td>
-				<td>所属系统</td>
 			</tr>
 				{{foreach from=$list item=row}}
 			<tr>
 				<td>[<a href='?c=productgroup&a=productgroupDel&group_id={{$row.group_id}}'>删除</a>]&nbsp;[<a href='?c=productgroup&a=productgroupFrom&group_id={{$row.group_id}}&edit=1'>修改</a>]</td>
 				<td>{{$row.group_id}}</td>
 				<td>{{$row.group_name}}</td>
-				<td>{{if $row.os==0}}windows{{else}}linux{{/if}}</td>
 			</tr>
 				{{/foreach}}
 			<tr>
