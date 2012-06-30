@@ -29,7 +29,7 @@ class PublicControl extends  Control
 		$username = trim($_POST['username']);
 		$email = trim($_POST['email']);
 		if ($username == "" || $email == "") {
-			die("用户名和邮箱不能为空");
+			return $this->displayMsg("用户名和邮箱不能为空");
 		}
 		$mail_result = apicall('user','findPasswd',array($username,$email));
 		switch ($mail_result) {

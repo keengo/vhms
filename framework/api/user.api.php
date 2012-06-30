@@ -35,8 +35,6 @@ class UserAPI extends API
 			return '3';
 		}
 		if (md5($user_info['email']) != md5($email)) {
-			echo md5($user_info['email']) ."=".$md5($email);
-			die();
 			return '4';
 		}
 		$passwd = getRandPasswd(8);
