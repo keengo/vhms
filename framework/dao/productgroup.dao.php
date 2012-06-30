@@ -1,5 +1,4 @@
 <?php 
-needRole('admin');
 class ProductgroupDAO extends DAO
 {
 	public function __construct()

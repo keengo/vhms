@@ -5,7 +5,7 @@
 		<div class="block_top" align="left">当前位置：虚拟主机 --> 产品分类列表</div>
 		<table class="table_main2" cellpadding="0" cellspacing="1">
 			<tr>
-				<td colspan="6" class="bg_main"><b>产品分类<a href='?c=productgroup&a=productgroupFrom'>&nbsp;&nbsp;<big>添加产品分类</big></b></a></td>
+				<td colspan="6" class="bg_main"><b>产品分类<a href='?c=productgroup&a=productgroupFrom'>&nbsp;&nbsp;<big>-->添加产品分类<--</big></b></a></td>
 			</tr>
 			<tr id="bg_yellow">
 				<td>操作</td>
@@ -15,10 +15,10 @@
 			</tr>
 				{{foreach from=$list item=row}}
 			<tr>
-				<td><a href='?c=productgroup&a=productgroupDel&group_id={{$row.group_id}}'>删除</a>&nbsp;<a href='?c=productgroup&a=productgroupFrom&group_id={{$row.group_id}}&edit=1'>修改</a></td>
+				<td>[<a href='?c=productgroup&a=productgroupDel&group_id={{$row.group_id}}'>删除</a>]&nbsp;[<a href='?c=productgroup&a=productgroupFrom&group_id={{$row.group_id}}&edit=1'>修改</a>]</td>
 				<td>{{$row.group_id}}</td>
 				<td>{{$row.group_name}}</td>
-				<td>{{$row.os}}</td>
+				<td>{{if $row.os==0}}windows{{else}}linux{{/if}}</td>
 			</tr>
 				{{/foreach}}
 			<tr>

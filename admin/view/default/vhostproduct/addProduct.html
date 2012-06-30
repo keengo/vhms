@@ -87,6 +87,7 @@ function change_cdn(val)
 	if(val==0){$('cdnpanel').style.display='';}
 	 else {	$('cdnpanel').style.display='none';}
 }
+//未启用
 function add_group_old()
 {
 	var group_name = prompt("请输入新组名称");
@@ -103,6 +104,7 @@ function add_group_old()
 		}	
 	});
 }
+//未启用
 function add_group()
 {
 	document.getElementById('product_group').style.display = 'block';
@@ -110,6 +112,7 @@ function add_group()
 }
 
 </script>
+<!-- 
 <div style='display:none' class='product_group' id='product_group'>
 <form name='group_from' method='post' action='?c=productgroup&a=productgroupAdd'>
 	<p>系统:<select name='os'>
@@ -120,6 +123,7 @@ function add_group()
 	
 </form>
 </div>
+ -->
 <div align="center">
 <div class="wid_main mar_main" align="left">
 <div class="block_top" align="left">当前位置：虚拟主机/cdn --> {{if
@@ -162,7 +166,7 @@ $action=='editProduct'}}修改产品{{else}}增加产品{{/if}}</div>
 			<option value='{{$product_groups[$i].group_id}}'
 				{{if $vhostproduct.upid==$product_groups[$i].group_id}}selected{{/if}}>{{$product_groups[$i].group_name}}</option>
 			{{/for}}
-		</select> <a href="#" onclick='add_group();'>添加产品分组</a>(可升级到相同产品组的其它产品，设置为0不可升级)</td>
+		</select> <a href="?c=productgroup&a=productgroupFrom" ><big><b>-->添加产品分组</b></big></a>(可升级到相同产品组的其它产品，设置为0不可升级)</td>
 	</tr>
 
 	<tr>

@@ -139,6 +139,9 @@ class VhostproductControl extends Control {
 		if(!$this->assignHosts()){
 			return false;
 		}
+		$product_groups = daocall('productgroup','productgroupGetAll',array());
+		$this->_tpl->assign('product_groups',$product_groups);
+		
 		$this->_tpl->assign('agent_ids',$agent_ids);
 		$this->_tpl->assign('vhostproduct',$vhostproduct);
 		$this->_tpl->assign('action','editProduct');
