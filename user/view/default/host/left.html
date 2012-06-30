@@ -12,7 +12,7 @@
 	background-color:#FFA500;
 	direction: rtl;
 	margin: 5px;
-	padding-bottom:1px;
+	padding-top:5px;
 }
 .public_host {
 	padding-top:5px;
@@ -43,7 +43,7 @@ $(document).ready(function(){
 <div class='public_left'>
 	{{if $groups}}
 		{{for $f=0;$f< count($groups);$f++}}
-			<div class='public_list'><p>&nbsp;&nbsp;分类:{{$groups[$f].group_name}}</p></div>
+			<div class='public_list'>&nbsp;&nbsp;分类:{{$groups[$f].group_name}}</div>
 			{{for $i=0;$i< count($products);$i++}}
 				{{if $products[$i].upid == $groups[$f].group_id}}
 					<div class='public_host'><a href="?c=host&a=showProductFrom&product_id={{$products[$i].id}}">{{$products[$i].name}}</a></div>
@@ -52,7 +52,7 @@ $(document).ready(function(){
 			
 		{{/for}}
 	{{else}}
-		<div class='public_list'><p>&nbsp;&nbsp;分类:自由类型</p></div>
+		<div class='public_list'>&nbsp;&nbsp;分类:自由类型</div>
 		{{for $i=0;$i< count($products);$i++}}
 		<div class='public_host'><a href="?c=host&a=showProductFrom&product_id={{$products[$i].id}}">{{$products[$i].name}}</a></div>
 		{{/for}}
