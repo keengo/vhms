@@ -27,6 +27,15 @@ function SwitchMenu(obj,sty)
 	
 }
 </script>
+<style type='text/css'>
+.one {
+	font-size:20;
+	color:red;
+	
+}
+</style>
+
+<div id='remind'>{{$js_str}}</div>
 <div id="masterdiv">
 	<h1 id="m2" onClick="SwitchMenu('sub2','m2')" class="menu"><ol id="p2">{{$lang.account_manage}}</ol></h1>
 		<ul class="submenu left_linght" id="sub2" >
@@ -39,7 +48,7 @@ function SwitchMenu(obj,sty)
 	<h1 id="m4" onClick="SwitchMenu('sub4','m4')" class="menu"><ol id="p4">主机管理</ol></h1>
 		<ul class="submenu left_linght" id="sub4" >
 			<li><a href="?c=nodes&a=listNode" target='main'>主机列表</a></li>	
-			<li><a href="?c=nodes&a=addNode" target='main'>增加主机</a></li>
+			<li id='p44'><a href="?c=nodes&a=addNode" target='main' >增加主机</a></li>
 		</ul>
 		
 	<h1 id="m5" onClick="SwitchMenu('sub5','m5')" class="menu"><ol id="p5">用户管理</ol></h1>
@@ -52,7 +61,7 @@ function SwitchMenu(obj,sty)
 			<li><a href="?c=vhost&a=pageVhost" target='main'>站点列表</a></li>	
 			<li><a href="?c=vhost&a=pageVhostByExpire_time&day=1" target='main'>过期列表</a></li>	
 			<li><a href="?c=vhostproduct&a=showProduct" target='main'>产品列表</a></li>	
-			<li><a href="?c=vhostproduct&a=addProductForm" target='main'>增加产品</a></li>
+			<li id='p66'><a href="?c=vhostproduct&a=addProductForm" target='main'>增加产品</a></li>
 			<li><a href="?c=productgroup&a=productgroupPageList" target='main'>产品分类</a></li>
 		</ul>
  	
@@ -90,74 +99,7 @@ function SwitchMenu(obj,sty)
 </td></tr>
 </table>
     <script type="text/javascript">  
-    /* 
-     *  id：展开/收起内容区的id 
-     *  minH : 展开/收起的最小高度 
-     *  maxH : 展开/收起的最大高度 
-     *  expand : true - 从收起到展开、false - 从展开到收起 
-     *  rate : 缓动变化率 0-1 
-     *  speed : 速度（毫秒） 
-     */  
-    var Toggle = function(id, minH, maxH, expand, rate, speed){  
-        this.minH = minH;  
-        this.maxH = maxH;  
-        this.tempH = 0;  
-        this.rate = rate;  
-        this.speed = speed;  
-        this.moving = false;  
-        this.moveT = null;  
-        this.holder = document.getElementById(id);  
-        this.expand = expand;  
-    }  
-    Toggle.prototype = {  
-        start : function(){  
-            if(this.moving) return;  
-            this.moving = true;  
-            this.tempH = this.expand ? this.minH : this.maxH;  
-            var t = this;  
-            this.moveT = setInterval(function(){t.move()}, this.speed);  
-        },  
-        move : function(){  
-            if(this.expand){  
-                if(this.tempH >= this.maxH){  
-                    this.moving = false;  
-                    this.expand = false;  
-                    clearInterval(this.moveT);  
-                }else{  
-                    var h = Math.round((this.maxH - this.tempH) * this.rate);  
-                    if(h <= 1){  
-                        h = 1;  
-                    }  
-                    this.tempH += h;  
-                }  
-            }else{  
-                if(this.tempH <= this.minH){  
-                    this.moving = false;  
-                    this.expand = true;  
-                    clearInterval(this.moveT);  
-                }else{  
-                    var h = Math.round((this.tempH - this.minH) * this.rate);  
-                    if(h <= 1){  
-                        h = 1;  
-                    }  
-                    this.tempH -= h;  
-                }  
-            }  
-            this.holder.style.height = this.tempH + "px";  
-        }  
-    }  
-      
-    //版块一（默认已收起）  
-    var obj = new Toggle("holder",20,200,true, 0.2, 10);  
-    document.getElementById("title").onclick = function(){  
-        obj.start();  
-    }  
-      
-    //版块二（默认已展开）  
-    var obj2 = new Toggle("holder2",20,200,false, 0.2, 10);  
-    document.getElementById("title2").onclick = function(){  
-        obj2.start();  
-    }  
+  
     </script>  
 </body>
 {{include file='common/foot.html'}}

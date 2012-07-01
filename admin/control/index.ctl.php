@@ -25,7 +25,22 @@ class IndexControl extends Control
 	}
 	public function left()
 	{
-		$this->display('left.html');
+		$nodes = daocall('nodes','getAllNodes',array());
+		if (count($nodes) < 0) {
+			$js_str = '<script language="javascript">jQuery(document).ready(function(){';
+			$js_str .= 'jQuery("#p44").append("'."&nbsp;<b class='one'><--第一步</b>".'");';
+			$js_str .= 'jQuery("#p66").append("'."&nbsp;<b class='one'><--第二步</b>".'");});</script>';
+		}else{
+			$products = daocall('vhostproduct','selectProduct',array());
+			if (count($products) < 0) {
+				$js_str = '<script language="javascript">jQuery(document).ready(function(){';
+				$js_str .= 'jQuery("#p66").append("'."&nbsp;<b class='one'><--下一步</b>".'");});</script>';
+			}
+		}
+		if ($js_str) {
+			$this->assign('js_str',$js_str);
+		}
+		return $this->display('left.html');
 	}
 	public function controlleft()
 	{
