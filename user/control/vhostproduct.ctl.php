@@ -119,10 +119,14 @@ class VhostproductControl extends Control {
 	public function upgradeForm()
 	{
 		$vhost = $_REQUEST['name'];
-		$vhost_info = daocall('vhost','getVhost',array($vhost,array('username','product_id')));
+		$vhost_info = daocall('vhost','getVhost',array($vhost,array('username','product_id','try_is')));
 		if(!$vhost_info || $vhost_info['username'] != getRole('user')){
 			trigger_error('没有找到该虚拟主机');
 			return false;
+		}
+		if ($vhost_info['try_is'] != 0) {
+			$this->_tpl->assign('msg', '试用产品不能升级');
+			return $this->_tpl->fetch('vhostproduct/msg.html');
 		}
 		$this->_tpl->assign("name",$vhost);
 		//$product = apicall('product','newProduct',array('vhost'));

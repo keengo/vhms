@@ -18,10 +18,10 @@ class MoneyAPI extends API
 	public function decMoney($user,$money,$mem=null)
 	{
 		$money = intval($money);
+		daocall('moneyout','add',array($user,$money,$mem));
 		if($money<=0){
 			return false;
 		}
-		daocall('moneyout','add',array($user,$money,$mem));
 		return daocall('user', 'decMoney', array($user,$money));
 	}
 	public function addMoney($user,$money)

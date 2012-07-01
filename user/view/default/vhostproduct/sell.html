@@ -49,6 +49,9 @@ function check_register()
 	  	
 	  	<tr><td>购买时间:</td>
         	<td id="months">
+        	{{if $product.try_on ==1}}
+        	<input type='radio' name='month' onclick='get_price(0);' value='-{{$try_day}}' >试用
+        	{{/if}}
         	{{if $product.month_flag}}
        	 	<input type='radio' name='month' onclick='get_price(1);' value='1' checked>1个月
         	{{/if}}

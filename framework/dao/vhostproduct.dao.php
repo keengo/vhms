@@ -31,17 +31,18 @@ class VhostproductDAO extends DAO {
 			'log_file'		=> 'log_file',
 			'access'		=> 'access',
 			'speed_limit'	=> 'speed_limit',/*带宽限制*/
-			'view'			=> 'view',/*前台显示*/
-			'cs'			=> 'cs',/*多引擎切换,0不切换，1随时切换，2购买切换*/
-			'cdn'			=> 'cdn',/*是否为CDN，1为CDN，0为虚拟主机*/
-			'envs'			=> 'envs',/*管理变量*/
+			'view'			=> 'view',		/*前台显示*/
+			'cs'			=> 'cs',		/*多引擎切换,0不切换，1随时切换，2购买切换*/
+			'cdn'			=> 'cdn',		/*是否为CDN，1为CDN，0为虚拟主机*/
+			'envs'			=> 'envs',		/*管理变量*/
 			'show_price'	=> 'show_price',/*前台按月显示价格*/
-			'flow'			=> 'flow',/*流量*/
-			'db_type'		=> 'db_type',/*数据库类型*/
+			'flow'			=> 'flow',		/*流量*/
+			'db_type'		=> 'db_type',	/*数据库类型*/
 			'max_subdir'	=> 'max_subdir',/*最大子目录个数*/
 			'max_worker'	=> 'max_worker',/*商业，最多工作者*/
-			'max_queue'		=> 'max_queue',/*商业，最多队列*/
-			'log_handle'	=> 'log_handle'/*日志分析*/
+			'max_queue'		=> 'max_queue',	/*商业，最多队列*/
+			'log_handle'	=> 'log_handle',/*日志分析*/
+			'try_on'		=> 'try_on'		/*是否允许试用*/
 		);
 		$this->MAP_TYPE = array(
 			'id'			=>FIELD_TYPE_INT|FIELD_TYPE_AUTO,
@@ -68,7 +69,8 @@ class VhostproductDAO extends DAO {
 			'max_subdir'	=>FIELD_TYPE_INT,
 			'max_worker'	=>FIELD_TYPE_INT,
 			'max_queue'		=>FIELD_TYPE_INT,
-			'log_handle'	=>FIELD_TYPE_INT
+			'log_handle'	=>FIELD_TYPE_INT,
+			'try_on'		=>FIELD_TYPE_INT
 		);
 		$this->_TABLE = DBPRE .'vhost_product';
 	}
@@ -140,7 +142,8 @@ class VhostproductDAO extends DAO {
 			'max_subdir',
 			'max_worker',
 			'max_queue',
-			'log_handle'
+			'log_handle',
+			'try_on'
 		), $arr);
 		$sql = "UPDATE ".$this->_TABLE." SET ".$fields." WHERE ".$this->getFieldValue2('id',$arr['id']);
 		return $this->executex($sql);
@@ -168,16 +171,6 @@ class VhostproductDAO extends DAO {
 		$field = $this->MAP_ARR;
 		
 		return $this->selectPage($field,$where, 'view',false, $page, $page_count, $count);
-//		return $this->selectPage(array('id','name','web_quota','db_quota',
-//										'templete','price','pause_flag',
-//										'month_flag','node','describe',
-//										'subtemplete','ftp','max_connect',
-//										'access','htaccess','log_file',
-//										'speed_limit','domain','subdir',
-//										'subdir_flag','upid','try_flag',
-//										'describe','show_price','db_type','log_handle','max_subdir','max_worker','max_queue'),
-//										 $where, 'view',false, $page, $page_count, $count);
-//		
 	}
 	//代理设置新增时所用。
 	public function selectProduct()

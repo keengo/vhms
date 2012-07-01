@@ -124,221 +124,138 @@ function add_group()
 </form>
 </div>
  -->
-<div align="center">
-<div class="wid_main mar_main" align="left">
-<div class="block_top" align="left">当前位置：虚拟主机/cdn --> {{if
-$action=='editProduct'}}修改产品{{else}}增加产品{{/if}}</div>
-<form name='nodeform'
-	action="?c=vhostproduct&a={{$action}}&id={{$vhostproduct.id}}"
-	method="post">
-<table class="table_main2" cellpadding="0" cellspacing="1">
-	<tr>
-		<td colspan="2" class="bg_main hg_main"><b>{{if
-		$action=='editProduct'}}修改产品{{else}}增加产品{{/if}}</b></td>
-	</tr>
-
-	<tr>
-		<td class="wid_general">选择主机</td>
-		<td><select name='node' onChange='changeNode()'>
-			{{foreach from=$nodes item=node}}
-			<option value='{{$node.name}}'
-				{{if $node.name==$vhostproduct.node}}selected{{/if}}>{{$node.name}}</option>
-			{{/foreach}}
-		</select></td>
-	</tr>
-
-	<tr>
-		<td>产品名称：</td>
-		<td><input name='name' type='text' class="wid_130"
-			value="{{$vhostproduct.name}}"></td>
-	</tr>
-
-	<tr>
-		<td>显示顺序：</td>
-		<td><input name='view' type='text' class="wid_130"
-			value="{{$vhostproduct.view}}"></td>
-	</tr>
-
-	<tr>
-		<td>产品组：</td>
-		<td><select name='upid'>
-			<option value='0'>自由类型</option>
-			{{for $i=0;$i< count($product_groups);$i++}}
-			<option value='{{$product_groups[$i].group_id}}'
-				{{if $vhostproduct.upid==$product_groups[$i].group_id}}selected{{/if}}>{{$product_groups[$i].group_name}}</option>
-			{{/for}}
-		</select> <a href="?c=productgroup&a=productgroupFrom" ><big><b>-->添加产品分组</b></big></a>(可升级到相同产品组的其它产品，设置为0不可升级)</td>
-	</tr>
-
-	<tr>
-		<td>产品类型：</td>
-		<td><input name='cdn' type='radio' value="0"
-			{{if !$vhostproduct || $vhostproduct.cdn==0}}
-			checked {{/if}} onClick="change_cdn(0)">虚拟主机 <input
-			name='cdn' type='radio' value="1" {{if $vhostproduct.cdn==1}}
-			checked {{/if}} onClick="change_cdn(1)">cdn(收费版才有此功能)</td>
-	</tr>
-
-	<tr>
-		<td colspan='2' style="padding-left: 0px;">
-		<div id='cdnpanel' style='display: {{ if $ vhostproduct.cdn == 1'>
-		<table class="table_main3" cellpadding="0" cellspacing="1">
-			<tr>
-				<td class="wid_general">空间大小：</td>
-				<td><input name="web_quota" type="text"
-					value="{{$vhostproduct.web_quota}}" class="wid_130">&nbsp;M</td>
-			</tr>
-
-			<tr>
-				<td>数据库大小：</td>
-				<td><input name="db_quota" type="text" class="wid_130"
-					value="{{$vhostproduct.db_quota}}">&nbsp;M</td>
-			</tr>
-
-			<tr>
-				<td>数据库类型：</td>
-				<td><input name="db_type" type="radio" value="mysql"
-					{{if $vhostproduct.db_type!='sqlsrv'}}checked{{/if}}>mysql
-				<input name="db_type" type="radio"
-					onClick="alert('请确认该节点已安装sql server服务');" value="sqlsrv"
-					{{if $vhostproduct.db_type=='sqlsrv'}}checked{{/if}}>sql
-				server</td>
-			</tr>
-
-			<tr>
-				<td>绑定子目录</td>
-				<td><input type='checkbox' name='subdir_flag' value='1'{{if $vhostproduct.subdir_flag}}checked{{/if}}>允许绑定子目录</td>
-			</tr>
-
-			<tr>
-				<td>子目录个数</td>
-				<td><input type='text' name='max_subdir' class="wid_130"
-					value='{{if $vhostproduct.max_subdir}}{{$vhostproduct.max_subdir}}{{else}}0{{/if}}'>&nbsp;0表示不限制</td>
-			</tr>
-
-			<tr>
-				<td>默认绑定子目录:</td>
-				<td><input name="subdir" type="text"
-					value="{{if $vhostproduct.subdir}}{{$vhostproduct.subdir}}{{else}}wwwroot{{/if}}"
-					class="wid_130"></td>
-			</tr>
-
-			<tr>
-				<td>模板</td>
-				<td id='templete2'>
-				<div id='templete'><input name="templete" type="text"
-					value="{{$vhostproduct.templete}}"></div>
-				<div id='subtemplete'></div>
-				</td>
-			</tr>
-
-			<tr>
-				<td>多引擎切换:</td>
-				<td><input type='radio' name="cs" value="0"
-					{{if $vhostproduct.cs==0}}checked{{/if}}>不能切换 <input
-					type='radio' name="cs" value="1"
-					{{if $vhostproduct.cs==1}}checked{{/if}}>随时切换 <input
-					type='radio' name="cs" value="2"
-					{{if !$vhostproduct || $vhostproduct.cs==2}}checked{{/if}}>购买时切换</td>
-			</tr>
-		</table>
+	<div align="center">
+		<div class="wid_main mar_main" align="left">
+		<div class="block_top" align="left">当前位置：虚拟主机/cdn --> {{if $action=='editProduct'}}修改产品{{else}}增加产品{{/if}}</div>
+			<form name='nodeform' action="?c=vhostproduct&a={{$action}}&id={{$vhostproduct.id}}" method="post">
+			<table class="table_main2" cellpadding="0" cellspacing="1">
+				<tr><td colspan="2" class="bg_main hg_main"><b>{{if	$action=='editProduct'}}修改产品{{else}}增加产品{{/if}}</b></td></tr>
+			
+				<tr><td class="wid_general">选择主机</td>
+					<td><select name='node' onChange='changeNode()'>
+						{{foreach from=$nodes item=node}}
+						<option value='{{$node.name}}'	{{if $node.name==$vhostproduct.node}}selected{{/if}}>{{$node.name}}</option>
+						{{/foreach}}
+					</select></td></tr>
+			
+				<tr><td>产品名称：</td>
+					<td><input name='name' type='text' class="wid_130"	value="{{$vhostproduct.name}}"></td></tr>
+			
+				<tr><td>显示顺序：</td>
+					<td><input name='view' type='text' class="wid_130"	value="{{$vhostproduct.view}}"></td></tr>
+			
+				<tr><td>产品组：</td>
+					<td><select name='upid'>
+						<option value='0'>自由类型</option>
+						{{for $i=0;$i< count($product_groups);$i++}}
+						<option value='{{$product_groups[$i].group_id}}'
+							{{if $vhostproduct.upid==$product_groups[$i].group_id}}selected{{/if}}>{{$product_groups[$i].group_name}}</option>
+						{{/for}}
+					</select> <a href="?c=productgroup&a=productgroupFrom" ><big><b>-->添加产品分组</b></big></a>(可升级到相同产品组的其它产品，设置为0不可升级)</td></tr>
+			
+				<tr><td>产品类型：</td>
+					<td><input name='cdn' type='radio' value="0"
+						{{if !$vhostproduct || $vhostproduct.cdn==0}}
+						checked {{/if}} onClick="change_cdn(0)">虚拟主机 <input
+						name='cdn' type='radio' value="1" {{if $vhostproduct.cdn==1}}
+						checked {{/if}} onClick="change_cdn(1)">cdn(收费版才有此功能)</td></tr>
+			
+				<tr><td colspan='2' style="padding-left: 0px;">
+					<div id='cdnpanel' style='display: {{ if $ vhostproduct.cdn == 1'>
+					<table class="table_main3" cellpadding="0" cellspacing="1">
+						<tr><td class="wid_general">空间大小：</td>
+							<td><input name="web_quota" type="text"	value="{{$vhostproduct.web_quota}}" class="wid_130">&nbsp;M</td></tr>
+			
+						<tr><td>数据库大小：</td>
+							<td><input name="db_quota" type="text" class="wid_130"	value="{{$vhostproduct.db_quota}}">&nbsp;M</td></tr>
+			
+						<tr><td>数据库类型：</td>
+							<td><input name="db_type" type="radio" value="mysql" {{if $vhostproduct.db_type!='sqlsrv'}}checked{{/if}}>mysql
+							<input name="db_type" type="radio"	onClick="alert('请确认该节点已安装sql server服务');" value="sqlsrv" {{if $vhostproduct.db_type=='sqlsrv'}}checked{{/if}}>sql server</td></tr>
+			
+						<tr><td>绑定子目录</td>
+							<td><input type='checkbox' name='subdir_flag' value='1'{{if $vhostproduct.subdir_flag}}checked{{/if}}>允许绑定子目录</td></tr>
+			
+						<tr><td>子目录个数</td>
+							<td><input type='text' name='max_subdir' class="wid_130"
+								value='{{if $vhostproduct.max_subdir}}{{$vhostproduct.max_subdir}}{{else}}0{{/if}}'>&nbsp;0表示不限制</td></tr>
+			
+						<tr><td>默认绑定子目录:</td>
+							<td><input name="subdir" type="text" value="{{if $vhostproduct.subdir}}{{$vhostproduct.subdir}}{{else}}wwwroot{{/if}}" class="wid_130"></td></tr>
+			
+						<tr><td>模板</td>
+							<td id='templete2'>
+							<div id='templete'><input name="templete" type="text" value="{{$vhostproduct.templete}}"></div>
+							<div id='subtemplete'></div>
+							</td></tr>
+			
+						<tr><td>多引擎切换:</td>
+							<td><input type='radio' name="cs" value="0"
+								{{if $vhostproduct.cs==0}}checked{{/if}}>不能切换 <input
+								type='radio' name="cs" value="1"
+								{{if $vhostproduct.cs==1}}checked{{/if}}>随时切换 <input
+								type='radio' name="cs" value="2"
+								{{if !$vhostproduct || $vhostproduct.cs==2}}checked{{/if}}>购买时切换</td></tr>
+					</table>
+					</div>
+					</td>
+				</tr>
+			
+				<tr><td>价格</td>
+					<td><input name="price" type="text" class="wid_130"	value="{{$vhostproduct.price/100}}">(元/年) <input type="checkbox" name="show_price" value="1"	{{if $vhostproduct.show_price!=0}}checked{{/if}}>前台按月显示</td></tr>
+				
+				{{if count($agent_ids)>0}}
+				<tr><td>代理价格</td>
+					<td>{{for $i=0;$i< count($agent_ids);$i++}}
+					{{$agent_ids[$i].name}}:<input name="agentprice_{{$agent_ids[$i].id}}"	type="text" value="{{$agent_ids[$i].price/100}}" style="width: 45px" />
+					{{/for}}</td></tr>
+				{{/if}}
+			
+				<tr><td>域名绑定个数</td>
+					<td><input name="domain" type="text" class="wid_130"
+						value="{{if $vhostproduct}}{{$vhostproduct.domain}}{{else}}-1{{/if}}">(-1表示无限)</td></tr>
+			
+				<tr><td>最大连接数</td>
+					<td><input name="max_connect" type="text" class="wid_130" value="{{if $vhostproduct}}{{$vhostproduct.max_connect}}{{else}}0{{/if}}">(0无限)</td></tr>
+			
+				<tr><td>带宽限制</td>
+					<td><input name="speed_limit" type="text" class="wid_130" value="{{if $vhostproduct}}{{$vhostproduct.speed_limit/1024}}{{else}}0{{/if}}">&nbsp;K/每秒,(0无限)</td></tr>
+			
+				<tr><td>流量限制</td>
+					<td><input name="flow" type="text" class="wid_130"	value="{{if $vhostproduct}}{{($vhostproduct.flow)}}{{else}}0{{/if}}">&nbsp;G/月,(0无限)(需kangle	web server商业版支持)</td></tr>
+			
+			
+				<tr><td>管理变量:</td>
+					<td><input name="envs" type="text" class="wid_130"
+						value="{{$vhostproduct.envs}}"></td></tr>
+			
+				<tr><td>其它选项</td>
+					<td><input type='checkbox' name='htaccess' value='1'{{if $vhostproduct.htaccess || !$vhostproduct}}checked{{/if}}>.htaccess支持
+					<input type='checkbox' name='ftp' value='1'{{if $vhostproduct.ftp || !$vhostproduct}}checked{{/if}}>开启ftp
+					<input type='checkbox' name='log_file' value='1'{{if $vhostproduct.log_file || !$vhostproduct}}checked{{/if}}>日志独立
+					<input type='checkbox' name='access' value='1'{{if $vhostproduct.access || !$vhostproduct}}checked{{/if}}>自定义控制
+					<input type='checkbox' name='log_handle' id='log_handle' value='1'{{if $vhostproduct.log_handle}}checked{{/if}}>日志分析</td></tr>
+			
+				<tr><div id='advance'>
+					<td class="padd23">独立队列:</td>
+					<td class="padd23">工作数(0不限): <input name="max_worker" type="text" id='max_worker' size='5' value="{{if $vhostproduct.max_worker}}{{$vhostproduct.max_worker}}{{else}}0{{/if}}">队列数(0不限): <input name="max_queue" type="text" id='max_queue' size='5'	value="{{if $vhostproduct.max_queue}}{{$vhostproduct.max_queue}}{{else}}0{{/if}}">(需kangle	web server商业版支持)</td>
+					</div></tr>
+			
+				<tr><td>产品说明(支持html):</td>
+					<td><textarea name='describe' rows='6' cols='40'>{{$vhostproduct.describe}}</textarea></td></tr>
+			
+				<tr><td>状态</td>
+					<td><input type="checkbox" name="pause_flag" value="1" {{if $vhostproduct.pause_flag!=0}}checked{{/if}}>暂停销售 
+						<input type="checkbox" name="month_flag" value="1" {{if $vhostproduct.month_flag!=0}}checked{{/if}}>月付
+						<input type="checkbox" name="try_on" value="1" {{if $vhostproduct.try_on!=0}}checked{{/if}}>允许试用</td>
+				</tr>
+			
+				<tr><td>&nbsp;</td>
+					<td><input type="submit" value="确认提交"></td></tr>
+			</table>
+			</form>
 		</div>
-		</td>
-	</tr>
-
-	<tr>
-		<td>价格</td>
-		<td><input name="price" type="text" class="wid_130"
-			value="{{$vhostproduct.price/100}}">(元/年) <input
-			type="checkbox" name="show_price" value="1"
-			{{if $vhostproduct.show_price!=0}}checked{{/if}}>前台按月显示</td>
-	</tr>
-	{{if count($agent_ids)>0}}
-	<tr>
-		<td>代理价格</td>
-		<td>{{for $i=0;$i< count($agent_ids);$i++}}
-		{{$agent_ids[$i].name}}:<input name="agentprice_{{$agent_ids[$i].id}}"
-			type="text" value="{{$agent_ids[$i].price/100}}" style="width: 45px" />
-		{{/for}}</td>
-	</tr>
-	{{/if}}
-
-	<tr>
-		<td>域名绑定个数</td>
-		<td><input name="domain" type="text" class="wid_130"
-			value="{{if $vhostproduct}}{{$vhostproduct.domain}}{{else}}-1{{/if}}">(-1表示无限)</td>
-	</tr>
-
-	<tr>
-		<td>最大连接数</td>
-		<td><input name="max_connect" type="text" class="wid_130"
-			value="{{if $vhostproduct}}{{$vhostproduct.max_connect}}{{else}}0{{/if}}">(0无限)</td>
-	</tr>
-
-	<tr>
-		<td>带宽限制</td>
-		<td><input name="speed_limit" type="text" class="wid_130"
-			value="{{if $vhostproduct}}{{$vhostproduct.speed_limit/1024}}{{else}}0{{/if}}">&nbsp;K/每秒,(0无限)</td>
-	</tr>
-
-	<tr>
-		<td>流量限制</td>
-		<td><input name="flow" type="text" class="wid_130"
-			value="{{if $vhostproduct}}{{($vhostproduct.flow)/1024/1024/1024}}{{else}}0{{/if}}">&nbsp;G/月,(0无限)(需kangle
-		web server商业版支持)</td>
-	</tr>
-
-
-	<tr>
-		<td>管理变量:</td>
-		<td><input name="envs" type="text" class="wid_130"
-			value="{{$vhostproduct.envs}}"></td>
-	</tr>
-
-	<tr>
-		<td>其它选项</td>
-		<td><input type='checkbox' name='htaccess' value='1'{{if $vhostproduct.htaccess || !$vhostproduct}}checked{{/if}}>.htaccess支持
-		<input type='checkbox' name='ftp' value='1'{{if $vhostproduct.ftp || !$vhostproduct}}checked{{/if}}>开启ftp
-		<input type='checkbox' name='log_file' value='1'{{if $vhostproduct.log_file || !$vhostproduct}}checked{{/if}}>日志独立
-		<input type='checkbox' name='access' value='1'{{if $vhostproduct.access || !$vhostproduct}}checked{{/if}}>自定义控制
-		<input type='checkbox' name='log_handle' id='log_handle' value='1'{{if $vhostproduct.log_handle}}checked{{/if}}>日志分析</td>
-	</tr>
-
-	<tr>
-		<div id='advance'>
-		<td class="padd23">独立队列:</td>
-		<td class="padd23">工作数(0不限): <input name="max_worker" type="text"
-			id='max_worker' size='5'
-			value="{{if $vhostproduct.max_worker}}{{$vhostproduct.max_worker}}{{else}}0{{/if}}">
-		队列数(0不限): <input name="max_queue" type="text" id='max_queue' size='5'
-			value="{{if $vhostproduct.max_queue}}{{$vhostproduct.max_queue}}{{else}}0{{/if}}">(需kangle
-		web server商业版支持)</td>
-		</div>
-	</tr>
-
-	<tr>
-		<td>产品说明(支持html):</td>
-		<td><textarea name='describe' rows='6' cols='40'>{{$vhostproduct.describe}}</textarea></td>
-	</tr>
-
-	<tr>
-		<td>状态</td>
-		<td><input type="checkbox" name="pause_flag" value="1"
-			{{if $vhostproduct.pause_flag!=0}}checked{{/if}}>暂停销售 <input
-			type="checkbox" name="month_flag" value="1"
-			{{if $vhostproduct.month_flag!=0}}checked{{/if}}>月付</td>
-	</tr>
-
-	<tr>
-		<td>&nbsp;</td>
-		<td><input type="submit" value="确认提交"></td>
-	</tr>
-</table>
-</form>
-</div>
-</div>
-<script language='javascript'>
-changeNode();
-</script>
+	</div>
+	<script language='javascript'>changeNode();</script>
 </body>
 {{include file='common/foot.html'}}

@@ -74,14 +74,16 @@ abstract class Product
 			trigger_error('产品错误');
 			return false;
 		}
-		if($info['month_flag']!=0 && !$this->isYears($month)){
-			trigger_error('该产品不支持月付');
-			return false;
+		if ($month > 0) {
+			if($info['month_flag'] != 0 && !$this->isYears($month)){
+				trigger_error('该产品不支持月付');
+				return false;
+			}
 		}
-		if($month<=0){
-			trigger_error('月份错误');
-			return false;
-		}
+//		if($month<=0){
+//			trigger_error('月份错误');
+//			return false;
+//		}
 		$mem = $susername." 续费 ".$month." 个月";//扣费备注
 
 		//处理代理价格，如果有代理，按代理价格扣费，否则按正常价格
@@ -115,7 +117,7 @@ abstract class Product
 			return false;
 		}
 		//echo "haha";
-
+		
 		if($price>0 && !apicall('money','decMoney', array($username,$price,$mem))){
 			$default_db->rollBack();
 			trigger_error('余额不足,所需金额:'.($price/100));
@@ -126,11 +128,14 @@ abstract class Product
 			trigger_error('续费产品出错');
 			return false;
 		}
-		if (daocall('setting','get',array('set_renew'))==1) {
-			$suser['status'] = 0;
-		}
 		if($default_db->commit()){
 			$this->resync($username,$suser,$info);
+			//续费后是否开通空间
+			if (daocall('setting','get',array('set_renew'))==1) {
+				$suser['status'] = 0;
+			}
+			$attr['try_is'] = 0;
+			daocall('vhost','updateVhost',array($susername,$attr));
 			return true;
 		}
 		return false;
@@ -238,6 +243,13 @@ abstract class Product
 		}
 		
 		$month = $suser['month'];
+		if ($month < 0) {
+			$product_info = daocall('vhostproduct','getProduct',array($product_id));
+			if ($product_info['try_on'] == 0) {
+				trigger_error('该产品不支持试用');
+				return false;
+			}
+		}
 		$info = $this->getInfo($product_id);
 		
 		if(!$info){
@@ -248,22 +260,26 @@ abstract class Product
 			trigger_error('该产品不能购买');
 			return false;
 		}
-		if($info['month_flag']!=0 && !$this->isYears($month)){
-			trigger_error('该产品不支持月付');
-			return false;
+		if ($month > 0){
+			if($info['month_flag']!=0 && !$this->isYears($month)){
+				trigger_error('该产品不支持月付');
+				return false;
+			}
 		}
-		if($month<=0){
-			trigger_error('月份错误');
-			return false;
-		}
+//		if($month<=0){
+//			trigger_error('月份错误');
+//			return false;
+//		}
 		
 		//更改模板
 		if($suser['subtemplete']) {
 			$info['subtemplete'] = $suser['subtemplete'];
 		}
-		
-		$mem = "购买 ".$suser['name']." ".$month." 个月";
-		
+		if ($month > 0) {
+			$mem = "购买 ".$suser['name']." ".$month." 个月";
+		}else{
+			$mem = "试用 ".$suser['name'];
+		}
 		//处理代理，如果有代理，按代理的价格来扣费，否则按正常价格
 		$userinfo = daocall('user','getUser',array($username));
 		if ($userinfo['agent_id'] > 0) {
@@ -277,10 +293,11 @@ abstract class Product
 		}else{
 			$price = $this->caculatePrice($info['price'],$month);
 		}
-
-		if($price<0){
-			trigger_error('价格错误');
-			return false;
+		if ($month > 0) {
+			if($price < 0){
+				trigger_error('价格错误');
+				return false;
+			}
 		}
 		if($default_db==null){
 			return false;
@@ -292,11 +309,12 @@ abstract class Product
 		if(!$default_db->beginTransaction()){
 			return false;
 		}
-		
-		if($price>0 && !apicall('money','decMoney', array($username,$price,$mem))){
-			$default_db->rollBack();
-			trigger_error('余额不足,所需金额:'.($price/100));
-			return false;
+		if ($month > 0) {
+			if($price > 0 && !apicall('money','decMoney', array($username,$price,$mem))){
+				$default_db->rollBack();
+				trigger_error('余额不足,所需金额:'.($price/100));
+				return false;
+			}
 		}
 		if(!$this->create($username,$suser,$info)){
 			$default_db->rollBack();
@@ -305,6 +323,11 @@ abstract class Product
 		}
 		if($default_db->commit()){
 			$this->sync($username,$suser,$info);
+			if ($month < 0) {
+				$attr['try_is'] = 1;
+				daocall('vhost','updateVhost',array($suser['name'],$attr));//将空间改为试用类型
+				daocall('moneyout','add',array($suser['name'],0,$mem));
+			}
 			return true;
 		}
 		return false;

@@ -15,6 +15,7 @@ class FunctionControl extends Control
 		daocall('setting','add',array('reg_user_price',$_REQUEST['reg_user_price'] * 100));
 		daocall('setting','add',array('reg_off',$_REQUEST['reg_off']));
 		daocall('setting','add',array('findpasswd_off',$_REQUEST['findpasswd_off']));
+		daocall('setting','add',array('try_day',$_REQUEST['try_day']));
 		if ($_REQUEST['view_dir'] != $this->setting['view_dir']) {
 			$log = array('operate_object'=>'view_dir='.$_REQUEST['view_dir'], 'admin'=>getRole('admin'),'operate'=>$_REQUEST['c']."&a=".$_REQUEST['a']);
 			apicall('operatelog','operatelogAdd',array($log));

@@ -58,7 +58,7 @@ class ProductControl extends Control {
 		}
 		$product = explode('_',$_REQUEST['product']);
 		$username = getRole('user');
-
+		
 		switch($product[0]){
 			case 'vhost':
 				$product_info = daocall('vhostproduct','getProduct',array($product[1]));
@@ -66,16 +66,22 @@ class ProductControl extends Control {
 					return trigger_error('虚拟主机产品ID错误');
 				}
 				$userinfo = daocall('user','getUser',array($username));
-				if($userinfo['agent_id'] >0 ) {
-					$arr['agent_id'] = $userinfo['agent_id'];
-					$arr['product_type'] = 0;
-					$arr['product_id'] = $product[1];
+				if($userinfo['agent_id'] > 0 ) {
+					$arr['agent_id'] 	= $userinfo['agent_id'];
+					$arr['product_type']= 0;
+					$arr['product_id'] 	= $product[1];
 					$agentinfo = daocall('agentprice','getAgentprice',array($arr));
 					if ($agentinfo && $agentinfo[0]['price'] >0) {
 						$product_info['price'] = $agentinfo[0]['price'];
 					}
 				}
+				$try_day = daocall('setting','get',array('try_day'));
+				if ($try_day <= 0 || $try_day == null) {
+					$try_day = '3';
+				}
+				$this->_tpl->assign('try_day',$try_day);
 				load_lib('pub:whm');
+				
 				$subtempletes = apicall('nodes','listSubTemplete',array($product_info['node'],$product_info['templete']));
 				$this->_tpl->assign('subtempletes',$subtempletes);
 				$this->_tpl->assign('product',$product_info);

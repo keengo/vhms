@@ -293,6 +293,7 @@ CREATE TABLE IF NOT EXISTS `vhost` (
   `username` varchar(32) NOT NULL,
   `flow` bigint(20) NOT NULL default '0',
   `db_type` varchar(255) NOT NULL default 'mysql',
+  `try_is` tinyint(4) NOT NULL default '0',
   PRIMARY KEY  (`uid`),
   UNIQUE KEY `name` (`name`),
   KEY `username` (`username`)

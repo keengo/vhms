@@ -21,7 +21,8 @@ class VhostDAO extends DAO{
 			'product_id'	=> 'product_id',
 			'username'		=> 'username',
 			'flow'			=> 'flow',
-			'db_type'		=> 'db_type'
+			'db_type'		=> 'db_type',
+			'try_is'		=> 'try_is'
 			);
 			$this->MAP_TYPE = array(
 			'passwd'		=>FIELD_TYPE_MD5,
@@ -31,6 +32,7 @@ class VhostDAO extends DAO{
 			'create_time'	=>FIELD_TYPE_DATETIME,
 			'expire_time'	=>FIELD_TYPE_DATETIME,
 			'flow'			=>FIELD_TYPE_BIGINT,
+			'try_is'		=>FIELD_TYPE_INT,
 			);
 			$this->_TABLE = DBPRE . 'vhost';
 	}
@@ -89,7 +91,7 @@ class VhostDAO extends DAO{
 			$where.=" AND ".$this->getFieldValue2('name', $name);
 		}
 		return $this->selectPage(
-		array('name','uid','templete','node','create_time','expire_time','status','product_id','username','flow'),
+		array('name','uid','templete','node','create_time','expire_time','status','product_id','username','flow','try_is'),
 		$where,
 		'uid', 
 		true,
@@ -138,11 +140,12 @@ class VhostDAO extends DAO{
 	}
 	/**
 	 * 插入用户信息信息
+	 * month 小于0则为试用天数，否则为购买月份
 	 */
 	public function insertVhost($username,$name,$passwd,$doc_root,$group,$templete,$subtemplete,$status,$node,$product_id,$month,$db_type)
 	{
-		$arr=array();
-		$arr['username']	=$username;
+		$arr				= array();
+		$arr['username']	= $username;
 		$arr['name'] 		= $name;
 		$arr['passwd'] 		= $passwd;
 		$arr['doc_root'] 	= $doc_root;
@@ -153,7 +156,12 @@ class VhostDAO extends DAO{
 		$arr['node'] 		= $node;
 		$arr['product_id'] 	= $product_id;
 		$arr['create_time'] = 'NOW()';
-		$arr['expire_time'] = 'ADDDATE(NOW(),INTERVAL '.$month.' MONTH)';
+		$arr['expire_time'] = 'ADDDATE(NOW(),INTERVAL ';
+		if ($month < 0 ){
+			$arr['expire_time'] .= substr($month,1).' day)';
+		}else{
+			$arr['expire_time'] .= $month.' MONTH)';
+		}
 		$arr['db_type'] 	= $db_type;
 		$result = $this->insertData($arr);
 
