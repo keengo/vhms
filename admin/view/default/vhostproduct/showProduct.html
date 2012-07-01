@@ -42,8 +42,7 @@ function updateView(id,product_id)
 {
 	xxkf_obj('updateView').innerHTML="";
 	var view=0;
-	if(document.getElementById(id).checked)
-	{
+	if(document.getElementById(id).checked)	{
 		view=1;
 	}
 	var url='?c={{$smarty.request.c}}&a=ajaxUpdateProductView&id='+product_id+'&view='+view;
@@ -93,9 +92,10 @@ function updateViewResult()
 					<td>空间/数据库(M)</td>
 					<td>数据库类型</td>
 					<td>价格(元/年)</td>	
-					<td>绑定域名</td>	
+					<!--  <td>绑定域名</td>	-->
 					<td>流量限制</td>	
-					<td>模板</td>		
+					<td>模板</td>
+					<td>允许试用</td>		
 					<td>状态</td></tr>
 				{{foreach from=$list item=row}}
 				<tr><td>[<a href="javascript:if(confirm('确定删除{{$row.name}}?')){location='?c=vhostproduct&a=del&id={{$row.id}}';}" title="删除">删除</a>][<a href="?c=vhostproduct&a=editProductForm&id={{$row.id}}">更改</a>]</td>
@@ -113,9 +113,10 @@ function updateViewResult()
 					<td>{{if $row.cdn}}cdn/-{{else}}{{$row.web_quota}}&nbsp;/&nbsp;{{$row.db_quota}}{{/if}}</td>
 					<td>{{$row.db_type}}</td>
 					<td>{{$row.price/100}}</td>
-					<td>{{if $row.domain=='-1'}}不限{{else}}{{$row.domain}}{{/if}}</td>
+					<!-- <td>{{if $row.domain=='-1'}}不限{{else}}{{$row.domain}}{{/if}}</td> -->
 					<td>{{if $row.flow >0}}{{$row.flow}}G/月{{else}}不限{{/if}}</td>
 					<td>{{$row.templete}}{{if $row.subtemplete}}:{{$row.subtemplete}}{{/if}}</td>
+					<td>{{if $row.try_on !=0}}允许{{else}}否{{/if}}</td>
 					<td>{{if $row.pause_flag!=0}}暂停销售 {{/if}}{{if $row.month_flag!=0}}月付 {{/if}}</td></tr>
 			{{/foreach}}
 			<tr><td colspan="12" id="bg_yellow" align="right">共计 {{$sum}} 条记录&nbsp;</td></tr>
