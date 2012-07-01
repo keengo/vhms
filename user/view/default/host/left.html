@@ -45,7 +45,7 @@ function suspend()
 {{if $groups}}
 	<div class='public_list'>&nbsp;&nbsp;分类:自由类型</div>
 		{{for $i=0;$i< count($products);$i++}}
-			{{if $products[$i].upid == 0}}
+			{{if $products[$i].upid == 0 && $products[$i].view != 0}}
 			<div class='public_host'><a href="?c=host&a=showProductFrom&product_id={{$products[$i].id}}">{{$products[$i].name}}</a></div>
 			{{/if}}
 		{{/for}}
@@ -54,7 +54,7 @@ function suspend()
 	{{for $f=0;$f< count($groups);$f++}}
 		<div class='public_list'>&nbsp;&nbsp;分类:{{$groups[$f].group_name}}</div>
 		{{for $i=0;$i< count($products);$i++}}
-			{{if $products[$i].upid == $groups[$f].group_id}}
+			{{if $products[$i].upid == $groups[$f].group_id && $products[$i].view != 0}}
 				<div class='public_host'><a href="?c=host&a=showProductFrom&product_id={{$products[$i].id}}">{{$products[$i].name}}</a></div>
 			{{/if}}
 		{{/for}}
@@ -63,7 +63,9 @@ function suspend()
 {{else}}
 	<div class='public_list'>&nbsp;&nbsp;分类:自由类型</div>
 	{{for $i=0;$i< count($products);$i++}}
+	{{if $products[$i].view != 0}}
 	<div class='public_host'><a href="?c=host&a=showProductFrom&product_id={{$products[$i].id}}">{{$products[$i].name}}</a></div>
+	{{/if}}
 	{{/for}}
 
 {{/if}}
