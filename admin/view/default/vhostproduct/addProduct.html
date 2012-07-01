@@ -162,6 +162,7 @@ $action=='editProduct'}}修改产品{{else}}增加产品{{/if}}</div>
 	<tr>
 		<td>产品组：</td>
 		<td><select name='upid'>
+			<option value='0'>自由类型</option>
 			{{for $i=0;$i< count($product_groups);$i++}}
 			<option value='{{$product_groups[$i].group_id}}'
 				{{if $vhostproduct.upid==$product_groups[$i].group_id}}selected{{/if}}>{{$product_groups[$i].group_name}}</option>

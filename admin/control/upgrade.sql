@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `operate_log` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0;
 CREATE TABLE IF NOT EXISTS `product_group` (
   `group_id` int(11) NOT NULL AUTO_INCREMENT,
-  `group_name` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `group_name` varchar(255)  NOT NULL,
   PRIMARY KEY (`group_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
