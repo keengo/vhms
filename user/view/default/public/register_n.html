@@ -1,7 +1,12 @@
 <script language='javascript'>
 function check_user()
 {
-	var url = '?c=public&a=ajaxCheckUser&username='+document.reg.username.value;
+	var username  = document.reg.username.value;
+	if (username == "") {
+		alert("用户名不能为空");
+		return ;
+	}
+	var url = '?c=public&a=ajaxCheckUser&username=' + username;
 	$.get(url,function(msg){
 		alert(msg);
 		
@@ -27,6 +32,7 @@ function check_user()
 .public_reg_info input {
 	height:30px;
 	font-size:20;
+	
 }
 .reg_submit {
 	padding-left:280px;
@@ -37,6 +43,12 @@ function check_user()
 	width:120px;
 }
 .reg_center {
+}
+.reg_input {
+	background-position:0 -120px;
+	color:rgb(255,76,100);
+	font-weight:bold;
+	 background-image:url('{{$STATIC}}/images/loginbg.jpg');
 }
 </style>
 
@@ -52,7 +64,7 @@ function check_user()
 		<div class='reg_left'>真实姓名:</div>		<div class='reg_center'><input name='name' size="24"/>&nbsp;*</div>
 		<div class='reg_left'>身份证号码:</div>	<div class='reg_center'><input name='ids' size="24"/>&nbsp;*</div>
 		<div class='reg_left'>注册协议:</div>		<div class='reg_center'><input name="agree" type="checkbox" value="1">我已阅读并同意<a href='?c=public&a=registerPact' target="_blank">注册协议</a> </div>
-		<div class='reg_left'>&nbsp;</div>		<div class='reg_submit'><input type="button" onClick="check_register()" value="注册"></div>
+		<div class='reg_left'>&nbsp;</div>		<div class='reg_submit'><input class='reg_input' type="button" onClick="check_register()" value="注册"><input class='reg_input' type='reset' value='重置'> </div>
 	</div>
 	</form>
 </div>

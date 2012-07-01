@@ -10,7 +10,7 @@
 	font-size:16;
 	color:rgb(100,0,200);
 	background-color:#FFA500;
-	direction: rtl;
+	direction: ltr;
 	margin: 5px;
 	padding-top:5px;
 }
@@ -37,27 +37,38 @@ $(document).ready(function(){
 			jQuery(this).removeClass('onMouseOver');
 	});
 });
-
+function suspend()
+{
+	
+}
 </script>
 
 <div class='public_left'>
-	{{if $groups}}
-		{{for $f=0;$f< count($groups);$f++}}
-			<div class='public_list'>&nbsp;&nbsp;分类:{{$groups[$f].group_name}}</div>
-			{{for $i=0;$i< count($products);$i++}}
-				{{if $products[$i].upid == $groups[$f].group_id}}
-					<div class='public_host'><a href="?c=host&a=showProductFrom&product_id={{$products[$i].id}}">{{$products[$i].name}}</a></div>
-				{{/if}}
-			{{/for}}
-			
-		{{/for}}
-	{{else}}
-		<div class='public_list'>&nbsp;&nbsp;分类:自由类型</div>
+{{if $groups}}
+	<div class='public_list'>&nbsp;&nbsp;分类:自由类型</div>
 		{{for $i=0;$i< count($products);$i++}}
-		<div class='public_host'><a href="?c=host&a=showProductFrom&product_id={{$products[$i].id}}">{{$products[$i].name}}</a></div>
+			{{if $products[$i].upid == 0}}
+			<div class='public_host'><a href="?c=host&a=showProductFrom&product_id={{$products[$i].id}}">{{$products[$i].name}}</a></div>
+			{{/if}}
 		{{/for}}
+		
 	
-	{{/if}}
+	{{for $f=0;$f< count($groups);$f++}}
+		<div class='public_list'>&nbsp;&nbsp;分类:{{$groups[$f].group_name}}</div>
+		{{for $i=0;$i< count($products);$i++}}
+			{{if $products[$i].upid == $groups[$f].group_id}}
+				<div class='public_host'><a href="?c=host&a=showProductFrom&product_id={{$products[$i].id}}">{{$products[$i].name}}</a></div>
+			{{/if}}
+		{{/for}}
+		
+	{{/for}}
+{{else}}
+	<div class='public_list'>&nbsp;&nbsp;分类:自由类型</div>
+	{{for $i=0;$i< count($products);$i++}}
+	<div class='public_host'><a href="?c=host&a=showProductFrom&product_id={{$products[$i].id}}">{{$products[$i].name}}</a></div>
+	{{/for}}
+
+{{/if}}
 
 </div>
 
