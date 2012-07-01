@@ -12,8 +12,8 @@ class ProductControl extends Control {
 	public function getUpgradePrice()
 	{
 		needRole('user');
-		$name 	= $_REQUEST['name'];
-		$id 	= $_REQUEST['id'];
+		$name 	= trim($_REQUEST['name']);
+		$id 	= intval($_REQUEST['id']);
 		if (!$id || !$name) {
 			die("查询升级价格出错");
 		}
