@@ -9,6 +9,28 @@ class ProductControl extends Control {
 	{
 		parent::__destruct();
 	}
+	public function getUpgradePrice()
+	{
+		needRole('user');
+		$name 	= $_REQUEST['name'];
+		$id 	= $_REQUEST['id'];
+		if (!$id || !$name) {
+			die("查询升级价格出错");
+		}
+		$vhost_info = daocall('vhost','getVhost',array($name));
+		$old_time = strtotime($vhost_info['expire_time']) - time();
+		$month = number_format($old_time / 2592000,2);//当前空间还余多少个月时间
+		$old_product = daocall('vhostproduct','getProduct',array($vhost_info['product_id']));
+		$old_money =  ($old_product['price'] / 12) * $month;//当前空间余钱
+		$new_product = daocall('vhostproduct','getProduct',array($id));
+		$new_price = ($new_product['price'] / 12) * $month;//当前空间余的月分，在新产品中要多少钱
+		$price = $new_price - $old_money;//新产品的钱减去当前余下的钱
+		if ($price > 0 ) {
+			die($price/100);
+		}
+		die("查询价格出错");
+	}
+	
 	public function left()
 	{
 		if($GLOBALS['frame']==1){
