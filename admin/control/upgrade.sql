@@ -105,4 +105,5 @@ CREATE TABLE IF NOT EXISTS `product_group` (
   PRIMARY KEY (`group_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 ALTER TABLE `vhost` ADD `try_is` tinyint(4) NOT NULL default '0';
+ALTER TABLE `vhost_product` ADD `try_on` tinyint(4) NOT NULL default '0';
 

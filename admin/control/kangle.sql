@@ -339,6 +339,7 @@ CREATE TABLE IF NOT EXISTS `vhost_product` (
   `max_worker` int(11) NOT NULL default '0',
   `max_queue` int(11) NOT NULL default '0',
   `log_handle` tinyint(4) NOT NULL default '0',
+  `try_on` tinyint(4) NOT NULL default '0',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
