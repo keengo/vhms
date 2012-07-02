@@ -13,7 +13,7 @@
 		        <td ><input name="reg_user_price" value="{{if $setting.reg_user_price}}{{$setting.reg_user_price/100}}{{else}}0{{/if}}"  size="10"/>&nbsp;元</td></tr> 
 		    
 		    <tr><td >试用天数：</td>
-		        <td ><input name="try_day" value="{{$setting.try_day}}"  size="10"/>&nbsp;天</td></tr> 
+		        <td ><input name="try_day" value="{{if $setting.try_day}}{{$setting.try_day}}{{else}}3{{/if}}"  size="10"/>&nbsp;天</td></tr> 
 		    
 		    <tr><td>模板目录:</td>
 				<td><select name='view_dir'>
