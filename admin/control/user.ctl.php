@@ -92,7 +92,7 @@ class UserControl extends Control {
 			daocall('user','decMoney', array($_REQUEST['username'],abs($money)));
 			$id = daocall('moneyin','add',array($_REQUEST['username'],$_REQUEST['money'],100));
 		}
-		$log = array('operate_object'=>'username='.$_REQUEST['username'],'mem'=>'meony='.$money, 'admin'=>getRole('admin'),'operate'=>$_REQUEST['a']);
+		$log = array('operate_object'=>'username='.$_REQUEST['username'],'mem'=>'meony='.$_REQUEST['money'], 'admin'=>getRole('admin'),'operate'=>$_REQUEST['a']);
 		apicall('operatelog','operatelogAdd',array($log));
 		
 		$this->listUser();
