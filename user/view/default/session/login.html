@@ -29,12 +29,15 @@ function check_submit()
 
 </style>
 <div class='login' align="center">
-	<form action="?c=session&a=login" method=post name="form1" id='from'>
+	<form action="?c=session&a=login" method=post name="form2" id='from'>
 	<div class="loginusername"><img src="{{$STATIC}}style/agent_log.jpg" /></div>
 	<div class="loginusername">账号:&nbsp;<input type="text" id='username' name="username" /></div>
 	<div class="loginusername">密码:&nbsp;<input type="password" id='passwd' name="passwd"/></div>
 	<div class="loginusername"><input type="button" onclick='check_submit();' value="登 录" /></div>
   	</form>
 </div>
+<script language='javascript'>
+form2.username.focus();
 
+</script>
 											

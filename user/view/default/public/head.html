@@ -9,6 +9,10 @@ line-height:150%;
 background:#F6F4F5;
 font-family: "宋体";
 }
+.product_list {
+	height:25px;
+	font-size:16;
+}
 </style>
 <body>
 <!--幻灯片script代码开始-->
@@ -56,33 +60,28 @@ font-family: "宋体";
 				{{if $role.user}}
 					{{$role.user}},您好!  [<a href='?c=user&a=index'>进入会员中心</a>] [<a href='?c=session&a=logout'>退出</a>]
 				{{else}}
-					用户名:
+					<big>用户名:</big>
 					<input name="username" type="text" size="12" />
-					密码:
+					<big>密码:</big>
 					<input name="passwd" type="password" size="12" />
 					<input type="submit" name="Submit" value="登录" />
 					<a href="?c=public&a=register_n"><font color='red'>&nbsp;&nbsp;<big>注册</big>&nbsp;&nbsp;</font></a><a href='?c=public&a=findPasswdFrom'><big>忘记密码</big></a> 
 				{{/if}}
 	  		</td>
-			<td align="right"><script language="javascript" src="?c=product&a=productList&target=self"></script></td>
+			<td align="right" class='product_list'>
+				<script language="javascript" src="?c=product&a=productList&target=self"></script>
+			</td>
+			</tr>
 		 <tr>
 			<td width="184" rowspan="2"><img src='{{if $setting.logo.value}}{{$setting.logo.value}}{{else}}{{$STATIC}}/images/logo.jpg{{/if}}' height="80"></td>
 			<td valign="top" align="left" class="right" width="500"></td><td valign="top"></td>
 		 </tr>
 	  </form>
-	  <tr>
-	  	<td colspan="2" align="right">
-			<a href='{{if $setting.links.value}}{{$setting.links.value}}{{else}}http://zh.kanglesoft.com{{/if}}' target="_blank">
-			<img src='{{if $setting.banner.value}}{{$setting.banner.value}}{{else}}{{$STATIC}}images/ad.gif{{/if}}' border="0" width="770" height="70"></a>
-		</td>
-	  </tr>
-	  <tr>
-	  <tr>
-	    <td colspan="3">
+	  <tr><td colspan="2" align="right"><a href='{{if $setting.links.value}}{{$setting.links.value}}{{else}}http://zh.kanglesoft.com{{/if}}' target="_blank"><img src='{{if $setting.banner.value}}{{$setting.banner.value}}{{else}}{{$STATIC}}images/ad.gif{{/if}}' border="0" width="770" height="70"></a></td></tr>
+	  <tr><td colspan="3">
 			<table width="100%" border="0" cellpadding="0" cellspacing="0">
-			  <tr>
-				<td width="6" height="42"><img src='{{$STATIC}}images/menu-home-red1.jpg'></td>
-				<td background='{{$STATIC}}images/menu-dxt-red2.jpg' class="right_h white">
+			  <tr><td width="6" height="42"><img src='{{$STATIC}}images/menu-home-red1.jpg'></td>
+				  <td background='{{$STATIC}}images/menu-dxt-red2.jpg' class="right_h white">
 					{{foreach from=$menus item=menu}}
 					<a href="{{$menu.1}}" class="mainlevel"><b><span class="td_font white">{{$menu.0}}</span></b></a>
 					&nbsp;&nbsp;<span class="right topimg_h">&nbsp;&nbsp;</span>
