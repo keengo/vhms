@@ -25,7 +25,7 @@ class TPL
 				//define(TPL_ROOT,dirname($_SERVER["REQUEST_URI"]));
 				define(TPL_ROOT,dirname($_SERVER['PHP_SELF']));
 			}
-			self::$instance->assign("STATIC",TPL_ROOT.'/view/default/');
+			self::$instance->assign("STATIC",TPL_ROOT.'/view/'.$view_dir.'/');
 			//self::$instance->assign("PSTATIC","/");
 		
 			//self::$instance->assign('role',getRoles());
