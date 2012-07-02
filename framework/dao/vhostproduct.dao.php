@@ -138,6 +138,7 @@ class VhostproductDAO extends DAO {
 			'cdn',
 			'view',
 			'show_price',
+			'flow',
 			'db_type',
 			'max_subdir',
 			'max_worker',
